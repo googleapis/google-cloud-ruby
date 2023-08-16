@@ -155,7 +155,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -209,20 +209,19 @@ module Google
             #
             #   @param contents [::Array<::String>]
             #     Required. The content of the input in string format.
-            #     We recommend the total content be less than 30k codepoints. The max length
-            #     of this field is 1024.
-            #     Use BatchTranslateText for larger text.
+            #     We recommend the total content be less than 30,000 codepoints. The max
+            #     length of this field is 1024. Use BatchTranslateText for larger text.
             #   @param mime_type [::String]
             #     Optional. The format of the source text, for example, "text/html",
             #      "text/plain". If left blank, the MIME type defaults to "text/html".
             #   @param source_language_code [::String]
-            #     Optional. The BCP-47 language code of the input text if
+            #     Optional. The ISO-639 language code of the input text if
             #     known, for example, "en-US" or "sr-Latn". Supported language codes are
             #     listed in Language Support. If the source language isn't specified, the API
             #     attempts to identify the source language automatically and returns the
             #     source language within the response.
             #   @param target_language_code [::String]
-            #     Required. The BCP-47 language code to use for translation of the input
+            #     Required. The ISO-639 language code to use for translation of the input
             #     text, set to one of the language codes listed in Language Support.
             #   @param parent [::String]
             #     Required. Project or location to make a call. Must refer to a caller's
@@ -255,7 +254,7 @@ module Google
             #     For example,
             #     `projects/{project-number-or-id}/locations/global/models/general/nmt`.
             #
-            #     If not provided, the default Google model (NMT) will be used.
+            #     If not provided, the default Google model (NMT) will be used
             #   @param glossary_config [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig, ::Hash]
             #     Optional. Glossary to be applied. The glossary must be
             #     within the same region (have the same location-id) as the model, otherwise
@@ -583,7 +582,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil)
+            # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil, customized_attribution: nil, is_translate_native_pdf_only: nil, enable_shadow_removal_native_pdf: nil, enable_rotation_correction: nil)
             #   Pass arguments to `translate_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -602,14 +601,14 @@ module Google
             #     Models and glossaries must be within the same region (have the same
             #     location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
             #   @param source_language_code [::String]
-            #     Optional. The BCP-47 language code of the input document if known, for
+            #     Optional. The ISO-639 language code of the input document if known, for
             #     example, "en-US" or "sr-Latn". Supported language codes are listed in
             #     Language Support. If the source language isn't specified, the API attempts
             #     to identify the source language automatically and returns the source
             #     language within the response. Source language must be specified if the
             #     request contains a glossary or a custom model.
             #   @param target_language_code [::String]
-            #     Required. The BCP-47 language code to use for translation of the input
+            #     Required. The ISO-639 language code to use for translation of the input
             #     document, set to one of the language codes listed in Language Support.
             #   @param document_input_config [::Google::Cloud::Translate::V3::DocumentInputConfig, ::Hash]
             #     Required. Input configurations.
@@ -647,6 +646,22 @@ module Google
             #
             #     See https://cloud.google.com/translate/docs/advanced/labels for more
             #     information.
+            #   @param customized_attribution [::String]
+            #     Optional. This flag is to support user customized attribution.
+            #     If not provided, the default is `Machine Translated by Google`.
+            #     Customized attribution should follow rules in
+            #     https://cloud.google.com/translate/attribution#attribution_and_logos
+            #   @param is_translate_native_pdf_only [::Boolean]
+            #     Optional. is_translate_native_pdf_only field for external customers.
+            #     If true, the page limit of online native pdf translation is 300 and only
+            #     native pdf pages will be translated.
+            #   @param enable_shadow_removal_native_pdf [::Boolean]
+            #     Optional. If true, use the text removal server to remove the shadow text on
+            #     background image for native pdf translation.
+            #     Shadow removal feature can only be enabled when
+            #     is_translate_native_pdf_only: false && pdf_native_only: false
+            #   @param enable_rotation_correction [::Boolean]
+            #     Optional. If true, enable auto rotation correction in DVS.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Translate::V3::TranslateDocumentResponse]
@@ -809,14 +824,14 @@ module Google
             #   # Call the batch_translate_text method.
             #   result = client.batch_translate_text request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_translate_text request, options = nil
@@ -880,7 +895,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil)
+            # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil, customized_attribution: nil, enable_shadow_removal_native_pdf: nil, enable_rotation_correction: nil)
             #   Pass arguments to `batch_translate_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -896,11 +911,11 @@ module Google
             #     the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
             #     error is returned.
             #   @param source_language_code [::String]
-            #     Required. The BCP-47 language code of the input document if known, for
+            #     Required. The ISO-639 language code of the input document if known, for
             #     example, "en-US" or "sr-Latn". Supported language codes are listed in
-            #     Language Support (https://cloud.google.com/translate/docs/languages).
+            #     [Language Support](https://cloud.google.com/translate/docs/languages).
             #   @param target_language_codes [::Array<::String>]
-            #     Required. The BCP-47 language code to use for translation of the input
+            #     Required. The ISO-639 language code to use for translation of the input
             #     document. Specify up to 10 language codes here.
             #   @param input_configs [::Array<::Google::Cloud::Translate::V3::BatchDocumentInputConfig, ::Hash>]
             #     Required. Input configurations.
@@ -940,6 +955,18 @@ module Google
             #
             #     If nothing specified, output files will be in the same format as the
             #     original file.
+            #   @param customized_attribution [::String]
+            #     Optional. This flag is to support user customized attribution.
+            #     If not provided, the default is `Machine Translated by Google`.
+            #     Customized attribution should follow rules in
+            #     https://cloud.google.com/translate/attribution#attribution_and_logos
+            #   @param enable_shadow_removal_native_pdf [::Boolean]
+            #     Optional. If true, use the text removal server to remove the shadow text on
+            #     background image for native pdf translation.
+            #     Shadow removal feature can only be enabled when
+            #     is_translate_native_pdf_only: false && pdf_native_only: false
+            #   @param enable_rotation_correction [::Boolean]
+            #     Optional. If true, enable auto rotation correction in DVS.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -961,14 +988,14 @@ module Google
             #   # Call the batch_translate_document method.
             #   result = client.batch_translate_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_translate_document request, options = nil
@@ -1057,14 +1084,14 @@ module Google
             #   # Call the create_glossary method.
             #   result = client.create_glossary request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_glossary request, options = nil
@@ -1176,13 +1203,11 @@ module Google
             #   # Call the list_glossaries method.
             #   result = client.list_glossaries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Translate::V3::Glossary.
-            #     p response
+            #     p item
             #   end
             #
             def list_glossaries request, options = nil
@@ -1356,14 +1381,14 @@ module Google
             #   # Call the delete_glossary method.
             #   result = client.delete_glossary request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_glossary request, options = nil
@@ -1446,9 +1471,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1490,7 +1515,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "translate.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "translate.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

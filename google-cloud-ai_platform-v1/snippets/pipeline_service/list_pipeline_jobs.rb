@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::PipelineService::Client#list_pipeline_jobs
+# Snippet for the list_pipeline_jobs call in the PipelineService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PipelineService::Client#list_pipeline_jobs. It
+# may require modification in order to execute successfully.
 #
 def list_pipeline_jobs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_pipeline_jobs
   # Call the list_pipeline_jobs method.
   result = client.list_pipeline_jobs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AIPlatform::V1::PipelineJob.
-    p response
+    p item
   end
 end
 # [END aiplatform_v1_generated_PipelineService_ListPipelineJobs_sync]

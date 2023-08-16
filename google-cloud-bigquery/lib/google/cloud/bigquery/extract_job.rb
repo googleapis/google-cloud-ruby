@@ -65,11 +65,17 @@ module Google
         ##
         # The table or model which is exported.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table, Model, nil] A table or model instance, or `nil`.
         #
-        def source
+        def source view: nil
           if (table = @gapi.configuration.extract.source_table)
-            retrieve_table table.project_id, table.dataset_id, table.table_id
+            retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
           elsif (model = @gapi.configuration.extract.source_model)
             retrieve_model model.project_id, model.dataset_id, model.model_id
           end
@@ -108,7 +114,7 @@ module Google
 
         ##
         # Checks if the destination format for the table data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`. Not applicable when
+        # JSON](https://jsonlines.org/). The default is `false`. Not applicable when
         # extracting models.
         #
         # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false` if not
@@ -362,7 +368,7 @@ module Google
           # Supported values for tables:
           #
           # * `csv` - CSV
-          # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+          # * `json` - [Newline-delimited JSON](https://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
           #
           # Supported values for models:

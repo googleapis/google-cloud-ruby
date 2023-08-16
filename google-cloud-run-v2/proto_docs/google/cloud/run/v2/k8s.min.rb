@@ -28,41 +28,26 @@ module Google
         # at runtime.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the container specified as a DNS_LABEL.
+        #     Name of the container specified as a DNS_LABEL (RFC 1123).
         # @!attribute [rw] image
         #   @return [::String]
-        #     Required. URL of the Container image in Google Container Registry or Google Artifact
-        #     Registry. More info: https://kubernetes.io/docs/concepts/containers/images
+        #     Required. Name of the container image in Dockerhub, Google Artifact
+        #     Registry, or Google Container Registry. If the host is not provided,
+        #     Dockerhub is assumed.
         # @!attribute [rw] command
         #   @return [::Array<::String>]
         #     Entrypoint array. Not executed within a shell.
         #     The docker image's ENTRYPOINT is used if this is not provided.
-        #     Variable references $(VAR_NAME) are expanded using the container's
-        #     environment. If a variable cannot be resolved, the reference in the input
-        #     string will be unchanged. The $(VAR_NAME) syntax can be escaped with a
-        #     double $$, ie: $$(VAR_NAME). Escaped references will never be expanded,
-        #     regardless of whether the variable exists or not.
-        #     More info:
-        #     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
         # @!attribute [rw] args
         #   @return [::Array<::String>]
         #     Arguments to the entrypoint.
         #     The docker image's CMD is used if this is not provided.
-        #     Variable references $(VAR_NAME) are expanded using the container's
-        #     environment. If a variable cannot be resolved, the reference in the input
-        #     string will be unchanged. The $(VAR_NAME) syntax can be escaped with a
-        #     double $$, ie: $$(VAR_NAME). Escaped references will never be expanded,
-        #     regardless of whether the variable exists or not.
-        #     More info:
-        #     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
         # @!attribute [rw] env
         #   @return [::Array<::Google::Cloud::Run::V2::EnvVar>]
         #     List of environment variables to set in the container.
         # @!attribute [rw] resources
         #   @return [::Google::Cloud::Run::V2::ResourceRequirements]
         #     Compute Resource requirements by this container.
-        #     More info:
-        #     https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
         # @!attribute [rw] ports
         #   @return [::Array<::Google::Cloud::Run::V2::ContainerPort>]
         #     List of ports to expose from the container. Only a single port can be
@@ -83,16 +68,12 @@ module Google
         #   @return [::Google::Cloud::Run::V2::Probe]
         #     Periodic probe of container liveness.
         #     Container will be restarted if the probe fails.
-        #     More info:
-        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
         # @!attribute [rw] startup_probe
         #   @return [::Google::Cloud::Run::V2::Probe]
         #     Startup probe of application within the container.
         #     All other probes are disabled if a startup probe is provided, until it
         #     succeeds. Container will not be added to service endpoints if the probe
         #     fails.
-        #     More info:
-        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,14 +82,22 @@ module Google
         # ResourceRequirements describes the compute resource requirements.
         # @!attribute [rw] limits
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Only memory and CPU are supported. Note: The only
-        #     supported values for CPU are '1', '2',  '4', and '8'. Setting 4 CPU
-        #     requires at least 2Gi of memory. The values of the map is string form of
-        #     the 'quantity' k8s type:
-        #     https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go
+        #     Only ´memory´ and 'cpu' are supported.
+        #
+        #     <p>Notes:
+        #      * The only supported values for CPU are '1', '2', '4', and '8'. Setting 4
+        #     CPU requires at least 2Gi of memory. For more information, go to
+        #     https://cloud.google.com/run/docs/configuring/cpu.
+        #       * For supported 'memory' values and syntax, go to
+        #      https://cloud.google.com/run/docs/configuring/memory-limits
         # @!attribute [rw] cpu_idle
         #   @return [::Boolean]
         #     Determines whether CPU should be throttled or not outside of requests.
+        # @!attribute [rw] startup_cpu_boost
+        #   @return [::Boolean]
+        #     Determines whether CPU should be boosted on startup of a new container
+        #     instance above the requested CPU threshold, this can help reduce cold-start
+        #     latency.
         class ResourceRequirements
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,8 +115,8 @@ module Google
         # EnvVar represents an environment variable present in a Container.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the environment variable. Must be a C_IDENTIFIER, and mnay not
-        #     exceed 32768 characters.
+        #     Required. Name of the environment variable. Must be a C_IDENTIFIER, and
+        #     mnay not exceed 32768 characters.
         # @!attribute [rw] value
         #   @return [::String]
         #     Variable references $(VAR_NAME) are expanded
@@ -192,8 +181,8 @@ module Google
         #     Required. This must match the Name of a Volume.
         # @!attribute [rw] mount_path
         #   @return [::String]
-        #     Required. Path within the container at which the volume should be mounted.  Must
-        #     not contain ':'. For Cloud SQL volumes, it can be left empty, or must
+        #     Required. Path within the container at which the volume should be mounted.
+        #     Must not contain ':'. For Cloud SQL volumes, it can be left empty, or must
         #     otherwise be `/cloudsql`. All instances defined in the Volume will be
         #     available as `/cloudsql/[instance]`. For more information on Cloud SQL
         #     volumes, visit https://cloud.google.com/sql/docs/mysql/connect-run
@@ -209,7 +198,6 @@ module Google
         # @!attribute [rw] secret
         #   @return [::Google::Cloud::Run::V2::SecretVolumeSource]
         #     Secret represents a secret that should populate this volume.
-        #     More info: https://kubernetes.io/docs/concepts/storage/volumes#secret
         # @!attribute [rw] cloud_sql_instance
         #   @return [::Google::Cloud::Run::V2::CloudSqlInstance]
         #     For Cloud SQL volumes, contains the specific instances that should be
@@ -293,7 +281,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a specific Cloud SQL instance.
+        # Represents a set of Cloud SQL instances. Each one will be available under
+        # /cloudsql/[instance]. Visit
+        # https://cloud.google.com/sql/docs/mysql/connect-run for more information on
+        # how to connect Cloud SQL and Cloud Run.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The Cloud SQL instance connection names, as can be found in
@@ -314,15 +305,11 @@ module Google
         #     initiated.
         #     Defaults to 0 seconds. Minimum value is 0. Maximum value for liveness probe
         #     is 3600. Maximum value for startup probe is 240.
-        #     More info:
-        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
         # @!attribute [rw] timeout_seconds
         #   @return [::Integer]
         #     Number of seconds after which the probe times out.
         #     Defaults to 1 second. Minimum value is 1. Maximum value is 3600.
         #     Must be smaller than period_seconds.
-        #     More info:
-        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
         # @!attribute [rw] period_seconds
         #   @return [::Integer]
         #     How often (in seconds) to perform the probe.
@@ -357,6 +344,11 @@ module Google
         # @!attribute [rw] http_headers
         #   @return [::Array<::Google::Cloud::Run::V2::HTTPHeader>]
         #     Custom headers to set in the request. HTTP allows repeated headers.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port number to access on the container. Must be in the range 1 to 65535.
+        #     If not specified, defaults to the exposed port of the container, which is
+        #     the value of container.ports[0].containerPort.
         class HTTPGetAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -378,7 +370,8 @@ module Google
         # @!attribute [rw] port
         #   @return [::Integer]
         #     Port number to access on the container. Must be in the range 1 to 65535.
-        #     If not specified, defaults to 8080.
+        #     If not specified, defaults to the exposed port of the container, which is
+        #     the value of container.ports[0].containerPort.
         class TCPSocketAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -388,7 +381,8 @@ module Google
         # @!attribute [rw] port
         #   @return [::Integer]
         #     Port number of the gRPC service. Number must be in the range 1 to 65535.
-        #     If not specified, defaults to 8080.
+        #     If not specified, defaults to the exposed port of the container, which is
+        #     the value of container.ports[0].containerPort.
         # @!attribute [rw] service
         #   @return [::String]
         #     Service is the name of the service to place in the gRPC HealthCheckRequest

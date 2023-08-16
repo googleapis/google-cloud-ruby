@@ -1,5 +1,58 @@
 # Changelog
 
+### 0.10.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.10.0 (2023-07-10)
+
+#### Features
+
+* Adds support for custom audiences ([#22488](https://github.com/googleapis/google-cloud-ruby/issues/22488)) 
+
+### 0.9.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.9.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+
+### 0.8.0 (2023-05-04)
+
+#### Features
+
+* Adds support for Session affinity in Service 
+* Adds support for Startup CPU Boost 
+* New 'port' field for HttpGetAction probe type 
+* New fields/enum values 
+#### Documentation
+
+* General documentation fixes. 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.6.0 (2023-01-26)
+
+#### Features
+
+* Execution resource includes the cancelled and retried task counts 
+* Execution resource provides the log URL 
+* Revision resource includes the action to take when an encryption key is revoked ([#20055](https://github.com/googleapis/google-cloud-ruby/issues/20055)) 
+#### Bug Fixes
+
+* Set the request path params header correctly 
+
 ### 0.5.0 (2022-11-08)
 
 #### Features

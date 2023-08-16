@@ -20,8 +20,11 @@
 require "google/cloud/vision/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Vision::V1::ProductSearch::Client#get_reference_image
+# Snippet for the get_reference_image call in the ProductSearch service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Vision::V1::ProductSearch::Client#get_reference_image. It may
+# require modification in order to execute successfully.
 #
 def get_reference_image
   # Create a client object. The client can be reused for multiple calls.

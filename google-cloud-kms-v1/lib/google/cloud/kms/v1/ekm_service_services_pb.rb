@@ -47,6 +47,18 @@ module Google
             rpc :CreateEkmConnection, ::Google::Cloud::Kms::V1::CreateEkmConnectionRequest, ::Google::Cloud::Kms::V1::EkmConnection
             # Updates an [EkmConnection][google.cloud.kms.v1.EkmConnection]'s metadata.
             rpc :UpdateEkmConnection, ::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest, ::Google::Cloud::Kms::V1::EkmConnection
+            # Returns the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource
+            # for a given project and location.
+            rpc :GetEkmConfig, ::Google::Cloud::Kms::V1::GetEkmConfigRequest, ::Google::Cloud::Kms::V1::EkmConfig
+            # Updates the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource
+            # for a given project and location.
+            rpc :UpdateEkmConfig, ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest, ::Google::Cloud::Kms::V1::EkmConfig
+            # Verifies that Cloud KMS can successfully connect to the external key
+            # manager specified by an [EkmConnection][google.cloud.kms.v1.EkmConnection].
+            # If there is an error connecting to the EKM, this method returns a
+            # FAILED_PRECONDITION status containing structured information as described
+            # at https://cloud.google.com/kms/docs/reference/ekm_errors.
+            rpc :VerifyConnectivity, ::Google::Cloud::Kms::V1::VerifyConnectivityRequest, ::Google::Cloud::Kms::V1::VerifyConnectivityResponse
           end
 
           Stub = Service.rpc_stub_class

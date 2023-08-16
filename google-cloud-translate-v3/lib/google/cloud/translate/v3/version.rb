@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Translate
       module V3
-        VERSION = "0.5.0"
+        VERSION = "0.8.0"
       end
     end
   end

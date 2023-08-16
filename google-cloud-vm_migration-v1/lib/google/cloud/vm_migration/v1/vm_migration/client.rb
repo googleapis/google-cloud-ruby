@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/vmmigration/v1/vmmigration_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -131,7 +133,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -142,6 +144,18 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
@@ -162,6 +176,20 @@ module Google
             # @return [::Google::Cloud::VMMigration::V1::VMMigration::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -221,13 +249,11 @@ module Google
             #   # Call the list_sources method.
             #   result = client.list_sources request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::Source.
-            #     p response
+            #     p item
             #   end
             #
             def list_sources request, options = nil
@@ -416,14 +442,14 @@ module Google
             #   # Call the create_source method.
             #   result = client.create_source request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_source request, options = nil
@@ -529,14 +555,14 @@ module Google
             #   # Call the update_source method.
             #   result = client.update_source request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_source request, options = nil
@@ -636,14 +662,14 @@ module Google
             #   # Call the delete_source method.
             #   result = client.delete_source request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_source request, options = nil
@@ -839,13 +865,11 @@ module Google
             #   # Call the list_utilization_reports method.
             #   result = client.list_utilization_reports request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::UtilizationReport.
-            #     p response
+            #     p item
             #   end
             #
             def list_utilization_reports request, options = nil
@@ -1042,14 +1066,14 @@ module Google
             #   # Call the create_utilization_report method.
             #   result = client.create_utilization_report request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_utilization_report request, options = nil
@@ -1149,14 +1173,14 @@ module Google
             #   # Call the delete_utilization_report method.
             #   result = client.delete_utilization_report request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_utilization_report request, options = nil
@@ -1258,13 +1282,11 @@ module Google
             #   # Call the list_datacenter_connectors method.
             #   result = client.list_datacenter_connectors request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::DatacenterConnector.
-            #     p response
+            #     p item
             #   end
             #
             def list_datacenter_connectors request, options = nil
@@ -1456,14 +1478,14 @@ module Google
             #   # Call the create_datacenter_connector method.
             #   result = client.create_datacenter_connector request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_datacenter_connector request, options = nil
@@ -1563,14 +1585,14 @@ module Google
             #   # Call the delete_datacenter_connector method.
             #   result = client.delete_datacenter_connector request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_datacenter_connector request, options = nil
@@ -1671,14 +1693,14 @@ module Google
             #   # Call the upgrade_appliance method.
             #   result = client.upgrade_appliance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def upgrade_appliance request, options = nil
@@ -1782,14 +1804,14 @@ module Google
             #   # Call the create_migrating_vm method.
             #   result = client.create_migrating_vm request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_migrating_vm request, options = nil
@@ -1892,13 +1914,11 @@ module Google
             #   # Call the list_migrating_vms method.
             #   result = client.list_migrating_vms request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::MigratingVm.
-            #     p response
+            #     p item
             #   end
             #
             def list_migrating_vms request, options = nil
@@ -2091,14 +2111,14 @@ module Google
             #   # Call the update_migrating_vm method.
             #   result = client.update_migrating_vm request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_migrating_vm request, options = nil
@@ -2184,14 +2204,14 @@ module Google
             #   # Call the delete_migrating_vm method.
             #   result = client.delete_migrating_vm request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_migrating_vm request, options = nil
@@ -2278,14 +2298,14 @@ module Google
             #   # Call the start_migration method.
             #   result = client.start_migration request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def start_migration request, options = nil
@@ -2374,14 +2394,14 @@ module Google
             #   # Call the resume_migration method.
             #   result = client.resume_migration request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def resume_migration request, options = nil
@@ -2469,14 +2489,14 @@ module Google
             #   # Call the pause_migration method.
             #   result = client.pause_migration request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def pause_migration request, options = nil
@@ -2563,14 +2583,14 @@ module Google
             #   # Call the finalize_migration method.
             #   result = client.finalize_migration request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def finalize_migration request, options = nil
@@ -2674,14 +2694,14 @@ module Google
             #   # Call the create_clone_job method.
             #   result = client.create_clone_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_clone_job request, options = nil
@@ -2767,14 +2787,14 @@ module Google
             #   # Call the cancel_clone_job method.
             #   result = client.cancel_clone_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def cancel_clone_job request, options = nil
@@ -2875,13 +2895,11 @@ module Google
             #   # Call the list_clone_jobs method.
             #   result = client.list_clone_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::CloneJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_clone_jobs request, options = nil
@@ -3072,14 +3090,14 @@ module Google
             #   # Call the create_cutover_job method.
             #   result = client.create_cutover_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_cutover_job request, options = nil
@@ -3165,14 +3183,14 @@ module Google
             #   # Call the cancel_cutover_job method.
             #   result = client.cancel_cutover_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def cancel_cutover_job request, options = nil
@@ -3273,13 +3291,11 @@ module Google
             #   # Call the list_cutover_jobs method.
             #   result = client.list_cutover_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::CutoverJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_cutover_jobs request, options = nil
@@ -3465,13 +3481,11 @@ module Google
             #   # Call the list_groups method.
             #   result = client.list_groups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::Group.
-            #     p response
+            #     p item
             #   end
             #
             def list_groups request, options = nil
@@ -3660,14 +3674,14 @@ module Google
             #   # Call the create_group method.
             #   result = client.create_group request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_group request, options = nil
@@ -3773,14 +3787,14 @@ module Google
             #   # Call the update_group method.
             #   result = client.update_group request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_group request, options = nil
@@ -3880,14 +3894,14 @@ module Google
             #   # Call the delete_group method.
             #   result = client.delete_group request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_group request, options = nil
@@ -3975,14 +3989,14 @@ module Google
             #   # Call the add_group_migration method.
             #   result = client.add_group_migration request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def add_group_migration request, options = nil
@@ -4070,14 +4084,14 @@ module Google
             #   # Call the remove_group_migration method.
             #   result = client.remove_group_migration request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def remove_group_migration request, options = nil
@@ -4181,13 +4195,11 @@ module Google
             #   # Call the list_target_projects method.
             #   result = client.list_target_projects request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::VMMigration::V1::TargetProject.
-            #     p response
+            #     p item
             #   end
             #
             def list_target_projects request, options = nil
@@ -4382,14 +4394,14 @@ module Google
             #   # Call the create_target_project method.
             #   result = client.create_target_project request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_target_project request, options = nil
@@ -4498,14 +4510,14 @@ module Google
             #   # Call the update_target_project method.
             #   result = client.update_target_project request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_target_project request, options = nil
@@ -4608,14 +4620,14 @@ module Google
             #   # Call the delete_target_project method.
             #   result = client.delete_target_project request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_target_project request, options = nil
@@ -4661,6 +4673,196 @@ module Google
             end
 
             ##
+            # Lists ReplicationCycles in a given MigratingVM.
+            #
+            # @overload list_replication_cycles(request, options = nil)
+            #   Pass arguments to `list_replication_cycles` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_replication_cycles(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_replication_cycles` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of ReplicationCycles.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of replication cycles to return. The service
+            #     may return fewer than this value. If unspecified, at most 100 migrating VMs
+            #     will be returned. The maximum value is 100; values above 100 will be
+            #     coerced to 100.
+            #   @param page_token [::String]
+            #     Required. A page token, received from a previous `ListReplicationCycles`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListReplicationCycles`
+            #     must match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. The filter request.
+            #   @param order_by [::String]
+            #     Optional. the order by fields for the result.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new
+            #
+            #   # Call the list_replication_cycles method.
+            #   result = client.list_replication_cycles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VMMigration::V1::ReplicationCycle.
+            #     p item
+            #   end
+            #
+            def list_replication_cycles request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_replication_cycles.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_replication_cycles.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_replication_cycles.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :list_replication_cycles, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_replication_cycles, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single ReplicationCycle.
+            #
+            # @overload get_replication_cycle(request, options = nil)
+            #   Pass arguments to `get_replication_cycle` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_replication_cycle(name: nil)
+            #   Pass arguments to `get_replication_cycle` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the ReplicationCycle.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new
+            #
+            #   # Call the get_replication_cycle method.
+            #   result = client.get_replication_cycle request
+            #
+            #   # The returned object is of type Google::Cloud::VMMigration::V1::ReplicationCycle.
+            #   p result
+            #
+            def get_replication_cycle request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_replication_cycle.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_replication_cycle.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_replication_cycle.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :get_replication_cycle, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the VmMigration API.
             #
             # This class represents the configuration for VmMigration,
@@ -4698,9 +4900,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -4742,7 +4944,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "vmmigration.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "vmmigration.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -5015,6 +5219,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_target_project
+                ##
+                # RPC-specific configuration for `list_replication_cycles`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_replication_cycles
+                ##
+                # RPC-specific configuration for `get_replication_cycle`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_replication_cycle
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5106,6 +5320,10 @@ module Google
                   @update_target_project = ::Gapic::Config::Method.new update_target_project_config
                   delete_target_project_config = parent_rpcs.delete_target_project if parent_rpcs.respond_to? :delete_target_project
                   @delete_target_project = ::Gapic::Config::Method.new delete_target_project_config
+                  list_replication_cycles_config = parent_rpcs.list_replication_cycles if parent_rpcs.respond_to? :list_replication_cycles
+                  @list_replication_cycles = ::Gapic::Config::Method.new list_replication_cycles_config
+                  get_replication_cycle_config = parent_rpcs.get_replication_cycle if parent_rpcs.respond_to? :get_replication_cycle
+                  @get_replication_cycle = ::Gapic::Config::Method.new get_replication_cycle_config
 
                   yield self if block_given?
                 end

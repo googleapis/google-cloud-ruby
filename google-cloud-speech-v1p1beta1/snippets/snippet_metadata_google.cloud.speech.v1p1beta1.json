@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-speech-v1p1beta1",
-    "version": "0.13.0",
+    "version": "0.18.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "speech_v1p1beta1_generated_Speech_Recognize_sync",
-      "title": "Snippet for recognize in Speech",
-      "description": "Basic snippet for recognize in Speech",
+      "title": "Snippet for the recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Speech::Client#recognize. It may require modification in order to execute successfully.",
       "file": "speech/recognize.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Speech_LongRunningRecognize_sync",
-      "title": "Snippet for long_running_recognize in Speech",
-      "description": "Basic snippet for long_running_recognize in Speech",
+      "title": "Snippet for the long_running_recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Speech::Client#long_running_recognize. It may require modification in order to execute successfully.",
       "file": "speech/long_running_recognize.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Speech_StreamingRecognize_sync",
-      "title": "Snippet for streaming_recognize in Speech",
-      "description": "Basic snippet for streaming_recognize in Speech",
+      "title": "Snippet for the streaming_recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Speech::Client#streaming_recognize. It may require modification in order to execute successfully.",
       "file": "speech/streaming_recognize.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_sync",
-      "title": "Snippet for create_phrase_set in Adaptation",
-      "description": "Basic snippet for create_phrase_set in Adaptation",
+      "title": "Snippet for the create_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_phrase_set. It may require modification in order to execute successfully.",
       "file": "adaptation/create_phrase_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_GetPhraseSet_sync",
-      "title": "Snippet for get_phrase_set in Adaptation",
-      "description": "Basic snippet for get_phrase_set in Adaptation",
+      "title": "Snippet for the get_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#get_phrase_set. It may require modification in order to execute successfully.",
       "file": "adaptation/get_phrase_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_ListPhraseSet_sync",
-      "title": "Snippet for list_phrase_set in Adaptation",
-      "description": "Basic snippet for list_phrase_set in Adaptation",
+      "title": "Snippet for the list_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#list_phrase_set. It may require modification in order to execute successfully.",
       "file": "adaptation/list_phrase_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_UpdatePhraseSet_sync",
-      "title": "Snippet for update_phrase_set in Adaptation",
-      "description": "Basic snippet for update_phrase_set in Adaptation",
+      "title": "Snippet for the update_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#update_phrase_set. It may require modification in order to execute successfully.",
       "file": "adaptation/update_phrase_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_DeletePhraseSet_sync",
-      "title": "Snippet for delete_phrase_set in Adaptation",
-      "description": "Basic snippet for delete_phrase_set in Adaptation",
+      "title": "Snippet for the delete_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_phrase_set. It may require modification in order to execute successfully.",
       "file": "adaptation/delete_phrase_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_CreateCustomClass_sync",
-      "title": "Snippet for create_custom_class in Adaptation",
-      "description": "Basic snippet for create_custom_class in Adaptation",
+      "title": "Snippet for the create_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_custom_class. It may require modification in order to execute successfully.",
       "file": "adaptation/create_custom_class.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_GetCustomClass_sync",
-      "title": "Snippet for get_custom_class in Adaptation",
-      "description": "Basic snippet for get_custom_class in Adaptation",
+      "title": "Snippet for the get_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#get_custom_class. It may require modification in order to execute successfully.",
       "file": "adaptation/get_custom_class.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_ListCustomClasses_sync",
-      "title": "Snippet for list_custom_classes in Adaptation",
-      "description": "Basic snippet for list_custom_classes in Adaptation",
+      "title": "Snippet for the list_custom_classes call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#list_custom_classes. It may require modification in order to execute successfully.",
       "file": "adaptation/list_custom_classes.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_UpdateCustomClass_sync",
-      "title": "Snippet for update_custom_class in Adaptation",
-      "description": "Basic snippet for update_custom_class in Adaptation",
+      "title": "Snippet for the update_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#update_custom_class. It may require modification in order to execute successfully.",
       "file": "adaptation/update_custom_class.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "speech_v1p1beta1_generated_Adaptation_DeleteCustomClass_sync",
-      "title": "Snippet for delete_custom_class in Adaptation",
-      "description": "Basic snippet for delete_custom_class in Adaptation",
+      "title": "Snippet for the delete_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_custom_class. It may require modification in order to execute successfully.",
       "file": "adaptation/delete_custom_class.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

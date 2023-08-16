@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#run_access_report
+# Snippet for the run_access_report call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#run_access_report.
+# It may require modification in order to execute successfully.
 #
 def run_access_report
   # Create a client object. The client can be reused for multiple calls.

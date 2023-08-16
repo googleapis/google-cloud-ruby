@@ -24,9 +24,14 @@ module Google
         # The request for a Data Access Record Report.
         # @!attribute [rw] entity
         #   @return [::String]
-        #     The Data Access Report is requested for this property.
-        #     For example if "123" is your GA4 property ID, then entity should be
-        #     "properties/123".
+        #     The Data Access Report supports requesting at the property level or account
+        #     level. If requested at the account level, Data Access Reports include all
+        #     access for all properties under that account.
+        #
+        #     To request at the property level, entity should be for example
+        #     'properties/123' if "123" is your GA4 property ID. To request at the
+        #     account level, entity should be for example 'accounts/1234' if "1234" is
+        #     your GA4 Account ID.
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessDimension>]
         #     The dimensions requested and displayed in the response. Requests are
@@ -44,7 +49,7 @@ module Google
         #     to 2 date ranges.
         # @!attribute [rw] dimension_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpression]
-        #     Dimension filters allow you to restrict report response to specific
+        #     Dimension filters let you restrict report response to specific
         #     dimension values which match the filter. For example, filtering on access
         #     records of a single user. To learn more, see [Fundamentals of Dimension
         #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
@@ -92,7 +97,8 @@ module Google
         # @!attribute [rw] return_entity_quota
         #   @return [::Boolean]
         #     Toggles whether to return the current state of this Analytics Property's
-        #     quota. Quota is returned in [AccessQuota](#AccessQuota).
+        #     quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+        #     requests, this field must be false.
         class RunAccessReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -124,7 +130,8 @@ module Google
         #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
         # @!attribute [rw] quota
         #   @return [::Google::Analytics::Admin::V1alpha::AccessQuota]
-        #     The quota state for this Analytics property including this request.
+        #     The quota state for this Analytics property including this request. This
+        #     field doesn't work with account-level requests.
         class RunAccessReportResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,9 +202,10 @@ module Google
         #     The account's `name` field is used to identify the account.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (for example, "field_to_update"). Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdateAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -210,7 +218,7 @@ module Google
         # @!attribute [rw] redirect_uri
         #   @return [::String]
         #     Redirect URI where the user will be sent after accepting Terms of Service.
-        #     Must be configured in Developers Console as a Redirect URI
+        #     Must be configured in Cloud Console as a Redirect URI.
         class ProvisionAccountTicketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -298,9 +306,10 @@ module Google
         #     updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdatePropertyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -444,8 +453,8 @@ module Google
         #     Required. Example format: accounts/1234
         # @!attribute [rw] notify_new_user
         #   @return [::Boolean]
-        #     Optional. If set, then email the new user notifying them that they've been granted
-        #     permissions to the resource.
+        #     Optional. If set, then email the new user notifying them that they've been
+        #     granted permissions to the resource.
         # @!attribute [rw] user_link
         #   @return [::Google::Analytics::Admin::V1alpha::UserLink]
         #     Required. The user link to create.
@@ -457,15 +466,15 @@ module Google
         # Request message for BatchCreateUserLinks RPC.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The account or property that all user links in the request are for.
-        #     This field is required. The parent field in the CreateUserLinkRequest
+        #     Required. The account or property that all user links in the request are
+        #     for. This field is required. The parent field in the CreateUserLinkRequest
         #     messages must either be empty or match this field.
         #     Example format: accounts/1234
         # @!attribute [rw] notify_new_users
         #   @return [::Boolean]
-        #     Optional. If set, then email the new users notifying them that they've been granted
-        #     permissions to the resource. Regardless of whether this is set or not,
-        #     notify_new_user field inside each individual request is ignored.
+        #     Optional. If set, then email the new users notifying them that they've been
+        #     granted permissions to the resource. Regardless of whether this is set or
+        #     not, notify_new_user field inside each individual request is ignored.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest>]
         #     Required. The requests specifying the user links to create.
@@ -581,7 +590,7 @@ module Google
         #   @return [::String]
         #     A page token, received from a previous `ListFirebaseLinks` call.
         #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListProperties` must
+        #     When paginating, all other parameters provided to `ListFirebaseLinks` must
         #     match the call that provided the page token.
         class ListFirebaseLinksRequest
           include ::Google::Protobuf::MessageExts
@@ -633,9 +642,10 @@ module Google
         #     The GoogleAdsLink to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdateGoogleAdsLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -732,8 +742,8 @@ module Google
         #     Required. The property for which to acknowledge user data collection.
         # @!attribute [rw] acknowledgement
         #   @return [::String]
-        #     Required. An acknowledgement that the caller of this method understands the terms
-        #     of user data collection.
+        #     Required. An acknowledgement that the caller of this method understands the
+        #     terms of user data collection.
         #
         #     This field must contain the exact value:
         #     "I acknowledge that I have the necessary privacy disclosures and rights
@@ -754,22 +764,24 @@ module Google
         # Request message for SearchChangeHistoryEvents RPC.
         # @!attribute [rw] account
         #   @return [::String]
-        #     Required. The account resource for which to return change history resources.
+        #     Required. The account resource for which to return change history
+        #     resources.
         # @!attribute [rw] property
         #   @return [::String]
         #     Optional. Resource name for a child property. If set, only return changes
         #     made to this property or its child resources.
         # @!attribute [rw] resource_type
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
-        #     Optional. If set, only return changes if they are for a resource that matches at
-        #     least one of these types.
+        #     Optional. If set, only return changes if they are for a resource that
+        #     matches at least one of these types.
         # @!attribute [rw] action
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::ActionType>]
-        #     Optional. If set, only return changes that match one or more of these types of
-        #     actions.
+        #     Optional. If set, only return changes that match one or more of these types
+        #     of actions.
         # @!attribute [rw] actor_email
         #   @return [::Array<::String>]
-        #     Optional. If set, only return changes if they are made by a user in this list.
+        #     Optional. If set, only return changes if they are made by a user in this
+        #     list.
         # @!attribute [rw] earliest_change_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. If set, only return changes made after this time (inclusive).
@@ -784,10 +796,11 @@ module Google
         #     The maximum value is 200 (higher values will be coerced to the maximum).
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-        #     Provide this to retrieve the subsequent page. When paginating, all other
-        #     parameters provided to `SearchChangeHistoryEvents` must match the call that
-        #     provided the page token.
+        #     Optional. A page token, received from a previous
+        #     `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+        #     page. When paginating, all other parameters provided to
+        #     `SearchChangeHistoryEvents` must match the call that provided the page
+        #     token.
         class SearchChangeHistoryEventsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -847,7 +860,8 @@ module Google
         #     Required. The measurement protocol secret to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated.
         class UpdateMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -905,9 +919,10 @@ module Google
         #     The `name` field is used to identify the settings to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdateGoogleSignalsSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -919,9 +934,25 @@ module Google
         #     Required. The conversion event to create.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the parent property where this conversion event will
-        #     be created. Format: properties/123
+        #     Required. The resource name of the parent property where this conversion
+        #     event will be created. Format: properties/123
         class CreateConversionEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateConversionEvent RPC
+        # @!attribute [rw] conversion_event
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+        #     Required. The conversion event to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateConversionEventRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1055,9 +1086,9 @@ module Google
         #     The DisplayVideo360AdvertiserLink to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
         class UpdateDisplayVideo360AdvertiserLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1161,6 +1192,87 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for GetSearchAds360Link RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the SearchAds360Link to get.
+        #     Example format: properties/1234/SearchAds360Link/5678
+        class GetSearchAds360LinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListSearchAds360Links RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListSearchAds360Links`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListSearchAds360Links` must match the call that provided the
+        #     page token.
+        class ListSearchAds360LinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListSearchAds360Links RPC.
+        # @!attribute [rw] search_ads_360_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::SearchAds360Link>]
+        #     List of SearchAds360Links.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListSearchAds360LinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateSearchAds360Link RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] search_ads_360_link
+        #   @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+        #     Required. The SearchAds360Link to create.
+        class CreateSearchAds360LinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteSearchAds360Link RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the SearchAds360Link to delete.
+        #     Example format: properties/1234/SearchAds360Links/5678
+        class DeleteSearchAds360LinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateSearchAds360Link RPC.
+        # @!attribute [rw] search_ads_360_link
+        #   @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+        #     The SearchAds360Link to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
+        class UpdateSearchAds360LinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateCustomDimension RPC.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1179,9 +1291,9 @@ module Google
         #     The CustomDimension to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
         class UpdateCustomDimensionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1259,9 +1371,9 @@ module Google
         #     The CustomMetric to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
         class UpdateCustomMetricRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1340,9 +1452,10 @@ module Google
         #     The `name` field is used to identify the settings to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdateDataRetentionSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1376,9 +1489,9 @@ module Google
         #     The DataStream to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
         class UpdateDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1491,9 +1604,10 @@ module Google
         #     The audience's `name` field is used to identify the audience to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdateAudienceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1525,10 +1639,721 @@ module Google
         #     The `name` field is used to identify the settings to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
         class UpdateAttributionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetAccessBinding RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the access binding to retrieve.
+        #     Formats:
+        #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+        #     - properties/\\{property}/accessBindings/\\{accessBinding}
+        class GetAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchGetAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     of all provided values for the 'names' field must match this field.
+        #     Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the access bindings to retrieve.
+        #     A maximum of 1000 access bindings can be retrieved in a batch.
+        #     Formats:
+        #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+        #     - properties/\\{property}/accessBindings/\\{accessBinding}
+        class BatchGetAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchGetAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     The requested access bindings.
+        class BatchGetAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of access bindings to return.
+        #     The service may return fewer than this value.
+        #     If unspecified, at most 200 access bindings will be returned.
+        #     The maximum value is 500; values above 500 will be coerced to 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAccessBindings` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListAccessBindings` must
+        #     match the call that provided the page token.
+        class ListAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     List of AccessBindings. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateAccessBinding RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] access_binding
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+        #     Required. The access binding to create.
+        class CreateAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchCreateAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     field in the CreateAccessBindingRequest messages must either be empty or
+        #     match this field. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest>]
+        #     Required. The requests specifying the access bindings to create.
+        #     A maximum of 1000 access bindings can be created in a batch.
+        class BatchCreateAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchCreateAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     The access bindings created.
+        class BatchCreateAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateAccessBinding RPC.
+        # @!attribute [rw] access_binding
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+        #     Required. The access binding to update.
+        class UpdateAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchUpdateAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     of all provided AccessBinding in UpdateAccessBindingRequest messages must
+        #     match this field.
+        #     Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest>]
+        #     Required. The requests specifying the access bindings to update.
+        #     A maximum of 1000 access bindings can be updated in a batch.
+        class BatchUpdateAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchUpdateAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     The access bindings updated.
+        class BatchUpdateAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteAccessBinding RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Formats:
+        #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+        #     - properties/\\{property}/accessBindings/\\{accessBinding}
+        class DeleteAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchDeleteAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     of all provided values for the 'names' field in DeleteAccessBindingRequest
+        #     messages must match this field. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest>]
+        #     Required. The requests specifying the access bindings to delete.
+        #     A maximum of 1000 access bindings can be deleted in a batch.
+        class BatchDeleteAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateExpandedDataSet RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] expanded_data_set
+        #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+        #     Required. The ExpandedDataSet to create.
+        class CreateExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateExpandedDataSet RPC.
+        # @!attribute [rw] expanded_data_set
+        #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+        #     Required. The ExpandedDataSet to update.
+        #     The resource's `name` field is used to identify the ExpandedDataSet to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteExpandedDataSet RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format: properties/1234/expandedDataSets/5678
+        class DeleteExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetExpandedDataSet RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ExpandedDataSet to get.
+        #     Example format: properties/1234/expandedDataSets/5678
+        class GetExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListExpandedDataSets RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListExpandedDataSets` call. Provide
+        #     this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListExpandedDataSet`
+        #     must match the call that provided the page token.
+        class ListExpandedDataSetsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListExpandedDataSets RPC.
+        # @!attribute [rw] expanded_data_sets
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ExpandedDataSet>]
+        #     List of ExpandedDataSet. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListExpandedDataSetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateChannelGroup RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to create a ChannelGroup.
+        #     Example format: properties/1234
+        # @!attribute [rw] channel_group
+        #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+        #     Required. The ChannelGroup to create.
+        class CreateChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateChannelGroup RPC.
+        # @!attribute [rw] channel_group
+        #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+        #     Required. The ChannelGroup to update.
+        #     The resource's `name` field is used to identify the ChannelGroup to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteChannelGroup RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ChannelGroup to delete.
+        #     Example format: properties/1234/channelGroups/5678
+        class DeleteChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetChannelGroup RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ChannelGroup to get.
+        #     Example format: properties/1234/channelGroups/5678
+        class GetChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListChannelGroups RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to list ChannelGroups.
+        #     Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListChannelGroups` call. Provide
+        #     this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListChannelGroups`
+        #     must match the call that provided the page token.
+        class ListChannelGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListChannelGroups RPC.
+        # @!attribute [rw] channel_groups
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChannelGroup>]
+        #     List of ChannelGroup. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListChannelGroupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for setting the opt out status for the automated GA4 setup process.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Required. The UA property to set the opt out status. Note this request uses
+        #     the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+        #     Format: properties/\\{internalWebPropertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] opt_out
+        #   @return [::Boolean]
+        #     The status to set.
+        class SetAutomatedGa4ConfigurationOptOutRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for setting the opt out status for the automated GA4 setup
+        # process.
+        class SetAutomatedGa4ConfigurationOptOutResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for fetching the opt out status for the automated GA4 setup process.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Required. The UA property to get the opt out status. Note this request uses
+        #     the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+        #     Format: properties/\\{internalWebPropertyId}
+        #     Example: properties/1234
+        class FetchAutomatedGa4ConfigurationOptOutRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for fetching the opt out status for the automated GA4 setup
+        # process.
+        # @!attribute [rw] opt_out
+        #   @return [::Boolean]
+        #     The opt out status for the UA property.
+        class FetchAutomatedGa4ConfigurationOptOutResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetBigQueryLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the BigQuery link to lookup.
+        #     Format: properties/\\{property_id}/bigQueryLinks/\\{bigquery_link_id}
+        #     Example: properties/123/bigQueryLinks/456
+        class GetBigQueryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListBigQueryLinks RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the property to list BigQuery links under.
+        #     Format: properties/\\{property_id}
+        #     Example: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListBigQueryLinks` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListBigQueryLinks` must
+        #     match the call that provided the page token.
+        class ListBigQueryLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListBigQueryLinks RPC
+        # @!attribute [rw] bigquery_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::BigQueryLink>]
+        #     List of BigQueryLinks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListBigQueryLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetEnhancedMeasurementSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the settings to lookup.
+        #     Format:
+        #     properties/\\{property}/dataStreams/\\{data_stream}/enhancedMeasurementSettings
+        #     Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+        class GetEnhancedMeasurementSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateEnhancedMeasurementSettings RPC.
+        # @!attribute [rw] enhanced_measurement_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateEnhancedMeasurementSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateConnectedSiteTag RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The Universal Analytics property to create connected site tags for.
+        #     This API does not support GA4 properties.
+        #     Format: properties/\\{universalAnalyticsPropertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] connected_site_tag
+        #   @return [::Google::Analytics::Admin::V1alpha::ConnectedSiteTag]
+        #     Required. The tag to add to the Universal Analytics property
+        class CreateConnectedSiteTagRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for CreateConnectedSiteTag RPC.
+        class CreateConnectedSiteTagResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteConnectedSiteTag RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The Universal Analytics property to delete connected site tags for.
+        #     This API does not support GA4 properties.
+        #     Format: properties/\\{universalAnalyticsPropertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] tag_id
+        #   @return [::String]
+        #     Tag ID to forward events to. Also known as the Measurement ID, or the
+        #     "G-ID"  (For example: G-12345).
+        class DeleteConnectedSiteTagRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListConnectedSiteTags RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The Universal Analytics property to fetch connected site tags for.
+        #     This does not work on GA4 properties. A maximum of 20 connected site tags
+        #     will be returned.
+        #     Example Format: `properties/1234`
+        class ListConnectedSiteTagsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListConnectedSiteTags RPC.
+        # @!attribute [rw] connected_site_tags
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ConnectedSiteTag>]
+        #     The site tags for the Universal Analytics property. A maximum of 20
+        #     connected site tags will be returned.
+        class ListConnectedSiteTagsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to CreateAdSenseLink method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to create an AdSense Link.
+        #     Format: properties/\\{propertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] adsense_link
+        #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+        #     Required. The AdSense Link to create
+        class CreateAdSenseLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to GetAdSenseLink method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Unique identifier for the AdSense Link requested.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/5678
+        class GetAdSenseLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to DeleteAdSenseLink method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Unique identifier for the AdSense Link to be deleted.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/5678
+        class DeleteAdSenseLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to ListAdSenseLinks method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the parent property.
+        #     Format: properties/\\{propertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token received from a previous `ListAdSenseLinks` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListAdSenseLinks` must
+        #     match the call that provided the page token.
+        class ListAdSenseLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAdSenseLinks method.
+        # @!attribute [rw] adsense_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AdSenseLink>]
+        #     List of AdSenseLinks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAdSenseLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for looking up GA4 property connected to a UA property.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Required. The UA property for which to look up the connected GA4 property.
+        #     Note this request uses the
+        #     internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+        #     Format: properties/\\{internal_web_property_id}
+        #     Example: properties/1234
+        class FetchConnectedGa4PropertyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for looking up GA4 property connected to a UA property.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The GA4 property connected to the UA property. An empty string is returned
+        #     when there is no connected GA4 property.
+        #     Format: properties/\\{property_id}
+        #     Example: properties/1234
+        class FetchConnectedGa4PropertyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateEventCreateRule RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] event_create_rule
+        #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+        #     Required. The EventCreateRule to create.
+        class CreateEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateEventCreateRule RPC.
+        # @!attribute [rw] event_create_rule
+        #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+        #     Required. The EventCreateRule to update.
+        #     The resource's `name` field is used to identify the EventCreateRule to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteEventCreateRule RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format:
+        #     properties/123/dataStreams/456/eventCreateRules/789
+        class DeleteEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetEventCreateRule RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the EventCreateRule to get.
+        #     Example format: properties/123/dataStreams/456/eventCreateRules/789
+        class GetEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListEventCreateRules RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListEventCreateRules` call. Provide
+        #     this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListEventCreateRules`
+        #     must match the call that provided the page token.
+        class ListEventCreateRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListEventCreateRules RPC.
+        # @!attribute [rw] event_create_rules
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::EventCreateRule>]
+        #     List of EventCreateRules. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListEventCreateRulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -15,6 +15,8 @@
 require "firestore_helper"
 
 describe "Watch", :firestore_acceptance do
+  before { skip if Google::Cloud.configure.firestore.transport == :rest }
+
   it "watches a limit query" do
     watch_col = root_col.doc("watch-limit-#{SecureRandom.hex(4)}").col("watch-query")
 

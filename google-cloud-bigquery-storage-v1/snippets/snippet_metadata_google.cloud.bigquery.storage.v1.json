@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-storage-v1",
-    "version": "0.16.0",
+    "version": "0.22.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryRead_CreateReadSession_sync",
-      "title": "Snippet for create_read_session in BigQueryRead",
-      "description": "Basic snippet for create_read_session in BigQueryRead",
+      "title": "Snippet for the create_read_session call in the BigQueryRead service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#create_read_session. It may require modification in order to execute successfully.",
       "file": "big_query_read/create_read_session.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryRead_ReadRows_sync",
-      "title": "Snippet for read_rows in BigQueryRead",
-      "description": "Basic snippet for read_rows in BigQueryRead",
+      "title": "Snippet for the read_rows call in the BigQueryRead service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#read_rows. It may require modification in order to execute successfully.",
       "file": "big_query_read/read_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 44,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryRead_SplitReadStream_sync",
-      "title": "Snippet for split_read_stream in BigQueryRead",
-      "description": "Basic snippet for split_read_stream in BigQueryRead",
+      "title": "Snippet for the split_read_stream call in the BigQueryRead service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#split_read_stream. It may require modification in order to execute successfully.",
       "file": "big_query_read/split_read_stream.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryWrite_CreateWriteStream_sync",
-      "title": "Snippet for create_write_stream in BigQueryWrite",
-      "description": "Basic snippet for create_write_stream in BigQueryWrite",
+      "title": "Snippet for the create_write_stream call in the BigQueryWrite service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#create_write_stream. It may require modification in order to execute successfully.",
       "file": "big_query_write/create_write_stream.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryWrite_AppendRows_sync",
-      "title": "Snippet for append_rows in BigQueryWrite",
-      "description": "Basic snippet for append_rows in BigQueryWrite",
+      "title": "Snippet for the append_rows call in the BigQueryWrite service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#append_rows. It may require modification in order to execute successfully.",
       "file": "big_query_write/append_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryWrite_GetWriteStream_sync",
-      "title": "Snippet for get_write_stream in BigQueryWrite",
-      "description": "Basic snippet for get_write_stream in BigQueryWrite",
+      "title": "Snippet for the get_write_stream call in the BigQueryWrite service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#get_write_stream. It may require modification in order to execute successfully.",
       "file": "big_query_write/get_write_stream.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryWrite_FinalizeWriteStream_sync",
-      "title": "Snippet for finalize_write_stream in BigQueryWrite",
-      "description": "Basic snippet for finalize_write_stream in BigQueryWrite",
+      "title": "Snippet for the finalize_write_stream call in the BigQueryWrite service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#finalize_write_stream. It may require modification in order to execute successfully.",
       "file": "big_query_write/finalize_write_stream.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryWrite_BatchCommitWriteStreams_sync",
-      "title": "Snippet for batch_commit_write_streams in BigQueryWrite",
-      "description": "Basic snippet for batch_commit_write_streams in BigQueryWrite",
+      "title": "Snippet for the batch_commit_write_streams call in the BigQueryWrite service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#batch_commit_write_streams. It may require modification in order to execute successfully.",
       "file": "big_query_write/batch_commit_write_streams.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerystorage_v1_generated_BigQueryWrite_FlushRows_sync",
-      "title": "Snippet for flush_rows in BigQueryWrite",
-      "description": "Basic snippet for flush_rows in BigQueryWrite",
+      "title": "Snippet for the flush_rows call in the BigQueryWrite service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#flush_rows. It may require modification in order to execute successfully.",
       "file": "big_query_write/flush_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

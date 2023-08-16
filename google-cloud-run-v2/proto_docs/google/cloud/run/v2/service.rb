@@ -55,8 +55,8 @@ module Google
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and if the Service does not exist, it will create a new
-        #     one. Caller must have both create and update permissions for this call if
-        #     this is set to true.
+        #     one. The caller must have 'run.services.create' permissions if this is set
+        #     to true and the Service does not exist.
         class UpdateServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -66,9 +66,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location and project to list resources on.
-        #     Location must be a valid GCP region, and cannot be the "-" wildcard.
-        #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
-        #     project id or number.
+        #     Location must be a valid Google Cloud region, and cannot be the "-"
+        #     wildcard. Format: projects/\\{project}/locations/\\{location}, where \\{project}
+        #     can be project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Services to return in this call.
@@ -146,8 +146,9 @@ module Google
         #     512-character limit.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the trigger. The value is a UUID4
-        #     string and guaranteed to remain unchanged until the resource is deleted.
+        #     Output only. Server assigned unique identifier for the trigger. The value
+        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
+        #     deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
@@ -156,24 +157,31 @@ module Google
         #     APIs, its JSON representation will be a `string` instead of an `integer`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Map of string keys and values that can be used to organize and categorize
+        #     Unstructured key value map that can be used to organize and categorize
         #     objects.
         #     User-provided labels are shared with Google's billing system, so they can
         #     be used to filter, or break down billing charges by team, component,
         #     environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
-        #     https://cloud.google.com/run/docs/configuring/labels
-        #     Cloud Run will populate some labels with 'run.googleapis.com' or
-        #     'serving.knative.dev' namespaces. Those labels are read-only, and user
-        #     changes will not be preserved.
+        #     https://cloud.google.com/run/docs/configuring/labels.
+        #
+        #     <p>Cloud Run API v2 does not support labels with  `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system labels in v1 now have a
+        #     corresponding field in v2 Service.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Unstructured key value map that may be set by external tools to store and
         #     arbitrary metadata. They are not queryable and should be preserved
-        #     when modifying objects. Cloud Run will populate some annotations using
-        #     'run.googleapis.com' or 'serving.knative.dev' namespaces. This field
-        #     follows Kubernetes annotations' namespacing, limits, and rules. More info:
-        #     https://kubernetes.io/docs/user-guide/annotations
+        #     when modifying objects.
+        #
+        #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected in new resources. All system
+        #     annotations in v1 now have a corresponding field in v2 Service.
+        #
+        #     <p>This field follows Kubernetes
+        #     annotations' namespacing, limits, and rules.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time.
@@ -210,6 +218,12 @@ module Google
         #     Launch Stages](https://cloud.google.com/terms/launch-stages).
         #     Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA
         #     is assumed.
+        #     Set the launch stage to a preview stage on input to allow use of preview
+        #     features in that stage. On read (or output), describes whether the resource
+        #     uses preview features.
+        #     <p>
+        #     For example, if ALPHA is provided as input, but only BETA and GA-level
+        #     features are used, this field will be BETA on output.
         # @!attribute [rw] binary_authorization
         #   @return [::Google::Cloud::Run::V2::BinaryAuthorization]
         #     Settings for the Binary Authorization feature.
@@ -223,44 +237,55 @@ module Google
         #     100% traffic to the latest `Ready` Revision.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
-        #     Output only. The generation of this Service currently serving traffic. See comments in
-        #     `reconciling` for additional information on reconciliation process in Cloud
-        #     Run.
-        #     Please note that unlike v1, this is an int64 value. As with most Google
-        #     APIs, its JSON representation will be a `string` instead of an `integer`.
+        #     Output only. The generation of this Service currently serving traffic. See
+        #     comments in `reconciling` for additional information on reconciliation
+        #     process in Cloud Run. Please note that unlike v1, this is an int64 value.
+        #     As with most Google APIs, its JSON representation will be a `string`
+        #     instead of an `integer`.
         # @!attribute [r] terminal_condition
         #   @return [::Google::Cloud::Run::V2::Condition]
-        #     Output only. The Condition of this Service, containing its readiness status, and
-        #     detailed error information in case it did not reach a serving state. See
-        #     comments in `reconciling` for additional information on reconciliation
-        #     process in Cloud Run.
+        #     Output only. The Condition of this Service, containing its readiness
+        #     status, and detailed error information in case it did not reach a serving
+        #     state. See comments in `reconciling` for additional information on
+        #     reconciliation process in Cloud Run.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
-        #     Output only. The Conditions of all other associated sub-resources. They contain
-        #     additional diagnostics information in case the Service does not reach its
-        #     Serving state. See comments in `reconciling` for additional information on
-        #     reconciliation process in Cloud Run.
+        #     Output only. The Conditions of all other associated sub-resources. They
+        #     contain additional diagnostics information in case the Service does not
+        #     reach its Serving state. See comments in `reconciling` for additional
+        #     information on reconciliation process in Cloud Run.
         # @!attribute [r] latest_ready_revision
         #   @return [::String]
-        #     Output only. Name of the latest revision that is serving traffic. See comments in
-        #     `reconciling` for additional information on reconciliation process in Cloud
-        #     Run.
+        #     Output only. Name of the latest revision that is serving traffic. See
+        #     comments in `reconciling` for additional information on reconciliation
+        #     process in Cloud Run.
         # @!attribute [r] latest_created_revision
         #   @return [::String]
-        #     Output only. Name of the last created revision. See comments in `reconciling` for
-        #     additional information on reconciliation process in Cloud Run.
+        #     Output only. Name of the last created revision. See comments in
+        #     `reconciling` for additional information on reconciliation process in Cloud
+        #     Run.
         # @!attribute [r] traffic_statuses
         #   @return [::Array<::Google::Cloud::Run::V2::TrafficTargetStatus>]
-        #     Output only. Detailed status information for corresponding traffic targets. See comments
-        #     in `reconciling` for additional information on reconciliation process in
-        #     Cloud Run.
+        #     Output only. Detailed status information for corresponding traffic targets.
+        #     See comments in `reconciling` for additional information on reconciliation
+        #     process in Cloud Run.
         # @!attribute [r] uri
         #   @return [::String]
         #     Output only. The main URI in which this Service is serving traffic.
+        # @!attribute [rw] custom_audiences
+        #   @return [::Array<::String>]
+        #     One or more custom audiences that you want this service to support. Specify
+        #     each custom audience as the full URL in a string. The custom audiences are
+        #     encoded in the token and used to authenticate requests. For more
+        #     information, see
+        #     https://cloud.google.com/run/docs/configuring/custom-audiences.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Returns true if the Service is currently being acted upon by the system to
-        #     bring it into the desired state.
+        #     Output only. Returns true if the Service is currently being acted upon by
+        #     the system to bring it into the desired state.
         #
         #     When a new Service is created, or an existing one is updated, Cloud Run
         #     will asynchronously perform all necessary steps to bring the Service to the

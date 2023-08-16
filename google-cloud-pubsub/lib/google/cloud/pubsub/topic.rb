@@ -676,12 +676,19 @@ module Google
         #   topic.publish "task completed",
         #                 ordering_key: "task-key"
         #
-        def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &block
+        def publish data = nil, attributes = nil, ordering_key: nil, compress: nil, compression_bytes_threshold: nil,
+                    **extra_attrs, &block
           ensure_service!
-          batch = BatchPublisher.new data, attributes, ordering_key, extra_attrs
+          batch = BatchPublisher.new data,
+                                     attributes,
+                                     ordering_key,
+                                     extra_attrs,
+                                     compress: compress,
+                                     compression_bytes_threshold: compression_bytes_threshold
+
           block&.call batch
           return nil if batch.messages.count.zero?
-          publish_batch_messages batch
+          batch.publish_batch_messages name, service
         end
 
         ##
@@ -1084,13 +1091,6 @@ module Google
         def ensure_grpc!
           ensure_service!
           reload! if reference?
-        end
-
-        ##
-        # Call the publish API with arrays of data data and attrs.
-        def publish_batch_messages batch
-          grpc = service.publish name, batch.messages
-          batch.to_gcloud_messages Array(grpc.message_ids)
         end
       end
     end

@@ -24,6 +24,7 @@ require "google/cloud/dataflow/v1beta3/version"
 
 require "google/cloud/dataflow/v1beta3/jobs/credentials"
 require "google/cloud/dataflow/v1beta3/jobs/client"
+require "google/cloud/dataflow/v1beta3/jobs/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         # Provides a method to create and modify Google Cloud Dataflow jobs.
         # A Job is a multi-stage computation graph run by the Cloud Dataflow service.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/jobs"
         #     client = ::Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataflow/v1beta3/jobs/rest"
+        #     client = ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
         #
         module Jobs
         end

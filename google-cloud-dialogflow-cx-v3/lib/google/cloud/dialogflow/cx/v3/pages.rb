@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/pages/credentials"
 require "google/cloud/dialogflow/cx/v3/pages/paths"
 require "google/cloud/dialogflow/cx/v3/pages/client"
+require "google/cloud/dialogflow/cx/v3/pages/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
           ##
           # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Page Pages}.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/pages"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/pages/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Rest::Client.new
           #
           module Pages
           end

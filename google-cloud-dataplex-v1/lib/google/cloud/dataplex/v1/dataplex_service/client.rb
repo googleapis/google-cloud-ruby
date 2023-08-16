@@ -236,7 +236,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -353,14 +353,14 @@ module Google
             #   # Call the create_lake method.
             #   result = client.create_lake request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_lake request, options = nil
@@ -452,14 +452,14 @@ module Google
             #   # Call the update_lake method.
             #   result = client.update_lake request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_lake request, options = nil
@@ -547,14 +547,14 @@ module Google
             #   # Call the delete_lake method.
             #   result = client.delete_lake request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_lake request, options = nil
@@ -622,12 +622,12 @@ module Google
             #     `projects/{project_number}/locations/{location_id}`
             #     where `location_id` refers to a GCP region.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of Lakes to return. The service may return fewer than this
-            #     value. If unspecified, at most 10 lakes will be returned. The maximum
-            #     value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of Lakes to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 lakes will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListLakes` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
+            #     Optional. Page token received from a previous `ListLakes` call. Provide
+            #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListLakes` must match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. Filter request.
@@ -654,13 +654,11 @@ module Google
             #   # Call the list_lakes method.
             #   result = client.list_lakes request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Lake.
-            #     p response
+            #     p item
             #   end
             #
             def list_lakes request, options = nil
@@ -813,14 +811,14 @@ module Google
             #     Required. The resource name of the parent lake:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of actions to return. The service may return fewer than this
-            #     value. If unspecified, at most 10 actions will be returned. The maximum
-            #     value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of actions to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 actions will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListLakeActions` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
-            #     provided to `ListLakeActions` must match the call that provided the page
-            #     token.
+            #     Optional. Page token received from a previous `ListLakeActions` call.
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters provided to `ListLakeActions` must match the call that provided
+            #     the page token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Action>]
@@ -842,13 +840,11 @@ module Google
             #   # Call the list_lake_actions method.
             #   result = client.list_lake_actions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-            #     p response
+            #     p item
             #   end
             #
             def list_lake_actions request, options = nil
@@ -950,14 +946,14 @@ module Google
             #   # Call the create_zone method.
             #   result = client.create_zone request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_zone request, options = nil
@@ -1049,14 +1045,14 @@ module Google
             #   # Call the update_zone method.
             #   result = client.update_zone request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_zone request, options = nil
@@ -1144,14 +1140,14 @@ module Google
             #   # Call the delete_zone method.
             #   result = client.delete_zone request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_zone request, options = nil
@@ -1218,12 +1214,12 @@ module Google
             #     Required. The resource name of the parent lake:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of zones to return. The service may return fewer than this
-            #     value. If unspecified, at most 10 zones will be returned. The maximum
-            #     value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of zones to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 zones will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListZones` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
+            #     Optional. Page token received from a previous `ListZones` call. Provide
+            #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListZones` must match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. Filter request.
@@ -1250,13 +1246,11 @@ module Google
             #   # Call the list_zones method.
             #   result = client.list_zones request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Zone.
-            #     p response
+            #     p item
             #   end
             #
             def list_zones request, options = nil
@@ -1409,14 +1403,14 @@ module Google
             #     Required. The resource name of the parent zone:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of actions to return. The service may return fewer than this
-            #     value. If unspecified, at most 10 actions will be returned. The maximum
-            #     value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of actions to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 actions will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListZoneActions` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
-            #     provided to `ListZoneActions` must match the call that provided the page
-            #     token.
+            #     Optional. Page token received from a previous `ListZoneActions` call.
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters provided to `ListZoneActions` must match the call that provided
+            #     the page token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Action>]
@@ -1438,13 +1432,11 @@ module Google
             #   # Call the list_zone_actions method.
             #   result = client.list_zone_actions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-            #     p response
+            #     p item
             #   end
             #
             def list_zone_actions request, options = nil
@@ -1545,14 +1537,14 @@ module Google
             #   # Call the create_asset method.
             #   result = client.create_asset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_asset request, options = nil
@@ -1644,14 +1636,14 @@ module Google
             #   # Call the update_asset method.
             #   result = client.update_asset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_asset request, options = nil
@@ -1739,14 +1731,14 @@ module Google
             #   # Call the delete_asset method.
             #   result = client.delete_asset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_asset request, options = nil
@@ -1813,12 +1805,12 @@ module Google
             #     Required. The resource name of the parent zone:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of asset to return. The service may return fewer than
-            #     this value. If unspecified, at most 10 assets will be returned. The
+            #     Optional. Maximum number of asset to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 assets will be returned. The
             #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListAssets` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
+            #     Optional. Page token received from a previous `ListAssets` call. Provide
+            #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListAssets` must match the call that provided the page
             #     token.
             #   @param filter [::String]
@@ -1846,13 +1838,11 @@ module Google
             #   # Call the list_assets method.
             #   result = client.list_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Asset.
-            #     p response
+            #     p item
             #   end
             #
             def list_assets request, options = nil
@@ -2005,14 +1995,14 @@ module Google
             #     Required. The resource name of the parent asset:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of actions to return. The service may return fewer than this
-            #     value. If unspecified, at most 10 actions will be returned. The maximum
-            #     value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of actions to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 actions will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListAssetActions` call. Provide this
-            #     to retrieve the subsequent page. When paginating, all other parameters
-            #     provided to `ListAssetActions` must match the call that provided the page
-            #     token.
+            #     Optional. Page token received from a previous `ListAssetActions` call.
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters provided to `ListAssetActions` must match the call that provided
+            #     the page token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Action>]
@@ -2034,13 +2024,11 @@ module Google
             #   # Call the list_asset_actions method.
             #   result = client.list_asset_actions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-            #     p response
+            #     p item
             #   end
             #
             def list_asset_actions request, options = nil
@@ -2134,14 +2122,14 @@ module Google
             #   # Call the create_task method.
             #   result = client.create_task request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_task request, options = nil
@@ -2233,14 +2221,14 @@ module Google
             #   # Call the update_task method.
             #   result = client.update_task request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_task request, options = nil
@@ -2327,14 +2315,14 @@ module Google
             #   # Call the delete_task method.
             #   result = client.delete_task request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_task request, options = nil
@@ -2401,12 +2389,12 @@ module Google
             #     Required. The resource name of the parent lake:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of tasks to return. The service may return fewer than this
-            #     value. If unspecified, at most 10 tasks will be returned. The maximum
-            #     value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of tasks to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 tasks will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListZones` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
+            #     Optional. Page token received from a previous `ListZones` call. Provide
+            #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListZones` must match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. Filter request.
@@ -2433,13 +2421,11 @@ module Google
             #   # Call the list_tasks method.
             #   result = client.list_tasks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Task.
-            #     p response
+            #     p item
             #   end
             #
             def list_tasks request, options = nil
@@ -2592,12 +2578,12 @@ module Google
             #     Required. The resource name of the parent environment:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of jobs to return. The service may return fewer than
-            #     this value. If unspecified, at most 10 jobs will be returned. The
+            #     Optional. Maximum number of jobs to return. The service may return fewer
+            #     than this value. If unspecified, at most 10 jobs will be returned. The
             #     maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListJobs` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
+            #     Optional. Page token received from a previous `ListJobs` call. Provide this
+            #     to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListJobs` must match the call that provided the page
             #     token.
             #
@@ -2621,13 +2607,11 @@ module Google
             #   # Call the list_jobs method.
             #   result = client.list_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Job.
-            #     p response
+            #     p item
             #   end
             #
             def list_jobs request, options = nil
@@ -2665,6 +2649,108 @@ module Google
 
               @dataplex_service_stub.call_rpc :list_jobs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataplex_service_stub, :list_jobs, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Run an on demand execution of a Task.
+            #
+            # @overload run_task(request, options = nil)
+            #   Pass arguments to `run_task` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::RunTaskRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::RunTaskRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_task(name: nil, labels: nil, args: nil)
+            #   Pass arguments to `run_task` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the task:
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+            #   @param labels [::Hash{::String => ::String}]
+            #     Optional. User-defined labels for the task. If the map is left empty, the
+            #     task will run with existing labels from task definition. If the map
+            #     contains an entry with a new key, the same will be added to existing set of
+            #     labels. If the map contains an entry with an existing label key in task
+            #     definition, the task will run with new label value for that entry. Clearing
+            #     an existing label will require label value to be explicitly set to a hyphen
+            #     "-". The label value cannot be empty.
+            #   @param args [::Hash{::String => ::String}]
+            #     Optional. Execution spec arguments. If the map is left empty, the task will
+            #     run with existing execution spec args from task definition. If the map
+            #     contains an entry with a new key, the same will be added to existing set of
+            #     args. If the map contains an entry with an existing arg key in task
+            #     definition, the task will run with new arg value for that entry. Clearing
+            #     an existing arg will require arg value to be explicitly set to a hyphen
+            #     "-". The arg value cannot be empty.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::RunTaskResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::RunTaskResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::RunTaskRequest.new
+            #
+            #   # Call the run_task method.
+            #   result = client.run_task request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::RunTaskResponse.
+            #   p result
+            #
+            def run_task request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::RunTaskRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_task.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_task.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_task.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :run_task, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2898,14 +2984,14 @@ module Google
             #   # Call the create_environment method.
             #   result = client.create_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_environment request, options = nil
@@ -2997,14 +3083,14 @@ module Google
             #   # Call the update_environment method.
             #   result = client.update_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_environment request, options = nil
@@ -3092,14 +3178,14 @@ module Google
             #   # Call the delete_environment method.
             #   result = client.delete_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_environment request, options = nil
@@ -3166,14 +3252,15 @@ module Google
             #     Required. The resource name of the parent lake:
             #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of environments to return. The service may return fewer than
-            #     this value. If unspecified, at most 10 environments will be returned. The
-            #     maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of environments to return. The service may return
+            #     fewer than this value. If unspecified, at most 10 environments will be
+            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListEnvironments` call. Provide this
-            #     to retrieve the subsequent page. When paginating, all other parameters
-            #     provided to `ListEnvironments` must match the call that provided the page
-            #     token.
+            #     Optional. Page token received from a previous `ListEnvironments` call.
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters provided to `ListEnvironments` must match the call that provided
+            #     the page token.
             #   @param filter [::String]
             #     Optional. Filter request.
             #   @param order_by [::String]
@@ -3199,13 +3286,11 @@ module Google
             #   # Call the list_environments method.
             #   result = client.list_environments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Environment.
-            #     p response
+            #     p item
             #   end
             #
             def list_environments request, options = nil
@@ -3358,22 +3443,22 @@ module Google
             #     Required. The resource name of the parent environment:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of sessions to return. The service may return fewer than
-            #     this value. If unspecified, at most 10 sessions will be returned. The
-            #     maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. Maximum number of sessions to return. The service may return
+            #     fewer than this value. If unspecified, at most 10 sessions will be
+            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListSessions` call. Provide this to
-            #     retrieve the subsequent page. When paginating, all other parameters
+            #     Optional. Page token received from a previous `ListSessions` call. Provide
+            #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListSessions` must match the call that provided the page
             #     token.
             #   @param filter [::String]
-            #     Optional. Filter request. The following `mode` filter is supported to return only the
-            #     sessions belonging to the requester when the mode is USER and return
-            #     sessions of all the users when the mode is ADMIN. When no filter is sent
-            #     default to USER mode.
-            #     NOTE: When the mode is ADMIN, the requester should have
-            #     `dataplex.environments.listAllSessions` permission to list all sessions,
-            #     in absence of the permission, the request fails.
+            #     Optional. Filter request. The following `mode` filter is supported to
+            #     return only the sessions belonging to the requester when the mode is USER
+            #     and return sessions of all the users when the mode is ADMIN. When no filter
+            #     is sent default to USER mode. NOTE: When the mode is ADMIN, the requester
+            #     should have `dataplex.environments.listAllSessions` permission to list all
+            #     sessions, in absence of the permission, the request fails.
             #
             #     mode = ADMIN | USER
             #
@@ -3397,13 +3482,11 @@ module Google
             #   # Call the list_sessions method.
             #   result = client.list_sessions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Session.
-            #     p response
+            #     p item
             #   end
             #
             def list_sessions request, options = nil
@@ -3486,9 +3569,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -3530,7 +3613,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dataplex.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dataplex.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -3704,6 +3789,11 @@ module Google
                 #
                 attr_reader :list_jobs
                 ##
+                # RPC-specific configuration for `run_task`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_task
+                ##
                 # RPC-specific configuration for `get_job`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3794,6 +3884,8 @@ module Google
                   @get_task = ::Gapic::Config::Method.new get_task_config
                   list_jobs_config = parent_rpcs.list_jobs if parent_rpcs.respond_to? :list_jobs
                   @list_jobs = ::Gapic::Config::Method.new list_jobs_config
+                  run_task_config = parent_rpcs.run_task if parent_rpcs.respond_to? :run_task
+                  @run_task = ::Gapic::Config::Method.new run_task_config
                   get_job_config = parent_rpcs.get_job if parent_rpcs.respond_to? :get_job
                   @get_job = ::Gapic::Config::Method.new get_job_config
                   cancel_job_config = parent_rpcs.cancel_job if parent_rpcs.respond_to? :cancel_job

@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_time_series_data
+# Snippet for the read_tensorboard_time_series_data call in the TensorboardService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_time_series_data.
+# It may require modification in order to execute successfully.
 #
 def read_tensorboard_time_series_data
   # Create a client object. The client can be reused for multiple calls.

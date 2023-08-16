@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/iap"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Iap::ClientConstructionMinitest < Minitest::Test
-  def test_identity_aware_proxy_admin_service
+  def test_identity_aware_proxy_admin_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Iap.identity_aware_proxy_admin_service do |config|
+      client = Google::Cloud::Iap.identity_aware_proxy_admin_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client, client
     end
   end
 
-  def test_identity_aware_proxy_o_auth_service
+  def test_identity_aware_proxy_admin_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Iap.identity_aware_proxy_admin_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client, client
+    end
+  end
+
+  def test_identity_aware_proxy_o_auth_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Iap.identity_aware_proxy_o_auth_service do |config|
+      client = Google::Cloud::Iap.identity_aware_proxy_o_auth_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client, client
+    end
+  end
+
+  def test_identity_aware_proxy_o_auth_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Iap.identity_aware_proxy_o_auth_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Rest::Client, client
     end
   end
 end

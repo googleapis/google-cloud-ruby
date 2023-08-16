@@ -39,12 +39,17 @@ module Google
     module Dialogflow
       module CX
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/cx/v3"
         #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+        #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/cx/v3"
+        #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Rest::Client.new
         #
         module V3
         end

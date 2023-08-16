@@ -41,8 +41,8 @@ module Google
           #     either `GAUGE` (the default) or `CUMULATIVE`.
           # @!attribute [rw] points
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::Point>]
-          #     Required. The data points of this time series. When listing time series, points are
-          #     returned in reverse time order.
+          #     Required. The data points of this time series. When listing time series,
+          #     points are returned in reverse time order.
           #
           #     When creating a time series, this field must contain exactly one point and
           #     the point's type must be the same as the value type of the associated

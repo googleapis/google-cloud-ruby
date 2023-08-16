@@ -43,28 +43,45 @@ module Google
             rpc :ListModelVersions, ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest, ::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse
             # Updates a Model.
             rpc :UpdateModel, ::Google::Cloud::AIPlatform::V1::UpdateModelRequest, ::Google::Cloud::AIPlatform::V1::Model
+            # Incrementally update the dataset used for an examples model.
+            rpc :UpdateExplanationDataset, ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest, ::Google::Longrunning::Operation
             # Deletes a Model.
             #
-            # A model cannot be deleted if any [Endpoint][google.cloud.aiplatform.v1.Endpoint] resource has a
-            # [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] based on the model in its
-            # [deployed_models][google.cloud.aiplatform.v1.Endpoint.deployed_models] field.
+            # A model cannot be deleted if any
+            # [Endpoint][google.cloud.aiplatform.v1.Endpoint] resource has a
+            # [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] based on the
+            # model in its
+            # [deployed_models][google.cloud.aiplatform.v1.Endpoint.deployed_models]
+            # field.
             rpc :DeleteModel, ::Google::Cloud::AIPlatform::V1::DeleteModelRequest, ::Google::Longrunning::Operation
             # Deletes a Model version.
             #
-            # Model version can only be deleted if there are no [DeployedModels][]
-            # created from it. Deleting the only version in the Model is not allowed. Use
-            # [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for deleting the Model instead.
+            # Model version can only be deleted if there are no
+            # [DeployedModels][google.cloud.aiplatform.v1.DeployedModel] created from it.
+            # Deleting the only version in the Model is not allowed. Use
+            # [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for
+            # deleting the Model instead.
             rpc :DeleteModelVersion, ::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest, ::Google::Longrunning::Operation
             # Merges a set of aliases for a Model version.
             rpc :MergeVersionAliases, ::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest, ::Google::Cloud::AIPlatform::V1::Model
             # Exports a trained, exportable Model to a location specified by the
             # user. A Model is considered to be exportable if it has at least one
-            # [supported export format][google.cloud.aiplatform.v1.Model.supported_export_formats].
+            # [supported export
+            # format][google.cloud.aiplatform.v1.Model.supported_export_formats].
             rpc :ExportModel, ::Google::Cloud::AIPlatform::V1::ExportModelRequest, ::Google::Longrunning::Operation
+            # Copies an already existing Vertex AI Model into the specified Location.
+            # The source Model must exist in the same Project.
+            # When copying custom Models, the users themselves are responsible for
+            # [Model.metadata][google.cloud.aiplatform.v1.Model.metadata] content to be
+            # region-agnostic, as well as making sure that any resources (e.g. files) it
+            # depends on remain accessible.
+            rpc :CopyModel, ::Google::Cloud::AIPlatform::V1::CopyModelRequest, ::Google::Longrunning::Operation
             # Imports an externally generated ModelEvaluation.
             rpc :ImportModelEvaluation, ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Imports a list of externally generated ModelEvaluationSlice.
             rpc :BatchImportModelEvaluationSlices, ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest, ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse
+            # Imports a list of externally generated EvaluatedAnnotations.
+            rpc :BatchImportEvaluatedAnnotations, ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest, ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsResponse
             # Gets a ModelEvaluation.
             rpc :GetModelEvaluation, ::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Lists ModelEvaluations in a Model.

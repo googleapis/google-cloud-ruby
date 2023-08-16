@@ -130,7 +130,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -152,8 +152,9 @@ module Google
             # Service calls
 
             ##
-            # Checks whether a member has a specific permission for a specific resource,
-            # and explains why the member does or does not have that permission.
+            # Checks whether a principal has a specific permission for a specific
+            # resource, and explains why the principal does or does not have that
+            # permission.
             #
             # @overload troubleshoot_iam_policy(request, options = nil)
             #   Pass arguments to `troubleshoot_iam_policy` via a request object, either of type
@@ -171,8 +172,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param access_tuple [::Google::Cloud::PolicyTroubleshooter::V1::AccessTuple, ::Hash]
-            #     The information to use for checking whether a member has a permission for a
-            #     resource.
+            #     The information to use for checking whether a principal has a permission
+            #     for a resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyResponse]
@@ -268,9 +269,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -312,7 +313,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "policytroubleshooter.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "policytroubleshooter.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

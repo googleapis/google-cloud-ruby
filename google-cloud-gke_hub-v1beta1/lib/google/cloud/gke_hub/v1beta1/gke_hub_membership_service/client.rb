@@ -30,9 +30,11 @@ module Google
           # Client for the GkeHubMembershipService service.
           #
           # The GKE Hub MembershipService handles the registration of many Kubernetes
-          # clusters to Google Cloud, represented with the {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
+          # clusters to Google Cloud, represented with the
+          # {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
           #
-          # GKE Hub is currently only available in the global region.
+          # GKE Hub is currently available in the global region and all regions in
+          # https://cloud.google.com/compute/docs/regions-zones.
           #
           # **Membership management may be non-trivial:** it is recommended to use one
           # of the Google-provided client libraries or tools where possible when working
@@ -137,7 +139,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -216,19 +218,20 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Memberships will be listed.
-            #     Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Memberships will be
+            #     listed. Specified in the format `projects/*/locations/*`.
+            #     `projects/*/locations/-` list memberships in all the regions.
             #   @param page_size [::Integer]
-            #     Optional. When requesting a 'page' of resources, `page_size` specifies number of
-            #     resources to return. If unspecified or set to 0, all resources will
-            #     be returned.
+            #     Optional. When requesting a 'page' of resources, `page_size` specifies
+            #     number of resources to return. If unspecified or set to 0, all resources
+            #     will be returned.
             #   @param page_token [::String]
             #     Optional. Token returned by previous call to `ListMemberships` which
             #     specifies the position in the list from where to continue listing the
             #     resources.
             #   @param filter [::String]
-            #     Optional. Lists Memberships that match the filter expression, following the syntax
-            #     outlined in https://google.aip.dev/160.
+            #     Optional. Lists Memberships that match the filter expression, following the
+            #     syntax outlined in https://google.aip.dev/160.
             #
             #     Examples:
             #
@@ -271,13 +274,11 @@ module Google
             #   # Call the list_memberships method.
             #   result = client.list_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeHub::V1beta1::Membership.
-            #     p response
+            #     p item
             #   end
             #
             def list_memberships request, options = nil
@@ -431,11 +432,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Memberships will be created.
-            #     Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Memberships will be
+            #     created. Specified in the format `projects/*/locations/*`.
             #   @param membership_id [::String]
-            #     Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
-            #     1123 compliant DNS label:
+            #     Required. Client chosen ID for the membership. `membership_id` must be a
+            #     valid RFC 1123 compliant DNS label:
             #
             #       1. At most 63 characters in length
             #       2. It must consist of lower case alphanumeric characters or `-`
@@ -480,14 +481,14 @@ module Google
             #   # Call the create_membership method.
             #   result = client.create_membership request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_membership request, options = nil
@@ -549,7 +550,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_membership(name: nil, request_id: nil)
+            # @overload delete_membership(name: nil, request_id: nil, force: nil)
             #   Pass arguments to `delete_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -571,6 +572,10 @@ module Google
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param force [::Boolean]
+            #     Optional. If set to true, any subresource from this Membership will also be
+            #     deleted. Otherwise, the request will only work if the Membership has no
+            #     subresource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -592,14 +597,14 @@ module Google
             #   # Call the delete_membership method.
             #   result = client.delete_membership request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_membership request, options = nil
@@ -666,8 +671,8 @@ module Google
             #     Required. The membership resource name in the format:
             #     `projects/[project_id]/locations/global/memberships/[membership_id]`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Mask of fields to update. At least one field path must be specified in this
-            #     mask.
+            #     Required. Mask of fields to update. At least one field path must be
+            #     specified in this mask.
             #   @param resource [::Google::Cloud::GkeHub::V1beta1::Membership, ::Hash]
             #     Required. Only fields specified in update_mask are updated.
             #     If you specify a field in the update_mask but don't specify its value here
@@ -712,14 +717,14 @@ module Google
             #   # Call the update_membership method.
             #   result = client.update_membership request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_membership request, options = nil
@@ -786,12 +791,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The Membership resource name the Agent will associate with, in the format
-            #     `projects/*/locations/*/memberships/*`.
+            #     Required. The Membership resource name the Agent will associate with, in
+            #     the format `projects/*/locations/*/memberships/*`.
             #   @param connect_agent [::Google::Cloud::GkeHub::V1beta1::ConnectAgent, ::Hash]
             #     Optional. The connect agent to generate manifest for.
             #   @param version [::String]
-            #     Optional. The Connect agent version to use. Defaults to the most current version.
+            #     Optional. The Connect agent version to use. Defaults to the most current
+            #     version.
             #   @param is_upgrade [::Boolean]
             #     Optional. If true, generate the resources for upgrade only. Some resources
             #     generated only for installation (e.g. secrets) will be excluded.
@@ -885,14 +891,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Memberships will be created.
-            #     Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Memberships will be
+            #     created. Specified in the format `projects/*/locations/*`.
             #   @param cr_manifest [::String]
-            #     Optional. The YAML of the membership CR in the cluster. Empty if the membership
-            #     CR does not exist.
+            #     Optional. The YAML of the membership CR in the cluster. Empty if the
+            #     membership CR does not exist.
             #   @param intended_membership [::String]
-            #     Required. The intended membership name under the `parent`. This method only does
-            #     validation in anticipation of a CreateMembership call with the same name.
+            #     Required. The intended membership name under the `parent`. This method only
+            #     does validation in anticipation of a CreateMembership call with the same
+            #     name.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityResponse]
@@ -1101,9 +1108,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1145,7 +1152,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "gkehub.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "gkehub.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

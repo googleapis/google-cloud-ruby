@@ -21,20 +21,20 @@ module Google
   module Cloud
     module Translate
       module V3
-        # Configures which glossary should be used for a specific target language,
-        # and defines options for applying that glossary.
+        # Configures which glossary is used for a specific target language and defines
+        # options for applying that glossary.
         # @!attribute [rw] glossary
         #   @return [::String]
         #     Required. The `glossary` to be applied for this translation.
         #
-        #     The format depends on glossary:
+        #     The format depends on the glossary:
         #
-        #     - User provided custom glossary:
+        #     - User-provided custom glossary:
         #       `projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}`
         # @!attribute [rw] ignore_case
         #   @return [::Boolean]
-        #     Optional. Indicates match is case-insensitive.
-        #     Default value is false if missing.
+        #     Optional. Indicates match is case insensitive. The default value is `false`
+        #     if missing.
         class TranslateTextGlossaryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -44,23 +44,22 @@ module Google
         # @!attribute [rw] contents
         #   @return [::Array<::String>]
         #     Required. The content of the input in string format.
-        #     We recommend the total content be less than 30k codepoints. The max length
-        #     of this field is 1024.
-        #     Use BatchTranslateText for larger text.
+        #     We recommend the total content be less than 30,000 codepoints. The max
+        #     length of this field is 1024. Use BatchTranslateText for larger text.
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     Optional. The format of the source text, for example, "text/html",
         #      "text/plain". If left blank, the MIME type defaults to "text/html".
         # @!attribute [rw] source_language_code
         #   @return [::String]
-        #     Optional. The BCP-47 language code of the input text if
+        #     Optional. The ISO-639 language code of the input text if
         #     known, for example, "en-US" or "sr-Latn". Supported language codes are
         #     listed in Language Support. If the source language isn't specified, the API
         #     attempts to identify the source language automatically and returns the
         #     source language within the response.
         # @!attribute [rw] target_language_code
         #   @return [::String]
-        #     Required. The BCP-47 language code to use for translation of the input
+        #     Required. The ISO-639 language code to use for translation of the input
         #     text, set to one of the language codes listed in Language Support.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -95,7 +94,7 @@ module Google
         #     For example,
         #     `projects/{project-number-or-id}/locations/global/models/general/nmt`.
         #
-        #     If not provided, the default Google model (NMT) will be used.
+        #     If not provided, the default Google model (NMT) will be used
         # @!attribute [rw] glossary_config
         #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
         #     Optional. Glossary to be applied. The glossary must be
@@ -161,7 +160,7 @@ module Google
         #     `projects/{project-number}/locations/{location-id}/models/general/nmt`.
         # @!attribute [rw] detected_language_code
         #   @return [::String]
-        #     The BCP-47 language code of source text in the initial request, detected
+        #     The ISO-639 language code of source text in the initial request, detected
         #     automatically, if no source language was passed within the initial
         #     request. If the source language was passed, auto-detection of the language
         #     does not occur and this field is empty.
@@ -233,7 +232,7 @@ module Google
         # The response message for language detection.
         # @!attribute [rw] language_code
         #   @return [::String]
-        #     The BCP-47 language code of source content in the request, detected
+        #     The ISO-639 language code of the source content in the request, detected
         #     automatically.
         # @!attribute [rw] confidence
         #   @return [::Float]
@@ -309,19 +308,19 @@ module Google
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Supported language code, generally consisting of its ISO 639-1
-        #     identifier, for example, 'en', 'ja'. In certain cases, BCP-47 codes
+        #     identifier, for example, 'en', 'ja'. In certain cases, ISO-639 codes
         #     including language and region identifiers are returned (for example,
-        #     'zh-TW' and 'zh-CN')
+        #     'zh-TW' and 'zh-CN').
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Human readable name of the language localized in the display language
+        #     Human-readable name of the language localized in the display language
         #     specified in the request.
         # @!attribute [rw] support_source
         #   @return [::Boolean]
-        #     Can be used as source language.
+        #     Can be used as a source language.
         # @!attribute [rw] support_target
         #   @return [::Boolean]
-        #     Can be used as target language.
+        #     Can be used as a target language.
         class SupportedLanguage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -419,10 +418,10 @@ module Google
         #     Since index.csv will be keeping updated during the process, please make
         #     sure there is no custom retention policy applied on the output bucket
         #     that may avoid file updating.
-        #     (https://cloud.google.com/storage/docs/bucket-lock?hl=en#retention-policy)
+        #     (https://cloud.google.com/storage/docs/bucket-lock#retention-policy)
         #
         #     The format of translations_file (for target language code 'trg') is:
-        #     gs://translation_test/a_b_c_'trg'_translations.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_translations.[extension]`
         #
         #     If the input file extension is tsv, the output has the following
         #     columns:
@@ -439,10 +438,10 @@ module Google
         #     If input file extension is a txt or html, the translation is directly
         #     written to the output file. If glossary is requested, a separate
         #     glossary_translations_file has format of
-        #     gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]`
         #
         #     The format of errors file (for target language code 'trg') is:
-        #     gs://translation_test/a_b_c_'trg'_errors.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_errors.[extension]`
         #
         #     If the input file extension is tsv, errors_file contains the following:
         #     Column 1: ID of the request provided in the input, if it's not
@@ -454,7 +453,7 @@ module Google
         #
         #     If the input file extension is txt or html, glossary_error_file will be
         #     generated that contains error details. glossary_error_file has format of
-        #     gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]`
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -504,9 +503,9 @@ module Google
         #
         #     For a DocumentInputConfig.gcs_uri provided document, the output file will
         #     have a name according to its URI. For example: an input file with URI:
-        #     "gs://a/b/c.[extension]" stored in a gcs_destination bucket with name
+        #     `gs://a/b/c.[extension]` stored in a gcs_destination bucket with name
         #     "my_bucket" will have an output URI:
-        #     "gs://my_bucket/a_b_c_[trg]_translations.[ext]", where
+        #     `gs://my_bucket/a_b_c_[trg]_translations.[ext]`, where
         #     - [trg] corresponds to the translated file's language code,
         #     - [ext] corresponds to the translated file's extension according to its
         #     mime type.
@@ -514,7 +513,7 @@ module Google
         #
         #     If the document was directly provided through the request, then the
         #     output document will have the format:
-        #     "gs://my_bucket/translated_document_[trg]_translations.[ext], where
+        #     `gs://my_bucket/translated_document_[trg]_translations.[ext]`, where
         #     - [trg] corresponds to the translated file's language code,
         #     - [ext] corresponds to the translated file's extension according to its
         #     mime type.
@@ -523,7 +522,7 @@ module Google
         #     translation will be equal to the default output URI but have
         #     `glossary_translations` instead of `translations`. For the previous
         #     example, its glossary URI would be:
-        #     "gs://my_bucket/a_b_c_[trg]_glossary_translations.[ext]".
+        #     `gs://my_bucket/a_b_c_[trg]_glossary_translations.[ext]`.
         #
         #     Thus the max number of output files will be 2 (Translated document,
         #     Glossary translated document).
@@ -564,7 +563,7 @@ module Google
         #     location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
         # @!attribute [rw] source_language_code
         #   @return [::String]
-        #     Optional. The BCP-47 language code of the input document if known, for
+        #     Optional. The ISO-639 language code of the input document if known, for
         #     example, "en-US" or "sr-Latn". Supported language codes are listed in
         #     Language Support. If the source language isn't specified, the API attempts
         #     to identify the source language automatically and returns the source
@@ -572,7 +571,7 @@ module Google
         #     request contains a glossary or a custom model.
         # @!attribute [rw] target_language_code
         #   @return [::String]
-        #     Required. The BCP-47 language code to use for translation of the input
+        #     Required. The ISO-639 language code to use for translation of the input
         #     document, set to one of the language codes listed in Language Support.
         # @!attribute [rw] document_input_config
         #   @return [::Google::Cloud::Translate::V3::DocumentInputConfig]
@@ -615,6 +614,26 @@ module Google
         #
         #     See https://cloud.google.com/translate/docs/advanced/labels for more
         #     information.
+        # @!attribute [rw] customized_attribution
+        #   @return [::String]
+        #     Optional. This flag is to support user customized attribution.
+        #     If not provided, the default is `Machine Translated by Google`.
+        #     Customized attribution should follow rules in
+        #     https://cloud.google.com/translate/attribution#attribution_and_logos
+        # @!attribute [rw] is_translate_native_pdf_only
+        #   @return [::Boolean]
+        #     Optional. is_translate_native_pdf_only field for external customers.
+        #     If true, the page limit of online native pdf translation is 300 and only
+        #     native pdf pages will be translated.
+        # @!attribute [rw] enable_shadow_removal_native_pdf
+        #   @return [::Boolean]
+        #     Optional. If true, use the text removal server to remove the shadow text on
+        #     background image for native pdf translation.
+        #     Shadow removal feature can only be enabled when
+        #     is_translate_native_pdf_only: false && pdf_native_only: false
+        # @!attribute [rw] enable_rotation_correction
+        #   @return [::Boolean]
+        #     Optional. If true, enable auto rotation correction in DVS.
         class TranslateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -856,10 +875,10 @@ module Google
         #
         #     For unidirectional glossaries:
         #
-        #     - TSV/CSV (`.tsv`/`.csv`): 2 column file, tab- or comma-separated.
+        #     - TSV/CSV (`.tsv`/`.csv`): Two column file, tab- or comma-separated.
         #       The first column is source text. The second column is target text.
-        #       The file must not contain headers. That is, the first row is data, not
-        #       column names.
+        #       No headers in this file. The first row contains data and not column
+        #       names.
         #
         #     - TMX (`.tmx`): TMX file with parallel data defining source/target term
         #     pairs.
@@ -874,7 +893,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a glossary built from user provided data.
+        # Represents a glossary built from user-provided data.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the glossary. Glossary names have the form
@@ -898,6 +917,9 @@ module Google
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. When the glossary creation was finished.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. The display name of the glossary.
         class Glossary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -905,11 +927,11 @@ module Google
           # Used with unidirectional glossaries.
           # @!attribute [rw] source_language_code
           #   @return [::String]
-          #     Required. The BCP-47 language code of the input text, for example,
+          #     Required. The ISO-639 language code of the input text, for example,
           #     "en-US". Expected to be an exact match for GlossaryTerm.language_code.
           # @!attribute [rw] target_language_code
           #   @return [::String]
-          #     Required. The BCP-47 language code for translation output, for example,
+          #     Required. The ISO-639 language code for translation output, for example,
           #     "zh-CN". Expected to be an exact match for GlossaryTerm.language_code.
           class LanguageCodePair
             include ::Google::Protobuf::MessageExts
@@ -919,7 +941,7 @@ module Google
           # Used with equivalent term set glossaries.
           # @!attribute [rw] language_codes
           #   @return [::Array<::String>]
-          #     The BCP-47 language code(s) for terms defined in the glossary.
+          #     The ISO-639 language code(s) for terms defined in the glossary.
           #     All entries are unique. The list contains at least two entries.
           #     Expected to be an exact match for GlossaryTerm.language_code.
           class LanguageCodesSet
@@ -1120,12 +1142,12 @@ module Google
         #     error is returned.
         # @!attribute [rw] source_language_code
         #   @return [::String]
-        #     Required. The BCP-47 language code of the input document if known, for
+        #     Required. The ISO-639 language code of the input document if known, for
         #     example, "en-US" or "sr-Latn". Supported language codes are listed in
-        #     Language Support (https://cloud.google.com/translate/docs/languages).
+        #     [Language Support](https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] target_language_codes
         #   @return [::Array<::String>]
-        #     Required. The BCP-47 language code to use for translation of the input
+        #     Required. The ISO-639 language code to use for translation of the input
         #     document. Specify up to 10 language codes here.
         # @!attribute [rw] input_configs
         #   @return [::Array<::Google::Cloud::Translate::V3::BatchDocumentInputConfig>]
@@ -1170,6 +1192,21 @@ module Google
         #
         #     If nothing specified, output files will be in the same format as the
         #     original file.
+        # @!attribute [rw] customized_attribution
+        #   @return [::String]
+        #     Optional. This flag is to support user customized attribution.
+        #     If not provided, the default is `Machine Translated by Google`.
+        #     Customized attribution should follow rules in
+        #     https://cloud.google.com/translate/attribution#attribution_and_logos
+        # @!attribute [rw] enable_shadow_removal_native_pdf
+        #   @return [::Boolean]
+        #     Optional. If true, use the text removal server to remove the shadow text on
+        #     background image for native pdf translation.
+        #     Shadow removal feature can only be enabled when
+        #     is_translate_native_pdf_only: false && pdf_native_only: false
+        # @!attribute [rw] enable_rotation_correction
+        #   @return [::Boolean]
+        #     Optional. If true, enable auto rotation correction in DVS.
         class BatchTranslateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1263,19 +1300,19 @@ module Google
         #     Since index.csv will be keeping updated during the process, please make
         #     sure there is no custom retention policy applied on the output bucket
         #     that may avoid file updating.
-        #     (https://cloud.google.com/storage/docs/bucket-lock?hl=en#retention-policy)
+        #     (https://cloud.google.com/storage/docs/bucket-lock#retention-policy)
         #
         #     The naming format of translation output files follows (for target
         #     language code [trg]): `translation_output`:
-        #     gs://translation_output/a_b_c_[trg]_translation.[extension]
+        #     `gs://translation_output/a_b_c_[trg]_translation.[extension]`
         #     `glossary_translation_output`:
-        #     gs://translation_test/a_b_c_[trg]_glossary_translation.[extension] The
+        #     `gs://translation_test/a_b_c_[trg]_glossary_translation.[extension]`. The
         #     output document will maintain the same file format as the input document.
         #
         #     The naming format of error output files follows (for target language code
-        #     [trg]): `error_output`: gs://translation_test/a_b_c_[trg]_errors.txt
+        #     [trg]): `error_output`: `gs://translation_test/a_b_c_[trg]_errors.txt`
         #     `glossary_error_output`:
-        #     gs://translation_test/a_b_c_[trg]_glossary_translation.txt The error
+        #     `gs://translation_test/a_b_c_[trg]_glossary_translation.txt`. The error
         #     output is a txt file containing error details.
         class BatchDocumentOutputConfig
           include ::Google::Protobuf::MessageExts

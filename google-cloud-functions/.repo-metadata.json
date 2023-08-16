@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The Cloud Functions API manages lightweight user-provided functions executed in response to events.",
     "ruby-cloud-env-prefix": "FUNCTIONS",
     "ruby-cloud-product-url": "https://cloud.google.com/functions",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

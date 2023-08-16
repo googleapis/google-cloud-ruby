@@ -104,7 +104,7 @@ module Google
 
                 default_config.rpcs.pull.timeout = 60.0
                 default_config.rpcs.pull.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14, 13]
                 }
 
                 default_config.rpcs.streaming_pull.timeout = 900.0
@@ -206,7 +206,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -263,7 +263,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -281,19 +281,18 @@ module Google
             #     field will be `_deleted-topic_` if the topic has been deleted.
             #   @param push_config [::Google::Cloud::PubSub::V1::PushConfig, ::Hash]
             #     If push delivery is used with this subscription, this field is
-            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-            #     but not both. If both are empty, then the subscriber will pull and ack
-            #     messages using API methods.
+            #     used to configure it.
             #   @param bigquery_config [::Google::Cloud::PubSub::V1::BigQueryConfig, ::Hash]
             #     If delivery to BigQuery is used with this subscription, this field is
-            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-            #     but not both. If both are empty, then the subscriber will pull and ack
-            #     messages using API methods.
+            #     used to configure it.
+            #   @param cloud_storage_config [::Google::Cloud::PubSub::V1::CloudStorageConfig, ::Hash]
+            #     If delivery to Google Cloud Storage is used with this subscription, this
+            #     field is used to configure it.
             #   @param ack_deadline_seconds [::Integer]
             #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
             #     the subscriber to acknowledge receipt before resending the message. In the
             #     interval after the message is delivered and before it is acknowledged, it
-            #     is considered to be <i>outstanding</i>. During that time period, the
+            #     is considered to be _outstanding_. During that time period, the
             #     message will not be redelivered (on a best-effort basis).
             #
             #     For pull subscriptions, this value is used as the initial value for the ack
@@ -325,8 +324,8 @@ module Google
             #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
             #     minutes.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing
+            #     labels](https://cloud.google.com/pubsub/docs/labels).
             #   @param enable_message_ordering [::Boolean]
             #     If true, messages published with the same `ordering_key` in `PubsubMessage`
             #     will be delivered to the subscribers in the order in which they
@@ -338,7 +337,8 @@ module Google
             #     successfully consuming messages from the subscription or is issuing
             #     operations on the subscription. If `expiration_policy` is not set, a
             #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
-            #     value for `expiration_policy.ttl` is 1 day.
+            #     value for `expiration_policy.ttl` is 1 day. If `expiration_policy` is set,
+            #     but `expiration_policy.ttl` is not set, the subscription never expires.
             #   @param filter [::String]
             #     An expression written in the Pub/Sub [filter
             #     language](https://cloud.google.com/pubsub/docs/filtering). If non-empty,
@@ -668,13 +668,11 @@ module Google
             #   # Call the list_subscriptions method.
             #   result = client.list_subscriptions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Subscription.
-            #     p response
+            #     p item
             #   end
             #
             def list_subscriptions request, options = nil
@@ -1007,9 +1005,7 @@ module Google
             end
 
             ##
-            # Pulls messages from the server. The server may return `UNAVAILABLE` if
-            # there are too many concurrent pull requests pending for the given
-            # subscription.
+            # Pulls messages from the server.
             #
             # @overload pull(request, options = nil)
             #   Pass arguments to `pull` via a request object, either of type
@@ -1134,22 +1130,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the streaming_pull method to start streaming.
             #   output = client.streaming_pull input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
             #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::PubSub::V1::StreamingPullResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::PubSub::V1::StreamingPullResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_pull request, options = nil
@@ -1290,10 +1286,10 @@ module Google
 
             ##
             # Gets the configuration details of a snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow you to manage message acknowledgments in bulk. That
-            # is, you can set the acknowledgment state of messages in an existing
-            # subscription to the state captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload get_snapshot(request, options = nil)
             #   Pass arguments to `get_snapshot` via a request object, either of type
@@ -1430,13 +1426,11 @@ module Google
             #   # Call the list_snapshots method.
             #   result = client.list_snapshots request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Snapshot.
-            #     p response
+            #     p item
             #   end
             #
             def list_snapshots request, options = nil
@@ -1518,9 +1512,9 @@ module Google
             #     Required. User-provided name for this snapshot. If the name is not provided
             #     in the request, the server will assign a random name for this snapshot on
             #     the same project as the subscription. Note that for REST API requests, you
-            #     must specify a name.  See the <a
-            #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
-            #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
+            #     must specify a name.  See the [resource name
+            #     rules](https://cloud.google.com/pubsub/docs/admin#resource_names). Format
+            #     is `projects/{project}/snapshots/{snap}`.
             #   @param subscription [::String]
             #     Required. The subscription whose backlog the snapshot retains.
             #     Specifically, the created snapshot is guaranteed to retain:
@@ -1532,8 +1526,8 @@ module Google
             #          successful completion of the CreateSnapshot request.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing
+            #     labels](https://cloud.google.com/pubsub/docs/labels).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]
@@ -1601,11 +1595,10 @@ module Google
 
             ##
             # Updates an existing snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow
-            # you to manage message acknowledgments in bulk. That is, you can set the
-            # acknowledgment state of messages in an existing subscription to the state
-            # captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload update_snapshot(request, options = nil)
             #   Pass arguments to `update_snapshot` via a request object, either of type
@@ -1931,9 +1924,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1975,7 +1968,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "pubsub.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "pubsub.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

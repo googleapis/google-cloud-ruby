@@ -20,8 +20,11 @@
 require "google/cloud/gke_multi_cloud/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters
+# Snippet for the list_aws_clusters call in the AwsClusters service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters. It
+# may require modification in order to execute successfully.
 #
 def list_aws_clusters
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_aws_clusters
   # Call the list_aws_clusters method.
   result = client.list_aws_clusters request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsCluster.
-    p response
+    p item
   end
 end
 # [END gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_sync]

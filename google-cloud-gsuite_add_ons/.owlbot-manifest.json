@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-gsuite_add_ons.gemspec",
+    "lib/google-cloud-gsuite_add_ons.rb",
+    "lib/google/cloud/gsuite_add_ons.rb",
+    "lib/google/cloud/gsuite_add_ons/version.rb",
+    "test/google/cloud/gsuite_add_ons/client_test.rb",
+    "test/google/cloud/gsuite_add_ons/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    ".owlbot.rb"
+  ]
+}

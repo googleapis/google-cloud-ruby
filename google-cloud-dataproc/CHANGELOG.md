@@ -1,5 +1,17 @@
 # Release History
 
+### 2.3.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20766](https://github.com/googleapis/google-cloud-ruby/issues/20766)) 
+
+### 2.2.0 (2023-01-05)
+
+#### Features
+
+* Support for NodeGroupController client ([#19852](https://github.com/googleapis/google-cloud-ruby/issues/19852)) 
+
 ### 2.1.0 (2022-07-02)
 
 #### Features

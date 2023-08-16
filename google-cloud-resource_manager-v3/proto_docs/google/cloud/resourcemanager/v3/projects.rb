@@ -26,8 +26,8 @@ module Google
         # Google Cloud Platform resources.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The unique resource name of the project. It is an int64 generated number
-        #     prefixed by "projects/".
+        #     Output only. The unique resource name of the project. It is an int64
+        #     generated number prefixed by "projects/".
         #
         #     Example: `projects/415104041262`
         # @!attribute [rw] parent
@@ -64,9 +64,9 @@ module Google
         #     Output only. The time at which this resource was requested for deletion.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. A checksum computed by the server based on the current value of the Project
-        #     resource. This may be sent on update and delete requests to ensure the
-        #     client has an up-to-date value before proceeding.
+        #     Output only. A checksum computed by the server based on the current value
+        #     of the Project resource. This may be sent on update and delete requests to
+        #     ensure the client has an up-to-date value before proceeding.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels associated with this project.
@@ -77,7 +77,7 @@ module Google
         #     Label values must be between 0 and 63 characters long and must conform
         #     to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
         #
-        #     No more than 256 labels can be associated with a given resource.
+        #     No more than 64 labels can be associated with a given resource.
         #
         #     Clients should store labels in a representation such as JSON that does not
         #     depend on specific characters being disallowed.
@@ -131,15 +131,17 @@ module Google
         # method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the parent resource to list projects under.
+        #     Required. The name of the parent resource whose projects are being listed.
+        #     Only children of this parent resource are listed; descendants are not
+        #     listed.
         #
-        #     For example, setting this field to 'folders/1234' would list all projects
-        #     directly under that folder.
+        #     If the parent is a folder, use the value `folders/{folder_id}`. If the
+        #     parent is an organization, use the value `organizations/{org_id}`.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous call to [ListProjects]
-        #     [google.cloud.resourcemanager.v3.Projects.ListProjects]
-        #     that indicates from where listing should continue.
+        #     Optional. A pagination token returned from a previous call to
+        #     [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+        #     indicates from where listing should continue.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of projects to return in the response.
@@ -147,8 +149,8 @@ module Google
         #     If unspecified, server picks an appropriate default.
         # @!attribute [rw] show_deleted
         #   @return [::Boolean]
-        #     Optional. Indicate that projects in the `DELETE_REQUESTED` state should also be
-        #     returned. Normally only `ACTIVE` projects are returned.
+        #     Optional. Indicate that projects in the `DELETE_REQUESTED` state should
+        #     also be returned. Normally only `ACTIVE` projects are returned.
         class ListProjectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -192,48 +194,42 @@ module Google
         #   @return [::String]
         #     Optional. A query string for searching for projects that the caller has
         #     `resourcemanager.projects.get` permission to. If multiple fields are
-        #     included in the query, the it will return results that match any of the
+        #     included in the query, then it will return results that match any of the
         #     fields. Some eligible fields are:
         #
-        #     ```
-        #     | Field                   | Description                                  |
-        #     |-------------------------|----------------------------------------------|
-        #     | displayName, name       | Filters by displayName.                      |
-        #     | parent                  | Project's parent. (for example: folders/123,
-        #     organizations/*) Prefer parent field over parent.type and parent.id. |
-        #     | parent.type             | Parent's type: `folder` or `organization`.   |
-        #     | parent.id               | Parent's id number (for example: 123)        |
-        #     | id, projectId           | Filters by projectId.                        |
-        #     | state, lifecycleState   | Filters by state.                            |
-        #     | labels                  | Filters by label name or value.              |
-        #     | labels.<key> (where *key* is the name of a label) | Filters by label
-        #     name. |
-        #     ```
+        #     - **`displayName`, `name`**: Filters by displayName.
+        #     - **`parent`**: Project's parent (for example: `folders/123`,
+        #     `organizations/*`). Prefer `parent` field over `parent.type` and
+        #     `parent.id`.
+        #     - **`parent.type`**: Parent's type: `folder` or `organization`.
+        #     - **`parent.id`**: Parent's id number (for example: `123`).
+        #     - **`id`, `projectId`**: Filters by projectId.
+        #     - **`state`, `lifecycleState`**: Filters by state.
+        #     - **`labels`**: Filters by label name or value.
+        #     - **`labels.<key>` (where `<key>` is the name of a label)**: Filters by label
+        #     name.
         #
         #     Search expressions are case insensitive.
         #
         #     Some examples queries:
         #
-        #     ```
-        #     | Query            | Description                                         |
-        #     |------------------|-----------------------------------------------------|
-        #     | name:how*        | The project's name starts with "how".               |
-        #     | name:Howl        | The project's name is `Howl` or `howl`.             |
-        #     | name:HOWL        | Equivalent to above.                                |
-        #     | NAME:howl        | Equivalent to above.                                |
-        #     | labels.color:*   | The project has the label `color`.                  |
-        #     | labels.color:red | The project's label `color` has the value `red`.    |
-        #     | labels.color:red&nbsp;labels.size:big | The project's label `color` has
-        #     the value `red` and its label `size` has the value `big`.                |
-        #     ```
+        #
+        #     - **`name:how*`**: The project's name starts with "how".
+        #     - **`name:Howl`**: The project's name is `Howl` or `howl`.
+        #     - **`name:HOWL`**: Equivalent to above.
+        #     - **`NAME:howl`**: Equivalent to above.
+        #     - **`labels.color:*`**: The project has the label `color`.
+        #     - **`labels.color:red`**:  The project's label `color` has the value `red`.
+        #     - **`labels.color:red labels.size:big`**: The project's label `color` has
+        #     the value `red` or its label `size` has the value `big`.
         #
         #     If no query is specified, the call will return projects for which the user
         #     has the `resourcemanager.projects.get` permission.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous call to [ListProjects]
-        #     [google.cloud.resourcemanager.v3.Projects.ListProjects]
-        #     that indicates from where listing should continue.
+        #     Optional. A pagination token returned from a previous call to
+        #     [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+        #     indicates from where listing should continue.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of projects to return in the response.
@@ -285,7 +281,7 @@ module Google
         #
         #     If the `parent` field is set, the `resourcemanager.projects.create`
         #     permission is checked on the parent resource. If no parent is set and
-        #     the authorization credentials belong to an Organziation, the parent
+        #     the authorization credentials belong to an Organization, the parent
         #     will be set to that Organization.
         class CreateProjectRequest
           include ::Google::Protobuf::MessageExts

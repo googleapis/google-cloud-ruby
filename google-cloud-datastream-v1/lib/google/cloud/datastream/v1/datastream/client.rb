@@ -150,7 +150,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -266,13 +266,11 @@ module Google
             #   # Call the list_connection_profiles method.
             #   result = client.list_connection_profiles request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Datastream::V1::ConnectionProfile.
-            #     p response
+            #     p item
             #   end
             #
             def list_connection_profiles request, options = nil
@@ -441,8 +439,8 @@ module Google
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. Only validate the connection profile, but don't create any resources.
-            #     The default is false.
+            #     Optional. Only validate the connection profile, but don't create any
+            #     resources. The default is false.
             #   @param force [::Boolean]
             #     Optional. Create the connection profile without validating it.
             #
@@ -466,14 +464,14 @@ module Google
             #   # Call the create_connection_profile method.
             #   result = client.create_connection_profile request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_connection_profile request, options = nil
@@ -559,8 +557,8 @@ module Google
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. Only validate the connection profile, but don't update any resources.
-            #     The default is false.
+            #     Optional. Only validate the connection profile, but don't update any
+            #     resources. The default is false.
             #   @param force [::Boolean]
             #     Optional. Update the connection profile without validating it.
             #
@@ -584,14 +582,14 @@ module Google
             #   # Call the update_connection_profile method.
             #   result = client.update_connection_profile request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_connection_profile request, options = nil
@@ -691,14 +689,14 @@ module Google
             #   # Call the delete_connection_profile method.
             #   result = client.delete_connection_profile request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_connection_profile request, options = nil
@@ -765,8 +763,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the connection profile type. Must be in the
-            #     format `projects/*/locations/*`.
+            #     Required. The parent resource of the connection profile type. Must be in
+            #     the format `projects/*/locations/*`.
             #   @param connection_profile [::Google::Cloud::Datastream::V1::ConnectionProfile, ::Hash]
             #     An ad-hoc connection profile configuration.
             #   @param connection_profile_name [::String]
@@ -902,13 +900,11 @@ module Google
             #   # Call the list_streams method.
             #   result = client.list_streams request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Datastream::V1::Stream.
-            #     p response
+            #     p item
             #   end
             #
             def list_streams request, options = nil
@@ -1102,14 +1098,14 @@ module Google
             #   # Call the create_stream method.
             #   result = client.create_stream request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_stream request, options = nil
@@ -1195,8 +1191,8 @@ module Google
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. Only validate the stream with the changes, without actually updating it.
-            #     The default is false.
+            #     Optional. Only validate the stream with the changes, without actually
+            #     updating it. The default is false.
             #   @param force [::Boolean]
             #     Optional. Update the stream without validating it.
             #
@@ -1220,14 +1216,14 @@ module Google
             #   # Call the update_stream method.
             #   result = client.update_stream request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_stream request, options = nil
@@ -1327,14 +1323,14 @@ module Google
             #   # Call the delete_stream method.
             #   result = client.delete_stream request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_stream request, options = nil
@@ -1602,13 +1598,11 @@ module Google
             #   # Call the list_stream_objects method.
             #   result = client.list_stream_objects request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Datastream::V1::StreamObject.
-            #     p response
+            #     p item
             #   end
             #
             def list_stream_objects request, options = nil
@@ -1672,7 +1666,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param object [::String]
-            #     Required. The name of the stream object resource to start a backfill job for.
+            #     Required. The name of the stream object resource to start a backfill job
+            #     for.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastream::V1::StartBackfillJobResponse]
@@ -1757,7 +1752,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param object [::String]
-            #     Required. The name of the stream object resource to stop the backfill job for.
+            #     Required. The name of the stream object resource to stop the backfill job
+            #     for.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastream::V1::StopBackfillJobResponse]
@@ -1843,8 +1839,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name for the location for which static IPs should be returned.
-            #     Must be in the format `projects/*/locations/*`.
+            #     Required. The resource name for the location for which static IPs should be
+            #     returned. Must be in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     Maximum number of Ips to return, will likely not be specified.
             #   @param page_token [::String]
@@ -1928,7 +1924,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil)
+            # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil, force: nil)
             #   Pass arguments to `create_private_connection` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1953,6 +1949,8 @@ module Google
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param force [::Boolean]
+            #     Optional. If set to true, will skip validations.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1974,14 +1972,14 @@ module Google
             #   # Call the create_private_connection method.
             #   result = client.create_private_connection request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_private_connection request, options = nil
@@ -2131,7 +2129,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent that owns the collection of private connectivity configurations.
+            #     Required. The parent that owns the collection of private connectivity
+            #     configurations.
             #   @param page_size [::Integer]
             #     Maximum number of private connectivity configurations to return.
             #     If unspecified, at most 50 private connectivity configurations that will be
@@ -2169,13 +2168,11 @@ module Google
             #   # Call the list_private_connections method.
             #   result = client.list_private_connections request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Datastream::V1::PrivateConnection.
-            #     p response
+            #     p item
             #   end
             #
             def list_private_connections request, options = nil
@@ -2255,8 +2252,8 @@ module Google
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param force [::Boolean]
-            #     Optional. If set to true, any child routes that belong to this PrivateConnection will
-            #     also be deleted.
+            #     Optional. If set to true, any child routes that belong to this
+            #     PrivateConnection will also be deleted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2278,14 +2275,14 @@ module Google
             #   # Call the delete_private_connection method.
             #   result = client.delete_private_connection request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_private_connection request, options = nil
@@ -2390,14 +2387,14 @@ module Google
             #   # Call the create_route method.
             #   result = client.create_route request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_route request, options = nil
@@ -2585,13 +2582,11 @@ module Google
             #   # Call the list_routes method.
             #   result = client.list_routes request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Datastream::V1::Route.
-            #     p response
+            #     p item
             #   end
             #
             def list_routes request, options = nil
@@ -2691,14 +2686,14 @@ module Google
             #   # Call the delete_route method.
             #   result = client.delete_route request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_route request, options = nil
@@ -2781,9 +2776,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2825,7 +2820,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "datastream.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "datastream.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

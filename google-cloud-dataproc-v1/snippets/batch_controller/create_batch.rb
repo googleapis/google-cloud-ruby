@@ -20,8 +20,11 @@
 require "google/cloud/dataproc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataproc::V1::BatchController::Client#create_batch
+# Snippet for the create_batch call in the BatchController service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::BatchController::Client#create_batch. It may
+# require modification in order to execute successfully.
 #
 def create_batch
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_batch
   # Call the create_batch method.
   result = client.create_batch request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END dataproc_v1_generated_BatchController_CreateBatch_sync]

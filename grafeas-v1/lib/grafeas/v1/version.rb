@@ -19,6 +19,6 @@
 
 module Grafeas
   module V1
-    VERSION = "0.7.0"
+    VERSION = "0.12.1"
   end
 end

@@ -27,7 +27,7 @@ module Google
           # Service for search.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please enable Retail Search on Cloud Console before using this feature.
+          # Enable Retail Search on Cloud Console before using this feature.
           class Service
 
             include ::GRPC::GenericService
@@ -39,7 +39,7 @@ module Google
             # Performs a search.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             rpc :Search, ::Google::Cloud::Retail::V2::SearchRequest, ::Google::Cloud::Retail::V2::SearchResponse
           end
 

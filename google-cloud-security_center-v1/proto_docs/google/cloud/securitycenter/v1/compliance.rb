@@ -25,14 +25,14 @@ module Google
         # recommendations.
         # @!attribute [rw] standard
         #   @return [::String]
-        #     Refers to industry wide standards or benchmarks e.g. "cis", "pci", "owasp",
-        #     etc.
+        #     Industry-wide compliance standards or benchmarks, such as CIS, PCI, and
+        #     OWASP.
         # @!attribute [rw] version
         #   @return [::String]
-        #     Version of the standard/benchmark e.g. 1.1
+        #     Version of the standard or benchmark, for example, 1.1
         # @!attribute [rw] ids
         #   @return [::Array<::String>]
-        #     Policies within the standard/benchmark e.g. A.12.4.1
+        #     Policies within the standard or benchmark, for example, A.12.4.1
         class Compliance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

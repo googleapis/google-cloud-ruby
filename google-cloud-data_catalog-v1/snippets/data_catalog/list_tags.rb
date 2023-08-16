@@ -20,8 +20,11 @@
 require "google/cloud/data_catalog/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags
+# Snippet for the list_tags call in the DataCatalog service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags. It may require
+# modification in order to execute successfully.
 #
 def list_tags
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_tags
   # Call the list_tags method.
   result = client.list_tags request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::DataCatalog::V1::Tag.
-    p response
+    p item
   end
 end
 # [END datacatalog_v1_generated_DataCatalog_ListTags_sync]

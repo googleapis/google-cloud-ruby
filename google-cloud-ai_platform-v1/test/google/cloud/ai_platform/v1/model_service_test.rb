@@ -59,6 +59,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     parent_model = "hello world"
     model_id = "hello world"
     model = {}
+    service_account = "hello world"
 
     upload_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upload_model, name
@@ -67,6 +68,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent_model"]
       assert_equal "hello world", request["model_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Model), request["model"]
+      assert_equal "hello world", request["service_account"]
       refute_nil options
     end
 
@@ -77,35 +79,35 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model }) do |response, operation|
+      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upload_model parent: parent, parent_model: parent_model, model_id: model_id, model: model do |response, operation|
+      client.upload_model parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upload_model ::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model) do |response, operation|
+      client.upload_model ::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model }, grpc_options) do |response, operation|
+      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upload_model(::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model), grpc_options) do |response, operation|
+      client.upload_model(::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -260,6 +262,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     page_token = "hello world"
     filter = "hello world"
     read_mask = {}
+    order_by = "hello world"
 
     list_model_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_model_versions, name
@@ -269,6 +272,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -279,35 +283,35 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }) do |response, operation|
+      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_model_versions name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask do |response, operation|
+      client.list_model_versions name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_model_versions ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask) do |response, operation|
+      client.list_model_versions ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }, grpc_options) do |response, operation|
+      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_model_versions(::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask), grpc_options) do |response, operation|
+      client.list_model_versions(::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -375,6 +379,71 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, update_model_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_explanation_dataset
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    model = "hello world"
+    examples = {}
+
+    update_explanation_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_explanation_dataset, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest, request
+      assert_equal "hello world", request["model"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Examples), request["examples"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_explanation_dataset_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::ModelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_explanation_dataset({ model: model, examples: examples }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_explanation_dataset model: model, examples: examples do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_explanation_dataset ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new(model: model, examples: examples) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_explanation_dataset({ model: model, examples: examples }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_explanation_dataset(::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new(model: model, examples: examples), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_explanation_dataset_client_stub.call_rpc_count
     end
   end
 
@@ -629,6 +698,76 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     end
   end
 
+  def test_copy_model
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    model_id = "hello world"
+    parent = "hello world"
+    source_model = "hello world"
+    encryption_spec = {}
+
+    copy_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :copy_model, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::CopyModelRequest, request
+      assert_equal "hello world", request["model_id"]
+      assert_equal :model_id, request.destination_model
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["source_model"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::EncryptionSpec), request["encryption_spec"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, copy_model_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::ModelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, copy_model_client_stub.call_rpc_count
+    end
+  end
+
   def test_import_model_evaluation
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::ModelEvaluation.new
@@ -746,6 +885,66 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, batch_import_model_evaluation_slices_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_import_evaluated_annotations
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    evaluated_annotations = [{}]
+
+    batch_import_evaluated_annotations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_import_evaluated_annotations, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation, request["evaluated_annotations"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_import_evaluated_annotations_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::ModelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_import_evaluated_annotations({ parent: parent, evaluated_annotations: evaluated_annotations }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_import_evaluated_annotations parent: parent, evaluated_annotations: evaluated_annotations do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_import_evaluated_annotations ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest.new(parent: parent, evaluated_annotations: evaluated_annotations) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_import_evaluated_annotations({ parent: parent, evaluated_annotations: evaluated_annotations }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_import_evaluated_annotations(::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest.new(parent: parent, evaluated_annotations: evaluated_annotations), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_import_evaluated_annotations_client_stub.call_rpc_count
     end
   end
 

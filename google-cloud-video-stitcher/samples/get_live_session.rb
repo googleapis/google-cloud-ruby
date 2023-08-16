@@ -28,7 +28,8 @@ def get_live_session project_id:, location:, session_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the live session.
-  name = client.live_session_path project: project_id, location: location, live_session: session_id
+  name = client.live_session_path project: project_id, location: location,
+                                  live_session: session_id
 
   # Get the live session.
   session = client.get_live_session name: name

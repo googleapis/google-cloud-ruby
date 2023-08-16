@@ -1,5 +1,74 @@
 # Release History
 
+### 0.31.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.31.0 (2023-06-27)
+
+#### Features
+
+* Mark the Asset APIs as deprecated in client libraries ([#22448](https://github.com/googleapis/google-cloud-ruby/issues/22448)) 
+
+### 0.30.0 (2023-06-16)
+
+#### Features
+
+* Add user agent and DLP parent type fields to finding's list of attributes ([#22380](https://github.com/googleapis/google-cloud-ruby/issues/22380)) 
+
+### 0.29.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.29.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
+### 0.28.0 (2023-04-23)
+
+#### Features
+
+* Add DlpDataProfile & DlpInspection options to Finding ([#21461](https://github.com/googleapis/google-cloud-ruby/issues/21461)) 
+#### Documentation
+
+* Improve documentation ([#21461](https://github.com/googleapis/google-cloud-ruby/issues/21461)) 
+
+### 0.27.0 (2023-04-12)
+
+#### Features
+
+* support security health analytics custom module 
+
+### 0.26.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20629](https://github.com/googleapis/google-cloud-ruby/issues/20629)) 
+
+### 0.25.1 (2023-01-15)
+
+#### Documentation
+
+* Clarify some resource name formats ([#20012](https://github.com/googleapis/google-cloud-ruby/issues/20012)) 
+
+### 0.25.0 (2022-12-14)
+
+#### Features
+
+* Added user name field to finding Access resource ([#19860](https://github.com/googleapis/google-cloud-ruby/issues/19860)) 
+
+### 0.24.0 (2022-12-09)
+
+#### Features
+
+* Added kernel_rootkit field to Finding ([#19802](https://github.com/googleapis/google-cloud-ruby/issues/19802)) 
+
 ### 0.23.0 (2022-11-15)
 
 #### Features

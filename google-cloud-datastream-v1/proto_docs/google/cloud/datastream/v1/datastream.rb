@@ -24,8 +24,8 @@ module Google
         # Request message for 'discover' ConnectionProfile request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the connection profile type. Must be in the
-        #     format `projects/*/locations/*`.
+        #     Required. The parent resource of the connection profile type. Must be in
+        #     the format `projects/*/locations/*`.
         # @!attribute [rw] connection_profile
         #   @return [::Google::Cloud::Datastream::V1::ConnectionProfile]
         #     An ad-hoc connection profile configuration.
@@ -71,8 +71,8 @@ module Google
         # Request message for 'FetchStaticIps' request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name for the location for which static IPs should be returned.
-        #     Must be in the format `projects/*/locations/*`.
+        #     Required. The resource name for the location for which static IPs should be
+        #     returned. Must be in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Ips to return, will likely not be specified.
@@ -177,8 +177,8 @@ module Google
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. Only validate the connection profile, but don't create any resources.
-        #     The default is false.
+        #     Optional. Only validate the connection profile, but don't create any
+        #     resources. The default is false.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Optional. Create the connection profile without validating it.
@@ -215,8 +215,8 @@ module Google
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. Only validate the connection profile, but don't update any resources.
-        #     The default is false.
+        #     Optional. Only validate the connection profile, but don't update any
+        #     resources. The default is false.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Optional. Update the connection profile without validating it.
@@ -366,8 +366,8 @@ module Google
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. Only validate the stream with the changes, without actually updating it.
-        #     The default is false.
+        #     Optional. Only validate the stream with the changes, without actually
+        #     updating it. The default is false.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Optional. Update the stream without validating it.
@@ -425,7 +425,8 @@ module Google
         # Request for manually initiating a backfill job for a specific stream object.
         # @!attribute [rw] object
         #   @return [::String]
-        #     Required. The name of the stream object resource to start a backfill job for.
+        #     Required. The name of the stream object resource to start a backfill job
+        #     for.
         class StartBackfillJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -444,7 +445,8 @@ module Google
         # object.
         # @!attribute [rw] object
         #   @return [::String]
-        #     Required. The name of the stream object resource to stop the backfill job for.
+        #     Required. The name of the stream object resource to stop the backfill job
+        #     for.
         class StopBackfillJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -512,8 +514,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -550,6 +553,9 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, will skip validations.
         class CreatePrivateConnectionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -558,7 +564,8 @@ module Google
         # Request for listing private connections.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent that owns the collection of private connectivity configurations.
+        #     Required. The parent that owns the collection of private connectivity
+        #     configurations.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of private connectivity configurations to return.
@@ -621,8 +628,8 @@ module Google
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] force
         #   @return [::Boolean]
-        #     Optional. If set to true, any child routes that belong to this PrivateConnection will
-        #     also be deleted.
+        #     Optional. If set to true, any child routes that belong to this
+        #     PrivateConnection will also be deleted.
         class DeletePrivateConnectionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

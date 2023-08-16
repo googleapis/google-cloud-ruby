@@ -1,5 +1,35 @@
 # Changelog
 
+### 0.8.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
+### 0.7.0 (2023-04-10)
+
+#### Features
+
+* added ignore_dependent_resources to DeleteCaPoolRequest, DeleteCertificateAuthorityRequest, DisableCertificateAuthorityRequest ([#21052](https://github.com/googleapis/google-cloud-ruby/issues/21052)) 
+
+### 0.6.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.5.0 (2023-02-14)
+
+#### Features
+
+* Support for X.509 name constraints ([#20406](https://github.com/googleapis/google-cloud-ruby/issues/20406)) 
+
 ### 0.4.0 (2022-07-07)
 
 #### Features

@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::MetadataService::Client#get_entity
+# Snippet for the get_entity call in the MetadataService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::MetadataService::Client#get_entity. It may
+# require modification in order to execute successfully.
 #
 def get_entity
   # Create a client object. The client can be reused for multiple calls.

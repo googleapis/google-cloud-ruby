@@ -49,9 +49,9 @@ module Google
         # Create a new client object for MigrationService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::Migration::V2::MigrationService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-migration-v2/latest/Google/Cloud/Bigquery/Migration/V2/MigrationService/Client.html)
-        # for version V2 of the API.
-        # However, you can specify specify a different API version by passing it in the
+        # [Google::Cloud::Bigquery::Migration::V2::MigrationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration-v2/latest/Google-Cloud-Bigquery-Migration-V2-MigrationService-Client)
+        # for a gRPC client for version V2 of the API.
+        # However, you can specify a different API version by passing it in the
         # `version` parameter. If the MigrationService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
@@ -62,7 +62,7 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v2`.
-        # @return [MigrationService::Client] A client object for the specified version.
+        # @return [::Object] A client object for the specified version.
         #
         def self.migration_service version: :v2, &block
           require "google/cloud/bigquery/migration/#{version.to_s.downcase}"
@@ -71,8 +71,8 @@ module Google
                          .constants
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
-          package_module = Google::Cloud::Bigquery::Migration.const_get package_name
-          package_module.const_get(:MigrationService).const_get(:Client).new(&block)
+          service_module = Google::Cloud::Bigquery::Migration.const_get(package_name).const_get(:MigrationService)
+          service_module.const_get(:Client).new(&block)
         end
 
         ##
@@ -92,7 +92,7 @@ module Google
         # * `timeout` (*type:* `Numeric`) -
         #   Default timeout in seconds.
         # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-        #   Additional gRPC headers to be sent with the call.
+        #   Additional headers to be sent with the call.
         # * `retry_policy` (*type:* `Hash`) -
         #   The retry policy. The value is a hash with the following keys:
         #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

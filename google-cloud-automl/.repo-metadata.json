@@ -16,5 +16,5 @@
     "ruby-cloud-product-url": "https://cloud.google.com/automl",
     "ruby-cloud-path-override": "auto_ml=automl",
     "ruby-cloud-namespace-override": "AutoMl=AutoML",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

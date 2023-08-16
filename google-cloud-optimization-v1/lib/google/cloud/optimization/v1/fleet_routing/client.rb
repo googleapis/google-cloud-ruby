@@ -147,7 +147,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -230,7 +230,7 @@ module Google
             #   @param solving_mode [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SolvingMode]
             #     By default, the solving mode is `DEFAULT_SOLVE` (0).
             #   @param max_validation_errors [::Integer]
-            #     Truncates the number of validation errors returned. Those errors are
+            #     Truncates the number of validation errors returned. These errors are
             #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
             #     error detail (https://cloud.google.com/apis/design/errors#error_details),
             #     unless solving_mode=VALIDATE_ONLY: see the
@@ -261,8 +261,9 @@ module Google
             #         <= visits[0].start_time <= visits[1].start_time ...
             #         <= vehicle_end_time`).
             #       * a shipment may only be performed on a vehicle that is allowed. A
-            #         vehicle is allowed if {::Google::Cloud::Optimization::V1::Shipment#allowed_vehicle_indices Shipment.allowed_vehicle_indices} is empty or
-            #         its `vehicle_index` is included in
+            #         vehicle is allowed if
+            #         {::Google::Cloud::Optimization::V1::Shipment#allowed_vehicle_indices Shipment.allowed_vehicle_indices}
+            #         is empty or its `vehicle_index` is included in
             #         {::Google::Cloud::Optimization::V1::Shipment#allowed_vehicle_indices Shipment.allowed_vehicle_indices}.
             #
             #     If the injected solution is not feasible, a validation error is not
@@ -297,16 +298,27 @@ module Google
             #   @param interpret_injected_solutions_using_labels [::Boolean]
             #     If true:
             #
-            #       * uses {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_label ShipmentRoute.vehicle_label} instead of `vehicle_index` to
+            #       * uses
+            #       {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_label ShipmentRoute.vehicle_label}
+            #       instead of `vehicle_index` to
             #         match routes in an injected solution with vehicles in the request;
-            #         reuses the mapping of original {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index} to new
-            #         {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index} to update
+            #         reuses the mapping of original
+            #         {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index}
+            #         to new
+            #         {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index}
+            #         to update
             #         {::Google::Cloud::Optimization::V1::InjectedSolutionConstraint::ConstraintRelaxation#vehicle_indices ConstraintRelaxation.vehicle_indices}
             #         if non-empty, but the mapping must be unambiguous (i.e., multiple
             #         `ShipmentRoute`s must not share the same original `vehicle_index`).
-            #       * uses {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#shipment_label ShipmentRoute.Visit.shipment_label} instead of `shipment_index`
+            #       * uses
+            #       {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#shipment_label ShipmentRoute.Visit.shipment_label}
+            #       instead of `shipment_index`
             #         to match visits in an injected solution with shipments in the request;
-            #       * uses {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label} instead of {::Google::Cloud::Optimization::V1::SkippedShipment#index SkippedShipment.index} to
+            #       * uses
+            #       {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label}
+            #       instead of
+            #       {::Google::Cloud::Optimization::V1::SkippedShipment#index SkippedShipment.index}
+            #       to
             #         match skipped shipments in the injected solution with request
             #         shipments.
             #
@@ -319,8 +331,10 @@ module Google
             #     If true, labels in the following categories must appear at most once in
             #     their category:
             #
-            #       * {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label} in the request;
-            #       * {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label} in the request;
+            #       * {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label} in the
+            #       request;
+            #       * {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label} in the
+            #       request;
             #       * {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_label ShipmentRoute.vehicle_label} in the injected solution;
             #       * {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label} and {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#shipment_label ShipmentRoute.Visit.shipment_label} in
             #         the injected solution (except pickup/delivery visit pairs, whose
@@ -330,27 +344,32 @@ module Google
             #     request vehicle, the corresponding route is removed from the solution
             #     along with its visits. If a `shipment_label` in the injected solution does
             #     not correspond to a request shipment, the corresponding visit is removed
-            #     from the solution. If a {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label} in the injected solution
-            #     does not correspond to a request shipment, the `SkippedShipment` is removed
-            #     from the solution.
+            #     from the solution. If a
+            #     {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label}
+            #     in the injected solution does not correspond to a request shipment, the
+            #     `SkippedShipment` is removed from the solution.
             #
             #     Removing route visits or entire routes from an injected solution may
             #     have an effect on the implied constraints, which may lead to change in
             #     solution, validation errors, or infeasibility.
             #
-            #     NOTE: The caller must ensure that each {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label}
-            #     (resp. {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label}) uniquely identifies a vehicle (resp. shipment)
-            #     entity used across the two relevant requests: the past request that
-            #     produced the `OptimizeToursResponse` used in the injected solution and the
-            #     current request that includes the injected solution. The uniqueness checks
-            #     described above are not enough to guarantee this requirement.
+            #     NOTE: The caller must ensure that each
+            #     {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label} (resp.
+            #     {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label}) uniquely
+            #     identifies a vehicle (resp. shipment) entity used across the two relevant
+            #     requests: the past request that produced the `OptimizeToursResponse` used
+            #     in the injected solution and the current request that includes the injected
+            #     solution. The uniqueness checks described above are not enough to guarantee
+            #     this requirement.
             #   @param consider_road_traffic [::Boolean]
             #     Consider traffic estimation in calculating `ShipmentRoute` fields
             #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#travel_duration Transition.travel_duration},
             #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#start_time Visit.start_time},
             #     and `vehicle_end_time`; in setting the
-            #     {::Google::Cloud::Optimization::V1::ShipmentRoute#has_traffic_infeasibilities ShipmentRoute.has_traffic_infeasibilities} field, and in calculating the
-            #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#total_cost OptimizeToursResponse.total_cost} field.
+            #     {::Google::Cloud::Optimization::V1::ShipmentRoute#has_traffic_infeasibilities ShipmentRoute.has_traffic_infeasibilities}
+            #     field, and in calculating the
+            #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#total_cost OptimizeToursResponse.total_cost}
+            #     field.
             #   @param populate_polylines [::Boolean]
             #     If true, polylines will be populated in response `ShipmentRoute`s.
             #   @param populate_transition_polylines [::Boolean]
@@ -376,10 +395,12 @@ module Google
             #     Label that may be used to identify this request, reported back in the
             #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#request_label OptimizeToursResponse.request_label}.
             #   @param populate_travel_step_polylines [::Boolean]
-            #     Deprecated: Use [OptimizeToursRequest.populate_transition_polylines][] instead.
-            #     If true, polylines will be populated in response
-            #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}. Note that in this case, the polylines will
-            #     also be populated in the deprecated `travel_steps`.
+            #     Deprecated: Use
+            #     {::Google::Cloud::Optimization::V1::OptimizeToursRequest#populate_transition_polylines OptimizeToursRequest.populate_transition_polylines}
+            #     instead. If true, polylines will be populated in response
+            #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}.
+            #     Note that in this case, the polylines will also be populated in the
+            #     deprecated `travel_steps`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Optimization::V1::OptimizeToursResponse]
@@ -479,8 +500,8 @@ module Google
             #
             #     If no location is specified, a region will be chosen automatically.
             #   @param model_configs [::Array<::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest::AsyncModelConfig, ::Hash>]
-            #     Required. Input/Output information each purchase model, such as file paths and data
-            #     formats.
+            #     Required. Input/Output information each purchase model, such as file paths
+            #     and data formats.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -502,14 +523,14 @@ module Google
             #   # Call the batch_optimize_tours method.
             #   result = client.batch_optimize_tours request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_optimize_tours request, options = nil
@@ -592,9 +613,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -636,7 +657,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudoptimization.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudoptimization.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

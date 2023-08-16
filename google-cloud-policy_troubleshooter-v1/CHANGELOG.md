@@ -1,5 +1,38 @@
 # Release History
 
+### 0.8.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.8.0 (2023-07-19)
+
+#### Features
+
+* Include errors in troubleshoot response ([#22548](https://github.com/googleapis/google-cloud-ruby/issues/22548)) 
+#### Documentation
+
+* Update documentation for ToubleshootIamPolicy RPC method 
+
+### 0.7.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.7.0 (2023-06-01)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+
+### 0.6.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
 ### 0.5.0 (2022-07-07)
 
 #### Features

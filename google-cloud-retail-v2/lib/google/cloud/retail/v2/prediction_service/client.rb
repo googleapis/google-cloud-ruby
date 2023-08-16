@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/retail/v2/prediction_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -128,7 +129,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -138,6 +139,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @prediction_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Retail::V2::PredictionService::Stub,
                 credentials:  credentials,
@@ -146,6 +153,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -177,7 +191,7 @@ module Google
             #     The ID of the Recommendations AI serving config or placement.
             #     Before you can request predictions from your model, you must create at
             #     least one serving config or placement for it. For more information, see
-            #     [Managing serving configurations]
+            #     [Manage serving configs]
             #     (https://cloud.google.com/retail/docs/manage-configs).
             #
             #     The full list of available serving configs can be seen at
@@ -228,12 +242,11 @@ module Google
             #      * filterOutOfStockItems  tag=(-"promotional")
             #      * filterOutOfStockItems
             #
-            #     If your filter blocks all prediction results, the API will return generic
-            #     (unfiltered) popular products. If you only want results strictly matching
-            #     the filters, set `strictFiltering` to True in `PredictRequest.params` to
-            #     receive empty results instead.
-            #     Note that the API will never return items with storageStatus of "EXPIRED"
-            #     or "DELETED" regardless of filter choices.
+            #     If your filter blocks all prediction results, the API will return *no*
+            #     results. If instead you want empty result sets to return generic
+            #     (unfiltered) popular products, set `strictFiltering` to False in
+            #     `PredictRequest.params`. Note that the API will never return items with
+            #     storageStatus of "EXPIRED" or "DELETED" regardless of filter choices.
             #
             #     If `filterSyntaxV2` is set to true under the `params` field, then
             #     attribute-based expressions are expected instead of the above described
@@ -242,6 +255,9 @@ module Google
             #      * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
             #      * (availability: ANY("IN_STOCK")) AND
             #        (colors: ANY("Red") OR categories: ANY("Phones"))
+            #
+            #     For more information, see
+            #     [Filter recommendations](https://cloud.google.com/retail/docs/filter-recs).
             #   @param validate_only [::Boolean]
             #     Use validate only mode for this prediction query. If set to true, a
             #     dummy model will be used that returns arbitrary products.
@@ -258,7 +274,7 @@ module Google
             #     * `returnScore`: Boolean. If set to true, the prediction 'score'
             #        corresponding to each returned product will be set in the
             #        `results.metadata` field in the prediction response. The given
-            #        'score' indicates the probability of an product being clicked/purchased
+            #        'score' indicates the probability of a product being clicked/purchased
             #        given the user's context and history.
             #     * `strictFiltering`: Boolean. True by default. If set to false, the service
             #        will return generic (unfiltered) popular products instead of empty if
@@ -396,9 +412,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -440,7 +456,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "retail.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "retail.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

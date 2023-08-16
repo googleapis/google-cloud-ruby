@@ -69,6 +69,29 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     _(Google::Cloud::Datastore::Convert.from_value(second_filter.property_filter.value)).must_equal Time.new(2014, 1, 1, 0, 0, 0, 0)
   end
 
+  it "can query through filter object" do
+    filter = Google::Cloud::Datastore::Filter.new("completed", "=", true)
+    query.kind "Task"
+    query.where filter
+
+    grpc = query.to_grpc
+
+    _(grpc.filter).must_be_kind_of Google::Cloud::Datastore::V1::Filter
+    _(grpc.filter.filter_type).must_equal :composite_filter
+    _(grpc.filter.composite_filter).wont_be :nil?
+    _(grpc.filter.property_filter).must_be :nil?
+    _(grpc.filter.composite_filter.op).must_equal :AND 
+    _(grpc.filter.composite_filter.filters.count).must_equal 1
+
+    filter_1 = grpc.filter.composite_filter.filters.first
+    _(filter_1.filter_type).must_equal :property_filter
+    _(filter_1.composite_filter).must_be :nil?
+    _(filter_1.property_filter).wont_be :nil?
+    _(filter_1.property_filter.property.name).must_equal "completed"
+    _(filter_1.property_filter.op).must_equal :EQUAL
+    _(Google::Cloud::Datastore::Convert.from_value(filter_1.property_filter.value)).must_equal true
+  end
+
   it "can order results" do
     query.kind "Task"
     query.order "due"

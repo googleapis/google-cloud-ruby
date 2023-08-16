@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/session_entity_types/credentials"
 require "google/cloud/dialogflow/cx/v3/session_entity_types/paths"
 require "google/cloud/dialogflow/cx/v3/session_entity_types/client"
+require "google/cloud/dialogflow/cx/v3/session_entity_types/rest"
 
 module Google
   module Cloud
@@ -32,12 +33,18 @@ module Google
       module CX
         module V3
           ##
-          # Service for managing {::Google::Cloud::Dialogflow::CX::V3::SessionEntityType SessionEntityTypes}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityType SessionEntityTypes}.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/session_entity_types"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/session_entity_types/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Rest::Client.new
           #
           module SessionEntityTypes
           end

@@ -26,6 +26,7 @@ require "google/cloud/domains/v1/domains/credentials"
 require "google/cloud/domains/v1/domains/paths"
 require "google/cloud/domains/v1/domains/operations"
 require "google/cloud/domains/v1/domains/client"
+require "google/cloud/domains/v1/domains/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # The Cloud Domains API enables management and configuration of domain names.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/domains/v1/domains"
         #     client = ::Google::Cloud::Domains::V1::Domains::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/domains/v1/domains/rest"
+        #     client = ::Google::Cloud::Domains::V1::Domains::Rest::Client.new
         #
         module Domains
         end

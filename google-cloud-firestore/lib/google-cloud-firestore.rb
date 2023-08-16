@@ -42,6 +42,10 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/datastore`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [String] database_id Identifier for a Firestore database. If not
+    #   present, the default database of the project is used.
+    # @param [:grpc,:rest] transport Which transport to use to communicate
+    #   with the server. Defaults to `:grpc`.
     #
     # @return [Google::Cloud::Firestore::Client]
     #
@@ -58,8 +62,23 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   firestore = gcloud.firestore scope: platform_scope
     #
-    def firestore scope: nil, timeout: nil
-      Google::Cloud.firestore @project, @keyfile, scope: scope, timeout: (timeout || @timeout)
+    # @example The default database can be overridden with the `database_id` option:
+    #   require "google/cloud"
+    #
+    #   gcloud  = Google::Cloud.new
+    #   database_id = "my-todo-database"
+    #   firestore = gcloud.firestore database_id: database_id
+    #
+    def firestore scope: nil,
+                  timeout: nil,
+                  database_id: nil,
+                  transport: nil
+      transport ||= Google::Cloud.configure.firestore.transport
+      Google::Cloud.firestore @project, @keyfile,
+                              scope: scope,
+                              timeout: (timeout || @timeout),
+                              database_id: database_id,
+                              transport: transport
     end
 
     ##
@@ -83,6 +102,10 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/datastore`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [String] database_id Identifier for a Firestore database. If not
+    #   present, the default database of the project is used.
+    # @param [:grpc,:rest] transport Which transport to use to communicate
+    #   with the server. Defaults to `:grpc`.
     #
     # @return [Google::Cloud::Firestore::Client]
     #
@@ -91,15 +114,25 @@ module Google
     #
     #   firestore = Google::Cloud.firestore
     #
-    def self.firestore project_id = nil, credentials = nil, scope: nil, timeout: nil
+    def self.firestore project_id = nil,
+                       credentials = nil,
+                       scope: nil,
+                       timeout: nil,
+                       database_id: nil,
+                       transport: nil
       require "google/cloud/firestore"
-      Google::Cloud::Firestore.new project_id:  project_id,
+      transport ||= Google::Cloud.configure.firestore.transport
+      Google::Cloud::Firestore.new project_id: project_id,
                                    credentials: credentials,
-                                   scope:       scope,
-                                   timeout:     timeout
+                                   scope: scope,
+                                   timeout: timeout,
+                                   database_id: database_id,
+                                   transport: transport
     end
   end
 end
+
+# rubocop:disable Metrics/BlockLength
 
 # Set the default firestore configuration
 Google::Cloud.configure.add_config! :firestore do |config|
@@ -116,8 +149,7 @@ Google::Cloud.configure.add_config! :firestore do |config|
     ENV["FIRESTORE_EMULATOR_HOST"]
   end
   default_scopes = [
-    "https://www.googleapis.com/auth/cloud-platform",
-    "https://www.googleapis.com/auth/datastore"
+    "https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/datastore"
   ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
@@ -129,4 +161,8 @@ Google::Cloud.configure.add_config! :firestore do |config|
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :endpoint, "firestore.googleapis.com", match: String
+  config.add_field! :database_id, "(default)", match: String
+  config.add_field! :transport, :grpc, match: Symbol
 end
+
+# rubocop:enable Metrics/BlockLength

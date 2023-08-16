@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-data_policies-v1beta1",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_CreateDataPolicy_sync",
-      "title": "Snippet for create_data_policy in DataPolicyService",
-      "description": "Basic snippet for create_data_policy in DataPolicyService",
+      "title": "Snippet for the create_data_policy call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#create_data_policy. It may require modification in order to execute successfully.",
       "file": "data_policy_service/create_data_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_UpdateDataPolicy_sync",
-      "title": "Snippet for update_data_policy in DataPolicyService",
-      "description": "Basic snippet for update_data_policy in DataPolicyService",
+      "title": "Snippet for the update_data_policy call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#update_data_policy. It may require modification in order to execute successfully.",
       "file": "data_policy_service/update_data_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_DeleteDataPolicy_sync",
-      "title": "Snippet for delete_data_policy in DataPolicyService",
-      "description": "Basic snippet for delete_data_policy in DataPolicyService",
+      "title": "Snippet for the delete_data_policy call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#delete_data_policy. It may require modification in order to execute successfully.",
       "file": "data_policy_service/delete_data_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_GetDataPolicy_sync",
-      "title": "Snippet for get_data_policy in DataPolicyService",
-      "description": "Basic snippet for get_data_policy in DataPolicyService",
+      "title": "Snippet for the get_data_policy call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#get_data_policy. It may require modification in order to execute successfully.",
       "file": "data_policy_service/get_data_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_ListDataPolicies_sync",
-      "title": "Snippet for list_data_policies in DataPolicyService",
-      "description": "Basic snippet for list_data_policies in DataPolicyService",
+      "title": "Snippet for the list_data_policies call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#list_data_policies. It may require modification in order to execute successfully.",
       "file": "data_policy_service/list_data_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in DataPolicyService",
-      "description": "Basic snippet for get_iam_policy in DataPolicyService",
+      "title": "Snippet for the get_iam_policy call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "data_policy_service/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in DataPolicyService",
-      "description": "Basic snippet for set_iam_policy in DataPolicyService",
+      "title": "Snippet for the set_iam_policy call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "data_policy_service/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigquerydatapolicy_v1beta1_generated_DataPolicyService_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in DataPolicyService",
-      "description": "Basic snippet for test_iam_permissions in DataPolicyService",
+      "title": "Snippet for the test_iam_permissions call in the DataPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "data_policy_service/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

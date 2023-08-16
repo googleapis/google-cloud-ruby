@@ -23,12 +23,17 @@ module Google
   module Cloud
     module Eventarc
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/eventarc/v1"
       #     client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/eventarc/v1"
+      #     client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
       #
       module V1
       end

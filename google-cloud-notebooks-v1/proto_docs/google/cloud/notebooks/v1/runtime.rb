@@ -200,7 +200,7 @@ module Google
         #   @return [::String]
         #     Optional. Output only. Specifies a unique device name
         #     of your choice that is reflected into the
-        #     /dev/disk/by-id/google-* tree of a Linux operating system running within
+        #     `/dev/disk/by-id/google-*` tree of a Linux operating system running within
         #     the instance. This name can be used to reference the device for mounting,
         #     resizing, and so on, from within the instance.
         #
@@ -234,8 +234,8 @@ module Google
         #     performance characteristics of SCSI over NVMe, see Local SSD performance.
         #     Valid values:
         #
-        #     * NVME
-        #     * SCSI
+        #     * `NVME`
+        #     * `SCSI`
         # @!attribute [r] kind
         #   @return [::String]
         #     Output only. Type of the resource. Always compute#attachedDisk for attached disks.
@@ -244,24 +244,24 @@ module Google
         #     Output only. Any valid publicly visible licenses.
         # @!attribute [rw] mode
         #   @return [::String]
-        #     The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If
-        #     not specified, the default is to attach the disk in READ_WRITE mode.
+        #     The mode in which to attach this disk, either `READ_WRITE` or `READ_ONLY`.
+        #     If not specified, the default is to attach the disk in `READ_WRITE` mode.
         #     Valid values:
         #
-        #     * READ_ONLY
-        #     * READ_WRITE
+        #     * `READ_ONLY`
+        #     * `READ_WRITE`
         # @!attribute [rw] source
         #   @return [::String]
         #     Specifies a valid partial or full URL to an existing Persistent Disk
         #     resource.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Specifies the type of the disk, either SCRATCH or PERSISTENT. If not
-        #     specified, the default is PERSISTENT.
+        #     Specifies the type of the disk, either `SCRATCH` or `PERSISTENT`. If not
+        #     specified, the default is `PERSISTENT`.
         #     Valid values:
         #
-        #     * PERSISTENT
-        #     * SCRATCH
+        #     * `PERSISTENT`
+        #     * `SCRATCH`
         class LocalDisk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -280,12 +280,12 @@ module Google
           #
           #     Valid values:
           #
-          #     * FEATURE_TYPE_UNSPECIFIED
-          #     * MULTI_IP_SUBNET
-          #     * SECURE_BOOT
-          #     * UEFI_COMPATIBLE
-          #     * VIRTIO_SCSI_MULTIQUEUE
-          #     * WINDOWS
+          #     * `FEATURE_TYPE_UNSPECIFIED`
+          #     * `MULTI_IP_SUBNET`
+          #     * `SECURE_BOOT`
+          #     * `UEFI_COMPATIBLE`
+          #     * `VIRTIO_SCSI_MULTIQUEUE`
+          #     * `WINDOWS`
           class RuntimeGuestOsFeature
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -610,14 +610,15 @@ module Google
         #     The subnetwork allocation will use the range *name* if it's assigned.
         #
         #     Example: managed-notebooks-range-c
-        #     PEERING_RANGE_NAME_3=managed-notebooks-range-c
-        #     gcloud compute addresses create $PEERING_RANGE_NAME_3 \
-        #       --global \
-        #       --prefix-length=24 \
-        #       --description="Google Cloud Managed Notebooks Range 24 c" \
-        #       --network=$NETWORK \
-        #       --addresses=192.168.0.0 \
-        #       --purpose=VPC_PEERING
+        #
+        #         PEERING_RANGE_NAME_3=managed-notebooks-range-c
+        #         gcloud compute addresses create $PEERING_RANGE_NAME_3 \
+        #           --global \
+        #           --prefix-length=24 \
+        #           --description="Google Cloud Managed Notebooks Range 24 c" \
+        #           --network=$NETWORK \
+        #           --addresses=192.168.0.0 \
+        #           --purpose=VPC_PEERING
         #
         #     Field value will be: `managed-notebooks-range-c`
         # @!attribute [rw] boot_image

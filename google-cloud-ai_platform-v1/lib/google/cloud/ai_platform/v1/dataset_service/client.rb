@@ -29,8 +29,7 @@ module Google
           ##
           # Client for the DatasetService service.
           #
-          # The service that handles the CRUD of Vertex AI Dataset and its child
-          # resources.
+          # The service that manages Vertex AI Dataset and its child resources.
           #
           class Client
             include Paths
@@ -126,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -230,14 +229,14 @@ module Google
             #   # Call the create_dataset method.
             #   result = client.create_dataset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_dataset request, options = nil
@@ -391,8 +390,8 @@ module Google
             #     Required. The Dataset which replaces the resource on the server.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource.
-            #     For the `FieldMask` definition, see {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
-            #     Updatable fields:
+            #     For the `FieldMask` definition, see
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. Updatable fields:
             #
             #       * `display_name`
             #       * `description`
@@ -533,13 +532,11 @@ module Google
             #   # Call the list_datasets method.
             #   result = client.list_datasets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Dataset.
-            #     p response
+            #     p item
             #   end
             #
             def list_datasets request, options = nil
@@ -627,14 +624,14 @@ module Google
             #   # Call the delete_dataset method.
             #   result = client.delete_dataset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_dataset request, options = nil
@@ -702,8 +699,8 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/datasets/{dataset}`
             #   @param import_configs [::Array<::Google::Cloud::AIPlatform::V1::ImportDataConfig, ::Hash>]
-            #     Required. The desired input locations. The contents of all input locations will be
-            #     imported in one batch.
+            #     Required. The desired input locations. The contents of all input locations
+            #     will be imported in one batch.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -725,14 +722,14 @@ module Google
             #   # Call the import_data method.
             #   result = client.import_data request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_data request, options = nil
@@ -822,14 +819,14 @@ module Google
             #   # Call the export_data method.
             #   result = client.export_data request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_data request, options = nil
@@ -928,13 +925,11 @@ module Google
             #   # Call the list_data_items method.
             #   result = client.list_data_items request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::DataItem.
-            #     p response
+            #     p item
             #   end
             #
             def list_data_items request, options = nil
@@ -972,6 +967,157 @@ module Google
 
               @dataset_service_stub.call_rpc :list_data_items, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataset_service_stub, :list_data_items, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Searches DataItems in a Dataset.
+            #
+            # @overload search_data_items(request, options = nil)
+            #   Pass arguments to `search_data_items` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_data_items(order_by_data_item: nil, order_by_annotation: nil, dataset: nil, saved_query: nil, data_labeling_job: nil, data_item_filter: nil, annotations_filter: nil, annotation_filters: nil, field_mask: nil, annotations_limit: nil, page_size: nil, order_by: nil, page_token: nil)
+            #   Pass arguments to `search_data_items` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param order_by_data_item [::String]
+            #     A comma-separated list of data item fields to order by, sorted in
+            #     ascending order. Use "desc" after a field name for descending.
+            #   @param order_by_annotation [::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest::OrderByAnnotation, ::Hash]
+            #     Expression that allows ranking results based on annotation's property.
+            #   @param dataset [::String]
+            #     Required. The resource name of the Dataset from which to search DataItems.
+            #     Format:
+            #     `projects/{project}/locations/{location}/datasets/{dataset}`
+            #   @param saved_query [::String]
+            #     The resource name of a SavedQuery(annotation set in UI).
+            #     Format:
+            #     `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+            #     All of the search will be done in the context of this SavedQuery.
+            #   @param data_labeling_job [::String]
+            #     The resource name of a DataLabelingJob.
+            #     Format:
+            #     `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+            #     If this field is set, all of the search will be done in the context of
+            #     this DataLabelingJob.
+            #   @param data_item_filter [::String]
+            #     An expression for filtering the DataItem that will be returned.
+            #
+            #       * `data_item_id` - for = or !=.
+            #       * `labeled` - for = or !=.
+            #       * `has_annotation(ANNOTATION_SPEC_ID)` - true only for DataItem that
+            #         have at least one annotation with annotation_spec_id =
+            #         `ANNOTATION_SPEC_ID` in the context of SavedQuery or DataLabelingJob.
+            #
+            #     For example:
+            #
+            #     * `data_item=1`
+            #     * `has_annotation(5)`
+            #   @param annotations_filter [::String]
+            #     An expression for filtering the Annotations that will be returned per
+            #     DataItem.
+            #       * `annotation_spec_id` - for = or !=.
+            #   @param annotation_filters [::Array<::String>]
+            #     An expression that specifies what Annotations will be returned per
+            #     DataItem. Annotations satisfied either of the conditions will be returned.
+            #       * `annotation_spec_id` - for = or !=.
+            #     Must specify `saved_query_id=` - saved query id that annotations should
+            #     belong to.
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Mask specifying which fields of
+            #     {::Google::Cloud::AIPlatform::V1::DataItemView DataItemView} to read.
+            #   @param annotations_limit [::Integer]
+            #     If set, only up to this many of Annotations will be returned per
+            #     DataItemView. The maximum value is 1000. If not set, the maximum value will
+            #     be used.
+            #   @param page_size [::Integer]
+            #     Requested page size. Server may return fewer results than requested.
+            #     Default and maximum page size is 100.
+            #   @param order_by [::String]
+            #     A comma-separated list of fields to order by, sorted in ascending order.
+            #     Use "desc" after a field name for descending.
+            #   @param page_token [::String]
+            #     A token identifying a page of results for the server to return
+            #     Typically obtained via
+            #     {::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse#next_page_token SearchDataItemsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items DatasetService.SearchDataItems}
+            #     call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::DataItemView>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::DataItemView>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new
+            #
+            #   # Call the search_data_items method.
+            #   result = client.search_data_items request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AIPlatform::V1::DataItemView.
+            #     p item
+            #   end
+            #
+            def search_data_items request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_data_items.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.dataset
+                header_params["dataset"] = request.dataset
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_data_items.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_data_items.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataset_service_stub.call_rpc :search_data_items, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataset_service_stub, :search_data_items, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -1033,13 +1179,11 @@ module Google
             #   # Call the list_saved_queries method.
             #   result = client.list_saved_queries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::SavedQuery.
-            #     p response
+            #     p item
             #   end
             #
             def list_saved_queries request, options = nil
@@ -1077,6 +1221,101 @@ module Google
 
               @dataset_service_stub.call_rpc :list_saved_queries, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataset_service_stub, :list_saved_queries, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a SavedQuery.
+            #
+            # @overload delete_saved_query(request, options = nil)
+            #   Pass arguments to `delete_saved_query` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_saved_query(name: nil)
+            #   Pass arguments to `delete_saved_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the SavedQuery to delete.
+            #     Format:
+            #     `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new
+            #
+            #   # Call the delete_saved_query method.
+            #   result = client.delete_saved_query request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_saved_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_saved_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_saved_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_saved_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataset_service_stub.call_rpc :delete_saved_query, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1227,13 +1466,11 @@ module Google
             #   # Call the list_annotations method.
             #   result = client.list_annotations request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Annotation.
-            #     p response
+            #     p item
             #   end
             #
             def list_annotations request, options = nil
@@ -1316,9 +1553,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1360,7 +1597,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1454,10 +1693,20 @@ module Google
                 #
                 attr_reader :list_data_items
                 ##
+                # RPC-specific configuration for `search_data_items`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_data_items
+                ##
                 # RPC-specific configuration for `list_saved_queries`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_saved_queries
+                ##
+                # RPC-specific configuration for `delete_saved_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_saved_query
                 ##
                 # RPC-specific configuration for `get_annotation_spec`
                 # @return [::Gapic::Config::Method]
@@ -1487,8 +1736,12 @@ module Google
                   @export_data = ::Gapic::Config::Method.new export_data_config
                   list_data_items_config = parent_rpcs.list_data_items if parent_rpcs.respond_to? :list_data_items
                   @list_data_items = ::Gapic::Config::Method.new list_data_items_config
+                  search_data_items_config = parent_rpcs.search_data_items if parent_rpcs.respond_to? :search_data_items
+                  @search_data_items = ::Gapic::Config::Method.new search_data_items_config
                   list_saved_queries_config = parent_rpcs.list_saved_queries if parent_rpcs.respond_to? :list_saved_queries
                   @list_saved_queries = ::Gapic::Config::Method.new list_saved_queries_config
+                  delete_saved_query_config = parent_rpcs.delete_saved_query if parent_rpcs.respond_to? :delete_saved_query
+                  @delete_saved_query = ::Gapic::Config::Method.new delete_saved_query_config
                   get_annotation_spec_config = parent_rpcs.get_annotation_spec if parent_rpcs.respond_to? :get_annotation_spec
                   @get_annotation_spec = ::Gapic::Config::Method.new get_annotation_spec_config
                   list_annotations_config = parent_rpcs.list_annotations if parent_rpcs.respond_to? :list_annotations

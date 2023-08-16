@@ -21,6 +21,24 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        # Gives a short summary of an evaluation, and links to the evaluation itself.
+        # @!attribute [rw] operation
+        #   @return [::String]
+        #     The resource name of the Long Running Operation for the evaluation.
+        # @!attribute [rw] evaluation
+        #   @return [::String]
+        #     The resource name of the evaluation.
+        # @!attribute [rw] aggregate_metrics
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Evaluation::Metrics]
+        #     An aggregate of the statistics for the evaluation with fuzzy matching on.
+        # @!attribute [rw] aggregate_metrics_exact
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Evaluation::Metrics]
+        #     An aggregate of the statistics for the evaluation with fuzzy matching off.
+        class EvaluationReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # An evaluation of a ProcessorVersion's performance.
         # @!attribute [rw] name
         #   @return [::String]

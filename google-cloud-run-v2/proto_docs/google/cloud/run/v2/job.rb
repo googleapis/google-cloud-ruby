@@ -144,8 +144,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Job represents the configuration of a single job. A job an immutable resource
-        # that references a container image which is run to completion.
+        # Job represents the configuration of a single job, which references a
+        # container image that is run to completion.
         # @!attribute [rw] name
         #   @return [::String]
         #     The fully qualified name of this Job.
@@ -154,32 +154,41 @@ module Google
         #     projects/\\{project}/locations/\\{location}/jobs/\\{job}
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the Execution. The value is a UUID4
-        #     string and guaranteed to remain unchanged until the resource is deleted.
+        #     Output only. Server assigned unique identifier for the Execution. The value
+        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
+        #     deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
         #     modifies the desired state.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style labels for the resource.
+        #     Unstructured key value map that can be used to organize and categorize
+        #     objects.
         #     User-provided labels are shared with Google's billing system, so they can
         #     be used to filter, or break down billing charges by team, component,
         #     environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
-        #     https://cloud.google.com/run/docs/configuring/labels
-        #     Cloud Run will populate some labels with 'run.googleapis.com' or
-        #     'serving.knative.dev' namespaces. Those labels are read-only, and user
-        #     changes will not be preserved.
+        #     https://cloud.google.com/run/docs/configuring/labels.
+        #
+        #     <p>Cloud Run API v2 does not support labels with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system labels in v1 now have a
+        #     corresponding field in v2 Job.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style annotations for the resource. Unstructured key value map that may
+        #     Unstructured key value map that may
         #     be set by external tools to store and arbitrary metadata.
         #     They are not queryable and should be preserved
-        #     when modifying objects. Cloud Run will populate some annotations using
-        #     'run.googleapis.com' or 'serving.knative.dev' namespaces. This field
-        #     follows Kubernetes annotations' namespacing, limits, and rules. More info:
-        #     https://kubernetes.io/docs/user-guide/annotations
+        #     when modifying objects.
+        #
+        #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected on new resources. All system
+        #     annotations in v1 now have a corresponding field in v2 Job.
+        #
+        #     <p>This field follows Kubernetes annotations' namespacing, limits, and
+        #     rules.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time.
@@ -211,6 +220,12 @@ module Google
         #     Launch Stages](https://cloud.google.com/terms/launch-stages).
         #     Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA
         #     is assumed.
+        #     Set the launch stage to a preview stage on input to allow use of preview
+        #     features in that stage. On read (or output), describes whether the resource
+        #     uses preview features.
+        #     <p>
+        #     For example, if ALPHA is provided as input, but only BETA and GA-level
+        #     features are used, this field will be BETA on output.
         # @!attribute [rw] binary_authorization
         #   @return [::Google::Cloud::Run::V2::BinaryAuthorization]
         #     Settings for the Binary Authorization feature.
@@ -219,18 +234,18 @@ module Google
         #     Required. The template used to create executions for this Job.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
-        #     Output only. The generation of this Job. See comments in `reconciling` for additional
-        #     information on reconciliation process in Cloud Run.
+        #     Output only. The generation of this Job. See comments in `reconciling` for
+        #     additional information on reconciliation process in Cloud Run.
         # @!attribute [r] terminal_condition
         #   @return [::Google::Cloud::Run::V2::Condition]
-        #     Output only. The Condition of this Job, containing its readiness status, and
-        #     detailed error information in case it did not reach the desired state.
+        #     Output only. The Condition of this Job, containing its readiness status,
+        #     and detailed error information in case it did not reach the desired state.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
-        #     Output only. The Conditions of all other associated sub-resources. They contain
-        #     additional diagnostics information in case the Job does not reach its
-        #     desired state. See comments in `reconciling` for additional information on
-        #     reconciliation process in Cloud Run.
+        #     Output only. The Conditions of all other associated sub-resources. They
+        #     contain additional diagnostics information in case the Job does not reach
+        #     its desired state. See comments in `reconciling` for additional information
+        #     on reconciliation process in Cloud Run.
         # @!attribute [r] execution_count
         #   @return [::Integer]
         #     Output only. Number of executions created for this job.
@@ -239,8 +254,8 @@ module Google
         #     Output only. Name of the last created execution.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Returns true if the Job is currently being acted upon by the system to
-        #     bring it into the desired state.
+        #     Output only. Returns true if the Job is currently being acted upon by the
+        #     system to bring it into the desired state.
         #
         #     When a new Job is created, or an existing one is updated, Cloud Run
         #     will asynchronously perform all necessary steps to bring the Job to the
@@ -260,6 +275,9 @@ module Google
         #     `latest_succeeded_execution` will have the state of the last succeeded
         #     execution or empty for newly created Job. Additional information on the
         #     failure can be found in `terminal_condition` and `conditions`.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch
+# Snippet for the get_default_branch call in the CatalogService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch. It may
+# require modification in order to execute successfully.
 #
 def get_default_branch
   # Create a client object. The client can be reused for multiple calls.

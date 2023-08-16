@@ -16,7 +16,7 @@ for this library, google-cloud-bigquery-data_transfer, to see the convenience me
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-bigquery-data_transfer-v1](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer-v1/latest).
+[google-cloud-bigquery-data_transfer-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/bigquery/transfer)
 for more usage information.
@@ -41,32 +41,6 @@ based on a [next-gen code generator](https://github.com/googleapis/gapic-generat
 and includes substantial interface changes. Existing code written for earlier
 versions of this library will likely require updates to use this version.
 See the {file:MIGRATING.md MIGRATING.md} document for more information.
-
-## Enabling Logging
-
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
-and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
-
-Configuring a Ruby stdlib logger:
-
-```ruby
-require "logger"
-
-module MyLogger
-  LOGGER = Logger.new $stderr, level: Logger::WARN
-  def logger
-    LOGGER
-  end
-end
-
-# Define a gRPC module-level logger method before grpc/logconfig.rb loads.
-module GRPC
-  extend MyLogger
-end
-```
 
 ## Supported Ruby Versions
 

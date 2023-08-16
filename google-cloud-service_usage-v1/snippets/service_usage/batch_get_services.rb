@@ -20,8 +20,11 @@
 require "google/cloud/service_usage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services
+# Snippet for the batch_get_services call in the ServiceUsage service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services. It
+# may require modification in order to execute successfully.
 #
 def batch_get_services
   # Create a client object. The client can be reused for multiple calls.

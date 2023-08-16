@@ -70,4 +70,16 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
       assert_equal "projects/value0/locations/value1", path
     end
   end
+
+  def test_saved_query_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.saved_query_path project: "value0", location: "value1", dataset: "value2", saved_query: "value3"
+      assert_equal "projects/value0/locations/value1/datasets/value2/savedQueries/value3", path
+    end
+  end
 end

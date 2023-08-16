@@ -26,6 +26,7 @@ require "google/cloud/memcache/v1/cloud_memcache/credentials"
 require "google/cloud/memcache/v1/cloud_memcache/paths"
 require "google/cloud/memcache/v1/cloud_memcache/operations"
 require "google/cloud/memcache/v1/cloud_memcache/client"
+require "google/cloud/memcache/v1/cloud_memcache/rest"
 
 module Google
   module Cloud
@@ -48,10 +49,15 @@ module Google
         # Note that location_id must be a GCP `region`; for example:
         # * `projects/my-memcached-project/locations/us-central1/instances/my-memcached`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/memcache/v1/cloud_memcache"
         #     client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/memcache/v1/cloud_memcache/rest"
+        #     client = ::Google::Cloud::Memcache::V1::CloudMemcache::Rest::Client.new
         #
         module CloudMemcache
         end

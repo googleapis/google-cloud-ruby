@@ -63,12 +63,12 @@ module Google
         #       ID>`
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dialogflow::V2::Environment::State]
-        #     Output only. The state of this environment. This field is read-only, i.e., it cannot be
-        #     set by create and update methods.
+        #     Output only. The state of this environment. This field is read-only, i.e.,
+        #     it cannot be set by create and update methods.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The last update time of this environment. This field is read-only, i.e., it
-        #     cannot be set by create and update methods.
+        #     Output only. The last update time of this environment. This field is
+        #     read-only, i.e., it cannot be set by create and update methods.
         # @!attribute [rw] text_to_speech_settings
         #   @return [::Google::Cloud::Dialogflow::V2::TextToSpeechSettings]
         #     Optional. Text to speech settings for this environment.
@@ -102,22 +102,22 @@ module Google
         # Instructs the speech synthesizer on how to generate the output audio content.
         # @!attribute [rw] enable_text_to_speech
         #   @return [::Boolean]
-        #     Optional. Indicates whether text to speech is enabled. Even when this field is false,
-        #     other settings in this proto are still retained.
+        #     Optional. Indicates whether text to speech is enabled. Even when this field
+        #     is false, other settings in this proto are still retained.
         # @!attribute [rw] output_audio_encoding
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioEncoding]
         #     Required. Audio encoding of the synthesized audio content.
         # @!attribute [rw] sample_rate_hertz
         #   @return [::Integer]
-        #     Optional. The synthesis sample rate (in hertz) for this audio. If not provided, then
-        #     the synthesizer will use the default sample rate based on the audio
-        #     encoding. If this is different from the voice's natural sample rate, then
-        #     the synthesizer will honor this request by converting to the desired sample
-        #     rate (which might result in worse audio quality).
+        #     Optional. The synthesis sample rate (in hertz) for this audio. If not
+        #     provided, then the synthesizer will use the default sample rate based on
+        #     the audio encoding. If this is different from the voice's natural sample
+        #     rate, then the synthesizer will honor this request by converting to the
+        #     desired sample rate (which might result in worse audio quality).
         # @!attribute [rw] synthesize_speech_configs
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig}]
-        #     Optional. Configuration of how speech should be synthesized, mapping from language
-        #     (https://cloud.google.com/dialogflow/docs/reference/language) to
+        #     Optional. Configuration of how speech should be synthesized, mapping from
+        #     language (https://cloud.google.com/dialogflow/docs/reference/language) to
         #     SynthesizeSpeechConfig.
         class TextToSpeechSettings
           include ::Google::Protobuf::MessageExts
@@ -133,7 +133,8 @@ module Google
           end
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The agent to list all environments from.
@@ -143,8 +144,8 @@ module Google
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return in a single page. By default 100 and
-        #     at most 1000.
+        #     Optional. The maximum number of items to return in a single page. By
+        #     default 100 and at most 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The next_page_token value returned from a previous list request.
@@ -153,7 +154,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
         # @!attribute [rw] environments
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Environment>]
         #     The list of agent environments. There will be a maximum number of items
@@ -167,7 +169,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#get_environment Environments.GetEnvironment}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#get_environment Environments.GetEnvironment}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the environment.
@@ -183,7 +186,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#create_environment Environments.CreateEnvironment}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#create_environment Environments.CreateEnvironment}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The agent to create an environment for.
@@ -202,7 +206,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#update_environment Environments.UpdateEnvironment}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#update_environment Environments.UpdateEnvironment}.
         # @!attribute [rw] environment
         #   @return [::Google::Cloud::Dialogflow::V2::Environment]
         #     Required. The environment to update.
@@ -220,7 +225,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#delete_environment Environments.DeleteEnvironment}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#delete_environment Environments.DeleteEnvironment}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the environment to delete.
@@ -236,7 +242,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#get_environment_history Environments.GetEnvironmentHistory}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#get_environment_history Environments.GetEnvironmentHistory}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the environment to retrieve history for.
@@ -249,8 +256,8 @@ module Google
         #     The environment ID for the default environment is `-`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return in a single page. By default 100 and
-        #     at most 1000.
+        #     Optional. The maximum number of items to return in a single page. By
+        #     default 100 and at most 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The next_page_token value returned from a previous list request.
@@ -259,7 +266,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Environments::Client#get_environment_history Environments.GetEnvironmentHistory}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Environments::Client#get_environment_history Environments.GetEnvironmentHistory}.
         # @!attribute [r] parent
         #   @return [::String]
         #     Output only. The name of the environment this history is for.
@@ -272,12 +280,12 @@ module Google
         #     The environment ID for the default environment is `-`.
         # @!attribute [r] entries
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry>]
-        #     Output only. The list of agent environments. There will be a maximum number of items
-        #     returned based on the page_size field in the request.
+        #     Output only. The list of agent environments. There will be a maximum number
+        #     of items returned based on the page_size field in the request.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. Token to retrieve the next page of results, or empty if there are no
-        #     more results in the list.
+        #     Output only. Token to retrieve the next page of results, or empty if there
+        #     are no more results in the list.
         class EnvironmentHistory
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

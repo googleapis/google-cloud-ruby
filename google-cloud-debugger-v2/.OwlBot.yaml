@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/devtools/clouddebugger/v2/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-debugger-v2/$1

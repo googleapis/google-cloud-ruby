@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#test_iam_permissions
+# Snippet for the test_iam_permissions call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#test_iam_permissions.
+# It may require modification in order to execute successfully.
 #
 def test_iam_permissions
   # Create a client object. The client can be reused for multiple calls.

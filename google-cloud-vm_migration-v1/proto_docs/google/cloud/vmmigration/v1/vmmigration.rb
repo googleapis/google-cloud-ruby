@@ -23,13 +23,108 @@ module Google
       module V1
         # ReplicationCycle contains information about the current replication cycle
         # status.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The identifier of the ReplicationCycle.
+        # @!attribute [rw] cycle_number
+        #   @return [::Integer]
+        #     The cycle's ordinal number.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the replication cycle has started.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the replication cycle has ended.
+        # @!attribute [rw] total_pause_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     The accumulated duration the replication cycle was paused.
         # @!attribute [rw] progress_percent
         #   @return [::Integer]
         #     The current progress in percentage of this cycle.
+        #     Was replaced by 'steps' field, which breaks down the cycle progression more
+        #     accurately.
+        # @!attribute [rw] steps
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::CycleStep>]
+        #     The cycle's steps list representing its progress.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle::State]
+        #     State of the ReplicationCycle.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Provides details on the state of the cycle in case of an error.
         class ReplicationCycle
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states of a replication cycle.
+          module State
+            # The state is unknown. This is used for API compatibility only and is not
+            # used by the system.
+            STATE_UNSPECIFIED = 0
+
+            # The replication cycle is running.
+            RUNNING = 1
+
+            # The replication cycle is paused.
+            PAUSED = 2
+
+            # The replication cycle finished with errors.
+            FAILED = 3
+
+            # The replication cycle finished successfully.
+            SUCCEEDED = 4
+          end
+        end
+
+        # CycleStep holds information about a step progress.
+        # @!attribute [rw] initializing_replication
+        #   @return [::Google::Cloud::VMMigration::V1::InitializingReplicationStep]
+        #     Initializing replication step.
+        # @!attribute [rw] replicating
+        #   @return [::Google::Cloud::VMMigration::V1::ReplicatingStep]
+        #     Replicating step.
+        # @!attribute [rw] post_processing
+        #   @return [::Google::Cloud::VMMigration::V1::PostProcessingStep]
+        #     Post processing step.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the cycle step has started.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the cycle step has ended.
+        class CycleStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # InitializingReplicationStep contains specific step details.
+        class InitializingReplicationStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ReplicatingStep contains specific step details.
+        # @!attribute [rw] total_bytes
+        #   @return [::Integer]
+        #     Total bytes to be handled in the step.
+        # @!attribute [rw] replicated_bytes
+        #   @return [::Integer]
+        #     Replicated bytes in the step.
+        # @!attribute [rw] last_two_minutes_average_bytes_per_second
+        #   @return [::Integer]
+        #     The source disks replication rate for the last 2 minutes in bytes per
+        #     second.
+        # @!attribute [rw] last_thirty_minutes_average_bytes_per_second
+        #   @return [::Integer]
+        #     The source disks replication rate for the last 30 minutes in bytes per
+        #     second.
+        class ReplicatingStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PostProcessingStep contains specific step details.
+        class PostProcessingStep
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -49,6 +144,9 @@ module Google
         # @!attribute [rw] compute_engine_target_defaults
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineTargetDefaults]
         #     Details of the target VM in Compute Engine.
+        # @!attribute [r] aws_source_vm_details
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceVmDetails]
+        #     Output only. Details of the VM from an AWS source.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The identifier of the MigratingVm.
@@ -205,6 +303,9 @@ module Google
         #   @return [::Google::Rpc::Status]
         #     Output only. Provides details for the errors that led to the Clone Job's
         #     state.
+        # @!attribute [r] steps
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::CloneStep>]
+        #     Output only. The clone steps list representing its progress.
         class CloneJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -236,6 +337,45 @@ module Google
             # OS adaptation is running as part of the clone job to generate license.
             ADAPTING_OS = 7
           end
+        end
+
+        # CloneStep holds information about the clone step progress.
+        # @!attribute [rw] adapting_os
+        #   @return [::Google::Cloud::VMMigration::V1::AdaptingOSStep]
+        #     Adapting OS step.
+        # @!attribute [rw] preparing_vm_disks
+        #   @return [::Google::Cloud::VMMigration::V1::PreparingVMDisksStep]
+        #     Preparing VM disks step.
+        # @!attribute [rw] instantiating_migrated_vm
+        #   @return [::Google::Cloud::VMMigration::V1::InstantiatingMigratedVMStep]
+        #     Instantiating migrated VM step.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the step has started.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the step has ended.
+        class CloneStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdaptingOSStep contains specific step details.
+        class AdaptingOSStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PreparingVMDisksStep contains specific step details.
+        class PreparingVMDisksStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # InstantiatingMigratedVMStep contains specific step details.
+        class InstantiatingMigratedVMStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # CutoverJob message describes a cutover of a migrating VM. The CutoverJob is
@@ -271,6 +411,9 @@ module Google
         #   @return [::String]
         #     Output only. A message providing possible extra details about the current
         #     state.
+        # @!attribute [r] steps
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::CutoverStep>]
+        #     Output only. The cutover steps list representing its progress.
         class CutoverJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -302,6 +445,39 @@ module Google
             # OS adaptation is running as part of the cutover job to generate license.
             ADAPTING_OS = 7
           end
+        end
+
+        # CutoverStep holds information about the cutover step progress.
+        # @!attribute [rw] previous_replication_cycle
+        #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+        #     A replication cycle prior cutover step.
+        # @!attribute [rw] shutting_down_source_vm
+        #   @return [::Google::Cloud::VMMigration::V1::ShuttingDownSourceVMStep]
+        #     Shutting down VM step.
+        # @!attribute [rw] final_sync
+        #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+        #     Final sync step.
+        # @!attribute [rw] preparing_vm_disks
+        #   @return [::Google::Cloud::VMMigration::V1::PreparingVMDisksStep]
+        #     Preparing VM disks step.
+        # @!attribute [rw] instantiating_migrated_vm
+        #   @return [::Google::Cloud::VMMigration::V1::InstantiatingMigratedVMStep]
+        #     Instantiating migrated VM step.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the step has started.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the step has ended.
+        class CutoverStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ShuttingDownSourceVMStep contains specific step details.
+        class ShuttingDownSourceVMStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for 'CreateCloneJob' request.
@@ -407,6 +583,9 @@ module Google
         # @!attribute [rw] vmware
         #   @return [::Google::Cloud::VMMigration::V1::VmwareSourceDetails]
         #     Vmware type source details.
+        # @!attribute [rw] aws
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDetails]
+        #     AWS type source details.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The Source name.
@@ -456,9 +635,98 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # DatacenterConnector message describes a connector between the Source and GCP,
-        # which is installed on a vmware datacenter (an OVA vm installed by the user)
-        # to connect the Datacenter to GCP and support vm migration data transfer.
+        # AwsSourceDetails message describes a specific source details for the
+        # AWS source type.
+        # @!attribute [rw] access_key_creds
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDetails::AccessKeyCredentials]
+        #     AWS Credentials using access key id and secret.
+        # @!attribute [rw] aws_region
+        #   @return [::String]
+        #     Immutable. The AWS region that the source VMs will be migrated from.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDetails::State]
+        #     Output only. State of the source as determined by the health check.
+        # @!attribute [r] error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. Provides details on the state of the Source in case of an
+        #     error.
+        # @!attribute [rw] inventory_tag_list
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AwsSourceDetails::Tag>]
+        #     AWS resource tags to limit the scope of the source inventory.
+        # @!attribute [rw] inventory_security_group_names
+        #   @return [::Array<::String>]
+        #     AWS security group names to limit the scope of the source
+        #     inventory.
+        # @!attribute [rw] migration_resources_user_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     User specified tags to add to every M2VM generated resource in AWS.
+        #     These tags will be set in addition to the default tags that are set as part
+        #     of the migration process. The tags must not begin with the reserved prefix
+        #     `m2vm`.
+        # @!attribute [r] public_ip
+        #   @return [::String]
+        #     Output only. The source's public IP. All communication initiated by this
+        #     source will originate from this IP.
+        class AwsSourceDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message describing AWS Credentials using access key id and secret.
+          # @!attribute [rw] access_key_id
+          #   @return [::String]
+          #     AWS access key ID.
+          # @!attribute [rw] secret_access_key
+          #   @return [::String]
+          #     Input only. AWS secret access key.
+          class AccessKeyCredentials
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Tag is an AWS tag representation.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     Key of tag.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     Value of tag.
+          class Tag
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MigrationResourcesUserTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The possible values of the state.
+          module State
+            # The state is unknown. This is used for API compatibility only and is not
+            # used by the system.
+            STATE_UNSPECIFIED = 0
+
+            # The state was not sampled by the health checks yet.
+            PENDING = 1
+
+            # The source is available but might not be usable yet due to invalid
+            # credentials or another reason.
+            # The error message will contain further details.
+            FAILED = 2
+
+            # The source exists and its credentials were verified.
+            ACTIVE = 3
+          end
+        end
+
+        # DatacenterConnector message describes a connector between the Source and
+        # Google Cloud, which is installed on a vmware datacenter (an OVA vm installed
+        # by the user) to connect the Datacenter to Google Cloud and support vm
+        # migration data transfer.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the connector was created (as an API call, not when
@@ -485,7 +753,7 @@ module Google
         # @!attribute [r] bucket
         #   @return [::String]
         #     Output only. The communication channel between the datacenter connector and
-        #     GCP.
+        #     Google Cloud.
         # @!attribute [r] state
         #   @return [::Google::Cloud::VMMigration::V1::DatacenterConnector::State]
         #     Output only. State of the DatacenterConnector, as determined by the health
@@ -833,6 +1101,148 @@ module Google
           end
         end
 
+        # AwsVmDetails describes a VM in AWS.
+        # @!attribute [rw] vm_id
+        #   @return [::String]
+        #     The VM ID in AWS.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The display name of the VM. Note that this value is not necessarily unique.
+        # @!attribute [rw] source_id
+        #   @return [::String]
+        #     The id of the AWS's source this VM is connected to.
+        # @!attribute [rw] source_description
+        #   @return [::String]
+        #     The descriptive name of the AWS's source this VM is connected to.
+        # @!attribute [r] power_state
+        #   @return [::Google::Cloud::VMMigration::V1::AwsVmDetails::PowerState]
+        #     Output only. The power state of the VM at the moment list was taken.
+        # @!attribute [rw] cpu_count
+        #   @return [::Integer]
+        #     The number of cpus the VM has.
+        # @!attribute [rw] memory_mb
+        #   @return [::Integer]
+        #     The memory size of the VM in MB.
+        # @!attribute [rw] disk_count
+        #   @return [::Integer]
+        #     The number of disks the VM has.
+        # @!attribute [rw] committed_storage_mb
+        #   @return [::Integer]
+        #     The total size of the storage allocated to the VM in MB.
+        # @!attribute [rw] os_description
+        #   @return [::String]
+        #     The VM's OS.
+        # @!attribute [rw] boot_option
+        #   @return [::Google::Cloud::VMMigration::V1::AwsVmDetails::BootOption]
+        #     The VM Boot Option.
+        # @!attribute [rw] instance_type
+        #   @return [::String]
+        #     The instance type of the VM.
+        # @!attribute [rw] vpc_id
+        #   @return [::String]
+        #     The VPC ID the VM belongs to.
+        # @!attribute [rw] security_groups
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AwsSecurityGroup>]
+        #     The security groups the VM belongs to.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The tags of the VM.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The AWS zone of the VM.
+        # @!attribute [rw] virtualization_type
+        #   @return [::Google::Cloud::VMMigration::V1::AwsVmDetails::VmVirtualizationType]
+        #     The virtualization type.
+        # @!attribute [rw] architecture
+        #   @return [::Google::Cloud::VMMigration::V1::AwsVmDetails::VmArchitecture]
+        #     The CPU architecture.
+        class AwsVmDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible values for the power state of the VM.
+          module PowerState
+            # Power state is not specified.
+            POWER_STATE_UNSPECIFIED = 0
+
+            # The VM is turned on.
+            ON = 1
+
+            # The VM is turned off.
+            OFF = 2
+
+            # The VM is suspended. This is similar to hibernation or sleep
+            # mode.
+            SUSPENDED = 3
+
+            # The VM is starting.
+            PENDING = 4
+          end
+
+          # The possible values for the vm boot option.
+          module BootOption
+            # The boot option is unknown.
+            BOOT_OPTION_UNSPECIFIED = 0
+
+            # The boot option is UEFI.
+            EFI = 1
+
+            # The boot option is LEGACY-BIOS.
+            BIOS = 2
+          end
+
+          # Possible values for the virtualization types of the VM.
+          module VmVirtualizationType
+            # The virtualization type is unknown.
+            VM_VIRTUALIZATION_TYPE_UNSPECIFIED = 0
+
+            # The virtualziation type is HVM.
+            HVM = 1
+
+            # The virtualziation type is PARAVIRTUAL.
+            PARAVIRTUAL = 2
+          end
+
+          # Possible values for the architectures of the VM.
+          module VmArchitecture
+            # The architecture is unknown.
+            VM_ARCHITECTURE_UNSPECIFIED = 0
+
+            # The architecture is I386.
+            I386 = 1
+
+            # The architecture is X86_64.
+            X86_64 = 2
+
+            # The architecture is ARM64.
+            ARM64 = 3
+
+            # The architecture is X86_64_MAC.
+            X86_64_MAC = 4
+          end
+        end
+
+        # AwsSecurityGroup describes a security group of an AWS VM.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     The AWS security group id.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The AWS security group name.
+        class AwsSecurityGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # VmwareVmsDetails describes VMs in vCenter.
         # @!attribute [rw] details
         #   @return [::Array<::Google::Cloud::VMMigration::V1::VmwareVmDetails>]
@@ -842,11 +1252,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AWSVmsDetails describes VMs in AWS.
+        # @!attribute [rw] details
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AwsVmDetails>]
+        #     The details of the AWS VMs.
+        class AwsVmsDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
         # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory fetchInventory}.
         # @!attribute [rw] vmware_vms
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmsDetails]
         #     The description of the VMs in a Source of type Vmware.
+        # @!attribute [rw] aws_vms
+        #   @return [::Google::Cloud::VMMigration::V1::AwsVmsDetails]
+        #     The description of the VMs in a Source of type AWS.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the source was last queried (if the result
@@ -1327,7 +1749,7 @@ module Google
         #     The name of the VM to create.
         # @!attribute [rw] project
         #   @return [::String]
-        #     The GCP target project ID or project name.
+        #     The Google Cloud target project ID or project name.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The zone in which to create the VM.
@@ -1442,7 +1864,7 @@ module Google
             # The license type is Pay As You Go license type.
             PAYG = 2
 
-            # The license type is is Bring Your Own License type.
+            # The license type is Bring Your Own License type.
             BYOL = 3
           end
         end
@@ -2278,6 +2700,83 @@ module Google
             # Migrate for Compute encountered an error during appliance upgrade.
             APPLIANCE_UPGRADE_ERROR = 9
           end
+        end
+
+        # Represent the source AWS VM details.
+        # @!attribute [rw] firmware
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceVmDetails::Firmware]
+        #     The firmware type of the source VM.
+        # @!attribute [rw] committed_storage_bytes
+        #   @return [::Integer]
+        #     The total size of the disks being migrated in bytes.
+        class AwsSourceVmDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible values for AWS VM firmware.
+          module Firmware
+            # The firmware is unknown.
+            FIRMWARE_UNSPECIFIED = 0
+
+            # The firmware is EFI.
+            EFI = 1
+
+            # The firmware is BIOS.
+            BIOS = 2
+          end
+        end
+
+        # Request message for 'LisReplicationCyclesRequest' request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of ReplicationCycles.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of replication cycles to return. The service
+        #     may return fewer than this value. If unspecified, at most 100 migrating VMs
+        #     will be returned. The maximum value is 100; values above 100 will be
+        #     coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Required. A page token, received from a previous `ListReplicationCycles`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListReplicationCycles`
+        #     must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter request.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. the order by fields for the result.
+        class ListReplicationCyclesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListReplicationCycles' request.
+        # @!attribute [r] replication_cycles
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
+        #     Output only. The list of replication cycles response.
+        # @!attribute [r] next_page_token
+        #   @return [::String]
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. Locations that could not be reached.
+        class ListReplicationCyclesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GetReplicationCycle' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ReplicationCycle.
+        class GetReplicationCycleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Controls the level of details of a Utilization Report.

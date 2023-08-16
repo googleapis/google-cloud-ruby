@@ -26,6 +26,7 @@ require "google/cloud/dataproc/v1/workflow_template_service/credentials"
 require "google/cloud/dataproc/v1/workflow_template_service/paths"
 require "google/cloud/dataproc/v1/workflow_template_service/operations"
 require "google/cloud/dataproc/v1/workflow_template_service/client"
+require "google/cloud/dataproc/v1/workflow_template_service/rest"
 
 module Google
   module Cloud
@@ -35,10 +36,15 @@ module Google
         # The API interface for managing Workflow Templates in the
         # Dataproc API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/workflow_template_service"
         #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataproc/v1/workflow_template_service/rest"
+        #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Rest::Client.new
         #
         module WorkflowTemplateService
         end

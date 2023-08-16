@@ -32,12 +32,16 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::ThresholdConfig]
         #     Threshold for numerical features of anomaly detection.
         #     This is shared by all objectives of Featurestore Monitoring for numerical
-        #     features (i.e. Features with type ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) DOUBLE or INT64).
+        #     features (i.e. Features with type
+        #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) DOUBLE
+        #     or INT64).
         # @!attribute [rw] categorical_threshold_config
         #   @return [::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::ThresholdConfig]
         #     Threshold for categorical features of anomaly detection.
         #     This is shared by all types of Featurestore Monitoring for categorical
-        #     features (i.e. Features with type ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL or STRING).
+        #     features (i.e. Features with type
+        #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL or
+        #     STRING).
         class FeaturestoreMonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -63,12 +67,6 @@ module Google
           #   @return [::Integer]
           #     Configuration of the snapshot analysis based monitoring pipeline
           #     running interval. The value indicates number of days.
-          #     If both
-          #     {::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::SnapshotAnalysis#monitoring_interval_days FeaturestoreMonitoringConfig.SnapshotAnalysis.monitoring_interval_days}
-          #     and [FeaturestoreMonitoringConfig.SnapshotAnalysis.monitoring_interval][]
-          #     are set when creating/updating EntityTypes/Features,
-          #     {::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::SnapshotAnalysis#monitoring_interval_days FeaturestoreMonitoringConfig.SnapshotAnalysis.monitoring_interval_days}
-          #     will be used.
           # @!attribute [rw] staleness_days
           #   @return [::Integer]
           #     Customized export features time window for snapshot analysis. Unit is one
@@ -81,7 +79,9 @@ module Google
 
           # Configuration of the Featurestore's ImportFeature Analysis Based
           # Monitoring. This type of analysis generates statistics for values of each
-          # Feature imported by every [ImportFeatureValues][] operation.
+          # Feature imported by every
+          # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#import_feature_values ImportFeatureValues}
+          # operation.
           # @!attribute [rw] state
           #   @return [::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::ImportFeaturesAnalysis::State]
           #     Whether to enable / disable / inherite default hebavior for import
@@ -119,7 +119,9 @@ module Google
             end
 
             # Defines the baseline to do anomaly detection for feature values imported
-            # by each [ImportFeatureValues][] operation.
+            # by each
+            # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#import_feature_values ImportFeatureValues}
+            # operation.
             module Baseline
               # Should not be used.
               BASELINE_UNSPECIFIED = 0

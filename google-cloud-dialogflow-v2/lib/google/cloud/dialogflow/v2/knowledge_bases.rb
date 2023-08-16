@@ -25,18 +25,25 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/knowledge_bases/credentials"
 require "google/cloud/dialogflow/v2/knowledge_bases/paths"
 require "google/cloud/dialogflow/v2/knowledge_bases/client"
+require "google/cloud/dialogflow/v2/knowledge_bases/rest"
 
 module Google
   module Cloud
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
+        # Service for managing
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/knowledge_bases"
         #     client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/knowledge_bases/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Rest::Client.new
         #
         module KnowledgeBases
         end

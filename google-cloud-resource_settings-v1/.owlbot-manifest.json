@@ -18,6 +18,10 @@
     "lib/google/cloud/resource_settings/v1/resource_settings_service/client.rb",
     "lib/google/cloud/resource_settings/v1/resource_settings_service/credentials.rb",
     "lib/google/cloud/resource_settings/v1/resource_settings_service/paths.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service/rest.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service/rest/client.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service/rest/service_stub.rb",
+    "lib/google/cloud/resource_settings/v1/rest.rb",
     "lib/google/cloud/resource_settings/v1/version.rb",
     "lib/google/cloud/resourcesettings/v1/resource_settings_pb.rb",
     "lib/google/cloud/resourcesettings/v1/resource_settings_services_pb.rb",
@@ -34,6 +38,7 @@
     "snippets/resource_settings_service/update_setting.rb",
     "snippets/snippet_metadata_google.cloud.resourcesettings.v1.json",
     "test/google/cloud/resource_settings/v1/resource_settings_service_paths_test.rb",
+    "test/google/cloud/resource_settings/v1/resource_settings_service_rest_test.rb",
     "test/google/cloud/resource_settings/v1/resource_settings_service_test.rb",
     "test/helper.rb"
   ],

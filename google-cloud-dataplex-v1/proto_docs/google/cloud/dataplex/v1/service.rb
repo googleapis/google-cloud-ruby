@@ -84,13 +84,13 @@ module Google
         #     where `location_id` refers to a GCP region.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of Lakes to return. The service may return fewer than this
-        #     value. If unspecified, at most 10 lakes will be returned. The maximum
-        #     value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of Lakes to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 lakes will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListLakes` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
+        #     Optional. Page token received from a previous `ListLakes` call. Provide
+        #     this to retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListLakes` must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -126,15 +126,15 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of actions to return. The service may return fewer than this
-        #     value. If unspecified, at most 10 actions will be returned. The maximum
-        #     value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of actions to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 actions will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListLakeActions` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
-        #     provided to `ListLakeActions` must match the call that provided the page
-        #     token.
+        #     Optional. Page token received from a previous `ListLakeActions` call.
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters provided to `ListLakeActions` must match the call that provided
+        #     the page token.
         class ListLakeActionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -225,13 +225,13 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of zones to return. The service may return fewer than this
-        #     value. If unspecified, at most 10 zones will be returned. The maximum
-        #     value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of zones to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 zones will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListZones` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
+        #     Optional. Page token received from a previous `ListZones` call. Provide
+        #     this to retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListZones` must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -264,15 +264,15 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of actions to return. The service may return fewer than this
-        #     value. If unspecified, at most 10 actions will be returned. The maximum
-        #     value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of actions to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 actions will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListZoneActions` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
-        #     provided to `ListZoneActions` must match the call that provided the page
-        #     token.
+        #     Optional. Page token received from a previous `ListZoneActions` call.
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters provided to `ListZoneActions` must match the call that provided
+        #     the page token.
         class ListZoneActionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -349,13 +349,13 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of asset to return. The service may return fewer than
-        #     this value. If unspecified, at most 10 assets will be returned. The
+        #     Optional. Maximum number of asset to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 assets will be returned. The
         #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListAssets` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
+        #     Optional. Page token received from a previous `ListAssets` call. Provide
+        #     this to retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListAssets` must match the call that provided the page
         #     token.
         # @!attribute [rw] filter
@@ -389,15 +389,15 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of actions to return. The service may return fewer than this
-        #     value. If unspecified, at most 10 actions will be returned. The maximum
-        #     value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of actions to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 actions will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListAssetActions` call. Provide this
-        #     to retrieve the subsequent page. When paginating, all other parameters
-        #     provided to `ListAssetActions` must match the call that provided the page
-        #     token.
+        #     Optional. Page token received from a previous `ListAssetActions` call.
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters provided to `ListAssetActions` must match the call that provided
+        #     the page token.
         class ListAssetActionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -433,8 +433,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -497,13 +498,13 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of tasks to return. The service may return fewer than this
-        #     value. If unspecified, at most 10 tasks will be returned. The maximum
-        #     value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of tasks to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 tasks will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListZones` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
+        #     Optional. Page token received from a previous `ListZones` call. Provide
+        #     this to retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListZones` must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -552,6 +553,59 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the task:
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User-defined labels for the task. If the map is left empty, the
+        #     task will run with existing labels from task definition. If the map
+        #     contains an entry with a new key, the same will be added to existing set of
+        #     labels. If the map contains an entry with an existing label key in task
+        #     definition, the task will run with new label value for that entry. Clearing
+        #     an existing label will require label value to be explicitly set to a hyphen
+        #     "-". The label value cannot be empty.
+        # @!attribute [rw] args
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Execution spec arguments. If the map is left empty, the task will
+        #     run with existing execution spec args from task definition. If the map
+        #     contains an entry with a new key, the same will be added to existing set of
+        #     args. If the map contains an entry with an existing arg key in task
+        #     definition, the task will run with new arg value for that entry. Clearing
+        #     an existing arg will require arg value to be explicitly set to a hyphen
+        #     "-". The arg value cannot be empty.
+        class RunTaskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ArgsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] job
+        #   @return [::Google::Cloud::Dataplex::V1::Job]
+        #     Jobs created by RunTask API.
+        class RunTaskResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # List jobs request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -559,13 +613,13 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of jobs to return. The service may return fewer than
-        #     this value. If unspecified, at most 10 jobs will be returned. The
+        #     Optional. Maximum number of jobs to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 jobs will be returned. The
         #     maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListJobs` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
+        #     Optional. Page token received from a previous `ListJobs` call. Provide this
+        #     to retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListJobs` must match the call that provided the page
         #     token.
         class ListJobsRequest
@@ -655,15 +709,16 @@ module Google
         #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of environments to return. The service may return fewer than
-        #     this value. If unspecified, at most 10 environments will be returned. The
-        #     maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of environments to return. The service may return
+        #     fewer than this value. If unspecified, at most 10 environments will be
+        #     returned. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListEnvironments` call. Provide this
-        #     to retrieve the subsequent page. When paginating, all other parameters
-        #     provided to `ListEnvironments` must match the call that provided the page
-        #     token.
+        #     Optional. Page token received from a previous `ListEnvironments` call.
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters provided to `ListEnvironments` must match the call that provided
+        #     the page token.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Filter request.
@@ -705,24 +760,24 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of sessions to return. The service may return fewer than
-        #     this value. If unspecified, at most 10 sessions will be returned. The
-        #     maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of sessions to return. The service may return
+        #     fewer than this value. If unspecified, at most 10 sessions will be
+        #     returned. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListSessions` call. Provide this to
-        #     retrieve the subsequent page. When paginating, all other parameters
+        #     Optional. Page token received from a previous `ListSessions` call. Provide
+        #     this to retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListSessions` must match the call that provided the page
         #     token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter request. The following `mode` filter is supported to return only the
-        #     sessions belonging to the requester when the mode is USER and return
-        #     sessions of all the users when the mode is ADMIN. When no filter is sent
-        #     default to USER mode.
-        #     NOTE: When the mode is ADMIN, the requester should have
-        #     `dataplex.environments.listAllSessions` permission to list all sessions,
-        #     in absence of the permission, the request fails.
+        #     Optional. Filter request. The following `mode` filter is supported to
+        #     return only the sessions belonging to the requester when the mode is USER
+        #     and return sessions of all the users when the mode is ADMIN. When no filter
+        #     is sent default to USER mode. NOTE: When the mode is ADMIN, the requester
+        #     should have `dataplex.environments.listAllSessions` permission to list all
+        #     sessions, in absence of the permission, the request fails.
         #
         #     mode = ADMIN | USER
         class ListSessionsRequest

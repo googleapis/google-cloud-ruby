@@ -26,6 +26,7 @@ require "google/cloud/redis/v1beta1/cloud_redis/credentials"
 require "google/cloud/redis/v1beta1/cloud_redis/paths"
 require "google/cloud/redis/v1beta1/cloud_redis/operations"
 require "google/cloud/redis/v1beta1/cloud_redis/client"
+require "google/cloud/redis/v1beta1/cloud_redis/rest"
 
 module Google
   module Cloud
@@ -48,10 +49,15 @@ module Google
         # Note that location_id must be referring to a GCP `region`; for example:
         # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/redis/v1beta1/cloud_redis"
         #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/redis/v1beta1/cloud_redis/rest"
+        #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::Client.new
         #
         module CloudRedis
         end

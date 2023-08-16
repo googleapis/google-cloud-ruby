@@ -20,8 +20,11 @@
 require "google/cloud/dlp/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dlp::V2::DlpService::Client#inspect_content
+# Snippet for the inspect_content call in the DlpService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#inspect_content. It may require
+# modification in order to execute successfully.
 #
 def inspect_content
   # Create a client object. The client can be reused for multiple calls.

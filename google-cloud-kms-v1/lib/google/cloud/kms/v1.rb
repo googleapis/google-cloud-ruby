@@ -24,12 +24,17 @@ module Google
   module Cloud
     module Kms
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/kms/v1"
       #     client = ::Google::Cloud::Kms::V1::EkmService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/kms/v1"
+      #     client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new
       #
       module V1
       end

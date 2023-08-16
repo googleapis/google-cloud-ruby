@@ -23,12 +23,17 @@ module Google
   module Cloud
     module WebRisk
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/web_risk/v1"
       #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/web_risk/v1"
+      #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::Client.new
       #
       module V1
       end

@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/video/livestream/v1/service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -178,7 +179,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -189,6 +190,12 @@ module Google
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
                 @operations_client = Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
+                @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
@@ -209,6 +216,13 @@ module Google
               # @return [::Google::Cloud::Video::LiveStream::V1::LivestreamService::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -275,14 +289,14 @@ module Google
               #   # Call the create_channel method.
               #   result = client.create_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_channel request, options = nil
@@ -352,8 +366,8 @@ module Google
               #     The maximum number of items to return. If unspecified, server
               #     will pick an appropriate default. Server may return fewer items than
               #     requested. A caller should only rely on response's
-              #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token} to
-              #     determine if there are more items left to be queried.
+              #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token}
+              #     to determine if there are more items left to be queried.
               #   @param page_token [::String]
               #     The next_page_token value returned from a previous List request, if any.
               #   @param filter [::String]
@@ -382,13 +396,11 @@ module Google
               #   # Call the list_channels method.
               #   result = client.list_channels request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Channel.
-              #     p response
+              #     p item
               #   end
               #
               def list_channels request, options = nil
@@ -580,14 +592,14 @@ module Google
               #   # Call the delete_channel method.
               #   result = client.delete_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def delete_channel request, options = nil
@@ -655,14 +667,22 @@ module Google
               #     resource by the update. You can only update the following fields:
               #
               #     * [`inputAttachments`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputattachment)
+              #     * [`inputConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputconfig)
               #     * [`output`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#output)
-              #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#ElementaryStream)
+              #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#elementarystream)
               #     * [`muxStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#muxstream)
-              #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#Manifest)
-              #     * [`spritesheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+              #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#manifest)
+              #     * [`spriteSheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+              #     * [`logConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#logconfig)
+              #     * [`timecodeConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#timecodeconfig)
+              #     * [`encryptions`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#encryption)
               #
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request. A field will be overwritten if it is in the mask.
+              #
+              #     If the mask is not present, then each field from the list above is updated
+              #     if the field appears in the request payload. To unset a field, add the
+              #     field to the update mask and remove it from the request payload.
               #   @param channel [::Google::Cloud::Video::LiveStream::V1::Channel, ::Hash]
               #     Required. The channel resource to be updated.
               #   @param request_id [::String]
@@ -700,14 +720,14 @@ module Google
               #   # Call the update_channel method.
               #   result = client.update_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_channel request, options = nil
@@ -809,14 +829,14 @@ module Google
               #   # Call the start_channel method.
               #   result = client.start_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def start_channel request, options = nil
@@ -918,14 +938,14 @@ module Google
               #   # Call the stop_channel method.
               #   result = client.stop_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def stop_channel request, options = nil
@@ -1032,14 +1052,14 @@ module Google
               #   # Call the create_input method.
               #   result = client.create_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_input request, options = nil
@@ -1109,8 +1129,8 @@ module Google
               #     The maximum number of items to return. If unspecified, server
               #     will pick an appropriate default. Server may return fewer items than
               #     requested. A caller should only rely on response's
-              #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token} to
-              #     determine if there are more items left to be queried.
+              #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token}
+              #     to determine if there are more items left to be queried.
               #   @param page_token [::String]
               #     The next_page_token value returned from a previous List request, if any.
               #   @param filter [::String]
@@ -1139,13 +1159,11 @@ module Google
               #   # Call the list_inputs method.
               #   result = client.list_inputs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Input.
-              #     p response
+              #     p item
               #   end
               #
               def list_inputs request, options = nil
@@ -1332,14 +1350,14 @@ module Google
               #   # Call the delete_input method.
               #   result = client.delete_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def delete_input request, options = nil
@@ -1411,6 +1429,10 @@ module Google
               #
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request. A field will be overwritten if it is in the mask.
+              #
+              #     If the mask is not present, then each field from the list above is updated
+              #     if the field appears in the request payload. To unset a field, add the
+              #     field to the update mask and remove it from the request payload.
               #   @param input [::Google::Cloud::Video::LiveStream::V1::Input, ::Hash]
               #     Required. The input resource to be updated.
               #   @param request_id [::String]
@@ -1448,14 +1470,14 @@ module Google
               #   # Call the update_input method.
               #   result = client.update_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_input request, options = nil
@@ -1631,8 +1653,8 @@ module Google
               #     The maximum number of items to return. If unspecified, server
               #     will pick an appropriate default. Server may return fewer items than
               #     requested. A caller should only rely on response's
-              #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token} to
-              #     determine if there are more items left to be queried.
+              #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token}
+              #     to determine if there are more items left to be queried.
               #   @param page_token [::String]
               #     The next_page_token value returned from a previous List request, if any.
               #   @param filter [::String]
@@ -1661,13 +1683,11 @@ module Google
               #   # Call the list_events method.
               #   result = client.list_events request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Event.
-              #     p response
+              #     p item
               #   end
               #
               def list_events request, options = nil
@@ -1899,6 +1919,616 @@ module Google
               end
 
               ##
+              # Creates a Asset with the provided unique ID in the specified
+              # region.
+              #
+              # @overload create_asset(request, options = nil)
+              #   Pass arguments to `create_asset` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_asset(parent: nil, asset: nil, asset_id: nil, request_id: nil)
+              #   Pass arguments to `create_asset` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent location for the resource, in the form of:
+              #     `projects/{project}/locations/{location}`.
+              #   @param asset [::Google::Cloud::Video::LiveStream::V1::Asset, ::Hash]
+              #     Required. The asset resource to be created.
+              #   @param asset_id [::String]
+              #     Required. The ID of the asset resource to be created.
+              #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
+              #     could contain dashes (-) in between.
+              #   @param request_id [::String]
+              #     A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new
+              #
+              #   # Call the create_asset method.
+              #   result = client.create_asset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_asset request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_asset.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_asset.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_asset.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :create_asset, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified asset if it is not used.
+              #
+              # @overload delete_asset(request, options = nil)
+              #   Pass arguments to `delete_asset` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_asset(name: nil, request_id: nil)
+              #   Pass arguments to `delete_asset` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the asset resource, in the form of:
+              #     `projects/{project}/locations/{location}/assets/{assetId}`.
+              #   @param request_id [::String]
+              #     A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new
+              #
+              #   # Call the delete_asset method.
+              #   result = client.delete_asset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_asset request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_asset.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_asset.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_asset.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :delete_asset, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the specified asset.
+              #
+              # @overload get_asset(request, options = nil)
+              #   Pass arguments to `get_asset` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::GetAssetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::GetAssetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_asset(name: nil)
+              #   Pass arguments to `get_asset` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource, in the following form:
+              #     `projects/{project}/locations/{location}/assets/{asset}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Video::LiveStream::V1::Asset]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Video::LiveStream::V1::Asset]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new
+              #
+              #   # Call the get_asset method.
+              #   result = client.get_asset request
+              #
+              #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Asset.
+              #   p result
+              #
+              def get_asset request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::GetAssetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_asset.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_asset.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_asset.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :get_asset, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns a list of all assets in the specified region.
+              #
+              # @overload list_assets(request, options = nil)
+              #   Pass arguments to `list_assets` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_assets(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_assets` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent location for the resource, in the form of:
+              #     `projects/{project}/locations/{location}`.
+              #   @param page_size [::Integer]
+              #     Requested page size. Server may return fewer items than requested.
+              #     If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     A token identifying a page of results the server should return.
+              #   @param filter [::String]
+              #     Filtering results
+              #   @param order_by [::String]
+              #     Hint for how to order the results
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Asset>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Asset>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new
+              #
+              #   # Call the list_assets method.
+              #   result = client.list_assets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Asset.
+              #     p item
+              #   end
+              #
+              def list_assets request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_assets.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_assets.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_assets.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :list_assets, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @livestream_service_stub, :list_assets, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the specified pool.
+              #
+              # @overload get_pool(request, options = nil)
+              #   Pass arguments to `get_pool` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::GetPoolRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::GetPoolRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_pool(name: nil)
+              #   Pass arguments to `get_pool` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the pool resource, in the form of:
+              #     `projects/{project}/locations/{location}/pools/{poolId}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Video::LiveStream::V1::Pool]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Video::LiveStream::V1::Pool]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new
+              #
+              #   # Call the get_pool method.
+              #   result = client.get_pool request
+              #
+              #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Pool.
+              #   p result
+              #
+              def get_pool request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::GetPoolRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_pool.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_pool.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_pool.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :get_pool, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the specified pool.
+              #
+              # @overload update_pool(request, options = nil)
+              #   Pass arguments to `update_pool` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_pool(update_mask: nil, pool: nil, request_id: nil)
+              #   Pass arguments to `update_pool` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Field mask is used to specify the fields to be overwritten in the Pool
+              #     resource by the update. You can only update the following fields:
+              #
+              #     * `networkConfig`
+              #
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #   @param pool [::Google::Cloud::Video::LiveStream::V1::Pool, ::Hash]
+              #     Required. The pool resource to be updated.
+              #   @param request_id [::String]
+              #     A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new
+              #
+              #   # Call the update_pool method.
+              #   result = client.update_pool request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_pool request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_pool.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.pool&.name
+                  header_params["pool.name"] = request.pool.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_pool.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_pool.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :update_pool, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the LivestreamService API.
               #
               # This class represents the configuration for LivestreamService,
@@ -1936,9 +2566,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1980,7 +2610,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "livestream.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "livestream.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2113,6 +2745,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_event
+                  ##
+                  # RPC-specific configuration for `create_asset`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_asset
+                  ##
+                  # RPC-specific configuration for `delete_asset`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_asset
+                  ##
+                  # RPC-specific configuration for `get_asset`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_asset
+                  ##
+                  # RPC-specific configuration for `list_assets`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_assets
+                  ##
+                  # RPC-specific configuration for `get_pool`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_pool
+                  ##
+                  # RPC-specific configuration for `update_pool`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_pool
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2148,6 +2810,18 @@ module Google
                     @get_event = ::Gapic::Config::Method.new get_event_config
                     delete_event_config = parent_rpcs.delete_event if parent_rpcs.respond_to? :delete_event
                     @delete_event = ::Gapic::Config::Method.new delete_event_config
+                    create_asset_config = parent_rpcs.create_asset if parent_rpcs.respond_to? :create_asset
+                    @create_asset = ::Gapic::Config::Method.new create_asset_config
+                    delete_asset_config = parent_rpcs.delete_asset if parent_rpcs.respond_to? :delete_asset
+                    @delete_asset = ::Gapic::Config::Method.new delete_asset_config
+                    get_asset_config = parent_rpcs.get_asset if parent_rpcs.respond_to? :get_asset
+                    @get_asset = ::Gapic::Config::Method.new get_asset_config
+                    list_assets_config = parent_rpcs.list_assets if parent_rpcs.respond_to? :list_assets
+                    @list_assets = ::Gapic::Config::Method.new list_assets_config
+                    get_pool_config = parent_rpcs.get_pool if parent_rpcs.respond_to? :get_pool
+                    @get_pool = ::Gapic::Config::Method.new get_pool_config
+                    update_pool_config = parent_rpcs.update_pool if parent_rpcs.respond_to? :update_pool
+                    @update_pool = ::Gapic::Config::Method.new update_pool_config
 
                     yield self if block_given?
                   end

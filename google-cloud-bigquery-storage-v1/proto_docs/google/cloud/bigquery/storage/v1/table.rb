@@ -47,7 +47,8 @@ module Google
           #     Optional. The field mode. The default value is NULLABLE.
           # @!attribute [rw] fields
           #   @return [::Array<::Google::Cloud::Bigquery::Storage::V1::TableFieldSchema>]
-          #     Optional. Describes the nested schema fields if the type property is set to STRUCT.
+          #     Optional. Describes the nested schema fields if the type property is set to
+          #     STRUCT.
           # @!attribute [rw] description
           #   @return [::String]
           #     Optional. The field description. The maximum length is 1,024 characters.
@@ -102,6 +103,10 @@ module Google
           # @!attribute [rw] scale
           #   @return [::Integer]
           #     Optional. See documentation for precision.
+          # @!attribute [rw] default_value_expression
+          #   @return [::String]
+          #     Optional. A SQL expression to specify the [default value]
+          #     (https://cloud.google.com/bigquery/docs/default-values) for this field.
           class TableFieldSchema
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

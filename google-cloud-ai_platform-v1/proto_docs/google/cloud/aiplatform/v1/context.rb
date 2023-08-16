@@ -22,9 +22,9 @@ module Google
     module AIPlatform
       module V1
         # Instance of a general context.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the Context.
+        #     Immutable. The resource name of the Context.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     User provided display name of the Context.
@@ -50,8 +50,8 @@ module Google
         #     Output only. Timestamp when this Context was last updated.
         # @!attribute [r] parent_contexts
         #   @return [::Array<::String>]
-        #     Output only. A list of resource names of Contexts that are parents of this Context.
-        #     A Context may have at most 10 parent_contexts.
+        #     Output only. A list of resource names of Contexts that are parents of this
+        #     Context. A Context may have at most 10 parent_contexts.
         # @!attribute [rw] schema_title
         #   @return [::String]
         #     The title of the schema describing the metadata.

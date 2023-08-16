@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result
+# Snippet for the get_validation_result call in the Agents service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result. It may
+# require modification in order to execute successfully.
 #
 def get_validation_result
   # Create a client object. The client can be reused for multiple calls.

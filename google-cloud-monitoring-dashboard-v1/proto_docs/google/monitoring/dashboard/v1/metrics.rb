@@ -54,8 +54,9 @@ module Google
           # method.
           # @!attribute [rw] filter
           #   @return [::String]
-          #     Required. The [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
-          #     that identifies the metric types, resources, and projects to query.
+          #     Required. The [monitoring
+          #     filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies
+          #     the metric types, resources, and projects to query.
           # @!attribute [rw] aggregation
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
           #     By default, the raw time series data is returned.

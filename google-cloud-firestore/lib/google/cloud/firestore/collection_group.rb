@@ -48,6 +48,8 @@ module Google
         #
         # @param [Integer] partition_count The desired maximum number of partition points. The number must be strictly
         #   positive. The actual number of partitions returned may be fewer.
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @return [Array<QueryPartition>] An ordered array of query partitions.
         #
@@ -62,7 +64,20 @@ module Google
         #
         #   queries = partitions.map(&:to_query)
         #
-        def partitions partition_count
+        # @example partition with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   col_group = firestore.col_group "cities"
+        #
+        #   read_time = Time.now
+        #
+        #   partitions = col_group.partitions 3, read_time: read_time
+        #
+        #   queries = partitions.map(&:to_query)
+        #
+        def partitions partition_count, read_time: nil
           ensure_service!
 
           raise ArgumentError, "partition_count must be > 0" unless partition_count.positive?
@@ -75,7 +90,7 @@ module Google
 
           grpc_partitions = if partition_count.positive?
                               # Retrieve all pages, since cursor order is not guaranteed and they must be sorted.
-                              list_all partition_count, query_with_default_order
+                              list_all partition_count, query_with_default_order, read_time
                             else
                               [] # Ensure that a single, empty QueryPartition is returned.
                             end
@@ -118,11 +133,12 @@ module Google
 
         protected
 
-        def list_all partition_count, query_with_default_order
+        def list_all partition_count, query_with_default_order, read_time
           grpc_partitions = []
           token = nil
           loop do
-            grpc = service.partition_query parent_path, query_with_default_order.query, partition_count, token: token
+            grpc = service.partition_query parent_path, query_with_default_order.query, partition_count,
+                                           token: token, read_time: read_time
             grpc_partitions += Array(grpc.partitions)
             token = grpc.next_page_token
             token = nil if token == ""

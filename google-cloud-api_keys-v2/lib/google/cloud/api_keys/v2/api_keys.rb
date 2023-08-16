@@ -26,6 +26,7 @@ require "google/cloud/api_keys/v2/api_keys/credentials"
 require "google/cloud/api_keys/v2/api_keys/paths"
 require "google/cloud/api_keys/v2/api_keys/operations"
 require "google/cloud/api_keys/v2/api_keys/client"
+require "google/cloud/api_keys/v2/api_keys/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Manages the API keys associated with projects.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/api_keys/v2/api_keys"
         #     client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/api_keys/v2/api_keys/rest"
+        #     client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
         #
         module ApiKeys
         end

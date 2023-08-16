@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/bigquery/datatransfer/v1/datatransfer_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -180,7 +181,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -190,6 +191,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @data_transfer_service_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub,
                   credentials:  credentials,
@@ -198,6 +205,13 @@ module Google
                   interceptors: @config.interceptors
                 )
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -220,8 +234,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/dataSources/{data_source_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/dataSources/{data_source_id}` or
               #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -307,8 +321,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The BigQuery project id for which data sources should be returned.
-              #     Must be in the form: `projects/{project_id}` or
+              #     Required. The BigQuery project id for which data sources should be
+              #     returned. Must be in the form: `projects/{project_id}` or
               #     `projects/{project_id}/locations/{location_id}`
               #   @param page_token [::String]
               #     Pagination token, which can be used to request a specific page
@@ -339,13 +353,11 @@ module Google
               #   # Call the list_data_sources method.
               #   result = client.list_data_sources request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::DataSource.
-              #     p response
+              #     p item
               #   end
               #
               def list_data_sources request, options = nil
@@ -409,10 +421,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The BigQuery project id where the transfer configuration should be created.
-              #     Must be in the format projects/\\{project_id}/locations/\\{location_id} or
-              #     projects/\\{project_id}. If specified location and location of the
-              #     destination bigquery dataset do not match - the request will fail.
+              #     Required. The BigQuery project id where the transfer configuration should
+              #     be created. Must be in the format
+              #     projects/\\{project_id}/locations/\\{location_id} or projects/\\{project_id}. If
+              #     specified location and location of the destination bigquery dataset do not
+              #     match - the request will fail.
               #   @param transfer_config [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig, ::Hash]
               #     Required. Data transfer configuration to create.
               #   @param authorization_code [::String]
@@ -446,7 +459,7 @@ module Google
               #     Note that this should not be set when `service_account_name` is used to
               #     create the transfer config.
               #   @param service_account_name [::String]
-              #     Optional service account name. If this field is set, the transfer config
+              #     Optional service account email. If this field is set, the transfer config
               #     will be created with this service account's credentials. It requires that
               #     the requesting user calling this API has permissions to act as this service
               #     account.
@@ -574,7 +587,7 @@ module Google
               #     Note that this should not be set when `service_account_name` is used to
               #     update the transfer config.
               #   @param service_account_name [::String]
-              #     Optional service account name. If this field is set, the transfer config
+              #     Optional service account email. If this field is set, the transfer config
               #     will be created with this service account's credentials. It requires that
               #     the requesting user calling this API has permissions to act as this service
               #     account.
@@ -668,8 +681,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -755,8 +768,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -877,13 +890,11 @@ module Google
               #   # Call the list_transfer_configs method.
               #   result = client.list_transfer_configs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_configs request, options = nil
@@ -1053,10 +1064,15 @@ module Google
               #     `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
               #   @param requested_time_range [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange, ::Hash]
-              #     Time range for the transfer runs that should be started.
+              #     A time_range start and end timestamp for historical data files or reports
+              #     that are scheduled to be transferred by the scheduled transfer run.
+              #     requested_time_range must be a past time and cannot include future time
+              #     values.
               #   @param requested_run_time [::Google::Protobuf::Timestamp, ::Hash]
-              #     Specific run_time for a transfer run to be started. The
-              #     requested_run_time must not be in the future.
+              #     A run_time timestamp for historical data files or reports
+              #     that are scheduled to be transferred by the scheduled transfer run.
+              #     requested_run_time must be a past time and cannot include future time
+              #     values.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsResponse]
@@ -1141,8 +1157,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+              #     or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1228,8 +1245,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+              #     or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1315,8 +1333,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Name of transfer configuration for which transfer runs should be retrieved.
-              #     Format of transfer configuration resource name is:
+              #     Required. Name of transfer configuration for which transfer runs should be
+              #     retrieved. Format of transfer configuration resource name is:
               #     `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
               #   @param states [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferState>]
@@ -1352,13 +1370,11 @@ module Google
               #   # Call the list_transfer_runs method.
               #   result = client.list_transfer_runs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_runs request, options = nil
@@ -1457,13 +1473,11 @@ module Google
               #   # Call the list_transfer_logs method.
               #   result = client.list_transfer_logs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_logs request, options = nil
@@ -1729,9 +1743,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1773,7 +1787,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "bigquerydatatransfer.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "bigquerydatatransfer.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

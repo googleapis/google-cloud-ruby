@@ -46,7 +46,7 @@ module Google
         #     By default, the solving mode is `DEFAULT_SOLVE` (0).
         # @!attribute [rw] max_validation_errors
         #   @return [::Integer]
-        #     Truncates the number of validation errors returned. Those errors are
+        #     Truncates the number of validation errors returned. These errors are
         #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
         #     error detail (https://cloud.google.com/apis/design/errors#error_details),
         #     unless solving_mode=VALIDATE_ONLY: see the
@@ -79,8 +79,9 @@ module Google
         #         <= visits[0].start_time <= visits[1].start_time ...
         #         <= vehicle_end_time`).
         #       * a shipment may only be performed on a vehicle that is allowed. A
-        #         vehicle is allowed if {::Google::Cloud::Optimization::V1::Shipment#allowed_vehicle_indices Shipment.allowed_vehicle_indices} is empty or
-        #         its `vehicle_index` is included in
+        #         vehicle is allowed if
+        #         {::Google::Cloud::Optimization::V1::Shipment#allowed_vehicle_indices Shipment.allowed_vehicle_indices}
+        #         is empty or its `vehicle_index` is included in
         #         {::Google::Cloud::Optimization::V1::Shipment#allowed_vehicle_indices Shipment.allowed_vehicle_indices}.
         #
         #     If the injected solution is not feasible, a validation error is not
@@ -118,16 +119,27 @@ module Google
         #   @return [::Boolean]
         #     If true:
         #
-        #       * uses {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_label ShipmentRoute.vehicle_label} instead of `vehicle_index` to
+        #       * uses
+        #       {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_label ShipmentRoute.vehicle_label}
+        #       instead of `vehicle_index` to
         #         match routes in an injected solution with vehicles in the request;
-        #         reuses the mapping of original {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index} to new
-        #         {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index} to update
+        #         reuses the mapping of original
+        #         {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index}
+        #         to new
+        #         {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index}
+        #         to update
         #         {::Google::Cloud::Optimization::V1::InjectedSolutionConstraint::ConstraintRelaxation#vehicle_indices ConstraintRelaxation.vehicle_indices}
         #         if non-empty, but the mapping must be unambiguous (i.e., multiple
         #         `ShipmentRoute`s must not share the same original `vehicle_index`).
-        #       * uses {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#shipment_label ShipmentRoute.Visit.shipment_label} instead of `shipment_index`
+        #       * uses
+        #       {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#shipment_label ShipmentRoute.Visit.shipment_label}
+        #       instead of `shipment_index`
         #         to match visits in an injected solution with shipments in the request;
-        #       * uses {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label} instead of {::Google::Cloud::Optimization::V1::SkippedShipment#index SkippedShipment.index} to
+        #       * uses
+        #       {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label}
+        #       instead of
+        #       {::Google::Cloud::Optimization::V1::SkippedShipment#index SkippedShipment.index}
+        #       to
         #         match skipped shipments in the injected solution with request
         #         shipments.
         #
@@ -140,8 +152,10 @@ module Google
         #     If true, labels in the following categories must appear at most once in
         #     their category:
         #
-        #       * {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label} in the request;
-        #       * {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label} in the request;
+        #       * {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label} in the
+        #       request;
+        #       * {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label} in the
+        #       request;
         #       * {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_label ShipmentRoute.vehicle_label} in the injected solution;
         #       * {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label} and {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#shipment_label ShipmentRoute.Visit.shipment_label} in
         #         the injected solution (except pickup/delivery visit pairs, whose
@@ -151,28 +165,33 @@ module Google
         #     request vehicle, the corresponding route is removed from the solution
         #     along with its visits. If a `shipment_label` in the injected solution does
         #     not correspond to a request shipment, the corresponding visit is removed
-        #     from the solution. If a {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label} in the injected solution
-        #     does not correspond to a request shipment, the `SkippedShipment` is removed
-        #     from the solution.
+        #     from the solution. If a
+        #     {::Google::Cloud::Optimization::V1::SkippedShipment#label SkippedShipment.label}
+        #     in the injected solution does not correspond to a request shipment, the
+        #     `SkippedShipment` is removed from the solution.
         #
         #     Removing route visits or entire routes from an injected solution may
         #     have an effect on the implied constraints, which may lead to change in
         #     solution, validation errors, or infeasibility.
         #
-        #     NOTE: The caller must ensure that each {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label}
-        #     (resp. {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label}) uniquely identifies a vehicle (resp. shipment)
-        #     entity used across the two relevant requests: the past request that
-        #     produced the `OptimizeToursResponse` used in the injected solution and the
-        #     current request that includes the injected solution. The uniqueness checks
-        #     described above are not enough to guarantee this requirement.
+        #     NOTE: The caller must ensure that each
+        #     {::Google::Cloud::Optimization::V1::Vehicle#label Vehicle.label} (resp.
+        #     {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label}) uniquely
+        #     identifies a vehicle (resp. shipment) entity used across the two relevant
+        #     requests: the past request that produced the `OptimizeToursResponse` used
+        #     in the injected solution and the current request that includes the injected
+        #     solution. The uniqueness checks described above are not enough to guarantee
+        #     this requirement.
         # @!attribute [rw] consider_road_traffic
         #   @return [::Boolean]
         #     Consider traffic estimation in calculating `ShipmentRoute` fields
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#travel_duration Transition.travel_duration},
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#start_time Visit.start_time},
         #     and `vehicle_end_time`; in setting the
-        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#has_traffic_infeasibilities ShipmentRoute.has_traffic_infeasibilities} field, and in calculating the
-        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#total_cost OptimizeToursResponse.total_cost} field.
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#has_traffic_infeasibilities ShipmentRoute.has_traffic_infeasibilities}
+        #     field, and in calculating the
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#total_cost OptimizeToursResponse.total_cost}
+        #     field.
         # @!attribute [rw] populate_polylines
         #   @return [::Boolean]
         #     If true, polylines will be populated in response `ShipmentRoute`s.
@@ -205,18 +224,21 @@ module Google
         #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#request_label OptimizeToursResponse.request_label}.
         # @!attribute [rw] populate_travel_step_polylines
         #   @return [::Boolean]
-        #     Deprecated: Use [OptimizeToursRequest.populate_transition_polylines][] instead.
-        #     If true, polylines will be populated in response
-        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}. Note that in this case, the polylines will
-        #     also be populated in the deprecated `travel_steps`.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursRequest#populate_transition_polylines OptimizeToursRequest.populate_transition_polylines}
+        #     instead. If true, polylines will be populated in response
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}.
+        #     Note that in this case, the polylines will also be populated in the
+        #     deprecated `travel_steps`.
         class OptimizeToursRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Defines how the solver should handle the request. In all modes but
           # `VALIDATE_ONLY`, if the request is invalid, you will receive an
-          # `INVALID_REQUEST` error. See {::Google::Cloud::Optimization::V1::OptimizeToursRequest#max_validation_errors max_validation_errors} to cap the number of
-          # errors returned.
+          # `INVALID_REQUEST` error. See
+          # {::Google::Cloud::Optimization::V1::OptimizeToursRequest#max_validation_errors max_validation_errors}
+          # to cap the number of errors returned.
           module SolvingMode
             # Solve the model.
             DEFAULT_SOLVE = 0
@@ -259,8 +281,9 @@ module Google
         #     vehicle in the model.
         # @!attribute [rw] request_label
         #   @return [::String]
-        #     Copy of the {::Google::Cloud::Optimization::V1::OptimizeToursRequest#label OptimizeToursRequest.label}, if a label was specified in the
-        #     request.
+        #     Copy of the
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursRequest#label OptimizeToursRequest.label},
+        #     if a label was specified in the request.
         # @!attribute [rw] skipped_shipments
         #   @return [::Array<::Google::Cloud::Optimization::V1::SkippedShipment>]
         #     The list of all shipments skipped.
@@ -268,16 +291,18 @@ module Google
         #   @return [::Array<::Google::Cloud::Optimization::V1::OptimizeToursValidationError>]
         #     List of all the validation errors that we were able to detect
         #     independently. See the "MULTIPLE ERRORS" explanation for the
-        #     {::Google::Cloud::Optimization::V1::OptimizeToursValidationError OptimizeToursValidationError} message.
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursValidationError OptimizeToursValidationError}
+        #     message.
         # @!attribute [rw] metrics
         #   @return [::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics]
         #     Duration, distance and usage metrics for this solution.
         # @!attribute [rw] total_cost
         #   @return [::Float]
-        #     Deprecated: Use [Metrics.total_cost][] instead.
-        #     Total cost of the solution. This takes into account all costs: costs per
-        #     per hour and travel hour, fixed vehicle costs, unperformed shipment penalty
-        #     costs, global duration cost, etc.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics#total_cost Metrics.total_cost}
+        #     instead. Total cost of the solution. This takes into account all costs:
+        #     costs per per hour and travel hour, fixed vehicle costs, unperformed
+        #     shipment penalty costs, global duration cost, etc.
         class OptimizeToursResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -286,23 +311,27 @@ module Google
           # @!attribute [rw] aggregated_route_metrics
           #   @return [::Google::Cloud::Optimization::V1::AggregatedMetrics]
           #     Aggregated over the routes. Each metric is the sum (or max, for loads)
-          #     over all {::Google::Cloud::Optimization::V1::ShipmentRoute#metrics ShipmentRoute.metrics} fields of the same name.
+          #     over all
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute#metrics ShipmentRoute.metrics}
+          #     fields of the same name.
           # @!attribute [rw] skipped_mandatory_shipment_count
           #   @return [::Integer]
           #     Number of mandatory shipments skipped.
           # @!attribute [rw] used_vehicle_count
           #   @return [::Integer]
           #     Number of vehicles used. Note: if a vehicle route is empty and
-          #     {::Google::Cloud::Optimization::V1::Vehicle#used_if_route_is_empty Vehicle.used_if_route_is_empty} is true, the vehicle is considered
-          #     used.
+          #     {::Google::Cloud::Optimization::V1::Vehicle#used_if_route_is_empty Vehicle.used_if_route_is_empty}
+          #     is true, the vehicle is considered used.
           # @!attribute [rw] earliest_vehicle_start_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The earliest start time for a used vehicle, computed as the minimum over
-          #     all used vehicles of {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_start_time ShipmentRoute.vehicle_start_time}.
+          #     all used vehicles of
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_start_time ShipmentRoute.vehicle_start_time}.
           # @!attribute [rw] latest_vehicle_end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The latest end time for a used vehicle, computed as the maximum over all
-          #     used vehicles of {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_end_time ShipmentRoute.vehicle_end_time}.
+          #     used vehicles of
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_end_time ShipmentRoute.vehicle_end_time}.
           # @!attribute [rw] costs
           #   @return [::Google::Protobuf::Map{::String => ::Float}]
           #     Cost of the solution, broken down by cost-related request fields.
@@ -346,8 +375,8 @@ module Google
         #     If no location is specified, a region will be chosen automatically.
         # @!attribute [rw] model_configs
         #   @return [::Array<::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest::AsyncModelConfig>]
-        #     Required. Input/Output information each purchase model, such as file paths and data
-        #     formats.
+        #     Required. Input/Output information each purchase model, such as file paths
+        #     and data formats.
         class BatchOptimizeToursRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -430,7 +459,8 @@ module Google
         #     earliest effective start time and the latest effective end time of
         #     all vehicles. Users can assign a cost per hour to that quantity to try
         #     and optimize for earliest job completion, for example. This cost must be in
-        #     the same unit as {::Google::Cloud::Optimization::V1::Shipment#penalty_cost Shipment.penalty_cost}.
+        #     the same unit as
+        #     {::Google::Cloud::Optimization::V1::Shipment#penalty_cost Shipment.penalty_cost}.
         # @!attribute [rw] duration_distance_matrices
         #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentModel::DurationDistanceMatrix>]
         #     Specifies duration and distance matrices used in the model. If this field
@@ -569,7 +599,8 @@ module Google
         #     Deprecated: No longer used.
         #     Set of break rules used in the model.
         #     Each vehicle specifies the `BreakRule` that applies to it via the
-        #     {::Google::Cloud::Optimization::V1::Vehicle#break_rule_indices Vehicle.break_rule_indices} field (which must be a singleton).
+        #     {::Google::Cloud::Optimization::V1::Vehicle#break_rule_indices Vehicle.break_rule_indices}
+        #     field (which must be a singleton).
         class ShipmentModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -579,7 +610,8 @@ module Google
           # @!attribute [rw] rows
           #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentModel::DurationDistanceMatrix::Row>]
           #     Specifies the rows of the duration and distance matrix. It must have as
-          #     many elements as {::Google::Cloud::Optimization::V1::ShipmentModel#duration_distance_matrix_src_tags ShipmentModel.duration_distance_matrix_src_tags}.
+          #     many elements as
+          #     {::Google::Cloud::Optimization::V1::ShipmentModel#duration_distance_matrix_src_tags ShipmentModel.duration_distance_matrix_src_tags}.
           # @!attribute [rw] vehicle_start_tag
           #   @return [::String]
           #     Tag defining to which vehicles this duration and distance matrix applies.
@@ -641,7 +673,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Deprecated: Use top level [BreakRule][] instead.
+          # Deprecated: Use top level
+          # {::Google::Cloud::Optimization::V1::ShipmentModel::BreakRule BreakRule} instead.
           # Rules to generate time breaks for a vehicle (e.g. lunch
           # breaks). A break is a contiguous period of time during which the vehicle
           # remains idle at its current position and cannot perform any visit. A break
@@ -649,10 +682,10 @@ module Google
           #
           # * during the travel between two visits (which includes the time right
           #   before or right after a visit, but not in the middle of a visit), in
-          #   which case it extends the corresponding transit time between the visits,
-          # * or before the vehicle start (the vehicle may not start in the middle of
+          #   which case it extends the corresponding transit time between the visits
+          # * before the vehicle start (the vehicle may not start in the middle of
           #   a break), in which case it does not affect the vehicle start time.
-          # * or after the vehicle end (ditto, with the vehicle end time).
+          # * after the vehicle end (ditto, with the vehicle end time).
           # @!attribute [rw] break_requests
           #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentModel::BreakRule::BreakRequest>]
           #     Sequence of breaks. See the `BreakRequest` message.
@@ -722,8 +755,8 @@ module Google
             #     See description of `FrequencyConstraint`.
             # @!attribute [rw] max_inter_break_duration
             #   @return [::Google::Protobuf::Duration]
-            #     Required. Maximum allowed span of any interval of time in the route that does not
-            #     include at least partially a break of `duration >=
+            #     Required. Maximum allowed span of any interval of time in the route
+            #     that does not include at least partially a break of `duration >=
             #     min_break_duration`. Must be positive.
             class FrequencyConstraint
               include ::Google::Protobuf::MessageExts
@@ -846,7 +879,8 @@ module Google
         # @!attribute [rw] label
         #   @return [::String]
         #     Specifies a label for this shipment. This label is reported in the response
-        #     in the `shipment_label` of the corresponding {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit}.
+        #     in the `shipment_label` of the corresponding
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit}.
         # @!attribute [rw] ignore
         #   @return [::Boolean]
         #     If true, skip this shipment, but don't apply a `penalty_cost`.
@@ -860,7 +894,9 @@ module Google
         #     `precedence_rules` that reference ignored shipments will also be ignored.
         # @!attribute [rw] demands
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-        #     Deprecated: Use [Shipment.load_demands][] instead.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands}
+        #     instead.
         class Shipment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -925,8 +961,10 @@ module Google
           # @!attribute [rw] load_demands
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Optimization::V1::Shipment::Load}]
           #     Load demands of this visit request. This is just like
-          #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands} field, except that it only applies to this
-          #     {::Google::Cloud::Optimization::V1::Shipment::VisitRequest VisitRequest} instead of the whole {::Google::Cloud::Optimization::V1::Shipment Shipment}.
+          #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands}
+          #     field, except that it only applies to this
+          #     {::Google::Cloud::Optimization::V1::Shipment::VisitRequest VisitRequest}
+          #     instead of the whole {::Google::Cloud::Optimization::V1::Shipment Shipment}.
           #     The demands listed here are added to the demands listed in
           #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands}.
           # @!attribute [rw] visit_types
@@ -939,10 +977,13 @@ module Google
           # @!attribute [rw] label
           #   @return [::String]
           #     Specifies a label for this `VisitRequest`. This label is reported in the
-          #     response as `visit_label` in the corresponding {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit}.
+          #     response as `visit_label` in the corresponding
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit}.
           # @!attribute [rw] demands
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-          #     Deprecated: Use [VisitRequest.load_demands][] instead.
+          #     Deprecated: Use
+          #     {::Google::Cloud::Optimization::V1::Shipment::VisitRequest#load_demands VisitRequest.load_demands}
+          #     instead.
           class VisitRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -959,7 +1000,8 @@ module Google
 
           # When performing a visit, a predefined amount may be added to the vehicle
           # load if it's a pickup, or subtracted if it's a delivery. This message
-          # defines such amount. See {::Google::Cloud::Optimization::V1::Shipment#load_demands load_demands}.
+          # defines such amount. See
+          # {::Google::Cloud::Optimization::V1::Shipment#load_demands load_demands}.
           # @!attribute [rw] amount
           #   @return [::Integer]
           #     The amount by which the load of the vehicle performing the corresponding
@@ -1176,13 +1218,15 @@ module Google
         #   @return [::Float]
         #     Cost per traveled hour of the vehicle route. This cost is applied only to
         #     travel time taken by the route (i.e., that reported in
-        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}), and excludes waiting time and visit time.
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}),
+        #     and excludes waiting time and visit time.
         # @!attribute [rw] cost_per_kilometer
         #   @return [::Float]
         #     Cost per kilometer of the vehicle route. This cost is applied to the
-        #     distance reported in the {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions} and does not apply
-        #     to any distance implicitly traveled from the `arrival_location` to the
-        #     `departure_location` of a single `VisitRequest`.
+        #     distance reported in the
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}
+        #     and does not apply to any distance implicitly traveled from the
+        #     `arrival_location` to the `departure_location` of a single `VisitRequest`.
         # @!attribute [rw] fixed_cost
         #   @return [::Float]
         #     Fixed cost applied if this vehicle is used to handle a shipment.
@@ -1233,7 +1277,8 @@ module Google
         # @!attribute [rw] label
         #   @return [::String]
         #     Specifies a label for this vehicle. This label is reported in the response
-        #     as the `vehicle_label` of the corresponding {::Google::Cloud::Optimization::V1::ShipmentRoute ShipmentRoute}.
+        #     as the `vehicle_label` of the corresponding
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute ShipmentRoute}.
         # @!attribute [rw] ignore
         #   @return [::Boolean]
         #     If true, `used_if_route_is_empty` must be false, and this vehicle will
@@ -1253,37 +1298,49 @@ module Google
         #   @return [::Array<::Integer>]
         #     Deprecated: No longer used.
         #     Indices in the `break_rule` field in the source
-        #     [ShipmentModel][]. They correspond to break rules enforced on the vehicle.
-        #
+        #     {::Google::Cloud::Optimization::V1::ShipmentModel ShipmentModel}. They
+        #     correspond to break rules enforced on the vehicle.
         #
         #     As of 2018/03, at most one rule index per vehicle can be specified.
         # @!attribute [rw] capacities
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-        #     Deprecated: Use [Vehicle.load_limits][] instead.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::Vehicle#load_limits Vehicle.load_limits}
+        #     instead.
         # @!attribute [rw] start_load_intervals
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantityInterval>]
-        #     Deprecated: Use [Vehicle.LoadLimit.start_load_interval][] instead.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#start_load_interval Vehicle.LoadLimit.start_load_interval}
+        #     instead.
         # @!attribute [rw] end_load_intervals
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantityInterval>]
-        #     Deprecated: Use [Vehicle.LoadLimit.end_load_interval][] instead.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#end_load_interval Vehicle.LoadLimit.end_load_interval}
+        #     instead.
         class Vehicle
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Defines a load limit applying to a vehicle, e.g. "this truck may only
-          # carry up to 3500 kg". See {::Google::Cloud::Optimization::V1::Vehicle#load_limits load_limits}.
+          # carry up to 3500 kg". See
+          # {::Google::Cloud::Optimization::V1::Vehicle#load_limits load_limits}.
           # @!attribute [rw] max_load
           #   @return [::Integer]
           #     The maximum acceptable amount of load.
           # @!attribute [rw] soft_max_load
           #   @return [::Integer]
-          #     A soft limit of the load. See {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#cost_per_unit_above_soft_max cost_per_unit_above_soft_max}.
+          #     A soft limit of the load. See
+          #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#cost_per_unit_above_soft_max cost_per_unit_above_soft_max}.
           # @!attribute [rw] cost_per_unit_above_soft_max
           #   @return [::Float]
-          #     If the load ever exceeds {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#soft_max_load soft_max_load} along this vehicle's route,
-          #     the following cost penalty applies (only once per vehicle):
-          #     (load - {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#soft_max_load soft_max_load}) * {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#cost_per_unit_above_soft_max cost_per_unit_above_soft_max}. All costs
-          #     add up and must be in the same unit as {::Google::Cloud::Optimization::V1::Shipment#penalty_cost Shipment.penalty_cost}.
+          #     If the load ever exceeds
+          #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#soft_max_load soft_max_load}
+          #     along this vehicle's route, the following cost penalty applies (only once
+          #     per vehicle): (load -
+          #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#soft_max_load soft_max_load})
+          #     * {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#cost_per_unit_above_soft_max cost_per_unit_above_soft_max}. All costs
+          #     add up and must be in the same unit as
+          #     {::Google::Cloud::Optimization::V1::Shipment#penalty_cost Shipment.penalty_cost}.
           # @!attribute [rw] start_load_interval
           #   @return [::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval]
           #     The acceptable load interval of the vehicle at the start of the route.
@@ -1298,12 +1355,18 @@ module Google
             # @!attribute [rw] min
             #   @return [::Integer]
             #     A minimum acceptable load. Must be ≥ 0.
-            #     If they're both specified, {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#min min} must be ≤ {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#max max}.
+            #     If they're both specified,
+            #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#min min} must
+            #     be ≤
+            #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#max max}.
             # @!attribute [rw] max
             #   @return [::Integer]
             #     A maximum acceptable load. Must be ≥ 0. If unspecified, the maximum
             #     load is unrestricted by this message.
-            #     If they're both specified, {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#min min} must be ≤ {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#max max}.
+            #     If they're both specified,
+            #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#min min} must
+            #     be ≤
+            #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval#max max}.
             class Interval
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1427,8 +1490,11 @@ module Google
         # event to happen at or before `soft_end_time` by incurring a cost proportional
         # to how long after `soft_end_time` the event occurs. `start_time`, `end_time`,
         # `soft_start_time` and `soft_end_time` should be within the global time limits
-        # (see {::Google::Cloud::Optimization::V1::ShipmentModel#global_start_time ShipmentModel.global_start_time} and
-        # {::Google::Cloud::Optimization::V1::ShipmentModel#global_end_time ShipmentModel.global_end_time}) and should respect:
+        # (see
+        # {::Google::Cloud::Optimization::V1::ShipmentModel#global_start_time ShipmentModel.global_start_time}
+        # and
+        # {::Google::Cloud::Optimization::V1::ShipmentModel#global_end_time ShipmentModel.global_end_time})
+        # and should respect:
         # ```
         #   0 <= `start_time` <= `soft_start_time` <= `end_time` and
         #   0 <= `start_time` <= `soft_end_time` <= `end_time`.
@@ -1478,7 +1544,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Deprecated: Use [Shipment.Load][], [Vehicle.LoadLimit][] and [ShipmentRoute.VehicleLoad][] instead.
+        # Deprecated: Use
+        # {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval Vehicle.LoadLimit.Interval}
+        # instead.
         # @!attribute [rw] type
         #   @return [::String]
         # @!attribute [rw] value
@@ -1488,7 +1556,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Deprecated: Use [Vehicle.LoadLimit.Interval][] instead.
+        # Deprecated: Use
+        # {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval Vehicle.LoadLimit.Interval}
+        # instead.
         # @!attribute [rw] type
         #   @return [::String]
         # @!attribute [rw] min_value
@@ -1519,8 +1589,8 @@ module Google
         #     nonnegative.
         # @!attribute [rw] cost_per_kilometer_above_soft_max
         #   @return [::Float]
-        #     Cost per kilometer incurred if `soft_max_meters` limit is violated. The
-        #     additional cost is 0 if the distance is under the limit, otherwise the
+        #     Cost per kilometer incurred if distance is above `soft_max_meters` limit.
+        #     The additional cost is 0 if the distance is under the limit, otherwise the
         #     formula used to compute the cost is the following:
         #     ```
         #       (distance_meters - soft_max_meters) / 1000.0 *
@@ -1553,8 +1623,9 @@ module Google
         #   @return [::String]
         #     A destination visit or vehicle end matches iff its
         #     {::Google::Cloud::Optimization::V1::Shipment::VisitRequest#tags VisitRequest.tags}
-        #     or {::Google::Cloud::Optimization::V1::Vehicle#end_tags Vehicle.end_tags} either contains `dst_tag` or does not contain
-        #     `excluded_dst_tag` (depending on which of these two fields is non-empty).
+        #     or {::Google::Cloud::Optimization::V1::Vehicle#end_tags Vehicle.end_tags} either
+        #     contains `dst_tag` or does not contain `excluded_dst_tag` (depending on
+        #     which of these two fields is non-empty).
         # @!attribute [rw] excluded_dst_tag
         #   @return [::String]
         #     See `dst_tag`. Exactly one of `dst_tag` and `excluded_dst_tag` must be
@@ -1568,7 +1639,8 @@ module Google
         #   @return [::Float]
         #     Specifies a cost per kilometer applied to the distance traveled while
         #     performing this transition. It adds up to any
-        #     {::Google::Cloud::Optimization::V1::Vehicle#cost_per_kilometer Vehicle.cost_per_kilometer} specified on vehicles.
+        #     {::Google::Cloud::Optimization::V1::Vehicle#cost_per_kilometer Vehicle.cost_per_kilometer}
+        #     specified on vehicles.
         # @!attribute [rw] distance_limit
         #   @return [::Google::Cloud::Optimization::V1::DistanceLimit]
         #     Specifies a limit on the distance traveled while performing this
@@ -1702,8 +1774,8 @@ module Google
           #     See description of `FrequencyConstraint`.
           # @!attribute [rw] max_inter_break_duration
           #   @return [::Google::Protobuf::Duration]
-          #     Required. Maximum allowed span of any interval of time in the route that does not
-          #     include at least partially a break of `duration >=
+          #     Required. Maximum allowed span of any interval of time in the route that
+          #     does not include at least partially a break of `duration >=
           #     min_break_duration`. Must be positive.
           class FrequencyConstraint
             include ::Google::Protobuf::MessageExts
@@ -1827,8 +1899,10 @@ module Google
         #     between visits, before the first visit, or after the last visit, while
         #     still satisfying the visit and vehicle time windows. For example,
         #
-        #       ```start_time(previous_visit) + duration(previous_visit) +
-        #       travel_duration(previous_visit, next_visit) > start_time(next_visit)```
+        #     ```
+        #       start_time(previous_visit) + duration(previous_visit) +
+        #       travel_duration(previous_visit, next_visit) > start_time(next_visit)
+        #     ```
         #
         #     Arrival at next_visit will likely happen later than its current
         #     time window due the increased estimate of travel time
@@ -1849,8 +1923,12 @@ module Google
         # @!attribute [rw] metrics
         #   @return [::Google::Cloud::Optimization::V1::AggregatedMetrics]
         #     Duration, distance and load metrics for this route. The fields of
-        #     {::Google::Cloud::Optimization::V1::AggregatedMetrics AggregatedMetrics} are summed over all {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions} or
-        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#visits ShipmentRoute.visits}, depending on the context.
+        #     {::Google::Cloud::Optimization::V1::AggregatedMetrics AggregatedMetrics} are
+        #     summed over all
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}
+        #     or
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#visits ShipmentRoute.visits},
+        #     depending on the context.
         # @!attribute [rw] route_costs
         #   @return [::Google::Protobuf::Map{::String => ::Float}]
         #     Cost of the route, broken down by cost-related request fields.
@@ -1866,36 +1944,42 @@ module Google
         #     Total cost of the route. The sum of all costs in the cost map.
         # @!attribute [rw] end_loads
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-        #     Deprecated: Use [ShipmentRoute.Transition.loads][] instead.
-        #     Vehicle loads upon arrival at its end location, for each
-        #     type specified in {::Google::Cloud::Optimization::V1::Vehicle#capacities Vehicle.capacities},
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}
+        #     instead. Vehicle loads upon arrival at its end location, for each type
+        #     specified in
+        #     {::Google::Cloud::Optimization::V1::Vehicle#capacities Vehicle.capacities},
         #     `start_load_intervals`, `end_load_intervals` or demands. Exception: we omit
         #     loads for quantity types unconstrained by intervals and that don't have any
         #     non-zero demand on the route.
         # @!attribute [rw] travel_steps
         #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentRoute::TravelStep>]
-        #     Deprecated: Use [ShipmentRoute.Transition][] instead.
-        #     Ordered list of travel steps for the route.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}
+        #     instead. Ordered list of travel steps for the route.
         # @!attribute [rw] vehicle_detour
         #   @return [::Google::Protobuf::Duration]
         #     Deprecated: No longer used.
         #     This field will only be populated at the
-        #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit} level.
-        #     Extra detour time due to the shipments visited on the route.
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit}
+        #     level.
+        #
+        #     This field is the extra detour time due to the shipments visited on the
+        #     route.
         #
         #     It is equal to `vehicle_end_time` - `vehicle_start_time` - travel duration
         #     from the vehicle's start_location to its `end_location`.
         # @!attribute [rw] delay_before_vehicle_end
         #   @return [::Google::Cloud::Optimization::V1::ShipmentRoute::Delay]
-        #     Deprecated: Use [ShipmentRoute.Transition.delay_duration][] instead.
-        #     Delay occurring before the vehicle end. See
+        #     Deprecated: Delay occurring before the vehicle end. See
         #     {::Google::Cloud::Optimization::V1::TransitionAttributes#delay TransitionAttributes.delay}.
         class ShipmentRoute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Deprecated: Use [ShipmentRoute.Transition.delay_duration][] instead.
-          # Time interval spent on the route resulting from a
+          # Deprecated: Use
+          # {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#delay_duration ShipmentRoute.Transition.delay_duration}
+          # instead. Time interval spent on the route resulting from a
           # {::Google::Cloud::Optimization::V1::TransitionAttributes#delay TransitionAttributes.delay}.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -1912,7 +1996,8 @@ module Google
           # delivery of a `Shipment`.
           # @!attribute [rw] shipment_index
           #   @return [::Integer]
-          #     Index of the `shipments` field in the source {::Google::Cloud::Optimization::V1::ShipmentModel ShipmentModel}.
+          #     Index of the `shipments` field in the source
+          #     {::Google::Cloud::Optimization::V1::ShipmentModel ShipmentModel}.
           # @!attribute [rw] is_pickup
           #   @return [::Boolean]
           #     If true the visit corresponds to a pickup of a `Shipment`. Otherwise, it
@@ -1961,19 +2046,25 @@ module Google
           #     if specified in the `VisitRequest`.
           # @!attribute [rw] arrival_loads
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-          #     Deprecated: Use [ShipmentRoute.Transition.loads][] instead.
-          #     Vehicle loads upon arrival at the visit location, for each
-          #     type specified in {::Google::Cloud::Optimization::V1::Vehicle#capacities Vehicle.capacities}, `start_load_intervals`,
-          #     `end_load_intervals` or `demands`.
+          #     Deprecated: Use
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}
+          #     instead. Vehicle loads upon arrival at the visit location, for each type
+          #     specified in
+          #     {::Google::Cloud::Optimization::V1::Vehicle#capacities Vehicle.capacities},
+          #     `start_load_intervals`, `end_load_intervals` or `demands`.
           #
           #     Exception: we omit loads for quantity types unconstrained by intervals
           #     and that don't have any non-zero demand on the route.
           # @!attribute [rw] delay_before_start
           #   @return [::Google::Cloud::Optimization::V1::ShipmentRoute::Delay]
-          #     Deprecated: Use [ShipmentRoute.Transition.delay_duration][] instead.
+          #     Deprecated: Use
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#delay_duration ShipmentRoute.Transition.delay_duration}
+          #     instead. Delay occurring before the visit starts.
           # @!attribute [rw] demands
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-          #     Deprecated: Use [Visit.load_demands][] instead.
+          #     Deprecated: Use
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#load_demands Visit.load_demands}
+          #     instead.
           class Visit
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2046,8 +2137,11 @@ module Google
           # @!attribute [rw] vehicle_loads
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Optimization::V1::ShipmentRoute::VehicleLoad}]
           #     Vehicle loads during this transition, for each type that either appears
-          #     in this vehicle's {::Google::Cloud::Optimization::V1::Vehicle#load_limits Vehicle.load_limits}, or that have non-zero
-          #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands} on some shipment performed on this route.
+          #     in this vehicle's
+          #     {::Google::Cloud::Optimization::V1::Vehicle#load_limits Vehicle.load_limits},
+          #     or that have non-zero
+          #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands}
+          #     on some shipment performed on this route.
           #
           #     The loads during the first transition are the starting loads of the
           #     vehicle route. Then, after each visit, the visit's `load_demands` are
@@ -2055,7 +2149,9 @@ module Google
           #     on whether the visit was a pickup or a delivery.
           # @!attribute [rw] loads
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
-          #     Deprecated: Use [Transition.vehicle_loads][] instead.
+          #     Deprecated: Use
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}
+          #     instead.
           class Transition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2071,11 +2167,13 @@ module Google
           end
 
           # Reports the actual load of the vehicle at some point along the route,
-          # for a given type (see {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}).
+          # for a given type (see
+          # {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}).
           # @!attribute [rw] amount
           #   @return [::Integer]
           #     The amount of load on the vehicle, for the given type. The unit of load
-          #     is usually indicated by the type. See {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}.
+          #     is usually indicated by the type. See
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}.
           class VehicleLoad
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2105,10 +2203,11 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Deprecated: Use [ShipmentRoute.transitions][] instead.
-          # Travel between each visit, along the route: from the
-          # vehicle's `start_location` to the first visit's `arrival_location`, then
-          # from the first visit's `departure_location` to the second visit's
+          # Deprecated: Use
+          # {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition ShipmentRoute.Transition}
+          # instead. Travel between each visit along the route: from the vehicle's
+          # `start_location` to the first visit's `arrival_location`, then from the
+          # first visit's `departure_location` to the second visit's
           # `arrival_location`, and so on until the vehicle's `end_location`. This
           # accounts only for the actual travel between visits, not counting the
           # waiting time, the time spent performing a visit, nor the distance covered
@@ -2163,8 +2262,9 @@ module Google
         #     `ShipmentModel`.
         # @!attribute [rw] label
         #   @return [::String]
-        #     Copy of the corresponding {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label}, if specified in the
-        #     `Shipment`.
+        #     Copy of the corresponding
+        #     {::Google::Cloud::Optimization::V1::Shipment#label Shipment.label}, if specified
+        #     in the `Shipment`.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::Optimization::V1::SkippedShipment::Reason>]
         #     A list of reasons that explain why the shipment was skipped. See comment
@@ -2262,7 +2362,9 @@ module Google
           end
         end
 
-        # Aggregated metrics for {::Google::Cloud::Optimization::V1::ShipmentRoute ShipmentRoute} (resp. for {::Google::Cloud::Optimization::V1::OptimizeToursResponse OptimizeToursResponse}
+        # Aggregated metrics for
+        # {::Google::Cloud::Optimization::V1::ShipmentRoute ShipmentRoute} (resp. for
+        # {::Google::Cloud::Optimization::V1::OptimizeToursResponse OptimizeToursResponse}
         # over all {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition Transition}
         # and/or {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit Visit} (resp. over
         # all {::Google::Cloud::Optimization::V1::ShipmentRoute ShipmentRoute}) elements.
@@ -2288,7 +2390,9 @@ module Google
         # @!attribute [rw] total_duration
         #   @return [::Google::Protobuf::Duration]
         #     The total duration should be equal to the sum of all durations above.
-        #     For routes, it also corresponds to {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_end_time ShipmentRoute.vehicle_end_time} -
+        #     For routes, it also corresponds to
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_end_time ShipmentRoute.vehicle_end_time}
+        #     -
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_start_time ShipmentRoute.vehicle_start_time}.
         # @!attribute [rw] travel_distance_meters
         #   @return [::Float]
@@ -2303,10 +2407,18 @@ module Google
         #     {::Google::Cloud::Optimization::V1::AggregatedMetrics#max_loads ShipmentRoute.metrics.max_loads}.
         # @!attribute [rw] costs
         #   @return [::Google::Protobuf::Map{::String => ::Float}]
-        #     Deprecated: Use [ShipmentRoute.route_costs][] and [OptimizeToursResponse.Metrics.costs][] instead.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#route_costs ShipmentRoute.route_costs}
+        #     and
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics#costs OptimizeToursResponse.Metrics.costs}
+        #     instead.
         # @!attribute [rw] total_cost
         #   @return [::Float]
-        #     Deprecated: Use [ShipmentRoute.route_total_cost][] and [OptimizeToursResponse.Metrics.total_cost][] instead.
+        #     Deprecated: Use
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#route_total_cost ShipmentRoute.route_total_cost}
+        #     and
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics#total_cost OptimizeToursResponse.Metrics.total_cost}
+        #     instead.
         class AggregatedMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2368,8 +2480,9 @@ module Google
           #     `vehicle_indices`. A vehicle index can only be listed once, even within
           #     several `constraint_relaxations`.
           #
-          #     A vehicle index is mapped the same as {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index}, if
-          #     `interpret_injected_solutions_using_labels` is true (see `fields`
+          #     A vehicle index is mapped the same as
+          #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_index ShipmentRoute.vehicle_index},
+          #     if `interpret_injected_solutions_using_labels` is true (see `fields`
           #     comment).
           class ConstraintRelaxation
             include ::Google::Protobuf::MessageExts
@@ -2414,7 +2527,7 @@ module Google
             #   @return [::Google::Cloud::Optimization::V1::InjectedSolutionConstraint::ConstraintRelaxation::Relaxation::Level]
             #     The constraint relaxation level that applies when the conditions
             #     at or after `threshold_time` AND at least `threshold_visit_count` are
-            #     satified.
+            #     satisfied.
             # @!attribute [rw] threshold_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at or after which the relaxation `level` may be applied.
@@ -2432,7 +2545,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # Expresses the different constraint relaxation levels, which are
-              # applied for a visit and those that follow when it satifies the
+              # applied for a visit and those that follow when it satisfies the
               # threshold conditions.
               #
               # The enumeration below is in order of increasing relaxation.
@@ -2440,7 +2553,7 @@ module Google
                 # Implicit default relaxation level: no constraints are relaxed,
                 # i.e., all visits are fully constrained.
                 #
-                # This value must not be explicly used in `level`.
+                # This value must not be explicitly used in `level`.
                 LEVEL_UNSPECIFIED = 0
 
                 # Visit start times and vehicle start/end times will be relaxed, but
@@ -2510,6 +2623,11 @@ module Google
         #         * INJECTED_SOLUTION_MISSING_LABEL = 2000;
         #         * INJECTED_SOLUTION_DUPLICATE_LABEL = 2001;
         #         * INJECTED_SOLUTION_AMBIGUOUS_INDEX = 2002;
+        #         * INJECTED_SOLUTION_INFEASIBLE_AFTER_GETTING_TRAVEL_TIMES = 2003;
+        #         * INJECTED_SOLUTION_TRANSITION_INCONSISTENT_WITH_ACTUAL_TRAVEL = 2004;
+        #         * INJECTED_SOLUTION_CONCURRENT_SOLUTION_TYPES = 2005;
+        #         * INJECTED_SOLUTION_MORE_THAN_ONE_PER_TYPE = 2006;
+        #         * INJECTED_SOLUTION_REFRESH_WITHOUT_POPULATE = 2008;
         #     * SHIPMENT_MODEL_ERROR = 22;
         #         * SHIPMENT_MODEL_TOO_LARGE = 2200;
         #         * SHIPMENT_MODEL_TOO_MANY_CAPACITY_TYPES = 2201;
@@ -2517,6 +2635,8 @@ module Google
         #         * SHIPMENT_MODEL_GLOBAL_END_TIME_TOO_LARGE_OR_NAN = 2203;
         #         * SHIPMENT_MODEL_GLOBAL_START_TIME_AFTER_GLOBAL_END_TIME = 2204;
         #         * SHIPMENT_MODEL_GLOBAL_DURATION_TOO_LONG = 2205;
+        #         * SHIPMENT_MODEL_MAX_ACTIVE_VEHICLES_NOT_POSITIVE = 2206;
+        #         * SHIPMENT_MODEL_DURATION_MATRIX_TOO_LARGE = 2207;
         #     * INDEX_ERROR = 24;
         #     * TAG_ERROR = 26;
         #     * TIME_WINDOW_ERROR = 28;
@@ -2598,9 +2718,12 @@ module Google
         #         * DURATION_LIMIT_QUADRATIC_SOFT_MAX_DURATION_EXCEEDS_GLOBAL_DURATION
         #           = 3815;
         #     * SHIPMENT_ERROR = 40;
+        #         * SHIPMENT_PD_LIMIT_WITHOUT_PICKUP_AND_DELIVERY = 4014;
         #         * SHIPMENT_PD_ABSOLUTE_DETOUR_LIMIT_DURATION_NEGATIVE_OR_NAN = 4000;
         #         * SHIPMENT_PD_ABSOLUTE_DETOUR_LIMIT_DURATION_EXCEEDS_GLOBAL_DURATION
         #           = 4001;
+        #         * SHIPMENT_PD_RELATIVE_DETOUR_LIMIT_INVALID = 4015;
+        #         * SHIPMENT_PD_DETOUR_LIMIT_AND_EXTRA_VISIT_DURATION = 4016;
         #         * SHIPMENT_PD_TIME_LIMIT_DURATION_NEGATIVE_OR_NAN = 4002;
         #         * SHIPMENT_PD_TIME_LIMIT_DURATION_EXCEEDS_GLOBAL_DURATION = 4003;
         #         * SHIPMENT_EMPTY_SHIPMENT_TYPE = 4004;
@@ -2613,7 +2736,6 @@ module Google
         #         * SHIPMENT_INVALID_COST_FOR_VEHICLE = 4011;
         #         * SHIPMENT_COST_FOR_VEHICLE_INDEX_OUT_OF_BOUNDS = 4012;
         #         * SHIPMENT_DUPLICATE_COST_FOR_VEHICLE_INDEX = 4013;
-        #         * SHIPMENT_DETOUR_WITHOUT_PICKUP_AND_DELIVERY = 4014;
         #     * VEHICLE_ERROR = 42;
         #         * VEHICLE_EMPTY_REQUIRED_OPERATOR_TYPE = 4200;
         #         * VEHICLE_DUPLICATE_REQUIRED_OPERATOR_TYPE = 4201;
@@ -2637,6 +2759,9 @@ module Google
         #         * VEHICLE_INVALID_COST_PER_TRAVELED_HOUR = 4219;
         #         * VEHICLE_INVALID_FIXED_COST = 4220;
         #         * VEHICLE_INVALID_TRAVEL_DURATION_MULTIPLE = 4221;
+        #         * VEHICLE_TRAVEL_DURATION_MULTIPLE_WITH_SHIPMENT_PD_DETOUR_LIMITS
+        #           = 4223;
+        #         * VEHICLE_MATRIX_INDEX_WITH_SHIPMENT_PD_DETOUR_LIMITS = 4224;
         #         * VEHICLE_MINIMUM_DURATION_LONGER_THAN_DURATION_LIMIT = 4222;
         #     * VISIT_REQUEST_ERROR = 44;
         #         * VISIT_REQUEST_EMPTY_TAG = 4400;
@@ -2689,9 +2814,6 @@ module Google
         #     * DURATION_SECONDS_MATRIX_ERROR = 56;
         #         * DURATION_SECONDS_MATRIX_DURATION_NEGATIVE_OR_NAN = 5600;
         #         * DURATION_SECONDS_MATRIX_DURATION_EXCEEDS_GLOBAL_DURATION = 5601;
-        #     * GRAPH_ARC_ERROR = 58;
-        #         * GRAPH_ARC_DURATION_NEGATIVE_OR_NAN = 5800;
-        #         * GRAPH_ARC_DURATION_EXCEEDS_GLOBAL_DURATION = 5801;
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The error display name.

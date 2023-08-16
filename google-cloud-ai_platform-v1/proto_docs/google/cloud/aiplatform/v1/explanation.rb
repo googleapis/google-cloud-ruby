@@ -21,8 +21,10 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Explanation of a prediction (provided in {::Google::Cloud::AIPlatform::V1::PredictResponse#predictions PredictResponse.predictions})
-        # produced by the Model on a given {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances instance}.
+        # Explanation of a prediction (provided in
+        # {::Google::Cloud::AIPlatform::V1::PredictResponse#predictions PredictResponse.predictions})
+        # produced by the Model on a given
+        # {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances instance}.
         # @!attribute [r] attributions
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Attribution>]
         #     Output only. Feature attributions grouped by predicted outputs.
@@ -31,14 +33,19 @@ module Google
         #     predict only one score, there is only one attibution that explains the
         #     predicted output. For Models that predict multiple outputs, such as
         #     multiclass Models that predict multiple classes, each element explains one
-        #     specific item. {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index} can be used to identify which
-        #     output this attribution is explaining.
+        #     specific item.
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index}
+        #     can be used to identify which output this attribution is explaining.
         #
-        #     If users set {::Google::Cloud::AIPlatform::V1::ExplanationParameters#top_k ExplanationParameters.top_k}, the attributions are sorted
-        #     by [instance_output_value][Attributions.instance_output_value] in
-        #     descending order. If {::Google::Cloud::AIPlatform::V1::ExplanationParameters#output_indices ExplanationParameters.output_indices} is specified,
-        #     the attributions are stored by {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index} in the same
-        #     order as they appear in the output_indices.
+        #     If users set
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#top_k ExplanationParameters.top_k},
+        #     the attributions are sorted by
+        #     [instance_output_value][Attributions.instance_output_value] in descending
+        #     order. If
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#output_indices ExplanationParameters.output_indices}
+        #     is specified, the attributions are stored by
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index}
+        #     in the same order as they appear in the output_indices.
         # @!attribute [r] neighbors
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Neighbor>]
         #     Output only. List of the nearest neighbors for example-based explanations.
@@ -53,24 +60,28 @@ module Google
         # Aggregated explanation metrics for a Model over a set of instances.
         # @!attribute [r] mean_attributions
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Attribution>]
-        #     Output only. Aggregated attributions explaining the Model's prediction outputs over the
-        #     set of instances. The attributions are grouped by outputs.
+        #     Output only. Aggregated attributions explaining the Model's prediction
+        #     outputs over the set of instances. The attributions are grouped by outputs.
         #
         #     For Models that predict only one output, such as regression Models that
         #     predict only one score, there is only one attibution that explains the
         #     predicted output. For Models that predict multiple outputs, such as
         #     multiclass Models that predict multiple classes, each element explains one
-        #     specific item. {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index} can be used to identify which
-        #     output this attribution is explaining.
+        #     specific item.
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index}
+        #     can be used to identify which output this attribution is explaining.
         #
-        #     The {::Google::Cloud::AIPlatform::V1::Attribution#baseline_output_value baselineOutputValue},
-        #     {::Google::Cloud::AIPlatform::V1::Attribution#instance_output_value instanceOutputValue} and
-        #     {::Google::Cloud::AIPlatform::V1::Attribution#feature_attributions featureAttributions} fields are
-        #     averaged over the test data.
+        #     The
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#baseline_output_value baselineOutputValue},
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#instance_output_value instanceOutputValue}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#feature_attributions featureAttributions}
+        #     fields are averaged over the test data.
         #
         #     NOTE: Currently AutoML tabular classification Models produce only one
         #     attribution, which averages attributions over all the classes it predicts.
-        #     {::Google::Cloud::AIPlatform::V1::Attribution#approximation_error Attribution.approximation_error} is not populated.
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#approximation_error Attribution.approximation_error}
+        #     is not populated.
         class ModelExplanation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -79,32 +90,39 @@ module Google
         # Attribution that explains a particular prediction output.
         # @!attribute [r] baseline_output_value
         #   @return [::Float]
-        #     Output only. Model predicted output if the input instance is constructed from the
-        #     baselines of all the features defined in {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#inputs ExplanationMetadata.inputs}.
+        #     Output only. Model predicted output if the input instance is constructed
+        #     from the baselines of all the features defined in
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#inputs ExplanationMetadata.inputs}.
         #     The field name of the output is determined by the key in
         #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#outputs ExplanationMetadata.outputs}.
         #
         #     If the Model's predicted output has multiple dimensions (rank > 1), this is
-        #     the value in the output located by {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}.
+        #     the value in the output located by
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}.
         #
         #     If there are multiple baselines, their output values are averaged.
         # @!attribute [r] instance_output_value
         #   @return [::Float]
         #     Output only. Model predicted output on the corresponding [explanation
         #     instance][ExplainRequest.instances]. The field name of the output is
-        #     determined by the key in {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#outputs ExplanationMetadata.outputs}.
+        #     determined by the key in
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#outputs ExplanationMetadata.outputs}.
         #
         #     If the Model predicted output has multiple dimensions, this is the value in
-        #     the output located by {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}.
+        #     the output located by
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}.
         # @!attribute [r] feature_attributions
         #   @return [::Google::Protobuf::Value]
-        #     Output only. Attributions of each explained feature. Features are extracted from
-        #     the {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances prediction instances} according to
-        #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#inputs explanation metadata for inputs}.
+        #     Output only. Attributions of each explained feature. Features are extracted
+        #     from the [prediction
+        #     instances][google.cloud.aiplatform.v1.ExplainRequest.instances] according
+        #     to [explanation metadata for
+        #     inputs][google.cloud.aiplatform.v1.ExplanationMetadata.inputs].
         #
         #     The value is a struct, whose keys are the name of the feature. The values
-        #     are how much the feature in the {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances instance}
-        #     contributed to the predicted result.
+        #     are how much the feature in the
+        #     {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances instance} contributed
+        #     to the predicted result.
         #
         #     The format of the value is determined by the feature's input format:
         #
@@ -120,10 +138,13 @@ module Google
         #         struct. The formats of the values in the attribution struct are
         #         determined by the formats of the values in the feature struct.
         #
-        #     The {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#feature_attributions_schema_uri ExplanationMetadata.feature_attributions_schema_uri} field,
-        #     pointed to by the {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} field of the
-        #     {::Google::Cloud::AIPlatform::V1::Endpoint#deployed_models Endpoint.deployed_models} object, points to the schema file that
-        #     describes the features and their attribution values (if it is populated).
+        #     The
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#feature_attributions_schema_uri ExplanationMetadata.feature_attributions_schema_uri}
+        #     field, pointed to by the
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} field of the
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#deployed_models Endpoint.deployed_models}
+        #     object, points to the schema file that describes the features and their
+        #     attribution values (if it is populated).
         # @!attribute [r] output_index
         #   @return [::Array<::Integer>]
         #     Output only. The index that locates the explained prediction output.
@@ -135,8 +156,9 @@ module Google
         #     of the output vector. Indices start from 0.
         # @!attribute [r] output_display_name
         #   @return [::String]
-        #     Output only. The display name of the output identified by {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}. For example,
-        #     the predicted class name by a multi-classification Model.
+        #     Output only. The display name of the output identified by
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}. For
+        #     example, the predicted class name by a multi-classification Model.
         #
         #     This field is only populated iff the Model predicts display names as a
         #     separate field along with the explained output. The predicted display name
@@ -144,20 +166,26 @@ module Google
         #     output_index.
         # @!attribute [r] approximation_error
         #   @return [::Float]
-        #     Output only. Error of {::Google::Cloud::AIPlatform::V1::Attribution#feature_attributions feature_attributions} caused by approximation used in the
-        #     explanation method. Lower value means more precise attributions.
+        #     Output only. Error of
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#feature_attributions feature_attributions}
+        #     caused by approximation used in the explanation method. Lower value means
+        #     more precise attributions.
         #
         #     * For Sampled Shapley
         #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#sampled_shapley_attribution attribution},
-        #     increasing {::Google::Cloud::AIPlatform::V1::SampledShapleyAttribution#path_count path_count} might reduce
-        #     the error.
+        #     increasing
+        #     {::Google::Cloud::AIPlatform::V1::SampledShapleyAttribution#path_count path_count}
+        #     might reduce the error.
         #     * For Integrated Gradients
         #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#integrated_gradients_attribution attribution},
-        #     increasing {::Google::Cloud::AIPlatform::V1::IntegratedGradientsAttribution#step_count step_count} might
-        #     reduce the error.
-        #     * For {::Google::Cloud::AIPlatform::V1::ExplanationParameters#xrai_attribution XRAI attribution},
         #     increasing
-        #     {::Google::Cloud::AIPlatform::V1::XraiAttribution#step_count step_count} might reduce the error.
+        #     {::Google::Cloud::AIPlatform::V1::IntegratedGradientsAttribution#step_count step_count}
+        #     might reduce the error.
+        #     * For [XRAI
+        #     attribution][google.cloud.aiplatform.v1.ExplanationParameters.xrai_attribution],
+        #     increasing
+        #     {::Google::Cloud::AIPlatform::V1::XraiAttribution#step_count step_count} might
+        #     reduce the error.
         #
         #     See [this introduction](/vertex-ai/docs/explainable-ai/overview)
         #     for more information.
@@ -217,6 +245,10 @@ module Google
         #     house or an animal. If the images are taken in artificial environments,
         #     like a lab or manufacturing line, or from diagnostic equipment, like
         #     x-rays or quality-control cameras, use Integrated Gradients instead.
+        # @!attribute [rw] examples
+        #   @return [::Google::Cloud::AIPlatform::V1::Examples]
+        #     Example-based explanations that returns the nearest neighbors from the
+        #     provided dataset.
         # @!attribute [rw] top_k
         #   @return [::Integer]
         #     If populated, returns attributions for top K indices of outputs
@@ -226,13 +258,14 @@ module Google
         # @!attribute [rw] output_indices
         #   @return [::Google::Protobuf::ListValue]
         #     If populated, only returns attributions that have
-        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index} contained in output_indices. It
-        #     must be an ndarray of integers, with the same shape of the output it's
-        #     explaining.
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index output_index}
+        #     contained in output_indices. It must be an ndarray of integers, with the
+        #     same shape of the output it's explaining.
         #
-        #     If not populated, returns attributions for {::Google::Cloud::AIPlatform::V1::ExplanationParameters#top_k top_k} indices of outputs.
-        #     If neither top_k nor output_indices is populated, returns the argmax
-        #     index of the outputs.
+        #     If not populated, returns attributions for
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#top_k top_k} indices of
+        #     outputs. If neither top_k nor output_indices is populated, returns the
+        #     argmax index of the outputs.
         #
         #     Only applicable to Models that predict multiple outputs (e,g, multi-class
         #     Models that predict multiple classes).
@@ -246,8 +279,8 @@ module Google
         # approximate the value rather than considering all subsets of features.
         # @!attribute [rw] path_count
         #   @return [::Integer]
-        #     Required. The number of feature permutations to consider when approximating the
-        #     Shapley values.
+        #     Required. The number of feature permutations to consider when approximating
+        #     the Shapley values.
         #
         #     Valid range of its value is [1, 50], inclusively.
         class SampledShapleyAttribution
@@ -339,16 +372,18 @@ module Google
         #     paper: https://arxiv.org/pdf/1706.03825.pdf. Defaults to 0.1.
         #
         #     If the distribution is different per feature, set
-        #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#feature_noise_sigma feature_noise_sigma} instead
-        #     for each feature.
+        #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#feature_noise_sigma feature_noise_sigma}
+        #     instead for each feature.
         # @!attribute [rw] feature_noise_sigma
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureNoiseSigma]
-        #     This is similar to {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma}, but
-        #     provides additional flexibility. A separate noise sigma can be provided
-        #     for each feature, which is useful if their distributions are different.
-        #     No noise is added to features that are not set. If this field is unset,
-        #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma} will be used for all
-        #     features.
+        #     This is similar to
+        #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma},
+        #     but provides additional flexibility. A separate noise sigma can be
+        #     provided for each feature, which is useful if their distributions are
+        #     different. No noise is added to features that are not set. If this field
+        #     is unset,
+        #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma}
+        #     will be used for all features.
         # @!attribute [rw] noisy_sample_count
         #   @return [::Integer]
         #     The number of gradient samples to use for
@@ -375,13 +410,14 @@ module Google
           #   @return [::String]
           #     The name of the input feature for which noise sigma is provided. The
           #     features are defined in
-          #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#inputs explanation metadata inputs}.
+          #     [explanation metadata
+          #     inputs][google.cloud.aiplatform.v1.ExplanationMetadata.inputs].
           # @!attribute [rw] sigma
           #   @return [::Float]
           #     This represents the standard deviation of the Gaussian kernel that will
           #     be used to add noise to the feature prior to computing gradients. Similar
-          #     to {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma} but represents the
-          #     noise added to the current feature. Defaults to 0.1.
+          #     to {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma}
+          #     but represents the noise added to the current feature. Defaults to 0.1.
           class NoiseSigmaForFeature
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -405,12 +441,98 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} entries that can be overridden at
-        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain online explanation} time.
+        # Example-based explainability that returns the nearest neighbors from the
+        # provided dataset.
+        # @!attribute [rw] example_gcs_source
+        #   @return [::Google::Cloud::AIPlatform::V1::Examples::ExampleGcsSource]
+        #     The Cloud Storage input instances.
+        # @!attribute [rw] nearest_neighbor_search_config
+        #   @return [::Google::Protobuf::Value]
+        #     The full configuration for the generated index, the semantics are the
+        #     same as {::Google::Cloud::AIPlatform::V1::Index#metadata metadata} and should
+        #     match
+        #     [NearestNeighborSearchConfig](https://cloud.google.com/vertex-ai/docs/explainable-ai/configuring-explanations-example-based#nearest-neighbor-search-config).
+        # @!attribute [rw] presets
+        #   @return [::Google::Cloud::AIPlatform::V1::Presets]
+        #     Simplified preset configuration, which automatically sets configuration
+        #     values based on the desired query speed-precision trade-off and modality.
+        # @!attribute [rw] neighbor_count
+        #   @return [::Integer]
+        #     The number of neighbors to return when querying for examples.
+        class Examples
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Cloud Storage input instances.
+          # @!attribute [rw] data_format
+          #   @return [::Google::Cloud::AIPlatform::V1::Examples::ExampleGcsSource::DataFormat]
+          #     The format in which instances are given, if not specified, assume it's
+          #     JSONL format. Currently only JSONL format is supported.
+          # @!attribute [rw] gcs_source
+          #   @return [::Google::Cloud::AIPlatform::V1::GcsSource]
+          #     The Cloud Storage location for the input instances.
+          class ExampleGcsSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The format of the input example instances.
+            module DataFormat
+              # Format unspecified, used when unset.
+              DATA_FORMAT_UNSPECIFIED = 0
+
+              # Examples are stored in JSONL files.
+              JSONL = 1
+            end
+          end
+        end
+
+        # Preset configuration for example-based explanations
+        # @!attribute [rw] query
+        #   @return [::Google::Cloud::AIPlatform::V1::Presets::Query]
+        #     Preset option controlling parameters for speed-precision trade-off when
+        #     querying for examples. If omitted, defaults to `PRECISE`.
+        # @!attribute [rw] modality
+        #   @return [::Google::Cloud::AIPlatform::V1::Presets::Modality]
+        #     The modality of the uploaded model, which automatically configures the
+        #     distance measurement and feature normalization for the underlying example
+        #     index and queries. If your model does not precisely fit one of these types,
+        #     it is okay to choose the closest type.
+        class Presets
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Preset option controlling parameters for query speed-precision trade-off
+          module Query
+            # More precise neighbors as a trade-off against slower response.
+            PRECISE = 0
+
+            # Faster response as a trade-off against less precise neighbors.
+            FAST = 1
+          end
+
+          # Preset option controlling parameters for different modalities
+          module Modality
+            # Should not be set. Added as a recommended best practice for enums
+            MODALITY_UNSPECIFIED = 0
+
+            # IMAGE modality
+            IMAGE = 1
+
+            # TEXT modality
+            TEXT = 2
+
+            # TABULAR modality
+            TABULAR = 3
+          end
+        end
+
+        # The {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} entries
+        # that can be overridden at [online
+        # explanation][google.cloud.aiplatform.v1.PredictionService.Explain] time.
         # @!attribute [rw] parameters
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationParameters]
         #     The parameters to be overridden. Note that the
-        #     [method][google.cloud.aiplatform.v1.ExplanationParameters.method] cannot be changed. If not specified,
+        #     attribution method cannot be changed. If not specified,
         #     no parameter is overridden.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationMetadataOverride]
@@ -423,21 +545,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::AIPlatform::V1::ExplanationMetadata ExplanationMetadata} entries that can be overridden at
-        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain online explanation} time.
+        # The {::Google::Cloud::AIPlatform::V1::ExplanationMetadata ExplanationMetadata}
+        # entries that can be overridden at [online
+        # explanation][google.cloud.aiplatform.v1.PredictionService.Explain] time.
         # @!attribute [rw] inputs
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ExplanationMetadataOverride::InputMetadataOverride}]
-        #     Required. Overrides the {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#inputs input metadata} of the features.
-        #     The key is the name of the feature to be overridden. The keys specified
-        #     here must exist in the input metadata to be overridden. If a feature is
-        #     not specified here, the corresponding feature's input metadata is not
-        #     overridden.
+        #     Required. Overrides the [input
+        #     metadata][google.cloud.aiplatform.v1.ExplanationMetadata.inputs] of the
+        #     features. The key is the name of the feature to be overridden. The keys
+        #     specified here must exist in the input metadata to be overridden. If a
+        #     feature is not specified here, the corresponding feature's input metadata
+        #     is not overridden.
         class ExplanationMetadataOverride
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The {::Google::Cloud::AIPlatform::V1::ExplanationMetadata::InputMetadata input metadata} entries to be
-          # overridden.
+          # The [input
+          # metadata][google.cloud.aiplatform.v1.ExplanationMetadata.InputMetadata]
+          # entries to be overridden.
           # @!attribute [rw] input_baselines
           #   @return [::Array<::Google::Protobuf::Value>]
           #     Baseline inputs for this feature.

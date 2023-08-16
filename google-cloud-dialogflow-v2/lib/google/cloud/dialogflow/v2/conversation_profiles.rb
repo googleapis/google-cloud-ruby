@@ -26,18 +26,25 @@ require "google/cloud/dialogflow/v2/conversation_profiles/credentials"
 require "google/cloud/dialogflow/v2/conversation_profiles/paths"
 require "google/cloud/dialogflow/v2/conversation_profiles/operations"
 require "google/cloud/dialogflow/v2/conversation_profiles/client"
+require "google/cloud/dialogflow/v2/conversation_profiles/rest"
 
 module Google
   module Cloud
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
+        # Service for managing
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/conversation_profiles"
         #     client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/conversation_profiles/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::Client.new
         #
         module ConversationProfiles
         end

@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/region_instance_groups"
+require "google/cloud/compute/v1/region_instance_groups/rest"
 
 
-class ::Google::Cloud::Compute::V1::RegionInstanceGroups::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -80,39 +80,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroups::ClientTest < Minitest:
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, get_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.get({ instance_group: instance_group, project: project, region: region }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.get({ instance_group: instance_group, project: project, region: region }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.get instance_group: instance_group, project: project, region: region do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.get instance_group: instance_group, project: project, region: region do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.get ::Google::Cloud::Compute::V1::GetRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.get({ instance_group: instance_group, project: project, region: region }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.get({ instance_group: instance_group, project: project, region: region }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.get(::Google::Cloud::Compute::V1::GetRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, get_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, get_client_stub.call_count
+      end
     end
   end
 
@@ -138,39 +140,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroups::ClientTest < Minitest:
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_client_stub.call_count
+      end
     end
   end
 
@@ -198,39 +202,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroups::ClientTest < Minitest:
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list_instances({ filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list_instances({ filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list_instances filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list_instances filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list_instances ::Google::Cloud::Compute::V1::ListInstancesRegionInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list_instances ::Google::Cloud::Compute::V1::ListInstancesRegionInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list_instances({ filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list_instances({ filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Compute::V1::ListInstancesRegionInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list_instances(::Google::Cloud::Compute::V1::ListInstancesRegionInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, region_instance_groups_list_instances_request_resource: region_instance_groups_list_instances_request_resource, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_instances_client_stub.call_count
+      end
     end
   end
 
@@ -254,39 +260,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroups::ClientTest < Minitest:
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, set_named_ports_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::ServiceStub.stub :transcode_set_named_ports_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_named_ports_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.set_named_ports({ instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.set_named_ports({ instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.set_named_ports instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.set_named_ports instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.set_named_ports ::Google::Cloud::Compute::V1::SetNamedPortsRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.set_named_ports ::Google::Cloud::Compute::V1::SetNamedPortsRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.set_named_ports({ instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.set_named_ports({ instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.set_named_ports(::Google::Cloud::Compute::V1::SetNamedPortsRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.set_named_ports(::Google::Cloud::Compute::V1::SetNamedPortsRegionInstanceGroupRequest.new(instance_group: instance_group, project: project, region: region, region_instance_groups_set_named_ports_request_resource: region_instance_groups_set_named_ports_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, set_named_ports_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, set_named_ports_client_stub.call_count
+      end
     end
   end
 

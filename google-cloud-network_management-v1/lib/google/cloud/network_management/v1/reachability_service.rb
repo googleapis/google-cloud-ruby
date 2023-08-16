@@ -26,6 +26,7 @@ require "google/cloud/network_management/v1/reachability_service/credentials"
 require "google/cloud/network_management/v1/reachability_service/paths"
 require "google/cloud/network_management/v1/reachability_service/operations"
 require "google/cloud/network_management/v1/reachability_service/client"
+require "google/cloud/network_management/v1/reachability_service/rest"
 
 module Google
   module Cloud
@@ -41,10 +42,15 @@ module Google
         # You can use the analysis results to verify these configurations and
         # to troubleshoot connectivity issues.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/network_management/v1/reachability_service"
         #     client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/network_management/v1/reachability_service/rest"
+        #     client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
         #
         module ReachabilityService
         end

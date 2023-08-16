@@ -222,7 +222,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     found_table_id = "found_table"
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id]
+    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id], **patch_table_args
     dataset.service.mocked_service = mock
 
     table = dataset.table found_table_id

@@ -48,12 +48,14 @@ module Google
       # Create a new client object for WorkflowsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client](https://googleapis.dev/ruby/google-cloud-life_sciences-v2beta/latest/Google/Cloud/LifeSciences/V2beta/WorkflowsService/Client.html)
-      # for version V2beta of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest/Google-Cloud-LifeSciences-V2beta-WorkflowsService-Client)
+      # for a gRPC client for version V2beta of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the WorkflowsService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About WorkflowsService
       #
@@ -62,17 +64,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2beta`.
-      # @return [WorkflowsService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.workflows_service version: :v2beta, &block
+      def self.workflows_service version: :v2beta, transport: :grpc, &block
         require "google/cloud/life_sciences/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::LifeSciences
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::LifeSciences.const_get package_name
-        package_module.const_get(:WorkflowsService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::LifeSciences.const_get(package_name).const_get(:WorkflowsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -92,7 +96,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

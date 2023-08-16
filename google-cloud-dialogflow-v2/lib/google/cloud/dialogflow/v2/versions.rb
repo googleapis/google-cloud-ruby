@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/versions/credentials"
 require "google/cloud/dialogflow/v2/versions/paths"
 require "google/cloud/dialogflow/v2/versions/client"
+require "google/cloud/dialogflow/v2/versions/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service for managing {::Google::Cloud::Dialogflow::V2::Version Versions}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/versions"
         #     client = ::Google::Cloud::Dialogflow::V2::Versions::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/versions/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::Versions::Rest::Client.new
         #
         module Versions
         end

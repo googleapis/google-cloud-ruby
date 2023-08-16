@@ -35,7 +35,7 @@ module Google
           # BudgetService stores Cloud Billing budgets, which define a
           # budget plan and rules to execute as we track spend against that plan.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/billing/budgets/v1beta1/budget_service"
           #     client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new

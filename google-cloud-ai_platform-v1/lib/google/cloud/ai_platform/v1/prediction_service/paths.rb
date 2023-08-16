@@ -27,20 +27,46 @@ module Google
             ##
             # Create a fully-qualified Endpoint resource string.
             #
-            # The resource will be in the following format:
+            # @overload endpoint_path(project:, location:, endpoint:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/endpoints/{endpoint}`
+            #   `projects/{project}/locations/{location}/endpoints/{endpoint}`
             #
-            # @param project [String]
-            # @param location [String]
-            # @param endpoint [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param endpoint [String]
+            #
+            # @overload endpoint_path(project:, location:, publisher:, model:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/publishers/{publisher}/models/{model}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param publisher [String]
+            #   @param model [String]
             #
             # @return [::String]
-            def endpoint_path project:, location:, endpoint:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def endpoint_path **args
+              resources = {
+                "endpoint:location:project" => (proc do |project:, location:, endpoint:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/endpoints/#{endpoint}"
+                  "projects/#{project}/locations/#{location}/endpoints/#{endpoint}"
+                end),
+                "location:model:project:publisher" => (proc do |project:, location:, publisher:, model:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "publisher cannot contain /" if publisher.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/publishers/#{publisher}/models/#{model}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

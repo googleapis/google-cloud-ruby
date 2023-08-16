@@ -26,21 +26,27 @@ require "google/cloud/document_ai/v1/document_processor_service/credentials"
 require "google/cloud/document_ai/v1/document_processor_service/paths"
 require "google/cloud/document_ai/v1/document_processor_service/operations"
 require "google/cloud/document_ai/v1/document_processor_service/client"
+require "google/cloud/document_ai/v1/document_processor_service/rest"
 
 module Google
   module Cloud
     module DocumentAI
       module V1
         ##
-        # Service to call Cloud DocumentAI to process documents according to the
+        # Service to call Document AI to process documents according to the
         # processor's definition. Processors are built using state-of-the-art Google
         # AI such as natural language, computer vision, and translation to extract
         # structured information from unstructured or semi-structured documents.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/document_ai/v1/document_processor_service"
         #     client = ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/document_ai/v1/document_processor_service/rest"
+        #     client = ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
         #
         module DocumentProcessorService
         end

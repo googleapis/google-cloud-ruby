@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#update_conversation_profile
+# Snippet for the update_conversation_profile call in the ConversationProfiles service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#update_conversation_profile.
+# It may require modification in order to execute successfully.
 #
 def update_conversation_profile
   # Create a client object. The client can be reused for multiple calls.

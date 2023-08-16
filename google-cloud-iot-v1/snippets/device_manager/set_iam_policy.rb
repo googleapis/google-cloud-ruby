@@ -20,8 +20,11 @@
 require "google/cloud/iot/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iot::V1::DeviceManager::Client#set_iam_policy
+# Snippet for the set_iam_policy call in the DeviceManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#set_iam_policy. It may require
+# modification in order to execute successfully.
 #
 def set_iam_policy
   # Create a client object. The client can be reused for multiple calls.

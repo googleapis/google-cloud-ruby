@@ -25,6 +25,7 @@ require "google/cloud/resource_manager/v3/version"
 require "google/cloud/resource_manager/v3/organizations/credentials"
 require "google/cloud/resource_manager/v3/organizations/paths"
 require "google/cloud/resource_manager/v3/organizations/client"
+require "google/cloud/resource_manager/v3/organizations/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Allows users to manage their organization resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_manager/v3/organizations"
         #     client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_manager/v3/organizations/rest"
+        #     client = ::Google::Cloud::ResourceManager::V3::Organizations::Rest::Client.new
         #
         module Organizations
         end

@@ -1,7 +1,7 @@
 {
     "api_id": "analyticsadmin.googleapis.com",
     "api_shortname": "analyticsadmin",
-    "client_documentation": "https://googleapis.dev/ruby/google-analytics-admin/latest",
+    "client_documentation": "https://rubydoc.info/gems/google-analytics-admin",
     "distribution_name": "google-analytics-admin",
     "is_cloud": false,
     "language": "ruby",
@@ -12,5 +12,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.",
     "ruby-cloud-env-prefix": "ANALYTICS_ADMIN",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

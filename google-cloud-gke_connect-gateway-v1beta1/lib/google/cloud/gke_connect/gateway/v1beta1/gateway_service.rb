@@ -37,7 +37,7 @@ module Google
           # against the Gateway service, and Gateway service will forward user requests
           # to clusters.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/gke_connect/gateway/v1beta1/gateway_service"
           #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new

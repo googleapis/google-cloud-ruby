@@ -22,6 +22,112 @@ module Google
     module Video
       module LiveStream
         module V1
+          # Request message for "LivestreamService.CreateAsset".
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent location for the resource, in the form of:
+          #     `projects/{project}/locations/{location}`.
+          # @!attribute [rw] asset
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Asset]
+          #     Required. The asset resource to be created.
+          # @!attribute [rw] asset_id
+          #   @return [::String]
+          #     Required. The ID of the asset resource to be created.
+          #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
+          #     could contain dashes (-) in between.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class CreateAssetRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.DeleteAsset".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the asset resource, in the form of:
+          #     `projects/{project}/locations/{location}/assets/{assetId}`.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes after the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class DeleteAssetRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.ListAssets".
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent location for the resource, in the form of:
+          #     `projects/{project}/locations/{location}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Requested page size. Server may return fewer items than requested.
+          #     If unspecified, server will pick an appropriate default.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A token identifying a page of results the server should return.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Filtering results
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     Hint for how to order the results
+          class ListAssetsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for "LivestreamService.ListAssets".
+          # @!attribute [rw] assets
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Asset>]
+          #     The list of Assets
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     The next_page_token value returned from a previous List request, if any.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Locations that could not be reached.
+          class ListAssetsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.GetAsset".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of the resource, in the following form:
+          #     `projects/{project}/locations/{location}/assets/{asset}`.
+          class GetAssetRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for "LivestreamService.CreateChannel".
           # @!attribute [rw] parent
           #   @return [::String]
@@ -65,8 +171,8 @@ module Google
           #     The maximum number of items to return. If unspecified, server
           #     will pick an appropriate default. Server may return fewer items than
           #     requested. A caller should only rely on response's
-          #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token} to
-          #     determine if there are more items left to be queried.
+          #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token}
+          #     to determine if there are more items left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     The next_page_token value returned from a previous List request, if any.
@@ -146,14 +252,22 @@ module Google
           #     resource by the update. You can only update the following fields:
           #
           #     * [`inputAttachments`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputattachment)
+          #     * [`inputConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputconfig)
           #     * [`output`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#output)
-          #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#ElementaryStream)
+          #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#elementarystream)
           #     * [`muxStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#muxstream)
-          #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#Manifest)
-          #     * [`spritesheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+          #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#manifest)
+          #     * [`spriteSheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+          #     * [`logConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#logconfig)
+          #     * [`timecodeConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#timecodeconfig)
+          #     * [`encryptions`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#encryption)
           #
           #     The fields specified in the update_mask are relative to the resource, not
           #     the full request. A field will be overwritten if it is in the mask.
+          #
+          #     If the mask is not present, then each field from the list above is updated
+          #     if the field appears in the request payload. To unset a field, add the
+          #     field to the update mask and remove it from the request payload.
           # @!attribute [rw] channel
           #   @return [::Google::Cloud::Video::LiveStream::V1::Channel]
           #     Required. The channel resource to be updated.
@@ -270,8 +384,8 @@ module Google
           #     The maximum number of items to return. If unspecified, server
           #     will pick an appropriate default. Server may return fewer items than
           #     requested. A caller should only rely on response's
-          #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token} to
-          #     determine if there are more items left to be queried.
+          #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token}
+          #     to determine if there are more items left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     The next_page_token value returned from a previous List request, if any.
@@ -349,6 +463,10 @@ module Google
           #
           #     The fields specified in the update_mask are relative to the resource, not
           #     the full request. A field will be overwritten if it is in the mask.
+          #
+          #     If the mask is not present, then each field from the list above is updated
+          #     if the field appears in the request payload. To unset a field, add the
+          #     field to the update mask and remove it from the request payload.
           # @!attribute [rw] input
           #   @return [::Google::Cloud::Video::LiveStream::V1::Input]
           #     Required. The input resource to be updated.
@@ -415,8 +533,8 @@ module Google
           #     The maximum number of items to return. If unspecified, server
           #     will pick an appropriate default. Server may return fewer items than
           #     requested. A caller should only rely on response's
-          #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token} to
-          #     determine if there are more items left to be queried.
+          #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token}
+          #     to determine if there are more items left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     The next_page_token value returned from a previous List request, if any.
@@ -513,6 +631,49 @@ module Google
           #   @return [::String]
           #     Output only. API version used to start the operation.
           class OperationMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.GetPool".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the pool resource, in the form of:
+          #     `projects/{project}/locations/{location}/pools/{poolId}`.
+          class GetPoolRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.UpdatePool".
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Field mask is used to specify the fields to be overwritten in the Pool
+          #     resource by the update. You can only update the following fields:
+          #
+          #     * `networkConfig`
+          #
+          #     The fields specified in the update_mask are relative to the resource, not
+          #     the full request. A field will be overwritten if it is in the mask.
+          # @!attribute [rw] pool
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Pool]
+          #     Required. The pool resource to be updated.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class UpdatePoolRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

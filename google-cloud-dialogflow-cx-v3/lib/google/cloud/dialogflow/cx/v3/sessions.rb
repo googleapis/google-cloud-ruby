@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/sessions/credentials"
 require "google/cloud/dialogflow/cx/v3/sessions/paths"
 require "google/cloud/dialogflow/cx/v3/sessions/client"
+require "google/cloud/dialogflow/cx/v3/sessions/rest"
 
 module Google
   module Cloud
@@ -33,13 +34,19 @@ module Google
         module V3
           ##
           # A session represents an interaction with a user. You retrieve user input
-          # and pass it to the {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to determine
-          # user intent and respond.
+          # and pass it to the
+          # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to
+          # determine user intent and respond.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/sessions"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/sessions/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new
           #
           module Sessions
           end

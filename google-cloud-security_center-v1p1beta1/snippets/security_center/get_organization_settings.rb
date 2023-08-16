@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_organization_settings
+# Snippet for the get_organization_settings call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_organization_settings.
+# It may require modification in order to execute successfully.
 #
 def get_organization_settings
   # Create a client object. The client can be reused for multiple calls.

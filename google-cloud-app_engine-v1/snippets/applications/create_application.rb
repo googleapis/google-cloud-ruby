@@ -20,8 +20,11 @@
 require "google/cloud/app_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AppEngine::V1::Applications::Client#create_application
+# Snippet for the create_application call in the Applications service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Applications::Client#create_application. It may
+# require modification in order to execute successfully.
 #
 def create_application
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_application
   # Call the create_application method.
   result = client.create_application request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END appengine_v1_generated_Applications_CreateApplication_sync]

@@ -150,7 +150,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -311,13 +311,11 @@ module Google
               #   # Call the list_jobs method.
               #   result = client.list_jobs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1::Job.
-              #     p response
+              #     p item
               #   end
               #
               def list_jobs request, options = nil
@@ -561,8 +559,8 @@ module Google
               #   @param job_template [::Google::Cloud::Video::Transcoder::V1::JobTemplate, ::Hash]
               #     Required. Parameters for creating job template.
               #   @param job_template_id [::String]
-              #     Required. The ID to use for the job template, which will become the final component
-              #     of the job template's resource name.
+              #     Required. The ID to use for the job template, which will become the final
+              #     component of the job template's resource name.
               #
               #     This value should be 4-63 characters, and valid characters must match the
               #     regular expression `[a-zA-Z][a-zA-Z0-9_-]*`.
@@ -650,8 +648,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent location from which to retrieve the collection of job templates.
-              #     Format: `projects/{project}/locations/{location}`
+              #     Required. The parent location from which to retrieve the collection of job
+              #     templates. Format: `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     The maximum number of items to return.
               #   @param page_token [::String]
@@ -684,13 +682,11 @@ module Google
               #   # Call the list_job_templates method.
               #   result = client.list_job_templates request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1::JobTemplate.
-              #     p response
+              #     p item
               #   end
               #
               def list_job_templates request, options = nil
@@ -949,9 +945,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -993,7 +989,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "transcoder.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "transcoder.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

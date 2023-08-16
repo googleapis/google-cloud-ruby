@@ -131,7 +131,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -228,13 +228,11 @@ module Google
               #   # Call the list_test_cases method.
               #   result = client.list_test_cases request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TestCase.
-              #     p response
+              #     p item
               #   end
               #
               def list_test_cases request, options = nil
@@ -566,7 +564,8 @@ module Google
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. The mask to specify which fields should be updated. The
               #     {::Google::Cloud::Dialogflow::CX::V3::TestCase#creation_time `creationTime`} and
-              #     {::Google::Cloud::Dialogflow::CX::V3::TestCase#last_test_result `lastTestResult`} cannot be updated.
+              #     {::Google::Cloud::Dialogflow::CX::V3::TestCase#last_test_result `lastTestResult`}
+              #     cannot be updated.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::TestCase]
@@ -639,8 +638,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseMetadata RunTestCaseMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseResponse RunTestCaseResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseMetadata RunTestCaseMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseResponse RunTestCaseResponse}
               #
               # @overload run_test_case(request, options = nil)
               #   Pass arguments to `run_test_case` via a request object, either of type
@@ -658,8 +659,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Format of test case name to run: `projects/<Project ID>/locations/
-              #     <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+              #     Required. Format of test case name to run: `projects/<Project
+              #     ID>/locations/ <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
               #   @param environment [::String]
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
@@ -685,14 +686,14 @@ module Google
               #   # Call the run_test_case method.
               #   result = client.run_test_case request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def run_test_case request, options = nil
@@ -744,8 +745,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesMetadata BatchRunTestCasesMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesResponse BatchRunTestCasesResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesMetadata BatchRunTestCasesMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesResponse BatchRunTestCasesResponse}
               #
               # @overload batch_run_test_cases(request, options = nil)
               #   Pass arguments to `batch_run_test_cases` via a request object, either of type
@@ -763,15 +766,15 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Agent name. Format: `projects/<Project ID>/locations/<Location ID>/agents/
-              #     <AgentID>`.
+              #     Required. Agent name. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/ <AgentID>`.
               #   @param environment [::String]
-              #     Optional. If not set, draft environment is assumed. Format: `projects/<Project
-              #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-              #     ID>`.
+              #     Optional. If not set, draft environment is assumed. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/environments/<Environment ID>`.
               #   @param test_cases [::Array<::String>]
-              #     Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/testCases/<TestCase ID>`.
+              #     Required. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/testCases/<TestCase ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -793,14 +796,14 @@ module Google
               #   # Call the batch_run_test_cases method.
               #   result = client.batch_run_test_cases request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def batch_run_test_cases request, options = nil
@@ -942,8 +945,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesMetadata ImportTestCasesMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesResponse ImportTestCasesResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesMetadata ImportTestCasesMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesResponse ImportTestCasesResponse}
               #
               # @overload import_test_cases(request, options = nil)
               #   Pass arguments to `import_test_cases` via a request object, either of type
@@ -996,14 +1001,14 @@ module Google
               #   # Call the import_test_cases method.
               #   result = client.import_test_cases request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def import_test_cases request, options = nil
@@ -1056,8 +1061,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesMetadata ExportTestCasesMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesResponse ExportTestCasesResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesMetadata ExportTestCasesMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesResponse ExportTestCasesResponse}
               #
               # @overload export_test_cases(request, options = nil)
               #   Pass arguments to `export_test_cases` via a request object, either of type
@@ -1123,14 +1130,14 @@ module Google
               #   # Call the export_test_cases method.
               #   result = client.export_test_cases request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def export_test_cases request, options = nil
@@ -1176,7 +1183,8 @@ module Google
               end
 
               ##
-              # Fetches a list of results for a given test case.
+              # Fetches the list of run results for the given test case. A maximum of 100
+              # results are kept for each test case.
               #
               # @overload list_test_case_results(request, options = nil)
               #   Pass arguments to `list_test_case_results` via a request object, either of type
@@ -1249,13 +1257,11 @@ module Google
               #   # Call the list_test_case_results method.
               #   result = client.list_test_case_results request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TestCaseResult.
-              #     p response
+              #     p item
               #   end
               #
               def list_test_case_results request, options = nil
@@ -1425,9 +1431,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1469,7 +1475,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-billing-budgets-v1",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "billingbudgets_v1_generated_BudgetService_CreateBudget_sync",
-      "title": "Snippet for create_budget in BudgetService",
-      "description": "Basic snippet for create_budget in BudgetService",
+      "title": "Snippet for the create_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1::BudgetService::Client#create_budget. It may require modification in order to execute successfully.",
       "file": "budget_service/create_budget.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "billingbudgets_v1_generated_BudgetService_UpdateBudget_sync",
-      "title": "Snippet for update_budget in BudgetService",
-      "description": "Basic snippet for update_budget in BudgetService",
+      "title": "Snippet for the update_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1::BudgetService::Client#update_budget. It may require modification in order to execute successfully.",
       "file": "budget_service/update_budget.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "billingbudgets_v1_generated_BudgetService_GetBudget_sync",
-      "title": "Snippet for get_budget in BudgetService",
-      "description": "Basic snippet for get_budget in BudgetService",
+      "title": "Snippet for the get_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1::BudgetService::Client#get_budget. It may require modification in order to execute successfully.",
       "file": "budget_service/get_budget.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "billingbudgets_v1_generated_BudgetService_ListBudgets_sync",
-      "title": "Snippet for list_budgets in BudgetService",
-      "description": "Basic snippet for list_budgets in BudgetService",
+      "title": "Snippet for the list_budgets call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1::BudgetService::Client#list_budgets. It may require modification in order to execute successfully.",
       "file": "budget_service/list_budgets.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "billingbudgets_v1_generated_BudgetService_DeleteBudget_sync",
-      "title": "Snippet for delete_budget in BudgetService",
-      "description": "Basic snippet for delete_budget in BudgetService",
+      "title": "Snippet for the delete_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1::BudgetService::Client#delete_budget. It may require modification in order to execute successfully.",
       "file": "budget_service/delete_budget.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

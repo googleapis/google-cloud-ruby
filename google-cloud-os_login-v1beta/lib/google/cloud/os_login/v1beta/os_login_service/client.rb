@@ -156,7 +156,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -283,9 +283,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. A reference to the POSIX account to update. POSIX accounts are identified
-            #     by the project ID they are associated with. A reference to the POSIX
-            #     account is in format `users/{user}/projects/{project}`.
+            #     Required. A reference to the POSIX account to update. POSIX accounts are
+            #     identified by the project ID they are associated with. A reference to the
+            #     POSIX account is in format `users/{user}/projects/{project}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -370,9 +370,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to update. Public keys are identified by
-            #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-            #     `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to update. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -549,9 +549,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to retrieve. Public keys are identified
-            #     by their SHA-256 fingerprint. The fingerprint of the public key is in
-            #     format `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to retrieve. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OsLogin::Common::SshPublicKey]
@@ -730,9 +730,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to update. Public keys are identified by
-            #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-            #     `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to update. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #   @param ssh_public_key [::Google::Cloud::OsLogin::Common::SshPublicKey, ::Hash]
             #     Required. The SSH public key and expiration time.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -803,6 +803,96 @@ module Google
             end
 
             ##
+            # Signs an SSH public key for a user to authenticate to an instance.
+            #
+            # @overload sign_ssh_public_key(request, options = nil)
+            #   Pass arguments to `sign_ssh_public_key` via a request object, either of type
+            #   {::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload sign_ssh_public_key(ssh_public_key: nil, parent: nil)
+            #   Pass arguments to `sign_ssh_public_key` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param ssh_public_key [::String]
+            #     The SSH public key to sign.
+            #   @param parent [::String]
+            #     The parent project and zone for the signing request. This is needed to
+            #     properly ensure per-organization ISS processing and potentially to provide
+            #     for the possibility of zone-specific certificates used in the signing
+            #     process.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest.new
+            #
+            #   # Call the sign_ssh_public_key method.
+            #   result = client.sign_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse.
+            #   p result
+            #
+            def sign_ssh_public_key request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.sign_ssh_public_key.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.sign_ssh_public_key.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.sign_ssh_public_key.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_login_service_stub.call_rpc :sign_ssh_public_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the OsLoginService API.
             #
             # This class represents the configuration for OsLoginService,
@@ -840,9 +930,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -884,7 +974,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "oslogin.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "oslogin.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -972,6 +1064,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_ssh_public_key
+                ##
+                # RPC-specific configuration for `sign_ssh_public_key`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :sign_ssh_public_key
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -989,6 +1086,8 @@ module Google
                   @import_ssh_public_key = ::Gapic::Config::Method.new import_ssh_public_key_config
                   update_ssh_public_key_config = parent_rpcs.update_ssh_public_key if parent_rpcs.respond_to? :update_ssh_public_key
                   @update_ssh_public_key = ::Gapic::Config::Method.new update_ssh_public_key_config
+                  sign_ssh_public_key_config = parent_rpcs.sign_ssh_public_key if parent_rpcs.respond_to? :sign_ssh_public_key
+                  @sign_ssh_public_key = ::Gapic::Config::Method.new sign_ssh_public_key_config
 
                   yield self if block_given?
                 end

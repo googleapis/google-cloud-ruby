@@ -15,7 +15,7 @@
 # limitations under the License.
 
 def create_job project_id:, location_id:, service_id:
-  # [START cloud_scheduler_create_job]
+  # [START cloudscheduler_create_job]
   require "google/cloud/scheduler"
 
   # Create a client.
@@ -47,6 +47,6 @@ def create_job project_id:, location_id:, service_id:
   response = client.create_job parent: parent, job: job
 
   puts "Created job: #{response.name}"
-  # [END cloud_scheduler_create_job]
+  # [END cloudscheduler_create_job]
   response.name
 end

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-iap-v1",
-    "version": "0.4.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for set_iam_policy in IdentityAwareProxyAdminService",
+      "title": "Snippet for the set_iam_policy call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for get_iam_policy in IdentityAwareProxyAdminService",
+      "title": "Snippet for the get_iam_policy call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for test_iam_permissions in IdentityAwareProxyAdminService",
+      "title": "Snippet for the test_iam_permissions call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_sync",
-      "title": "Snippet for get_iap_settings in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for get_iap_settings in IdentityAwareProxyAdminService",
+      "title": "Snippet for the get_iap_settings call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_iap_settings. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/get_iap_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_sync",
-      "title": "Snippet for update_iap_settings in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for update_iap_settings in IdentityAwareProxyAdminService",
+      "title": "Snippet for the update_iap_settings call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#update_iap_settings. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/update_iap_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_sync",
-      "title": "Snippet for list_tunnel_dest_groups in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for list_tunnel_dest_groups in IdentityAwareProxyAdminService",
+      "title": "Snippet for the list_tunnel_dest_groups call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#list_tunnel_dest_groups. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/list_tunnel_dest_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_sync",
-      "title": "Snippet for create_tunnel_dest_group in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for create_tunnel_dest_group in IdentityAwareProxyAdminService",
+      "title": "Snippet for the create_tunnel_dest_group call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#create_tunnel_dest_group. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/create_tunnel_dest_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_sync",
-      "title": "Snippet for get_tunnel_dest_group in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for get_tunnel_dest_group in IdentityAwareProxyAdminService",
+      "title": "Snippet for the get_tunnel_dest_group call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_tunnel_dest_group. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/get_tunnel_dest_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_sync",
-      "title": "Snippet for delete_tunnel_dest_group in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for delete_tunnel_dest_group in IdentityAwareProxyAdminService",
+      "title": "Snippet for the delete_tunnel_dest_group call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#delete_tunnel_dest_group. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/delete_tunnel_dest_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_sync",
-      "title": "Snippet for update_tunnel_dest_group in IdentityAwareProxyAdminService",
-      "description": "Basic snippet for update_tunnel_dest_group in IdentityAwareProxyAdminService",
+      "title": "Snippet for the update_tunnel_dest_group call in the IdentityAwareProxyAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#update_tunnel_dest_group. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_admin_service/update_tunnel_dest_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListBrands_sync",
-      "title": "Snippet for list_brands in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for list_brands in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the list_brands call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#list_brands. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/list_brands.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateBrand_sync",
-      "title": "Snippet for create_brand in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for create_brand in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the create_brand call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#create_brand. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/create_brand.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_GetBrand_sync",
-      "title": "Snippet for get_brand in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for get_brand in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the get_brand call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#get_brand. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/get_brand.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateIdentityAwareProxyClient_sync",
-      "title": "Snippet for create_identity_aware_proxy_client in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for create_identity_aware_proxy_client in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the create_identity_aware_proxy_client call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#create_identity_aware_proxy_client. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/create_identity_aware_proxy_client.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListIdentityAwareProxyClients_sync",
-      "title": "Snippet for list_identity_aware_proxy_clients in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for list_identity_aware_proxy_clients in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the list_identity_aware_proxy_clients call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#list_identity_aware_proxy_clients. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/list_identity_aware_proxy_clients.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_GetIdentityAwareProxyClient_sync",
-      "title": "Snippet for get_identity_aware_proxy_client in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for get_identity_aware_proxy_client in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the get_identity_aware_proxy_client call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#get_identity_aware_proxy_client. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/get_identity_aware_proxy_client.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_ResetIdentityAwareProxyClientSecret_sync",
-      "title": "Snippet for reset_identity_aware_proxy_client_secret in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for reset_identity_aware_proxy_client_secret in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the reset_identity_aware_proxy_client_secret call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#reset_identity_aware_proxy_client_secret. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/reset_identity_aware_proxy_client_secret.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "iap_v1_generated_IdentityAwareProxyOAuthService_DeleteIdentityAwareProxyClient_sync",
-      "title": "Snippet for delete_identity_aware_proxy_client in IdentityAwareProxyOAuthService",
-      "description": "Basic snippet for delete_identity_aware_proxy_client in IdentityAwareProxyOAuthService",
+      "title": "Snippet for the delete_identity_aware_proxy_client call in the IdentityAwareProxyOAuthService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#delete_identity_aware_proxy_client. It may require modification in order to execute successfully.",
       "file": "identity_aware_proxy_o_auth_service/delete_identity_aware_proxy_client.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/v2/conversation_datasets/credentials"
 require "google/cloud/dialogflow/v2/conversation_datasets/paths"
 require "google/cloud/dialogflow/v2/conversation_datasets/operations"
 require "google/cloud/dialogflow/v2/conversation_datasets/client"
+require "google/cloud/dialogflow/v2/conversation_datasets/rest"
 
 module Google
   module Cloud
@@ -37,10 +38,15 @@ module Google
         # Conversation datasets contain raw conversation files and their
         # customizable metadata that can be used for model training.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/conversation_datasets"
         #     client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/conversation_datasets/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
         #
         module ConversationDatasets
         end

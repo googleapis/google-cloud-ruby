@@ -20,8 +20,11 @@
 require "google/cloud/deploy/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job
+# Snippet for the retry_job call in the CloudDeploy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job. It may require
+# modification in order to execute successfully.
 #
 def retry_job
   # Create a client object. The client can be reused for multiple calls.

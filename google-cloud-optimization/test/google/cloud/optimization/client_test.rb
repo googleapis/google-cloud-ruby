@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/optimization"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Optimization::ClientConstructionMinitest < Minitest::Test
-  def test_fleet_routing
+  def test_fleet_routing_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Optimization.fleet_routing do |config|
+      client = Google::Cloud::Optimization.fleet_routing transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Optimization::V1::FleetRouting::Client, client
+    end
+  end
+
+  def test_fleet_routing_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Optimization.fleet_routing transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Optimization::V1::FleetRouting::Rest::Client, client
     end
   end
 end

@@ -71,6 +71,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_agent.timeout = 180.0
+                  default_config.rpcs.create_agent.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -130,7 +135,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -224,13 +229,11 @@ module Google
               #   # Call the list_agents method.
               #   result = client.list_agents request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Agent.
-              #     p response
+              #     p item
               #   end
               #
               def list_agents request, options = nil
@@ -640,7 +643,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportAgentResponse ExportAgentResponse}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportAgentResponse ExportAgentResponse}
               #
               # @overload export_agent(request, options = nil)
               #   Pass arguments to `export_agent` via a request object, either of type
@@ -652,7 +656,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil)
+              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil, git_destination: nil, include_bigquery_export_settings: nil)
               #   Pass arguments to `export_agent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -661,10 +665,10 @@ module Google
               #     Required. The name of the agent to export.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
               #   @param agent_uri [::String]
-              #     Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-              #     export the agent to. The format of this URI must be
-              #     `gs://<bucket-name>/<object-name>`.
-              #     If left unspecified, the serialized agent is returned inline.
+              #     Optional. The [Google Cloud
+              #     Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+              #     to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+              #     left unspecified, the serialized agent is returned inline.
               #
               #     Dialogflow performs a write operation for the Cloud Storage object
               #     on the caller's behalf, so your request authentication must
@@ -672,11 +676,16 @@ module Google
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #   @param data_format [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::DataFormat]
-              #     Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
+              #     Optional. The data format of the exported agent. If not specified, `BLOB`
+              #     is assumed.
               #   @param environment [::String]
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
+              #   @param git_destination [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::GitDestination, ::Hash]
+              #     Optional. The Git branch to export the agent to.
+              #   @param include_bigquery_export_settings [::Boolean]
+              #     Optional. Whether to include BigQuery Export setting.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -698,14 +707,14 @@ module Google
               #   # Call the export_agent method.
               #   result = client.export_agent request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def export_agent request, options = nil
@@ -779,7 +788,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload restore_agent(name: nil, agent_uri: nil, agent_content: nil, restore_option: nil)
+              # @overload restore_agent(name: nil, agent_uri: nil, agent_content: nil, git_source: nil, restore_option: nil)
               #   Pass arguments to `restore_agent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -799,6 +808,8 @@ module Google
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #   @param agent_content [::String]
               #     Uncompressed raw byte content for agent.
+              #   @param git_source [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::GitSource, ::Hash]
+              #     Setting for restoring from a git branch
               #   @param restore_option [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]
               #     Agent restore mode. If not specified, `KEEP` is assumed.
               #
@@ -822,14 +833,14 @@ module Google
               #   # Call the restore_agent method.
               #   result = client.restore_agent request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def restore_agent request, options = nil
@@ -1092,9 +1103,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1136,7 +1147,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -26,6 +26,7 @@ require "google/cloud/gaming/v1/game_server_clusters_service/credentials"
 require "google/cloud/gaming/v1/game_server_clusters_service/paths"
 require "google/cloud/gaming/v1/game_server_clusters_service/operations"
 require "google/cloud/gaming/v1/game_server_clusters_service/client"
+require "google/cloud/gaming/v1/game_server_clusters_service/rest"
 
 module Google
   module Cloud
@@ -35,10 +36,15 @@ module Google
         # The game server cluster maps to Kubernetes clusters running Agones and is
         # used to manage fleets within clusters.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gaming/v1/game_server_clusters_service"
         #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gaming/v1/game_server_clusters_service/rest"
+        #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Rest::Client.new
         #
         module GameServerClustersService
         end

@@ -57,8 +57,10 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Strongly recommended for the best service experience.
         #
-        #     If {::Google::Cloud::Talent::V4::UpdateJobRequest#update_mask update_mask} is provided, only the specified fields in
-        #     {::Google::Cloud::Talent::V4::UpdateJobRequest#job job} are updated. Otherwise all the fields are updated.
+        #     If {::Google::Cloud::Talent::V4::UpdateJobRequest#update_mask update_mask} is
+        #     provided, only the specified fields in
+        #     {::Google::Cloud::Talent::V4::UpdateJobRequest#job job} are updated. Otherwise
+        #     all the fields are updated.
         #
         #     A field mask to restrict the fields that are updated. Only
         #     top level fields of {::Google::Cloud::Talent::V4::Job Job} are supported.
@@ -119,15 +121,18 @@ module Google
         #   @return [::Integer]
         #     The maximum number of jobs to be returned per page of results.
         #
-        #     If {::Google::Cloud::Talent::V4::ListJobsRequest#job_view job_view} is set to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_ID_ONLY JobView.JOB_VIEW_ID_ONLY}, the maximum allowed
-        #     page size is 1000. Otherwise, the maximum allowed page size is 100.
+        #     If {::Google::Cloud::Talent::V4::ListJobsRequest#job_view job_view} is set to
+        #     {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_ID_ONLY JobView.JOB_VIEW_ID_ONLY},
+        #     the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+        #     size is 100.
         #
         #     Default is 100 if empty or a number < 1 is specified.
         # @!attribute [rw] job_view
         #   @return [::Google::Cloud::Talent::V4::JobView]
         #     The desired job attributes returned for jobs in the
-        #     search response. Defaults to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_FULL JobView.JOB_VIEW_FULL} if no value is
-        #     specified.
+        #     search response. Defaults to
+        #     {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_FULL JobView.JOB_VIEW_FULL} if no
+        #     value is specified.
         class ListJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -163,12 +168,13 @@ module Google
         #   @return [::Google::Cloud::Talent::V4::SearchJobsRequest::SearchMode]
         #     Mode of a search.
         #
-        #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::SearchMode::JOB_SEARCH SearchMode.JOB_SEARCH}.
+        #     Defaults to
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::SearchMode::JOB_SEARCH SearchMode.JOB_SEARCH}.
         # @!attribute [rw] request_metadata
         #   @return [::Google::Cloud::Talent::V4::RequestMetadata]
-        #     Required. The meta information collected about the job searcher, used to improve the
-        #     search quality of the service. The identifiers (such as `user_id`) are
-        #     provided by users, and must be unique and consistent.
+        #     Required. The meta information collected about the job searcher, used to
+        #     improve the search quality of the service. The identifiers (such as
+        #     `user_id`) are provided by users, and must be unique and consistent.
         # @!attribute [rw] job_query
         #   @return [::Google::Cloud::Talent::V4::JobQuery]
         #     Query used to search against jobs, such as keyword, location filters, etc.
@@ -215,23 +221,32 @@ module Google
         #
         #     Job histogram facets:
         #
-        #     * company_display_name: histogram by {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}.
-        #     * employment_type: histogram by {::Google::Cloud::Talent::V4::Job#employment_types Job.employment_types}, for example,
+        #     * company_display_name: histogram by
+        #     {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}.
+        #     * employment_type: histogram by
+        #     {::Google::Cloud::Talent::V4::Job#employment_types Job.employment_types}, for
+        #     example,
         #       "FULL_TIME", "PART_TIME".
-        #     * company_size (DEPRECATED): histogram by {::Google::Cloud::Talent::V4::CompanySize CompanySize}, for example,
-        #     "SMALL", "MEDIUM", "BIG".
-        #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+        #     * company_size (DEPRECATED): histogram by
+        #     {::Google::Cloud::Talent::V4::CompanySize CompanySize}, for example, "SMALL",
+        #     "MEDIUM", "BIG".
+        #     * publish_time_in_day: histogram by the
+        #     {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
         #       in days.
         #       Must specify list of numeric buckets in spec.
-        #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+        #     * publish_time_in_month: histogram by the
+        #     {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
         #       in months.
         #       Must specify list of numeric buckets in spec.
-        #     * publish_time_in_year: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+        #     * publish_time_in_year: histogram by the
+        #     {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
         #       in years.
         #       Must specify list of numeric buckets in spec.
-        #     * degree_types: histogram by the {::Google::Cloud::Talent::V4::Job#degree_types Job.degree_types}, for example,
+        #     * degree_types: histogram by the
+        #     {::Google::Cloud::Talent::V4::Job#degree_types Job.degree_types}, for example,
         #       "Bachelors", "Masters".
-        #     * job_level: histogram by the {::Google::Cloud::Talent::V4::Job#job_level Job.job_level}, for example, "Entry
+        #     * job_level: histogram by the
+        #     {::Google::Cloud::Talent::V4::Job#job_level Job.job_level}, for example, "Entry
         #       Level".
         #     * country: histogram by the country code of jobs, for example, "US", "FR".
         #     * admin1: histogram by the admin1 code of jobs, which is a global
@@ -246,25 +261,31 @@ module Google
         #       and longitude), for example, 37.4038522,-122.0987765. Since the
         #       coordinates of a city center can change, customers may need to refresh
         #       them periodically.
-        #     * locale: histogram by the {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}, for example, "en-US",
+        #     * locale: histogram by the
+        #     {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}, for example,
+        #     "en-US",
         #       "fr-FR".
-        #     * language: histogram by the language subtag of the {::Google::Cloud::Talent::V4::Job#language_code Job.language_code},
+        #     * language: histogram by the language subtag of the
+        #     {::Google::Cloud::Talent::V4::Job#language_code Job.language_code},
         #       for example, "en", "fr".
-        #     * category: histogram by the {::Google::Cloud::Talent::V4::JobCategory JobCategory}, for example,
+        #     * category: histogram by the
+        #     {::Google::Cloud::Talent::V4::JobCategory JobCategory}, for example,
         #       "COMPUTER_AND_IT", "HEALTHCARE".
         #     * base_compensation_unit: histogram by the
-        #       {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit CompensationInfo.CompensationUnit} of base
-        #       salary, for example, "WEEKLY", "MONTHLY".
+        #       {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit CompensationInfo.CompensationUnit}
+        #       of base salary, for example, "WEEKLY", "MONTHLY".
         #     * base_compensation: histogram by the base salary. Must specify list of
         #       numeric buckets to group results by.
         #     * annualized_base_compensation: histogram by the base annualized salary.
         #       Must specify list of numeric buckets to group results by.
         #     * annualized_total_compensation: histogram by the total annualized salary.
         #       Must specify list of numeric buckets to group results by.
-        #     * string_custom_attribute: histogram by string {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}.
+        #     * string_custom_attribute: histogram by string
+        #     {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}.
         #       Values can be accessed via square bracket notations like
         #       string_custom_attribute["key1"].
-        #     * numeric_custom_attribute: histogram by numeric {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}.
+        #     * numeric_custom_attribute: histogram by numeric
+        #     {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}.
         #       Values can be accessed via square bracket notations like
         #       numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
         #       group results by.
@@ -280,12 +301,15 @@ module Google
         # @!attribute [rw] job_view
         #   @return [::Google::Cloud::Talent::V4::JobView]
         #     The desired job attributes returned for jobs in the search response.
-        #     Defaults to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
+        #     Defaults to
+        #     {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if
+        #     no value is specified.
         # @!attribute [rw] offset
         #   @return [::Integer]
         #     An integer that specifies the current offset (that is, starting result
         #     location, amongst the jobs deemed by the API as relevant) in search
-        #     results. This field is only considered if {::Google::Cloud::Talent::V4::SearchJobsRequest#page_token page_token} is unset.
+        #     results. This field is only considered if
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#page_token page_token} is unset.
         #
         #     The maximum allowed value is 5000. Otherwise an error is thrown.
         #
@@ -301,8 +325,9 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The token specifying the current offset within
-        #     search results. See {::Google::Cloud::Talent::V4::SearchJobsResponse#next_page_token SearchJobsResponse.next_page_token} for
-        #     an explanation of how to obtain the next set of query results.
+        #     search results. See
+        #     {::Google::Cloud::Talent::V4::SearchJobsResponse#next_page_token SearchJobsResponse.next_page_token}
+        #     for an explanation of how to obtain the next set of query results.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     The criteria determining how search results are sorted. Default is
@@ -313,33 +338,36 @@ module Google
         #     * `"relevance desc"`: By relevance descending, as determined by the API
         #       algorithms. Relevance thresholding of query results is only available
         #       with this ordering.
-        #     * `"posting_publish_time desc"`: By {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+        #     * `"posting_publish_time desc"`: By
+        #     {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
         #       descending.
-        #     * `"posting_update_time desc"`: By {::Google::Cloud::Talent::V4::Job#posting_update_time Job.posting_update_time}
+        #     * `"posting_update_time desc"`: By
+        #     {::Google::Cloud::Talent::V4::Job#posting_update_time Job.posting_update_time}
         #       descending.
         #     * `"title"`: By {::Google::Cloud::Talent::V4::Job#title Job.title} ascending.
-        #     * `"title desc"`: By {::Google::Cloud::Talent::V4::Job#title Job.title} descending.
+        #     * `"title desc"`: By {::Google::Cloud::Talent::V4::Job#title Job.title}
+        #     descending.
         #     * `"annualized_base_compensation"`: By job's
-        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_base_compensation_range CompensationInfo.annualized_base_compensation_range} ascending. Jobs
-        #       whose annualized base compensation is unspecified are put at the end of
-        #       search results.
+        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_base_compensation_range CompensationInfo.annualized_base_compensation_range}
+        #       ascending. Jobs whose annualized base compensation is unspecified are put
+        #       at the end of search results.
         #     * `"annualized_base_compensation desc"`: By job's
-        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_base_compensation_range CompensationInfo.annualized_base_compensation_range} descending. Jobs
-        #       whose annualized base compensation is unspecified are put at the end of
-        #       search results.
+        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_base_compensation_range CompensationInfo.annualized_base_compensation_range}
+        #       descending. Jobs whose annualized base compensation is unspecified are
+        #       put at the end of search results.
         #     * `"annualized_total_compensation"`: By job's
-        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_total_compensation_range CompensationInfo.annualized_total_compensation_range} ascending. Jobs
-        #       whose annualized base compensation is unspecified are put at the end of
-        #       search results.
+        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_total_compensation_range CompensationInfo.annualized_total_compensation_range}
+        #       ascending. Jobs whose annualized base compensation is unspecified are put
+        #       at the end of search results.
         #     * `"annualized_total_compensation desc"`: By job's
-        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_total_compensation_range CompensationInfo.annualized_total_compensation_range} descending. Jobs
-        #       whose annualized base compensation is unspecified are put at the end of
-        #       search results.
+        #       {::Google::Cloud::Talent::V4::CompensationInfo#annualized_total_compensation_range CompensationInfo.annualized_total_compensation_range}
+        #       descending. Jobs whose annualized base compensation is unspecified are
+        #       put at the end of search results.
         #     * `"custom_ranking desc"`: By the relevance score adjusted to the
-        #       {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#ranking_expression SearchJobsRequest.CustomRankingInfo.ranking_expression} with weight
-        #       factor assigned by
-        #       {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#importance_level SearchJobsRequest.CustomRankingInfo.importance_level} in descending
-        #       order.
+        #       {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#ranking_expression SearchJobsRequest.CustomRankingInfo.ranking_expression}
+        #       with weight factor assigned by
+        #       {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#importance_level SearchJobsRequest.CustomRankingInfo.importance_level}
+        #       in descending order.
         #     * Location sorting: Use the special syntax to order jobs by distance:<br>
         #       `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
         #       `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
@@ -364,8 +392,9 @@ module Google
         #     displayed to the job seeker higher up in the results, with the other jobs
         #     being displayed lower down in the results.
         #
-        #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::DiversificationLevel::SIMPLE DiversificationLevel.SIMPLE} if no value
-        #     is specified.
+        #     Defaults to
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::DiversificationLevel::SIMPLE DiversificationLevel.SIMPLE}
+        #     if no value is specified.
         # @!attribute [rw] custom_ranking_info
         #   @return [::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo]
         #     Controls over how job documents get ranked on top of existing relevance
@@ -373,29 +402,38 @@ module Google
         # @!attribute [rw] disable_keyword_match
         #   @return [::Boolean]
         #     This field is deprecated. Please use
-        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode}
+        #     going forward.
         #
         #     To migrate, disable_keyword_match set to false maps to
-        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
-        #     true maps to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
-        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL},
+        #     and disable_keyword_match set to true maps to
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+        #     If
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode}
+        #     is set, this field is ignored.
         #
-        #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4::Job#title Job.title},
-        #     {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
-        #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
-        #     keyword match returns jobs that do not match given category filters when
-        #     there are matching keywords. For example, for the query "program manager,"
-        #     a result is returned even if the job posting has the title "software
-        #     developer," which doesn't fall into "program manager" ontology, but does
-        #     have "program manager" appearing in its description.
+        #     Controls whether to disable exact keyword match on
+        #     {::Google::Cloud::Talent::V4::Job#title Job.title},
+        #     {::Google::Cloud::Talent::V4::Job#description Job.description},
+        #     {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name},
+        #     {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
+        #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When
+        #     disable keyword match is turned off, a keyword match returns jobs that do
+        #     not match given category filters when there are matching keywords. For
+        #     example, for the query "program manager," a result is returned even if the
+        #     job posting has the title "software developer," which doesn't fall into
+        #     "program manager" ontology, but does have "program manager" appearing in
+        #     its description.
         #
         #     For queries like "cloud" that don't contain title or
         #     location specific ontology, jobs with "cloud" keyword matches are returned
         #     regardless of this flag's value.
         #
-        #     Use {::Google::Cloud::Talent::V4::Company#keyword_searchable_job_custom_attributes Company.keyword_searchable_job_custom_attributes} if
-        #     company-specific globally matched custom field/attribute string values are
-        #     needed. Enabling keyword match improves recall of subsequent search
+        #     Use
+        #     {::Google::Cloud::Talent::V4::Company#keyword_searchable_job_custom_attributes Company.keyword_searchable_job_custom_attributes}
+        #     if company-specific globally matched custom field/attribute string values
+        #     are needed. Enabling keyword match improves recall of subsequent search
         #     requests.
         #
         #     Defaults to false.
@@ -404,32 +442,36 @@ module Google
         #     Controls what keyword match options to use. If both keyword_match_mode and
         #     disable_keyword_match are set, keyword_match_mode will take precedence.
         #
-        #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
-        #     is specified.
+        #     Defaults to
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
+        #     if no value is specified.
         class SearchJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Custom ranking information for {::Google::Cloud::Talent::V4::SearchJobsRequest SearchJobsRequest}.
+          # Custom ranking information for
+          # {::Google::Cloud::Talent::V4::SearchJobsRequest SearchJobsRequest}.
           # @!attribute [rw] importance_level
           #   @return [::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
           #     Required. Controls over how important the score of
-          #     {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo.ranking_expression} gets applied to job's final
-          #     ranking position.
+          #     {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo.ranking_expression}
+          #     gets applied to job's final ranking position.
           #
           #     An error is thrown if not specified.
           # @!attribute [rw] ranking_expression
           #   @return [::String]
-          #     Required. Controls over how job documents get ranked on top of existing relevance
-          #     score (determined by API algorithm). A combination of the ranking
-          #     expression and relevance score is used to determine job's final ranking
-          #     position.
+          #     Required. Controls over how job documents get ranked on top of existing
+          #     relevance score (determined by API algorithm). A combination of the
+          #     ranking expression and relevance score is used to determine job's final
+          #     ranking position.
           #
           #     The syntax for this expression is a subset of Google SQL syntax.
           #
           #     Supported operators are: +, -, *, /, where the left and right side of
-          #     the operator is either a numeric {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes} key,
-          #     integer/double value or an expression that can be evaluated to a number.
+          #     the operator is either a numeric
+          #     {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}
+          #     key, integer/double value or an expression that can be evaluated to a
+          #     number.
           #
           #     Parenthesis are supported to adjust calculation precedence. The
           #     expression must be < 200 characters in length.
@@ -445,7 +487,8 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The importance level for {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo.ranking_expression}.
+            # The importance level for
+            # {::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo.ranking_expression}.
             module ImportanceLevel
               # Default value if the importance level isn't specified.
               IMPORTANCE_LEVEL_UNSPECIFIED = 0
@@ -536,6 +579,11 @@ module Google
             # pushed to the end of the last page of search result.
             TWO_PER_COMPANY = 4
 
+            # Similar to ONE_PER_COMPANY, but it allows at most three jobs in the
+            # same company to be shown at once, the other jobs under same company are
+            # dropped.
+            MAX_THREE_PER_COMPANY = 6
+
             # The result list is ordered such that somewhat similar results are pushed
             # to the end of the last page of the search results. This option is
             # recommended if SIMPLE diversification does not diversify enough.
@@ -554,25 +602,33 @@ module Google
           # location specific ontology, jobs with "cloud" keyword matches are returned
           # regardless of this enum's value.
           #
-          # Use {::Google::Cloud::Talent::V4::Company#keyword_searchable_job_custom_attributes Company.keyword_searchable_job_custom_attributes} if
-          # company-specific globally matched custom field/attribute string values are
-          # needed. Enabling keyword match improves recall of subsequent search
+          # Use
+          # {::Google::Cloud::Talent::V4::Company#keyword_searchable_job_custom_attributes Company.keyword_searchable_job_custom_attributes}
+          # if company-specific globally matched custom field/attribute string values
+          # are needed. Enabling keyword match improves recall of subsequent search
           # requests.
           module KeywordMatchMode
             # The keyword match option isn't specified. Defaults to
-            # {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} behavior.
+            # {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
+            # behavior.
             KEYWORD_MATCH_MODE_UNSPECIFIED = 0
 
             # Disables keyword matching.
             KEYWORD_MATCH_DISABLED = 1
 
-            # Enable keyword matching over {::Google::Cloud::Talent::V4::Job#title Job.title},
-            # {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
-            # {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}, and keyword searchable {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}
+            # Enable keyword matching over
+            # {::Google::Cloud::Talent::V4::Job#title Job.title},
+            # {::Google::Cloud::Talent::V4::Job#description Job.description},
+            # {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name},
+            # {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
+            # {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}, and
+            # keyword searchable
+            # {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}
             # fields.
             KEYWORD_MATCH_ALL = 2
 
-            # Only enable keyword matching over {::Google::Cloud::Talent::V4::Job#title Job.title}.
+            # Only enable keyword matching over
+            # {::Google::Cloud::Talent::V4::Job#title Job.title}.
             KEYWORD_MATCH_TITLE_ONLY = 3
           end
         end
@@ -580,7 +636,8 @@ module Google
         # Response for SearchJob method.
         # @!attribute [rw] matching_jobs
         #   @return [::Array<::Google::Cloud::Talent::V4::SearchJobsResponse::MatchingJob>]
-        #     The Job entities that match the specified {::Google::Cloud::Talent::V4::SearchJobsRequest SearchJobsRequest}.
+        #     The Job entities that match the specified
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest SearchJobsRequest}.
         # @!attribute [rw] histogram_query_results
         #   @return [::Array<::Google::Cloud::Talent::V4::HistogramQueryResult>]
         #     The histogram results that match with specified
@@ -592,7 +649,8 @@ module Google
         # @!attribute [rw] location_filters
         #   @return [::Array<::Google::Cloud::Talent::V4::Location>]
         #     The location filters that the service applied to the specified query. If
-        #     any filters are lat-lng based, the {::Google::Cloud::Talent::V4::Location#location_type Location.location_type} is
+        #     any filters are lat-lng based, the
+        #     {::Google::Cloud::Talent::V4::Location#location_type Location.location_type} is
         #     {::Google::Cloud::Talent::V4::Location::LocationType::LOCATION_TYPE_UNSPECIFIED Location.LocationType.LOCATION_TYPE_UNSPECIFIED}.
         # @!attribute [rw] total_size
         #   @return [::Integer]
@@ -619,22 +677,26 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Job entry with metadata inside {::Google::Cloud::Talent::V4::SearchJobsResponse SearchJobsResponse}.
+          # Job entry with metadata inside
+          # {::Google::Cloud::Talent::V4::SearchJobsResponse SearchJobsResponse}.
           # @!attribute [rw] job
           #   @return [::Google::Cloud::Talent::V4::Job]
-          #     Job resource that matches the specified {::Google::Cloud::Talent::V4::SearchJobsRequest SearchJobsRequest}.
+          #     Job resource that matches the specified
+          #     {::Google::Cloud::Talent::V4::SearchJobsRequest SearchJobsRequest}.
           # @!attribute [rw] job_summary
           #   @return [::String]
           #     A summary of the job with core information that's displayed on the search
           #     results listing page.
           # @!attribute [rw] job_title_snippet
           #   @return [::String]
-          #     Contains snippets of text from the {::Google::Cloud::Talent::V4::Job#title Job.title} field most
-          #     closely matching a search query's keywords, if available. The matching
-          #     query keywords are enclosed in HTML bold tags.
+          #     Contains snippets of text from the
+          #     {::Google::Cloud::Talent::V4::Job#title Job.title} field most closely matching
+          #     a search query's keywords, if available. The matching query keywords are
+          #     enclosed in HTML bold tags.
           # @!attribute [rw] search_text_snippet
           #   @return [::String]
-          #     Contains snippets of text from the {::Google::Cloud::Talent::V4::Job#description Job.description} and similar
+          #     Contains snippets of text from the
+          #     {::Google::Cloud::Talent::V4::Job#description Job.description} and similar
           #     fields that most closely match a search query's keywords, if available.
           #     All HTML tags in the original fields are stripped when returned in this
           #     field, and matching query keywords are enclosed in HTML bold tags.
@@ -695,17 +757,19 @@ module Google
         #     Strongly recommended for the best service experience. Be aware that it will
         #     also increase latency when checking the status of a batch operation.
         #
-        #     If {::Google::Cloud::Talent::V4::BatchUpdateJobsRequest#update_mask update_mask} is provided, only the specified fields in
-        #     {::Google::Cloud::Talent::V4::Job Job} are updated. Otherwise all the fields are updated.
+        #     If {::Google::Cloud::Talent::V4::BatchUpdateJobsRequest#update_mask update_mask}
+        #     is provided, only the specified fields in {::Google::Cloud::Talent::V4::Job Job}
+        #     are updated. Otherwise all the fields are updated.
         #
         #     A field mask to restrict the fields that are updated. Only
         #     top level fields of {::Google::Cloud::Talent::V4::Job Job} are supported.
         #
-        #     If {::Google::Cloud::Talent::V4::BatchUpdateJobsRequest#update_mask update_mask} is provided, The {::Google::Cloud::Talent::V4::Job Job} inside
+        #     If {::Google::Cloud::Talent::V4::BatchUpdateJobsRequest#update_mask update_mask}
+        #     is provided, The {::Google::Cloud::Talent::V4::Job Job} inside
         #     [JobResult][JobOperationResult.JobResult]
         #     will only contains fields that is updated, plus the Id of the Job.
-        #     Otherwise,  {::Google::Cloud::Talent::V4::Job Job} will include all fields, which can yield a very
-        #     large response.
+        #     Otherwise,  {::Google::Cloud::Talent::V4::Job Job} will include all fields,
+        #     which can yield a very large response.
         class BatchUpdateJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -736,10 +800,12 @@ module Google
         # Mutation result of a job from a batch operation.
         # @!attribute [rw] job
         #   @return [::Google::Cloud::Talent::V4::Job]
-        #     Here {::Google::Cloud::Talent::V4::Job Job} only contains basic information including {::Google::Cloud::Talent::V4::Job#name name},
-        #     {::Google::Cloud::Talent::V4::Job#company company}, {::Google::Cloud::Talent::V4::Job#language_code language_code}
-        #     and {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}, use getJob method to retrieve
-        #     detailed information of the created/updated job.
+        #     Here {::Google::Cloud::Talent::V4::Job Job} only contains basic information
+        #     including {::Google::Cloud::Talent::V4::Job#name name},
+        #     {::Google::Cloud::Talent::V4::Job#company company},
+        #     {::Google::Cloud::Talent::V4::Job#language_code language_code} and
+        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}, use getJob
+        #     method to retrieve detailed information of the created/updated job.
         # @!attribute [rw] status
         #   @return [::Google::Rpc::Status]
         #     The status of the job processed. This field is populated if the
@@ -749,8 +815,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The result of {::Google::Cloud::Talent::V4::JobService::Client#batch_create_jobs JobService.BatchCreateJobs}. It's used to
-        # replace {::Google::Longrunning::Operation#response google.longrunning.Operation.response} in case of success.
+        # The result of
+        # {::Google::Cloud::Talent::V4::JobService::Client#batch_create_jobs JobService.BatchCreateJobs}.
+        # It's used to replace
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # in case of success.
         # @!attribute [rw] job_results
         #   @return [::Array<::Google::Cloud::Talent::V4::JobResult>]
         #     List of job mutation results from a batch create operation. It can change
@@ -760,8 +829,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The result of {::Google::Cloud::Talent::V4::JobService::Client#batch_update_jobs JobService.BatchUpdateJobs}. It's used to
-        # replace {::Google::Longrunning::Operation#response google.longrunning.Operation.response} in case of success.
+        # The result of
+        # {::Google::Cloud::Talent::V4::JobService::Client#batch_update_jobs JobService.BatchUpdateJobs}.
+        # It's used to replace
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # in case of success.
         # @!attribute [rw] job_results
         #   @return [::Array<::Google::Cloud::Talent::V4::JobResult>]
         #     List of job mutation results from a batch update operation. It can change
@@ -771,8 +843,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The result of {::Google::Cloud::Talent::V4::JobService::Client#batch_delete_jobs JobService.BatchDeleteJobs}. It's used to
-        # replace {::Google::Longrunning::Operation#response google.longrunning.Operation.response} in case of success.
+        # The result of
+        # {::Google::Cloud::Talent::V4::JobService::Client#batch_delete_jobs JobService.BatchDeleteJobs}.
+        # It's used to replace
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # in case of success.
         # @!attribute [rw] job_results
         #   @return [::Array<::Google::Cloud::Talent::V4::JobResult>]
         #     List of job mutation results from a batch delete operation. It can change
@@ -783,25 +858,37 @@ module Google
         end
 
         # An enum that specifies the job attributes that are returned in the
-        # {::Google::Cloud::Talent::V4::SearchJobsResponse::MatchingJob#job MatchingJob.job} or
-        # {::Google::Cloud::Talent::V4::ListJobsResponse#jobs ListJobsResponse.jobs} fields.
+        # {::Google::Cloud::Talent::V4::SearchJobsResponse::MatchingJob#job MatchingJob.job}
+        # or {::Google::Cloud::Talent::V4::ListJobsResponse#jobs ListJobsResponse.jobs}
+        # fields.
         module JobView
           # Default value.
           JOB_VIEW_UNSPECIFIED = 0
 
           # A ID only view of job, with following attributes:
-          # {::Google::Cloud::Talent::V4::Job#name Job.name}, {::Google::Cloud::Talent::V4::Job#requisition_id Job.requisition_id}, {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}.
+          # {::Google::Cloud::Talent::V4::Job#name Job.name},
+          # {::Google::Cloud::Talent::V4::Job#requisition_id Job.requisition_id},
+          # {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}.
           JOB_VIEW_ID_ONLY = 1
 
           # A minimal view of the job, with the following attributes:
-          # {::Google::Cloud::Talent::V4::Job#name Job.name}, {::Google::Cloud::Talent::V4::Job#requisition_id Job.requisition_id}, {::Google::Cloud::Talent::V4::Job#title Job.title},
-          # {::Google::Cloud::Talent::V4::Job#company Job.company}, {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations Job.DerivedInfo.locations}, {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}.
+          # {::Google::Cloud::Talent::V4::Job#name Job.name},
+          # {::Google::Cloud::Talent::V4::Job#requisition_id Job.requisition_id},
+          # {::Google::Cloud::Talent::V4::Job#title Job.title},
+          # {::Google::Cloud::Talent::V4::Job#company Job.company},
+          # {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations Job.DerivedInfo.locations},
+          # {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}.
           JOB_VIEW_MINIMAL = 2
 
           # A small view of the job, with the following attributes in the search
-          # results: {::Google::Cloud::Talent::V4::Job#name Job.name}, {::Google::Cloud::Talent::V4::Job#requisition_id Job.requisition_id}, {::Google::Cloud::Talent::V4::Job#title Job.title},
-          # {::Google::Cloud::Talent::V4::Job#company Job.company}, {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations Job.DerivedInfo.locations}, {::Google::Cloud::Talent::V4::Job#visibility Job.visibility},
-          # {::Google::Cloud::Talent::V4::Job#language_code Job.language_code}, {::Google::Cloud::Talent::V4::Job#description Job.description}.
+          # results: {::Google::Cloud::Talent::V4::Job#name Job.name},
+          # {::Google::Cloud::Talent::V4::Job#requisition_id Job.requisition_id},
+          # {::Google::Cloud::Talent::V4::Job#title Job.title},
+          # {::Google::Cloud::Talent::V4::Job#company Job.company},
+          # {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations Job.DerivedInfo.locations},
+          # {::Google::Cloud::Talent::V4::Job#visibility Job.visibility},
+          # {::Google::Cloud::Talent::V4::Job#language_code Job.language_code},
+          # {::Google::Cloud::Talent::V4::Job#description Job.description}.
           JOB_VIEW_SMALL = 3
 
           # All available attributes are included in the search results.

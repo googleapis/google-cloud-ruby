@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-analytics_hub-v1",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ListDataExchanges_sync",
-      "title": "Snippet for list_data_exchanges in AnalyticsHubService",
-      "description": "Basic snippet for list_data_exchanges in AnalyticsHubService",
+      "title": "Snippet for the list_data_exchanges call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_data_exchanges. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/list_data_exchanges.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ListOrgDataExchanges_sync",
-      "title": "Snippet for list_org_data_exchanges in AnalyticsHubService",
-      "description": "Basic snippet for list_org_data_exchanges in AnalyticsHubService",
+      "title": "Snippet for the list_org_data_exchanges call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_org_data_exchanges. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/list_org_data_exchanges.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_GetDataExchange_sync",
-      "title": "Snippet for get_data_exchange in AnalyticsHubService",
-      "description": "Basic snippet for get_data_exchange in AnalyticsHubService",
+      "title": "Snippet for the get_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_data_exchange. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/get_data_exchange.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_CreateDataExchange_sync",
-      "title": "Snippet for create_data_exchange in AnalyticsHubService",
-      "description": "Basic snippet for create_data_exchange in AnalyticsHubService",
+      "title": "Snippet for the create_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_data_exchange. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/create_data_exchange.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_UpdateDataExchange_sync",
-      "title": "Snippet for update_data_exchange in AnalyticsHubService",
-      "description": "Basic snippet for update_data_exchange in AnalyticsHubService",
+      "title": "Snippet for the update_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#update_data_exchange. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/update_data_exchange.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_sync",
-      "title": "Snippet for delete_data_exchange in AnalyticsHubService",
-      "description": "Basic snippet for delete_data_exchange in AnalyticsHubService",
+      "title": "Snippet for the delete_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#delete_data_exchange. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/delete_data_exchange.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ListListings_sync",
-      "title": "Snippet for list_listings in AnalyticsHubService",
-      "description": "Basic snippet for list_listings in AnalyticsHubService",
+      "title": "Snippet for the list_listings call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_listings. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/list_listings.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_GetListing_sync",
-      "title": "Snippet for get_listing in AnalyticsHubService",
-      "description": "Basic snippet for get_listing in AnalyticsHubService",
+      "title": "Snippet for the get_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_listing. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/get_listing.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_CreateListing_sync",
-      "title": "Snippet for create_listing in AnalyticsHubService",
-      "description": "Basic snippet for create_listing in AnalyticsHubService",
+      "title": "Snippet for the create_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_listing. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/create_listing.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_UpdateListing_sync",
-      "title": "Snippet for update_listing in AnalyticsHubService",
-      "description": "Basic snippet for update_listing in AnalyticsHubService",
+      "title": "Snippet for the update_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#update_listing. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/update_listing.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_DeleteListing_sync",
-      "title": "Snippet for delete_listing in AnalyticsHubService",
-      "description": "Basic snippet for delete_listing in AnalyticsHubService",
+      "title": "Snippet for the delete_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#delete_listing. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/delete_listing.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_sync",
-      "title": "Snippet for subscribe_listing in AnalyticsHubService",
-      "description": "Basic snippet for subscribe_listing in AnalyticsHubService",
+      "title": "Snippet for the subscribe_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#subscribe_listing. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/subscribe_listing.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in AnalyticsHubService",
-      "description": "Basic snippet for get_iam_policy in AnalyticsHubService",
+      "title": "Snippet for the get_iam_policy call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in AnalyticsHubService",
-      "description": "Basic snippet for set_iam_policy in AnalyticsHubService",
+      "title": "Snippet for the set_iam_policy call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in AnalyticsHubService",
-      "description": "Basic snippet for test_iam_permissions in AnalyticsHubService",
+      "title": "Snippet for the test_iam_permissions call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "analytics_hub_service/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

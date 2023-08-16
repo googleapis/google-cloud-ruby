@@ -31,9 +31,9 @@ module Google
         ##
         # The UrlMaps API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/url_maps"
+        #     require "google/cloud/compute/v1/url_maps/rest"
         #     client = ::Google::Cloud::Compute::V1::UrlMaps::Rest::Client.new
         #
         module UrlMaps

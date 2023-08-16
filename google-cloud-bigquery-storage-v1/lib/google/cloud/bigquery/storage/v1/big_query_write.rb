@@ -39,7 +39,7 @@ module Google
           # For supplementary information about the Write API, see:
           # https://cloud.google.com/bigquery/docs/write-api
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/storage/v1/big_query_write"
           #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new

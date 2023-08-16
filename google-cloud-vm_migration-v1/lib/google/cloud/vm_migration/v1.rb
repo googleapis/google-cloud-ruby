@@ -23,12 +23,17 @@ module Google
   module Cloud
     module VMMigration
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/vm_migration/v1"
       #     client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/vm_migration/v1"
+      #     client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
       #
       module V1
       end

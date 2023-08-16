@@ -31,9 +31,9 @@ module Google
         ##
         # The NodeTemplates API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/node_templates"
+        #     require "google/cloud/compute/v1/node_templates/rest"
         #     client = ::Google::Cloud::Compute::V1::NodeTemplates::Rest::Client.new
         #
         module NodeTemplates

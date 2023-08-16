@@ -30,7 +30,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the HyperparameterTuningJob.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] study_spec
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec]
@@ -50,8 +50,8 @@ module Google
         #     before the whole job fails.
         # @!attribute [rw] trial_job_spec
         #   @return [::Google::Cloud::AIPlatform::V1::CustomJobSpec]
-        #     Required. The spec of a trial job. The same spec applies to the CustomJobs created
-        #     in all the trials.
+        #     Required. The spec of a trial job. The same spec applies to the CustomJobs
+        #     created in all the trials.
         # @!attribute [r] trials
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Trial>]
         #     Output only. Trials of the HyperparameterTuningJob.
@@ -63,15 +63,17 @@ module Google
         #     Output only. Time when the HyperparameterTuningJob was created.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the HyperparameterTuningJob for the first time entered the
-        #     `JOB_STATE_RUNNING` state.
+        #     Output only. Time when the HyperparameterTuningJob for the first time
+        #     entered the `JOB_STATE_RUNNING` state.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the HyperparameterTuningJob entered any of the following states:
-        #     `JOB_STATE_SUCCEEDED`, `JOB_STATE_FAILED`, `JOB_STATE_CANCELLED`.
+        #     Output only. Time when the HyperparameterTuningJob entered any of the
+        #     following states: `JOB_STATE_SUCCEEDED`, `JOB_STATE_FAILED`,
+        #     `JOB_STATE_CANCELLED`.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the HyperparameterTuningJob was most recently updated.
+        #     Output only. Time when the HyperparameterTuningJob was most recently
+        #     updated.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
         #     Output only. Only populated when job's state is JOB_STATE_FAILED or

@@ -30,12 +30,17 @@ module Google
   module Cloud
     module AppEngine
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/app_engine/v1"
       #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/app_engine/v1"
+      #     client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
       #
       module V1
       end

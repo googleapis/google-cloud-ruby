@@ -20,8 +20,11 @@
 require "google/cloud/web_security_scanner/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#update_scan_config
+# Snippet for the update_scan_config call in the WebSecurityScanner service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#update_scan_config.
+# It may require modification in order to execute successfully.
 #
 def update_scan_config
   # Create a client object. The client can be reused for multiple calls.

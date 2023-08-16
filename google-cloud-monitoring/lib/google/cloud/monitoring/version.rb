@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Monitoring
-      VERSION = "1.4.1"
+      VERSION = "1.6.1"
     end
   end
 end

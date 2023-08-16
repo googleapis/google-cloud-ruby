@@ -22,14 +22,16 @@ describe "#get_vod_stitch_detail", :stitcher_snippet do
     @session_id = vod_session.name.split("/").last
 
     output = capture_io {
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     }
 
     @stitch_detail_id = output[0].to_s.split("/").last.strip
     sample = SampleLoader.load "get_vod_stitch_detail.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id, stitch_detail_id: @stitch_detail_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id, stitch_detail_id: @stitch_detail_id
     end
 
     assert_match %r{VOD stitch detail: projects/\S+/locations/#{location_id}/vodSessions/#{@session_id}/vodStitchDetails/#{@stitch_detail_id}}, out

@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The BigQuery Reservation API provides the mechanisms by which enterprise users can provision and manage dedicated resources such as slots and BigQuery BI Engine memory allocations.",
     "ruby-cloud-env-prefix": "BIGQUERY_RESERVATION",
     "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/reservations",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

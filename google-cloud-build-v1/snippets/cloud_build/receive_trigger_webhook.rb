@@ -20,8 +20,11 @@
 require "google/cloud/build/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Build::V1::CloudBuild::Client#receive_trigger_webhook
+# Snippet for the receive_trigger_webhook call in the CloudBuild service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#receive_trigger_webhook. It may
+# require modification in order to execute successfully.
 #
 def receive_trigger_webhook
   # Create a client object. The client can be reused for multiple calls.

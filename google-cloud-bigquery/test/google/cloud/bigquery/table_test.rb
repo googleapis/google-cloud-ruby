@@ -120,7 +120,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
   it "can test its existence with force to load resource" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.exists?(force: true)).must_equal true

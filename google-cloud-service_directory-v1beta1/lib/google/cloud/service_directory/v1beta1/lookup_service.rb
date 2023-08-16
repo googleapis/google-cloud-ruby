@@ -25,6 +25,7 @@ require "google/cloud/service_directory/v1beta1/version"
 require "google/cloud/service_directory/v1beta1/lookup_service/credentials"
 require "google/cloud/service_directory/v1beta1/lookup_service/paths"
 require "google/cloud/service_directory/v1beta1/lookup_service/client"
+require "google/cloud/service_directory/v1beta1/lookup_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service Directory API for looking up service data at runtime.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_directory/v1beta1/lookup_service"
         #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/service_directory/v1beta1/lookup_service/rest"
+        #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Rest::Client.new
         #
         module LookupService
         end

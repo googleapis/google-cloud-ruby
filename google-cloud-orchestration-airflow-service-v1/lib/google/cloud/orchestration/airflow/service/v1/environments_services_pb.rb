@@ -45,6 +45,26 @@ module Google
                 rpc :UpdateEnvironment, ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest, ::Google::Longrunning::Operation
                 # Delete an environment.
                 rpc :DeleteEnvironment, ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest, ::Google::Longrunning::Operation
+                # Executes Airflow CLI command.
+                rpc :ExecuteAirflowCommand, ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse
+                # Stops Airflow CLI command execution.
+                rpc :StopAirflowCommand, ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse
+                # Polls Airflow CLI command execution and fetches logs.
+                rpc :PollAirflowCommand, ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse
+                # Creates a snapshots of a Cloud Composer environment.
+                #
+                # As a result of this operation, snapshot of environment's state is stored
+                # in a location specified in the SaveSnapshotRequest.
+                rpc :SaveSnapshot, ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest, ::Google::Longrunning::Operation
+                # Loads a snapshot of a Cloud Composer environment.
+                #
+                # As a result of this operation, a snapshot of environment's specified in
+                # LoadSnapshotRequest is loaded into the environment.
+                rpc :LoadSnapshot, ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest, ::Google::Longrunning::Operation
+                # Triggers database failover (only for highly resilient environments).
+                rpc :DatabaseFailover, ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest, ::Google::Longrunning::Operation
+                # Fetches database properties.
+                rpc :FetchDatabaseProperties, ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse
               end
 
               Stub = Service.rpc_stub_class

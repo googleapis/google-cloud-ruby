@@ -47,13 +47,14 @@ module Google
         #     and are immutable.
         # @!attribute [rw] payload
         #   @return [::Google::Protobuf::Value]
-        #     Required. The data that the DataItem represents (for example, an image or a text
-        #     snippet). The schema of the payload is stored in the parent Dataset's
-        #     [metadata schema's][google.cloud.aiplatform.v1.Dataset.metadata_schema_uri] dataItemSchemaUri field.
+        #     Required. The data that the DataItem represents (for example, an image or a
+        #     text snippet). The schema of the payload is stored in the parent Dataset's
+        #     [metadata schema's][google.cloud.aiplatform.v1.Dataset.metadata_schema_uri]
+        #     dataItemSchemaUri field.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Used to perform consistent read-modify-write updates. If not set, a blind
-        #     "overwrite" update happens.
+        #     Optional. Used to perform consistent read-modify-write updates. If not set,
+        #     a blind "overwrite" update happens.
         class DataItem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

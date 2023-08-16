@@ -21,7 +21,8 @@ module Google
   module Cloud
     module Kms
       module V1
-        # Request message for [KeyManagementService.ListEkmConnections][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections EkmService.ListEkmConnections}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location associated with the
@@ -57,7 +58,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [KeyManagementService.ListEkmConnections][].
+        # Response message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections EkmService.ListEkmConnections}.
         # @!attribute [rw] ekm_connections
         #   @return [::Array<::Google::Cloud::Kms::V1::EkmConnection>]
         #     The list of {::Google::Cloud::Kms::V1::EkmConnection EkmConnections}.
@@ -75,7 +77,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [KeyManagementService.GetEkmConnection][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection EkmService.GetEkmConnection}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The {::Google::Cloud::Kms::V1::EkmConnection#name name} of the
@@ -85,7 +88,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [KeyManagementService.CreateEkmConnection][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#create_ekm_connection EkmService.CreateEkmConnection}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location associated with the
@@ -104,7 +108,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [KeyManagementService.UpdateEkmConnection][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#update_ekm_connection EkmService.UpdateEkmConnection}.
         # @!attribute [rw] ekm_connection
         #   @return [::Google::Cloud::Kms::V1::EkmConnection]
         #     Required. {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} with updated
@@ -113,6 +118,30 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. List of fields to be updated in this request.
         class UpdateEkmConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#get_ekm_config EkmService.GetEkmConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::EkmConfig#name name} of the
+        #     {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} to get.
+        class GetEkmConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#update_ekm_config EkmService.UpdateEkmConfig}.
+        # @!attribute [rw] ekm_config
+        #   @return [::Google::Cloud::Kms::V1::EkmConfig]
+        #     Required. {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} with updated values.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. List of fields to be updated in this request.
+        class UpdateEkmConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -185,9 +214,20 @@ module Google
         #     supported.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     This checksum is computed by the server based on the value of other fields,
-        #     and may be sent on update requests to ensure the client has an up-to-date
-        #     value before proceeding.
+        #     Optional. Etag of the currently stored
+        #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}.
+        # @!attribute [rw] key_management_mode
+        #   @return [::Google::Cloud::Kms::V1::EkmConnection::KeyManagementMode]
+        #     Optional. Describes who can perform control plane operations on the EKM. If
+        #     unset, this defaults to
+        #     {::Google::Cloud::Kms::V1::EkmConnection::KeyManagementMode::MANUAL MANUAL}.
+        # @!attribute [rw] crypto_space_path
+        #   @return [::String]
+        #     Optional. Identifies the EKM Crypto Space that this
+        #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} maps to. Note: This
+        #     field is required if
+        #     {::Google::Cloud::Kms::V1::EkmConnection::KeyManagementMode KeyManagementMode} is
+        #     {::Google::Cloud::Kms::V1::EkmConnection::KeyManagementMode::CLOUD_KMS CLOUD_KMS}.
         class EkmConnection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,11 +254,90 @@ module Google
           # @!attribute [rw] server_certificates
           #   @return [::Array<::Google::Cloud::Kms::V1::Certificate>]
           #     Required. A list of leaf server certificates used to authenticate HTTPS
-          #     connections to the EKM replica.
+          #     connections to the EKM replica. Currently, a maximum of 10
+          #     {::Google::Cloud::Kms::V1::Certificate Certificate} is supported.
           class ServiceResolver
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # {::Google::Cloud::Kms::V1::EkmConnection::KeyManagementMode KeyManagementMode}
+          # describes who can perform control plane cryptographic operations using this
+          # {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}.
+          module KeyManagementMode
+            # Not specified.
+            KEY_MANAGEMENT_MODE_UNSPECIFIED = 0
+
+            # EKM-side key management operations on
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} created with this
+            # {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} must be initiated from
+            # the EKM directly and cannot be performed from Cloud KMS. This means that:
+            # * When creating a
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} associated with
+            # this
+            #   {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}, the caller must
+            #   supply the key path of pre-existing external key material that will be
+            #   linked to the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+            # * Destruction of external key material cannot be requested via the
+            #   Cloud KMS API and must be performed directly in the EKM.
+            # * Automatic rotation of key material is not supported.
+            MANUAL = 1
+
+            # All {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} created with this
+            # {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} use EKM-side key
+            # management operations initiated from Cloud KMS. This means that:
+            # * When a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+            # associated with this {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}
+            # is
+            #   created, the EKM automatically generates new key material and a new
+            #   key path. The caller cannot supply the key path of pre-existing
+            #   external key material.
+            # * Destruction of external key material associated with this
+            #   {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} can be requested by
+            #   calling [DestroyCryptoKeyVersion][EkmService.DestroyCryptoKeyVersion].
+            # * Automatic rotation of key material is supported.
+            CLOUD_KMS = 2
+          end
+        end
+
+        # An {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} is a singleton resource that
+        # represents configuration parameters that apply to all
+        # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} and
+        # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} with a
+        # {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
+        # [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC] in a given
+        # project and location.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for the
+        #     {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} in the format
+        #     `projects/*/locations/*/ekmConfig`.
+        # @!attribute [rw] default_ekm_connection
+        #   @return [::String]
+        #     Optional. Resource name of the default
+        #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}. Setting this field to
+        #     the empty string removes the default.
+        class EkmConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity EkmService.VerifyConnectivity}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::EkmConnection#name name} of the
+        #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} to verify.
+        class VerifyConnectivityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity EkmService.VerifyConnectivity}.
+        class VerifyConnectivityResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

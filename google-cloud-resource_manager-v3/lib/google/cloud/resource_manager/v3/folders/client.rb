@@ -154,7 +154,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -303,14 +303,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the organization or folder whose folders are
-            #     being listed.
-            #     Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+            #     Required. The name of the parent resource whose folders are being listed.
+            #     Only children of this parent resource are listed; descendants are not
+            #     listed.
+            #
+            #     If the parent is a folder, use the value `folders/{folder_id}`. If the
+            #     parent is an organization, use the value `organizations/{org_id}`.
+            #
             #     Access to this method is controlled by checking the
             #     `resourcemanager.folders.list` permission on the `parent`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of folders to return in the response.
-            #     If unspecified, server picks an appropriate default.
+            #     Optional. The maximum number of folders to return in the response. The
+            #     server can return fewer folders than requested. If unspecified, server
+            #     picks an appropriate default.
             #   @param page_token [::String]
             #     Optional. A pagination token returned from a previous call to `ListFolders`
             #     that indicates where this listing should continue from.
@@ -339,13 +344,11 @@ module Google
             #   # Call the list_folders method.
             #   result = client.list_folders request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ResourceManager::V3::Folder.
-            #     p response
+            #     p item
             #   end
             #
             def list_folders request, options = nil
@@ -406,11 +409,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of folders to return in the response.
-            #     If unspecified, server picks an appropriate default.
+            #     Optional. The maximum number of folders to return in the response. The
+            #     server can return fewer folders than requested. If unspecified, server
+            #     picks an appropriate default.
             #   @param page_token [::String]
-            #     Optional. A pagination token returned from a previous call to `SearchFolders`
-            #     that indicates from where search should continue.
+            #     Optional. A pagination token returned from a previous call to
+            #     `SearchFolders` that indicates from where search should continue.
             #   @param query [::String]
             #     Optional. Search criteria used to select the folders to return.
             #     If no search criteria is specified then all accessible folders will be
@@ -464,13 +468,11 @@ module Google
             #   # Call the search_folders method.
             #   result = client.search_folders request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ResourceManager::V3::Folder.
-            #     p response
+            #     p item
             #   end
             #
             def search_folders request, options = nil
@@ -552,8 +554,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param folder [::Google::Cloud::ResourceManager::V3::Folder, ::Hash]
-            #     Required. The folder being created, only the display name and parent will be
-            #     consulted. All other fields will be ignored.
+            #     Required. The folder being created, only the display name and parent will
+            #     be consulted. All other fields will be ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -575,14 +577,14 @@ module Google
             #   # Call the create_folder method.
             #   result = client.create_folder request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_folder request, options = nil
@@ -623,7 +625,9 @@ module Google
             # Updates a folder, changing its `display_name`.
             # Changes to the folder `display_name` will be rejected if they violate
             # either the `display_name` formatting rules or the naming constraints
-            # described in the {::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder CreateFolder} documentation.
+            # described in the
+            # {::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder CreateFolder}
+            # documentation.
             #
             # The folder's `display_name` must start and end with a letter or digit,
             # may contain letters, digits, spaces, hyphens and underscores and can be
@@ -652,8 +656,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param folder [::Google::Cloud::ResourceManager::V3::Folder, ::Hash]
-            #     Required. The new definition of the Folder. It must include the `name` field, which
-            #     cannot be changed.
+            #     Required. The new definition of the Folder. It must include the `name`
+            #     field, which cannot be changed.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Fields to be updated.
             #     Only the `display_name` can be updated.
@@ -678,14 +682,14 @@ module Google
             #   # Call the update_folder method.
             #   result = client.update_folder request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_folder request, options = nil
@@ -745,9 +749,9 @@ module Google
             # `FolderOperation` message as an aid to stateless clients.
             # Folder moves will be rejected if they violate either the naming, height,
             # or fanout constraints described in the
-            # {::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder CreateFolder} documentation.
-            # The caller must have `resourcemanager.folders.move` permission on the
-            # folder's current and proposed new parent.
+            # {::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder CreateFolder}
+            # documentation. The caller must have `resourcemanager.folders.move`
+            # permission on the folder's current and proposed new parent.
             #
             # @overload move_folder(request, options = nil)
             #   Pass arguments to `move_folder` via a request object, either of type
@@ -768,9 +772,9 @@ module Google
             #     Required. The resource name of the Folder to move.
             #     Must be of the form folders/\\{folder_id}
             #   @param destination_parent [::String]
-            #     Required. The resource name of the folder or organization which should be the
-            #     folder's new parent.
-            #     Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+            #     Required. The resource name of the folder or organization which should be
+            #     the folder's new parent. Must be of the form `folders/{folder_id}` or
+            #     `organizations/{org_id}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -792,14 +796,14 @@ module Google
             #   # Call the move_folder method.
             #   result = client.move_folder request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def move_folder request, options = nil
@@ -846,11 +850,13 @@ module Google
 
             ##
             # Requests deletion of a folder. The folder is moved into the
-            # {::Google::Cloud::ResourceManager::V3::Folder::State::DELETE_REQUESTED DELETE_REQUESTED} state
-            # immediately, and is deleted approximately 30 days later. This method may
-            # only be called on an empty folder, where a folder is empty if it doesn't
-            # contain any folders or projects in the {::Google::Cloud::ResourceManager::V3::Folder::State::ACTIVE ACTIVE} state.
-            # If called on a folder in {::Google::Cloud::ResourceManager::V3::Folder::State::DELETE_REQUESTED DELETE_REQUESTED}
+            # {::Google::Cloud::ResourceManager::V3::Folder::State::DELETE_REQUESTED DELETE_REQUESTED}
+            # state immediately, and is deleted approximately 30 days later. This method
+            # may only be called on an empty folder, where a folder is empty if it
+            # doesn't contain any folders or projects in the
+            # {::Google::Cloud::ResourceManager::V3::Folder::State::ACTIVE ACTIVE} state. If
+            # called on a folder in
+            # {::Google::Cloud::ResourceManager::V3::Folder::State::DELETE_REQUESTED DELETE_REQUESTED}
             # state the operation will result in a no-op success.
             # The caller must have `resourcemanager.folders.delete` permission on the
             # identified folder.
@@ -894,14 +900,14 @@ module Google
             #   # Call the delete_folder method.
             #   result = client.delete_folder request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_folder request, options = nil
@@ -948,14 +954,16 @@ module Google
 
             ##
             # Cancels the deletion request for a folder. This method may be called on a
-            # folder in any state. If the folder is in the {::Google::Cloud::ResourceManager::V3::Folder::State::ACTIVE ACTIVE}
-            # state the result will be a no-op success. In order to succeed, the folder's
-            # parent must be in the {::Google::Cloud::ResourceManager::V3::Folder::State::ACTIVE ACTIVE} state. In addition,
-            # reintroducing the folder into the tree must not violate folder naming,
-            # height, and fanout constraints described in the
-            # {::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder CreateFolder} documentation.
-            # The caller must have `resourcemanager.folders.undelete` permission on the
-            # identified folder.
+            # folder in any state. If the folder is in the
+            # {::Google::Cloud::ResourceManager::V3::Folder::State::ACTIVE ACTIVE} state the
+            # result will be a no-op success. In order to succeed, the folder's parent
+            # must be in the
+            # {::Google::Cloud::ResourceManager::V3::Folder::State::ACTIVE ACTIVE} state. In
+            # addition, reintroducing the folder into the tree must not violate folder
+            # naming, height, and fanout constraints described in the
+            # {::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder CreateFolder}
+            # documentation. The caller must have `resourcemanager.folders.undelete`
+            # permission on the identified folder.
             #
             # @overload undelete_folder(request, options = nil)
             #   Pass arguments to `undelete_folder` via a request object, either of type
@@ -996,14 +1004,14 @@ module Google
             #   # Call the undelete_folder method.
             #   result = client.undelete_folder request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def undelete_folder request, options = nil
@@ -1375,9 +1383,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1419,7 +1427,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudresourcemanager.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudresourcemanager.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

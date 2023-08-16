@@ -25,6 +25,7 @@ require "google/cloud/phishing_protection/v1beta1/version"
 require "google/cloud/phishing_protection/v1beta1/phishing_protection_service/credentials"
 require "google/cloud/phishing_protection/v1beta1/phishing_protection_service/paths"
 require "google/cloud/phishing_protection/v1beta1/phishing_protection_service/client"
+require "google/cloud/phishing_protection/v1beta1/phishing_protection_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service to report phishing URIs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/phishing_protection/v1beta1/phishing_protection_service"
         #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/phishing_protection/v1beta1/phishing_protection_service/rest"
+        #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Rest::Client.new
         #
         module PhishingProtectionService
         end

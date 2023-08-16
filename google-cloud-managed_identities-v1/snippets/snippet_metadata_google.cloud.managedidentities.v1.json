@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-managed_identities-v1",
-    "version": "0.4.0",
+    "version": "0.5.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_CreateMicrosoftAdDomain_sync",
-      "title": "Snippet for create_microsoft_ad_domain in ManagedIdentitiesService",
-      "description": "Basic snippet for create_microsoft_ad_domain in ManagedIdentitiesService",
+      "title": "Snippet for the create_microsoft_ad_domain call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#create_microsoft_ad_domain. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/create_microsoft_ad_domain.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ResetAdminPassword_sync",
-      "title": "Snippet for reset_admin_password in ManagedIdentitiesService",
-      "description": "Basic snippet for reset_admin_password in ManagedIdentitiesService",
+      "title": "Snippet for the reset_admin_password call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#reset_admin_password. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/reset_admin_password.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ListDomains_sync",
-      "title": "Snippet for list_domains in ManagedIdentitiesService",
-      "description": "Basic snippet for list_domains in ManagedIdentitiesService",
+      "title": "Snippet for the list_domains call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#list_domains. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/list_domains.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_GetDomain_sync",
-      "title": "Snippet for get_domain in ManagedIdentitiesService",
-      "description": "Basic snippet for get_domain in ManagedIdentitiesService",
+      "title": "Snippet for the get_domain call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#get_domain. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/get_domain.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_UpdateDomain_sync",
-      "title": "Snippet for update_domain in ManagedIdentitiesService",
-      "description": "Basic snippet for update_domain in ManagedIdentitiesService",
+      "title": "Snippet for the update_domain call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#update_domain. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/update_domain.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_sync",
-      "title": "Snippet for delete_domain in ManagedIdentitiesService",
-      "description": "Basic snippet for delete_domain in ManagedIdentitiesService",
+      "title": "Snippet for the delete_domain call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#delete_domain. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/delete_domain.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_sync",
-      "title": "Snippet for attach_trust in ManagedIdentitiesService",
-      "description": "Basic snippet for attach_trust in ManagedIdentitiesService",
+      "title": "Snippet for the attach_trust call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#attach_trust. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/attach_trust.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ReconfigureTrust_sync",
-      "title": "Snippet for reconfigure_trust in ManagedIdentitiesService",
-      "description": "Basic snippet for reconfigure_trust in ManagedIdentitiesService",
+      "title": "Snippet for the reconfigure_trust call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#reconfigure_trust. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/reconfigure_trust.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_DetachTrust_sync",
-      "title": "Snippet for detach_trust in ManagedIdentitiesService",
-      "description": "Basic snippet for detach_trust in ManagedIdentitiesService",
+      "title": "Snippet for the detach_trust call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#detach_trust. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/detach_trust.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ValidateTrust_sync",
-      "title": "Snippet for validate_trust in ManagedIdentitiesService",
-      "description": "Basic snippet for validate_trust in ManagedIdentitiesService",
+      "title": "Snippet for the validate_trust call in the ManagedIdentitiesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#validate_trust. It may require modification in order to execute successfully.",
       "file": "managed_identities_service/validate_trust.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

@@ -24,9 +24,9 @@ module Google
     module BeyondCorp
       module AppConnections
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/beyond_corp/app_connections/v1"
         #     client = ::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client.new

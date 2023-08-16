@@ -35,7 +35,8 @@ module Google
         #     Feature importance score, only populated when cross-feature monitoring is
         #     enabled. For now only used to represent feature attribution score within
         #     range [0, 1] for
-        #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringObjectiveType::FEATURE_ATTRIBUTION_SKEW ModelDeploymentMonitoringObjectiveType.FEATURE_ATTRIBUTION_SKEW} and
+        #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringObjectiveType::FEATURE_ATTRIBUTION_SKEW ModelDeploymentMonitoringObjectiveType.FEATURE_ATTRIBUTION_SKEW}
+        #     and
         #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringObjectiveType::FEATURE_ATTRIBUTION_DRIFT ModelDeploymentMonitoringObjectiveType.FEATURE_ATTRIBUTION_DRIFT}.
         # @!attribute [rw] stats_uri
         #   @return [::String]

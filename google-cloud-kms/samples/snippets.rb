@@ -751,7 +751,7 @@ class Snippets
     # Print the policy.
     puts "Policy for #{resource_name}"
     policy.bindings.each do |bind|
-      puts bind.role.to_s
+      puts bind.role
       bind.members.each do |member|
         puts "- #{member}"
       end
@@ -827,7 +827,7 @@ class Snippets
     # Example of iterating over key rings.
     puts "Key rings in #{location_name}"
     key_rings.each do |key_ring|
-      puts key_ring.name.to_s
+      puts key_ring.name
     end
     # [END kms_quickstart]
 

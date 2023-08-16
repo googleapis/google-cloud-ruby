@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/admin/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token
+# Snippet for the generate_consistency_token call in the BigtableTableAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token.
+# It may require modification in order to execute successfully.
 #
 def generate_consistency_token
   # Create a client object. The client can be reused for multiple calls.

@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/servicedirectory/v1beta1/lookup_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -128,7 +129,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -138,6 +139,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @lookup_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Stub,
                 credentials:  credentials,
@@ -146,6 +153,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -172,8 +186,8 @@ module Google
             #   @param name [::String]
             #     Required. The name of the service to resolve.
             #   @param max_endpoints [::Integer]
-            #     Optional. The maximum number of endpoints to return. Defaults to 25. Maximum is 100.
-            #     If a value less than one is specified, the Default is used.
+            #     Optional. The maximum number of endpoints to return. Defaults to 25.
+            #     Maximum is 100. If a value less than one is specified, the Default is used.
             #     If a value greater than the Maximum is specified, the Maximum is used.
             #   @param endpoint_filter [::String]
             #     Optional. The filter applied to the endpoints of the resolved service.
@@ -200,6 +214,9 @@ module Google
             #     `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
             #         returns endpoints that have name that is alphabetically later than the
             #         string, so "endpoint-e" is returned but "endpoint-a" is not
+            #     *
+            #     `name=projects/my-project/locations/us-central1/namespaces/my-namespace/services/my-service/endpoints/ep-1`
+            #          returns the endpoint that has an endpoint_id equal to `ep-1`
             #     *   `metadata.owner!=sd AND metadata.foo=bar` returns endpoints that have
             #         `owner` in annotation key but value is not `sd` AND have key/value
             #          `foo=bar`
@@ -312,9 +329,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -356,7 +373,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "servicedirectory.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "servicedirectory.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

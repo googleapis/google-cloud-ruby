@@ -23,12 +23,17 @@ module Google
   module Cloud
     module Tasks
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/tasks/v2beta3"
       #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/tasks/v2beta3"
+      #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
       #
       module V2beta3
       end

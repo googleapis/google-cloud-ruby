@@ -20,8 +20,11 @@
 require "google/cloud/error_reporting/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client#report_error_event
+# Snippet for the report_error_event call in the ReportErrorsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client#report_error_event.
+# It may require modification in order to execute successfully.
 #
 def report_error_event
   # Create a client object. The client can be reused for multiple calls.

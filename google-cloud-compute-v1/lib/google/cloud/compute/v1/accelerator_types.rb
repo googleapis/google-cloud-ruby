@@ -33,9 +33,9 @@ module Google
         #
         # The AcceleratorTypes API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/accelerator_types"
+        #     require "google/cloud/compute/v1/accelerator_types/rest"
         #     client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client.new
         #
         module AcceleratorTypes

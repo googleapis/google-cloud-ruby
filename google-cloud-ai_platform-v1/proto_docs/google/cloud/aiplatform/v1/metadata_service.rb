@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_store MetadataService.CreateMetadataStore}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_store MetadataService.CreateMetadataStore}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location where the MetadataStore should
@@ -45,7 +46,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details of operations that perform {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_store MetadataService.CreateMetadataStore}.
+        # Details of operations that perform
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_store MetadataService.CreateMetadataStore}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     Operation metadata for creating a MetadataStore.
@@ -54,7 +56,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_metadata_store MetadataService.GetMetadataStore}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_metadata_store MetadataService.GetMetadataStore}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the MetadataStore to retrieve.
@@ -65,7 +68,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The Location whose MetadataStores should be listed.
@@ -79,8 +83,8 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
-        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores} call. Provide this to retrieve the
-        #     subsequent page.
+        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other provided parameters must match the call that
         #     provided the page token. (Otherwise the request will fail with
@@ -90,21 +94,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}.
         # @!attribute [rw] metadata_stores
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::MetadataStore>]
         #     The MetadataStores found for the Location.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as
-        #     {::Google::Cloud::AIPlatform::V1::ListMetadataStoresRequest#page_token ListMetadataStoresRequest.page_token} to retrieve the next
-        #     page. If this field is not populated, there are no subsequent pages.
+        #     {::Google::Cloud::AIPlatform::V1::ListMetadataStoresRequest#page_token ListMetadataStoresRequest.page_token}
+        #     to retrieve the next page. If this field is not populated, there are no
+        #     subsequent pages.
         class ListMetadataStoresResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_metadata_store MetadataService.DeleteMetadataStore}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_metadata_store MetadataService.DeleteMetadataStore}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the MetadataStore to delete.
@@ -118,7 +125,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details of operations that perform {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_metadata_store MetadataService.DeleteMetadataStore}.
+        # Details of operations that perform
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_metadata_store MetadataService.DeleteMetadataStore}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     Operation metadata for deleting a MetadataStore.
@@ -127,7 +135,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_artifact MetadataService.CreateArtifact}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_artifact MetadataService.CreateArtifact}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the MetadataStore where the Artifact should
@@ -151,7 +160,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_artifact MetadataService.GetArtifact}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_artifact MetadataService.GetArtifact}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Artifact to retrieve.
@@ -162,7 +172,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The MetadataStore whose Artifacts should be listed.
@@ -174,7 +185,8 @@ module Google
         #     Must be in range 1-1000, inclusive. Defaults to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}
+        #     A page token, received from a previous
+        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}
         #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other provided parameters must match the call that
@@ -198,6 +210,9 @@ module Google
         #         To filter on metadata fields use traversal operation as follows:
         #         `metadata.<field_name>.<type_value>`.
         #         For example: `metadata.field_1.number_value = 10.0`
+        #         In case the field name contains special characters (such as colon), one
+        #         can embed it inside double quote.
+        #         For example: `metadata."field:1".number_value = 10.0`
         #     *   **Context based filtering**:
         #         To filter Artifacts based on the contexts to which they belong, use the
         #         function operator with the full resource name
@@ -223,13 +238,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}.
         # @!attribute [rw] artifacts
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Artifact>]
         #     The Artifacts retrieved from the MetadataStore.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as {::Google::Cloud::AIPlatform::V1::ListArtifactsRequest#page_token ListArtifactsRequest.page_token}
+        #     A token, which can be sent as
+        #     {::Google::Cloud::AIPlatform::V1::ListArtifactsRequest#page_token ListArtifactsRequest.page_token}
         #     to retrieve the next page.
         #     If this field is not populated, there are no subsequent pages.
         class ListArtifactsResponse
@@ -237,28 +254,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#update_artifact MetadataService.UpdateArtifact}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#update_artifact MetadataService.UpdateArtifact}.
         # @!attribute [rw] artifact
         #   @return [::Google::Cloud::AIPlatform::V1::Artifact]
         #     Required. The Artifact containing updates.
-        #     The Artifact's {::Google::Cloud::AIPlatform::V1::Artifact#name Artifact.name} field is used to identify the Artifact to
-        #     be updated.
-        #     Format:
+        #     The Artifact's {::Google::Cloud::AIPlatform::V1::Artifact#name Artifact.name}
+        #     field is used to identify the Artifact to be updated. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. A FieldMask indicating which fields should be updated.
-        #     Functionality of this field is not yet supported.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
+        #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
+        #     not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
         #     created.
         class UpdateArtifactRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_artifact MetadataService.DeleteArtifact}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_artifact MetadataService.DeleteArtifact}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Artifact to delete.
@@ -274,7 +292,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_artifacts MetadataService.PurgeArtifacts}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_artifacts MetadataService.PurgeArtifacts}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The metadata store to purge Artifacts from.
@@ -294,7 +313,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_artifacts MetadataService.PurgeArtifacts}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_artifacts MetadataService.PurgeArtifacts}.
         # @!attribute [rw] purge_count
         #   @return [::Integer]
         #     The number of Artifacts that this request deleted (or, if `force` is false,
@@ -309,7 +329,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details of operations that perform {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_artifacts MetadataService.PurgeArtifacts}.
+        # Details of operations that perform
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_artifacts MetadataService.PurgeArtifacts}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     Operation metadata for purging Artifacts.
@@ -318,12 +339,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_context MetadataService.CreateContext}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_context MetadataService.CreateContext}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the MetadataStore where the Context should be
-        #     created.
-        #     Format:
+        #     Required. The resource name of the MetadataStore where the Context should
+        #     be created. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
         # @!attribute [rw] context
         #   @return [::Google::Cloud::AIPlatform::V1::Context]
@@ -342,7 +363,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_context MetadataService.GetContext}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_context MetadataService.GetContext}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Context to retrieve.
@@ -353,7 +375,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The MetadataStore whose Contexts should be listed.
@@ -365,7 +388,8 @@ module Google
         #     Must be in range 1-1000, inclusive. Defaults to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
+        #     A page token, received from a previous
+        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
         #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other provided parameters must match the call that
@@ -389,6 +413,9 @@ module Google
         #        To filter on metadata fields use traversal operation as follows:
         #        `metadata.<field_name>.<type_value>`.
         #        For example: `metadata.field_1.number_value = 10.0`.
+        #        In case the field name contains special characters (such as colon), one
+        #        can embed it inside double quote.
+        #        For example: `metadata."field:1".number_value = 10.0`
         #     *  **Parent Child filtering**:
         #        To filter Contexts based on parent-child relationship use the HAS
         #        operator as follows:
@@ -418,13 +445,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}.
         # @!attribute [rw] contexts
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Context>]
         #     The Contexts retrieved from the MetadataStore.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as {::Google::Cloud::AIPlatform::V1::ListContextsRequest#page_token ListContextsRequest.page_token}
+        #     A token, which can be sent as
+        #     {::Google::Cloud::AIPlatform::V1::ListContextsRequest#page_token ListContextsRequest.page_token}
         #     to retrieve the next page.
         #     If this field is not populated, there are no subsequent pages.
         class ListContextsResponse
@@ -432,28 +461,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#update_context MetadataService.UpdateContext}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#update_context MetadataService.UpdateContext}.
         # @!attribute [rw] context
         #   @return [::Google::Cloud::AIPlatform::V1::Context]
         #     Required. The Context containing updates.
-        #     The Context's {::Google::Cloud::AIPlatform::V1::Context#name Context.name} field is used to identify the Context to be
-        #     updated.
-        #     Format:
+        #     The Context's {::Google::Cloud::AIPlatform::V1::Context#name Context.name} field
+        #     is used to identify the Context to be updated. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. A FieldMask indicating which fields should be updated.
-        #     Functionality of this field is not yet supported.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is
-        #     created.
+        #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is
+        #     not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is created.
         class UpdateContextRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_context MetadataService.DeleteContext}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_context MetadataService.DeleteContext}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Context to delete.
@@ -473,7 +502,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_contexts MetadataService.PurgeContexts}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_contexts MetadataService.PurgeContexts}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The metadata store to purge Contexts from.
@@ -493,7 +523,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_contexts MetadataService.PurgeContexts}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_contexts MetadataService.PurgeContexts}.
         # @!attribute [rw] purge_count
         #   @return [::Integer]
         #     The number of Contexts that this request deleted (or, if `force` is false,
@@ -508,7 +539,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details of operations that perform {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_contexts MetadataService.PurgeContexts}.
+        # Details of operations that perform
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_contexts MetadataService.PurgeContexts}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     Operation metadata for purging Contexts.
@@ -517,12 +549,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_artifacts_and_executions MetadataService.AddContextArtifactsAndExecutions}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_artifacts_and_executions MetadataService.AddContextArtifactsAndExecutions}.
         # @!attribute [rw] context
         #   @return [::String]
-        #     Required. The resource name of the Context that the Artifacts and Executions
-        #     belong to.
-        #     Format:
+        #     Required. The resource name of the Context that the Artifacts and
+        #     Executions belong to. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
         # @!attribute [rw] artifacts
         #   @return [::Array<::String>]
@@ -542,13 +574,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_artifacts_and_executions MetadataService.AddContextArtifactsAndExecutions}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_artifacts_and_executions MetadataService.AddContextArtifactsAndExecutions}.
         class AddContextArtifactsAndExecutionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_children MetadataService.AddContextChildren}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_children MetadataService.AddContextChildren}.
         # @!attribute [rw] context
         #   @return [::String]
         #     Required. The resource name of the parent Context.
@@ -563,7 +597,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_children MetadataService.AddContextChildren}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_context_children MetadataService.AddContextChildren}.
         class AddContextChildrenResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -585,13 +620,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#remove_context_children MetadataService.RemoveContextChildren}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#remove_context_children MetadataService.RemoveContextChildren}.
         class RemoveContextChildrenResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_context_lineage_subgraph MetadataService.QueryContextLineageSubgraph}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_context_lineage_subgraph MetadataService.QueryContextLineageSubgraph}.
         # @!attribute [rw] context
         #   @return [::String]
         #     Required. The resource name of the Context whose Artifacts and Executions
@@ -607,7 +644,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_execution MetadataService.CreateExecution}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_execution MetadataService.CreateExecution}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the MetadataStore where the Execution should
@@ -632,7 +670,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_execution MetadataService.GetExecution}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_execution MetadataService.GetExecution}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Execution to retrieve.
@@ -643,7 +682,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The MetadataStore whose Executions should be listed.
@@ -655,7 +695,8 @@ module Google
         #     Must be in range 1-1000, inclusive. Defaults to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}
+        #     A page token, received from a previous
+        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}
         #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other provided parameters must match the call that
@@ -679,6 +720,9 @@ module Google
         #        To filter on metadata fields use traversal operation as follows:
         #        `metadata.<field_name>.<type_value>`
         #        For example: `metadata.field_1.number_value = 10.0`
+        #        In case the field name contains special characters (such as colon), one
+        #        can embed it inside double quote.
+        #        For example: `metadata."field:1".number_value = 10.0`
         #     *  **Context based filtering**:
         #        To filter Executions based on the contexts to which they belong use
         #        the function operator with the full resource name:
@@ -704,13 +748,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}.
         # @!attribute [rw] executions
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Execution>]
         #     The Executions retrieved from the MetadataStore.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as {::Google::Cloud::AIPlatform::V1::ListExecutionsRequest#page_token ListExecutionsRequest.page_token}
+        #     A token, which can be sent as
+        #     {::Google::Cloud::AIPlatform::V1::ListExecutionsRequest#page_token ListExecutionsRequest.page_token}
         #     to retrieve the next page.
         #     If this field is not populated, there are no subsequent pages.
         class ListExecutionsResponse
@@ -718,28 +764,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#update_execution MetadataService.UpdateExecution}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#update_execution MetadataService.UpdateExecution}.
         # @!attribute [rw] execution
         #   @return [::Google::Cloud::AIPlatform::V1::Execution]
         #     Required. The Execution containing updates.
-        #     The Execution's {::Google::Cloud::AIPlatform::V1::Execution#name Execution.name} field is used to identify the Execution
-        #     to be updated.
-        #     Format:
+        #     The Execution's {::Google::Cloud::AIPlatform::V1::Execution#name Execution.name}
+        #     field is used to identify the Execution to be updated. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. A FieldMask indicating which fields should be updated.
-        #     Functionality of this field is not yet supported.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution} is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution}
-        #     is created.
+        #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution}
+        #     is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution} is
+        #     created.
         class UpdateExecutionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_execution MetadataService.DeleteExecution}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#delete_execution MetadataService.DeleteExecution}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Execution to delete.
@@ -755,7 +802,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_executions MetadataService.PurgeExecutions}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_executions MetadataService.PurgeExecutions}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The metadata store to purge Executions from.
@@ -775,7 +823,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_executions MetadataService.PurgeExecutions}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_executions MetadataService.PurgeExecutions}.
         # @!attribute [rw] purge_count
         #   @return [::Integer]
         #     The number of Executions that this request deleted (or, if `force` is
@@ -791,7 +840,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details of operations that perform {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_executions MetadataService.PurgeExecutions}.
+        # Details of operations that perform
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#purge_executions MetadataService.PurgeExecutions}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     Operation metadata for purging Executions.
@@ -800,7 +850,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_execution_events MetadataService.AddExecutionEvents}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_execution_events MetadataService.AddExecutionEvents}.
         # @!attribute [rw] execution
         #   @return [::String]
         #     Required. The resource name of the Execution that the Events connect
@@ -815,30 +866,31 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_execution_events MetadataService.AddExecutionEvents}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#add_execution_events MetadataService.AddExecutionEvents}.
         class AddExecutionEventsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_execution_inputs_and_outputs MetadataService.QueryExecutionInputsAndOutputs}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_execution_inputs_and_outputs MetadataService.QueryExecutionInputsAndOutputs}.
         # @!attribute [rw] execution
         #   @return [::String]
-        #     Required. The resource name of the Execution whose input and output Artifacts should
-        #     be retrieved as a LineageSubgraph.
-        #     Format:
+        #     Required. The resource name of the Execution whose input and output
+        #     Artifacts should be retrieved as a LineageSubgraph. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
         class QueryExecutionInputsAndOutputsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_schema MetadataService.CreateMetadataSchema}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_schema MetadataService.CreateMetadataSchema}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the MetadataStore where the MetadataSchema should
-        #     be created.
-        #     Format:
+        #     Required. The resource name of the MetadataStore where the MetadataSchema
+        #     should be created. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
         # @!attribute [rw] metadata_schema
         #   @return [::Google::Cloud::AIPlatform::V1::MetadataSchema]
@@ -858,7 +910,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_metadata_schema MetadataService.GetMetadataSchema}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#get_metadata_schema MetadataService.GetMetadataSchema}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the MetadataSchema to retrieve.
@@ -869,7 +922,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The MetadataStore whose MetadataSchemas should be listed.
@@ -883,8 +937,8 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
-        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
-        #     next page.
+        #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}
+        #     call. Provide this to retrieve the next page.
         #
         #     When paginating, all other provided parameters must match the call that
         #     provided the page token. (Otherwise the request will fail with
@@ -897,26 +951,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}.
         # @!attribute [rw] metadata_schemas
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::MetadataSchema>]
         #     The MetadataSchemas found for the MetadataStore.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as
-        #     {::Google::Cloud::AIPlatform::V1::ListMetadataSchemasRequest#page_token ListMetadataSchemasRequest.page_token} to retrieve the next
-        #     page. If this field is not populated, there are no subsequent pages.
+        #     {::Google::Cloud::AIPlatform::V1::ListMetadataSchemasRequest#page_token ListMetadataSchemasRequest.page_token}
+        #     to retrieve the next page. If this field is not populated, there are no
+        #     subsequent pages.
         class ListMetadataSchemasResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_artifact_lineage_subgraph MetadataService.QueryArtifactLineageSubgraph}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_artifact_lineage_subgraph MetadataService.QueryArtifactLineageSubgraph}.
         # @!attribute [rw] artifact
         #   @return [::String]
-        #     Required. The resource name of the Artifact whose Lineage needs to be retrieved as a
-        #     LineageSubgraph.
-        #     Format:
+        #     Required. The resource name of the Artifact whose Lineage needs to be
+        #     retrieved as a LineageSubgraph. Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
         #
         #     The request may error with FAILED_PRECONDITION if the number of Artifacts,
@@ -947,6 +1003,9 @@ module Google
         #        To filter on metadata fields use traversal operation as follows:
         #        `metadata.<field_name>.<type_value>`.
         #        For example: `metadata.field_1.number_value = 10.0`
+        #        In case the field name contains special characters (such as colon), one
+        #        can embed it inside double quote.
+        #        For example: `metadata."field:1".number_value = 10.0`
         #
         #     Each of the above supported filter types can be combined together using
         #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed

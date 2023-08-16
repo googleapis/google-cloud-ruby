@@ -23,12 +23,17 @@ module Google
   module Cloud
     module VpcAccess
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/vpc_access/v1"
       #     client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/vpc_access/v1"
+      #     client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new
       #
       module V1
       end

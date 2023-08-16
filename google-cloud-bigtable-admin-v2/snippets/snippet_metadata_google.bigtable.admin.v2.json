@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigtable-admin-v2",
-    "version": "0.15.0",
+    "version": "0.17.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateInstance_sync",
-      "title": "Snippet for create_instance in BigtableInstanceAdmin",
-      "description": "Basic snippet for create_instance in BigtableInstanceAdmin",
+      "title": "Snippet for the create_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetInstance_sync",
-      "title": "Snippet for get_instance in BigtableInstanceAdmin",
-      "description": "Basic snippet for get_instance in BigtableInstanceAdmin",
+      "title": "Snippet for the get_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListInstances_sync",
-      "title": "Snippet for list_instances in BigtableInstanceAdmin",
-      "description": "Basic snippet for list_instances in BigtableInstanceAdmin",
+      "title": "Snippet for the list_instances call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_sync",
-      "title": "Snippet for update_instance in BigtableInstanceAdmin",
-      "description": "Basic snippet for update_instance in BigtableInstanceAdmin",
+      "title": "Snippet for the update_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateInstance_sync",
-      "title": "Snippet for partial_update_instance in BigtableInstanceAdmin",
-      "description": "Basic snippet for partial_update_instance in BigtableInstanceAdmin",
+      "title": "Snippet for the partial_update_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_instance. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/partial_update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in BigtableInstanceAdmin",
-      "description": "Basic snippet for delete_instance in BigtableInstanceAdmin",
+      "title": "Snippet for the delete_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateCluster_sync",
-      "title": "Snippet for create_cluster in BigtableInstanceAdmin",
-      "description": "Basic snippet for create_cluster in BigtableInstanceAdmin",
+      "title": "Snippet for the create_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_cluster. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/create_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetCluster_sync",
-      "title": "Snippet for get_cluster in BigtableInstanceAdmin",
-      "description": "Basic snippet for get_cluster in BigtableInstanceAdmin",
+      "title": "Snippet for the get_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_cluster. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/get_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListClusters_sync",
-      "title": "Snippet for list_clusters in BigtableInstanceAdmin",
-      "description": "Basic snippet for list_clusters in BigtableInstanceAdmin",
+      "title": "Snippet for the list_clusters call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_clusters. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/list_clusters.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateCluster_sync",
-      "title": "Snippet for update_cluster in BigtableInstanceAdmin",
-      "description": "Basic snippet for update_cluster in BigtableInstanceAdmin",
+      "title": "Snippet for the update_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_cluster. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/update_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateCluster_sync",
-      "title": "Snippet for partial_update_cluster in BigtableInstanceAdmin",
-      "description": "Basic snippet for partial_update_cluster in BigtableInstanceAdmin",
+      "title": "Snippet for the partial_update_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_cluster. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/partial_update_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteCluster_sync",
-      "title": "Snippet for delete_cluster in BigtableInstanceAdmin",
-      "description": "Basic snippet for delete_cluster in BigtableInstanceAdmin",
+      "title": "Snippet for the delete_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/delete_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateAppProfile_sync",
-      "title": "Snippet for create_app_profile in BigtableInstanceAdmin",
-      "description": "Basic snippet for create_app_profile in BigtableInstanceAdmin",
+      "title": "Snippet for the create_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_app_profile. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/create_app_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetAppProfile_sync",
-      "title": "Snippet for get_app_profile in BigtableInstanceAdmin",
-      "description": "Basic snippet for get_app_profile in BigtableInstanceAdmin",
+      "title": "Snippet for the get_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_app_profile. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/get_app_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListAppProfiles_sync",
-      "title": "Snippet for list_app_profiles in BigtableInstanceAdmin",
-      "description": "Basic snippet for list_app_profiles in BigtableInstanceAdmin",
+      "title": "Snippet for the list_app_profiles call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_app_profiles. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/list_app_profiles.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateAppProfile_sync",
-      "title": "Snippet for update_app_profile in BigtableInstanceAdmin",
-      "description": "Basic snippet for update_app_profile in BigtableInstanceAdmin",
+      "title": "Snippet for the update_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_app_profile. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/update_app_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteAppProfile_sync",
-      "title": "Snippet for delete_app_profile in BigtableInstanceAdmin",
-      "description": "Basic snippet for delete_app_profile in BigtableInstanceAdmin",
+      "title": "Snippet for the delete_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_app_profile. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/delete_app_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in BigtableInstanceAdmin",
-      "description": "Basic snippet for get_iam_policy in BigtableInstanceAdmin",
+      "title": "Snippet for the get_iam_policy call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in BigtableInstanceAdmin",
-      "description": "Basic snippet for set_iam_policy in BigtableInstanceAdmin",
+      "title": "Snippet for the set_iam_policy call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in BigtableInstanceAdmin",
-      "description": "Basic snippet for test_iam_permissions in BigtableInstanceAdmin",
+      "title": "Snippet for the test_iam_permissions call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListHotTablets_sync",
-      "title": "Snippet for list_hot_tablets in BigtableInstanceAdmin",
-      "description": "Basic snippet for list_hot_tablets in BigtableInstanceAdmin",
+      "title": "Snippet for the list_hot_tablets call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_hot_tablets. It may require modification in order to execute successfully.",
       "file": "bigtable_instance_admin/list_hot_tablets.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTable_sync",
-      "title": "Snippet for create_table in BigtableTableAdmin",
-      "description": "Basic snippet for create_table in BigtableTableAdmin",
+      "title": "Snippet for the create_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/create_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTableFromSnapshot_sync",
-      "title": "Snippet for create_table_from_snapshot in BigtableTableAdmin",
-      "description": "Basic snippet for create_table_from_snapshot in BigtableTableAdmin",
+      "title": "Snippet for the create_table_from_snapshot call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table_from_snapshot. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/create_table_from_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListTables_sync",
-      "title": "Snippet for list_tables in BigtableTableAdmin",
-      "description": "Basic snippet for list_tables in BigtableTableAdmin",
+      "title": "Snippet for the list_tables call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/list_tables.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetTable_sync",
-      "title": "Snippet for get_table in BigtableTableAdmin",
-      "description": "Basic snippet for get_table in BigtableTableAdmin",
+      "title": "Snippet for the get_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/get_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateTable_sync",
-      "title": "Snippet for update_table in BigtableTableAdmin",
-      "description": "Basic snippet for update_table in BigtableTableAdmin",
+      "title": "Snippet for the update_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/update_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteTable_sync",
-      "title": "Snippet for delete_table in BigtableTableAdmin",
-      "description": "Basic snippet for delete_table in BigtableTableAdmin",
+      "title": "Snippet for the delete_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/delete_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UndeleteTable_sync",
-      "title": "Snippet for undelete_table in BigtableTableAdmin",
-      "description": "Basic snippet for undelete_table in BigtableTableAdmin",
+      "title": "Snippet for the undelete_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/undelete_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ModifyColumnFamilies_sync",
-      "title": "Snippet for modify_column_families in BigtableTableAdmin",
-      "description": "Basic snippet for modify_column_families in BigtableTableAdmin",
+      "title": "Snippet for the modify_column_families call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#modify_column_families. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/modify_column_families.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DropRowRange_sync",
-      "title": "Snippet for drop_row_range in BigtableTableAdmin",
-      "description": "Basic snippet for drop_row_range in BigtableTableAdmin",
+      "title": "Snippet for the drop_row_range call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#drop_row_range. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/drop_row_range.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GenerateConsistencyToken_sync",
-      "title": "Snippet for generate_consistency_token in BigtableTableAdmin",
-      "description": "Basic snippet for generate_consistency_token in BigtableTableAdmin",
+      "title": "Snippet for the generate_consistency_token call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/generate_consistency_token.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CheckConsistency_sync",
-      "title": "Snippet for check_consistency in BigtableTableAdmin",
-      "description": "Basic snippet for check_consistency in BigtableTableAdmin",
+      "title": "Snippet for the check_consistency call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#check_consistency. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/check_consistency.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_SnapshotTable_sync",
-      "title": "Snippet for snapshot_table in BigtableTableAdmin",
-      "description": "Basic snippet for snapshot_table in BigtableTableAdmin",
+      "title": "Snippet for the snapshot_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#snapshot_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/snapshot_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetSnapshot_sync",
-      "title": "Snippet for get_snapshot in BigtableTableAdmin",
-      "description": "Basic snippet for get_snapshot in BigtableTableAdmin",
+      "title": "Snippet for the get_snapshot call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_snapshot. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/get_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListSnapshots_sync",
-      "title": "Snippet for list_snapshots in BigtableTableAdmin",
-      "description": "Basic snippet for list_snapshots in BigtableTableAdmin",
+      "title": "Snippet for the list_snapshots call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_snapshots. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/list_snapshots.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSnapshot_sync",
-      "title": "Snippet for delete_snapshot in BigtableTableAdmin",
-      "description": "Basic snippet for delete_snapshot in BigtableTableAdmin",
+      "title": "Snippet for the delete_snapshot call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_snapshot. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/delete_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateBackup_sync",
-      "title": "Snippet for create_backup in BigtableTableAdmin",
-      "description": "Basic snippet for create_backup in BigtableTableAdmin",
+      "title": "Snippet for the create_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/create_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetBackup_sync",
-      "title": "Snippet for get_backup in BigtableTableAdmin",
-      "description": "Basic snippet for get_backup in BigtableTableAdmin",
+      "title": "Snippet for the get_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/get_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,15 +1526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateBackup_sync",
-      "title": "Snippet for update_backup in BigtableTableAdmin",
-      "description": "Basic snippet for update_backup in BigtableTableAdmin",
+      "title": "Snippet for the update_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_backup. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/update_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,15 +1566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteBackup_sync",
-      "title": "Snippet for delete_backup in BigtableTableAdmin",
-      "description": "Basic snippet for delete_backup in BigtableTableAdmin",
+      "title": "Snippet for the delete_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_backup. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/delete_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,15 +1606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListBackups_sync",
-      "title": "Snippet for list_backups in BigtableTableAdmin",
-      "description": "Basic snippet for list_backups in BigtableTableAdmin",
+      "title": "Snippet for the list_backups call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/list_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,15 +1646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_RestoreTable_sync",
-      "title": "Snippet for restore_table in BigtableTableAdmin",
-      "description": "Basic snippet for restore_table in BigtableTableAdmin",
+      "title": "Snippet for the restore_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#restore_table. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/restore_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,15 +1686,55 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CopyBackup_sync",
+      "title": "Snippet for the copy_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup. It may require modification in order to execute successfully.",
+      "file": "bigtable_table_admin/copy_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "copy_backup",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CopyBackup",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CopyBackup",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in BigtableTableAdmin",
-      "description": "Basic snippet for get_iam_policy in BigtableTableAdmin",
+      "title": "Snippet for the get_iam_policy call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,15 +1766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in BigtableTableAdmin",
-      "description": "Basic snippet for set_iam_policy in BigtableTableAdmin",
+      "title": "Snippet for the set_iam_policy call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,15 +1806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in BigtableTableAdmin",
-      "description": "Basic snippet for test_iam_permissions in BigtableTableAdmin",
+      "title": "Snippet for the test_iam_permissions call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "bigtable_table_admin/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

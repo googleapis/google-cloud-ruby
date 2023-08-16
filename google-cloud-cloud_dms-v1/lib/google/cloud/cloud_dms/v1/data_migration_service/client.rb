@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/clouddms/v1/clouddms_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -103,6 +105,44 @@ module Google
 
                 default_config.rpcs.delete_connection_profile.timeout = 60.0
 
+                default_config.rpcs.create_private_connection.timeout = 60.0
+
+                default_config.rpcs.get_private_connection.timeout = 60.0
+
+                default_config.rpcs.list_private_connections.timeout = 60.0
+
+                default_config.rpcs.delete_private_connection.timeout = 60.0
+
+                default_config.rpcs.get_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.list_conversion_workspaces.timeout = 60.0
+
+                default_config.rpcs.create_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.update_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.delete_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.seed_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.import_mapping_rules.timeout = 60.0
+
+                default_config.rpcs.convert_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.commit_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.rollback_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.apply_conversion_workspace.timeout = 60.0
+
+                default_config.rpcs.describe_database_entities.timeout = 60.0
+
+                default_config.rpcs.search_background_jobs.timeout = 60.0
+
+                default_config.rpcs.describe_conversion_workspace_revisions.timeout = 60.0
+
+                default_config.rpcs.fetch_static_ips.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -162,7 +202,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -173,6 +213,18 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
@@ -193,6 +245,20 @@ module Google
             # @return [::Google::Cloud::CloudDMS::V1::DataMigrationService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -215,11 +281,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns this collection of migrationJobs.
+            #     Required. The parent which owns this collection of migrationJobs.
             #   @param page_size [::Integer]
             #     The maximum number of migration jobs to return. The service may return
             #     fewer than this value. If unspecified, at most 50 migration jobs will be
-            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     returned. The maximum value is 1000; values above 1000 are coerced to
             #     1000.
             #   @param page_token [::String]
             #     The nextPageToken value received in the previous call to
@@ -261,13 +327,11 @@ module Google
             #   # Call the list_migration_jobs method.
             #   result = client.list_migration_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CloudDMS::V1::MigrationJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_migration_jobs request, options = nil
@@ -416,7 +480,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns this collection of migration jobs.
+            #     Required. The parent which owns this collection of migration jobs.
             #   @param migration_job_id [::String]
             #     Required. The ID of the instance to create.
             #   @param migration_job [::Google::Cloud::CloudDMS::V1::MigrationJob, ::Hash]
@@ -424,12 +488,12 @@ module Google
             #     job](https://cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.migrationJobs)
             #     object.
             #   @param request_id [::String]
-            #     A unique id used to identify the request. If the server receives two
-            #     requests with the same id, then the second request will be ignored.
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
             #
             #     It is recommended to always set this value to a UUID.
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
             #     (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -452,14 +516,14 @@ module Google
             #   # Call the create_migration_job method.
             #   result = client.create_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_migration_job request, options = nil
@@ -523,17 +587,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     migration job resource by the update.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the conversion workspace resource.
             #   @param migration_job [::Google::Cloud::CloudDMS::V1::MigrationJob, ::Hash]
             #     Required. The migration job parameters to update.
             #   @param request_id [::String]
-            #     A unique id used to identify the request. If the server receives two
-            #     requests with the same id, then the second request will be ignored.
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
             #
             #     It is recommended to always set this value to a UUID.
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
             #     (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -556,14 +620,14 @@ module Google
             #   # Call the update_migration_job method.
             #   result = client.update_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_migration_job request, options = nil
@@ -629,12 +693,12 @@ module Google
             #   @param name [::String]
             #     Required. Name of the migration job resource to delete.
             #   @param request_id [::String]
-            #     A unique id used to identify the request. If the server receives two
-            #     requests with the same id, then the second request will be ignored.
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
             #
             #     It is recommended to always set this value to a UUID.
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
             #     (_), and hyphens (-). The maximum length is 40 characters.
             #   @param force [::Boolean]
             #     The destination CloudSQL connection profile is always deleted with the
@@ -661,14 +725,14 @@ module Google
             #   # Call the delete_migration_job method.
             #   result = client.delete_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_migration_job request, options = nil
@@ -754,14 +818,14 @@ module Google
             #   # Call the start_migration_job method.
             #   result = client.start_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def start_migration_job request, options = nil
@@ -847,14 +911,14 @@ module Google
             #   # Call the stop_migration_job method.
             #   result = client.stop_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def stop_migration_job request, options = nil
@@ -941,14 +1005,14 @@ module Google
             #   # Call the resume_migration_job method.
             #   result = client.resume_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def resume_migration_job request, options = nil
@@ -1035,14 +1099,14 @@ module Google
             #   # Call the promote_migration_job method.
             #   result = client.promote_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def promote_migration_job request, options = nil
@@ -1129,14 +1193,14 @@ module Google
             #   # Call the verify_migration_job method.
             #   result = client.verify_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def verify_migration_job request, options = nil
@@ -1224,14 +1288,14 @@ module Google
             #   # Call the restart_migration_job method.
             #   result = client.restart_migration_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def restart_migration_job request, options = nil
@@ -1304,7 +1368,7 @@ module Google
             #   @param vm_selection_config [::Google::Cloud::CloudDMS::V1::VmSelectionConfig, ::Hash]
             #     The VM selection configuration
             #   @param vm_port [::Integer]
-            #     The port that will be open on the bastion host
+            #     The port that will be open on the bastion host.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudDMS::V1::SshScript]
@@ -1371,7 +1435,8 @@ module Google
             end
 
             ##
-            # Retrieve a list of all connection profiles in a given project and location.
+            # Retrieves a list of all connection profiles in a given project and
+            # location.
             #
             # @overload list_connection_profiles(request, options = nil)
             #   Pass arguments to `list_connection_profiles` via a request object, either of type
@@ -1389,11 +1454,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns this collection of connection profiles.
+            #     Required. The parent which owns this collection of connection profiles.
             #   @param page_size [::Integer]
             #     The maximum number of connection profiles to return. The service may return
             #     fewer than this value. If unspecified, at most 50 connection profiles will
-            #     be returned. The maximum value is 1000; values above 1000 will be coerced
+            #     be returned. The maximum value is 1000; values above 1000 are coerced
             #     to 1000.
             #   @param page_token [::String]
             #     A page token, received from a previous `ListConnectionProfiles` call.
@@ -1412,7 +1477,7 @@ module Google
             #     = %lt;my_username%gt;** to list all connection profiles configured to
             #     connect with a specific username.
             #   @param order_by [::String]
-            #     the order by fields for the result.
+            #     A comma-separated list of fields to order results according to.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::ConnectionProfile>]
@@ -1434,13 +1499,11 @@ module Google
             #   # Call the list_connection_profiles method.
             #   result = client.list_connection_profiles request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CloudDMS::V1::ConnectionProfile.
-            #     p response
+            #     p item
             #   end
             #
             def list_connection_profiles request, options = nil
@@ -1583,25 +1646,33 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_connection_profile(parent: nil, connection_profile_id: nil, connection_profile: nil, request_id: nil)
+            # @overload create_connection_profile(parent: nil, connection_profile_id: nil, connection_profile: nil, request_id: nil, validate_only: nil, skip_validation: nil)
             #   Pass arguments to `create_connection_profile` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns this collection of connection profiles.
+            #     Required. The parent which owns this collection of connection profiles.
             #   @param connection_profile_id [::String]
             #     Required. The connection profile identifier.
             #   @param connection_profile [::Google::Cloud::CloudDMS::V1::ConnectionProfile, ::Hash]
             #     Required. The create request body including the connection profile data
             #   @param request_id [::String]
-            #     A unique id used to identify the request. If the server receives two
-            #     requests with the same id, then the second request will be ignored.
+            #     Optional. A unique ID used to identify the request. If the server receives
+            #     two requests with the same ID, then the second request is ignored.
             #
             #     It is recommended to always set this value to a UUID.
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
             #     (_), and hyphens (-). The maximum length is 40 characters.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the connection profile, but don't create any
+            #     resources. The default is false. Only supported for Oracle connection
+            #     profiles.
+            #   @param skip_validation [::Boolean]
+            #     Optional. Create the connection profile without validating it.
+            #     The default is false.
+            #     Only supported for Oracle connection profiles.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1623,14 +1694,14 @@ module Google
             #   # Call the create_connection_profile method.
             #   result = client.create_connection_profile request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_connection_profile request, options = nil
@@ -1688,24 +1759,32 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_connection_profile(update_mask: nil, connection_profile: nil, request_id: nil)
+            # @overload update_connection_profile(update_mask: nil, connection_profile: nil, request_id: nil, validate_only: nil, skip_validation: nil)
             #   Pass arguments to `update_connection_profile` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     connection profile resource by the update.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the conversion workspace resource.
             #   @param connection_profile [::Google::Cloud::CloudDMS::V1::ConnectionProfile, ::Hash]
             #     Required. The connection profile parameters to update.
             #   @param request_id [::String]
-            #     A unique id used to identify the request. If the server receives two
-            #     requests with the same id, then the second request will be ignored.
+            #     Optional. A unique ID used to identify the request. If the server receives
+            #     two requests with the same ID, then the second request is ignored.
             #
             #     It is recommended to always set this value to a UUID.
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
             #     (_), and hyphens (-). The maximum length is 40 characters.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the connection profile, but don't update any
+            #     resources. The default is false. Only supported for Oracle connection
+            #     profiles.
+            #   @param skip_validation [::Boolean]
+            #     Optional. Update the connection profile without validating it.
+            #     The default is false.
+            #     Only supported for Oracle connection profiles.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1727,14 +1806,14 @@ module Google
             #   # Call the update_connection_profile method.
             #   result = client.update_connection_profile request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_connection_profile request, options = nil
@@ -1802,12 +1881,12 @@ module Google
             #   @param name [::String]
             #     Required. Name of the connection profile resource to delete.
             #   @param request_id [::String]
-            #     A unique id used to identify the request. If the server receives two
-            #     requests with the same id, then the second request will be ignored.
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
             #
             #     It is recommended to always set this value to a UUID.
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
             #     (_), and hyphens (-). The maximum length is 40 characters.
             #   @param force [::Boolean]
             #     In case of force delete, the CloudSQL replica database is also deleted
@@ -1833,14 +1912,14 @@ module Google
             #   # Call the delete_connection_profile method.
             #   result = client.delete_connection_profile request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_connection_profile request, options = nil
@@ -1886,6 +1965,1907 @@ module Google
             end
 
             ##
+            # Creates a new private connection in a given project and location.
+            #
+            # @overload create_private_connection(request, options = nil)
+            #   Pass arguments to `create_private_connection` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil, skip_validation: nil)
+            #   Pass arguments to `create_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent that owns the collection of PrivateConnections.
+            #   @param private_connection_id [::String]
+            #     Required. The private connection identifier.
+            #   @param private_connection [::Google::Cloud::CloudDMS::V1::PrivateConnection, ::Hash]
+            #     Required. The private connection resource to create.
+            #   @param request_id [::String]
+            #     Optional. A unique ID used to identify the request. If the server receives
+            #     two requests with the same ID, then the second request is ignored.
+            #
+            #     It is recommended to always set this value to a UUID.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     (_), and hyphens (-). The maximum length is 40 characters.
+            #   @param skip_validation [::Boolean]
+            #     Optional. If set to true, will skip validations.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest.new
+            #
+            #   # Call the create_private_connection method.
+            #   result = client.create_private_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :create_private_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single private connection.
+            #
+            # @overload get_private_connection(request, options = nil)
+            #   Pass arguments to `get_private_connection` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_private_connection(name: nil)
+            #   Pass arguments to `get_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the private connection to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudDMS::V1::PrivateConnection]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudDMS::V1::PrivateConnection]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest.new
+            #
+            #   # Call the get_private_connection method.
+            #   result = client.get_private_connection request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::PrivateConnection.
+            #   p result
+            #
+            def get_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :get_private_connection, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves a list of private connections in a given project and location.
+            #
+            # @overload list_private_connections(request, options = nil)
+            #   Pass arguments to `list_private_connections` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_private_connections(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_private_connections` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent that owns the collection of private connections.
+            #   @param page_size [::Integer]
+            #     Maximum number of private connections to return.
+            #     If unspecified, at most 50 private connections that are returned.
+            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #   @param page_token [::String]
+            #     Page token received from a previous `ListPrivateConnections` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `ListPrivateConnections` must match the call that provided the page
+            #     token.
+            #   @param filter [::String]
+            #     A filter expression that filters private connections listed in the
+            #     response. The expression must specify the field name, a comparison
+            #     operator, and the value that you want to use for filtering. The value must
+            #     be a string, a number, or a boolean. The comparison operator must be either
+            #     =, !=, >, or <. For example, list private connections created this year by
+            #     specifying **createTime %gt; 2021-01-01T00:00:00.000000000Z**.
+            #   @param order_by [::String]
+            #     Order by fields for the result.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::PrivateConnection>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::PrivateConnection>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest.new
+            #
+            #   # Call the list_private_connections method.
+            #   result = client.list_private_connections request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::PrivateConnection.
+            #     p item
+            #   end
+            #
+            def list_private_connections request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_private_connections.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_private_connections.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_private_connections.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :list_private_connections, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_private_connections, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single Database Migration Service private connection.
+            #
+            # @overload delete_private_connection(request, options = nil)
+            #   Pass arguments to `delete_private_connection` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_private_connection(name: nil, request_id: nil)
+            #   Pass arguments to `delete_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the private connection to delete.
+            #   @param request_id [::String]
+            #     Optional. A unique ID used to identify the request. If the server receives
+            #     two requests with the same ID, then the second request is ignored.
+            #
+            #     It is recommended to always set this value to a UUID.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest.new
+            #
+            #   # Call the delete_private_connection method.
+            #   result = client.delete_private_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :delete_private_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single conversion workspace.
+            #
+            # @overload get_conversion_workspace(request, options = nil)
+            #   Pass arguments to `get_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_conversion_workspace(name: nil)
+            #   Pass arguments to `get_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the conversion workspace resource to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudDMS::V1::ConversionWorkspace]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudDMS::V1::ConversionWorkspace]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest.new
+            #
+            #   # Call the get_conversion_workspace method.
+            #   result = client.get_conversion_workspace request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::ConversionWorkspace.
+            #   p result
+            #
+            def get_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :get_conversion_workspace, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists conversion workspaces in a given project and location.
+            #
+            # @overload list_conversion_workspaces(request, options = nil)
+            #   Pass arguments to `list_conversion_workspaces` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_conversion_workspaces(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_conversion_workspaces` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent which owns this collection of conversion workspaces.
+            #   @param page_size [::Integer]
+            #     The maximum number of conversion workspaces to return. The service may
+            #     return fewer than this value. If unspecified, at most 50 sets are returned.
+            #   @param page_token [::String]
+            #     The nextPageToken value received in the previous call to
+            #     conversionWorkspaces.list, used in the subsequent request to retrieve the
+            #     next page of results. On first call this should be left blank. When
+            #     paginating, all other parameters provided to conversionWorkspaces.list must
+            #     match the call that provided the page token.
+            #   @param filter [::String]
+            #     A filter expression that filters conversion workspaces listed in the
+            #     response. The expression must specify the field name, a comparison
+            #     operator, and the value that you want to use for filtering. The value must
+            #     be a string, a number, or a boolean. The comparison operator must be either
+            #     =, !=, >, or <. For example, list conversion workspaces created this year
+            #     by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.** You can
+            #     also filter nested fields. For example, you could specify
+            #     **source.version = "12.c.1"** to select all conversion workspaces with
+            #     source database version equal to 12.c.1.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::ConversionWorkspace>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::ConversionWorkspace>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest.new
+            #
+            #   # Call the list_conversion_workspaces method.
+            #   result = client.list_conversion_workspaces request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::ConversionWorkspace.
+            #     p item
+            #   end
+            #
+            def list_conversion_workspaces request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_conversion_workspaces.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_conversion_workspaces.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_conversion_workspaces.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :list_conversion_workspaces, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_conversion_workspaces, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new conversion workspace in a given project and location.
+            #
+            # @overload create_conversion_workspace(request, options = nil)
+            #   Pass arguments to `create_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_conversion_workspace(parent: nil, conversion_workspace_id: nil, conversion_workspace: nil, request_id: nil)
+            #   Pass arguments to `create_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent which owns this collection of conversion workspaces.
+            #   @param conversion_workspace_id [::String]
+            #     Required. The ID of the conversion workspace to create.
+            #   @param conversion_workspace [::Google::Cloud::CloudDMS::V1::ConversionWorkspace, ::Hash]
+            #     Required. Represents a conversion workspace object.
+            #   @param request_id [::String]
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
+            #
+            #     It is recommended to always set this value to a UUID.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest.new
+            #
+            #   # Call the create_conversion_workspace method.
+            #   result = client.create_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :create_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single conversion workspace.
+            #
+            # @overload update_conversion_workspace(request, options = nil)
+            #   Pass arguments to `update_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_conversion_workspace(update_mask: nil, conversion_workspace: nil, request_id: nil)
+            #   Pass arguments to `update_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the conversion workspace resource.
+            #   @param conversion_workspace [::Google::Cloud::CloudDMS::V1::ConversionWorkspace, ::Hash]
+            #     Required. The conversion workspace parameters to update.
+            #   @param request_id [::String]
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
+            #
+            #     It is recommended to always set this value to a UUID.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest.new
+            #
+            #   # Call the update_conversion_workspace method.
+            #   result = client.update_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversion_workspace&.name
+                header_params["conversion_workspace.name"] = request.conversion_workspace.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :update_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single conversion workspace.
+            #
+            # @overload delete_conversion_workspace(request, options = nil)
+            #   Pass arguments to `delete_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_conversion_workspace(name: nil, request_id: nil)
+            #   Pass arguments to `delete_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the conversion workspace resource to delete.
+            #   @param request_id [::String]
+            #     A unique ID used to identify the request. If the server receives two
+            #     requests with the same ID, then the second request is ignored.
+            #
+            #     It is recommended to always set this value to a UUID.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+            #     (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest.new
+            #
+            #   # Call the delete_conversion_workspace method.
+            #   result = client.delete_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :delete_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports a snapshot of the source database into the
+            # conversion workspace.
+            #
+            # @overload seed_conversion_workspace(request, options = nil)
+            #   Pass arguments to `seed_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload seed_conversion_workspace(name: nil, auto_commit: nil, source_connection_profile: nil, destination_connection_profile: nil)
+            #   Pass arguments to `seed_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Name of the conversion workspace resource to seed with new database
+            #     structure, in the form of:
+            #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param auto_commit [::Boolean]
+            #     Should the conversion workspace be committed automatically after the
+            #     seed operation.
+            #   @param source_connection_profile [::String]
+            #     Fully qualified (Uri) name of the source connection profile.
+            #   @param destination_connection_profile [::String]
+            #     Fully qualified (Uri) name of the destination connection profile.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest.new
+            #
+            #   # Call the seed_conversion_workspace method.
+            #   result = client.seed_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def seed_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.seed_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.seed_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.seed_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :seed_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports the mapping rules for a given conversion workspace.
+            # Supports various formats of external rules files.
+            #
+            # @overload import_mapping_rules(request, options = nil)
+            #   Pass arguments to `import_mapping_rules` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_mapping_rules(parent: nil, rules_format: nil, rules_files: nil, auto_commit: nil)
+            #   Pass arguments to `import_mapping_rules` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Name of the conversion workspace resource to import the rules to
+            #     in the form of:
+            #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param rules_format [::Google::Cloud::CloudDMS::V1::ImportRulesFileFormat]
+            #     The format of the rules content file.
+            #   @param rules_files [::Array<::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest::RulesFile, ::Hash>]
+            #     One or more rules files.
+            #   @param auto_commit [::Boolean]
+            #     Should the conversion workspace be committed automatically after the
+            #     import operation.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest.new
+            #
+            #   # Call the import_mapping_rules method.
+            #   result = client.import_mapping_rules request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def import_mapping_rules request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_mapping_rules.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_mapping_rules.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_mapping_rules.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :import_mapping_rules, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a draft tree schema for the destination database.
+            #
+            # @overload convert_conversion_workspace(request, options = nil)
+            #   Pass arguments to `convert_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload convert_conversion_workspace(name: nil, auto_commit: nil, filter: nil)
+            #   Pass arguments to `convert_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Name of the conversion workspace resource to convert in the form of:
+            #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param auto_commit [::Boolean]
+            #     Specifies whether the conversion workspace is to be committed automatically
+            #     after the conversion.
+            #   @param filter [::String]
+            #     Filter the entities to convert. Leaving this field empty will convert all
+            #     of the entities. Supports Google AIP-160 style filtering.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest.new
+            #
+            #   # Call the convert_conversion_workspace method.
+            #   result = client.convert_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def convert_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.convert_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.convert_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.convert_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :convert_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Marks all the data in the conversion workspace as committed.
+            #
+            # @overload commit_conversion_workspace(request, options = nil)
+            #   Pass arguments to `commit_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload commit_conversion_workspace(name: nil, commit_name: nil)
+            #   Pass arguments to `commit_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the conversion workspace resource to commit.
+            #   @param commit_name [::String]
+            #     Optional. Optional name of the commit.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest.new
+            #
+            #   # Call the commit_conversion_workspace method.
+            #   result = client.commit_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def commit_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.commit_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.commit_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.commit_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :commit_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Rolls back a conversion workspace to the last committed snapshot.
+            #
+            # @overload rollback_conversion_workspace(request, options = nil)
+            #   Pass arguments to `rollback_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload rollback_conversion_workspace(name: nil)
+            #   Pass arguments to `rollback_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the conversion workspace resource to roll back to.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest.new
+            #
+            #   # Call the rollback_conversion_workspace method.
+            #   result = client.rollback_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def rollback_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.rollback_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.rollback_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.rollback_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :rollback_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Applies draft tree onto a specific destination database.
+            #
+            # @overload apply_conversion_workspace(request, options = nil)
+            #   Pass arguments to `apply_conversion_workspace` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload apply_conversion_workspace(name: nil, filter: nil, connection_profile: nil)
+            #   Pass arguments to `apply_conversion_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the conversion workspace resource for which to apply
+            #     the draft tree. Must be in the form of:
+            #      projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param filter [::String]
+            #     Filter which entities to apply. Leaving this field empty will apply all of
+            #     the entities. Supports Google AIP 160 based filtering.
+            #   @param connection_profile [::String]
+            #     Fully qualified (Uri) name of the destination connection profile.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest.new
+            #
+            #   # Call the apply_conversion_workspace method.
+            #   result = client.apply_conversion_workspace request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def apply_conversion_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.apply_conversion_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.apply_conversion_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.apply_conversion_workspace.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :apply_conversion_workspace, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Describes the database entities tree for a specific conversion workspace
+            # and a specific tree type.
+            #
+            # Database entities are not resources like conversion workspaces or mapping
+            # rules, and they can't be created, updated or deleted. Instead, they are
+            # simple data objects describing the structure of the client database.
+            #
+            # @overload describe_database_entities(request, options = nil)
+            #   Pass arguments to `describe_database_entities` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload describe_database_entities(conversion_workspace: nil, page_size: nil, page_token: nil, tree: nil, uncommitted: nil, commit_id: nil, filter: nil)
+            #   Pass arguments to `describe_database_entities` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversion_workspace [::String]
+            #     Required. Name of the conversion workspace resource whose database entities
+            #     are described. Must be in the form of:
+            #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param page_size [::Integer]
+            #     The maximum number of entities to return. The service may return
+            #     fewer entities than the value specifies.
+            #   @param page_token [::String]
+            #     The nextPageToken value received in the previous call to
+            #     conversionWorkspace.describeDatabaseEntities, used in the subsequent
+            #     request to retrieve the next page of results. On first call this should be
+            #     left blank. When paginating, all other parameters provided to
+            #     conversionWorkspace.describeDatabaseEntities must match the call that
+            #     provided the page token.
+            #   @param tree [::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest::DBTreeType]
+            #     The tree to fetch.
+            #   @param uncommitted [::Boolean]
+            #     Whether to retrieve the latest committed version of the entities or the
+            #     latest version. This field is ignored if a specific commit_id is specified.
+            #   @param commit_id [::String]
+            #     Request a specific commit ID. If not specified, the entities from the
+            #     latest commit are returned.
+            #   @param filter [::String]
+            #     Filter the returned entities based on AIP-160 standard.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::DatabaseEntity>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::CloudDMS::V1::DatabaseEntity>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest.new
+            #
+            #   # Call the describe_database_entities method.
+            #   result = client.describe_database_entities request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::DatabaseEntity.
+            #     p item
+            #   end
+            #
+            def describe_database_entities request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.describe_database_entities.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversion_workspace
+                header_params["conversion_workspace"] = request.conversion_workspace
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.describe_database_entities.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.describe_database_entities.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :describe_database_entities, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :describe_database_entities, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Searches/lists the background jobs for a specific
+            # conversion workspace.
+            #
+            # The background jobs are not resources like conversion workspaces or
+            # mapping rules, and they can't be created, updated or deleted.
+            # Instead, they are a way to expose the data plane jobs log.
+            #
+            # @overload search_background_jobs(request, options = nil)
+            #   Pass arguments to `search_background_jobs` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_background_jobs(conversion_workspace: nil, return_most_recent_per_job_type: nil, max_size: nil, completed_until_time: nil)
+            #   Pass arguments to `search_background_jobs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversion_workspace [::String]
+            #     Required. Name of the conversion workspace resource whose jobs are listed,
+            #     in the form of:
+            #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param return_most_recent_per_job_type [::Boolean]
+            #     Optional. Whether or not to return just the most recent job per job type,
+            #   @param max_size [::Integer]
+            #     Optional. The maximum number of jobs to return. The service may return
+            #     fewer than this value. If unspecified, at most 100 jobs are
+            #     returned. The maximum value is 100; values above 100 are coerced to
+            #     100.
+            #   @param completed_until_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. If provided, only returns jobs that completed until (not
+            #     including) the given timestamp.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest.new
+            #
+            #   # Call the search_background_jobs method.
+            #   result = client.search_background_jobs request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::SearchBackgroundJobsResponse.
+            #   p result
+            #
+            def search_background_jobs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_background_jobs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversion_workspace
+                header_params["conversion_workspace"] = request.conversion_workspace
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_background_jobs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_background_jobs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :search_background_jobs, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves a list of committed revisions of a specific conversion
+            # workspace.
+            #
+            # @overload describe_conversion_workspace_revisions(request, options = nil)
+            #   Pass arguments to `describe_conversion_workspace_revisions` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload describe_conversion_workspace_revisions(conversion_workspace: nil, commit_id: nil)
+            #   Pass arguments to `describe_conversion_workspace_revisions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversion_workspace [::String]
+            #     Required. Name of the conversion workspace resource whose revisions are
+            #     listed. Must be in the form of:
+            #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+            #   @param commit_id [::String]
+            #     Optional. Optional filter to request a specific commit ID.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest.new
+            #
+            #   # Call the describe_conversion_workspace_revisions method.
+            #   result = client.describe_conversion_workspace_revisions request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsResponse.
+            #   p result
+            #
+            def describe_conversion_workspace_revisions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.describe_conversion_workspace_revisions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversion_workspace
+                header_params["conversion_workspace"] = request.conversion_workspace
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.describe_conversion_workspace_revisions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.describe_conversion_workspace_revisions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :describe_conversion_workspace_revisions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetches a set of static IP addresses that need to be allowlisted by the
+            # customer when using the static-IP connectivity method.
+            #
+            # @overload fetch_static_ips(request, options = nil)
+            #   Pass arguments to `fetch_static_ips` via a request object, either of type
+            #   {::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_static_ips(name: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `fetch_static_ips` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name for the location for which static IPs should be
+            #     returned. Must be in the format `projects/*/locations/*`.
+            #   @param page_size [::Integer]
+            #     Maximum number of IPs to return.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `FetchStaticIps` call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudDMS::V1::FetchStaticIpsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudDMS::V1::FetchStaticIpsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest.new
+            #
+            #   # Call the fetch_static_ips method.
+            #   result = client.fetch_static_ips request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::FetchStaticIpsResponse.
+            #   p result
+            #
+            def fetch_static_ips request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_static_ips.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_static_ips.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_static_ips.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_migration_service_stub.call_rpc :fetch_static_ips, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DataMigrationService API.
             #
             # This class represents the configuration for DataMigrationService,
@@ -1923,9 +3903,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1967,7 +3947,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "datamigration.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "datamigration.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2105,6 +4087,101 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_connection_profile
+                ##
+                # RPC-specific configuration for `create_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_private_connection
+                ##
+                # RPC-specific configuration for `get_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_private_connection
+                ##
+                # RPC-specific configuration for `list_private_connections`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_private_connections
+                ##
+                # RPC-specific configuration for `delete_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_private_connection
+                ##
+                # RPC-specific configuration for `get_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_conversion_workspace
+                ##
+                # RPC-specific configuration for `list_conversion_workspaces`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_conversion_workspaces
+                ##
+                # RPC-specific configuration for `create_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_conversion_workspace
+                ##
+                # RPC-specific configuration for `update_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_conversion_workspace
+                ##
+                # RPC-specific configuration for `delete_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_conversion_workspace
+                ##
+                # RPC-specific configuration for `seed_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :seed_conversion_workspace
+                ##
+                # RPC-specific configuration for `import_mapping_rules`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_mapping_rules
+                ##
+                # RPC-specific configuration for `convert_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :convert_conversion_workspace
+                ##
+                # RPC-specific configuration for `commit_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :commit_conversion_workspace
+                ##
+                # RPC-specific configuration for `rollback_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :rollback_conversion_workspace
+                ##
+                # RPC-specific configuration for `apply_conversion_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :apply_conversion_workspace
+                ##
+                # RPC-specific configuration for `describe_database_entities`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :describe_database_entities
+                ##
+                # RPC-specific configuration for `search_background_jobs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_background_jobs
+                ##
+                # RPC-specific configuration for `describe_conversion_workspace_revisions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :describe_conversion_workspace_revisions
+                ##
+                # RPC-specific configuration for `fetch_static_ips`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_static_ips
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2142,6 +4219,44 @@ module Google
                   @update_connection_profile = ::Gapic::Config::Method.new update_connection_profile_config
                   delete_connection_profile_config = parent_rpcs.delete_connection_profile if parent_rpcs.respond_to? :delete_connection_profile
                   @delete_connection_profile = ::Gapic::Config::Method.new delete_connection_profile_config
+                  create_private_connection_config = parent_rpcs.create_private_connection if parent_rpcs.respond_to? :create_private_connection
+                  @create_private_connection = ::Gapic::Config::Method.new create_private_connection_config
+                  get_private_connection_config = parent_rpcs.get_private_connection if parent_rpcs.respond_to? :get_private_connection
+                  @get_private_connection = ::Gapic::Config::Method.new get_private_connection_config
+                  list_private_connections_config = parent_rpcs.list_private_connections if parent_rpcs.respond_to? :list_private_connections
+                  @list_private_connections = ::Gapic::Config::Method.new list_private_connections_config
+                  delete_private_connection_config = parent_rpcs.delete_private_connection if parent_rpcs.respond_to? :delete_private_connection
+                  @delete_private_connection = ::Gapic::Config::Method.new delete_private_connection_config
+                  get_conversion_workspace_config = parent_rpcs.get_conversion_workspace if parent_rpcs.respond_to? :get_conversion_workspace
+                  @get_conversion_workspace = ::Gapic::Config::Method.new get_conversion_workspace_config
+                  list_conversion_workspaces_config = parent_rpcs.list_conversion_workspaces if parent_rpcs.respond_to? :list_conversion_workspaces
+                  @list_conversion_workspaces = ::Gapic::Config::Method.new list_conversion_workspaces_config
+                  create_conversion_workspace_config = parent_rpcs.create_conversion_workspace if parent_rpcs.respond_to? :create_conversion_workspace
+                  @create_conversion_workspace = ::Gapic::Config::Method.new create_conversion_workspace_config
+                  update_conversion_workspace_config = parent_rpcs.update_conversion_workspace if parent_rpcs.respond_to? :update_conversion_workspace
+                  @update_conversion_workspace = ::Gapic::Config::Method.new update_conversion_workspace_config
+                  delete_conversion_workspace_config = parent_rpcs.delete_conversion_workspace if parent_rpcs.respond_to? :delete_conversion_workspace
+                  @delete_conversion_workspace = ::Gapic::Config::Method.new delete_conversion_workspace_config
+                  seed_conversion_workspace_config = parent_rpcs.seed_conversion_workspace if parent_rpcs.respond_to? :seed_conversion_workspace
+                  @seed_conversion_workspace = ::Gapic::Config::Method.new seed_conversion_workspace_config
+                  import_mapping_rules_config = parent_rpcs.import_mapping_rules if parent_rpcs.respond_to? :import_mapping_rules
+                  @import_mapping_rules = ::Gapic::Config::Method.new import_mapping_rules_config
+                  convert_conversion_workspace_config = parent_rpcs.convert_conversion_workspace if parent_rpcs.respond_to? :convert_conversion_workspace
+                  @convert_conversion_workspace = ::Gapic::Config::Method.new convert_conversion_workspace_config
+                  commit_conversion_workspace_config = parent_rpcs.commit_conversion_workspace if parent_rpcs.respond_to? :commit_conversion_workspace
+                  @commit_conversion_workspace = ::Gapic::Config::Method.new commit_conversion_workspace_config
+                  rollback_conversion_workspace_config = parent_rpcs.rollback_conversion_workspace if parent_rpcs.respond_to? :rollback_conversion_workspace
+                  @rollback_conversion_workspace = ::Gapic::Config::Method.new rollback_conversion_workspace_config
+                  apply_conversion_workspace_config = parent_rpcs.apply_conversion_workspace if parent_rpcs.respond_to? :apply_conversion_workspace
+                  @apply_conversion_workspace = ::Gapic::Config::Method.new apply_conversion_workspace_config
+                  describe_database_entities_config = parent_rpcs.describe_database_entities if parent_rpcs.respond_to? :describe_database_entities
+                  @describe_database_entities = ::Gapic::Config::Method.new describe_database_entities_config
+                  search_background_jobs_config = parent_rpcs.search_background_jobs if parent_rpcs.respond_to? :search_background_jobs
+                  @search_background_jobs = ::Gapic::Config::Method.new search_background_jobs_config
+                  describe_conversion_workspace_revisions_config = parent_rpcs.describe_conversion_workspace_revisions if parent_rpcs.respond_to? :describe_conversion_workspace_revisions
+                  @describe_conversion_workspace_revisions = ::Gapic::Config::Method.new describe_conversion_workspace_revisions_config
+                  fetch_static_ips_config = parent_rpcs.fetch_static_ips if parent_rpcs.respond_to? :fetch_static_ips
+                  @fetch_static_ips = ::Gapic::Config::Method.new fetch_static_ips_config
 
                   yield self if block_given?
                 end

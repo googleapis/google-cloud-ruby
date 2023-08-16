@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-data_fusion-v1",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "datafusion_v1_generated_DataFusion_ListAvailableVersions_sync",
-      "title": "Snippet for list_available_versions in DataFusion",
-      "description": "Basic snippet for list_available_versions in DataFusion",
+      "title": "Snippet for the list_available_versions call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#list_available_versions. It may require modification in order to execute successfully.",
       "file": "data_fusion/list_available_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datafusion_v1_generated_DataFusion_ListInstances_sync",
-      "title": "Snippet for list_instances in DataFusion",
-      "description": "Basic snippet for list_instances in DataFusion",
+      "title": "Snippet for the list_instances call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "data_fusion/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datafusion_v1_generated_DataFusion_GetInstance_sync",
-      "title": "Snippet for get_instance in DataFusion",
-      "description": "Basic snippet for get_instance in DataFusion",
+      "title": "Snippet for the get_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "data_fusion/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datafusion_v1_generated_DataFusion_CreateInstance_sync",
-      "title": "Snippet for create_instance in DataFusion",
-      "description": "Basic snippet for create_instance in DataFusion",
+      "title": "Snippet for the create_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "data_fusion/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datafusion_v1_generated_DataFusion_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in DataFusion",
-      "description": "Basic snippet for delete_instance in DataFusion",
+      "title": "Snippet for the delete_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "data_fusion/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datafusion_v1_generated_DataFusion_UpdateInstance_sync",
-      "title": "Snippet for update_instance in DataFusion",
-      "description": "Basic snippet for update_instance in DataFusion",
+      "title": "Snippet for the update_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "data_fusion/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datafusion_v1_generated_DataFusion_RestartInstance_sync",
-      "title": "Snippet for restart_instance in DataFusion",
-      "description": "Basic snippet for restart_instance in DataFusion",
+      "title": "Snippet for the restart_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#restart_instance. It may require modification in order to execute successfully.",
       "file": "data_fusion/restart_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

@@ -27,10 +27,10 @@ end
 flag :source_path, "--source-path=PATH" do
   desc "Path to the googleapis-gen source repo"
 end
-flag :pull do
+flag :pull, "--[no-]pull" do
   desc "Pull the latest owlbot images before running"
 end
-flag :interactive, "--interactive", "-i" do
+flag :interactive, "--[no-]interactive", "-i" do
   desc "Run in interactive mode, including editing of the .owlbot.rb file"
 end
 flag :editor do
@@ -43,9 +43,18 @@ end
 flag :git_remote, "--remote NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
-flag :enable_tests, "--test" do
+flag :enable_fork, "--fork" do
+  desc "Use a fork to open the pull request"
+end
+flag :enable_tests, "--[no-]test" do
   desc "Run CI on the newly-created library"
 end
+flag :bootstrap_releases, "--[no-]bootstrap-releases" do
+  desc "Also add release-please configuration for the newly-created library"
+end
+
+static :config_name, "release-please-config.json"
+static :manifest_name, ".release-please-manifest.json"
 
 include :exec, e: true
 include :fileutils
@@ -54,6 +63,11 @@ include :git_cache
 include "yoshi-pr-generator"
 
 def run
+  # Temporary hack to allow minitest-rg 5.2.0 to work in minitest 5.19 or
+  # later. This should be removed if we have a better solution or decide to
+  # drop rg.
+  ENV["MT_COMPAT"] = "true"
+
   setup
   set :branch_name, "gen/#{gem_name}" unless branch_name
   commit_message = "feat: Initial generation of #{gem_name}"
@@ -64,6 +78,7 @@ def run
     write_owlbot_config
     write_owlbot_script
     call_owlbot
+    create_release_please_configs if bootstrap_releases
     test_library if enable_tests
   end
 end
@@ -74,6 +89,10 @@ def setup
   Dir.chdir context_directory
   error "#{owlbot_config_path} already exists" if File.file? owlbot_config_path
   yoshi_utils.git_ensure_identity
+  if enable_fork
+    set :git_remote, "pull-request-fork" unless git_remote
+    yoshi_utils.gh_ensure_fork remote: git_remote
+  end
   mkdir_p gem_name
 end
 
@@ -85,37 +104,65 @@ end
 
 def write_owlbot_config
   template = File.read find_data "owlbot-config-template.erb"
-  File.open owlbot_config_path, "w" do |file|
-    file.write ERB.new(template).result(binding)
-  end
+  File.write owlbot_config_path, ERB.new(template).result(binding)
 end
 
 def write_owlbot_script
   return unless interactive
   error "No EDITOR set" unless editor
   template = File.read find_data "owlbot-script-template.erb"
-  File.open owlbot_script_path, "w" do |file|
-    file.write ERB.new(template).result(binding)
-  end
+  File.write owlbot_script_path, ERB.new(template).result(binding)
   exec [editor, owlbot_script_path]
   new_content = File.read owlbot_script_path
   error "Aborted" if new_content.to_s.strip.empty?
-  lines = new_content.split("\n")
-  if lines.all? { |line| line.strip.empty? || line.start_with?("#") || line.strip == "OwlBot.move_files" }
-    puts "Omitting .owlbot.rb"
-    rm owlbot_script_path
-  end
+  lines = new_content.split "\n"
+  return unless lines.all? { |line| line.strip.empty? || line.start_with?("#") || line.strip == "OwlBot.move_files" }
+  puts "Omitting .owlbot.rb"
+  rm owlbot_script_path
 end
 
 def call_owlbot
   cmd = ["owlbot", gem_name]
   cmd << "--pull" if pull
-  cmd << "-#{'v' * verbosity}" if verbosity > 0
-  cmd << "-#{'q' * (-verbosity)}" if verbosity < 0
   cmd << "--protos-path" << protos_path if protos_path
   cmd << "--source-path" << source_path if source_path
   cmd << "--piper-client" << piper_client if piper_client
+  cmd += verbosity_flags
   exec_tool cmd
+end
+
+def create_release_please_configs
+  manifest = JSON.parse File.read manifest_name
+  manifest[gem_name] = "0.0.1"
+  manifest = add_fillers(manifest).sort.to_h
+  File.write manifest_name, "#{JSON.pretty_generate manifest}\n"
+
+  config = JSON.parse File.read config_name
+  config["packages"][gem_name] = {
+    "component" => gem_name,
+    "version_file" => gem_version_file,
+  }
+  config["packages"] = config["packages"].sort.to_h
+  File.write config_name, "#{JSON.pretty_generate config}\n"
+end
+
+def gem_version_file
+  @gem_version_file ||= begin
+    version_path = gem_name.tr "-", "/"
+    version_file = File.join "lib", version_path, "version.rb"
+    version_file_full = File.join gem_name, version_file
+    raise "Unable to find #{version_file_full}" unless File.file? version_file_full
+    version_file
+  end
+  @gem_version_file
+end
+
+def add_fillers manifest
+  non_filler_keys = manifest.keys.filter { |k| !k.end_with? "+FILLER" }
+  non_filler_keys.each do |key|
+    manifest["#{key}+FILLER"] = "0.0.0"
+  end
+  manifest
 end
 
 def test_library
@@ -149,7 +196,7 @@ def gem_name
   @gem_name ||= begin
     build_file_path = File.join bazel_base_dir, proto_namespace, "BUILD.bazel"
     bazel_rules_content = File.read build_file_path
-    if bazel_rules_content =~ /"ruby-cloud-gem-name=([\w-]+)",/
+    if bazel_rules_content =~ /"ruby-cloud-gem-name=([\w-]+)"/
       Regexp.last_match[1]
     else
       error "Unable to find gem name rule in #{build_file_path}"

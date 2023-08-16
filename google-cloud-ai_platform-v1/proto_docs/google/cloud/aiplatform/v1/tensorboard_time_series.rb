@@ -48,14 +48,15 @@ module Google
         #     "overwrite" update happens.
         # @!attribute [rw] plugin_name
         #   @return [::String]
-        #     Immutable. Name of the plugin this time series pertain to. Such as Scalar, Tensor,
-        #     Blob
+        #     Immutable. Name of the plugin this time series pertain to. Such as Scalar,
+        #     Tensor, Blob
         # @!attribute [rw] plugin_data
         #   @return [::String]
         #     Data of the current plugin, with the size limited to 65KB.
         # @!attribute [r] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries::Metadata]
-        #     Output only. Scalar, Tensor, or Blob metadata for this TensorboardTimeSeries.
+        #     Output only. Scalar, Tensor, or Blob metadata for this
+        #     TensorboardTimeSeries.
         class TensorboardTimeSeries
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -63,15 +64,16 @@ module Google
           # Describes metadata for a TensorboardTimeSeries.
           # @!attribute [r] max_step
           #   @return [::Integer]
-          #     Output only. Max step index of all data points within a TensorboardTimeSeries.
+          #     Output only. Max step index of all data points within a
+          #     TensorboardTimeSeries.
           # @!attribute [r] max_wall_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Max wall clock timestamp of all data points within a
           #     TensorboardTimeSeries.
           # @!attribute [r] max_blob_sequence_length
           #   @return [::Integer]
-          #     Output only. The largest blob sequence length (number of blobs) of all data points in
-          #     this time series, if its ValueType is BLOB_SEQUENCE.
+          #     Output only. The largest blob sequence length (number of blobs) of all
+          #     data points in this time series, if its ValueType is BLOB_SEQUENCE.
           class Metadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

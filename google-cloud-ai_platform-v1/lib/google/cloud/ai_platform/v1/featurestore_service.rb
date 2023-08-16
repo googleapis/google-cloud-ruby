@@ -34,7 +34,7 @@ module Google
         ##
         # The service that handles CRUD and List for resources for Featurestore.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/featurestore_service"
         #     client = ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client.new

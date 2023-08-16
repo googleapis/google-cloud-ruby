@@ -17,6 +17,10 @@
     "lib/google/cloud/private_catalog/v1beta1/private_catalog.rb",
     "lib/google/cloud/private_catalog/v1beta1/private_catalog/client.rb",
     "lib/google/cloud/private_catalog/v1beta1/private_catalog/credentials.rb",
+    "lib/google/cloud/private_catalog/v1beta1/private_catalog/rest.rb",
+    "lib/google/cloud/private_catalog/v1beta1/private_catalog/rest/client.rb",
+    "lib/google/cloud/private_catalog/v1beta1/private_catalog/rest/service_stub.rb",
+    "lib/google/cloud/private_catalog/v1beta1/rest.rb",
     "lib/google/cloud/private_catalog/v1beta1/version.rb",
     "lib/google/cloud/privatecatalog/v1beta1/private_catalog_pb.rb",
     "lib/google/cloud/privatecatalog/v1beta1/private_catalog_services_pb.rb",
@@ -38,6 +42,7 @@
     "snippets/private_catalog/search_products.rb",
     "snippets/private_catalog/search_versions.rb",
     "snippets/snippet_metadata_google.cloud.privatecatalog.v1beta1.json",
+    "test/google/cloud/private_catalog/v1beta1/private_catalog_rest_test.rb",
     "test/google/cloud/private_catalog/v1beta1/private_catalog_test.rb",
     "test/helper.rb"
   ],

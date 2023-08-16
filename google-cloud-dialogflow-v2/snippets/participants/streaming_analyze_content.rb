@@ -20,29 +20,32 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content
+# Snippet for the streaming_analyze_content call in the Participants service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content.
+# It may require modification in order to execute successfully.
 #
 def streaming_analyze_content
   # Create a client object. The client can be reused for multiple calls.
   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
 
-  # Create an input stream
+  # Create an input stream.
   input = Gapic::StreamInput.new
 
   # Call the streaming_analyze_content method to start streaming.
   output = client.streaming_analyze_content input
 
-  # Send requests on the stream. For each request, pass in keyword
-  # arguments to set fields. Be sure to close the stream when done.
+  # Send requests on the stream. For each request object, set fields by
+  # passing keyword arguments. Be sure to close the stream when done.
   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
   input.close
 
-  # Handle streamed responses. These may be interleaved with inputs.
-  # Each response is of type ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse.
-  output.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END dialogflow_v2_generated_Participants_StreamingAnalyzeContent_sync]

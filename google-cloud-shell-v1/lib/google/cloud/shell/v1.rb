@@ -23,12 +23,17 @@ module Google
   module Cloud
     module Shell
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/shell/v1"
       #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/shell/v1"
+      #     client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new
       #
       module V1
       end

@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # The details pertaining to specific contacts
+        # Details about specific contacts
         # @!attribute [rw] contacts
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Contact>]
         #     A list of contacts
@@ -30,10 +30,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Representa a single contact's email address
+        # The email address of a contact.
         # @!attribute [rw] email
         #   @return [::String]
-        #     An email address e.g. "person123@company.com"
+        #     An email address. For example, "`person123@company.com`".
         class Contact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

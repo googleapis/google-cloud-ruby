@@ -125,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -239,14 +239,14 @@ module Google
             #   # Call the create_metadata_store method.
             #   result = client.create_metadata_store request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_metadata_store request, options = nil
@@ -406,8 +406,8 @@ module Google
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores} call. Provide this to retrieve the
-            #     subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
             #     provided the page token. (Otherwise the request will fail with
@@ -433,13 +433,11 @@ module Google
             #   # Call the list_metadata_stores method.
             #   result = client.list_metadata_stores request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::MetadataStore.
-            #     p response
+            #     p item
             #   end
             #
             def list_metadata_stores request, options = nil
@@ -530,14 +528,14 @@ module Google
             #   # Call the delete_metadata_store method.
             #   result = client.delete_metadata_store request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_metadata_store request, options = nil
@@ -793,7 +791,8 @@ module Google
             #     The maximum number of Artifacts to return. The service may return fewer.
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
-            #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}
+            #     A page token, received from a previous
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
@@ -816,6 +815,9 @@ module Google
             #         To filter on metadata fields use traversal operation as follows:
             #         `metadata.<field_name>.<type_value>`.
             #         For example: `metadata.field_1.number_value = 10.0`
+            #         In case the field name contains special characters (such as colon), one
+            #         can embed it inside double quote.
+            #         For example: `metadata."field:1".number_value = 10.0`
             #     *   **Context based filtering**:
             #         To filter Artifacts based on the contexts to which they belong, use the
             #         function operator with the full resource name
@@ -856,13 +858,11 @@ module Google
             #   # Call the list_artifacts method.
             #   result = client.list_artifacts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Artifact.
-            #     p response
+            #     p item
             #   end
             #
             def list_artifacts request, options = nil
@@ -927,15 +927,14 @@ module Google
             #
             #   @param artifact [::Google::Cloud::AIPlatform::V1::Artifact, ::Hash]
             #     Required. The Artifact containing updates.
-            #     The Artifact's {::Google::Cloud::AIPlatform::V1::Artifact#name Artifact.name} field is used to identify the Artifact to
-            #     be updated.
-            #     Format:
+            #     The Artifact's {::Google::Cloud::AIPlatform::V1::Artifact#name Artifact.name}
+            #     field is used to identify the Artifact to be updated. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
-            #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
+            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
+            #     not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
             #     created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1049,14 +1048,14 @@ module Google
             #   # Call the delete_artifact method.
             #   result = client.delete_artifact request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_artifact request, options = nil
@@ -1151,14 +1150,14 @@ module Google
             #   # Call the purge_artifacts method.
             #   result = client.purge_artifacts request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def purge_artifacts request, options = nil
@@ -1222,9 +1221,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the MetadataStore where the Context should be
-            #     created.
-            #     Format:
+            #     Required. The resource name of the MetadataStore where the Context should
+            #     be created. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
             #   @param context [::Google::Cloud::AIPlatform::V1::Context, ::Hash]
             #     Required. The Context to create.
@@ -1414,7 +1412,8 @@ module Google
             #     The maximum number of Contexts to return. The service may return fewer.
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
-            #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
+            #     A page token, received from a previous
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
@@ -1437,6 +1436,9 @@ module Google
             #        To filter on metadata fields use traversal operation as follows:
             #        `metadata.<field_name>.<type_value>`.
             #        For example: `metadata.field_1.number_value = 10.0`.
+            #        In case the field name contains special characters (such as colon), one
+            #        can embed it inside double quote.
+            #        For example: `metadata."field:1".number_value = 10.0`
             #     *  **Parent Child filtering**:
             #        To filter Contexts based on parent-child relationship use the HAS
             #        operator as follows:
@@ -1481,13 +1483,11 @@ module Google
             #   # Call the list_contexts method.
             #   result = client.list_contexts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Context.
-            #     p response
+            #     p item
             #   end
             #
             def list_contexts request, options = nil
@@ -1552,16 +1552,14 @@ module Google
             #
             #   @param context [::Google::Cloud::AIPlatform::V1::Context, ::Hash]
             #     Required. The Context containing updates.
-            #     The Context's {::Google::Cloud::AIPlatform::V1::Context#name Context.name} field is used to identify the Context to be
-            #     updated.
-            #     Format:
+            #     The Context's {::Google::Cloud::AIPlatform::V1::Context#name Context.name} field
+            #     is used to identify the Context to be updated. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
-            #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is
-            #     created.
+            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is
+            #     not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Context]
@@ -1677,14 +1675,14 @@ module Google
             #   # Call the delete_context method.
             #   result = client.delete_context request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_context request, options = nil
@@ -1779,14 +1777,14 @@ module Google
             #   # Call the purge_contexts method.
             #   result = client.purge_contexts request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def purge_contexts request, options = nil
@@ -1852,9 +1850,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param context [::String]
-            #     Required. The resource name of the Context that the Artifacts and Executions
-            #     belong to.
-            #     Format:
+            #     Required. The resource name of the Context that the Artifacts and
+            #     Executions belong to. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
             #   @param artifacts [::Array<::String>]
             #     The resource names of the Artifacts to attribute to the Context.
@@ -2423,7 +2420,8 @@ module Google
             #     The maximum number of Executions to return. The service may return fewer.
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
-            #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}
+            #     A page token, received from a previous
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
@@ -2446,6 +2444,9 @@ module Google
             #        To filter on metadata fields use traversal operation as follows:
             #        `metadata.<field_name>.<type_value>`
             #        For example: `metadata.field_1.number_value = 10.0`
+            #        In case the field name contains special characters (such as colon), one
+            #        can embed it inside double quote.
+            #        For example: `metadata."field:1".number_value = 10.0`
             #     *  **Context based filtering**:
             #        To filter Executions based on the contexts to which they belong use
             #        the function operator with the full resource name:
@@ -2486,13 +2487,11 @@ module Google
             #   # Call the list_executions method.
             #   result = client.list_executions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Execution.
-            #     p response
+            #     p item
             #   end
             #
             def list_executions request, options = nil
@@ -2557,16 +2556,15 @@ module Google
             #
             #   @param execution [::Google::Cloud::AIPlatform::V1::Execution, ::Hash]
             #     Required. The Execution containing updates.
-            #     The Execution's {::Google::Cloud::AIPlatform::V1::Execution#name Execution.name} field is used to identify the Execution
-            #     to be updated.
-            #     Format:
+            #     The Execution's {::Google::Cloud::AIPlatform::V1::Execution#name Execution.name}
+            #     field is used to identify the Execution to be updated. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
-            #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution} is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution}
-            #     is created.
+            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution}
+            #     is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution} is
+            #     created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Execution]
@@ -2679,14 +2677,14 @@ module Google
             #   # Call the delete_execution method.
             #   result = client.delete_execution request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_execution request, options = nil
@@ -2781,14 +2779,14 @@ module Google
             #   # Call the purge_executions method.
             #   result = client.purge_executions request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def purge_executions request, options = nil
@@ -2947,9 +2945,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param execution [::String]
-            #     Required. The resource name of the Execution whose input and output Artifacts should
-            #     be retrieved as a LineageSubgraph.
-            #     Format:
+            #     Required. The resource name of the Execution whose input and output
+            #     Artifacts should be retrieved as a LineageSubgraph. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -3035,9 +3032,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the MetadataStore where the MetadataSchema should
-            #     be created.
-            #     Format:
+            #     Required. The resource name of the MetadataStore where the MetadataSchema
+            #     should be created. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
             #   @param metadata_schema [::Google::Cloud::AIPlatform::V1::MetadataSchema, ::Hash]
             #     Required. The MetadataSchema to create.
@@ -3230,8 +3226,8 @@ module Google
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
-            #     next page.
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}
+            #     call. Provide this to retrieve the next page.
             #
             #     When paginating, all other provided parameters must match the call that
             #     provided the page token. (Otherwise the request will fail with
@@ -3259,13 +3255,11 @@ module Google
             #   # Call the list_metadata_schemas method.
             #   result = client.list_metadata_schemas request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::MetadataSchema.
-            #     p response
+            #     p item
             #   end
             #
             def list_metadata_schemas request, options = nil
@@ -3330,9 +3324,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param artifact [::String]
-            #     Required. The resource name of the Artifact whose Lineage needs to be retrieved as a
-            #     LineageSubgraph.
-            #     Format:
+            #     Required. The resource name of the Artifact whose Lineage needs to be
+            #     retrieved as a LineageSubgraph. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
             #
             #     The request may error with FAILED_PRECONDITION if the number of Artifacts,
@@ -3361,6 +3354,9 @@ module Google
             #        To filter on metadata fields use traversal operation as follows:
             #        `metadata.<field_name>.<type_value>`.
             #        For example: `metadata.field_1.number_value = 10.0`
+            #        In case the field name contains special characters (such as colon), one
+            #        can embed it inside double quote.
+            #        For example: `metadata."field:1".number_value = 10.0`
             #
             #     Each of the above supported filter types can be combined together using
             #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed
@@ -3470,9 +3466,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -3514,7 +3510,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

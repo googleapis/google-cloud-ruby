@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/environments/credentials"
 require "google/cloud/dialogflow/v2/environments/paths"
 require "google/cloud/dialogflow/v2/environments/client"
+require "google/cloud/dialogflow/v2/environments/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service for managing {::Google::Cloud::Dialogflow::V2::Environment Environments}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/environments"
         #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/environments/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new
         #
         module Environments
         end

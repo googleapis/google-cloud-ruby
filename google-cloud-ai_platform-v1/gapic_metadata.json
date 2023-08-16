@@ -50,9 +50,19 @@
                 "list_data_items"
               ]
             },
+            "SearchDataItems": {
+              "methods": [
+                "search_data_items"
+              ]
+            },
             "ListSavedQueries": {
               "methods": [
                 "list_saved_queries"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "delete_saved_query"
               ]
             },
             "GetAnnotationSpec": {
@@ -108,6 +118,11 @@
               "methods": [
                 "undeploy_model"
               ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutate_deployed_model"
+              ]
             }
           }
         }
@@ -126,6 +141,11 @@
             "StreamingReadFeatureValues": {
               "methods": [
                 "streaming_read_feature_values"
+              ]
+            },
+            "WriteFeatureValues": {
+              "methods": [
+                "write_feature_values"
               ]
             }
           }
@@ -230,6 +250,11 @@
             "ExportFeatureValues": {
               "methods": [
                 "export_feature_values"
+              ]
+            },
+            "DeleteFeatureValues": {
+              "methods": [
+                "delete_feature_values"
               ]
             },
             "SearchFeatures": {
@@ -414,6 +439,41 @@
                 "cancel_hyperparameter_tuning_job"
               ]
             },
+            "CreateNasJob": {
+              "methods": [
+                "create_nas_job"
+              ]
+            },
+            "GetNasJob": {
+              "methods": [
+                "get_nas_job"
+              ]
+            },
+            "ListNasJobs": {
+              "methods": [
+                "list_nas_jobs"
+              ]
+            },
+            "DeleteNasJob": {
+              "methods": [
+                "delete_nas_job"
+              ]
+            },
+            "CancelNasJob": {
+              "methods": [
+                "cancel_nas_job"
+              ]
+            },
+            "GetNasTrialDetail": {
+              "methods": [
+                "get_nas_trial_detail"
+              ]
+            },
+            "ListNasTrialDetails": {
+              "methods": [
+                "list_nas_trial_details"
+              ]
+            },
             "CreateBatchPredictionJob": {
               "methods": [
                 "create_batch_prediction_job"
@@ -477,6 +537,25 @@
             "ResumeModelDeploymentMonitoringJob": {
               "methods": [
                 "resume_model_deployment_monitoring_job"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::MatchService::Client",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "find_neighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "read_index_datapoints"
               ]
             }
           }
@@ -701,6 +780,11 @@
                 "update_model"
               ]
             },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "update_explanation_dataset"
+              ]
+            },
             "DeleteModel": {
               "methods": [
                 "delete_model"
@@ -721,6 +805,11 @@
                 "export_model"
               ]
             },
+            "CopyModel": {
+              "methods": [
+                "copy_model"
+              ]
+            },
             "ImportModelEvaluation": {
               "methods": [
                 "import_model_evaluation"
@@ -729,6 +818,11 @@
             "BatchImportModelEvaluationSlices": {
               "methods": [
                 "batch_import_model_evaluation_slices"
+              ]
+            },
+            "BatchImportEvaluatedAnnotations": {
+              "methods": [
+                "batch_import_evaluated_annotations"
               ]
             },
             "GetModelEvaluation": {
@@ -749,6 +843,20 @@
             "ListModelEvaluationSlices": {
               "methods": [
                 "list_model_evaluation_slices"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "get_publisher_model"
               ]
             }
           }
@@ -829,9 +937,58 @@
                 "raw_predict"
               ]
             },
+            "ServerStreamingPredict": {
+              "methods": [
+                "server_streaming_predict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ScheduleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client",
+          "rpcs": {
+            "CreateSchedule": {
+              "methods": [
+                "create_schedule"
+              ]
+            },
+            "DeleteSchedule": {
+              "methods": [
+                "delete_schedule"
+              ]
+            },
+            "GetSchedule": {
+              "methods": [
+                "get_schedule"
+              ]
+            },
+            "ListSchedules": {
+              "methods": [
+                "list_schedules"
+              ]
+            },
+            "PauseSchedule": {
+              "methods": [
+                "pause_schedule"
+              ]
+            },
+            "ResumeSchedule": {
+              "methods": [
+                "resume_schedule"
+              ]
+            },
+            "UpdateSchedule": {
+              "methods": [
+                "update_schedule"
               ]
             }
           }
@@ -900,6 +1057,16 @@
             "DeleteTensorboard": {
               "methods": [
                 "delete_tensorboard"
+              ]
+            },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "read_tensorboard_usage"
+              ]
+            },
+            "ReadTensorboardSize": {
+              "methods": [
+                "read_tensorboard_size"
               ]
             },
             "CreateTensorboardExperiment": {

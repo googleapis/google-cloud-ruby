@@ -33,6 +33,13 @@ module Google
           # levels define DTMF detections running in parallel.
           #
           # Hierarchy: Agent->Flow->Page->Fulfillment/Parameter.
+          # @!attribute [rw] audio_export_gcs_destination
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::GcsDestination]
+          #     If present, incoming audio is exported by Dialogflow to the configured
+          #     Google Cloud Storage destination.
+          #     Exposed at the following levels:
+          #     - Agent level
+          #     - Flow level
           # @!attribute [rw] logging_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings::LoggingSettings]
           #     Settings for logging.

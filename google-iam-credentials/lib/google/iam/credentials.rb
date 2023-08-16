@@ -31,12 +31,14 @@ module Google
       # Create a new client object for IAMCredentials.
       #
       # By default, this returns an instance of
-      # [Google::Iam::Credentials::V1::IAMCredentials::Client](https://googleapis.dev/ruby/google-iam-credentials-v1/latest/Google/Iam/Credentials/V1/IAMCredentials/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Iam::Credentials::V1::IAMCredentials::Client](https://cloud.google.com/ruby/docs/reference/google-iam-credentials-v1/latest/Google-Iam-Credentials-V1-IAMCredentials-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IAMCredentials service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About IAMCredentials
       #
@@ -52,17 +54,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [IAMCredentials::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.iam_credentials version: :v1, &block
+      def self.iam_credentials version: :v1, transport: :grpc, &block
         require "google/iam/credentials/#{version.to_s.downcase}"
 
         package_name = Google::Iam::Credentials
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Iam::Credentials.const_get package_name
-        package_module.const_get(:IAMCredentials).const_get(:Client).new(&block)
+        service_module = Google::Iam::Credentials.const_get(package_name).const_get(:IAMCredentials)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
     end
   end

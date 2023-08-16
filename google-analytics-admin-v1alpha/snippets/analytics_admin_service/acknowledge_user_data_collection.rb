@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#acknowledge_user_data_collection
+# Snippet for the acknowledge_user_data_collection call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#acknowledge_user_data_collection.
+# It may require modification in order to execute successfully.
 #
 def acknowledge_user_data_collection
   # Create a client object. The client can be reused for multiple calls.

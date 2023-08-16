@@ -145,7 +145,7 @@ module Google
             credentials = @config.credentials
             # Use self-signed JWT if the endpoint is unchanged from default,
             # but only if the default endpoint does not have a region prefix.
-            enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+            enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                      !@config.endpoint.split(".").first.include?("-")
             credentials ||= Credentials.default scope: @config.scope,
                                                 enable_self_signed_jwt: enable_self_signed_jwt
@@ -241,13 +241,11 @@ module Google
           #   # Call the list_policies method.
           #   result = client.list_policies request
           #
-          #   # The returned object is of type Gapic::PagedEnumerable. You can
-          #   # iterate over all elements by calling #each, and the enumerable
-          #   # will lazily make API calls to fetch subsequent pages. Other
-          #   # methods are also available for managing paging directly.
-          #   result.each do |response|
+          #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+          #   # over elements, and API calls will be issued to fetch pages as needed.
+          #   result.each do |item|
           #     # Each element is of type ::Google::Iam::V2::Policy.
-          #     p response
+          #     p item
           #   end
           #
           def list_policies request, options = nil
@@ -444,14 +442,14 @@ module Google
           #   # Call the create_policy method.
           #   result = client.create_policy request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def create_policy request, options = nil
@@ -551,14 +549,14 @@ module Google
           #   # Call the update_policy method.
           #   result = client.update_policy request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def update_policy request, options = nil
@@ -660,14 +658,14 @@ module Google
           #   # Call the delete_policy method.
           #   result = client.delete_policy request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def delete_policy request, options = nil
@@ -750,9 +748,9 @@ module Google
           #    *  (`String`) The path to a service account key file in JSON format
           #    *  (`Hash`) A service account key as a Hash
           #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-          #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+          #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
           #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-          #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+          #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
           #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
           #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
           #    *  (`nil`) indicating no credentials
@@ -794,7 +792,9 @@ module Google
           class Configuration
             extend ::Gapic::Config
 
-            config_attr :endpoint,      "iam.googleapis.com", ::String
+            DEFAULT_ENDPOINT = "iam.googleapis.com"
+
+            config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
             config_attr :credentials,   nil do |value|
               allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
               allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

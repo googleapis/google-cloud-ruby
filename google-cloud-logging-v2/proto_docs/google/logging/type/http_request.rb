@@ -63,7 +63,7 @@ module Google
         #   @return [::String]
         #     The referer URL of the request, as defined in
         #     [HTTP/1.1 Header Field
-        #     Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+        #     Definitions](https://datatracker.ietf.org/doc/html/rfc2616#section-14.36).
         # @!attribute [rw] latency
         #   @return [::Google::Protobuf::Duration]
         #     The request processing latency on the server, from the time the request was

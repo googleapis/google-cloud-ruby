@@ -25,6 +25,7 @@ require "google/cloud/apigee_connect/v1/version"
 require "google/cloud/apigee_connect/v1/connection_service/credentials"
 require "google/cloud/apigee_connect/v1/connection_service/paths"
 require "google/cloud/apigee_connect/v1/connection_service/client"
+require "google/cloud/apigee_connect/v1/connection_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service Interface for the Apigee Connect connection management APIs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/apigee_connect/v1/connection_service"
         #     client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/apigee_connect/v1/connection_service/rest"
+        #     client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::Client.new
         #
         module ConnectionService
         end

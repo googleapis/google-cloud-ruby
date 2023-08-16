@@ -179,6 +179,13 @@ module Google
             ASYMMETRIC_DECRYPT = 6
 
             # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # with {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt RawEncrypt}
+            # and {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt RawDecrypt}.
+            # This purpose is meant to be used for interoperable symmetric
+            # encryption and does not support automatic CryptoKey rotation.
+            RAW_ENCRYPT_DECRYPT = 7
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
             # with {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign MacSign}.
             MAC = 9
           end
@@ -254,6 +261,9 @@ module Google
 
             # Cavium HSM attestation compressed with gzip. Note that this format is
             # defined by Cavium and subject to change at any time.
+            #
+            # See
+            # https://www.marvell.com/products/security-solutions/nitrox-hs-adapters/software-key-attestation.html.
             CAVIUM_V1_COMPRESSED = 3
 
             # Cavium HSM attestation V2 compressed with gzip. This is a new format
@@ -338,6 +348,17 @@ module Google
         #     Output only. The root cause of the most recent import failure. Only present
         #     if {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}.
+        # @!attribute [r] generation_failure_reason
+        #   @return [::String]
+        #     Output only. The root cause of the most recent generation failure. Only
+        #     present if {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::GENERATION_FAILED GENERATION_FAILED}.
+        # @!attribute [r] external_destruction_failure_reason
+        #   @return [::String]
+        #     Output only. The root cause of the most recent external destruction
+        #     failure. Only present if
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::EXTERNAL_DESTRUCTION_FAILED EXTERNAL_DESTRUCTION_FAILED}.
         # @!attribute [rw] external_protection_level_options
         #   @return [::Google::Cloud::Kms::V1::ExternalProtectionLevelOptions]
         #     ExternalProtectionLevelOptions stores a group of additional fields for
@@ -365,11 +386,11 @@ module Google
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
           #
-          # Algorithms beginning with "RSA_SIGN_" are usable with
+          # Algorithms beginning with `RSA_SIGN_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
           #
-          # The fields in the name after "RSA_SIGN_" correspond to the following
+          # The fields in the name after `RSA_SIGN_` correspond to the following
           # parameters: padding algorithm, modulus bit length, and digest algorithm.
           #
           # For PSS, the salt length used is equal to the length of digest
@@ -377,25 +398,25 @@ module Google
           # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::RSA_SIGN_PSS_2048_SHA256 RSA_SIGN_PSS_2048_SHA256}
           # will use PSS with a salt length of 256 bits or 32 bytes.
           #
-          # Algorithms beginning with "RSA_DECRYPT_" are usable with
+          # Algorithms beginning with `RSA_DECRYPT_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
           #
-          # The fields in the name after "RSA_DECRYPT_" correspond to the following
+          # The fields in the name after `RSA_DECRYPT_` correspond to the following
           # parameters: padding algorithm, modulus bit length, and digest algorithm.
           #
-          # Algorithms beginning with "EC_SIGN_" are usable with
+          # Algorithms beginning with `EC_SIGN_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
           #
-          # The fields in the name after "EC_SIGN_" correspond to the following
+          # The fields in the name after `EC_SIGN_` correspond to the following
           # parameters: elliptic curve, digest algorithm.
           #
-          # Algorithms beginning with "HMAC_" are usable with
+          # Algorithms beginning with `HMAC_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::MAC MAC}.
           #
-          # The suffix following "HMAC_" corresponds to the hash algorithm being used
+          # The suffix following `HMAC_` corresponds to the hash algorithm being used
           # (eg. SHA256).
           #
           # For more information, see [Key purposes and algorithms]
@@ -406,6 +427,24 @@ module Google
 
             # Creates symmetric encryption keys.
             GOOGLE_SYMMETRIC_ENCRYPTION = 1
+
+            # AES-GCM (Galois Counter Mode) using 128-bit keys.
+            AES_128_GCM = 41
+
+            # AES-GCM (Galois Counter Mode) using 256-bit keys.
+            AES_256_GCM = 19
+
+            # AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.
+            AES_128_CBC = 42
+
+            # AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.
+            AES_256_CBC = 43
+
+            # AES-CTR (Counter Mode) using 128-bit keys.
+            AES_128_CTR = 44
+
+            # AES-CTR (Counter Mode) using 256-bit keys.
+            AES_256_CTR = 45
 
             # RSASSA-PSS 2048 bit key with a SHA256 digest.
             RSA_SIGN_PSS_2048_SHA256 = 2
@@ -462,13 +501,19 @@ module Google
             RSA_DECRYPT_OAEP_4096_SHA1 = 39
 
             # ECDSA on the NIST P-256 curve with a SHA256 digest.
+            # Other hash functions can also be used:
+            # https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms
             EC_SIGN_P256_SHA256 = 12
 
             # ECDSA on the NIST P-384 curve with a SHA384 digest.
+            # Other hash functions can also be used:
+            # https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms
             EC_SIGN_P384_SHA384 = 13
 
             # ECDSA on the non-NIST secp256k1 curve. This curve is only supported for
             # HSM protection level.
+            # Other hash functions can also be used:
+            # https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms
             EC_SIGN_SECP256K1_SHA256 = 31
 
             # HMAC-SHA256 signing with a 256 bit key.
@@ -541,6 +586,23 @@ module Google
             # Additional details can be found in
             # {::Google::Cloud::Kms::V1::CryptoKeyVersion#import_failure_reason CryptoKeyVersion.import_failure_reason}.
             IMPORT_FAILED = 7
+
+            # This version was not generated successfully. It may not be used, enabled,
+            # disabled, or destroyed. Additional details can be found in
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#generation_failure_reason CryptoKeyVersion.generation_failure_reason}.
+            GENERATION_FAILED = 8
+
+            # This version was destroyed, and it may not be used or enabled again.
+            # Cloud KMS is waiting for the corresponding key material residing in an
+            # external key manager to be destroyed.
+            PENDING_EXTERNAL_DESTRUCTION = 9
+
+            # This version was destroyed, and it may not be used or enabled again.
+            # However, Cloud KMS could not confirm that the corresponding key material
+            # residing in an external key manager was destroyed. Additional details can
+            # be found in
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#external_destruction_failure_reason CryptoKeyVersion.external_destruction_failure_reason}.
+            EXTERNAL_DESTRUCTION_FAILED = 10
           end
 
           # A view for {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
@@ -736,6 +798,34 @@ module Google
             # [RSA AES key wrap
             # mechanism](http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908).
             RSA_OAEP_4096_SHA1_AES_256 = 2
+
+            # This ImportMethod represents the CKM_RSA_AES_KEY_WRAP key wrapping
+            # scheme defined in the PKCS #11 standard. In summary, this involves
+            # wrapping the raw key with an ephemeral AES key, and wrapping the
+            # ephemeral AES key with a 3072 bit RSA key. For more details, see
+            # [RSA AES key wrap
+            # mechanism](http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908).
+            RSA_OAEP_3072_SHA256_AES_256 = 3
+
+            # This ImportMethod represents the CKM_RSA_AES_KEY_WRAP key wrapping
+            # scheme defined in the PKCS #11 standard. In summary, this involves
+            # wrapping the raw key with an ephemeral AES key, and wrapping the
+            # ephemeral AES key with a 4096 bit RSA key. For more details, see
+            # [RSA AES key wrap
+            # mechanism](http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908).
+            RSA_OAEP_4096_SHA256_AES_256 = 4
+
+            # This ImportMethod represents RSAES-OAEP with a 3072 bit RSA key. The
+            # key material to be imported is wrapped directly with the RSA key. Due
+            # to technical limitations of RSA wrapping, this method cannot be used to
+            # wrap RSA keys for import.
+            RSA_OAEP_3072_SHA256 = 5
+
+            # This ImportMethod represents RSAES-OAEP with a 4096 bit RSA key. The
+            # key material to be imported is wrapped directly with the RSA key. Due
+            # to technical limitations of RSA wrapping, this method cannot be used to
+            # wrap RSA keys for import.
+            RSA_OAEP_4096_SHA256 = 6
           end
 
           # The state of the {::Google::Cloud::Kms::V1::ImportJob ImportJob}, indicating if

@@ -25,6 +25,11 @@
                 "get_database"
               ]
             },
+            "UpdateDatabase": {
+              "methods": [
+                "update_database"
+              ]
+            },
             "UpdateDatabaseDdl": {
               "methods": [
                 "update_database_ddl"

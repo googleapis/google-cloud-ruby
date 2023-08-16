@@ -34,7 +34,7 @@ def list_channels project_id:, location:
   puts "Channels:"
   # Print out all channels.
   response.each do |channel|
-    puts channel.name.to_s
+    puts channel.name
   end
 end
 # [END livestream_list_channels]

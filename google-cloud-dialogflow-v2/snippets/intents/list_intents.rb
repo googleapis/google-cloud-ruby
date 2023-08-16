@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Intents::Client#list_intents
+# Snippet for the list_intents call in the Intents service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Intents::Client#list_intents. It may require
+# modification in order to execute successfully.
 #
 def list_intents
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_intents
   # Call the list_intents method.
   result = client.list_intents request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dialogflow::V2::Intent.
-    p response
+    p item
   end
 end
 # [END dialogflow_v2_generated_Intents_ListIntents_sync]

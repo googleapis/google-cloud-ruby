@@ -65,7 +65,7 @@ module Google
         #  * The last segment cannot be fully numeric.
         #  * Must be unique within the customer project.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/managed_identities/v1/managed_identities_service"
         #     client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new

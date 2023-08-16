@@ -365,7 +365,7 @@ module Google
               write.current_document = \
                 Google::Cloud::Firestore::V1::Precondition.new({
                   exists: exists, update_time: time_to_timestamp(update_time)
-                }.delete_if { |_, v| v.nil? })
+                }.compact)
             end
 
             write
@@ -498,7 +498,6 @@ module Google
               dup_hash = dup_hash[field]
             end
             prev_hash[last_field] = dup_hash
-            prev_hash.delete_if { |_k, v| v.nil? }
             ret_hash
           end
 

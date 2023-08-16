@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_assets
+# Snippet for the list_assets call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_assets. It may
+# require modification in order to execute successfully.
 #
 def list_assets
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_assets
   # Call the list_assets method.
   result = client.list_assets request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::SecurityCenter::V1::ListAssetsResponse::ListAssetsResult.
-    p response
+    p item
   end
 end
 # [END securitycenter_v1_generated_SecurityCenter_ListAssets_sync]

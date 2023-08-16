@@ -25,6 +25,7 @@ require "google/cloud/dataplex/v1/version"
 require "google/cloud/dataplex/v1/content_service/credentials"
 require "google/cloud/dataplex/v1/content_service/paths"
 require "google/cloud/dataplex/v1/content_service/client"
+require "google/cloud/dataplex/v1/content_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # ContentService manages Notebook and SQL Scripts for Dataplex.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/content_service"
         #     client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataplex/v1/content_service/rest"
+        #     client = ::Google::Cloud::Dataplex::V1::ContentService::Rest::Client.new
         #
         module ContentService
         end

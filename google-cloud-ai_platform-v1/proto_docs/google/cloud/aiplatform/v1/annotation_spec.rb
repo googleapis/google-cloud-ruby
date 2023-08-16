@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the AnnotationSpec.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -38,8 +38,8 @@ module Google
         #     Output only. Timestamp when AnnotationSpec was last updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Used to perform consistent read-modify-write updates. If not set, a blind
-        #     "overwrite" update happens.
+        #     Optional. Used to perform consistent read-modify-write updates. If not set,
+        #     a blind "overwrite" update happens.
         class AnnotationSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

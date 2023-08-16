@@ -23,12 +23,17 @@ module Google
   module Cloud
     module ArtifactRegistry
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/artifact_registry/v1beta2"
       #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/artifact_registry/v1beta2"
+      #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
       #
       module V1beta2
       end

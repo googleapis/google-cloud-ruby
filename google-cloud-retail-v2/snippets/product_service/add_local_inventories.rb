@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories
+# Snippet for the add_local_inventories call in the ProductService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories. It
+# may require modification in order to execute successfully.
 #
 def add_local_inventories
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def add_local_inventories
   # Call the add_local_inventories method.
   result = client.add_local_inventories request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END retail_v2_generated_ProductService_AddLocalInventories_sync]

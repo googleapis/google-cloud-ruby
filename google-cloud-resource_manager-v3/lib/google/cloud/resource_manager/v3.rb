@@ -20,6 +20,7 @@ require "google/cloud/resource_manager/v3/folders"
 require "google/cloud/resource_manager/v3/organizations"
 require "google/cloud/resource_manager/v3/projects"
 require "google/cloud/resource_manager/v3/tag_bindings"
+require "google/cloud/resource_manager/v3/tag_holds"
 require "google/cloud/resource_manager/v3/tag_keys"
 require "google/cloud/resource_manager/v3/tag_values"
 require "google/cloud/resource_manager/v3/version"
@@ -28,12 +29,17 @@ module Google
   module Cloud
     module ResourceManager
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/resource_manager/v3"
       #     client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/resource_manager/v3"
+      #     client = ::Google::Cloud::ResourceManager::V3::Folders::Rest::Client.new
       #
       module V3
       end

@@ -1,5 +1,35 @@
 # Release History
 
+### 0.12.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.12.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.11.0 (2023-05-04)
+
+#### Features
+
+* Support adding ICMP pings to HttpCheck and TcpCheck 
+* Support checker type and user labels in UptimeCheckConfig 
+* Support filtering in list_uptime_check_configs 
+* Support for JSON_PATH content matchers 
+* Support for providing the passing http response codes in HttpCheck 
+* Support Oregon, Iowa, and Virginia regional checks 
+* Support user provided content-type headers in HttpCheck 
+
+### 0.10.0 (2023-01-11)
+
+#### Features
+
+* Added support for the snooze API ([#19976](https://github.com/googleapis/google-cloud-ruby/issues/19976)) 
+
 ### 0.9.0 (2022-08-09)
 
 #### Features

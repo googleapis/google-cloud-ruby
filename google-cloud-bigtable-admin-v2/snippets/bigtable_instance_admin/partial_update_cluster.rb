@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/admin/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_cluster
+# Snippet for the partial_update_cluster call in the BigtableInstanceAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_cluster.
+# It may require modification in order to execute successfully.
 #
 def partial_update_cluster
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def partial_update_cluster
   # Call the partial_update_cluster method.
   result = client.partial_update_cluster request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateCluster_sync]

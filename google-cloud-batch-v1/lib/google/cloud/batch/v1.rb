@@ -23,12 +23,17 @@ module Google
   module Cloud
     module Batch
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/batch/v1"
       #     client = ::Google::Cloud::Batch::V1::BatchService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/batch/v1"
+      #     client = ::Google::Cloud::Batch::V1::BatchService::Rest::Client.new
       #
       module V1
       end

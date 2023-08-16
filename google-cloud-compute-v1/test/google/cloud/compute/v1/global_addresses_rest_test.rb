@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/global_addresses"
+require "google/cloud/compute/v1/global_addresses/rest"
 
 
-class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -80,39 +80,41 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, delete_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.delete({ address: address, project: project, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.delete({ address: address, project: project, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.delete address: address, project: project, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.delete address: address, project: project, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest.new(address: address, project: project, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.delete ::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest.new(address: address, project: project, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.delete({ address: address, project: project, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.delete({ address: address, project: project, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest.new(address: address, project: project, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.delete(::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest.new(address: address, project: project, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, delete_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, delete_client_stub.call_count
+      end
     end
   end
 
@@ -133,39 +135,41 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, get_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.get({ address: address, project: project }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.get({ address: address, project: project }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.get address: address, project: project do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.get address: address, project: project do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetGlobalAddressRequest.new(address: address, project: project) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.get ::Google::Cloud::Compute::V1::GetGlobalAddressRequest.new(address: address, project: project) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.get({ address: address, project: project }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.get({ address: address, project: project }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetGlobalAddressRequest.new(address: address, project: project), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.get(::Google::Cloud::Compute::V1::GetGlobalAddressRequest.new(address: address, project: project), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, get_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, get_client_stub.call_count
+      end
     end
   end
 
@@ -187,39 +191,41 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, insert_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, insert_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.insert({ address_resource: address_resource, project: project, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.insert({ address_resource: address_resource, project: project, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.insert address_resource: address_resource, project: project, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.insert address_resource: address_resource, project: project, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertGlobalAddressRequest.new(address_resource: address_resource, project: project, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.insert ::Google::Cloud::Compute::V1::InsertGlobalAddressRequest.new(address_resource: address_resource, project: project, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.insert({ address_resource: address_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.insert({ address_resource: address_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertGlobalAddressRequest.new(address_resource: address_resource, project: project, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.insert(::Google::Cloud::Compute::V1::InsertGlobalAddressRequest.new(address_resource: address_resource, project: project, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, insert_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, insert_client_stub.call_count
+      end
     end
   end
 
@@ -244,39 +250,98 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListGlobalAddressesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list ::Google::Cloud::Compute::V1::ListGlobalAddressesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListGlobalAddressesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list(::Google::Cloud::Compute::V1::ListGlobalAddressesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    address = "hello world"
+    global_addresses_move_request_resource = {}
+    project = "hello world"
+    request_id = "hello world"
+
+    move_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_move_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move({ address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move ::Google::Cloud::Compute::V1::MoveGlobalAddressRequest.new(address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move({ address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move(::Google::Cloud::Compute::V1::MoveGlobalAddressRequest.new(address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_client_stub.call_count
+      end
     end
   end
 
@@ -298,39 +363,41 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_set_labels_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.set_labels ::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.set_labels(::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, set_labels_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, set_labels_client_stub.call_count
+      end
     end
   end
 

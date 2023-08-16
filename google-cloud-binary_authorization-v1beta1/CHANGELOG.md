@@ -1,5 +1,31 @@
 # Release History
 
+### 0.9.0 (2023-08-15)
+
+#### Features
+
+* Added ContinuousValidationEvent::ContinuousValidationPodEvent::ImageDetails#check_results 
+* Added ContinuousValidationEvent::ContinuousValidationPodEvent#policy_name 
+* Added ContinuousValidationEvent#config_error_event ([#22780](https://github.com/googleapis/google-cloud-ruby/issues/22780)) 
+#### Bug Fixes
+
+* BREAKING: Removed ContinuousValidationEvent#unsupported_policy_event which was never used 
+
+### 0.8.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21673](https://github.com/googleapis/google-cloud-ruby/issues/21673)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
 ### 0.6.0 (2022-07-02)
 
 #### Features

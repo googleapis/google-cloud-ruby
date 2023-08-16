@@ -25,6 +25,29 @@ module Google
           # Path helper methods for the DocumentProcessorService API.
           module Paths
             ##
+            # Create a fully-qualified Evaluation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}/evaluations/{evaluation}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param processor [String]
+            # @param processor_version [String]
+            # @param evaluation [String]
+            #
+            # @return [::String]
+            def evaluation_path project:, location:, processor:, processor_version:, evaluation:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "processor cannot contain /" if processor.to_s.include? "/"
+              raise ::ArgumentError, "processor_version cannot contain /" if processor_version.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/processors/#{processor}/processorVersions/#{processor_version}/evaluations/#{evaluation}"
+            end
+
+            ##
             # Create a fully-qualified HumanReviewConfig resource string.
             #
             # The resource will be in the following format:
@@ -77,6 +100,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/processors/#{processor}"
+            end
+
+            ##
+            # Create a fully-qualified ProcessorType resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/processorTypes/{processor_type}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param processor_type [String]
+            #
+            # @return [::String]
+            def processor_type_path project:, location:, processor_type:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/processorTypes/#{processor_type}"
             end
 
             ##

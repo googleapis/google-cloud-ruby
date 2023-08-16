@@ -15,17 +15,20 @@
 require_relative "helper"
 
 describe "#update_cdn_key", :stitcher_snippet do
-  it "updates the Akamai CDN key" do
+  it "updates the Media CDN key" do
     sample = SampleLoader.load "update_cdn_key.rb"
 
-    refute_nil akamai_cdn_key
-    @akamai_cdn_key_created = true
+    refute_nil media_cdn_key
+    @media_cdn_key_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: akamai_cdn_key_id, hostname: updated_hostname, gcdn_keyname: nil, gcdn_private_key: nil, akamai_token_key: akamai_token_key
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: media_cdn_key_id, hostname: updated_hostname,
+                 key_name: key_name, private_key: updated_media_cdn_private_key,
+                 is_media_cdn: true
     end
 
-    cdn_key_id_regex = Regexp.escape akamai_cdn_key_id
+    cdn_key_id_regex = Regexp.escape media_cdn_key_id
     assert_match %r{Updated CDN key: projects/\S+/locations/#{location_id}/cdnKeys/#{cdn_key_id_regex}}, out
   end
 
@@ -36,10 +39,13 @@ describe "#update_cdn_key", :stitcher_snippet do
     @cloud_cdn_key_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: gcdn_cdn_key_id, hostname: updated_hostname, gcdn_keyname: updated_gcdn_key_name, gcdn_private_key: gcdn_private_key, akamai_token_key: nil
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: cloud_cdn_key_id, hostname: updated_hostname,
+                 key_name: key_name, private_key: updated_cloud_cdn_private_key,
+                 is_media_cdn: false
     end
 
-    cdn_key_id_regex = Regexp.escape gcdn_cdn_key_id
+    cdn_key_id_regex = Regexp.escape cloud_cdn_key_id
     assert_match %r{Updated CDN key: projects/\S+/locations/#{location_id}/cdnKeys/#{cdn_key_id_regex}}, out
   end
 end

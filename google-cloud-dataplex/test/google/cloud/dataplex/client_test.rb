@@ -20,35 +20,101 @@ require "helper"
 require "google/cloud/dataplex"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Dataplex::ClientConstructionMinitest < Minitest::Test
-  def test_content_service
+  def test_content_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Dataplex.content_service do |config|
+      client = Google::Cloud::Dataplex.content_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Dataplex::V1::ContentService::Client, client
     end
   end
 
-  def test_metadata_service
+  def test_content_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dataplex.content_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::ContentService::Rest::Client, client
+    end
+  end
+
+  def test_dataplex_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Dataplex.metadata_service do |config|
+      client = Google::Cloud::Dataplex.dataplex_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataplexService::Client, client
+    end
+  end
+
+  def test_dataplex_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dataplex.dataplex_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataplexService::Rest::Client, client
+    end
+  end
+
+  def test_data_taxonomy_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataplex.data_taxonomy_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client, client
+    end
+  end
+
+  def test_data_taxonomy_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dataplex.data_taxonomy_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client, client
+    end
+  end
+
+  def test_data_scan_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataplex.data_scan_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataScanService::Client, client
+    end
+  end
+
+  def test_data_scan_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dataplex.data_scan_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataScanService::Rest::Client, client
+    end
+  end
+
+  def test_metadata_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataplex.metadata_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Dataplex::V1::MetadataService::Client, client
     end
   end
 
-  def test_dataplex_service
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Dataplex.dataplex_service do |config|
-        config.credentials = grpc_channel
+  def test_metadata_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dataplex.metadata_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Dataplex::V1::DataplexService::Client, client
+      assert_kind_of Google::Cloud::Dataplex::V1::MetadataService::Rest::Client, client
     end
   end
 end

@@ -20,8 +20,11 @@
 require "google/cloud/essential_contacts/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client#compute_contacts
+# Snippet for the compute_contacts call in the EssentialContactsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client#compute_contacts.
+# It may require modification in order to execute successfully.
 #
 def compute_contacts
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def compute_contacts
   # Call the compute_contacts method.
   result = client.compute_contacts request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::EssentialContacts::V1::Contact.
-    p response
+    p item
   end
 end
 # [END essentialcontacts_v1_generated_EssentialContactsService_ComputeContacts_sync]

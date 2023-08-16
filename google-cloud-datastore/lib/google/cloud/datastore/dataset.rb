@@ -24,6 +24,7 @@ require "google/cloud/datastore/gql_query"
 require "google/cloud/datastore/cursor"
 require "google/cloud/datastore/dataset/lookup_results"
 require "google/cloud/datastore/dataset/query_results"
+require "google/cloud/datastore/dataset/aggregate_query_results"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/read_only_transaction"
 
@@ -82,6 +83,26 @@ module Google
           service.project
         end
         alias project project_id
+
+        ##
+        # The Datastore database connected to.
+        #
+        # @return [String] ID of the database
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new(
+        #     project_id: "my-todo-project",
+        #     credentials: "/path/to/keyfile.json",
+        #     database_id: "my-database"
+        #   )
+        #
+        #   datastore.database_id #=> "my-database"
+        #
+        def database_id
+          service.database
+        end
 
         ##
         # Generate IDs for a Key before creating an entity.
@@ -316,6 +337,8 @@ module Google
         #   [Eventual Consistency in Google Cloud
         #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
         #   for more information.
+        # @param [Time] read_time Reads entities as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @return [Google::Cloud::Datastore::Entity, nil]
         #
@@ -334,12 +357,12 @@ module Google
         #
         #   task = datastore.find "Task", "sampleTask"
         #
-        def find key_or_kind, id_or_name = nil, consistency: nil
+        def find key_or_kind, id_or_name = nil, consistency: nil, read_time: nil
           key = key_or_kind
           unless key.is_a? Google::Cloud::Datastore::Key
             key = Key.new key_or_kind, id_or_name
           end
-          find_all(key, consistency: consistency).first
+          find_all(key, consistency: consistency, read_time: read_time).first
         end
         alias get find
 
@@ -356,6 +379,8 @@ module Google
         #   [Eventual Consistency in Google Cloud
         #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
         #   for more information.
+        # @param [Time] read_time Reads entities as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @return [Google::Cloud::Datastore::Dataset::LookupResults]
         #
@@ -368,12 +393,12 @@ module Google
         #   task_key2 = datastore.key "Task", "sampleTask2"
         #   tasks = datastore.find_all task_key1, task_key2
         #
-        def find_all *keys, consistency: nil
+        def find_all *keys, consistency: nil, read_time: nil
           ensure_service!
           check_consistency! consistency
           lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
-                                      consistency: consistency)
-          LookupResults.from_grpc lookup_res, service, consistency
+                                      consistency: consistency, read_time: read_time)
+          LookupResults.from_grpc lookup_res, service, consistency, nil, read_time
         end
         alias lookup find_all
 
@@ -390,6 +415,8 @@ module Google
         #   [Eventual Consistency in Google Cloud
         #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
         #   for more information.
+        # @param [Time] read_time Reads entities as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #
@@ -440,18 +467,102 @@ module Google
         #                             done: false
         #   tasks = datastore.run gql_query, namespace: "example-ns"
         #
-        def run query, namespace: nil, consistency: nil
+        def run query, namespace: nil, consistency: nil, read_time: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{query.class} object."
           end
           check_consistency! consistency
           query_res = service.run_query query.to_grpc, namespace,
-                                        consistency: consistency
+                                        consistency: consistency, read_time: read_time
           QueryResults.from_grpc query_res, service, namespace,
-                                 query.to_grpc.dup
+                                 query.to_grpc.dup, read_time
         end
         alias run_query run
+
+        ##
+        # Retrieve aggregate results specified by an AggregateQuery.
+        #
+        # @param [AggregateQuery, GqlQuery] query The object with the aggregate criteria.
+        # @param [String] namespace The namespace the query is to run within.
+        # @param [Symbol] consistency The non-transactional read consistency to
+        #   use. Cannot be set to `:strong` for global queries. Accepted values
+        #   are `:eventual` and `:strong`.
+        # @param [Time] read_time Reads entities as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
+        #   The default consistency depends on the type of query used. See
+        #   [Eventual Consistency in Google Cloud
+        #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+        #   for more information.
+        #
+        # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #                    .where("done", "=", false)
+        #
+        #   aggregate_query = query.aggregate_query
+        #
+        #   res = datastore.run_aggregation aggregate_query
+        #
+        # @example Run an aggregate ancestor query with eventual consistency:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task_list_key = datastore.key "TaskList", "default"
+        #   query = datastore.query.kind("Task")
+        #                    .ancestor(task_list_key)
+        #
+        #   aggregate_query = query.aggregate_query
+        #
+        #   res = datastore.run_aggregation aggregate_query, consistency: :eventual
+        #
+        # @example Run the aggregate query within a namespace with the `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #                    .where("done", "=", false)
+        #
+        #   aggregate_query = query.aggregate_query
+        #
+        #   res = datastore.run_aggregation aggregate_query, namespace: "example-ns"
+        #
+        # @example Run the aggregate query with a GQL string.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   gql_query = datastore.gql "SELECT COUNT(*) FROM Task WHERE done = @done",
+        #                             done: false
+        #   res = datastore.run_aggregation gql_query
+        #
+        # @example Run the aggregate GQL query within a namespace with `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   gql_query = datastore.gql "SELECT COUNT(*) FROM Task WHERE done = @done",
+        #                             done: false
+        #   res = datastore.run_aggregation gql_query, namespace: "example-ns"
+        #
+        def run_aggregation aggregate_query, namespace: nil, consistency: nil, read_time: nil
+          ensure_service!
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
+          end
+          check_consistency! consistency
+          aggregate_query_res = service.run_aggregation_query aggregate_query.to_grpc, namespace,
+                                                              consistency: consistency, read_time: read_time
+          AggregateQueryResults.from_grpc aggregate_query_res
+        end
 
         ##
         # Creates a Datastore Transaction.
@@ -574,6 +685,9 @@ module Google
         # @see https://cloud.google.com/datastore/docs/concepts/transactions
         #   Transactions
         #
+        # @param [Time] read_time Reads entities at the given time.
+        #   This may not be older than 60 seconds. Optional
+        #
         # @yield [tx] a block yielding a new transaction
         # @yieldparam [ReadOnlyTransaction] tx the transaction object
         #
@@ -595,8 +709,8 @@ module Google
         #     end
         #   end
         #
-        def read_only_transaction
-          tx = ReadOnlyTransaction.new service
+        def read_only_transaction read_time: nil
+          tx = ReadOnlyTransaction.new service, read_time: read_time
           return tx unless block_given?
 
           begin
@@ -865,6 +979,38 @@ module Google
           yield entity if block_given?
 
           entity
+        end
+
+        ##
+        # Create a new Filter instance. This is a convenience method to make the
+        # creation of Filter objects easier.
+        #
+        # @param name [String] The property to filter by.
+        # @param operator [String] The operator to filter by. Defaults to nil.
+        # @param value [Object] The value to compare the property to. Defaults
+        #       to nil. Possible values are:
+        #         - Integer
+        #         - Float/BigDecimal
+        #         - String
+        #         - Boolean
+        #         - Array
+        #         - Date/Time
+        #         - StringIO
+        #         - Google::Cloud::Datastore::Key
+        #         - Google::Cloud::Datastore::Entity
+        #         - nil
+        #
+        # @return [Google::Cloud::Datastore::Filter]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = datastore.filter("done", "=", false)
+        #
+        def filter name, operator, value
+          Filter.new name, operator, value
         end
 
         protected

@@ -14,5 +14,5 @@
     "ruby-cloud-description": "A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services.",
     "ruby-cloud-env-prefix": "ASSET",
     "ruby-cloud-product-url": "https://cloud.google.com/asset-inventory/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

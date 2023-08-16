@@ -24,12 +24,17 @@ module Google
     module Video
       module Transcoder
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/video/transcoder/v1"
         #     client = ::Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+        #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/video/transcoder/v1"
+        #     client = ::Google::Cloud::Video::Transcoder::V1::TranscoderService::Rest::Client.new
         #
         module V1
         end

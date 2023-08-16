@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::Folders::Client#create_folder
+# Snippet for the create_folder call in the Folders service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Folders::Client#create_folder. It may
+# require modification in order to execute successfully.
 #
 def create_folder
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_folder
   # Call the create_folder method.
   result = client.create_folder request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END cloudresourcemanager_v3_generated_Folders_CreateFolder_sync]

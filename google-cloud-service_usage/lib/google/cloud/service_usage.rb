@@ -48,9 +48,9 @@ module Google
       # Create a new client object for ServiceUsage.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceUsage::V1::ServiceUsage::Client](https://googleapis.dev/ruby/google-cloud-service_usage-v1/latest/Google/Cloud/ServiceUsage/V1/ServiceUsage/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::ServiceUsage::V1::ServiceUsage::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-service_usage-v1/latest/Google-Cloud-ServiceUsage-V1-ServiceUsage-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServiceUsage service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -65,7 +65,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [ServiceUsage::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.service_usage version: :v1, &block
         require "google/cloud/service_usage/#{version.to_s.downcase}"
@@ -74,8 +74,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::ServiceUsage.const_get package_name
-        package_module.const_get(:ServiceUsage).const_get(:Client).new(&block)
+        service_module = Google::Cloud::ServiceUsage.const_get(package_name).const_get(:ServiceUsage)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -95,7 +95,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

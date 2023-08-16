@@ -28,21 +28,24 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the Dataset.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. The description of the Dataset.
+        #     The description of the Dataset.
         # @!attribute [rw] metadata_schema_uri
         #   @return [::String]
-        #     Required. Points to a YAML file stored on Google Cloud Storage describing additional
-        #     information about the Dataset.
-        #     The schema is defined as an OpenAPI 3.0.2 Schema Object.
-        #     The schema files that can be used here are found in
-        #     gs://google-cloud-aiplatform/schema/dataset/metadata/.
+        #     Required. Points to a YAML file stored on Google Cloud Storage describing
+        #     additional information about the Dataset. The schema is defined as an
+        #     OpenAPI 3.0.2 Schema Object. The schema files that can be used here are
+        #     found in gs://google-cloud-aiplatform/schema/dataset/metadata/.
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Value]
         #     Required. Additional information about the Dataset.
+        # @!attribute [r] data_item_count
+        #   @return [::Integer]
+        #     Output only. The number of DataItems in this Dataset. Only apply for
+        #     non-structured Dataset.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this Dataset was created.
@@ -68,11 +71,28 @@ module Google
         #     and are immutable. Following system labels exist for each Dataset:
         #
         #     * "aiplatform.googleapis.com/dataset_metadata_schema": output only, its
-        #       value is the [metadata_schema's][google.cloud.aiplatform.v1.Dataset.metadata_schema_uri] title.
+        #       value is the
+        #       [metadata_schema's][google.cloud.aiplatform.v1.Dataset.metadata_schema_uri]
+        #       title.
+        # @!attribute [rw] saved_queries
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::SavedQuery>]
+        #     All SavedQueries belong to the Dataset will be returned in List/Get
+        #     Dataset response. The annotation_specs field
+        #     will not be populated except for UI cases which will only use
+        #     {::Google::Cloud::AIPlatform::V1::SavedQuery#annotation_spec_count annotation_spec_count}.
+        #     In CreateDataset request, a SavedQuery is created together if
+        #     this field is set, up to one SavedQuery can be set in CreateDatasetRequest.
+        #     The SavedQuery should not contain any AnnotationSpec.
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for a Dataset. If set, this Dataset
         #     and all sub-resources of this Dataset will be secured by this key.
+        # @!attribute [r] metadata_artifact
+        #   @return [::String]
+        #     Output only. The resource name of the Artifact that was created in
+        #     MetadataStore when creating the Dataset. The Artifact resource name pattern
+        #     is
+        #     `projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}`.
         class Dataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,21 +124,26 @@ module Google
         #     considered identical if their content bytes are identical (e.g. image bytes
         #     or pdf bytes).
         #     These labels will be overridden by Annotation labels specified inside index
-        #     file referenced by {::Google::Cloud::AIPlatform::V1::ImportDataConfig#import_schema_uri import_schema_uri}, e.g. jsonl file.
+        #     file referenced by
+        #     {::Google::Cloud::AIPlatform::V1::ImportDataConfig#import_schema_uri import_schema_uri},
+        #     e.g. jsonl file.
         # @!attribute [rw] annotation_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels that will be applied to newly imported Annotations. If two
         #     Annotations are identical, one of them will be deduped. Two Annotations are
-        #     considered identical if their {::Google::Cloud::AIPlatform::V1::Annotation#payload payload},
-        #     {::Google::Cloud::AIPlatform::V1::Annotation#payload_schema_uri payload_schema_uri} and all of their
-        #     {::Google::Cloud::AIPlatform::V1::Annotation#labels labels} are the same.
-        #     These labels will be overridden by Annotation labels specified inside index
-        #     file referenced by {::Google::Cloud::AIPlatform::V1::ImportDataConfig#import_schema_uri import_schema_uri}, e.g. jsonl file.
+        #     considered identical if their
+        #     {::Google::Cloud::AIPlatform::V1::Annotation#payload payload},
+        #     {::Google::Cloud::AIPlatform::V1::Annotation#payload_schema_uri payload_schema_uri}
+        #     and all of their {::Google::Cloud::AIPlatform::V1::Annotation#labels labels} are
+        #     the same. These labels will be overridden by Annotation labels specified
+        #     inside index file referenced by
+        #     {::Google::Cloud::AIPlatform::V1::ImportDataConfig#import_schema_uri import_schema_uri},
+        #     e.g. jsonl file.
         # @!attribute [rw] import_schema_uri
         #   @return [::String]
-        #     Required. Points to a YAML file stored on Google Cloud Storage describing the import
-        #     format. Validation will be done against the schema. The schema is defined
-        #     as an [OpenAPI 3.0.2 Schema
+        #     Required. Points to a YAML file stored on Google Cloud Storage describing
+        #     the import format. Validation will be done against the schema. The schema
+        #     is defined as an [OpenAPI 3.0.2 Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         class ImportDataConfig
           include ::Google::Protobuf::MessageExts
@@ -156,13 +181,36 @@ module Google
         #     which are named with the corresponding annotations' schema title. Inside
         #     these sub directories, a schema.yaml will be created to describe the
         #     output format.
+        # @!attribute [rw] fraction_split
+        #   @return [::Google::Cloud::AIPlatform::V1::ExportFractionSplit]
+        #     Split based on fractions defining the size of each set.
         # @!attribute [rw] annotations_filter
         #   @return [::String]
-        #     A filter on Annotations of the Dataset. Only Annotations on to-be-exported
-        #     DataItems(specified by [data_items_filter][]) that match this filter will
-        #     be exported. The filter syntax is the same as in
+        #     An expression for filtering what part of the Dataset is to be exported.
+        #     Only Annotations that match this filter will be exported. The filter syntax
+        #     is the same as in
         #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_annotations ListAnnotations}.
         class ExportDataConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Assigns the input data to training, validation, and test sets as per the
+        # given fractions. Any of `training_fraction`, `validation_fraction` and
+        # `test_fraction` may optionally be provided, they must sum to up to 1. If the
+        # provided ones sum to less than 1, the remainder is assigned to sets as
+        # decided by Vertex AI. If none of the fractions are set, by default roughly
+        # 80% of data is used for training, 10% for validation, and 10% for test.
+        # @!attribute [rw] training_fraction
+        #   @return [::Float]
+        #     The fraction of the input data that is to be used to train the Model.
+        # @!attribute [rw] validation_fraction
+        #   @return [::Float]
+        #     The fraction of the input data that is to be used to validate the Model.
+        # @!attribute [rw] test_fraction
+        #   @return [::Float]
+        #     The fraction of the input data that is to be used to evaluate the Model.
+        class ExportFractionSplit
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -21,7 +21,7 @@ module Google
   module Analytics
     module Data
       module V1beta
-        VERSION = "0.6.0"
+        VERSION = "0.8.1"
       end
     end
   end

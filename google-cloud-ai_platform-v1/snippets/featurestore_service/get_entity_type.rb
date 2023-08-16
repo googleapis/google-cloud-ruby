@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#get_entity_type
+# Snippet for the get_entity_type call in the FeaturestoreService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#get_entity_type. It
+# may require modification in order to execute successfully.
 #
 def get_entity_type
   # Create a client object. The client can be reused for multiple calls.

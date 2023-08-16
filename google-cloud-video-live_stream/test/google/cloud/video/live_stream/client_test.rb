@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/video/live_stream"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Video::LiveStream::ClientConstructionMinitest < Minitest::Test
-  def test_livestream_service
+  def test_livestream_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Video::LiveStream.livestream_service do |config|
+      client = Google::Cloud::Video::LiveStream.livestream_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client, client
+    end
+  end
+
+  def test_livestream_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Video::LiveStream.livestream_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client, client
     end
   end
 end

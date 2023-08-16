@@ -119,6 +119,23 @@ module Google
         # @!attribute [r] smart_reply_metrics
         #   @return [::Google::Cloud::Dialogflow::V2::SmartReplyMetrics]
         #     Output only. Only available when model is for smart reply.
+        # @!attribute [r] raw_human_eval_template_csv
+        #   @return [::String]
+        #     Output only. Human eval template in csv format.
+        #     It tooks real-world conversations provided through input dataset, generates
+        #     example suggestions for customer to verify quality of the model.
+        #     For Smart Reply, the generated csv file contains columns of
+        #     Context, (Suggestions,Q1,Q2)*3, Actual reply.
+        #     Context contains at most 10 latest messages in the conversation prior to
+        #     the current suggestion.
+        #     Q1: "Would you send it as the next message of agent?"
+        #     Evaluated based on whether the suggest is appropriate to be sent by
+        #     agent in current context.
+        #     Q2: "Does the suggestion move the conversation closer to resolution?"
+        #     Evaluated based on whether the suggestion provide solutions, or answers
+        #     customer's question or collect information from customer to resolve the
+        #     customer's issue.
+        #     Actual reply column contains the actual agent reply sent in the context.
         class ConversationModelEvaluation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,10 +163,10 @@ module Google
           #     ID>/documents/<Document ID>`. Only used for smart reply model.
           # @!attribute [rw] max_result_count
           #   @return [::Integer]
-          #     Required. The model to be evaluated can return multiple results with confidence
-          #     score on each query. These results will be sorted by the descending order
-          #     of the scores and we only keep the first max_result_count results as the
-          #     final results to evaluate.
+          #     Required. The model to be evaluated can return multiple results with
+          #     confidence score on each query. These results will be sorted by the
+          #     descending order of the scores and we only keep the first
+          #     max_result_count results as the final results to evaluate.
           class SmartReplyConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -163,10 +180,10 @@ module Google
           #     ID>/documents/<Document ID>`. Only used for smart compose model.
           # @!attribute [rw] max_result_count
           #   @return [::Integer]
-          #     Required. The model to be evaluated can return multiple results with confidence
-          #     score on each query. These results will be sorted by the descending order
-          #     of the scores and we only keep the first max_result_count results as the
-          #     final results to evaluate.
+          #     Required. The model to be evaluated can return multiple results with
+          #     confidence score on each query. These results will be sorted by the
+          #     descending order of the scores and we only keep the first
+          #     max_result_count results as the final results to evaluate.
           class SmartComposeConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -188,7 +205,8 @@ module Google
         # Metadata for article suggestion models.
         # @!attribute [rw] training_model_type
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationModel::ModelType]
-        #     Optional. Type of the article suggestion model. If not provided, model_type is used.
+        #     Optional. Type of the article suggestion model. If not provided, model_type
+        #     is used.
         class ArticleSuggestionModelMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -197,7 +215,8 @@ module Google
         # Metadata for smart reply models.
         # @!attribute [rw] training_model_type
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationModel::ModelType]
-        #     Optional. Type of the smart reply model. If not provided, model_type is used.
+        #     Optional. Type of the smart reply model. If not provided, model_type is
+        #     used.
         class SmartReplyModelMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -386,7 +405,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model ConversationModels.CreateConversationModel} operation.
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model ConversationModels.CreateConversationModel}
+        # operation.
         # @!attribute [rw] conversation_model
         #   @return [::String]
         #     The resource name of the conversation model. Format:
@@ -429,7 +450,9 @@ module Google
           end
         end
 
-        # Metadata for a {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#deploy_conversation_model ConversationModels.DeployConversationModel} operation.
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#deploy_conversation_model ConversationModels.DeployConversationModel}
+        # operation.
         # @!attribute [rw] conversation_model
         #   @return [::String]
         #     The resource name of the conversation model. Format:
@@ -443,7 +466,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#undeploy_conversation_model ConversationModels.UndeployConversationModel} operation.
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#undeploy_conversation_model ConversationModels.UndeployConversationModel}
+        # operation.
         # @!attribute [rw] conversation_model
         #   @return [::String]
         #     The resource name of the conversation model. Format:
@@ -457,7 +482,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#delete_conversation_model ConversationModels.DeleteConversationModel} operation.
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationModels::Client#delete_conversation_model ConversationModels.DeleteConversationModel}
+        # operation.
         # @!attribute [rw] conversation_model
         #   @return [::String]
         #     The resource name of the conversation model. Format:

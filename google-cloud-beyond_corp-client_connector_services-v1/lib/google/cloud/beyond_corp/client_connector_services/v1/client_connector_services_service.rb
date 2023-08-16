@@ -45,7 +45,7 @@ module Google
           # * Client Connector Services, named as follows:
           #   `projects/{project_id}/locations/{location_id}/client_connector_services/{client_connector_service_id}`.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/beyond_corp/client_connector_services/v1/client_connector_services_service"
           #     client = ::Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client.new

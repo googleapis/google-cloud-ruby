@@ -31,9 +31,9 @@ module Google
         ##
         # The Reservations API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/reservations"
+        #     require "google/cloud/compute/v1/reservations/rest"
         #     client = ::Google::Cloud::Compute::V1::Reservations::Rest::Client.new
         #
         module Reservations

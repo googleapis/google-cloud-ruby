@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/intents/credentials"
 require "google/cloud/dialogflow/cx/v3/intents/paths"
 require "google/cloud/dialogflow/cx/v3/intents/client"
+require "google/cloud/dialogflow/cx/v3/intents/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
           ##
           # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Intent Intents}.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/intents"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/intents/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new
           #
           module Intents
           end

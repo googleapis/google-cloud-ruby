@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "DATAFLOW",
     "ruby-cloud-product-url": "https://cloud.google.com/dataflow",
     "ruby-cloud-service-override": "JobsV1Beta3=Jobs;MessagesV1Beta3=Messages;MetricsV1Beta3=Metrics;SnapshotsV1Beta3=Snapshots",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

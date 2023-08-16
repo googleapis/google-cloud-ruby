@@ -24,6 +24,7 @@ require "google/cloud/private_catalog/v1beta1/version"
 
 require "google/cloud/private_catalog/v1beta1/private_catalog/credentials"
 require "google/cloud/private_catalog/v1beta1/private_catalog/client"
+require "google/cloud/private_catalog/v1beta1/private_catalog/rest"
 
 module Google
   module Cloud
@@ -52,10 +53,15 @@ module Google
         # name and a subset of the data of the original
         # [google.cloud.privatecatalogproducer.v1beta.Version][].
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/private_catalog/v1beta1/private_catalog"
         #     client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/private_catalog/v1beta1/private_catalog/rest"
+        #     client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new
         #
         module PrivateCatalog
         end

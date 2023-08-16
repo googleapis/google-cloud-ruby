@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "BINARY_AUTHORIZATION",
     "ruby-cloud-product-url": "https://cloud.google.com/binary-authorization/",
     "ruby-cloud-service-override": "BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

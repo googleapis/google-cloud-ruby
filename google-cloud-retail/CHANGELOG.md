@@ -1,5 +1,17 @@
 # Release History
 
+### 1.6.0 (2023-05-04)
+
+#### Features
+
+* Support for the model service 
+
+### 1.5.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20768](https://github.com/googleapis/google-cloud-ruby/issues/20768)) 
+
 ### 1.4.0 (2022-09-02)
 
 #### Features

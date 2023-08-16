@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/retail/v2/search_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -30,7 +31,7 @@ module Google
           # Service for search.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please enable Retail Search on Cloud Console before using this feature.
+          # Enable Retail Search on Cloud Console before using this feature.
           #
           class Client
             include Paths
@@ -131,7 +132,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -140,6 +141,12 @@ module Google
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @search_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Retail::V2::SearchService::Stub,
@@ -150,13 +157,20 @@ module Google
               )
             end
 
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
             # Service calls
 
             ##
             # Performs a search.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload search(request, options = nil)
             #   Pass arguments to `search` via a request object, either of type
@@ -168,7 +182,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -178,7 +192,7 @@ module Google
             #     `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
             #     or the name of the legacy placement resource, such as
             #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
-            #     This field is used to identify the serving configuration name and the set
+            #     This field is used to identify the serving config name and the set
             #     of models that will be used to make the search.
             #   @param branch [::String]
             #     The branch resource name, such as
@@ -262,7 +276,7 @@ module Google
             #   @param facet_specs [::Array<::Google::Cloud::Retail::V2::SearchRequest::FacetSpec, ::Hash>]
             #     Facet specifications for faceted search. If empty, no facets are returned.
             #
-            #     A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+            #     A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
             #     is returned.
             #   @param dynamic_facet_spec [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec, ::Hash]
             #     Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -363,7 +377,7 @@ module Google
             #     {::Google::Cloud::Retail::V2::UserEvent#page_categories UserEvent.page_categories};
             #
             #     To represent full path of category, use '>' sign to separate different
-            #     hierarchies. If '>' is part of the category name, please replace it with
+            #     hierarchies. If '>' is part of the category name, replace it with
             #     other character(s).
             #
             #     Category pages include special pages such as sales or promotions. For
@@ -404,6 +418,13 @@ module Google
             #   @param spell_correction_spec [::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec, ::Hash]
             #     The spell correction specification that specifies the mode under
             #     which spell correction will take effect.
+            #   @param entity [::String]
+            #     The entity for customers that may run multiple different entities, domains,
+            #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+            #     `google.com`, `youtube.com`, etc.
+            #     If this is set, it should be exactly matched with
+            #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get search
+            #     results boosted by entity.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]
@@ -425,13 +446,11 @@ module Google
             #   # Call the search method.
             #   result = client.search request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Retail::V2::SearchResponse::SearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search request, options = nil
@@ -514,9 +533,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -558,7 +577,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "retail.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "retail.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

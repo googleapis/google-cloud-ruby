@@ -67,8 +67,8 @@ module Google
         #     "overwrite" update happens.
         # @!attribute [r] support_automl_training
         #   @return [::Boolean]
-        #     Output only. If the Annotations belonging to the SavedQuery can be used for AutoML
-        #     training.
+        #     Output only. If the Annotations belonging to the SavedQuery can be used for
+        #     AutoML training.
         class SavedQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

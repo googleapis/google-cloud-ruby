@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-billing-v1",
-    "version": "0.10.0",
+    "version": "0.13.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_GetBillingAccount_sync",
-      "title": "Snippet for get_billing_account in CloudBilling",
-      "description": "Basic snippet for get_billing_account in CloudBilling",
+      "title": "Snippet for the get_billing_account call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#get_billing_account. It may require modification in order to execute successfully.",
       "file": "cloud_billing/get_billing_account.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_ListBillingAccounts_sync",
-      "title": "Snippet for list_billing_accounts in CloudBilling",
-      "description": "Basic snippet for list_billing_accounts in CloudBilling",
+      "title": "Snippet for the list_billing_accounts call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#list_billing_accounts. It may require modification in order to execute successfully.",
       "file": "cloud_billing/list_billing_accounts.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_UpdateBillingAccount_sync",
-      "title": "Snippet for update_billing_account in CloudBilling",
-      "description": "Basic snippet for update_billing_account in CloudBilling",
+      "title": "Snippet for the update_billing_account call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#update_billing_account. It may require modification in order to execute successfully.",
       "file": "cloud_billing/update_billing_account.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_sync",
-      "title": "Snippet for create_billing_account in CloudBilling",
-      "description": "Basic snippet for create_billing_account in CloudBilling",
+      "title": "Snippet for the create_billing_account call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#create_billing_account. It may require modification in order to execute successfully.",
       "file": "cloud_billing/create_billing_account.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_ListProjectBillingInfo_sync",
-      "title": "Snippet for list_project_billing_info in CloudBilling",
-      "description": "Basic snippet for list_project_billing_info in CloudBilling",
+      "title": "Snippet for the list_project_billing_info call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#list_project_billing_info. It may require modification in order to execute successfully.",
       "file": "cloud_billing/list_project_billing_info.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_GetProjectBillingInfo_sync",
-      "title": "Snippet for get_project_billing_info in CloudBilling",
-      "description": "Basic snippet for get_project_billing_info in CloudBilling",
+      "title": "Snippet for the get_project_billing_info call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#get_project_billing_info. It may require modification in order to execute successfully.",
       "file": "cloud_billing/get_project_billing_info.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_UpdateProjectBillingInfo_sync",
-      "title": "Snippet for update_project_billing_info in CloudBilling",
-      "description": "Basic snippet for update_project_billing_info in CloudBilling",
+      "title": "Snippet for the update_project_billing_info call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#update_project_billing_info. It may require modification in order to execute successfully.",
       "file": "cloud_billing/update_project_billing_info.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in CloudBilling",
-      "description": "Basic snippet for get_iam_policy in CloudBilling",
+      "title": "Snippet for the get_iam_policy call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "cloud_billing/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in CloudBilling",
-      "description": "Basic snippet for set_iam_policy in CloudBilling",
+      "title": "Snippet for the set_iam_policy call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "cloud_billing/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudBilling_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in CloudBilling",
-      "description": "Basic snippet for test_iam_permissions in CloudBilling",
+      "title": "Snippet for the test_iam_permissions call in the CloudBilling service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudBilling::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "cloud_billing/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudCatalog_ListServices_sync",
-      "title": "Snippet for list_services in CloudCatalog",
-      "description": "Basic snippet for list_services in CloudCatalog",
+      "title": "Snippet for the list_services call in the CloudCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudCatalog::Client#list_services. It may require modification in order to execute successfully.",
       "file": "cloud_catalog/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbilling_v1_generated_CloudCatalog_ListSkus_sync",
-      "title": "Snippet for list_skus in CloudCatalog",
-      "description": "Basic snippet for list_skus in CloudCatalog",
+      "title": "Snippet for the list_skus call in the CloudCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::V1::CloudCatalog::Client#list_skus. It may require modification in order to execute successfully.",
       "file": "cloud_catalog/list_skus.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

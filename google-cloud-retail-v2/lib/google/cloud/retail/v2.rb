@@ -19,6 +19,7 @@
 require "google/cloud/retail/v2/catalog_service"
 require "google/cloud/retail/v2/completion_service"
 require "google/cloud/retail/v2/control_service"
+require "google/cloud/retail/v2/model_service"
 require "google/cloud/retail/v2/prediction_service"
 require "google/cloud/retail/v2/product_service"
 require "google/cloud/retail/v2/search_service"
@@ -30,12 +31,17 @@ module Google
   module Cloud
     module Retail
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/retail/v2"
       #     client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/retail/v2"
+      #     client = ::Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
       #
       module V2
       end

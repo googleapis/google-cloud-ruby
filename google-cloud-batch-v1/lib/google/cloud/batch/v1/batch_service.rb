@@ -26,6 +26,7 @@ require "google/cloud/batch/v1/batch_service/credentials"
 require "google/cloud/batch/v1/batch_service/paths"
 require "google/cloud/batch/v1/batch_service/operations"
 require "google/cloud/batch/v1/batch_service/client"
+require "google/cloud/batch/v1/batch_service/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # The service manages user submitted batch jobs and allocates Google Compute
         # Engine VM instances to run the jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/batch/v1/batch_service"
         #     client = ::Google::Cloud::Batch::V1::BatchService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/batch/v1/batch_service/rest"
+        #     client = ::Google::Cloud::Batch::V1::BatchService::Rest::Client.new
         #
         module BatchService
         end

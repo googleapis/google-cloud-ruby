@@ -130,7 +130,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -441,13 +441,11 @@ module Google
               #   # Call the list_flows method.
               #   result = client.list_flows request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Flow.
-              #     p response
+              #     p item
               #   end
               #
               def list_flows request, options = nil
@@ -755,14 +753,14 @@ module Google
               #   # Call the train_flow method.
               #   result = client.train_flow request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def train_flow request, options = nil
@@ -997,7 +995,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ImportFlowResponse ImportFlowResponse}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportFlowResponse ImportFlowResponse}
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -1013,7 +1012,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload import_flow(parent: nil, flow_uri: nil, flow_content: nil, import_option: nil)
+              # @overload import_flow(parent: nil, flow_uri: nil, flow_content: nil, import_option: nil, flow_import_strategy: nil)
               #   Pass arguments to `import_flow` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1035,6 +1034,9 @@ module Google
               #     Uncompressed raw byte content for flow.
               #   @param import_option [::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest::ImportOption]
               #     Flow import mode. If not specified, `KEEP` is assumed.
+              #   @param flow_import_strategy [::Google::Cloud::Dialogflow::CX::V3::FlowImportStrategy, ::Hash]
+              #     Optional. Specifies the import strategy used when resolving resource
+              #     conflicts.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -1056,14 +1058,14 @@ module Google
               #   # Call the import_flow method.
               #   result = client.import_flow request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def import_flow request, options = nil
@@ -1117,7 +1119,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportFlowResponse ExportFlowResponse}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportFlowResponse ExportFlowResponse}
               #
               # Note that resources (e.g. intents, entities, webhooks) that the flow
               # references will also be exported.
@@ -1142,10 +1145,10 @@ module Google
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/flows/<Flow ID>`.
               #   @param flow_uri [::String]
-              #     Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-              #     export the flow to. The format of this URI must be
-              #     `gs://<bucket-name>/<object-name>`.
-              #     If left unspecified, the serialized flow is returned inline.
+              #     Optional. The [Google Cloud
+              #     Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.
+              #     The format of this URI must be `gs://<bucket-name>/<object-name>`. If left
+              #     unspecified, the serialized flow is returned inline.
               #
               #     Dialogflow performs a write operation for the Cloud Storage object
               #     on the caller's behalf, so your request authentication must
@@ -1175,14 +1178,14 @@ module Google
               #   # Call the export_flow method.
               #   result = client.export_flow request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def export_flow request, options = nil
@@ -1265,9 +1268,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1309,7 +1312,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

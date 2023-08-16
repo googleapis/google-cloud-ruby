@@ -22,6 +22,7 @@ require "google/cloud/bigquery/routine"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
+require "google/cloud/bigquery/dataset/tag"
 require "google/cloud/bigquery/convert"
 require "google/apis/bigquery_v2"
 
@@ -467,6 +468,21 @@ module Google
         end
 
         ##
+        # Retrieves the tags associated with this dataset. Tag keys are
+        # globally unique, and managed via the resource manager API.
+        #
+        # @see https://cloud.google.com/resource-manager/docs/tags/tags-overview
+        # for more information.
+        #
+        # @return [Google::Cloud::Bigquery::Dataset::Tag] The list of tags.
+        #
+        def tags
+          ensure_full_data!
+          return nil if @gapi.tags.nil?
+          @gapi.tags.map { |gapi| Tag.from_gapi gapi }
+        end
+
+        ##
         # Permanently deletes the dataset. The dataset must be empty before it
         # can be deleted unless the `force` option is set to `true`.
         #
@@ -704,7 +720,7 @@ module Google
               use_legacy_sql:                  use_legacy_sql,
               user_defined_function_resources: udfs_gapi(udfs)
             )
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
@@ -778,7 +794,7 @@ module Google
               query:               query,
               refresh_interval_ms: refresh_interval_ms
             )
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
@@ -793,6 +809,11 @@ module Google
         #   object without verifying that the resource exists on the BigQuery
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         #
         # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
         #   table does not exist.
@@ -815,13 +836,22 @@ module Google
         #
         #   table = dataset.table "my_table", skip_lookup: true
         #
+        # @example Avoid retrieving transient stats of the table with `view`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.table "my_table", view: "basic"
+        #
         # @!group Table
         #
-        def table table_id, skip_lookup: nil
+        def table table_id, skip_lookup: nil, view: nil
           ensure_service!
           return Table.new_reference project_id, dataset_id, table_id, service if skip_lookup
-          gapi = service.get_table dataset_id, table_id
-          Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          Table.from_gapi gapi, service, metadata_view: view
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -1816,7 +1846,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `sheets` - Google Sheets
         #   * `datastore_backup` - Cloud Datastore backup
@@ -1879,7 +1909,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
@@ -2141,7 +2171,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
@@ -2658,6 +2688,11 @@ module Google
         #   messages before the batch is published. Default is 10.
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         # @yield [response] the callback for when a batch of rows is inserted
         # @yieldparam [Table::AsyncInserter::Result] result the result of the
         #   asynchronous insert
@@ -2686,18 +2721,63 @@ module Google
         #
         #   inserter.stop.wait!
         #
+        # @example Avoid retrieving transient stats of the table with while inserting :
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   inserter = dataset.insert_async("my_table", view: "basic") do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
         def insert_async table_id, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
-                         interval: 10, threads: 4, &block
+                         interval: 10, threads: 4, view: nil, &block
           ensure_service!
 
           # Get table, don't use Dataset#table which handles NotFoundError
-          gapi = service.get_table dataset_id, table_id
-          table = Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          table = Table.from_gapi gapi, service, metadata_view: view
           # Get the AsyncInserter from the table
           table.insert_async skip_invalid: skip_invalid,
                              ignore_unknown: ignore_unknown,
                              max_bytes: max_bytes, max_rows: max_rows,
                              interval: interval, threads: threads, &block
+        end
+
+        ##
+        # Build an object of type Google::Apis::BigqueryV2::DatasetAccessEntry from
+        # the self.
+        #
+        # @param [Array<String>] target_types The list of target types within the dataset.
+        #
+        # @return [Google::Apis::BigqueryV2::DatasetAccessEntry] Returns a DatasetAccessEntry object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   dataset_access_entry = dataset.access_entry target_types: ["VIEWS"]
+        #
+        def build_access_entry target_types: nil
+          params = {
+            dataset: dataset_ref,
+            target_types: target_types
+          }.compact
+          Google::Apis::BigqueryV2::DatasetAccessEntry.new(**params)
         end
 
         protected
@@ -2944,8 +3024,6 @@ module Google
             @access
           end
 
-          # rubocop:disable Style/MethodDefParentheses
-
           ##
           # @raise [RuntimeError] not implemented
           def delete(*)
@@ -3048,8 +3126,6 @@ module Google
             raise "not implemented in #{self.class}"
           end
           alias refresh! reload!
-
-          # rubocop:enable Style/MethodDefParentheses
 
           ##
           # @private Make sure any access changes are saved

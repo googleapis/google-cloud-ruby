@@ -1,5 +1,29 @@
 # Changelog
 
+### 0.6.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.6.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.5.0 (2023-02-17)
+
+#### Features
+
+* Include the location and iam_policy mixin clients ([#20458](https://github.com/googleapis/google-cloud-ruby/issues/20458)) 
+
+### 0.4.1 (2023-02-01)
+
+#### Bug Fixes
+
+* Remove policy_based_routing_service as it introduced breaking changes ([#20071](https://github.com/googleapis/google-cloud-ruby/issues/20071)) 
+
 ### 0.4.0 (2022-11-07)
 
 #### Features

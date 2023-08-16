@@ -166,7 +166,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -201,7 +201,8 @@ module Google
             # Service calls
 
             ##
-            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource on a given GCP project and region.
+            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+            # resource on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -223,24 +224,27 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent location where this {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource
-            #     will be created.
+            #     Required. The parent location where this
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource will be
+            #     created.
             #
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param aws_cluster [::Google::Cloud::GkeMultiCloud::V1::AwsCluster, ::Hash]
-            #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to create.
+            #     Required. The specification of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to create.
             #   @param aws_cluster_id [::String]
-            #     Required. A client provided ID the resource. Must be unique within the parent
-            #     resource.
+            #     Required. A client provided ID the resource. Must be unique within the
+            #     parent resource.
             #
-            #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
-            #     resource name formatted as
+            #     The provided ID will be part of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource name
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
             #
-            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually create the cluster.
             #
@@ -264,14 +268,14 @@ module Google
             #   # Call the create_aws_cluster method.
             #   result = client.create_aws_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_aws_cluster request, options = nil
@@ -335,7 +339,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param aws_cluster [::Google::Cloud::GkeMultiCloud::V1::AwsCluster, ::Hash]
-            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to update.
+            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+            #     resource to update.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually update the cluster.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -355,14 +360,17 @@ module Google
             #      *   `control_plane.proxy_config`.
             #      *   `control_plane.proxy_config.secret_arn`.
             #      *   `control_plane.proxy_config.secret_version`.
+            #      *   `control_plane.root_volume.size_gib`.
+            #      *   `control_plane.root_volume.volume_type`.
             #      *   `control_plane.root_volume.iops`.
             #      *   `control_plane.root_volume.kms_key_arn`.
-            #      *   `control_plane.root_volume.volume_type`.
-            #      *   `control_plane.root_volume.size_gib`.
             #      *   `control_plane.ssh_config`.
             #      *   `control_plane.ssh_config.ec2_key_pair`.
             #      *   `control_plane.instance_placement.tenancy`.
-            #      *   `logging_config`.
+            #      *   `control_plane.iam_instance_profile`.
+            #      *   `logging_config.component_config.enable_components`.
+            #      *   `control_plane.tags`.
+            #      *   `monitoring_config.managed_prometheus_config.enabled`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -384,14 +392,14 @@ module Google
             #   # Call the update_aws_cluster method.
             #   result = client.update_aws_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_aws_cluster request, options = nil
@@ -437,7 +445,8 @@ module Google
             end
 
             ##
-            # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource.
+            # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+            # resource.
             #
             # @overload get_aws_cluster(request, options = nil)
             #   Pass arguments to `get_aws_cluster` via a request object, either of type
@@ -455,13 +464,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to
+            #     describe.
             #
             #     `AwsCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AwsCluster]
@@ -528,8 +539,8 @@ module Google
             end
 
             ##
-            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources on a given Google Cloud project and
-            # region.
+            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources
+            # on a given Google Cloud project and region.
             #
             # @overload list_aws_clusters(request, options = nil)
             #   Pass arguments to `list_aws_clusters` via a request object, either of type
@@ -553,18 +564,19 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
             #     If not specified, a default value of 50 will be used by the service.
             #     Regardless of the pageSize value, the response can include a partial list
             #     and a caller should only rely on response's
-            #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersResponse#next_page_token nextPageToken} to determine if
-            #     there are more instances left to be queried.
+            #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersResponse#next_page_token nextPageToken}
+            #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `nextPageToken` value returned from a previous
-            #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters awsClusters.list} request, if any.
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters awsClusters.list}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::GkeMultiCloud::V1::AwsCluster>]
@@ -586,13 +598,11 @@ module Google
             #   # Call the list_aws_clusters method.
             #   result = client.list_aws_clusters request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsCluster.
-            #     p response
+            #     p item
             #   end
             #
             def list_aws_clusters request, options = nil
@@ -638,10 +648,11 @@ module Google
             end
 
             ##
-            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource.
+            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+            # resource.
             #
-            # Fails if the cluster has one or more associated {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
-            # resources.
+            # Fails if the cluster has one or more associated
+            # {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resources.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -663,23 +674,26 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to delete.
+            #     Required. The resource name the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to delete.
             #
             #     `AwsCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually delete the resource.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource is not found,
-            #     the request will succeed but no action will be taken on the server and a
-            #     completed {::Google::Longrunning::Operation Operation} will be returned.
+            #     If set to true, and the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource is not
+            #     found, the request will succeed but no action will be taken on the server
+            #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
             #
             #     Useful for idempotent deletion.
             #   @param etag [::String]
-            #     The current etag of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
+            #     The current etag of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
             #
             #     Allows clients to perform deletions through optimistic concurrency control.
             #
@@ -706,14 +720,14 @@ module Google
             #   # Call the delete_aws_cluster method.
             #   result = client.delete_aws_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_aws_cluster request, options = nil
@@ -778,7 +792,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param aws_cluster [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to authenticate to.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to
+            #     authenticate to.
             #
             #     `AwsCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -851,7 +867,8 @@ module Google
             end
 
             ##
-            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}, attached to a given {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
+            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool},
+            # attached to a given {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -873,7 +890,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource where this node pool will be created.
+            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+            #     resource where this node pool will be created.
             #
             #     `AwsCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -881,16 +899,18 @@ module Google
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param aws_node_pool [::Google::Cloud::GkeMultiCloud::V1::AwsNodePool, ::Hash]
-            #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to create.
+            #     Required. The specification of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to create.
             #   @param aws_node_pool_id [::String]
-            #     Required. A client provided ID the resource. Must be unique within the parent
-            #     resource.
+            #     Required. A client provided ID the resource. Must be unique within the
+            #     parent resource.
             #
-            #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
-            #     resource name formatted as
+            #     The provided ID will be part of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource name
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
             #
-            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually create the node
             #     pool.
@@ -915,14 +935,14 @@ module Google
             #   # Call the create_aws_node_pool method.
             #   result = client.create_aws_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_aws_node_pool request, options = nil
@@ -986,7 +1006,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param aws_node_pool [::Google::Cloud::GkeMultiCloud::V1::AwsNodePool, ::Hash]
-            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to update.
+            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
+            #     resource to update.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but don't actually update the node pool.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -1009,6 +1030,13 @@ module Google
             #      *   `config.proxy_config.secret_version`.
             #      *   `config.ssh_config`.
             #      *   `config.ssh_config.ec2_key_pair`.
+            #      *   `config.instance_placement.tenancy`.
+            #      *   `config.iam_instance_profile`.
+            #      *   `config.labels`.
+            #      *   `config.tags`.
+            #      *   `config.autoscaling_metrics_collection`.
+            #      *   `config.autoscaling_metrics_collection.granularity`.
+            #      *   `config.autoscaling_metrics_collection.metrics`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1030,14 +1058,14 @@ module Google
             #   # Call the update_aws_node_pool method.
             #   result = client.update_aws_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_aws_node_pool request, options = nil
@@ -1083,7 +1111,8 @@ module Google
             end
 
             ##
-            # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource.
+            # Describes a specific
+            # {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource.
             #
             # @overload get_aws_node_pool(request, options = nil)
             #   Pass arguments to `get_aws_node_pool` via a request object, either of type
@@ -1101,7 +1130,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to
+            #     describe.
             #
             #     `AwsNodePool` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -1174,7 +1205,9 @@ module Google
             end
 
             ##
-            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resources on a given {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
+            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
+            # resources on a given
+            # {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
             #
             # @overload list_aws_node_pools(request, options = nil)
             #   Pass arguments to `list_aws_node_pools` via a request object, either of type
@@ -1206,11 +1239,12 @@ module Google
             #     If not specified, a default value of 50 will be used by the service.
             #     Regardless of the pageSize value, the response can include a partial list
             #     and a caller should only rely on response's
-            #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsResponse#next_page_token nextPageToken} to determine if
-            #     there are more instances left to be queried.
+            #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsResponse#next_page_token nextPageToken}
+            #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `nextPageToken` value returned from a previous
-            #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools awsNodePools.list} request, if any.
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools awsNodePools.list}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::GkeMultiCloud::V1::AwsNodePool>]
@@ -1232,13 +1266,11 @@ module Google
             #   # Call the list_aws_node_pools method.
             #   result = client.list_aws_node_pools request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool.
-            #     p response
+            #     p item
             #   end
             #
             def list_aws_node_pools request, options = nil
@@ -1284,7 +1316,8 @@ module Google
             end
 
             ##
-            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource.
+            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
+            # resource.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -1306,7 +1339,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to delete.
+            #     Required. The resource name the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to delete.
             #
             #     `AwsNodePool` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -1317,13 +1351,15 @@ module Google
             #     If set, only validate the request, but do not actually delete the node
             #     pool.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource is not found,
-            #     the request will succeed but no action will be taken on the server and a
-            #     completed {::Google::Longrunning::Operation Operation} will be returned.
+            #     If set to true, and the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource is not
+            #     found, the request will succeed but no action will be taken on the server
+            #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
             #
             #     Useful for idempotent deletion.
             #   @param etag [::String]
-            #     The current ETag of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}.
+            #     The current ETag of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}.
             #
             #     Allows clients to perform deletions through optimistic concurrency control.
             #
@@ -1350,14 +1386,14 @@ module Google
             #   # Call the delete_aws_node_pool method.
             #   result = client.delete_aws_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_aws_node_pool request, options = nil
@@ -1422,7 +1458,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsServerConfig AwsServerConfig} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsServerConfig AwsServerConfig} resource
+            #     to describe.
             #
             #     `AwsServerConfig` names are formatted as
             #     `projects/<project-id>/locations/<region>/awsServerConfig`.
@@ -1532,9 +1570,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1576,7 +1614,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "gkemulticloud.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "gkemulticloud.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

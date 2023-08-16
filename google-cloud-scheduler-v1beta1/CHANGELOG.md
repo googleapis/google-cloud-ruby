@@ -1,5 +1,33 @@
 # Release History
 
+### 0.8.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.6.0 (2022-12-14)
+
+#### Features
+
+* Added support for the locations mixin client ([#19858](https://github.com/googleapis/google-cloud-ruby/issues/19858)) 
+* Support for deleting legacy App Engine crons 
+* Support for filters when listing jobs 
+* Support for force-running a legacy App Engine cron 
+* Support for including legacy App Engine crons in job listings 
+
 ### 0.5.0 (2022-07-07)
 
 #### Features

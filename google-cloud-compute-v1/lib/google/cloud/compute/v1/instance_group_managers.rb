@@ -31,9 +31,9 @@ module Google
         ##
         # The InstanceGroupManagers API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/instance_group_managers"
+        #     require "google/cloud/compute/v1/instance_group_managers/rest"
         #     client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new
         #
         module InstanceGroupManagers

@@ -29,7 +29,8 @@ module Google
             ##
             # Client for the Environments service.
             #
-            # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
+            # Service for managing
+            # {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
             #
             class Client
               include Paths
@@ -130,7 +131,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -178,7 +179,8 @@ module Google
               # Service calls
 
               ##
-              # Returns the list of all environments in the specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
+              # Returns the list of all environments in the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
               #
               # @overload list_environments(request, options = nil)
               #   Pass arguments to `list_environments` via a request object, either of type
@@ -196,8 +198,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to list all environments for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to list all
+              #     environments for. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 20 and
               #     at most 100.
@@ -224,13 +227,11 @@ module Google
               #   # Call the list_environments method.
               #   result = client.list_environments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Environment.
-              #     p response
+              #     p item
               #   end
               #
               def list_environments request, options = nil
@@ -276,7 +277,8 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload get_environment(request, options = nil)
               #   Pass arguments to `get_environment` via a request object, either of type
@@ -294,8 +296,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -363,7 +366,8 @@ module Google
               end
 
               ##
-              # Creates an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} in the specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
+              # Creates an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} in the
+              # specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -389,8 +393,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
               #   @param environment [::Google::Cloud::Dialogflow::CX::V3::Environment, ::Hash]
               #     Required. The environment to create.
               #
@@ -414,14 +419,14 @@ module Google
               #   # Call the create_environment method.
               #   result = client.create_environment request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_environment request, options = nil
@@ -467,7 +472,8 @@ module Google
               end
 
               ##
-              # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Updates the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -517,14 +523,14 @@ module Google
               #   # Call the update_environment method.
               #   result = client.update_environment request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_environment request, options = nil
@@ -570,7 +576,8 @@ module Google
               end
 
               ##
-              # Deletes the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Deletes the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload delete_environment(request, options = nil)
               #   Pass arguments to `delete_environment` via a request object, either of type
@@ -588,8 +595,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -657,7 +665,8 @@ module Google
               end
 
               ##
-              # Looks up the history of the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Looks up the history of the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload lookup_environment_history(request, options = nil)
               #   Pass arguments to `lookup_environment_history` via a request object, either of type
@@ -704,13 +713,11 @@ module Google
               #   # Call the lookup_environment_history method.
               #   result = client.lookup_environment_history request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Environment.
-              #     p response
+              #     p item
               #   end
               #
               def lookup_environment_history request, options = nil
@@ -756,14 +763,17 @@ module Google
               end
 
               ##
-              # Kicks off a continuous test under the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Kicks off a continuous test under the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestMetadata RunContinuousTestMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestResponse RunContinuousTestResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestMetadata RunContinuousTestMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestResponse RunContinuousTestResponse}
               #
               # @overload run_continuous_test(request, options = nil)
               #   Pass arguments to `run_continuous_test` via a request object, either of type
@@ -781,8 +791,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param environment [::String]
-              #     Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/environments/<Environment ID>`.
+              #     Required. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/environments/<Environment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -804,14 +814,14 @@ module Google
               #   # Call the run_continuous_test method.
               #   result = client.run_continuous_test request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def run_continuous_test request, options = nil
@@ -904,13 +914,11 @@ module Google
               #   # Call the list_continuous_test_results method.
               #   result = client.list_continuous_test_results request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::ContinuousTestResult.
-              #     p response
+              #     p item
               #   end
               #
               def list_continuous_test_results request, options = nil
@@ -956,14 +964,17 @@ module Google
               end
 
               ##
-              # Deploys a flow to the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Deploys a flow to the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::DeployFlowMetadata DeployFlowMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::DeployFlowResponse DeployFlowResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::DeployFlowMetadata DeployFlowMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::DeployFlowResponse DeployFlowResponse}
               #
               # @overload deploy_flow(request, options = nil)
               #   Pass arguments to `deploy_flow` via a request object, either of type
@@ -1009,14 +1020,14 @@ module Google
               #   # Call the deploy_flow method.
               #   result = client.deploy_flow request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def deploy_flow request, options = nil
@@ -1099,9 +1110,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1143,7 +1154,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

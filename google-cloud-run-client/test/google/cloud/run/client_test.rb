@@ -20,55 +20,101 @@ require "helper"
 require "google/cloud/run"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
-  def test_executions
+  def test_executions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Run.executions do |config|
+      client = Google::Cloud::Run.executions transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Run::V2::Executions::Client, client
     end
   end
 
-  def test_jobs
+  def test_executions_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Run.executions transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::Executions::Rest::Client, client
+    end
+  end
+
+  def test_jobs_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Run.jobs do |config|
+      client = Google::Cloud::Run.jobs transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Run::V2::Jobs::Client, client
     end
   end
 
-  def test_revisions
+  def test_jobs_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Run.jobs transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::Jobs::Rest::Client, client
+    end
+  end
+
+  def test_revisions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Run.revisions do |config|
+      client = Google::Cloud::Run.revisions transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Run::V2::Revisions::Client, client
     end
   end
 
-  def test_services
+  def test_revisions_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Run.revisions transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::Revisions::Rest::Client, client
+    end
+  end
+
+  def test_services_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Run.services do |config|
+      client = Google::Cloud::Run.services transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Run::V2::Services::Client, client
     end
   end
 
-  def test_tasks
+  def test_services_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Run.services transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::Services::Rest::Client, client
+    end
+  end
+
+  def test_tasks_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Run.tasks do |config|
+      client = Google::Cloud::Run.tasks transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Run::V2::Tasks::Client, client
+    end
+  end
+
+  def test_tasks_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Run.tasks transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::Tasks::Rest::Client, client
     end
   end
 end

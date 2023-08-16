@@ -25,6 +25,7 @@ require "google/cloud/video/transcoder/v1/version"
 require "google/cloud/video/transcoder/v1/transcoder_service/credentials"
 require "google/cloud/video/transcoder/v1/transcoder_service/paths"
 require "google/cloud/video/transcoder/v1/transcoder_service/client"
+require "google/cloud/video/transcoder/v1/transcoder_service/rest"
 
 module Google
   module Cloud
@@ -39,10 +40,15 @@ module Google
           # features such as Digital Rights Management (DRM), audio equalization, content
           # concatenation, and digital ad-stitch ready content generation.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/video/transcoder/v1/transcoder_service"
           #     client = ::Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/video/transcoder/v1/transcoder_service/rest"
+          #     client = ::Google::Cloud::Video::Transcoder::V1::TranscoderService::Rest::Client.new
           #
           module TranscoderService
           end

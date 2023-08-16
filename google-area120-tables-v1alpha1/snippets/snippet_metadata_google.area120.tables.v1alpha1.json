@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-area120-tables-v1alpha1",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_GetTable_sync",
-      "title": "Snippet for get_table in TablesService",
-      "description": "Basic snippet for get_table in TablesService",
+      "title": "Snippet for the get_table call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#get_table. It may require modification in order to execute successfully.",
       "file": "tables_service/get_table.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_ListTables_sync",
-      "title": "Snippet for list_tables in TablesService",
-      "description": "Basic snippet for list_tables in TablesService",
+      "title": "Snippet for the list_tables call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#list_tables. It may require modification in order to execute successfully.",
       "file": "tables_service/list_tables.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_GetWorkspace_sync",
-      "title": "Snippet for get_workspace in TablesService",
-      "description": "Basic snippet for get_workspace in TablesService",
+      "title": "Snippet for the get_workspace call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#get_workspace. It may require modification in order to execute successfully.",
       "file": "tables_service/get_workspace.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_ListWorkspaces_sync",
-      "title": "Snippet for list_workspaces in TablesService",
-      "description": "Basic snippet for list_workspaces in TablesService",
+      "title": "Snippet for the list_workspaces call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#list_workspaces. It may require modification in order to execute successfully.",
       "file": "tables_service/list_workspaces.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_GetRow_sync",
-      "title": "Snippet for get_row in TablesService",
-      "description": "Basic snippet for get_row in TablesService",
+      "title": "Snippet for the get_row call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#get_row. It may require modification in order to execute successfully.",
       "file": "tables_service/get_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_ListRows_sync",
-      "title": "Snippet for list_rows in TablesService",
-      "description": "Basic snippet for list_rows in TablesService",
+      "title": "Snippet for the list_rows call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#list_rows. It may require modification in order to execute successfully.",
       "file": "tables_service/list_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_CreateRow_sync",
-      "title": "Snippet for create_row in TablesService",
-      "description": "Basic snippet for create_row in TablesService",
+      "title": "Snippet for the create_row call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#create_row. It may require modification in order to execute successfully.",
       "file": "tables_service/create_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_BatchCreateRows_sync",
-      "title": "Snippet for batch_create_rows in TablesService",
-      "description": "Basic snippet for batch_create_rows in TablesService",
+      "title": "Snippet for the batch_create_rows call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#batch_create_rows. It may require modification in order to execute successfully.",
       "file": "tables_service/batch_create_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_UpdateRow_sync",
-      "title": "Snippet for update_row in TablesService",
-      "description": "Basic snippet for update_row in TablesService",
+      "title": "Snippet for the update_row call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#update_row. It may require modification in order to execute successfully.",
       "file": "tables_service/update_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_BatchUpdateRows_sync",
-      "title": "Snippet for batch_update_rows in TablesService",
-      "description": "Basic snippet for batch_update_rows in TablesService",
+      "title": "Snippet for the batch_update_rows call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#batch_update_rows. It may require modification in order to execute successfully.",
       "file": "tables_service/batch_update_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_DeleteRow_sync",
-      "title": "Snippet for delete_row in TablesService",
-      "description": "Basic snippet for delete_row in TablesService",
+      "title": "Snippet for the delete_row call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#delete_row. It may require modification in order to execute successfully.",
       "file": "tables_service/delete_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_sync",
-      "title": "Snippet for batch_delete_rows in TablesService",
-      "description": "Basic snippet for batch_delete_rows in TablesService",
+      "title": "Snippet for the batch_delete_rows call in the TablesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Area120::Tables::V1alpha1::TablesService::Client#batch_delete_rows. It may require modification in order to execute successfully.",
       "file": "tables_service/batch_delete_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

@@ -1,3 +1,19 @@
+# frozen_string_literal: true
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 include :exec, e: true
 include :fileutils
 
@@ -12,23 +28,20 @@ def run
   each_library do |library_data|
     erb = ERB.new template
     content = erb.result library_data.erb_binding
-    unless dry_run
-      File.open library_data.bazel_path, "w" do |file|
-        file.write content
-      end
-    end
+    next if dry_run
+    File.write library_data.bazel_path, content
   end
 end
 
 def each_library
   piper_client_dir = capture("p4 g4d #{piper_client}").strip
   LibraryData.googleapis_base_dir = File.join piper_client_dir, "third_party", "googleapis", "stable"
-  Dir.glob("*/synth.py") do |path|
+  Dir.glob "*/synth.py" do |path|
     full_path = File.expand_path path, context_directory
     library_data = LibraryData.new full_path
     errors = library_data.errors
     unless errors.empty?
-      errors.each { |msg| logger.warn "#{msg} in #{path}"}
+      errors.each { |msg| logger.warn "#{msg} in #{path}" }
       next
     end
     logger.info "Handling #{path}..."
@@ -36,6 +49,7 @@ def each_library
   end
 end
 
+# Represents a bunch of information about the library
 class LibraryData
   class << self
     attr_accessor :googleapis_base_dir
@@ -124,9 +138,9 @@ class LibraryData
   end
 
   def interpret_versioned_bazel content
-    @proto_with_info_target = nil
-    if content =~ /:(\w+_proto_with_info)/
-      @proto_with_info_target = Regexp.last_match[1]
-    end
+    @proto_with_info_target =
+      if content =~ /:(\w+_proto_with_info)/
+        Regexp.last_match[1]
+      end
   end
 end

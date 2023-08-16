@@ -1,5 +1,61 @@
 # Release History
 
+### 0.9.0 (2023-07-10)
+
+#### Features
+
+* added error details ([#22477](https://github.com/googleapis/google-cloud-ruby/issues/22477)) 
+
+### 0.8.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.7.0 (2023-04-20)
+
+#### Features
+
+* Support Scaling configuration ([#21440](https://github.com/googleapis/google-cloud-ruby/issues/21440)) 
+
+### 0.6.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20627](https://github.com/googleapis/google-cloud-ruby/issues/20627)) 
+
+### 0.5.0 (2023-02-17)
+
+#### Features
+
+* Include the location and iam_policy mixin clients ([#20457](https://github.com/googleapis/google-cloud-ruby/issues/20457)) 
+
+### 0.4.0 (2023-01-05)
+
+#### Features
+
+* Support for alter_metadata_resource_location RPC ([#19897](https://github.com/googleapis/google-cloud-ruby/issues/19897)) 
+* Support for move_table_to_database RPC 
+* Support for query_metadata RPC 
+* Support for remove_iam_policy RPC 
+
+### 0.3.0 (2022-12-06)
+
+#### Features
+
+* Added support for auxiliary version configuration 
+* Added support for encryption, network, database type, and telemetry configuration in a Metastore Service 
+* Added support for Federations ([#19472](https://github.com/googleapis/google-cloud-ruby/issues/19472)) 
+* Added support for listing services restoring from a backup 
+* Added support for metadata import finished timestamp 
+* Added support for Metastore Service endpoint protocol 
+
 ### 0.2.0 (2022-07-05)
 
 #### Features

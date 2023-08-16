@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/functions/v1/functions_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -147,7 +149,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -158,6 +160,18 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
@@ -178,6 +192,20 @@ module Google
             # @return [::Google::Cloud::Functions::V1::CloudFunctionsService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -234,13 +262,11 @@ module Google
             #   # Call the list_functions method.
             #   result = client.list_functions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Functions::V1::CloudFunction.
-            #     p response
+            #     p item
             #   end
             #
             def list_functions request, options = nil
@@ -372,7 +398,7 @@ module Google
 
             ##
             # Creates a new function. If a function with the given name already exists in
-            # the specified project, the long running operation will return
+            # the specified project, the long running operation returns an
             # `ALREADY_EXISTS` error.
             #
             # @overload create_function(request, options = nil)
@@ -391,8 +417,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param location [::String]
-            #     Required. The project and location in which the function should be created, specified
-            #     in the format `projects/*/locations/*`
+            #     Required. The project and location in which the function should be created,
+            #     specified in the format `projects/*/locations/*`
             #   @param function [::Google::Cloud::Functions::V1::CloudFunction, ::Hash]
             #     Required. Function to be created.
             #
@@ -416,14 +442,14 @@ module Google
             #   # Call the create_function method.
             #   result = client.create_function request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_function request, options = nil
@@ -511,14 +537,14 @@ module Google
             #   # Call the update_function method.
             #   result = client.update_function request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_function request, options = nil
@@ -565,7 +591,7 @@ module Google
 
             ##
             # Deletes a function with the given name from the specified project. If the
-            # given function is used by some trigger, the trigger will be updated to
+            # given function is used by some trigger, the trigger is updated to
             # remove this function.
             #
             # @overload delete_function(request, options = nil)
@@ -606,14 +632,14 @@ module Google
             #   # Call the delete_function method.
             #   result = client.delete_function request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_function request, options = nil
@@ -766,12 +792,12 @@ module Google
             #   attached, the identity from the credentials would be used, but that
             #   identity does not have permissions to upload files to the URL.
             #
-            # When making a HTTP PUT request, these two headers need to be specified:
+            # When making an HTTP PUT request, these two headers must be specified:
             #
             # * `content-type: application/zip`
             # * `x-goog-content-length-range: 0,104857600`
             #
-            # And this header SHOULD NOT be specified:
+            # And this header must NOT be specified:
             #
             # * `Authorization: Bearer YOUR_TOKEN`
             #
@@ -878,9 +904,9 @@ module Google
 
             ##
             # Returns a signed URL for downloading deployed function source code.
-            # The URL is only valid for a limited period and should be used within
+            # The URL is only valid for a limited period and must be used within
             # minutes after generation.
-            # For more information about the signed URL usage see:
+            # For more information about the signed URL usage, see:
             # https://cloud.google.com/storage/docs/access-control/signed-urls
             #
             # @overload generate_download_url(request, options = nil)
@@ -1161,7 +1187,7 @@ module Google
             ##
             # Tests the specified permissions against the IAM access control policy
             # for a function.
-            # If the function does not exist, this will return an empty set of
+            # If the function does not exist, this returns an empty set of
             # permissions, not a NOT_FOUND error.
             #
             # @overload test_iam_permissions(request, options = nil)
@@ -1290,9 +1316,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1334,7 +1360,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudfunctions.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudfunctions.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

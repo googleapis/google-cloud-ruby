@@ -20,8 +20,11 @@
 require "google/cloud/kms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Kms::V1::KeyManagementService::Client#create_key_ring
+# Snippet for the create_key_ring call in the KeyManagementService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#create_key_ring. It may
+# require modification in order to execute successfully.
 #
 def create_key_ring
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/domains/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Domains::V1::Domains::Client#register_domain
+# Snippet for the register_domain call in the Domains service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Domains::V1::Domains::Client#register_domain. It may require
+# modification in order to execute successfully.
 #
 def register_domain
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def register_domain
   # Call the register_domain method.
   result = client.register_domain request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END domains_v1_generated_Domains_RegisterDomain_sync]

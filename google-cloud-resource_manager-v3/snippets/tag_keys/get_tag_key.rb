@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key
+# Snippet for the get_tag_key call in the TagKeys service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key. It may
+# require modification in order to execute successfully.
 #
 def get_tag_key
   # Create a client object. The client can be reused for multiple calls.

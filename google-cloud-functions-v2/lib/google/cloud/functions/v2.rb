@@ -23,12 +23,17 @@ module Google
   module Cloud
     module Functions
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/functions/v2"
       #     client = ::Google::Cloud::Functions::V2::FunctionService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/functions/v2"
+      #     client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
       #
       module V2
       end

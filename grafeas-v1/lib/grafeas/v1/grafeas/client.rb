@@ -333,13 +333,11 @@ module Grafeas
         #   # Call the list_occurrences method.
         #   result = client.list_occurrences request
         #
-        #   # The returned object is of type Gapic::PagedEnumerable. You can
-        #   # iterate over all elements by calling #each, and the enumerable
-        #   # will lazily make API calls to fetch subsequent pages. Other
-        #   # methods are also available for managing paging directly.
-        #   result.each do |response|
+        #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+        #   # over elements, and API calls will be issued to fetch pages as needed.
+        #   result.each do |item|
         #     # Each element is of type ::Grafeas::V1::Occurrence.
-        #     p response
+        #     p item
         #   end
         #
         def list_occurrences request, options = nil
@@ -960,13 +958,11 @@ module Grafeas
         #   # Call the list_notes method.
         #   result = client.list_notes request
         #
-        #   # The returned object is of type Gapic::PagedEnumerable. You can
-        #   # iterate over all elements by calling #each, and the enumerable
-        #   # will lazily make API calls to fetch subsequent pages. Other
-        #   # methods are also available for managing paging directly.
-        #   result.each do |response|
+        #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+        #   # over elements, and API calls will be issued to fetch pages as needed.
+        #   result.each do |item|
         #     # Each element is of type ::Grafeas::V1::Note.
-        #     p response
+        #     p item
         #   end
         #
         def list_notes request, options = nil
@@ -1415,13 +1411,11 @@ module Grafeas
         #   # Call the list_note_occurrences method.
         #   result = client.list_note_occurrences request
         #
-        #   # The returned object is of type Gapic::PagedEnumerable. You can
-        #   # iterate over all elements by calling #each, and the enumerable
-        #   # will lazily make API calls to fetch subsequent pages. Other
-        #   # methods are also available for managing paging directly.
-        #   result.each do |response|
+        #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+        #   # over elements, and API calls will be issued to fetch pages as needed.
+        #   result.each do |item|
         #     # Each element is of type ::Grafeas::V1::Occurrence.
-        #     p response
+        #     p item
         #   end
         #
         def list_note_occurrences request, options = nil
@@ -1504,9 +1498,9 @@ module Grafeas
         #    *  (`String`) The path to a service account key file in JSON format
         #    *  (`Hash`) A service account key as a Hash
         #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-        #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+        #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
         #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-        #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+        #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
         #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
         #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
         #    *  (`nil`) indicating no credentials
@@ -1548,7 +1542,9 @@ module Grafeas
         class Configuration
           extend ::Gapic::Config
 
-          config_attr :endpoint,      nil, ::String
+          DEFAULT_ENDPOINT = nil
+
+          config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
           config_attr :credentials,   nil do |value|
             allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
             allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

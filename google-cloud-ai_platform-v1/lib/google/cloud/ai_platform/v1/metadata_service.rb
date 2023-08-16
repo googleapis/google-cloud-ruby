@@ -34,7 +34,7 @@ module Google
         ##
         # Service for reading and writing metadata entries.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/metadata_service"
         #     client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new

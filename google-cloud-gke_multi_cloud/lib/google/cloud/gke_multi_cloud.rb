@@ -45,12 +45,44 @@ module Google
   module Cloud
     module GkeMultiCloud
       ##
+      # Create a new client object for AttachedClusters.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest/Google-Cloud-GkeMultiCloud-V1-AttachedClusters-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the AttachedClusters service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About AttachedClusters
+      #
+      # The AttachedClusters API provides a single centrally managed service
+      # to register and manage Anthos attached clusters that run on customer's owned
+      # infrastructure.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.attached_clusters version: :v1, &block
+        require "google/cloud/gke_multi_cloud/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::GkeMultiCloud
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::GkeMultiCloud.const_get(package_name).const_get(:AttachedClusters)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for AwsClusters.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client](https://googleapis.dev/ruby/google-cloud-gke_multi_cloud-v1/latest/Google/Cloud/GkeMultiCloud/V1/AwsClusters/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest/Google-Cloud-GkeMultiCloud-V1-AwsClusters-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AwsClusters service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -62,7 +94,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [AwsClusters::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.aws_clusters version: :v1, &block
         require "google/cloud/gke_multi_cloud/#{version.to_s.downcase}"
@@ -71,17 +103,17 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::GkeMultiCloud.const_get package_name
-        package_module.const_get(:AwsClusters).const_get(:Client).new(&block)
+        service_module = Google::Cloud::GkeMultiCloud.const_get(package_name).const_get(:AwsClusters)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for AzureClusters.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client](https://googleapis.dev/ruby/google-cloud-gke_multi_cloud-v1/latest/Google/Cloud/GkeMultiCloud/V1/AzureClusters/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest/Google-Cloud-GkeMultiCloud-V1-AzureClusters-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AzureClusters service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -93,7 +125,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [AzureClusters::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.azure_clusters version: :v1, &block
         require "google/cloud/gke_multi_cloud/#{version.to_s.downcase}"
@@ -102,8 +134,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::GkeMultiCloud.const_get package_name
-        package_module.const_get(:AzureClusters).const_get(:Client).new(&block)
+        service_module = Google::Cloud::GkeMultiCloud.const_get(package_name).const_get(:AzureClusters)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -123,7 +155,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

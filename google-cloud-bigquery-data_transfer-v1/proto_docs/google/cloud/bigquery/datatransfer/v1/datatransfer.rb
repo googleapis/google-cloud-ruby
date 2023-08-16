@@ -100,6 +100,9 @@ module Google
 
               # Page ID for a Google+ Page.
               PLUS_PAGE = 6
+
+              # List of strings parameter.
+              LIST = 7
             end
           end
 
@@ -213,8 +216,8 @@ module Google
           # A request to get data source info.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/dataSources/{data_source_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/dataSources/{data_source_id}` or
           #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
           class GetDataSourceRequest
             include ::Google::Protobuf::MessageExts
@@ -224,8 +227,8 @@ module Google
           # Request to list supported data sources and their data transfer settings.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The BigQuery project id for which data sources should be returned.
-          #     Must be in the form: `projects/{project_id}` or
+          #     Required. The BigQuery project id for which data sources should be
+          #     returned. Must be in the form: `projects/{project_id}` or
           #     `projects/{project_id}/locations/{location_id}`
           # @!attribute [rw] page_token
           #   @return [::String]
@@ -265,10 +268,11 @@ module Google
           # user.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The BigQuery project id where the transfer configuration should be created.
-          #     Must be in the format projects/\\{project_id}/locations/\\{location_id} or
-          #     projects/\\{project_id}. If specified location and location of the
-          #     destination bigquery dataset do not match - the request will fail.
+          #     Required. The BigQuery project id where the transfer configuration should
+          #     be created. Must be in the format
+          #     projects/\\{project_id}/locations/\\{location_id} or projects/\\{project_id}. If
+          #     specified location and location of the destination bigquery dataset do not
+          #     match - the request will fail.
           # @!attribute [rw] transfer_config
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
@@ -306,7 +310,7 @@ module Google
           #     create the transfer config.
           # @!attribute [rw] service_account_name
           #   @return [::String]
-          #     Optional service account name. If this field is set, the transfer config
+          #     Optional service account email. If this field is set, the transfer config
           #     will be created with this service account's credentials. It requires that
           #     the requesting user calling this API has permissions to act as this service
           #     account.
@@ -362,7 +366,7 @@ module Google
           #     update the transfer config.
           # @!attribute [rw] service_account_name
           #   @return [::String]
-          #     Optional service account name. If this field is set, the transfer config
+          #     Optional service account email. If this field is set, the transfer config
           #     will be created with this service account's credentials. It requires that
           #     the requesting user calling this API has permissions to act as this service
           #     account.
@@ -379,8 +383,8 @@ module Google
           # A request to get data transfer information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class GetTransferConfigRequest
             include ::Google::Protobuf::MessageExts
@@ -391,8 +395,8 @@ module Google
           # and log messages will be deleted as well.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class DeleteTransferConfigRequest
             include ::Google::Protobuf::MessageExts
@@ -402,8 +406,9 @@ module Google
           # A request to get data transfer run information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          #     or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class GetTransferRunRequest
             include ::Google::Protobuf::MessageExts
@@ -413,8 +418,9 @@ module Google
           # A request to delete data transfer run information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          #     or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class DeleteTransferRunRequest
             include ::Google::Protobuf::MessageExts
@@ -463,8 +469,8 @@ module Google
           # A request to list data transfer runs.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. Name of transfer configuration for which transfer runs should be retrieved.
-          #     Format of transfer configuration resource name is:
+          #     Required. Name of transfer configuration for which transfer runs should be
+          #     retrieved. Format of transfer configuration resource name is:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states
@@ -613,11 +619,16 @@ module Google
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] requested_time_range
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange]
-          #     Time range for the transfer runs that should be started.
+          #     A time_range start and end timestamp for historical data files or reports
+          #     that are scheduled to be transferred by the scheduled transfer run.
+          #     requested_time_range must be a past time and cannot include future time
+          #     values.
           # @!attribute [rw] requested_run_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Specific run_time for a transfer run to be started. The
-          #     requested_run_time must not be in the future.
+          #     A run_time timestamp for historical data files or reports
+          #     that are scheduled to be transferred by the scheduled transfer run.
+          #     requested_run_time must be a past time and cannot include future time
+          #     values.
           class StartManualTransferRunsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

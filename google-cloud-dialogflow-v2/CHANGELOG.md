@@ -1,5 +1,72 @@
 # Release History
 
+### 0.27.0 (2023-08-15)
+
+#### Features
+
+* Query parameters no include the platform of virtual agent response messages 
+* Support for the baseline model version used to generate a summary ([#22775](https://github.com/googleapis/google-cloud-ruby/issues/22775)) 
+
+### 0.26.2 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22706](https://github.com/googleapis/google-cloud-ruby/issues/22706)) 
+
+### 0.26.1 (2023-08-03)
+
+#### Documentation
+
+* Improve documentation format ([#22678](https://github.com/googleapis/google-cloud-ruby/issues/22678)) 
+
+### 0.26.0 (2023-06-23)
+
+#### Features
+
+* support session_ttl for AutomatedAgentConfig 
+
+### 0.25.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.24.0 (2023-05-16)
+
+#### Features
+
+* add baseline model configuration for conversation summarization ([#21568](https://github.com/googleapis/google-cloud-ruby/issues/21568)) 
+
+### 0.23.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.22.0 (2023-02-17)
+
+#### Features
+
+* Support for text-to-speech configuration in ConversationProfile 
+* Support for the assist_query_params argument to the suggest_conversation_summary RPC ([#20437](https://github.com/googleapis/google-cloud-ruby/issues/20437)) 
+
+### 0.21.0 (2023-01-15)
+
+#### Features
+
+* Include a human eval template in ConversationModelEvaluation 
+* Support for the suggest_conversation_summary RPC ([#20023](https://github.com/googleapis/google-cloud-ruby/issues/20023)) 
+* Support summarization feedback in AgentAssistantFeedback 
+
+### 0.20.0 (2022-12-09)
+
+#### Features
+
+* Added cx_current_page field to AutomatedAgentReply ([#19464](https://github.com/googleapis/google-cloud-ruby/issues/19464)) 
+
 ### 0.19.0 (2022-11-01)
 
 #### Features

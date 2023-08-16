@@ -20,8 +20,11 @@
 require "google/cloud/service_directory/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#test_iam_permissions
+# Snippet for the test_iam_permissions call in the RegistrationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#test_iam_permissions.
+# It may require modification in order to execute successfully.
 #
 def test_iam_permissions
   # Create a client object. The client can be reused for multiple calls.

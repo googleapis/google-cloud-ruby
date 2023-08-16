@@ -1,5 +1,33 @@
 # Changelog
 
+### 0.6.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.6.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21680](https://github.com/googleapis/google-cloud-ruby/issues/21680)) 
+
+### 0.5.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20630](https://github.com/googleapis/google-cloud-ruby/issues/20630)) 
+
+### 0.4.0 (2023-01-11)
+
+#### Features
+
+* Added support for AWS as a source ([#19978](https://github.com/googleapis/google-cloud-ruby/issues/19978)) 
+* Added support for get_replication_cycle and list_replication_cycles RPCs 
+* Added support for retrieving the steps of a clone or cutover job 
+* Added support for the IAM mixin client 
+* Added support for the locations mixin client 
+
 ### 0.3.0 (2022-07-20)
 
 #### Features

@@ -26,6 +26,7 @@ require "google/cloud/vm_migration/v1/vm_migration/credentials"
 require "google/cloud/vm_migration/v1/vm_migration/paths"
 require "google/cloud/vm_migration/v1/vm_migration/operations"
 require "google/cloud/vm_migration/v1/vm_migration/client"
+require "google/cloud/vm_migration/v1/vm_migration/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # VM Migration Service
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vm_migration/v1/vm_migration"
         #     client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/vm_migration/v1/vm_migration/rest"
+        #     client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
         #
         module VMMigration
         end

@@ -61,7 +61,19 @@ module Google
         #     Output only. Human-readable status of the operation, if any.
         # @!attribute [r] error_detail
         #   @return [::String]
-        #     Output only. Human-readable status of any error that occurred during the operation.
+        #     Output only. Human-readable status of any error that occurred during the
+        #     operation.
+        # @!attribute [r] verb
+        #   @return [::String]
+        #     Output only. The verb associated with the API method which triggered this
+        #     operation. Possible values are "create", "delete", "update" and "import".
+        # @!attribute [r] requested_cancellation
+        #   @return [::Boolean]
+        #     Output only. Identifies whether it has been requested cancellation
+        #     for the operation. Operations that have successfully been cancelled
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,13 +126,15 @@ module Google
         # more details on Anthos multi-cluster capabilities using Fleets.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the Fleet host project where this cluster will be registered.
+        #     Required. The name of the Fleet host project where this cluster will be
+        #     registered.
         #
         #     Project names are formatted as
         #     `projects/<project-number>`.
         # @!attribute [r] membership
         #   @return [::String]
-        #     Output only. The name of the managed Hub Membership resource associated to this cluster.
+        #     Output only. The name of the managed Hub Membership resource associated to
+        #     this cluster.
         #
         #     Membership names are formatted as
         #     `projects/<project-number>/locations/global/membership/<cluster-id>`.
@@ -157,6 +171,25 @@ module Google
             # This indicates that user workload logging component is enabled.
             WORKLOADS = 2
           end
+        end
+
+        # Parameters that describe the Monitoring configuration in a cluster.
+        # @!attribute [rw] managed_prometheus_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::ManagedPrometheusConfig]
+        #     Enable Google Cloud Managed Service for Prometheus in the cluster.
+        class MonitoringConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ManagedPrometheusConfig defines the configuration for
+        # Google Cloud Managed Service for Prometheus.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enable Managed Collection.
+        class ManagedPrometheusConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

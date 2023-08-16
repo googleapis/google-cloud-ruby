@@ -95,6 +95,18 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientPathsTest < Minitest:
     end
   end
 
+  def test_replication_cycle_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.replication_cycle_path project: "value0", location: "value1", source: "value2", migrating_vm: "value3", replication_cycle: "value4"
+      assert_equal "projects/value0/locations/value1/sources/value2/migratingVms/value3/replicationCycles/value4", path
+    end
+  end
+
   def test_source_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

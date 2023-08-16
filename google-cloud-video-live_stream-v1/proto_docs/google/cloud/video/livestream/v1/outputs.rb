@@ -56,8 +56,9 @@ module Google
           #     - `ts` - the corresponding file extension is `.ts`
           # @!attribute [rw] elementary_streams
           #   @return [::Array<::String>]
-          #     List of `ElementaryStream` {::Google::Cloud::Video::LiveStream::V1::ElementaryStream#key key}s multiplexed in this
-          #     stream.
+          #     List of `ElementaryStream`
+          #     {::Google::Cloud::Video::LiveStream::V1::ElementaryStream#key key}s multiplexed
+          #     in this stream.
           #
           #     - For `fmp4` container, must contain either one video or one audio stream.
           #     - For `ts` container, must contain exactly one audio stream and up to one
@@ -65,6 +66,10 @@ module Google
           # @!attribute [rw] segment_settings
           #   @return [::Google::Cloud::Video::LiveStream::V1::SegmentSettings]
           #     Segment settings for `fmp4` and `ts`.
+          # @!attribute [rw] encryption_id
+          #   @return [::String]
+          #     Identifier of the encryption configuration to use. If omitted, output
+          #     will be unencrypted.
           class MuxStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,15 +79,17 @@ module Google
           # @!attribute [rw] file_name
           #   @return [::String]
           #     The name of the generated file. The default is `manifest` with the
-          #     extension suffix corresponding to the `Manifest` {::Google::Cloud::Video::LiveStream::V1::Manifest#type type}. If multiple
+          #     extension suffix corresponding to the `Manifest`
+          #     {::Google::Cloud::Video::LiveStream::V1::Manifest#type type}. If multiple
           #     manifests are added to the channel, each must have a unique file name.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Video::LiveStream::V1::Manifest::ManifestType]
           #     Required. Type of the manifest, can be `HLS` or `DASH`.
           # @!attribute [rw] mux_streams
           #   @return [::Array<::String>]
-          #     Required. List of `MuxStream` {::Google::Cloud::Video::LiveStream::V1::MuxStream#key key}s that should appear in this
-          #     manifest.
+          #     Required. List of `MuxStream`
+          #     {::Google::Cloud::Video::LiveStream::V1::MuxStream#key key}s that should appear
+          #     in this manifest.
           #
           #     - For HLS, either `fmp4` or `ts` mux streams can be specified but not
           #     mixed.
@@ -101,6 +108,15 @@ module Google
           #     errors while accessing segments which are listed in the manifest that the
           #     player has, but were already deleted from the output Google Cloud Storage
           #     bucket. Default value is `60s`.
+          # @!attribute [rw] use_timecode_as_timeline
+          #   @return [::Boolean]
+          #     Whether to use the timecode, as specified in timecode config, when setting:
+          #
+          #     - `availabilityStartTime` attribute in DASH manifests.
+          #     - `#EXT-X-PROGRAM-DATE-TIME` tag in HLS manifests.
+          #
+          #     If false, ignore the input timecode and use the time from system clock
+          #     when the manifest is first generated. This is the default behavior.
           class Manifest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,6 +180,9 @@ module Google
           end
 
           # Preprocessing configurations.
+          # @!attribute [rw] audio
+          #   @return [::Google::Cloud::Video::LiveStream::V1::PreprocessingConfig::Audio]
+          #     Audio preprocessing configuration.
           # @!attribute [rw] crop
           #   @return [::Google::Cloud::Video::LiveStream::V1::PreprocessingConfig::Crop]
           #     Specify the video cropping configuration.
@@ -173,6 +192,25 @@ module Google
           class PreprocessingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Audio preprocessing configuration.
+            # @!attribute [rw] lufs
+            #   @return [::Float]
+            #     Specify audio loudness normalization in loudness units relative to full
+            #     scale (LUFS). Enter a value between -24 and 0 according to the following:
+            #
+            #     - -24 is the Advanced Television Systems Committee (ATSC A/85)
+            #     - -23 is the EU R128 broadcast standard
+            #     - -19 is the prior standard for online mono audio
+            #     - -18 is the ReplayGain standard
+            #     - -16 is the prior standard for stereo audio
+            #     - -14 is the new online audio standard recommended by Spotify, as well as
+            #     Amazon Echo
+            #     - 0 disables normalization. The default is 0.
+            class Audio
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Video cropping configuration for the input video. The cropped input video
             # is scaled to match the output resolution.
@@ -232,8 +270,8 @@ module Google
             #     Valid range is [180, 1080].
             # @!attribute [rw] frame_rate
             #   @return [::Float]
-            #     Required. The target video frame rate in frames per second (FPS). Must be less
-            #     than or equal to 60. Will default to the input frame rate if larger
+            #     Required. The target video frame rate in frames per second (FPS). Must be
+            #     less than or equal to 60. Will default to the input frame rate if larger
             #     than the input frame rate. The API will generate an output FPS that is
             #     divisible by the input FPS, and smaller or equal to the target FPS. See
             #     [Calculating frame
@@ -260,15 +298,17 @@ module Google
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
             #     `2s`. Note that `gopDuration` must be less than or equal to
-            #     {::Google::Cloud::Video::LiveStream::V1::SegmentSettings#segment_duration segment_duration}, and
-            #     {::Google::Cloud::Video::LiveStream::V1::SegmentSettings#segment_duration segment_duration} must be divisible
-            #     by `gopDuration`. Valid range is [2s, 20s].
+            #     {::Google::Cloud::Video::LiveStream::V1::SegmentSettings#segment_duration segment_duration},
+            #     and
+            #     {::Google::Cloud::Video::LiveStream::V1::SegmentSettings#segment_duration segment_duration}
+            #     must be divisible by `gopDuration`. Valid range is [2s, 20s].
             #
             #     All video streams in the same channel must have the same GOP size.
             # @!attribute [rw] vbv_size_bits
             #   @return [::Integer]
             #     Size of the Video Buffering Verifier (VBV) buffer in bits. Must be
-            #     greater than zero. The default is equal to {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#bitrate_bps bitrate_bps}.
+            #     greater than zero. The default is equal to
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#bitrate_bps bitrate_bps}.
             # @!attribute [rw] vbv_fullness_bits
             #   @return [::Integer]
             #     Initial fullness of the Video Buffering Verifier (VBV) buffer in bits.
@@ -289,8 +329,9 @@ module Google
             # @!attribute [rw] b_frame_count
             #   @return [::Integer]
             #     The number of consecutive B-frames. Must be greater than or equal to
-            #     zero. Must be less than {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#gop_frame_count gop_frame_count} if set. The default
-            #     is 0.
+            #     zero. Must be less than
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#gop_frame_count gop_frame_count}
+            #     if set. The default is 0.
             # @!attribute [rw] aq_strength
             #   @return [::Float]
             #     Specify the intensity of the adaptive quantizer (AQ). Must be between 0
@@ -308,7 +349,8 @@ module Google
             #     The available options are [FFmpeg-compatible Profile
             #     Options](https://trac.ffmpeg.org/wiki/Encode/H.264#Profile).
             #     Note that certain values for this field may cause the
-            #     transcoder to override other fields you set in the {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings H264CodecSettings}
+            #     transcoder to override other fields you set in the
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings H264CodecSettings}
             #     message.
             # @!attribute [rw] tune
             #   @return [::String]
@@ -316,7 +358,9 @@ module Google
             #     [FFmpeg-compatible Encode
             #     Options](https://trac.ffmpeg.org/wiki/Encode/H.264#Tune)
             #     Note that certain values for this field may cause the transcoder to
-            #     override other fields you set in the {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings H264CodecSettings} message.
+            #     override other fields you set in the
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings H264CodecSettings}
+            #     message.
             class H264CodecSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -338,7 +382,8 @@ module Google
           #     - `aac`
           # @!attribute [rw] bitrate_bps
           #   @return [::Integer]
-          #     Required. Audio bitrate in bits per second. Must be between 1 and 10,000,000.
+          #     Required. Audio bitrate in bits per second. Must be between 1 and
+          #     10,000,000.
           # @!attribute [rw] channel_count
           #   @return [::Integer]
           #     Number of audio channels. Must be between 1 and 6. The default is 2.
@@ -369,21 +414,29 @@ module Google
             # The mapping for the input streams and audio channels.
             # @!attribute [rw] input_key
             #   @return [::String]
-            #     Required. The `Channel` {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key} that identifies the input that this
-            #     audio mapping applies to. If an active input doesn't have an audio
-            #     mapping, the primary audio track in the input stream will be selected.
+            #     Required. The `Channel`
+            #     {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key}
+            #     that identifies the input that this audio mapping applies to. If an
+            #     active input doesn't have an audio mapping, the primary audio track in
+            #     the input stream will be selected.
             # @!attribute [rw] input_track
             #   @return [::Integer]
             #     Required. The zero-based index of the track in the input stream.
-            #     All {::Google::Cloud::Video::LiveStream::V1::AudioStream#mapping mapping}s in the same {::Google::Cloud::Video::LiveStream::V1::AudioStream AudioStream}
-            #     must have the same input track.
+            #     All {::Google::Cloud::Video::LiveStream::V1::AudioStream#mapping mapping}s in
+            #     the same {::Google::Cloud::Video::LiveStream::V1::AudioStream AudioStream} must
+            #     have the same input track.
             # @!attribute [rw] input_channel
             #   @return [::Integer]
             #     Required. The zero-based index of the channel in the input stream.
             # @!attribute [rw] output_channel
             #   @return [::Integer]
             #     Required. The zero-based index of the channel in the output audio stream.
-            #     Must be consistent with the {::Google::Cloud::Video::LiveStream::V1::AudioStream::AudioMapping#input_channel input_channel}.
+            #     Must be consistent with the
+            #     {::Google::Cloud::Video::LiveStream::V1::AudioStream::AudioMapping#input_channel input_channel}.
+            # @!attribute [rw] gain_db
+            #   @return [::Float]
+            #     Audio volume control in dB. Negative values decrease volume,
+            #     positive values increase. The default is 0.
             class AudioMapping
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -409,16 +462,45 @@ module Google
           #   @return [::Google::Protobuf::Duration]
           #     Duration of the segments in seconds. The default is `6s`. Note that
           #     `segmentDuration` must be greater than or equal to
-          #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#gop_duration gop_duration}, and
-          #     `segmentDuration` must be divisible by
+          #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#gop_duration gop_duration},
+          #     and `segmentDuration` must be divisible by
           #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings#gop_duration gop_duration}.
           #     Valid range is [2s, 20s].
           #
-          #     All {::Google::Cloud::Video::LiveStream::V1::Manifest#mux_streams mux_streams} in the same manifest must have the
-          #     same segment duration.
+          #     All {::Google::Cloud::Video::LiveStream::V1::Manifest#mux_streams mux_streams} in
+          #     the same manifest must have the same segment duration.
           class SegmentSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Timecode configuration.
+          # @!attribute [rw] source
+          #   @return [::Google::Cloud::Video::LiveStream::V1::TimecodeConfig::TimecodeSource]
+          #     The source of the timecode that will later be used in outputs/manifests.
+          #     It determines the initial timecode/timestamp (first frame) of output
+          #     streams.
+          # @!attribute [rw] utc_offset
+          #   @return [::Google::Protobuf::Duration]
+          #     UTC offset. Must be whole seconds, between -18 hours and +18 hours.
+          # @!attribute [rw] time_zone
+          #   @return [::Google::Type::TimeZone]
+          #     Time zone e.g. "America/Los_Angeles".
+          class TimecodeConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The source of timecode.
+            module TimecodeSource
+              # The timecode source is not specified.
+              TIMECODE_SOURCE_UNSPECIFIED = 0
+
+              # Use input media timestamp.
+              MEDIA_TIMESTAMP = 1
+
+              # Use input embedded timecode e.g. picture timing SEI message.
+              EMBEDDED_TIMECODE = 2
+            end
           end
         end
       end

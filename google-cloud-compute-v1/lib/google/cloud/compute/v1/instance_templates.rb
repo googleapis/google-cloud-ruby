@@ -31,9 +31,9 @@ module Google
         ##
         # The InstanceTemplates API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/instance_templates"
+        #     require "google/cloud/compute/v1/instance_templates/rest"
         #     client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new
         #
         module InstanceTemplates

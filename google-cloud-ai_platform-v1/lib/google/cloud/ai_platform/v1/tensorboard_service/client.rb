@@ -125,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -229,14 +229,14 @@ module Google
             #   # Call the create_tensorboard method.
             #   result = client.create_tensorboard request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_tensorboard request, options = nil
@@ -390,8 +390,8 @@ module Google
             #     Required. Field mask is used to specify the fields to be overwritten in the
             #     Tensorboard resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it is in the mask. If the
-            #     user does not provide a mask then all fields will be overwritten if new
+            #     the full request. A field is overwritten if it's in the mask. If the
+            #     user does not provide a mask then all fields are overwritten if new
             #     values are specified.
             #   @param tensorboard [::Google::Cloud::AIPlatform::V1::Tensorboard, ::Hash]
             #     Required. The Tensorboard's `name` field is used to identify the
@@ -418,14 +418,14 @@ module Google
             #   # Call the update_tensorboard method.
             #   result = client.update_tensorboard request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_tensorboard request, options = nil
@@ -496,17 +496,17 @@ module Google
             #     Lists the Tensorboards that match the filter expression.
             #   @param page_size [::Integer]
             #     The maximum number of Tensorboards to return. The service may return
-            #     fewer than this value. If unspecified, at most 100 Tensorboards will be
-            #     returned. The maximum value is 100; values above 100 will be coerced to
+            #     fewer than this value. If unspecified, at most 100 Tensorboards are
+            #     returned. The maximum value is 100; values above 100 are coerced to
             #     100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards TensorboardService.ListTensorboards} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards TensorboardService.ListTensorboards}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards TensorboardService.ListTensorboards} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards TensorboardService.ListTensorboards}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     Field to use to sort the list.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -532,13 +532,11 @@ module Google
             #   # Call the list_tensorboards method.
             #   result = client.list_tensorboards request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Tensorboard.
-            #     p response
+            #     p item
             #   end
             #
             def list_tensorboards request, options = nil
@@ -626,14 +624,14 @@ module Google
             #   # Call the delete_tensorboard method.
             #   result = client.delete_tensorboard request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_tensorboard request, options = nil
@@ -679,6 +677,180 @@ module Google
             end
 
             ##
+            # Returns a list of monthly active users for a given TensorBoard instance.
+            #
+            # @overload read_tensorboard_usage(request, options = nil)
+            #   Pass arguments to `read_tensorboard_usage` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload read_tensorboard_usage(tensorboard: nil)
+            #   Pass arguments to `read_tensorboard_usage` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param tensorboard [::String]
+            #     Required. The name of the Tensorboard resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new
+            #
+            #   # Call the read_tensorboard_usage method.
+            #   result = client.read_tensorboard_usage request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse.
+            #   p result
+            #
+            def read_tensorboard_usage request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.read_tensorboard_usage.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.tensorboard
+                header_params["tensorboard"] = request.tensorboard
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.read_tensorboard_usage.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.read_tensorboard_usage.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tensorboard_service_stub.call_rpc :read_tensorboard_usage, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the storage size for a given TensorBoard instance.
+            #
+            # @overload read_tensorboard_size(request, options = nil)
+            #   Pass arguments to `read_tensorboard_size` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload read_tensorboard_size(tensorboard: nil)
+            #   Pass arguments to `read_tensorboard_size` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param tensorboard [::String]
+            #     Required. The name of the Tensorboard resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new
+            #
+            #   # Call the read_tensorboard_size method.
+            #   result = client.read_tensorboard_size request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse.
+            #   p result
+            #
+            def read_tensorboard_size request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.read_tensorboard_size.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.tensorboard
+                header_params["tensorboard"] = request.tensorboard
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.read_tensorboard_size.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.read_tensorboard_size.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tensorboard_service_stub.call_rpc :read_tensorboard_size, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a TensorboardExperiment.
             #
             # @overload create_tensorboard_experiment(request, options = nil)
@@ -697,14 +869,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Tensorboard to create the TensorboardExperiment
-            #     in. Format:
+            #     Required. The resource name of the Tensorboard to create the
+            #     TensorboardExperiment in. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
             #   @param tensorboard_experiment [::Google::Cloud::AIPlatform::V1::TensorboardExperiment, ::Hash]
             #     The TensorboardExperiment to create.
             #   @param tensorboard_experiment_id [::String]
-            #     Required. The ID to use for the Tensorboard experiment, which will become the final
-            #     component of the Tensorboard experiment's resource name.
+            #     Required. The ID to use for the Tensorboard experiment, which becomes the
+            #     final component of the Tensorboard experiment's resource name.
             #
             #     This value should be 1-128 characters, and valid characters
             #     are /[a-z][0-9]-/.
@@ -882,8 +1054,8 @@ module Google
             #     Required. Field mask is used to specify the fields to be overwritten in the
             #     TensorboardExperiment resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it is in the mask. If the
-            #     user does not provide a mask then all fields will be overwritten if new
+            #     the full request. A field is overwritten if it's in the mask. If the
+            #     user does not provide a mask then all fields are overwritten if new
             #     values are specified.
             #   @param tensorboard_experiment [::Google::Cloud::AIPlatform::V1::TensorboardExperiment, ::Hash]
             #     Required. The TensorboardExperiment's `name` field is used to identify the
@@ -973,24 +1145,24 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Tensorboard to list TensorboardExperiments.
-            #     Format:
+            #     Required. The resource name of the Tensorboard to list
+            #     TensorboardExperiments. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
             #   @param filter [::String]
             #     Lists the TensorboardExperiments that match the filter expression.
             #   @param page_size [::Integer]
             #     The maximum number of TensorboardExperiments to return. The service may
             #     return fewer than this value. If unspecified, at most 50
-            #     TensorboardExperiments will be returned. The maximum value is 1000; values
-            #     above 1000 will be coerced to 1000.
+            #     TensorboardExperiments are returned. The maximum value is 1000; values
+            #     above 1000 are coerced to 1000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_experiments TensorboardService.ListTensorboardExperiments} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_experiments TensorboardService.ListTensorboardExperiments}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_experiments TensorboardService.ListTensorboardExperiments} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_experiments TensorboardService.ListTensorboardExperiments}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     Field to use to sort the list.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -1016,13 +1188,11 @@ module Google
             #   # Call the list_tensorboard_experiments method.
             #   result = client.list_tensorboard_experiments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::TensorboardExperiment.
-            #     p response
+            #     p item
             #   end
             #
             def list_tensorboard_experiments request, options = nil
@@ -1110,14 +1280,14 @@ module Google
             #   # Call the delete_tensorboard_experiment method.
             #   result = client.delete_tensorboard_experiment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_tensorboard_experiment request, options = nil
@@ -1181,13 +1351,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the TensorboardExperiment to create the TensorboardRun
-            #     in. Format:
+            #     Required. The resource name of the TensorboardExperiment to create the
+            #     TensorboardRun in. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
             #   @param tensorboard_run [::Google::Cloud::AIPlatform::V1::TensorboardRun, ::Hash]
             #     Required. The TensorboardRun to create.
             #   @param tensorboard_run_id [::String]
-            #     Required. The ID to use for the Tensorboard run, which will become the final
+            #     Required. The ID to use for the Tensorboard run, which becomes the final
             #     component of the Tensorboard run's resource name.
             #
             #     This value should be 1-128 characters, and valid characters
@@ -1458,12 +1628,12 @@ module Google
             #     Required. Field mask is used to specify the fields to be overwritten in the
             #     TensorboardRun resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it is in the mask. If the
-            #     user does not provide a mask then all fields will be overwritten if new
+            #     the full request. A field is overwritten if it's in the mask. If the
+            #     user does not provide a mask then all fields are overwritten if new
             #     values are specified.
             #   @param tensorboard_run [::Google::Cloud::AIPlatform::V1::TensorboardRun, ::Hash]
-            #     Required. The TensorboardRun's `name` field is used to identify the TensorboardRun to
-            #     be updated. Format:
+            #     Required. The TensorboardRun's `name` field is used to identify the
+            #     TensorboardRun to be updated. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1549,24 +1719,24 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
-            #     Format:
+            #     Required. The resource name of the TensorboardExperiment to list
+            #     TensorboardRuns. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
             #   @param filter [::String]
             #     Lists the TensorboardRuns that match the filter expression.
             #   @param page_size [::Integer]
             #     The maximum number of TensorboardRuns to return. The service may return
-            #     fewer than this value. If unspecified, at most 50 TensorboardRuns will be
-            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     fewer than this value. If unspecified, at most 50 TensorboardRuns are
+            #     returned. The maximum value is 1000; values above 1000 are coerced to
             #     1000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_runs TensorboardService.ListTensorboardRuns} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_runs TensorboardService.ListTensorboardRuns}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_runs TensorboardService.ListTensorboardRuns} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_runs TensorboardService.ListTensorboardRuns}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     Field to use to sort the list.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -1592,13 +1762,11 @@ module Google
             #   # Call the list_tensorboard_runs method.
             #   result = client.list_tensorboard_runs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::TensorboardRun.
-            #     p response
+            #     p item
             #   end
             #
             def list_tensorboard_runs request, options = nil
@@ -1686,14 +1854,14 @@ module Google
             #   # Call the delete_tensorboard_run method.
             #   result = client.delete_tensorboard_run request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_tensorboard_run request, options = nil
@@ -1765,8 +1933,8 @@ module Google
             #     CreateTensorboardTimeSeriesRequest messages must be sub resources of this
             #     TensorboardExperiment.
             #   @param requests [::Array<::Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest, ::Hash>]
-            #     Required. The request message specifying the TensorboardTimeSeries to create.
-            #     A maximum of 1000 TensorboardTimeSeries can be created in a batch.
+            #     Required. The request message specifying the TensorboardTimeSeries to
+            #     create. A maximum of 1000 TensorboardTimeSeries can be created in a batch.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardTimeSeriesResponse]
@@ -1856,10 +2024,10 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
             #   @param tensorboard_time_series_id [::String]
-            #     Optional. The user specified unique ID to use for the TensorboardTimeSeries, which
-            #     will become the final component of the TensorboardTimeSeries's resource
-            #     name.
-            #     This value should match "[a-z0-9][a-z0-9-]\\{0, 127}"
+            #     Optional. The user specified unique ID to use for the
+            #     TensorboardTimeSeries, which becomes the final component of the
+            #     TensorboardTimeSeries's resource name. This value should match
+            #     "[a-z0-9][a-z0-9-]\\{0, 127}"
             #   @param tensorboard_time_series [::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries, ::Hash]
             #     Required. The TensorboardTimeSeries to create.
             #
@@ -2036,8 +2204,8 @@ module Google
             #     Required. Field mask is used to specify the fields to be overwritten in the
             #     TensorboardTimeSeries resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it is in the mask. If the
-            #     user does not provide a mask then all fields will be overwritten if new
+            #     the full request. A field is overwritten if it's in the mask. If the
+            #     user does not provide a mask then all fields are overwritten if new
             #     values are specified.
             #   @param tensorboard_time_series [::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries, ::Hash]
             #     Required. The TensorboardTimeSeries' `name` field is used to identify the
@@ -2128,24 +2296,24 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the TensorboardRun to list TensorboardTimeSeries.
-            #     Format:
+            #     Required. The resource name of the TensorboardRun to list
+            #     TensorboardTimeSeries. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
             #   @param filter [::String]
             #     Lists the TensorboardTimeSeries that match the filter expression.
             #   @param page_size [::Integer]
             #     The maximum number of TensorboardTimeSeries to return. The service may
             #     return fewer than this value. If unspecified, at most 50
-            #     TensorboardTimeSeries will be returned. The maximum value is 1000; values
-            #     above 1000 will be coerced to 1000.
+            #     TensorboardTimeSeries are returned. The maximum value is 1000; values
+            #     above 1000 are coerced to 1000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_time_series TensorboardService.ListTensorboardTimeSeries} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_time_series TensorboardService.ListTensorboardTimeSeries}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_time_series TensorboardService.ListTensorboardTimeSeries} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboard_time_series TensorboardService.ListTensorboardTimeSeries}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     Field to use to sort the list.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -2171,13 +2339,11 @@ module Google
             #   # Call the list_tensorboard_time_series method.
             #   result = client.list_tensorboard_time_series request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries.
-            #     p response
+            #     p item
             #   end
             #
             def list_tensorboard_time_series request, options = nil
@@ -2265,14 +2431,14 @@ module Google
             #   # Call the delete_tensorboard_time_series method.
             #   result = client.delete_tensorboard_time_series request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_tensorboard_time_series request, options = nil
@@ -2320,8 +2486,8 @@ module Google
             ##
             # Reads multiple TensorboardTimeSeries' data. The data point number limit is
             # 1000 for scalars, 100 for tensors and blob references. If the number of
-            # data points stored is less than the limit, all data will be returned.
-            # Otherwise, that limit number of data points will be randomly selected from
+            # data points stored is less than the limit, all data is returned.
+            # Otherwise, the number limit of data points is randomly selected from
             # this time series and returned.
             #
             # @overload batch_read_tensorboard_time_series_data(request, options = nil)
@@ -2340,13 +2506,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tensorboard [::String]
-            #     Required. The resource name of the Tensorboard containing TensorboardTimeSeries to
-            #     read data from. Format:
+            #     Required. The resource name of the Tensorboard containing
+            #     TensorboardTimeSeries to read data from. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
-            #     The TensorboardTimeSeries referenced by {::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest#time_series time_series} must be sub
-            #     resources of this Tensorboard.
+            #     The TensorboardTimeSeries referenced by
+            #     {::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest#time_series time_series}
+            #     must be sub resources of this Tensorboard.
             #   @param time_series [::Array<::String>]
-            #     Required. The resource names of the TensorboardTimeSeries to read data from. Format:
+            #     Required. The resource names of the TensorboardTimeSeries to read data
+            #     from. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2415,8 +2583,8 @@ module Google
 
             ##
             # Reads a TensorboardTimeSeries' data. By default, if the number of data
-            # points stored is less than 1000, all data will be returned. Otherwise, 1000
-            # data points will be randomly selected from this time series and returned.
+            # points stored is less than 1000, all data is returned. Otherwise, 1000
+            # data points is randomly selected from this time series and returned.
             # This value can be changed by changing max_data_points, which can't be
             # greater than 10k.
             #
@@ -2556,13 +2724,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new
             #
-            #   # Call the read_tensorboard_blob_data method.
-            #   result = client.read_tensorboard_blob_data request
+            #   # Call the read_tensorboard_blob_data method to start streaming.
+            #   output = client.read_tensorboard_blob_data request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def read_tensorboard_blob_data request, options = nil
@@ -2608,8 +2776,7 @@ module Google
 
             ##
             # Write time series data points of multiple TensorboardTimeSeries in multiple
-            # TensorboardRun's. If any data fail to be ingested, an error will be
-            # returned.
+            # TensorboardRun's. If any data fail to be ingested, an error is returned.
             #
             # @overload write_tensorboard_experiment_data(request, options = nil)
             #   Pass arguments to `write_tensorboard_experiment_data` via a request object, either of type
@@ -2699,8 +2866,7 @@ module Google
 
             ##
             # Write time series data points into multiple TensorboardTimeSeries under
-            # a TensorboardRun. If any data fail to be ingested, an error will be
-            # returned.
+            # a TensorboardRun. If any data fail to be ingested, an error is returned.
             #
             # @overload write_tensorboard_run_data(request, options = nil)
             #   Pass arguments to `write_tensorboard_run_data` via a request object, either of type
@@ -2812,26 +2978,26 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tensorboard_time_series [::String]
-            #     Required. The resource name of the TensorboardTimeSeries to export data from.
-            #     Format:
+            #     Required. The resource name of the TensorboardTimeSeries to export data
+            #     from. Format:
             #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
             #   @param filter [::String]
             #     Exports the TensorboardTimeSeries' data that match the filter expression.
             #   @param page_size [::Integer]
             #     The maximum number of data points to return per page.
-            #     The default page_size will be 1000. Values must be between 1 and 10000.
-            #     Values above 10000 will be coerced to 10000.
+            #     The default page_size is 1000. Values must be between 1 and 10000.
+            #     Values above 10000 are coerced to 10000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     [TensorboardService.ExportTensorboardTimeSeries][] call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     [TensorboardService.ExportTensorboardTimeSeries][] must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     Field to use to sort the TensorboardTimeSeries' data.
-            #     By default, TensorboardTimeSeries' data will be returned in a pseudo random
+            #     By default, TensorboardTimeSeries' data is returned in a pseudo random
             #     order.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2854,13 +3020,11 @@ module Google
             #   # Call the export_tensorboard_time_series_data method.
             #   result = client.export_tensorboard_time_series_data request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::TimeSeriesDataPoint.
-            #     p response
+            #     p item
             #   end
             #
             def export_tensorboard_time_series_data request, options = nil
@@ -2943,9 +3107,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2987,7 +3151,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -3065,6 +3231,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_tensorboard
+                ##
+                # RPC-specific configuration for `read_tensorboard_usage`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :read_tensorboard_usage
+                ##
+                # RPC-specific configuration for `read_tensorboard_size`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :read_tensorboard_size
                 ##
                 # RPC-specific configuration for `create_tensorboard_experiment`
                 # @return [::Gapic::Config::Method]
@@ -3193,6 +3369,10 @@ module Google
                   @list_tensorboards = ::Gapic::Config::Method.new list_tensorboards_config
                   delete_tensorboard_config = parent_rpcs.delete_tensorboard if parent_rpcs.respond_to? :delete_tensorboard
                   @delete_tensorboard = ::Gapic::Config::Method.new delete_tensorboard_config
+                  read_tensorboard_usage_config = parent_rpcs.read_tensorboard_usage if parent_rpcs.respond_to? :read_tensorboard_usage
+                  @read_tensorboard_usage = ::Gapic::Config::Method.new read_tensorboard_usage_config
+                  read_tensorboard_size_config = parent_rpcs.read_tensorboard_size if parent_rpcs.respond_to? :read_tensorboard_size
+                  @read_tensorboard_size = ::Gapic::Config::Method.new read_tensorboard_size_config
                   create_tensorboard_experiment_config = parent_rpcs.create_tensorboard_experiment if parent_rpcs.respond_to? :create_tensorboard_experiment
                   @create_tensorboard_experiment = ::Gapic::Config::Method.new create_tensorboard_experiment_config
                   get_tensorboard_experiment_config = parent_rpcs.get_tensorboard_experiment if parent_rpcs.respond_to? :get_tensorboard_experiment

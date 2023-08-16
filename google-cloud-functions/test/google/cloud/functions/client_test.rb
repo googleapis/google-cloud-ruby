@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/functions"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Functions::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_functions_service
+  def test_cloud_functions_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Functions.cloud_functions_service do |config|
+      client = Google::Cloud::Functions.cloud_functions_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Functions::V1::CloudFunctionsService::Client, client
+    end
+  end
+
+  def test_cloud_functions_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Functions.cloud_functions_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Functions::V1::CloudFunctionsService::Rest::Client, client
     end
   end
 end

@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Cloud Tasks is a fully managed service that allows you to manage the execution, dispatch and delivery of a large number of distributed tasks. You can asynchronously perform work outside of a user request. Your tasks can be executed on App Engine or any arbitrary HTTP endpoint.",
     "ruby-cloud-env-prefix": "TASKS",
     "ruby-cloud-product-url": "https://cloud.google.com/tasks",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

@@ -64,23 +64,35 @@ module Google
         # The table from which data is copied. This is the table on
         # which {Table#copy_job} was called.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
-        def source
+        def source view: nil
           table = @gapi.configuration.copy.source_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##
         # The table to which data is copied.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
-        def destination
+        def destination view: nil
           table = @gapi.configuration.copy.destination_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##

@@ -64,18 +64,26 @@ module Google
             rpc :AbandonRelease, ::Google::Cloud::Deploy::V1::AbandonReleaseRequest, ::Google::Cloud::Deploy::V1::AbandonReleaseResponse
             # Approves a Rollout.
             rpc :ApproveRollout, ::Google::Cloud::Deploy::V1::ApproveRolloutRequest, ::Google::Cloud::Deploy::V1::ApproveRolloutResponse
+            # Advances a Rollout in a given project and location.
+            rpc :AdvanceRollout, ::Google::Cloud::Deploy::V1::AdvanceRolloutRequest, ::Google::Cloud::Deploy::V1::AdvanceRolloutResponse
+            # Cancels a Rollout in a given project and location.
+            rpc :CancelRollout, ::Google::Cloud::Deploy::V1::CancelRolloutRequest, ::Google::Cloud::Deploy::V1::CancelRolloutResponse
             # Lists Rollouts in a given project and location.
             rpc :ListRollouts, ::Google::Cloud::Deploy::V1::ListRolloutsRequest, ::Google::Cloud::Deploy::V1::ListRolloutsResponse
             # Gets details of a single Rollout.
             rpc :GetRollout, ::Google::Cloud::Deploy::V1::GetRolloutRequest, ::Google::Cloud::Deploy::V1::Rollout
             # Creates a new Rollout in a given project and location.
             rpc :CreateRollout, ::Google::Cloud::Deploy::V1::CreateRolloutRequest, ::Google::Longrunning::Operation
+            # Ignores the specified Job in a Rollout.
+            rpc :IgnoreJob, ::Google::Cloud::Deploy::V1::IgnoreJobRequest, ::Google::Cloud::Deploy::V1::IgnoreJobResponse
             # Retries the specified Job in a Rollout.
             rpc :RetryJob, ::Google::Cloud::Deploy::V1::RetryJobRequest, ::Google::Cloud::Deploy::V1::RetryJobResponse
             # Lists JobRuns in a given project and location.
             rpc :ListJobRuns, ::Google::Cloud::Deploy::V1::ListJobRunsRequest, ::Google::Cloud::Deploy::V1::ListJobRunsResponse
             # Gets details of a single JobRun.
             rpc :GetJobRun, ::Google::Cloud::Deploy::V1::GetJobRunRequest, ::Google::Cloud::Deploy::V1::JobRun
+            # Terminates a Job Run in a given project and location.
+            rpc :TerminateJobRun, ::Google::Cloud::Deploy::V1::TerminateJobRunRequest, ::Google::Cloud::Deploy::V1::TerminateJobRunResponse
             # Gets the configuration for a location.
             rpc :GetConfig, ::Google::Cloud::Deploy::V1::GetConfigRequest, ::Google::Cloud::Deploy::V1::Config
           end

@@ -9,5 +9,5 @@
     "product_documentation": "https://cloud.google.com/dns",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
-    "library_type": "GAPIC_MANUAL"
+    "library_type": "OTHER"
 }

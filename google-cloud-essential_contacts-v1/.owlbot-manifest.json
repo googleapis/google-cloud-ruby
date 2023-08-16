@@ -18,6 +18,10 @@
     "lib/google/cloud/essential_contacts/v1/essential_contacts_service/client.rb",
     "lib/google/cloud/essential_contacts/v1/essential_contacts_service/credentials.rb",
     "lib/google/cloud/essential_contacts/v1/essential_contacts_service/paths.rb",
+    "lib/google/cloud/essential_contacts/v1/essential_contacts_service/rest.rb",
+    "lib/google/cloud/essential_contacts/v1/essential_contacts_service/rest/client.rb",
+    "lib/google/cloud/essential_contacts/v1/essential_contacts_service/rest/service_stub.rb",
+    "lib/google/cloud/essential_contacts/v1/rest.rb",
     "lib/google/cloud/essential_contacts/v1/version.rb",
     "lib/google/cloud/essentialcontacts/v1/enums_pb.rb",
     "lib/google/cloud/essentialcontacts/v1/service_pb.rb",
@@ -43,6 +47,7 @@
     "snippets/essential_contacts_service/update_contact.rb",
     "snippets/snippet_metadata_google.cloud.essentialcontacts.v1.json",
     "test/google/cloud/essential_contacts/v1/essential_contacts_service_paths_test.rb",
+    "test/google/cloud/essential_contacts/v1/essential_contacts_service_rest_test.rb",
     "test/google/cloud/essential_contacts/v1/essential_contacts_service_test.rb",
     "test/helper.rb"
   ],

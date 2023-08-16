@@ -180,7 +180,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -215,8 +215,8 @@ module Google
             # Service calls
 
             ##
-            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource on a given Google Cloud project
-            # and region.
+            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient}
+            # resource on a given Google Cloud project and region.
             #
             # `AzureClient` resources hold client authentication
             # information needed by the Anthos Multicloud API to manage Azure resources
@@ -242,24 +242,27 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent location where this {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource
-            #     will be created.
+            #     Required. The parent location where this
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource will be
+            #     created.
             #
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param azure_client [::Google::Cloud::GkeMultiCloud::V1::AzureClient, ::Hash]
-            #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} to create.
+            #     Required. The specification of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} to create.
             #   @param azure_client_id [::String]
-            #     Required. A client provided ID the resource. Must be unique within the parent
-            #     resource.
+            #     Required. A client provided ID the resource. Must be unique within the
+            #     parent resource.
             #
-            #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient}
-            #     resource name formatted as
+            #     The provided ID will be part of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource name
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
             #
-            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually create the client.
             #
@@ -283,14 +286,14 @@ module Google
             #   # Call the create_azure_client method.
             #   result = client.create_azure_client request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_azure_client request, options = nil
@@ -336,7 +339,8 @@ module Google
             end
 
             ##
-            # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource.
+            # Describes a specific
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource.
             #
             # @overload get_azure_client(request, options = nil)
             #   Pass arguments to `get_azure_client` via a request object, either of type
@@ -354,9 +358,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource to
+            #     describe.
             #
-            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} names are formatted as
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} names are
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
@@ -427,8 +434,8 @@ module Google
             end
 
             ##
-            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resources on a given Google Cloud project and
-            # region.
+            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient}
+            # resources on a given Google Cloud project and region.
             #
             # @overload list_azure_clients(request, options = nil)
             #   Pass arguments to `list_azure_clients` via a request object, either of type
@@ -452,18 +459,19 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
             #     If not specified, a default value of 50 will be used by the service.
             #     Regardless of the pageSize value, the response can include a partial list
             #     and a caller should only rely on response's
-            #     {::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsResponse#next_page_token nextPageToken} to determine if
-            #     there are more instances left to be queried.
+            #     {::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsResponse#next_page_token nextPageToken}
+            #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `nextPageToken` value returned from a previous
-            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients azureClients.list} request, if any.
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients azureClients.list}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::GkeMultiCloud::V1::AzureClient>]
@@ -485,13 +493,11 @@ module Google
             #   # Call the list_azure_clients method.
             #   result = client.list_azure_clients request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureClient.
-            #     p response
+            #     p item
             #   end
             #
             def list_azure_clients request, options = nil
@@ -537,7 +543,8 @@ module Google
             end
 
             ##
-            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource.
+            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient}
+            # resource.
             #
             # If the client is used by one or more clusters, deletion will
             # fail and a `FAILED_PRECONDITION` error will be returned.
@@ -562,17 +569,20 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} to delete.
+            #     Required. The resource name the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} to delete.
             #
-            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} names are formatted as
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} names are
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource is not found,
-            #     the request will succeed but no action will be taken on the server and a
-            #     completed {::Google::Longrunning::Operation Operation} will be returned.
+            #     If set to true, and the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource is not
+            #     found, the request will succeed but no action will be taken on the server
+            #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
             #
             #     Useful for idempotent deletion.
             #   @param validate_only [::Boolean]
@@ -598,14 +608,14 @@ module Google
             #   # Call the delete_azure_client method.
             #   result = client.delete_azure_client request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_azure_client request, options = nil
@@ -651,7 +661,8 @@ module Google
             end
 
             ##
-            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource on a given GCP project and region.
+            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
+            # resource on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -673,24 +684,27 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent location where this {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource
-            #     will be created.
+            #     Required. The parent location where this
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource will be
+            #     created.
             #
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param azure_cluster [::Google::Cloud::GkeMultiCloud::V1::AzureCluster, ::Hash]
-            #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} to create.
+            #     Required. The specification of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} to create.
             #   @param azure_cluster_id [::String]
-            #     Required. A client provided ID the resource. Must be unique within the parent
-            #     resource.
+            #     Required. A client provided ID the resource. Must be unique within the
+            #     parent resource.
             #
-            #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
-            #     resource name formatted as
+            #     The provided ID will be part of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource name
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
-            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually create the cluster.
             #
@@ -714,14 +728,14 @@ module Google
             #   # Call the create_azure_cluster method.
             #   result = client.create_azure_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_azure_cluster request, options = nil
@@ -785,7 +799,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param azure_cluster [::Google::Cloud::GkeMultiCloud::V1::AzureCluster, ::Hash]
-            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource to update.
+            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
+            #     resource to update.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually update the cluster.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -794,13 +809,21 @@ module Google
             #     fields from {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}:
             #
             #      *   `description`.
-            #      *   `annotations`.
             #      *   `azureClient`.
             #      *   `control_plane.version`.
             #      *   `control_plane.vm_size`.
+            #      *   `annotations`.
             #      *   `authorization.admin_users`.
             #      *   `control_plane.root_volume.size_gib`.
-            #      *   `logging_config`
+            #      *   `azure_services_authentication`.
+            #      *   `azure_services_authentication.tenant_id`.
+            #      *   `azure_services_authentication.application_id`.
+            #      *   `control_plane.proxy_config`.
+            #      *   `control_plane.proxy_config.resource_group_id`.
+            #      *   `control_plane.proxy_config.secret_id`.
+            #      *   `control_plane.ssh_config.authorized_key`.
+            #      *   `logging_config.component_config.enable_components`
+            #      *   `monitoring_config.managed_prometheus_config.enabled`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -822,14 +845,14 @@ module Google
             #   # Call the update_azure_cluster method.
             #   result = client.update_azure_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_azure_cluster request, options = nil
@@ -875,7 +898,8 @@ module Google
             end
 
             ##
-            # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
+            # Describes a specific
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
             #
             # @overload get_azure_cluster(request, options = nil)
             #   Pass arguments to `get_azure_cluster` via a request object, either of type
@@ -893,13 +917,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource to
+            #     describe.
             #
             #     `AzureCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AzureCluster]
@@ -966,8 +992,8 @@ module Google
             end
 
             ##
-            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resources on a given Google Cloud project and
-            # region.
+            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
+            # resources on a given Google Cloud project and region.
             #
             # @overload list_azure_clusters(request, options = nil)
             #   Pass arguments to `list_azure_clusters` via a request object, either of type
@@ -991,18 +1017,19 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
             #     If not specified, a default value of 50 will be used by the service.
             #     Regardless of the pageSize value, the response can include a partial list
             #     and a caller should only rely on response's
-            #     {::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersResponse#next_page_token nextPageToken} to determine if
-            #     there are more instances left to be queried.
+            #     {::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersResponse#next_page_token nextPageToken}
+            #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `nextPageToken` value returned from a previous
-            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clusters azureClusters.list} request, if any.
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clusters azureClusters.list}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::GkeMultiCloud::V1::AzureCluster>]
@@ -1024,13 +1051,11 @@ module Google
             #   # Call the list_azure_clusters method.
             #   result = client.list_azure_clusters request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureCluster.
-            #     p response
+            #     p item
             #   end
             #
             def list_azure_clusters request, options = nil
@@ -1076,10 +1101,11 @@ module Google
             end
 
             ##
-            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
+            # Deletes a specific
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
             #
-            # Fails if the cluster has one or more associated {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
-            # resources.
+            # Fails if the cluster has one or more associated
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resources.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -1101,23 +1127,26 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} to delete.
+            #     Required. The resource name the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} to delete.
             #
             #     `AzureCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource is not found,
-            #     the request will succeed but no action will be taken on the server and a
-            #     completed {::Google::Longrunning::Operation Operation} will be returned.
+            #     If set to true, and the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource is not
+            #     found, the request will succeed but no action will be taken on the server
+            #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
             #
             #     Useful for idempotent deletion.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually delete the resource.
             #   @param etag [::String]
-            #     The current etag of the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
+            #     The current etag of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
             #
             #     Allows clients to perform deletions through optimistic concurrency control.
             #
@@ -1144,14 +1173,14 @@ module Google
             #   # Call the delete_azure_cluster method.
             #   result = client.delete_azure_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_azure_cluster request, options = nil
@@ -1216,7 +1245,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param azure_cluster [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource to authenticate to.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource to
+            #     authenticate to.
             #
             #     `AzureCluster` names are formatted as
             #     `projects/<project-id>/locations/<region>/AzureClusters/<cluster-id>`.
@@ -1289,7 +1320,9 @@ module Google
             end
 
             ##
-            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}, attached to a given {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
+            # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool},
+            # attached to a given
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -1311,23 +1344,26 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource where this node pool will be created.
+            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
+            #     resource where this node pool will be created.
             #
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param azure_node_pool [::Google::Cloud::GkeMultiCloud::V1::AzureNodePool, ::Hash]
-            #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} to create.
+            #     Required. The specification of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} to create.
             #   @param azure_node_pool_id [::String]
-            #     Required. A client provided ID the resource. Must be unique within the parent
-            #     resource.
+            #     Required. A client provided ID the resource. Must be unique within the
+            #     parent resource.
             #
-            #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
-            #     resource name formatted as
+            #     The provided ID will be part of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource name
+            #     formatted as
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
             #
-            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+            #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually create the node
             #     pool.
@@ -1352,14 +1388,14 @@ module Google
             #   # Call the create_azure_node_pool method.
             #   result = client.create_azure_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_azure_node_pool request, options = nil
@@ -1423,7 +1459,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param azure_node_pool [::Google::Cloud::GkeMultiCloud::V1::AzureNodePool, ::Hash]
-            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource to update.
+            #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
+            #     resource to update.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but don't actually update the node pool.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -1435,7 +1472,7 @@ module Google
             #      *   `version`.
             #      *   `autoscaling.min_node_count`.
             #      *   `autoscaling.max_node_count`.
-            #      *   `config.vm_size`.
+            #      *   `config.ssh_config.authorized_key`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1457,14 +1494,14 @@ module Google
             #   # Call the update_azure_node_pool method.
             #   result = client.update_azure_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_azure_node_pool request, options = nil
@@ -1510,7 +1547,8 @@ module Google
             end
 
             ##
-            # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource.
+            # Describes a specific
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource.
             #
             # @overload get_azure_node_pool(request, options = nil)
             #   Pass arguments to `get_azure_node_pool` via a request object, either of type
@@ -1528,7 +1566,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource to
+            #     describe.
             #
             #     `AzureNodePool` names are formatted as
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
@@ -1601,7 +1641,9 @@ module Google
             end
 
             ##
-            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resources on a given {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
+            # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
+            # resources on a given
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
             #
             # @overload list_azure_node_pools(request, options = nil)
             #   Pass arguments to `list_azure_node_pools` via a request object, either of type
@@ -1633,11 +1675,12 @@ module Google
             #     If not specified, a default value of 50 will be used by the service.
             #     Regardless of the pageSize value, the response can include a partial list
             #     and a caller should only rely on response's
-            #     {::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsResponse#next_page_token nextPageToken} to determine if
-            #     there are more instances left to be queried.
+            #     {::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsResponse#next_page_token nextPageToken}
+            #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `nextPageToken` value returned from a previous
-            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_node_pools azureNodePools.list} request, if any.
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_node_pools azureNodePools.list}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::GkeMultiCloud::V1::AzureNodePool>]
@@ -1659,13 +1702,11 @@ module Google
             #   # Call the list_azure_node_pools method.
             #   result = client.list_azure_node_pools request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureNodePool.
-            #     p response
+            #     p item
             #   end
             #
             def list_azure_node_pools request, options = nil
@@ -1711,7 +1752,8 @@ module Google
             end
 
             ##
-            # Deletes a specific {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource.
+            # Deletes a specific
+            # {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -1733,7 +1775,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} to delete.
+            #     Required. The resource name the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} to delete.
             #
             #     `AzureNodePool` names are formatted as
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
@@ -1744,13 +1787,16 @@ module Google
             #     If set, only validate the request, but do not actually delete the node
             #     pool.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource is not found,
-            #     the request will succeed but no action will be taken on the server and a
-            #     completed {::Google::Longrunning::Operation Operation} will be returned.
+            #     If set to true, and the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource is
+            #     not found, the request will succeed but no action will be taken on the
+            #     server and a completed {::Google::Longrunning::Operation Operation} will be
+            #     returned.
             #
             #     Useful for idempotent deletion.
             #   @param etag [::String]
-            #     The current ETag of the {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}.
+            #     The current ETag of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}.
             #
             #     Allows clients to perform deletions through optimistic concurrency control.
             #
@@ -1777,14 +1823,14 @@ module Google
             #   # Call the delete_azure_node_pool method.
             #   result = client.delete_azure_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_azure_node_pool request, options = nil
@@ -1849,7 +1895,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AzureServerConfig AzureServerConfig} resource to describe.
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureServerConfig AzureServerConfig}
+            #     resource to describe.
             #
             #     `AzureServerConfig` names are formatted as
             #     `projects/<project-id>/locations/<region>/azureServerConfig`.
@@ -1959,9 +2007,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2003,7 +2051,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "gkemulticloud.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "gkemulticloud.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

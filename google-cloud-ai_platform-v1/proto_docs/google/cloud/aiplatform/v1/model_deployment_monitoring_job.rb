@@ -30,7 +30,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the ModelDeploymentMonitoringJob.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         #     Display name of a ModelDeploymentMonitoringJob.
         # @!attribute [rw] endpoint
@@ -52,8 +52,8 @@ module Google
         #     Output only. Latest triggered monitoring pipeline metadata.
         # @!attribute [rw] model_deployment_monitoring_objective_configs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringObjectiveConfig>]
-        #     Required. The config for monitoring objectives. This is a per DeployedModel config.
-        #     Each DeployedModel needs to be configured separately.
+        #     Required. The config for monitoring objectives. This is a per DeployedModel
+        #     config. Each DeployedModel needs to be configured separately.
         # @!attribute [rw] model_deployment_monitoring_schedule_config
         #   @return [::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringScheduleConfig]
         #     Required. Schedule config for running the monitoring job.
@@ -71,10 +71,12 @@ module Google
         #     requests.
         # @!attribute [rw] sample_predict_instance
         #   @return [::Google::Protobuf::Value]
-        #     Sample Predict instance, same format as {::Google::Cloud::AIPlatform::V1::PredictRequest#instances PredictRequest.instances},
+        #     Sample Predict instance, same format as
+        #     {::Google::Cloud::AIPlatform::V1::PredictRequest#instances PredictRequest.instances},
         #     this can be set as a replacement of
-        #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob#predict_instance_schema_uri ModelDeploymentMonitoringJob.predict_instance_schema_uri}. If not set,
-        #     we will generate predict schema from collected predict requests.
+        #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob#predict_instance_schema_uri ModelDeploymentMonitoringJob.predict_instance_schema_uri}.
+        #     If not set, we will generate predict schema from collected predict
+        #     requests.
         # @!attribute [rw] analysis_instance_schema_uri
         #   @return [::String]
         #     YAML schema file uri describing the format of a single instance that you
@@ -90,9 +92,9 @@ module Google
         #     fields in predict instance formatted as string.
         # @!attribute [r] bigquery_tables
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringBigQueryTable>]
-        #     Output only. The created bigquery tables for the job under customer project. Customer
-        #     could do their own query & analysis. There could be 4 log tables in
-        #     maximum:
+        #     Output only. The created bigquery tables for the job under customer
+        #     project. Customer could do their own query & analysis. There could be 4 log
+        #     tables in maximum:
         #     1. Training data logging predict request/response
         #     2. Serving data logging predict request/response
         # @!attribute [rw] log_ttl
@@ -115,11 +117,12 @@ module Google
         #     Output only. Timestamp when this ModelDeploymentMonitoringJob was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when this ModelDeploymentMonitoringJob was updated most recently.
+        #     Output only. Timestamp when this ModelDeploymentMonitoringJob was updated
+        #     most recently.
         # @!attribute [r] next_schedule_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when this monitoring pipeline will be scheduled to run for the
-        #     next round.
+        #     Output only. Timestamp when this monitoring pipeline will be scheduled to
+        #     run for the next round.
         # @!attribute [rw] stats_anomalies_base_directory
         #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
         #     Stats anomalies base folder path.
@@ -238,17 +241,18 @@ module Google
         # The config for scheduling monitoring job.
         # @!attribute [rw] monitor_interval
         #   @return [::Google::Protobuf::Duration]
-        #     Required. The model monitoring job scheduling interval. It will be rounded up to next
-        #     full hour. This defines how often the monitoring jobs are triggered.
+        #     Required. The model monitoring job scheduling interval. It will be rounded
+        #     up to next full hour. This defines how often the monitoring jobs are
+        #     triggered.
         # @!attribute [rw] monitor_window
         #   @return [::Google::Protobuf::Duration]
         #     The time window of the prediction data being included in each prediction
         #     dataset. This window specifies how long the data should be collected from
         #     historical model results for each run. If not set,
-        #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringScheduleConfig#monitor_interval ModelDeploymentMonitoringScheduleConfig.monitor_interval} will be used.
-        #     e.g. If currently the cutoff time is 2022-01-08 14:30:00 and the
-        #     monitor_window is set to be 3600, then data from 2022-01-08 13:30:00
-        #     to 2022-01-08 14:30:00 will be retrieved and aggregated to calculate the
+        #     {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringScheduleConfig#monitor_interval ModelDeploymentMonitoringScheduleConfig.monitor_interval}
+        #     will be used. e.g. If currently the cutoff time is 2022-01-08 14:30:00 and
+        #     the monitor_window is set to be 3600, then data from 2022-01-08 13:30:00 to
+        #     2022-01-08 14:30:00 will be retrieved and aggregated to calculate the
         #     monitoring statistics.
         class ModelDeploymentMonitoringScheduleConfig
           include ::Google::Protobuf::MessageExts

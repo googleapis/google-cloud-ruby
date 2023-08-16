@@ -69,8 +69,8 @@ module Google
         #     Output only. The current state for the TPU Node.
         # @!attribute [r] health_description
         #   @return [::String]
-        #     Output only. If this field is populated, it contains a description of why the TPU Node
-        #     is unhealthy.
+        #     Output only. If this field is populated, it contains a description of why
+        #     the TPU Node is unhealthy.
         # @!attribute [rw] tensorflow_version
         #   @return [::String]
         #     Required. The version of Tensorflow running in the Node.
@@ -91,10 +91,10 @@ module Google
         #     block.
         # @!attribute [r] service_account
         #   @return [::String]
-        #     Output only. The service account used to run the tensor flow services within the node.
-        #     To share resources, including Google Cloud Storage data, with the
-        #     Tensorflow job running in the Node, this account must have permissions to
-        #     that data.
+        #     Output only. The service account used to run the tensor flow services
+        #     within the node. To share resources, including Google Cloud Storage data,
+        #     with the Tensorflow job running in the Node, this account must have
+        #     permissions to that data.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the node was created.
@@ -146,7 +146,7 @@ module Google
             # TPU node is being created.
             CREATING = 1
 
-            # TPU node has been created and is fully usable.
+            # TPU node has been created.
             READY = 2
 
             # TPU node is restarting.
@@ -332,7 +332,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Tpu::V1::Tpu::Client#get_tensor_flow_version GetTensorFlowVersion}.
+        # Request for
+        # {::Google::Cloud::Tpu::V1::Tpu::Client#get_tensor_flow_version GetTensorFlowVersion}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name.
@@ -341,7 +342,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Tpu::V1::Tpu::Client#list_tensor_flow_versions ListTensorFlowVersions}.
+        # Request for
+        # {::Google::Cloud::Tpu::V1::Tpu::Client#list_tensor_flow_versions ListTensorFlowVersions}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name.
@@ -362,7 +364,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for {::Google::Cloud::Tpu::V1::Tpu::Client#list_tensor_flow_versions ListTensorFlowVersions}.
+        # Response for
+        # {::Google::Cloud::Tpu::V1::Tpu::Client#list_tensor_flow_versions ListTensorFlowVersions}.
         # @!attribute [rw] tensorflow_versions
         #   @return [::Array<::Google::Cloud::Tpu::V1::TensorFlowVersion>]
         #     The listed nodes.
@@ -398,7 +401,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types ListAcceleratorTypes}.
+        # Request for
+        # {::Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types ListAcceleratorTypes}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name.
@@ -419,7 +423,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for {::Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types ListAcceleratorTypes}.
+        # Response for
+        # {::Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types ListAcceleratorTypes}.
         # @!attribute [rw] accelerator_types
         #   @return [::Array<::Google::Cloud::Tpu::V1::AcceleratorType>]
         #     The listed nodes.

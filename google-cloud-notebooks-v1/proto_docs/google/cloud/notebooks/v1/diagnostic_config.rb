@@ -24,25 +24,27 @@ module Google
         # Defines flags that are used to run the diagnostic tool
         # @!attribute [rw] gcs_bucket
         #   @return [::String]
-        #     Required. User Cloud Storage bucket location (REQUIRED)
-        #     ## Must be formatted with path prefix (gs://$GCS_BUCKET)
+        #     Required. User Cloud Storage bucket location (REQUIRED).
+        #     Must be formatted with path prefix (`gs://$GCS_BUCKET`).
         #
         #     Permissions:
         #     User Managed Notebooks:
         #     - storage.buckets.writer: Must be given to the project's service account
-        #     attached to VM.
+        #       attached to VM.
         #     Google Managed Notebooks:
         #     - storage.buckets.writer: Must be given to the project's service account or
-        #     ## user credentials attached to VM depending on authentication mode.
+        #       user credentials attached to VM depending on authentication mode.
         #
         #     Cloud Storage bucket Log file will be written to
-        #     gs://$GCS_BUCKET/$RELATIVE_PATH/$VM_DATE_$TIME.tar.gz
+        #     `gs://$GCS_BUCKET/$RELATIVE_PATH/$VM_DATE_$TIME.tar.gz`
         # @!attribute [rw] relative_path
         #   @return [::String]
-        #     Optional. Defines the relative storage path in the Cloud Storage bucket where the
-        #     diagnostic logs will be written: Default path will be the root directory of
-        #     the Cloud Storage bucket (gs://$GCS_BUCKET/$DATE_$TIME.tar.gz) Example of
-        #     full path where Log file will be written: gs://$GCS_BUCKET/$RELATIVE_PATH/
+        #     Optional. Defines the relative storage path in the Cloud Storage bucket
+        #     where the diagnostic logs will be written: Default path will be the root
+        #     directory of the Cloud Storage bucket
+        #     (`gs://$GCS_BUCKET/$DATE_$TIME.tar.gz`)
+        #     Example of full path where Log file will be written:
+        #     `gs://$GCS_BUCKET/$RELATIVE_PATH/`
         # @!attribute [rw] repair_flag_enabled
         #   @return [::Boolean]
         #     Optional. Enables flag to repair service for instance

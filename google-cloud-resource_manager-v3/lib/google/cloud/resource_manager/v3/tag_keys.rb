@@ -26,6 +26,7 @@ require "google/cloud/resource_manager/v3/tag_keys/credentials"
 require "google/cloud/resource_manager/v3/tag_keys/paths"
 require "google/cloud/resource_manager/v3/tag_keys/operations"
 require "google/cloud/resource_manager/v3/tag_keys/client"
+require "google/cloud/resource_manager/v3/tag_keys/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Allow users to create and manage tag keys.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_manager/v3/tag_keys"
         #     client = ::Google::Cloud::ResourceManager::V3::TagKeys::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_manager/v3/tag_keys/rest"
+        #     client = ::Google::Cloud::ResourceManager::V3::TagKeys::Rest::Client.new
         #
         module TagKeys
         end

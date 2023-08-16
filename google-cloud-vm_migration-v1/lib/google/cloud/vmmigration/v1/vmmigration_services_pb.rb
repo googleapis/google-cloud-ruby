@@ -150,6 +150,10 @@ module Google
             # NOTE: TargetProject is a global resource; hence the only supported value
             # for location is `global`.
             rpc :DeleteTargetProject, ::Google::Cloud::VMMigration::V1::DeleteTargetProjectRequest, ::Google::Longrunning::Operation
+            # Lists ReplicationCycles in a given MigratingVM.
+            rpc :ListReplicationCycles, ::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest, ::Google::Cloud::VMMigration::V1::ListReplicationCyclesResponse
+            # Gets details of a single ReplicationCycle.
+            rpc :GetReplicationCycle, ::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest, ::Google::Cloud::VMMigration::V1::ReplicationCycle
           end
 
           Stub = Service.rpc_stub_class

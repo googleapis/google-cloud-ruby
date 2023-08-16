@@ -32,16 +32,18 @@ module Google
         #     Must be of the form `tagKeys/{tag_key_id}`.
         # @!attribute [rw] short_name
         #   @return [::String]
-        #     Required. Immutable. User-assigned short name for TagValue. The short name should be
-        #     unique for TagValues within the same parent TagKey.
+        #     Required. Immutable. User-assigned short name for TagValue. The short name
+        #     should be unique for TagValues within the same parent TagKey.
         #
         #     The short name must be 63 characters or less, beginning and ending with
         #     an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_),
         #     dots (.), and alphanumerics between.
         # @!attribute [r] namespaced_name
         #   @return [::String]
-        #     Output only. Namespaced name of the TagValue. Must be in the format
-        #     `{organization_id}/{tag_key_short_name}/{short_name}`.
+        #     Output only. The namespaced name of the TagValue. Can be in the form
+        #     `{organization_id}/{tag_key_short_name}/{tag_value_short_name}` or
+        #     `{project_id}/{tag_key_short_name}/{tag_value_short_name}` or
+        #     `{project_number}/{tag_key_short_name}/{tag_value_short_name}`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. User-assigned description of the TagValue.
@@ -56,27 +58,29 @@ module Google
         #     Output only. Update time.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Entity tag which users can pass to prevent race conditions. This field is
-        #     always set in server responses. See UpdateTagValueRequest for details.
+        #     Optional. Entity tag which users can pass to prevent race conditions. This
+        #     field is always set in server responses. See UpdateTagValueRequest for
+        #     details.
         class TagValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for listing TagValues for the specified TagKey.
+        # Resource name for TagKey, parent of the TagValues to be listed,
+        # in the format `tagKeys/123`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name for TagKey, parent of the TagValues to be listed,
-        #     in the format `tagKeys/123`.
+        #     Required.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of TagValues to return in the response. The server
-        #     allows a maximum of 300 TagValues to return. If unspecified, the server
-        #     will use 100 as the default.
+        #     Optional. The maximum number of TagValues to return in the response. The
+        #     server allows a maximum of 300 TagValues to return. If unspecified, the
+        #     server will use 100 as the default.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous call to `ListTagValues`
-        #     that indicates where this listing should continue from.
+        #     Optional. A pagination token returned from a previous call to
+        #     `ListTagValues` that indicates where this listing should continue from.
         class ListTagValuesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,8 +104,26 @@ module Google
         # The request message for getting a TagValue.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name for TagValue to be fetched in the format `tagValues/456`.
+        #     Required. Resource name for TagValue to be fetched in the format
+        #     `tagValues/456`.
         class GetTagValueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for getting a TagValue by its namespaced name.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. A namespaced tag value name in the following format:
+        #
+        #       `{parentId}/{tagKeyShort}/{tagValueShort}`
+        #
+        #     Examples:
+        #     - `42/foo/abc` for a value with short name "abc" under the key with short
+        #       name "foo" under the organization with ID 42
+        #     - `r2-d2/bar/xyz` for a value with short name "xyz" under the key with
+        #        short name "bar" under the project with ID "r2-d2"
+        class GetNamespacedTagValueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -109,12 +131,12 @@ module Google
         # The request message for creating a TagValue.
         # @!attribute [rw] tag_value
         #   @return [::Google::Cloud::ResourceManager::V3::TagValue]
-        #     Required. The TagValue to be created. Only fields `short_name`, `description`,
-        #     and `parent` are considered during the creation request.
+        #     Required. The TagValue to be created. Only fields `short_name`,
+        #     `description`, and `parent` are considered during the creation request.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. Set as true to perform the validations necessary for creating the resource,
-        #     but not actually perform the action.
+        #     Optional. Set as true to perform the validations necessary for creating the
+        #     resource, but not actually perform the action.
         class CreateTagValueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -129,17 +151,17 @@ module Google
         # The request message for updating a TagValue.
         # @!attribute [rw] tag_value
         #   @return [::Google::Cloud::ResourceManager::V3::TagValue]
-        #     Required. The new definition of the TagValue. Only fields `description` and `etag`
-        #     fields can be updated by this request. If the `etag` field is nonempty, it
-        #     must match the `etag` field of the existing ControlGroup. Otherwise,
-        #     `FAILED_PRECONDITION` will be returned.
+        #     Required. The new definition of the TagValue. Only fields `description` and
+        #     `etag` fields can be updated by this request. If the `etag` field is
+        #     nonempty, it must match the `etag` field of the existing ControlGroup.
+        #     Otherwise, `ABORTED` will be returned.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Fields to be updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. True to perform validations necessary for updating the resource, but not
-        #     actually perform the action.
+        #     Optional. True to perform validations necessary for updating the resource,
+        #     but not actually perform the action.
         class UpdateTagValueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,15 +176,16 @@ module Google
         # The request message for deleting a TagValue.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name for TagValue to be deleted in the format tagValues/456.
+        #     Required. Resource name for TagValue to be deleted in the format
+        #     tagValues/456.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. Set as true to perform the validations necessary for deletion, but not
-        #     actually perform the action.
+        #     Optional. Set as true to perform the validations necessary for deletion,
+        #     but not actually perform the action.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. The etag known to the client for the expected state of the TagValue. This
-        #     is to be used for optimistic concurrency.
+        #     Optional. The etag known to the client for the expected state of the
+        #     TagValue. This is to be used for optimistic concurrency.
         class DeleteTagValueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

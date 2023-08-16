@@ -28,8 +28,9 @@ module Google
         #     Output only. Resource name of the Annotation.
         # @!attribute [rw] payload_schema_uri
         #   @return [::String]
-        #     Required. Google Cloud Storage URI points to a YAML file describing {::Google::Cloud::AIPlatform::V1::Annotation#payload payload}. The
-        #     schema is defined as an [OpenAPI 3.0.2 Schema
+        #     Required. Google Cloud Storage URI points to a YAML file describing
+        #     {::Google::Cloud::AIPlatform::V1::Annotation#payload payload}. The schema is
+        #     defined as an [OpenAPI 3.0.2 Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         #     The schema files that can be used here are found in
         #     gs://google-cloud-aiplatform/schema/dataset/annotation/, note that the
@@ -47,14 +48,15 @@ module Google
         #     Output only. Timestamp when this Annotation was last updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Used to perform consistent read-modify-write updates. If not set, a blind
-        #     "overwrite" update happens.
+        #     Optional. Used to perform consistent read-modify-write updates. If not set,
+        #     a blind "overwrite" update happens.
         # @!attribute [r] annotation_source
         #   @return [::Google::Cloud::AIPlatform::V1::UserActionReference]
         #     Output only. The source of the Annotation.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. The labels with user-defined metadata to organize your Annotations.
+        #     Optional. The labels with user-defined metadata to organize your
+        #     Annotations.
         #
         #     Label keys and values can be no longer than 64 characters
         #     (Unicode codepoints), can only contain lowercase letters, numeric
@@ -71,7 +73,8 @@ module Google
         #       If not set, the Annotation is not visible in the UI.
         #
         #     * "aiplatform.googleapis.com/payload_schema":
-        #       output only, its value is the [payload_schema's][google.cloud.aiplatform.v1.Annotation.payload_schema_uri]
+        #       output only, its value is the
+        #       [payload_schema's][google.cloud.aiplatform.v1.Annotation.payload_schema_uri]
         #       title.
         class Annotation
           include ::Google::Protobuf::MessageExts

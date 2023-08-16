@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.7.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.6.0 (2023-03-24)
+
+#### Features
+
+* Add new state in MigrationSubtask 
+* Add support for request_source field in TranslationConfigDetails ([#20986](https://github.com/googleapis/google-cloud-ruby/issues/20986)) 
+
 ### 0.5.0 (2022-08-10)
 
 #### Features

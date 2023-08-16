@@ -20,8 +20,11 @@
 require "google/cloud/firestore/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query
+# Snippet for the run_aggregation_query call in the Firestore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query. It may
+# require modification in order to execute successfully.
 #
 def run_aggregation_query
   # Create a client object. The client can be reused for multiple calls.
@@ -30,13 +33,13 @@ def run_aggregation_query
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new
 
-  # Call the run_aggregation_query method.
-  result = client.run_aggregation_query request
+  # Call the run_aggregation_query method to start streaming.
+  output = client.run_aggregation_query request
 
-  # The returned object is a streamed enumerable yielding elements of
-  # type ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse.
-  result.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END firestore_v1_generated_Firestore_RunAggregationQuery_sync]

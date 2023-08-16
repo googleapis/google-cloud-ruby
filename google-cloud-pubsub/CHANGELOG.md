@@ -1,5 +1,47 @@
 # Release History
 
+### 2.15.4 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.15.4 (2023-05-18)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.15.3 (2023-04-19)
+
+#### Bug Fixes
+
+* wait for successful receipt modack when exactly once delivery enabled ([#21431](https://github.com/googleapis/google-cloud-ruby/issues/21431)) 
+
+### 2.15.2 (2023-03-19)
+
+#### Bug Fixes
+
+* make batch handle publish interval ([#20913](https://github.com/googleapis/google-cloud-ruby/issues/20913)) 
+
+### 2.15.1 (2023-02-23)
+
+#### Documentation
+
+* Correct default value for streams ([#20485](https://github.com/googleapis/google-cloud-ruby/issues/20485)) 
+
+### 2.15.0 (2023-01-22)
+
+#### Features
+
+* support publisher compression ([#19910](https://github.com/googleapis/google-cloud-ruby/issues/19910)) 
+
+### 2.14.0 (2023-01-12)
+
+#### Features
+
+* Added support for schema evolution, including managing schema revisions, and schema commit and rollback ([#19981](https://github.com/googleapis/google-cloud-ruby/issues/19981)) 
+
 ### 2.13.0 (2022-10-18)
 
 #### Features

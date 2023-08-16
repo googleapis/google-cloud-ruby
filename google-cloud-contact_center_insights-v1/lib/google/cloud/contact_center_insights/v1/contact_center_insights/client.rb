@@ -128,7 +128,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -249,6 +249,113 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @contact_center_insights_stub.call_rpc :create_conversation, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a longrunning conversation upload operation. This method differs
+            # from CreateConversation by allowing audio transcription and optional DLP
+            # redaction.
+            #
+            # @overload upload_conversation(request, options = nil)
+            #   Pass arguments to `upload_conversation` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upload_conversation(parent: nil, conversation: nil, conversation_id: nil, redaction_config: nil)
+            #   Pass arguments to `upload_conversation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the conversation.
+            #   @param conversation [::Google::Cloud::ContactCenterInsights::V1::Conversation, ::Hash]
+            #     Required. The conversation resource to create.
+            #   @param conversation_id [::String]
+            #     Optional. A unique ID for the new conversation. This ID will become the
+            #     final component of the conversation's resource name. If no ID is specified,
+            #     a server-generated ID will be used.
+            #
+            #     This value should be 4-64 characters and must match the regular
+            #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
+            #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
+            #     Optional. DLP settings for transcript redaction. Optional, will default to
+            #     the config specified in Settings.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new
+            #
+            #   # Call the upload_conversation method.
+            #   result = client.upload_conversation request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def upload_conversation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upload_conversation.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.upload_conversation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upload_conversation.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :upload_conversation, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -485,13 +592,11 @@ module Google
             #   # Call the list_conversations method.
             #   result = client.list_conversations request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::Conversation.
-            #     p response
+            #     p item
             #   end
             #
             def list_conversations request, options = nil
@@ -669,14 +774,14 @@ module Google
             #   # Call the create_analysis method.
             #   result = client.create_analysis request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_analysis request, options = nil
@@ -859,13 +964,11 @@ module Google
             #   # Call the list_analyses method.
             #   result = client.list_analyses request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::Analysis.
-            #     p response
+            #     p item
             #   end
             #
             def list_analyses request, options = nil
@@ -996,6 +1099,207 @@ module Google
             end
 
             ##
+            # Analyzes multiple conversations in a single request.
+            #
+            # @overload bulk_analyze_conversations(request, options = nil)
+            #   Pass arguments to `bulk_analyze_conversations` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload bulk_analyze_conversations(parent: nil, filter: nil, analysis_percentage: nil, annotator_selector: nil)
+            #   Pass arguments to `bulk_analyze_conversations` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource to create analyses in.
+            #   @param filter [::String]
+            #     Required. Filter used to select the subset of conversations to analyze.
+            #   @param analysis_percentage [::Float]
+            #     Required. Percentage of selected conversation to analyze, between
+            #     [0, 100].
+            #   @param annotator_selector [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector, ::Hash]
+            #     To select the annotators to run and the phrase matchers to use
+            #     (if any). If not specified, all annotators will be run.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest.new
+            #
+            #   # Call the bulk_analyze_conversations method.
+            #   result = client.bulk_analyze_conversations request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def bulk_analyze_conversations request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.bulk_analyze_conversations.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.bulk_analyze_conversations.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.bulk_analyze_conversations.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :bulk_analyze_conversations, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports conversations and processes them according to the user's
+            # configuration.
+            #
+            # @overload ingest_conversations(request, options = nil)
+            #   Pass arguments to `ingest_conversations` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil)
+            #   Pass arguments to `ingest_conversations` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param gcs_source [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource, ::Hash]
+            #     A cloud storage bucket source.
+            #   @param transcript_object_config [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::TranscriptObjectConfig, ::Hash]
+            #     Configuration for when `source` contains conversation transcripts.
+            #   @param parent [::String]
+            #     Required. The parent resource for new conversations.
+            #   @param conversation_config [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::ConversationConfig, ::Hash]
+            #     Configuration that applies to all conversations.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new
+            #
+            #   # Call the ingest_conversations method.
+            #   result = client.ingest_conversations request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def ingest_conversations request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.ingest_conversations.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.ingest_conversations.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.ingest_conversations.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :ingest_conversations, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Export insights data to a destination defined in the request body.
             #
             # @overload export_insights_data(request, options = nil)
@@ -1047,14 +1351,14 @@ module Google
             #   # Call the export_insights_data method.
             #   result = client.export_insights_data request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_insights_data request, options = nil
@@ -1142,14 +1446,14 @@ module Google
             #   # Call the create_issue_model method.
             #   result = client.create_issue_model request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_issue_model request, options = nil
@@ -1492,14 +1796,14 @@ module Google
             #   # Call the delete_issue_model method.
             #   result = client.delete_issue_model request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_issue_model request, options = nil
@@ -1586,14 +1890,14 @@ module Google
             #   # Call the deploy_issue_model method.
             #   result = client.deploy_issue_model request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def deploy_issue_model request, options = nil
@@ -1680,14 +1984,14 @@ module Google
             #   # Call the undeploy_issue_model method.
             #   result = client.undeploy_issue_model request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def undeploy_issue_model request, options = nil
@@ -1990,6 +2294,91 @@ module Google
             end
 
             ##
+            # Deletes an issue.
+            #
+            # @overload delete_issue(request, options = nil)
+            #   Pass arguments to `delete_issue` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_issue(name: nil)
+            #   Pass arguments to `delete_issue` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the issue to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest.new
+            #
+            #   # Call the delete_issue method.
+            #   result = client.delete_issue request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_issue request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_issue.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_issue.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_issue.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :delete_issue, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets an issue model's statistics.
             #
             # @overload calculate_issue_model_stats(request, options = nil)
@@ -2093,10 +2482,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the phrase matcher. Required. The location to create
-            #     a phrase matcher for.
-            #     Format: `projects/<Project ID>/locations/<Location ID>` or
-            #     `projects/<Project Number>/locations/<Location ID>`
+            #     Required. The parent resource of the phrase matcher. Required. The location
+            #     to create a phrase matcher for. Format: `projects/<Project
+            #     ID>/locations/<Location ID>` or `projects/<Project
+            #     Number>/locations/<Location ID>`
             #   @param phrase_matcher [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher, ::Hash]
             #     Required. The phrase matcher resource to create.
             #
@@ -2302,13 +2691,11 @@ module Google
             #   # Call the list_phrase_matchers method.
             #   result = client.list_phrase_matchers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
-            #     p response
+            #     p item
             #   end
             #
             def list_phrase_matchers request, options = nil
@@ -3010,13 +3397,11 @@ module Google
             #   # Call the list_views method.
             #   result = client.list_views request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::View.
-            #     p response
+            #     p item
             #   end
             #
             def list_views request, options = nil
@@ -3271,9 +3656,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -3315,7 +3700,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "contactcenterinsights.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "contactcenterinsights.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -3374,6 +3761,11 @@ module Google
                 #
                 attr_reader :create_conversation
                 ##
+                # RPC-specific configuration for `upload_conversation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upload_conversation
+                ##
                 # RPC-specific configuration for `update_conversation`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3413,6 +3805,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_analysis
+                ##
+                # RPC-specific configuration for `bulk_analyze_conversations`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :bulk_analyze_conversations
+                ##
+                # RPC-specific configuration for `ingest_conversations`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :ingest_conversations
                 ##
                 # RPC-specific configuration for `export_insights_data`
                 # @return [::Gapic::Config::Method]
@@ -3468,6 +3870,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_issue
+                ##
+                # RPC-specific configuration for `delete_issue`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_issue
                 ##
                 # RPC-specific configuration for `calculate_issue_model_stats`
                 # @return [::Gapic::Config::Method]
@@ -3543,6 +3950,8 @@ module Google
                 def initialize parent_rpcs = nil
                   create_conversation_config = parent_rpcs.create_conversation if parent_rpcs.respond_to? :create_conversation
                   @create_conversation = ::Gapic::Config::Method.new create_conversation_config
+                  upload_conversation_config = parent_rpcs.upload_conversation if parent_rpcs.respond_to? :upload_conversation
+                  @upload_conversation = ::Gapic::Config::Method.new upload_conversation_config
                   update_conversation_config = parent_rpcs.update_conversation if parent_rpcs.respond_to? :update_conversation
                   @update_conversation = ::Gapic::Config::Method.new update_conversation_config
                   get_conversation_config = parent_rpcs.get_conversation if parent_rpcs.respond_to? :get_conversation
@@ -3559,6 +3968,10 @@ module Google
                   @list_analyses = ::Gapic::Config::Method.new list_analyses_config
                   delete_analysis_config = parent_rpcs.delete_analysis if parent_rpcs.respond_to? :delete_analysis
                   @delete_analysis = ::Gapic::Config::Method.new delete_analysis_config
+                  bulk_analyze_conversations_config = parent_rpcs.bulk_analyze_conversations if parent_rpcs.respond_to? :bulk_analyze_conversations
+                  @bulk_analyze_conversations = ::Gapic::Config::Method.new bulk_analyze_conversations_config
+                  ingest_conversations_config = parent_rpcs.ingest_conversations if parent_rpcs.respond_to? :ingest_conversations
+                  @ingest_conversations = ::Gapic::Config::Method.new ingest_conversations_config
                   export_insights_data_config = parent_rpcs.export_insights_data if parent_rpcs.respond_to? :export_insights_data
                   @export_insights_data = ::Gapic::Config::Method.new export_insights_data_config
                   create_issue_model_config = parent_rpcs.create_issue_model if parent_rpcs.respond_to? :create_issue_model
@@ -3581,6 +3994,8 @@ module Google
                   @list_issues = ::Gapic::Config::Method.new list_issues_config
                   update_issue_config = parent_rpcs.update_issue if parent_rpcs.respond_to? :update_issue
                   @update_issue = ::Gapic::Config::Method.new update_issue_config
+                  delete_issue_config = parent_rpcs.delete_issue if parent_rpcs.respond_to? :delete_issue
+                  @delete_issue = ::Gapic::Config::Method.new delete_issue_config
                   calculate_issue_model_stats_config = parent_rpcs.calculate_issue_model_stats if parent_rpcs.respond_to? :calculate_issue_model_stats
                   @calculate_issue_model_stats = ::Gapic::Config::Method.new calculate_issue_model_stats_config
                   create_phrase_matcher_config = parent_rpcs.create_phrase_matcher if parent_rpcs.respond_to? :create_phrase_matcher

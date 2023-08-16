@@ -36,14 +36,17 @@ module Google
 
               # Create security settings in the specified location.
               rpc :CreateSecuritySettings, ::Google::Cloud::Dialogflow::CX::V3::CreateSecuritySettingsRequest, ::Google::Cloud::Dialogflow::CX::V3::SecuritySettings
-              # Retrieves the specified [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings].
-              # The returned settings may be stale by up to 1 minute.
+              # Retrieves the specified
+              # [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings]. The
+              # returned settings may be stale by up to 1 minute.
               rpc :GetSecuritySettings, ::Google::Cloud::Dialogflow::CX::V3::GetSecuritySettingsRequest, ::Google::Cloud::Dialogflow::CX::V3::SecuritySettings
-              # Updates the specified [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings].
+              # Updates the specified
+              # [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings].
               rpc :UpdateSecuritySettings, ::Google::Cloud::Dialogflow::CX::V3::UpdateSecuritySettingsRequest, ::Google::Cloud::Dialogflow::CX::V3::SecuritySettings
               # Returns the list of all security settings in the specified location.
               rpc :ListSecuritySettings, ::Google::Cloud::Dialogflow::CX::V3::ListSecuritySettingsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListSecuritySettingsResponse
-              # Deletes the specified [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings].
+              # Deletes the specified
+              # [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings].
               rpc :DeleteSecuritySettings, ::Google::Cloud::Dialogflow::CX::V3::DeleteSecuritySettingsRequest, ::Google::Protobuf::Empty
             end
 

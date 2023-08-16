@@ -20,8 +20,11 @@
 require "google/cloud/recommender/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_succeeded
+# Snippet for the mark_recommendation_succeeded call in the Recommender service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_succeeded.
+# It may require modification in order to execute successfully.
 #
 def mark_recommendation_succeeded
   # Create a client object. The client can be reused for multiple calls.

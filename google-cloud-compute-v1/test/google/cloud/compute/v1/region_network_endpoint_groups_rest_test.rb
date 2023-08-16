@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/region_network_endpoint_groups"
+require "google/cloud/compute/v1/region_network_endpoint_groups/rest"
 
 
-class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -81,39 +81,41 @@ class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, delete_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.delete({ network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.delete({ network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.delete network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.delete network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.delete ::Google::Cloud::Compute::V1::DeleteRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.delete({ network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.delete({ network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.delete(::Google::Cloud::Compute::V1::DeleteRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, delete_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, delete_client_stub.call_count
+      end
     end
   end
 
@@ -135,39 +137,41 @@ class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, get_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.get({ network_endpoint_group: network_endpoint_group, project: project, region: region }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.get({ network_endpoint_group: network_endpoint_group, project: project, region: region }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.get network_endpoint_group: network_endpoint_group, project: project, region: region do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.get network_endpoint_group: network_endpoint_group, project: project, region: region do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.get ::Google::Cloud::Compute::V1::GetRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.get({ network_endpoint_group: network_endpoint_group, project: project, region: region }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.get({ network_endpoint_group: network_endpoint_group, project: project, region: region }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.get(::Google::Cloud::Compute::V1::GetRegionNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, region: region), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, get_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, get_client_stub.call_count
+      end
     end
   end
 
@@ -190,39 +194,41 @@ class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, insert_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, insert_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.insert network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.insert network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRegionNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.insert ::Google::Cloud::Compute::V1::InsertRegionNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRegionNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.insert(::Google::Cloud::Compute::V1::InsertRegionNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, insert_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, insert_client_stub.call_count
+      end
     end
   end
 
@@ -248,39 +254,41 @@ class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list ::Google::Cloud::Compute::V1::ListRegionNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list(::Google::Cloud::Compute::V1::ListRegionNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_client_stub.call_count
+      end
     end
   end
 

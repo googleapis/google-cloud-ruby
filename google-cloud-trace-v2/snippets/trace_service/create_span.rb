@@ -20,8 +20,11 @@
 require "google/cloud/trace/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Trace::V2::TraceService::Client#create_span
+# Snippet for the create_span call in the TraceService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Trace::V2::TraceService::Client#create_span. It may require
+# modification in order to execute successfully.
 #
 def create_span
   # Create a client object. The client can be reused for multiple calls.

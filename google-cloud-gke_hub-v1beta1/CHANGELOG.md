@@ -1,5 +1,30 @@
 # Release History
 
+### 0.8.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21675](https://github.com/googleapis/google-cloud-ruby/issues/21675)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.7.0 (2023-04-23)
+
+#### Features
+
+* Support force deletion of sub-resources during membership deletes ([#21460](https://github.com/googleapis/google-cloud-ruby/issues/21460)) 
+* Support monitoring configuration in membership ([#21460](https://github.com/googleapis/google-cloud-ruby/issues/21460)) 
+#### Documentation
+
+* Reformat documentation ([#21460](https://github.com/googleapis/google-cloud-ruby/issues/21460)) 
+
+### 0.6.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20627](https://github.com/googleapis/google-cloud-ruby/issues/20627)) 
+
 ### 0.5.0 (2022-07-02)
 
 #### Features

@@ -25,18 +25,25 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/answer_records/credentials"
 require "google/cloud/dialogflow/v2/answer_records/paths"
 require "google/cloud/dialogflow/v2/answer_records/client"
+require "google/cloud/dialogflow/v2/answer_records/rest"
 
 module Google
   module Cloud
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
+        # Service for managing
+        # {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/answer_records"
         #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/answer_records/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new
         #
         module AnswerRecords
         end

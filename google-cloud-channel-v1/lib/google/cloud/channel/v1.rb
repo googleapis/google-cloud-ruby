@@ -24,12 +24,17 @@ module Google
   module Cloud
     module Channel
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/channel/v1"
       #     client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/channel/v1"
+      #     client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new
       #
       module V1
       end

@@ -20,8 +20,11 @@
 require "google/cloud/gaming/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#fetch_deployment_state
+# Snippet for the fetch_deployment_state call in the GameServerDeploymentsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#fetch_deployment_state.
+# It may require modification in order to execute successfully.
 #
 def fetch_deployment_state
   # Create a client object. The client can be reused for multiple calls.

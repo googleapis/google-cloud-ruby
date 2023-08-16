@@ -20,8 +20,11 @@
 require "google/cloud/private_catalog/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_versions
+# Snippet for the search_versions call in the PrivateCatalog service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_versions.
+# It may require modification in order to execute successfully.
 #
 def search_versions
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def search_versions
   # Call the search_versions method.
   result = client.search_versions request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::PrivateCatalog::V1beta1::Version.
-    p response
+    p item
   end
 end
 # [END cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchVersions_sync]

@@ -1,5 +1,31 @@
 # Release History
 
+### 0.9.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.9.0 (2023-06-01)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+
+### 0.8.0 (2023-03-23)
+
+#### Features
+
+* Add support for reCAPTCHA Enterprise FraudPrevention API 
+* Add support for reCAPTCHA Enterprise TransactionData API 
+* Add support for TransactionEvent ([#20923](https://github.com/googleapis/google-cloud-ruby/issues/20923)) 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
 ### 0.6.0 (2022-07-07)
 
 #### Features

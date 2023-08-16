@@ -24,7 +24,9 @@ require "google/cloud/web_risk/v1/version"
 
 require "google/cloud/web_risk/v1/web_risk_service/credentials"
 require "google/cloud/web_risk/v1/web_risk_service/paths"
+require "google/cloud/web_risk/v1/web_risk_service/operations"
 require "google/cloud/web_risk/v1/web_risk_service/client"
+require "google/cloud/web_risk/v1/web_risk_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +36,15 @@ module Google
         # Web Risk API defines an interface to detect malicious URLs on your
         # website and in client applications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/web_risk/v1/web_risk_service"
         #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/web_risk/v1/web_risk_service/rest"
+        #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::Client.new
         #
         module WebRiskService
         end

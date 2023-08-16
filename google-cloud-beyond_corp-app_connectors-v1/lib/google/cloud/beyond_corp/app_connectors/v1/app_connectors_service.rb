@@ -48,7 +48,7 @@ module Google
           # The AppConnectorsService provides methods to manage
           # (create/read/update/delete) BeyondCorp AppConnectors.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/beyond_corp/app_connectors/v1/app_connectors_service"
           #     client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new

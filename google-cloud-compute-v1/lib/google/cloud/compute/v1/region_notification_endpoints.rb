@@ -31,9 +31,9 @@ module Google
         ##
         # The RegionNotificationEndpoints API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/region_notification_endpoints"
+        #     require "google/cloud/compute/v1/region_notification_endpoints/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client.new
         #
         module RegionNotificationEndpoints

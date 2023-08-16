@@ -43,7 +43,7 @@ module Google
                        timeout: nil, open_timeout: nil, read_timeout: nil,
                        send_timeout: nil, host: nil, quota_project: nil,
                        max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                       multiplier: nil
+                       multiplier: nil, upload_chunk_size: nil
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
@@ -65,6 +65,7 @@ module Google
           @service.request_options.max_interval = max_interval if max_interval
           @service.request_options.multiplier = multiplier if multiplier
           @service.request_options.add_invocation_id_header = true
+          @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
@@ -792,6 +793,18 @@ module Google
         # @private
         def inspect
           "#{self.class}(#{@project})"
+        end
+
+        ##
+        # Add custom Google extension headers to the requests that use the signed URLs.
+        def add_custom_headers headers
+          @service.request_options.header.merge! headers
+        end
+
+        ##
+        # Add custom Google extension header to the requests that use the signed URLs.
+        def add_custom_header header_name, header_value
+          @service.request_options.header[header_name] = header_value
         end
 
         protected

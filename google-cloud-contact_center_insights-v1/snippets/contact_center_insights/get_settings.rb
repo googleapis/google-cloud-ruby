@@ -20,8 +20,11 @@
 require "google/cloud/contact_center_insights/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_settings
+# Snippet for the get_settings call in the ContactCenterInsights service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_settings.
+# It may require modification in order to execute successfully.
 #
 def get_settings
   # Create a client object. The client can be reused for multiple calls.

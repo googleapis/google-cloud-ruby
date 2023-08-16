@@ -63,10 +63,12 @@ module Google
           #     more details.
           # @!attribute [rw] enable_word_info
           #   @return [::Boolean]
-          #     Optional. If `true`, Dialogflow returns {::Google::Cloud::Dialogflow::CX::V3::SpeechWordInfo SpeechWordInfo} in
-          #     {::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
-          #     words, e.g. start and end time offsets. If false or unspecified, Speech
-          #     doesn't return any word-level information.
+          #     Optional. If `true`, Dialogflow returns
+          #     {::Google::Cloud::Dialogflow::CX::V3::SpeechWordInfo SpeechWordInfo} in
+          #     {::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult StreamingRecognitionResult}
+          #     with information about the recognized speech words, e.g. start and end time
+          #     offsets. If false or unspecified, Speech doesn't return any word-level
+          #     information.
           # @!attribute [rw] phrase_hints
           #   @return [::Array<::String>]
           #     Optional. A list of strings containing words and phrases that the speech
@@ -88,9 +90,16 @@ module Google
           #     [Cloud Speech API
           #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
           #     for more details.
+          #     If you specify a model, the following models typically have the best
+          #     performance:
+          #
+          #     - phone_call (best for Agent Assist and telephony)
+          #     - latest_short (best for Dialogflow non-telephony)
+          #     - command_and_search (best for very short utterances and commands)
           # @!attribute [rw] model_variant
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SpeechModelVariant]
-          #     Optional. Which variant of the {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model Speech model} to use.
+          #     Optional. Which variant of the [Speech
+          #     model][google.cloud.dialogflow.cx.v3.InputAudioConfig.model] to use.
           # @!attribute [rw] single_utterance
           #   @return [::Boolean]
           #     Optional. If `false` (default), recognition does not cease until the
@@ -119,10 +128,10 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SsmlVoiceGender]
           #     Optional. The preferred gender of the voice. If not set, the service will
           #     choose a voice based on the other parameters such as language_code and
-          #     {::Google::Cloud::Dialogflow::CX::V3::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
-          #     voice of the appropriate gender is not available, the synthesizer
-          #     substitutes a voice with a different gender rather than failing the
-          #     request.
+          #     {::Google::Cloud::Dialogflow::CX::V3::VoiceSelectionParams#name name}. Note that
+          #     this is only a preference, not requirement. If a voice of the appropriate
+          #     gender is not available, the synthesizer substitutes a voice with a
+          #     different gender rather than failing the request.
           class VoiceSelectionParams
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,9 +186,46 @@ module Google
           # @!attribute [rw] synthesize_speech_config
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig]
           #     Optional. Configuration of how speech should be synthesized.
+          #     If not specified,
+          #     {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}
+          #     is applied.
           class OutputAudioConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Settings related to speech synthesizing.
+          # @!attribute [rw] synthesize_speech_configs
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig}]
+          #     Configuration of how speech should be synthesized, mapping from language
+          #     (https://cloud.google.com/dialogflow/cx/docs/reference/language) to
+          #     SynthesizeSpeechConfig.
+          #
+          #     These settings affect:
+          #
+          #      - The [phone
+          #      gateway](https://cloud.google.com/dialogflow/cx/docs/concept/integration/phone-gateway)
+          #        synthesize configuration set via
+          #        {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}.
+          #
+          #      - How speech is synthesized when invoking
+          #      {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client session} APIs.
+          #        {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}
+          #        only applies if
+          #        {::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig#synthesize_speech_config OutputAudioConfig.synthesize_speech_config}
+          #        is not specified.
+          class TextToSpeechSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig]
+            class SynthesizeSpeechConfigsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Audio encoding of the audio content sent in the conversational query request.
@@ -231,7 +277,8 @@ module Google
             AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
           end
 
-          # Variant of the specified {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model Speech model} to use.
+          # Variant of the specified [Speech
+          # model][google.cloud.dialogflow.cx.v3.InputAudioConfig.model] to use.
           #
           # See the [Cloud Speech
           # documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
@@ -260,8 +307,8 @@ module Google
             # Use an enhanced model variant:
             #
             # * If an enhanced variant does not exist for the given
-            #   {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model model} and request language, Dialogflow falls
-            #   back to the standard variant.
+            #   {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model model} and request
+            #   language, Dialogflow falls back to the standard variant.
             #
             #   The [Cloud Speech
             #   documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)

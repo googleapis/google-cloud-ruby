@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/sessions/credentials"
 require "google/cloud/dialogflow/v2/sessions/paths"
 require "google/cloud/dialogflow/v2/sessions/client"
+require "google/cloud/dialogflow/v2/sessions/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # For more information, see the [API interactions
         # guide](https://cloud.google.com/dialogflow/docs/api-overview).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/sessions"
         #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/sessions/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Rest::Client.new
         #
         module Sessions
         end

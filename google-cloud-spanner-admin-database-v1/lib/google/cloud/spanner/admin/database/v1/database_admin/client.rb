@@ -84,6 +84,11 @@ module Google
                       initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
                     }
 
+                    default_config.rpcs.update_database.timeout = 3600.0
+                    default_config.rpcs.update_database.retry_policy = {
+                      initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
+                    }
+
                     default_config.rpcs.update_database_ddl.timeout = 3600.0
                     default_config.rpcs.update_database_ddl.retry_policy = {
                       initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -208,7 +213,7 @@ module Google
                   credentials = @config.credentials
                   # Use self-signed JWT if the endpoint is unchanged from default,
                   # but only if the default endpoint does not have a region prefix.
-                  enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                  enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                            !@config.endpoint.split(".").first.include?("-")
                   credentials ||= Credentials.default scope: @config.scope,
                                                       enable_self_signed_jwt: enable_self_signed_jwt
@@ -291,13 +296,11 @@ module Google
                 #   # Call the list_databases method.
                 #   result = client.list_databases request
                 #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can
-                #   # iterate over all elements by calling #each, and the enumerable
-                #   # will lazily make API calls to fetch subsequent pages. Other
-                #   # methods are also available for managing paging directly.
-                #   result.each do |response|
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
                 #     # Each element is of type ::Google::Cloud::Spanner::Admin::Database::V1::Database.
-                #     p response
+                #     p item
                 #   end
                 #
                 def list_databases request, options = nil
@@ -408,14 +411,14 @@ module Google
                 #   # Call the create_database method.
                 #   result = client.create_database request
                 #
-                #   # The returned object is of type Gapic::Operation. You can use this
-                #   # object to check the status of an operation, cancel it, or wait
-                #   # for results. Here is how to block until completion:
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
                 #   result.wait_until_done! timeout: 60
                 #   if result.response?
                 #     p result.response
                 #   else
-                #     puts "Error!"
+                #     puts "No response received."
                 #   end
                 #
                 def create_database request, options = nil
@@ -547,6 +550,139 @@ module Google
                 end
 
                 ##
+                # Updates a Cloud Spanner database. The returned
+                # {::Google::Longrunning::Operation long-running operation} can be used to track
+                # the progress of updating the database. If the named database does not
+                # exist, returns `NOT_FOUND`.
+                #
+                # While the operation is pending:
+                #
+                #   * The database's
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::Database#reconciling reconciling}
+                #     field is set to true.
+                #   * Cancelling the operation is best-effort. If the cancellation succeeds,
+                #     the operation metadata's
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseMetadata#cancel_time cancel_time}
+                #     is set, the updates are reverted, and the operation terminates with a
+                #     `CANCELLED` status.
+                #   * New UpdateDatabase requests will return a `FAILED_PRECONDITION` error
+                #     until the pending operation is done (returns successfully or with
+                #     error).
+                #   * Reading the database via the API continues to give the pre-request
+                #     values.
+                #
+                # Upon completion of the returned operation:
+                #
+                #   * The new values are in effect and readable via the API.
+                #   * The database's
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::Database#reconciling reconciling}
+                #     field becomes false.
+                #
+                # The returned {::Google::Longrunning::Operation long-running operation} will
+                # have a name of the format
+                # `projects/<project>/instances/<instance>/databases/<database>/operations/<operation_id>`
+                # and can be used to track the database modification. The
+                # {::Google::Longrunning::Operation#metadata metadata} field type is
+                # {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseMetadata UpdateDatabaseMetadata}.
+                # The {::Google::Longrunning::Operation#response response} field type is
+                # {::Google::Cloud::Spanner::Admin::Database::V1::Database Database}, if successful.
+                #
+                # @overload update_database(request, options = nil)
+                #   Pass arguments to `update_database` via a request object, either of type
+                #   {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload update_database(database: nil, update_mask: nil)
+                #   Pass arguments to `update_database` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param database [::Google::Cloud::Spanner::Admin::Database::V1::Database, ::Hash]
+                #     Required. The database to update.
+                #     The `name` field of the database is of the form
+                #     `projects/<project>/instances/<instance>/databases/<database>`.
+                #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     Required. The list of fields to update. Currently, only
+                #     `enable_drop_protection` field can be updated.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::Operation]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/spanner/admin/database/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new
+                #
+                #   # Call the update_database method.
+                #   result = client.update_database request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def update_database request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.update_database.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.database&.name
+                    header_params["database.name"] = request.database.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.update_database.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.update_database.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @database_admin_stub.call_rpc :update_database, request, options: options do |response, operation|
+                    response = ::Gapic::Operation.new response, @operations_client, options: options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Updates the schema of a Cloud Spanner database by
                 # creating/altering/dropping tables, columns, indexes, etc. The returned
                 # {::Google::Longrunning::Operation long-running operation} will have a name of
@@ -615,14 +751,14 @@ module Google
                 #   # Call the update_database_ddl method.
                 #   result = client.update_database_ddl request
                 #
-                #   # The returned object is of type Gapic::Operation. You can use this
-                #   # object to check the status of an operation, cancel it, or wait
-                #   # for results. Here is how to block until completion:
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
                 #   result.wait_until_done! timeout: 60
                 #   if result.response?
                 #     p result.response
                 #   else
-                #     puts "Error!"
+                #     puts "No response received."
                 #   end
                 #
                 def update_database_ddl request, options = nil
@@ -1213,14 +1349,14 @@ module Google
                 #   # Call the create_backup method.
                 #   result = client.create_backup request
                 #
-                #   # The returned object is of type Gapic::Operation. You can use this
-                #   # object to check the status of an operation, cancel it, or wait
-                #   # for results. Here is how to block until completion:
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
                 #   result.wait_until_done! timeout: 60
                 #   if result.response?
                 #     p result.response
                 #   else
-                #     puts "Error!"
+                #     puts "No response received."
                 #   end
                 #
                 def create_backup request, options = nil
@@ -1341,14 +1477,14 @@ module Google
                 #   # Call the copy_backup method.
                 #   result = client.copy_backup request
                 #
-                #   # The returned object is of type Gapic::Operation. You can use this
-                #   # object to check the status of an operation, cancel it, or wait
-                #   # for results. Here is how to block until completion:
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
                 #   result.wait_until_done! timeout: 60
                 #   if result.response?
                 #     p result.response
                 #   else
-                #     puts "Error!"
+                #     puts "No response received."
                 #   end
                 #
                 def copy_backup request, options = nil
@@ -1749,13 +1885,11 @@ module Google
                 #   # Call the list_backups method.
                 #   result = client.list_backups request
                 #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can
-                #   # iterate over all elements by calling #each, and the enumerable
-                #   # will lazily make API calls to fetch subsequent pages. Other
-                #   # methods are also available for managing paging directly.
-                #   result.each do |response|
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
                 #     # Each element is of type ::Google::Cloud::Spanner::Admin::Database::V1::Backup.
-                #     p response
+                #     p item
                 #   end
                 #
                 def list_backups request, options = nil
@@ -1876,14 +2010,14 @@ module Google
                 #   # Call the restore_database method.
                 #   result = client.restore_database request
                 #
-                #   # The returned object is of type Gapic::Operation. You can use this
-                #   # object to check the status of an operation, cancel it, or wait
-                #   # for results. Here is how to block until completion:
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
                 #   result.wait_until_done! timeout: 60
                 #   if result.response?
                 #     p result.response
                 #   else
-                #     puts "Error!"
+                #     puts "No response received."
                 #   end
                 #
                 def restore_database request, options = nil
@@ -2028,13 +2162,11 @@ module Google
                 #   # Call the list_database_operations method.
                 #   result = client.list_database_operations request
                 #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can
-                #   # iterate over all elements by calling #each, and the enumerable
-                #   # will lazily make API calls to fetch subsequent pages. Other
-                #   # methods are also available for managing paging directly.
-                #   result.each do |response|
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
                 #     # Each element is of type ::Google::Longrunning::Operation.
-                #     p response
+                #     p item
                 #   end
                 #
                 def list_database_operations request, options = nil
@@ -2206,13 +2338,11 @@ module Google
                 #   # Call the list_backup_operations method.
                 #   result = client.list_backup_operations request
                 #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can
-                #   # iterate over all elements by calling #each, and the enumerable
-                #   # will lazily make API calls to fetch subsequent pages. Other
-                #   # methods are also available for managing paging directly.
-                #   result.each do |response|
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
                 #     # Each element is of type ::Google::Longrunning::Operation.
-                #     p response
+                #     p item
                 #   end
                 #
                 def list_backup_operations request, options = nil
@@ -2308,13 +2438,11 @@ module Google
                 #   # Call the list_database_roles method.
                 #   result = client.list_database_roles request
                 #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can
-                #   # iterate over all elements by calling #each, and the enumerable
-                #   # will lazily make API calls to fetch subsequent pages. Other
-                #   # methods are also available for managing paging directly.
-                #   result.each do |response|
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
                 #     # Each element is of type ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole.
-                #     p response
+                #     p item
                 #   end
                 #
                 def list_database_roles request, options = nil
@@ -2397,9 +2525,9 @@ module Google
                 #    *  (`String`) The path to a service account key file in JSON format
                 #    *  (`Hash`) A service account key as a Hash
                 #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-                #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+                #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
                 #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-                #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+                #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
                 #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
                 #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
                 #    *  (`nil`) indicating no credentials
@@ -2441,7 +2569,9 @@ module Google
                 class Configuration
                   extend ::Gapic::Config
 
-                  config_attr :endpoint,      "spanner.googleapis.com", ::String
+                  DEFAULT_ENDPOINT = "spanner.googleapis.com"
+
+                  config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                   config_attr :credentials,   nil do |value|
                     allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                     allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2509,6 +2639,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :get_database
+                    ##
+                    # RPC-specific configuration for `update_database`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_database
                     ##
                     # RPC-specific configuration for `update_database_ddl`
                     # @return [::Gapic::Config::Method]
@@ -2598,6 +2733,8 @@ module Google
                       @create_database = ::Gapic::Config::Method.new create_database_config
                       get_database_config = parent_rpcs.get_database if parent_rpcs.respond_to? :get_database
                       @get_database = ::Gapic::Config::Method.new get_database_config
+                      update_database_config = parent_rpcs.update_database if parent_rpcs.respond_to? :update_database
+                      @update_database = ::Gapic::Config::Method.new update_database_config
                       update_database_ddl_config = parent_rpcs.update_database_ddl if parent_rpcs.respond_to? :update_database_ddl
                       @update_database_ddl = ::Gapic::Config::Method.new update_database_ddl_config
                       drop_database_config = parent_rpcs.drop_database if parent_rpcs.respond_to? :drop_database

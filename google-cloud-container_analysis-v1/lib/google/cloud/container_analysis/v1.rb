@@ -23,9 +23,9 @@ module Google
   module Cloud
     module ContainerAnalysis
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/container_analysis/v1"
       #     client = ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new

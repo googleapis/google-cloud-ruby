@@ -20,8 +20,11 @@
 require "google/cloud/kms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_primary_version
+# Snippet for the update_crypto_key_primary_version call in the KeyManagementService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_primary_version.
+# It may require modification in order to execute successfully.
 #
 def update_crypto_key_primary_version
   # Create a client object. The client can be reused for multiple calls.

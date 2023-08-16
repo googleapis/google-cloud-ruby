@@ -1,5 +1,56 @@
 # Release History
 
+### 0.8.0 (2023-08-15)
+
+#### Features
+
+* Added shadow removal and rotation correction options to Document Translation and Batch Document Translation API ([#22748](https://github.com/googleapis/google-cloud-ruby/issues/22748)) 
+
+### 0.7.3 (2023-08-03)
+
+#### Documentation
+
+* Format documentation ([#22667](https://github.com/googleapis/google-cloud-ruby/issues/22667)) 
+
+### 0.7.2 (2023-07-28)
+
+#### Documentation
+
+* Minor formatting ([#22635](https://github.com/googleapis/google-cloud-ruby/issues/22635)) 
+
+### 0.7.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.7.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+
+### 0.6.0 (2023-02-22)
+
+#### Features
+
+* Added display_name field to Glossary 
+* Support for removing the shadow text for native PDF translation 
+* Support translating only native PDF pages 
+* Support user-customized attribution flag ([#20490](https://github.com/googleapis/google-cloud-ruby/issues/20490)) 
+
+### 0.5.2 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20453](https://github.com/googleapis/google-cloud-ruby/issues/20453)) 
+
+### 0.5.1 (2022-12-09)
+
+#### Documentation
+
+* Minor fix to reference documentation formatting ([#19831](https://github.com/googleapis/google-cloud-ruby/issues/19831)) 
+
 ### 0.5.0 (2022-07-08)
 
 #### Features

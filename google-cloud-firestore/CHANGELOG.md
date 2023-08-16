@@ -1,5 +1,62 @@
 # Release History
 
+### 2.13.1 (2023-06-16)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.13.0 (2023-05-10)
+
+#### Features
+
+* Added support for bulk writer ([#21426](https://github.com/googleapis/google-cloud-ruby/issues/21426)) 
+
+### 2.12.0 (2023-04-20)
+
+#### Features
+
+* Add support for OR query ([#20920](https://github.com/googleapis/google-cloud-ruby/issues/20920)) 
+
+### 2.11.0 (2023-02-23)
+
+#### Features
+
+* Support REST transport ([#20446](https://github.com/googleapis/google-cloud-ruby/issues/20446)) 
+
+### 2.10.1 (2023-02-16)
+
+#### Bug Fixes
+
+* update version of firestore-v1 in gemspec ([#20433](https://github.com/googleapis/google-cloud-ruby/issues/20433)) 
+
+### 2.10.0 (2023-02-09)
+
+#### Features
+
+* Added support for multiple databases ([#20029](https://github.com/googleapis/google-cloud-ruby/issues/20029)) 
+
+### 2.9.1 (2023-02-03)
+
+#### Bug Fixes
+
+* Change "aggregate_alias" to optional param ([#20082](https://github.com/googleapis/google-cloud-ruby/issues/20082)) 
+
+### 2.9.0 (2023-01-26)
+
+#### Features
+
+* Added support for read time ([#19851](https://github.com/googleapis/google-cloud-ruby/issues/19851)) 
+
+### 2.8.0 (2023-01-05)
+
+#### Features
+
+* Support query count for Firestore ([#19457](https://github.com/googleapis/google-cloud-ruby/issues/19457)) 
+#### Bug Fixes
+
+* Add support for merging null field in a document ([#19918](https://github.com/googleapis/google-cloud-ruby/issues/19918)) 
+
 ### 2.7.2 (2022-08-24)
 
 #### Documentation

@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/api_keys"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::ApiKeys::ClientConstructionMinitest < Minitest::Test
-  def test_api_keys
+  def test_api_keys_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiKeys.api_keys do |config|
+      client = Google::Cloud::ApiKeys.api_keys transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::ApiKeys::V2::ApiKeys::Client, client
+    end
+  end
+
+  def test_api_keys_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::ApiKeys.api_keys transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client, client
     end
   end
 end

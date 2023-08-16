@@ -173,8 +173,10 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Output from {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob} for Model Monitoring baseline dataset,
-            # which can be used to generate baseline attribution scores.
+            # Output from
+            # {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob} for
+            # Model Monitoring baseline dataset, which can be used to generate baseline
+            # attribution scores.
             # @!attribute [rw] gcs
             #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
             #     Cloud Storage location for BatchExplain output.

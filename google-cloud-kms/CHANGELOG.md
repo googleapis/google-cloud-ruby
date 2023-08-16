@@ -1,5 +1,17 @@
 # Release History
 
+### 2.5.1 (2023-02-21)
+
+#### Bug Fixes
+
+* Update the dependency on google-cloud-kms-v1 to require the version with REST support ([#20480](https://github.com/googleapis/google-cloud-ruby/issues/20480)) 
+
+### 2.5.0 (2023-02-17)
+
+#### Features
+
+* Added support for REST transport ([#20442](https://github.com/googleapis/google-cloud-ruby/issues/20442)) 
+
 ### 2.4.0 (2022-07-02)
 
 #### Features

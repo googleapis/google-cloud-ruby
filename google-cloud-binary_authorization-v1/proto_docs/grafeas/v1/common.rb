@@ -180,6 +180,9 @@ module Grafeas
 
       # This represents a DSSE attestation Note
       DSSE_ATTESTATION = 10
+
+      # This represents a Vulnerability Assessment.
+      VULNERABILITY_ASSESSMENT = 11
     end
   end
 end

@@ -29,14 +29,13 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the DataLabelingJob.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         #     Display name of a DataLabelingJob.
         # @!attribute [rw] datasets
         #   @return [::Array<::String>]
-        #     Required. Dataset resource names. Right now we only support labeling from a single
-        #     Dataset.
-        #     Format:
+        #     Required. Dataset resource names. Right now we only support labeling from a
+        #     single Dataset. Format:
         #     `projects/{project}/locations/{location}/datasets/{dataset}`
         # @!attribute [rw] annotation_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -53,14 +52,14 @@ module Google
         #     Required. Number of labelers to work on each DataItem.
         # @!attribute [rw] instruction_uri
         #   @return [::String]
-        #     Required. The Google Cloud Storage location of the instruction pdf. This pdf is
-        #     shared with labelers, and provides detailed description on how to label
-        #     DataItems in Datasets.
+        #     Required. The Google Cloud Storage location of the instruction pdf. This
+        #     pdf is shared with labelers, and provides detailed description on how to
+        #     label DataItems in Datasets.
         # @!attribute [rw] inputs_schema_uri
         #   @return [::String]
-        #     Required. Points to a YAML file stored on Google Cloud Storage describing the
-        #     config for a specific type of DataLabelingJob.
-        #     The schema files that can be used here are found in the
+        #     Required. Points to a YAML file stored on Google Cloud Storage describing
+        #     the config for a specific type of DataLabelingJob. The schema files that
+        #     can be used here are found in the
         #     https://storage.googleapis.com/google-cloud-aiplatform bucket in the
         #     /schema/datalabelingjob/inputs/ folder.
         # @!attribute [rw] inputs
@@ -71,12 +70,12 @@ module Google
         #     Output only. The detailed state of the job.
         # @!attribute [r] labeling_progress
         #   @return [::Integer]
-        #     Output only. Current labeling job progress percentage scaled in interval [0, 100],
-        #     indicating the percentage of DataItems that has been finished.
+        #     Output only. Current labeling job progress percentage scaled in interval
+        #     [0, 100], indicating the percentage of DataItems that has been finished.
         # @!attribute [r] current_spend
         #   @return [::Google::Type::Money]
-        #     Output only. Estimated cost(in US dollars) that the DataLabelingJob has incurred to
-        #     date.
+        #     Output only. Estimated cost(in US dollars) that the DataLabelingJob has
+        #     incurred to date.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this DataLabelingJob was created.
@@ -85,8 +84,8 @@ module Google
         #     Output only. Timestamp when this DataLabelingJob was updated most recently.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. DataLabelingJob errors. It is only populated when job's state is
-        #     `JOB_STATE_FAILED` or `JOB_STATE_CANCELLED`.
+        #     Output only. DataLabelingJob errors. It is only populated when job's state
+        #     is `JOB_STATE_FAILED` or `JOB_STATE_CANCELLED`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels with user-defined metadata to organize your DataLabelingJobs.
@@ -100,7 +99,8 @@ module Google
         #     and are immutable. Following system labels exist for each DataLabelingJob:
         #
         #     * "aiplatform.googleapis.com/schema": output only, its value is the
-        #       {::Google::Cloud::AIPlatform::V1::DataLabelingJob#inputs_schema_uri inputs_schema}'s title.
+        #       {::Google::Cloud::AIPlatform::V1::DataLabelingJob#inputs_schema_uri inputs_schema}'s
+        #       title.
         # @!attribute [rw] specialist_pools
         #   @return [::Array<::String>]
         #     The SpecialistPools' resource names associated with this job.

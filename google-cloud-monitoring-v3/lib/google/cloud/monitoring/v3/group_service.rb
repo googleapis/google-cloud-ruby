@@ -44,7 +44,7 @@ module Google
         # updated automatically as monitored resources are added and removed
         # from the infrastructure.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/v3/group_service"
         #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new

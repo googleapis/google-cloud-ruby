@@ -20,8 +20,11 @@
 require "google/cloud/profiler/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Profiler::V2::ProfilerService::Client#create_profile
+# Snippet for the create_profile call in the ProfilerService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Profiler::V2::ProfilerService::Client#create_profile. It may
+# require modification in order to execute successfully.
 #
 def create_profile
   # Create a client object. The client can be reused for multiple calls.

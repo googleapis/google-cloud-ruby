@@ -1311,6 +1311,72 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
     end
   end
 
+  def test_delete_feature_values
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    select_entity = {}
+    entity_type = "hello world"
+
+    delete_feature_values_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_feature_values, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectEntity), request["select_entity"]
+      assert_equal :select_entity, request.DeleteOption
+      assert_equal "hello world", request["entity_type"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_feature_values_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_feature_values({ select_entity: select_entity, entity_type: entity_type }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_feature_values select_entity: select_entity, entity_type: entity_type do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_feature_values ::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest.new(select_entity: select_entity, entity_type: entity_type) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_feature_values({ select_entity: select_entity, entity_type: entity_type }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_feature_values(::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest.new(select_entity: select_entity, entity_type: entity_type), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_feature_values_client_stub.call_rpc_count
+    end
+  end
+
   def test_search_features
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::SearchFeaturesResponse.new

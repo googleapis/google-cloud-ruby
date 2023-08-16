@@ -25,6 +25,7 @@ require "google/cloud/security/public_ca/v1beta1/version"
 require "google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/credentials"
 require "google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/paths"
 require "google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/client"
+require "google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
           # binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) for
           # the public certificate authority service.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/security/public_ca/v1beta1/public_certificate_authority_service"
           #     client = ::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/rest"
+          #     client = ::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Rest::Client.new
           #
           module PublicCertificateAuthorityService
           end

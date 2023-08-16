@@ -1,5 +1,35 @@
 # Release History
 
+### 0.10.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+
+### 0.9.1 (2023-05-18)
+
+#### Documentation
+
+* update documentation to require certain fields ([#21564](https://github.com/googleapis/google-cloud-ruby/issues/21564)) 
+
+### 0.9.0 (2023-02-23)
+
+#### Features
+
+* Added support for REST transport ([#20498](https://github.com/googleapis/google-cloud-ruby/issues/20498)) 
+
+### 0.8.0 (2022-12-09)
+
+#### Features
+
+* Support for synthesize_long_audio ([#19835](https://github.com/googleapis/google-cloud-ruby/issues/19835)) 
+
 ### 0.7.0 (2022-07-08)
 
 #### Features

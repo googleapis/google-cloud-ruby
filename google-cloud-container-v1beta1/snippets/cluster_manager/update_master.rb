@@ -20,8 +20,11 @@
 require "google/cloud/container/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1beta1::ClusterManager::Client#update_master
+# Snippet for the update_master call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#update_master. It
+# may require modification in order to execute successfully.
 #
 def update_master
   # Create a client object. The client can be reused for multiple calls.

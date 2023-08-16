@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/region_url_maps"
+require "google/cloud/compute/v1/region_url_maps/rest"
 
 
-class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -81,39 +81,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, delete_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.delete({ project: project, region: region, request_id: request_id, url_map: url_map }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.delete({ project: project, region: region, request_id: request_id, url_map: url_map }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.delete project: project, region: region, request_id: request_id, url_map: url_map do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.delete project: project, region: region, request_id: request_id, url_map: url_map do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.delete ::Google::Cloud::Compute::V1::DeleteRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.delete({ project: project, region: region, request_id: request_id, url_map: url_map }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.delete({ project: project, region: region, request_id: request_id, url_map: url_map }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.delete(::Google::Cloud::Compute::V1::DeleteRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, delete_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, delete_client_stub.call_count
+      end
     end
   end
 
@@ -135,39 +137,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, get_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.get({ project: project, region: region, url_map: url_map }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.get({ project: project, region: region, url_map: url_map }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.get project: project, region: region, url_map: url_map do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.get project: project, region: region, url_map: url_map do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionUrlMapRequest.new(project: project, region: region, url_map: url_map) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.get ::Google::Cloud::Compute::V1::GetRegionUrlMapRequest.new(project: project, region: region, url_map: url_map) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.get({ project: project, region: region, url_map: url_map }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.get({ project: project, region: region, url_map: url_map }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionUrlMapRequest.new(project: project, region: region, url_map: url_map), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.get(::Google::Cloud::Compute::V1::GetRegionUrlMapRequest.new(project: project, region: region, url_map: url_map), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, get_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, get_client_stub.call_count
+      end
     end
   end
 
@@ -190,39 +194,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, insert_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, insert_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.insert({ project: project, region: region, request_id: request_id, url_map_resource: url_map_resource }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.insert({ project: project, region: region, request_id: request_id, url_map_resource: url_map_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.insert project: project, region: region, request_id: request_id, url_map_resource: url_map_resource do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.insert project: project, region: region, request_id: request_id, url_map_resource: url_map_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map_resource: url_map_resource) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.insert ::Google::Cloud::Compute::V1::InsertRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map_resource: url_map_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.insert({ project: project, region: region, request_id: request_id, url_map_resource: url_map_resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.insert({ project: project, region: region, request_id: request_id, url_map_resource: url_map_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map_resource: url_map_resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.insert(::Google::Cloud::Compute::V1::InsertRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map_resource: url_map_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, insert_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, insert_client_stub.call_count
+      end
     end
   end
 
@@ -248,39 +254,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionUrlMapsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list ::Google::Cloud::Compute::V1::ListRegionUrlMapsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionUrlMapsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list(::Google::Cloud::Compute::V1::ListRegionUrlMapsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_client_stub.call_count
+      end
     end
   end
 
@@ -304,39 +312,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, patch_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.patch({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.patch({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.patch project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.patch project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.patch ::Google::Cloud::Compute::V1::PatchRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.patch({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.patch({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.patch(::Google::Cloud::Compute::V1::PatchRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, patch_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, patch_client_stub.call_count
+      end
     end
   end
 
@@ -360,39 +370,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, update_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_update_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.update({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.update({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.update project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.update project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.update ::Google::Cloud::Compute::V1::UpdateRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.update ::Google::Cloud::Compute::V1::UpdateRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.update({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.update({ project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.update(::Google::Cloud::Compute::V1::UpdateRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.update(::Google::Cloud::Compute::V1::UpdateRegionUrlMapRequest.new(project: project, region: region, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, update_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, update_client_stub.call_count
+      end
     end
   end
 
@@ -415,39 +427,41 @@ class ::Google::Cloud::Compute::V1::RegionUrlMaps::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, validate_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::ServiceStub.stub :transcode_validate_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, validate_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.validate({ project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.validate({ project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.validate project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.validate project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.validate ::Google::Cloud::Compute::V1::ValidateRegionUrlMapRequest.new(project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.validate ::Google::Cloud::Compute::V1::ValidateRegionUrlMapRequest.new(project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.validate({ project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.validate({ project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.validate(::Google::Cloud::Compute::V1::ValidateRegionUrlMapRequest.new(project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.validate(::Google::Cloud::Compute::V1::ValidateRegionUrlMapRequest.new(project: project, region: region, region_url_maps_validate_request_resource: region_url_maps_validate_request_resource, url_map: url_map), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, validate_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, validate_client_stub.call_count
+      end
     end
   end
 

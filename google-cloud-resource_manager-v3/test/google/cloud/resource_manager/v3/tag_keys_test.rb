@@ -172,6 +172,64 @@ class ::Google::Cloud::ResourceManager::V3::TagKeys::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_namespaced_tag_key
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ResourceManager::V3::TagKey.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_namespaced_tag_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_namespaced_tag_key, name
+      assert_kind_of ::Google::Cloud::ResourceManager::V3::GetNamespacedTagKeyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_namespaced_tag_key_client_stub do
+      # Create client
+      client = ::Google::Cloud::ResourceManager::V3::TagKeys::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_namespaced_tag_key({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_namespaced_tag_key name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_namespaced_tag_key ::Google::Cloud::ResourceManager::V3::GetNamespacedTagKeyRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_namespaced_tag_key({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_namespaced_tag_key(::Google::Cloud::ResourceManager::V3::GetNamespacedTagKeyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_namespaced_tag_key_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_tag_key
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

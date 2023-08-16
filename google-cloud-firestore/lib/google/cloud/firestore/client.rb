@@ -23,6 +23,8 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
+require "google/cloud/firestore/bulk_writer"
+require "google/cloud/firestore/filter"
 
 module Google
   module Cloud
@@ -69,7 +71,7 @@ module Google
         #
         # @return [String] database identifier.
         def database_id
-          "(default)"
+          service.database
         end
 
         ##
@@ -84,6 +86,9 @@ module Google
 
         ##
         # Retrieves an enumerator for the root collections.
+        #
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @yield [collections] The block for accessing the collections.
         # @yieldparam [CollectionReference] collection A collection reference object.
@@ -101,10 +106,21 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols &block
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   read_time = Time.now
+        #
+        #   # Get the root collections
+        #   firestore.cols(read_time: read_time).each do |col|
+        #     puts col.collection_id
+        #   end
+        #
+        def cols read_time: nil, &block
           ensure_service!
-          grpc = service.list_collections "#{path}/documents"
-          cols_enum = CollectionReferenceList.from_grpc(grpc, self, "#{path}/documents").all
+          grpc = service.list_collections "#{path}/documents", read_time: read_time
+          cols_enum = CollectionReferenceList.from_grpc(grpc, self, "#{path}/documents", read_time: read_time).all
           cols_enum.each(&block) if block_given?
           cols_enum
         end
@@ -172,6 +188,56 @@ module Google
         alias collection_group col_group
 
         ##
+        # Creates a filter object.
+        #
+        # @param field [FieldPath, String, Symbol] A field path to filter
+        #   results with.
+        #   If a {FieldPath} object is not provided then the field will be
+        #   treated as a dotted string, meaning the string represents individual
+        #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #   `.` cannot be in a dotted string, and should provided using a
+        #   {FieldPath} object instead.
+        #
+        # @param operator [String, Symbol] The operation to compare the field
+        #   to. Acceptable values include:
+        #   * less than: `<`, `lt`
+        #   * less than or equal: `<=`, `lte`
+        #   * greater than: `>`, `gt`
+        #   * greater than or equal: `>=`, `gte`
+        #   * equal: `=`, `==`, `eq`, `eql`, `is`
+        #   * not equal: `!=`
+        #   * in: `in`
+        #   * not in: `not-in`, `not_in`
+        #   * array contains: `array-contains`, `array_contains`
+        #
+        # @param value [Object] The value to compare the property to. Defaults to nil.
+        #   Possible values are:
+        #   * Integer
+        #   * Float/BigDecimal
+        #   * String
+        #   * Boolean
+        #   * Array
+        #   * Date/Time
+        #   * StringIO
+        #   * Google::Cloud::Datastore::Key
+        #   * Google::Cloud::Datastore::Entity
+        #   * nil
+        #
+        # @return [Google::Cloud::Firestore::Filter] New filter object.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Create a filter
+        #   filter = firestore.filter(:population, :>=, 1000000)
+        #
+        def filter field, operator, value
+          Filter.new field, operator, value
+        end
+
+        ##
         # Retrieves a document reference.
         #
         # @param [String] document_path A string representing the path of the
@@ -217,6 +283,8 @@ module Google
         #   individual fields joined by ".". Fields containing `~`, `*`, `/`,
         #   `[`, `]`, and `.` cannot be in a dotted string, and should provided
         #   using a {FieldPath} object instead. (See {#field_path}.)
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
@@ -245,11 +313,24 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get_all *docs, field_mask: nil
+        # @example Get docs using a read_time:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   read_time = Time.now
+        #
+        #   # Get and print city documents
+        #   cities = ["cities/NYC", "cities/SF", "cities/LA"]
+        #   firestore.get_all(cities, read_time: read_time).each do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def get_all *docs, field_mask: nil, read_time: nil
           ensure_service!
 
           unless block_given?
-            return enum_for :get_all, *docs, field_mask: field_mask
+            return enum_for :get_all, *docs, field_mask: field_mask, read_time: read_time
           end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
@@ -264,7 +345,7 @@ module Google
           end
           mask = nil if mask.empty?
 
-          results = service.get_documents doc_paths, mask: mask
+          results = service.get_documents doc_paths, mask: mask, read_time: read_time
           results.each do |result|
             next if result.result.nil?
             yield DocumentSnapshot.from_batch_result result, self
@@ -668,13 +749,83 @@ module Google
           end
         end
 
+        ##
+        # Create a transaction to perform multiple reads that are
+        # executed atomically at a single logical point in time in a database.
+        #
+        # All changes are accumulated in memory until the block completes.
+        # Transactions will be automatically retried when documents change
+        # before the transaction is committed. See {Transaction}.
+        #
+        # @see https://firebase.google.com/docs/firestore/manage-data/transactions
+        #   Transactions and Batched Writes
+        #
+        # @param [Time] read_time The maximum number of retries for
+        #   transactions failed due to errors. Default is 5. Optional.
+        #
+        # @yield [transaction] The block for reading data.
+        # @yieldparam [Transaction] transaction The transaction object for
+        #   making changes.
+        #
+        # @return [Object] The return value of the provided
+        #   yield block
+        #
+        # @example Read only transaction with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   read_time = Time.now
+        #
+        #   firestore.read_only_transaction(read_time: read_time) do |tx|
+        #     # Get a document snapshot
+        #     nyc_snap = tx.get nyc_ref
+        #   end
+        #
+        def read_only_transaction read_time: nil
+          transaction = Transaction.from_client self, read_time: read_time, read_only: true
+          yield transaction
+        end
+
+        ##
+        # Create a bulk writer to perform multiple writes that are
+        # executed parallely.
+        #
+        # @param [Integer] request_threads The number of threads used for handling
+        #  requests. Default is 2. Optional.
+        # @param [Integer] batch_threads The number of threads used for processing
+        #  batches. Default is 4. Optional.
+        # @param [Integer] retries The number of times a failed write request will
+        # be retried (with exponential delay) before being marked as failure. Max
+        # attempts are 15. Optional
+        #
+        # @return [Google::Cloud::Firestore::BulkWriter] Returns an object of
+        #   bulk writer.
+        #
+        # @example Initializing a BulkWriter with all the configurations.
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   bw = firestore.bulk_writer
+        #
+        #   bulk_write_result = bw.create "doc_ref", request_threads: 4, batch_threads: 10, retries: 10
+        #
+        def bulk_writer request_threads: nil, batch_threads: nil, retries: nil
+          BulkWriter.new self, @service, request_threads: request_threads,
+                         batch_threads: batch_threads, retries: retries
+        end
+
         # @!endgroup
 
         # @private
-        def list_documents parent, collection_id, token: nil, max: nil
+        def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           ensure_service!
-          grpc = service.list_documents parent, collection_id, token: token, max: max
-          DocumentReference::List.from_grpc grpc, self, parent, collection_id
+          grpc = service.list_documents parent, collection_id, token: token, max: max, read_time: read_time
+          DocumentReference::List.from_grpc grpc, self, parent, collection_id, read_time: read_time
         end
 
         protected

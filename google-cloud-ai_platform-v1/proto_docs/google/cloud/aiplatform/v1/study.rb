@@ -91,12 +91,13 @@ module Google
         #     Output only. Time when the Trial was started.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the Trial's status changed to `SUCCEEDED` or `INFEASIBLE`.
+        #     Output only. Time when the Trial's status changed to `SUCCEEDED` or
+        #     `INFEASIBLE`.
         # @!attribute [r] client_id
         #   @return [::String]
-        #     Output only. The identifier of the client that originally requested this Trial.
-        #     Each client is identified by a unique client_id. When a client
-        #     asks for a suggestion, Vertex AI Vizier will assign it a Trial. The client
+        #     Output only. The identifier of the client that originally requested this
+        #     Trial. Each client is identified by a unique client_id. When a client asks
+        #     for a suggestion, Vertex AI Vizier will assign it a Trial. The client
         #     should evaluate the Trial, complete it, and report back to Vertex AI
         #     Vizier. If suggestion is asked again by same client_id before the Trial is
         #     completed, the same Trial will be returned. Multiple clients with
@@ -115,9 +116,11 @@ module Google
         #     Output only. URIs for accessing [interactive
         #     shells](https://cloud.google.com/vertex-ai/docs/training/monitor-debug-interactive-shell)
         #     (one URI for each training node). Only available if this trial is part of
-        #     a {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob HyperparameterTuningJob} and the job's
-        #     {::Google::Cloud::AIPlatform::V1::CustomJobSpec#enable_web_access trial_job_spec.enable_web_access} field
-        #     is `true`.
+        #     a
+        #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob HyperparameterTuningJob}
+        #     and the job's
+        #     {::Google::Cloud::AIPlatform::V1::CustomJobSpec#enable_web_access trial_job_spec.enable_web_access}
+        #     field is `true`.
         #
         #     The keys are names of each node used for the trial; for example,
         #     `workerpool0-0` for the primary node, `workerpool1-0` for the first node in
@@ -133,7 +136,8 @@ module Google
           # @!attribute [r] parameter_id
           #   @return [::String]
           #     Output only. The ID of the parameter. The parameter should be defined in
-          #     [StudySpec's Parameters][google.cloud.aiplatform.v1.StudySpec.parameters].
+          #     [StudySpec's
+          #     Parameters][google.cloud.aiplatform.v1.StudySpec.parameters].
           # @!attribute [r] value
           #   @return [::Google::Protobuf::Value]
           #     Output only. The value of the parameter.
@@ -214,14 +218,36 @@ module Google
           # Represents a metric to optimize.
           # @!attribute [rw] metric_id
           #   @return [::String]
-          #     Required. The ID of the metric. Must not contain whitespaces and must be unique
-          #     amongst all MetricSpecs.
+          #     Required. The ID of the metric. Must not contain whitespaces and must be
+          #     unique amongst all MetricSpecs.
           # @!attribute [rw] goal
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MetricSpec::GoalType]
           #     Required. The optimization goal of the metric.
+          # @!attribute [rw] safety_config
+          #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MetricSpec::SafetyMetricConfig]
+          #     Used for safe search. In the case, the metric will be a safety
+          #     metric. You must provide a separate metric for objective metric.
           class MetricSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Used in safe optimization to specify threshold levels and risk tolerance.
+            # @!attribute [rw] safety_threshold
+            #   @return [::Float]
+            #     Safety threshold (boundary value between safe and unsafe). NOTE that if
+            #     you leave SafetyMetricConfig unset, a default value of 0 will be used.
+            # @!attribute [rw] desired_min_safe_trials_fraction
+            #   @return [::Float]
+            #     Desired minimum fraction of safe trials (over total number of trials)
+            #     that should be targeted by the algorithm at any time during the
+            #     study (best effort). This should be between 0.0 and 1.0 and a value of
+            #     0.0 means that there is no minimum and an algorithm proceeds without
+            #     targeting any specific fraction. A value of 1.0 means that the
+            #     algorithm attempts to only Suggest safe Trials.
+            class SafetyMetricConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # The available types of optimization goals.
             module GoalType
@@ -251,8 +277,8 @@ module Google
           #     The value spec for a 'DISCRETE' parameter.
           # @!attribute [rw] parameter_id
           #   @return [::String]
-          #     Required. The ID of the parameter. Must not contain whitespaces and must be unique
-          #     amongst all ParameterSpecs.
+          #     Required. The ID of the parameter. Must not contain whitespaces and must
+          #     be unique amongst all ParameterSpecs.
           # @!attribute [rw] scale_type
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::ScaleType]
           #     How the parameter should be scaled.
@@ -391,8 +417,8 @@ module Google
               # Represents the spec to match categorical values from parent parameter.
               # @!attribute [rw] values
               #   @return [::Array<::String>]
-              #     Required. Matches values of the parent parameter of 'CATEGORICAL' type.
-              #     All values must exist in `categorical_value_spec` of parent
+              #     Required. Matches values of the parent parameter of 'CATEGORICAL'
+              #     type. All values must exist in `categorical_value_spec` of parent
               #     parameter.
               class CategoricalValueCondition
                 include ::Google::Protobuf::MessageExts
@@ -427,9 +453,11 @@ module Google
           # low probability to exceed the optimal value found so far.
           # @!attribute [rw] use_elapsed_duration
           #   @return [::Boolean]
-          #     True if {::Google::Cloud::AIPlatform::V1::Measurement#elapsed_duration Measurement.elapsed_duration} is used as the x-axis of each
-          #     Trials Decay Curve. Otherwise, {::Google::Cloud::AIPlatform::V1::Measurement#step_count Measurement.step_count} will be used
-          #     as the x-axis.
+          #     True if
+          #     {::Google::Cloud::AIPlatform::V1::Measurement#elapsed_duration Measurement.elapsed_duration}
+          #     is used as the x-axis of each Trials Decay Curve. Otherwise,
+          #     {::Google::Cloud::AIPlatform::V1::Measurement#step_count Measurement.step_count}
+          #     will be used as the x-axis.
           class DecayCurveAutomatedStoppingSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -443,9 +471,10 @@ module Google
           # @!attribute [rw] use_elapsed_duration
           #   @return [::Boolean]
           #     True if median automated stopping rule applies on
-          #     {::Google::Cloud::AIPlatform::V1::Measurement#elapsed_duration Measurement.elapsed_duration}. It means that elapsed_duration
-          #     field of latest measurement of current Trial is used to compute median
-          #     objective value for each completed Trials.
+          #     {::Google::Cloud::AIPlatform::V1::Measurement#elapsed_duration Measurement.elapsed_duration}.
+          #     It means that elapsed_duration field of latest measurement of current
+          #     Trial is used to compute median objective value for each completed
+          #     Trials.
           class MedianAutomatedStoppingSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -497,6 +526,15 @@ module Google
           #     instead of steps. Also, in this case, the parameters max_num_steps and
           #     min_num_steps are overloaded to contain max_elapsed_seconds and
           #     min_elapsed_seconds.
+          # @!attribute [rw] update_all_stopped_trials
+          #   @return [::Boolean]
+          #     ConvexAutomatedStoppingSpec by default only updates the trials that needs
+          #     to be early stopped using a newly trained auto-regressive model. When
+          #     this flag is set to True, all stopped trials from the beginning are
+          #     potentially updated in terms of their `final_measurement`. Also, note
+          #     that the training logic of autoregressive models is different in this
+          #     case. Enabling this option has shown better results and this may be the
+          #     default option in the future.
           class ConvexAutomatedStoppingSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -565,15 +603,16 @@ module Google
         # values.
         # @!attribute [r] elapsed_duration
         #   @return [::Google::Protobuf::Duration]
-        #     Output only. Time that the Trial has been running at the point of this Measurement.
+        #     Output only. Time that the Trial has been running at the point of this
+        #     Measurement.
         # @!attribute [r] step_count
         #   @return [::Integer]
-        #     Output only. The number of steps the machine learning model has been trained for.
-        #     Must be non-negative.
+        #     Output only. The number of steps the machine learning model has been
+        #     trained for. Must be non-negative.
         # @!attribute [r] metrics
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Measurement::Metric>]
-        #     Output only. A list of metrics got by evaluating the objective functions using suggested
-        #     Parameter values.
+        #     Output only. A list of metrics got by evaluating the objective functions
+        #     using suggested Parameter values.
         class Measurement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -28,22 +28,28 @@ module Google
         #     Required. The Google Cloud Platform project ID that the cluster belongs to.
         # @!attribute [rw] cluster_name
         #   @return [::String]
-        #     Required. The cluster name. Cluster names within a project must be
-        #     unique. Names of deleted clusters can be reused.
+        #     Required. The cluster name, which must be unique within a project.
+        #     The name must start with a lowercase letter, and can contain
+        #     up to 51 lowercase letters, numbers, and hyphens. It cannot end
+        #     with a hyphen. The name of a deleted cluster can be reused.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig]
         #     Optional. The cluster config for a cluster of Compute Engine Instances.
         #     Note that Dataproc may set default values, and values may change
         #     when clusters are updated.
+        #
+        #     Exactly one of ClusterConfig or VirtualClusterConfig must be specified.
         # @!attribute [rw] virtual_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::VirtualClusterConfig]
-        #     Optional. The virtual cluster config, used when creating a Dataproc cluster that
-        #     does not directly control the underlying compute resources, for example,
-        #     when creating a [Dataproc-on-GKE
-        #     cluster](https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster).
-        #     Note that Dataproc may set default values, and values may change when
-        #     clusters are updated. Exactly one of config or virtualClusterConfig must be
-        #     specified.
+        #     Optional. The virtual cluster config is used when creating a Dataproc
+        #     cluster that does not directly control the underlying compute resources,
+        #     for example, when creating a [Dataproc-on-GKE
+        #     cluster](https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke-overview).
+        #     Dataproc may set default values, and values may change when
+        #     clusters are updated. Exactly one of
+        #     {::Google::Cloud::Dataproc::V1::Cluster#config config} or
+        #     {::Google::Cloud::Dataproc::V1::Cluster#virtual_cluster_config virtual_cluster_config}
+        #     must be specified.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this cluster.
@@ -99,15 +105,13 @@ module Google
         #     a Cloud Storage bucket.**
         # @!attribute [rw] temp_bucket
         #   @return [::String]
-        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs data,
-        #     such as Spark and MapReduce history files.
-        #     If you do not specify a temp bucket,
-        #     Dataproc will determine a Cloud Storage location (US,
-        #     ASIA, or EU) for your cluster's temp bucket according to the
-        #     Compute Engine zone where your cluster is deployed, and then create
-        #     and manage this project-level, per-location bucket. The default bucket has
-        #     a TTL of 90 days, but you can use any TTL (or none) if you specify a
-        #     bucket (see
+        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs
+        #     data, such as Spark and MapReduce history files. If you do not specify a
+        #     temp bucket, Dataproc will determine a Cloud Storage location (US, ASIA, or
+        #     EU) for your cluster's temp bucket according to the Compute Engine zone
+        #     where your cluster is deployed, and then create and manage this
+        #     project-level, per-location bucket. The default bucket has a TTL of 90
+        #     days, but you can use any TTL (or none) if you specify a bucket (see
         #     [Dataproc staging and temp
         #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
@@ -168,17 +172,20 @@ module Google
         # @!attribute [rw] dataproc_metric_config
         #   @return [::Google::Cloud::Dataproc::V1::DataprocMetricConfig]
         #     Optional. The config for Dataproc metrics.
+        # @!attribute [rw] auxiliary_node_groups
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::AuxiliaryNodeGroup>]
+        #     Optional. The node group settings.
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Dataproc cluster config for a cluster that does not directly control the
+        # The Dataproc cluster config for a cluster that does not directly control the
         # underlying compute resources, such as a [Dataproc-on-GKE
-        # cluster](https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster).
+        # cluster](https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke-overview).
         # @!attribute [rw] staging_bucket
         #   @return [::String]
-        #     Optional. A Storage bucket used to stage job
+        #     Optional. A Cloud Storage bucket used to stage job
         #     dependencies, config files, and job driver console output.
         #     If you do not specify a staging bucket, Cloud
         #     Dataproc will determine a Cloud Storage location (US,
@@ -191,7 +198,8 @@ module Google
         #     a Cloud Storage bucket.**
         # @!attribute [rw] kubernetes_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::KubernetesClusterConfig]
-        #     Required. The configuration for running the Dataproc cluster on Kubernetes.
+        #     Required. The configuration for running the Dataproc cluster on
+        #     Kubernetes.
         # @!attribute [rw] auxiliary_services_config
         #   @return [::Google::Cloud::Dataproc::V1::AuxiliaryServicesConfig]
         #     Optional. Configuration of auxiliary services used by this cluster.
@@ -266,17 +274,15 @@ module Google
         # instances, applicable to all instances in the cluster.
         # @!attribute [rw] zone_uri
         #   @return [::String]
-        #     Optional. The zone where the Compute Engine cluster will be located.
-        #     On a create request, it is required in the "global" region. If omitted
-        #     in a non-global Dataproc region, the service will pick a zone in the
-        #     corresponding Compute Engine region. On a get request, zone will
-        #     always be present.
+        #     Optional. The Compute Engine zone where the Dataproc cluster will be
+        #     located. If omitted, the service will pick a zone in the cluster's Compute
+        #     Engine region. On a get request, zone will always be present.
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
         #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]`
         #     * `projects/[project_id]/zones/[zone]`
-        #     * `us-central1-f`
+        #     * `[zone]`
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     Optional. The Compute Engine network to be used for machine
@@ -288,8 +294,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default`
-        #     * `projects/[project_id]/regions/global/default`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/networks/default`
+        #     * `projects/[project_id]/global/networks/default`
         #     * `default`
         # @!attribute [rw] subnetwork_uri
         #   @return [::String]
@@ -298,8 +304,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`
-        #     * `projects/[project_id]/regions/us-east1/subnetworks/sub0`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/[region]/subnetworks/sub0`
+        #     * `projects/[project_id]/regions/[region]/subnetworks/sub0`
         #     * `sub0`
         # @!attribute [rw] internal_ip_only
         #   @return [::Boolean]
@@ -358,7 +364,8 @@ module Google
         #     Optional. Node Group Affinity for sole-tenant clusters.
         # @!attribute [rw] shielded_instance_config
         #   @return [::Google::Cloud::Dataproc::V1::ShieldedInstanceConfig]
-        #     Optional. Shielded Instance Config for clusters using [Compute Engine Shielded
+        #     Optional. Shielded Instance Config for clusters using [Compute Engine
+        #     Shielded
         #     VMs](https://cloud.google.com/security/shielded-cloud/shielded-vm).
         # @!attribute [rw] confidential_instance_config
         #   @return [::Google::Cloud::Dataproc::V1::ConfidentialInstanceConfig]
@@ -384,7 +391,8 @@ module Google
           # fields](https://cloud.google.com/compute/docs/reference/rest/v1/instances).
           module PrivateIpv6GoogleAccess
             # If unspecified, Compute Engine default behavior will apply, which
-            # is the same as {::Google::Cloud::Dataproc::V1::GceClusterConfig::PrivateIpv6GoogleAccess::INHERIT_FROM_SUBNETWORK INHERIT_FROM_SUBNETWORK}.
+            # is the same as
+            # {::Google::Cloud::Dataproc::V1::GceClusterConfig::PrivateIpv6GoogleAccess::INHERIT_FROM_SUBNETWORK INHERIT_FROM_SUBNETWORK}.
             PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED = 0
 
             # Private access to and from Google Services configuration
@@ -403,6 +411,8 @@ module Google
         end
 
         # Node Group Affinity for clusters using sole-tenant node groups.
+        # **The Dataproc `NodeGroupAffinity` resource is not related to the
+        # Dataproc {::Google::Cloud::Dataproc::V1::NodeGroup NodeGroup} resource.**
         # @!attribute [rw] node_group_uri
         #   @return [::String]
         #     Required. The URI of a
@@ -412,8 +422,8 @@ module Google
         #
         #     A full URL, partial URI, or node group name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`
-        #     * `projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/nodeGroups/node-group-1`
+        #     * `projects/[project_id]/zones/[zone]/nodeGroups/node-group-1`
         #     * `node-group-1`
         class NodeGroupAffinity
           include ::Google::Protobuf::MessageExts
@@ -440,7 +450,8 @@ module Google
         # VMs](https://cloud.google.com/compute/confidential-vm/docs)
         # @!attribute [rw] enable_confidential_compute
         #   @return [::Boolean]
-        #     Optional. Defines whether the instance should have confidential compute enabled.
+        #     Optional. Defines whether the instance should have confidential compute
+        #     enabled.
         class ConfidentialInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -468,14 +479,14 @@ module Google
         #
         #     Image examples:
         #
-        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/images/[image-id]`
         #     * `projects/[project_id]/global/images/[image-id]`
         #     * `image-id`
         #
         #     Image family examples. Dataproc will use the most recent
         #     image from the family:
         #
-        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/images/family/[custom-image-family-name]`
         #     * `projects/[project_id]/global/images/family/[custom-image-family-name]`
         #
         #     If the URI is unspecified, it will be inferred from
@@ -486,8 +497,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
-        #     * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/machineTypes/n1-standard-2`
+        #     * `projects/[project_id]/zones/[zone]/machineTypes/n1-standard-2`
         #     * `n1-standard-2`
         #
         #     **Auto Zone Exception**: If you are using the Dataproc
@@ -529,10 +540,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Controls the use of
-          # [preemptible instances]
-          # (https://cloud.google.com/compute/docs/instances/preemptible)
-          # within the group.
+          # Controls the use of preemptible instances within the group.
           module Preemptibility
             # Preemptibility is unspecified, the system will choose the
             # appropriate setting for each instance group.
@@ -544,10 +552,23 @@ module Google
             # value for Master and Worker instance groups.
             NON_PREEMPTIBLE = 1
 
-            # Instances are preemptible.
+            # Instances are [preemptible]
+            # (https://cloud.google.com/compute/docs/instances/preemptible).
             #
-            # This option is allowed only for secondary worker groups.
+            # This option is allowed only for [secondary worker]
+            # (https://cloud.google.com/dataproc/docs/concepts/compute/secondary-vms)
+            # groups.
             PREEMPTIBLE = 2
+
+            # Instances are [Spot VMs]
+            # (https://cloud.google.com/compute/docs/instances/spot).
+            #
+            # This option is allowed only for [secondary worker]
+            # (https://cloud.google.com/dataproc/docs/concepts/compute/secondary-vms)
+            # groups. Spot VMs are the latest version of [preemptible VMs]
+            # (https://cloud.google.com/compute/docs/instances/preemptible), and
+            # provide additional features.
+            SPOT = 3
           end
         end
 
@@ -572,12 +593,12 @@ module Google
         #     Full URL, partial URI, or short name of the accelerator type resource to
         #     expose to this instance. See
         #     [Compute Engine
-        #     AcceleratorTypes](https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes).
+        #     AcceleratorTypes](https://cloud.google.com/compute/docs/reference/v1/acceleratorTypes).
         #
         #     Examples:
         #
-        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
-        #     * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
+        #     * `projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
         #     * `nvidia-tesla-k80`
         #
         #     **Auto Zone Exception**: If you are using the Dataproc
@@ -606,12 +627,15 @@ module Google
         #     Optional. Size in GB of the boot disk (default is 500GB).
         # @!attribute [rw] num_local_ssds
         #   @return [::Integer]
-        #     Optional. Number of attached SSDs, from 0 to 4 (default is 0).
+        #     Optional. Number of attached SSDs, from 0 to 8 (default is 0).
         #     If SSDs are not attached, the boot disk is used to store runtime logs and
         #     [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data.
         #     If one or more SSDs are attached, this runtime bulk
         #     data is spread across them, and the boot disk contains only basic
         #     config and installed binaries.
+        #
+        #     Note: Local SSD options may vary by machine type and number of vCPUs
+        #     selected.
         # @!attribute [rw] local_ssd_interface
         #   @return [::String]
         #     Optional. Interface type of local SSDs (default is "scsi").
@@ -622,6 +646,68 @@ module Google
         class DiskConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Node group identification and configuration information.
+        # @!attribute [rw] node_group
+        #   @return [::Google::Cloud::Dataproc::V1::NodeGroup]
+        #     Required. Node group configuration.
+        # @!attribute [rw] node_group_id
+        #   @return [::String]
+        #     Optional. A node group ID. Generated if not specified.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
+        #     underscores (_), and hyphens (-). Cannot begin or end with underscore
+        #     or hyphen. Must consist of from 3 to 33 characters.
+        class AuxiliaryNodeGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Dataproc Node Group.
+        # **The Dataproc `NodeGroup` resource is not related to the
+        # Dataproc {::Google::Cloud::Dataproc::V1::NodeGroupAffinity NodeGroupAffinity}
+        # resource.**
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The Node group [resource name](https://aip.dev/122).
+        # @!attribute [rw] roles
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::NodeGroup::Role>]
+        #     Required. Node group roles.
+        # @!attribute [rw] node_group_config
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
+        #     Optional. The node group instance group configuration.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Node group labels.
+        #
+        #     * Label **keys** must consist of from 1 to 63 characters and conform to
+        #       [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
+        #     * Label **values** can be empty. If specified, they must consist of from
+        #       1 to 63 characters and conform to [RFC 1035]
+        #       (https://www.ietf.org/rfc/rfc1035.txt).
+        #     * The node group must have no more than 32 labels.
+        class NodeGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Node group roles.
+          module Role
+            # Required unspecified role.
+            ROLE_UNSPECIFIED = 0
+
+            # Job drivers run on the node group.
+            DRIVER = 1
+          end
         end
 
         # Specifies an executable to run on a fully configured node and a
@@ -736,8 +822,8 @@ module Google
         # Specifies Kerberos related configuration.
         # @!attribute [rw] enable_kerberos
         #   @return [::Boolean]
-        #     Optional. Flag to indicate whether to Kerberize the cluster (default: false). Set
-        #     this field to true to enable Kerberos on a cluster.
+        #     Optional. Flag to indicate whether to Kerberize the cluster (default:
+        #     false). Set this field to true to enable Kerberos on a cluster.
         # @!attribute [rw] root_principal_password_uri
         #   @return [::String]
         #     Optional. The Cloud Storage URI of a KMS encrypted file containing the root
@@ -882,7 +968,8 @@ module Google
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] auto_delete_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. The time when cluster will be auto-deleted (see JSON representation of
+        #     Optional. The time when cluster will be auto-deleted (see JSON
+        #     representation of
         #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] auto_delete_ttl
         #   @return [::Google::Protobuf::Duration]
@@ -912,6 +999,39 @@ module Google
         class MetastoreConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains cluster daemon metrics, such as HDFS and YARN stats.
+        #
+        # **Beta Feature**: This report is available for testing purposes only. It may
+        # be changed before final release.
+        # @!attribute [rw] hdfs_metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     The HDFS metrics.
+        # @!attribute [rw] yarn_metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     YARN metrics.
+        class ClusterMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class HdfsMetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class YarnMetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Dataproc metric config.
@@ -992,39 +1112,9 @@ module Google
 
             # Hiveserver2 metric source.
             HIVESERVER2 = 6
-          end
-        end
 
-        # Contains cluster daemon metrics, such as HDFS and YARN stats.
-        #
-        # **Beta Feature**: This report is available for testing purposes only. It may
-        # be changed before final release.
-        # @!attribute [rw] hdfs_metrics
-        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
-        #     The HDFS metrics.
-        # @!attribute [rw] yarn_metrics
-        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
-        #     The YARN metrics.
-        class ClusterMetrics
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::Integer]
-          class HdfsMetricsEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::Integer]
-          class YarnMetricsEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
+            # hivemetastore metric source
+            HIVEMETASTORE = 7
           end
         end
 
@@ -1041,11 +1131,12 @@ module Google
         #     Required. The cluster to create.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique ID used to identify the request. If the server receives two
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two
         #     [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
         #     with the same id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
-        #     is returned.
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1076,7 +1167,7 @@ module Google
         #     Required. The changes to the cluster.
         # @!attribute [rw] graceful_decommission_timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Timeout for graceful YARN decomissioning. Graceful
+        #     Optional. Timeout for graceful YARN decommissioning. Graceful
         #     decommissioning allows removing nodes from the cluster without
         #     interrupting jobs in progress. Timeout specifies how long to wait for jobs
         #     in progress to finish before forcefully removing nodes (and potentially
@@ -1144,8 +1235,8 @@ module Google
         #     receives two
         #     [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
         #     with the same id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-        #     backend is returned.
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1178,8 +1269,8 @@ module Google
         #     receives two
         #     [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
         #     with the same id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-        #     backend is returned.
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     Recommendation: Set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1212,8 +1303,8 @@ module Google
         #     receives two
         #     [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
         #     with the same id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-        #     backend is returned.
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     Recommendation: Set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1246,8 +1337,8 @@ module Google
         #     receives two
         #     [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
         #     with the same id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-        #     backend is returned.
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).

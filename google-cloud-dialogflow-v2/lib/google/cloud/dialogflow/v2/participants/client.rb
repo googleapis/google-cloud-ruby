@@ -136,7 +136,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -394,13 +394,11 @@ module Google
             #   # Call the list_participants method.
             #   result = client.list_participants request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Participant.
-            #     p response
+            #     p item
             #   end
             #
             def list_participants request, options = nil
@@ -685,22 +683,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the streaming_analyze_content method to start streaming.
             #   output = client.streaming_analyze_content input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
             #   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_analyze_content request, options = nil
@@ -772,8 +770,9 @@ module Google
             #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
             #   @param context_size [::Integer]
             #     Optional. Max number of messages prior to and including
-            #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message} to use as context
-            #     when compiling the suggestion. By default 20 and at most 50.
+            #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message}
+            #     to use as context when compiling the suggestion. By default 20 and at
+            #     most 50.
             #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
             #     Parameters for a human assist query.
             #
@@ -1081,9 +1080,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1125,7 +1124,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -27,9 +27,6 @@ module Google
         #   @return [::String]
         #     A user-defined name of the function. Function names must be unique
         #     globally and match pattern `projects/*/locations/*/functions/*`
-        # @!attribute [rw] environment
-        #   @return [::Google::Cloud::Functions::V2::Environment]
-        #     Describe whether the function is gen1 or gen2.
         # @!attribute [rw] description
         #   @return [::String]
         #     User-provided description of a function.
@@ -57,6 +54,19 @@ module Google
         # @!attribute [r] state_messages
         #   @return [::Array<::Google::Cloud::Functions::V2::StateMessage>]
         #     Output only. State Messages for this Cloud Function.
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Functions::V2::Environment]
+        #     Describe whether the function is 1st Gen or 2nd Gen.
+        # @!attribute [r] url
+        #   @return [::String]
+        #     Output only. The deployed url for the function.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
+        #     encrypt/decrypt function resources.
+        #
+        #     It must match the pattern
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
         class Function
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -215,8 +225,8 @@ module Google
         # given source.
         # @!attribute [r] build
         #   @return [::String]
-        #     Output only. The Cloud Build name of the latest successful deployment of the
-        #     function.
+        #     Output only. The Cloud Build name of the latest successful deployment of
+        #     the function.
         # @!attribute [rw] runtime
         #   @return [::String]
         #     The runtime in which to run the function. Required when deploying a new
@@ -255,10 +265,20 @@ module Google
         # @!attribute [rw] environment_variables
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User-provided build-time environment variables for the function
+        # @!attribute [rw] docker_registry
+        #   @return [::Google::Cloud::Functions::V2::BuildConfig::DockerRegistry]
+        #     Docker Registry to use for this deployment. This configuration is only
+        #     applicable to 1st Gen functions, 2nd Gen functions can only use Artifact
+        #     Registry.
+        #
+        #     If `docker_repository` field is specified, this field will be automatically
+        #     set as `ARTIFACT_REGISTRY`.
+        #     If unspecified, it currently defaults to `CONTAINER_REGISTRY`.
+        #     This field may be overridden by the backend for eligible deployments.
         # @!attribute [rw] docker_repository
         #   @return [::String]
-        #     Optional. User managed repository created in Artifact Registry optionally with a
-        #     customer managed encryption key. This is the repository to which the
+        #     User managed repository created in Artifact Registry optionally
+        #     with a customer managed encryption key. This is the repository to which the
         #     function docker image will be pushed after it is built by Cloud Build.
         #     If unspecified, GCF will create and use a repository named 'gcf-artifacts'
         #     for every deployed region.
@@ -280,6 +300,23 @@ module Google
           class EnvironmentVariablesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Docker Registry to use for storing function Docker images.
+          module DockerRegistry
+            # Unspecified.
+            DOCKER_REGISTRY_UNSPECIFIED = 0
+
+            # Docker images will be stored in multi-regional Container Registry
+            # repositories named `gcf`.
+            CONTAINER_REGISTRY = 1
+
+            # Docker images will be stored in regional Artifact Registry repositories.
+            # By default, GCF will create and use repositories named `gcf-artifacts`
+            # in every region in which a function is deployed. But the repository to
+            # use can also be specified by the user using the `docker_repository`
+            # field.
+            ARTIFACT_REGISTRY = 2
           end
         end
 
@@ -303,6 +340,13 @@ module Google
         #     See
         #     https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go
         #     a full description.
+        # @!attribute [rw] available_cpu
+        #   @return [::String]
+        #     [Preview] The number of CPUs used in a single container instance.
+        #     Default value is calculated from available memory.
+        #     Supports the same values as Cloud Run, see
+        #     https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements
+        #     Example: "1" indicates 1 vCPU
         # @!attribute [rw] environment_variables
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Environment variables that shall be available during function execution.
@@ -366,6 +410,16 @@ module Google
         # @!attribute [r] revision
         #   @return [::String]
         #     Output only. The name of service revision.
+        # @!attribute [rw] max_instance_request_concurrency
+        #   @return [::Integer]
+        #     [Preview] Sets the maximum number of concurrent requests that each instance
+        #     can receive. Defaults to 1.
+        # @!attribute [rw] security_level
+        #   @return [::Google::Cloud::Functions::V2::ServiceConfig::SecurityLevel]
+        #     Security level configure whether the function only accepts https.
+        #     This configuration is only applicable to 1st Gen functions with Http
+        #     trigger. By default https is optional for 1st Gen functions; 2nd Gen
+        #     functions are https ONLY.
         class ServiceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -412,6 +466,27 @@ module Google
 
             # Allow HTTP traffic from private VPC sources and through GCLB.
             ALLOW_INTERNAL_AND_GCLB = 3
+          end
+
+          # Available security level settings.
+          #
+          # This enforces security protocol on function URL.
+          #
+          # Security level is only configurable for 1st Gen functions, If unspecified,
+          # SECURE_OPTIONAL will be used. 2nd Gen functions are SECURE_ALWAYS ONLY.
+          module SecurityLevel
+            # Unspecified.
+            SECURITY_LEVEL_UNSPECIFIED = 0
+
+            # Requests for a URL that match this handler that do not use HTTPS are
+            # automatically redirected to the HTTPS URL with the same path. Query
+            # parameters are reserved for the redirect.
+            SECURE_ALWAYS = 1
+
+            # Both HTTP and HTTPS requests with URLs that match the handler succeed
+            # without redirects. The application can examine the request to determine
+            # which protocol was used and respond accordingly.
+            SECURE_OPTIONAL = 2
           end
         end
 
@@ -489,8 +564,8 @@ module Google
         # service.
         # @!attribute [r] trigger
         #   @return [::String]
-        #     Output only. The resource name of the Eventarc trigger. The format of this field is
-        #     `projects/{project}/locations/{region}/triggers/{trigger}`.
+        #     Output only. The resource name of the Eventarc trigger. The format of this
+        #     field is `projects/{project}/locations/{region}/triggers/{trigger}`.
         # @!attribute [rw] trigger_region
         #   @return [::String]
         #     The region that the trigger will be in. The trigger will only receive
@@ -516,14 +591,15 @@ module Google
         #     will not be deleted at function deletion.
         # @!attribute [rw] service_account_email
         #   @return [::String]
-        #     Optional. The email of the trigger's service account. The service account must have
-        #     permission to invoke Cloud Run services, the permission is
+        #     Optional. The email of the trigger's service account. The service account
+        #     must have permission to invoke Cloud Run services, the permission is
         #     `run.routes.invoke`.
         #     If empty, defaults to the Compute Engine default service account:
         #     `{project_number}-compute@developer.gserviceaccount.com`.
         # @!attribute [rw] retry_policy
         #   @return [::Google::Cloud::Functions::V2::EventTrigger::RetryPolicy]
-        #     Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).
+        #     Optional. If unset, then defaults to ignoring failures (i.e. not retrying
+        #     them).
         # @!attribute [rw] channel
         #   @return [::String]
         #     Optional. The name of the channel associated with the trigger in
@@ -578,15 +654,18 @@ module Google
         # Request for the `ListFunctions` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location from which the function should be listed,
-        #     specified in the format `projects/*/locations/*`
-        #     If you want to list functions in all locations, use "-" in place of a
-        #     location. When listing functions in all locations, if one or more
-        #     location(s) are unreachable, the response will contain functions from all
-        #     reachable locations along with the names of any unreachable locations.
+        #     Required. The project and location from which the function should be
+        #     listed, specified in the format `projects/*/locations/*` If you want to
+        #     list functions in all locations, use "-" in place of a location. When
+        #     listing functions in all locations, if one or more location(s) are
+        #     unreachable, the response will contain functions from all reachable
+        #     locations along with the names of any unreachable locations.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of functions to return per call.
+        #     Maximum number of functions to return per call. The largest allowed
+        #     page_size is 1,000, if the page_size is omitted or specified as greater
+        #     than 1,000 then it will be replaced as 1,000. The size of the list
+        #     response can be less than specified when used with filters.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last
@@ -627,8 +706,8 @@ module Google
         # Request for the `CreateFunction` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location in which the function should be created, specified
-        #     in the format `projects/*/locations/*`
+        #     Required. The project and location in which the function should be created,
+        #     specified in the format `projects/*/locations/*`
         # @!attribute [rw] function
         #   @return [::Google::Cloud::Functions::V2::Function]
         #     Required. Function to be created.
@@ -670,8 +749,25 @@ module Google
         # Request of `GenerateSourceUploadUrl` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location in which the Google Cloud Storage signed URL
-        #     should be generated, specified in the format `projects/*/locations/*`.
+        #     Required. The project and location in which the Google Cloud Storage signed
+        #     URL should be generated, specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
+        #     encrypt/decrypt function source code objects in intermediate Cloud Storage
+        #     buckets. When you generate an upload url and upload your source code, it
+        #     gets copied to an intermediate Cloud Storage bucket. The source code is
+        #     then copied to a versioned directory in the sources bucket in the consumer
+        #     project during the function deployment.
+        #
+        #     It must match the pattern
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+        #
+        #     The Google Cloud Functions service account
+        #     (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+        #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+        #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+        #     Key/KeyRing/Project/Organization (least access preferred).
         class GenerateUploadUrlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -701,8 +797,8 @@ module Google
         # Request of `GenerateDownloadUrl` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of function for which source code Google Cloud Storage signed
-        #     URL should be generated.
+        #     Required. The name of function for which source code Google Cloud Storage
+        #     signed URL should be generated.
         class GenerateDownloadUrlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -721,8 +817,8 @@ module Google
         # Request for the `ListRuntimes` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location from which the runtimes should be listed,
-        #     specified in the format `projects/*/locations/*`
+        #     Required. The project and location from which the runtimes should be
+        #     listed, specified in the format `projects/*/locations/*`
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter for Runtimes that match the filter expression,
@@ -807,8 +903,9 @@ module Google
         #   @return [::Boolean]
         #     Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [rw] api_version
         #   @return [::String]
         #     API version used to start the operation.
@@ -819,6 +916,15 @@ module Google
         #   @return [::Array<::Google::Cloud::Functions::V2::Stage>]
         #     Mechanism for reporting in-progress stages
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Extra GCF specific location information.
+        # @!attribute [rw] environments
+        #   @return [::Array<::Google::Cloud::Functions::V2::Environment>]
+        #     The Cloud Function environments this location supports.
+        class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

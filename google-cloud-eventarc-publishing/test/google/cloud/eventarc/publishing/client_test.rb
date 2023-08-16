@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/eventarc/publishing"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Eventarc::Publishing::ClientConstructionMinitest < Minitest::Test
-  def test_publisher
+  def test_publisher_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Eventarc::Publishing.publisher do |config|
+      client = Google::Cloud::Eventarc::Publishing.publisher transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Eventarc::Publishing::V1::Publisher::Client, client
+    end
+  end
+
+  def test_publisher_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Eventarc::Publishing.publisher transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client, client
     end
   end
 end

@@ -20,8 +20,11 @@
 require "google/cloud/gke_hub/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#list_memberships
+# Snippet for the list_memberships call in the GkeHubMembershipService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#list_memberships.
+# It may require modification in order to execute successfully.
 #
 def list_memberships
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_memberships
   # Call the list_memberships method.
   result = client.list_memberships request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::GkeHub::V1beta1::Membership.
-    p response
+    p item
   end
 end
 # [END gkehub_v1beta1_generated_GkeHubMembershipService_ListMemberships_sync]

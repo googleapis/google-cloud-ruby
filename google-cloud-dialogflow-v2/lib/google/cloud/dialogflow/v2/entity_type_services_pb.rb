@@ -63,7 +63,8 @@ module Google
             #
             # - `metadata`: An empty [Struct
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-            # - `response`: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse]
+            # - `response`:
+            # [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse]
             #
             # Note: You should always train an agent prior to sending it queries. See the
             # [training

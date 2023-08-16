@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::CatalogService::Client#get_completion_config
+# Snippet for the get_completion_config call in the CatalogService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#get_completion_config. It
+# may require modification in order to execute successfully.
 #
 def get_completion_config
   # Create a client object. The client can be reused for multiple calls.

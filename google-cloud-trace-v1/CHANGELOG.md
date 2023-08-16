@@ -1,5 +1,26 @@
 # Release History
 
+### 0.6.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.6.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+
+### 0.5.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20629](https://github.com/googleapis/google-cloud-ruby/issues/20629)) 
+#### Documentation
+
+* Recommend OpenTelemetry instead of OpenCensus ([#20596](https://github.com/googleapis/google-cloud-ruby/issues/20596)) 
+
 ### 0.4.0 (2022-07-08)
 
 #### Features

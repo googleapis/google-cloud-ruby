@@ -21,15 +21,16 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location into which to upload the Model.
         #     Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] parent_model
         #   @return [::String]
-        #     Optional. The resource name of the model into which to upload the version. Only
-        #     specify this field when uploading a new version.
+        #     Optional. The resource name of the model into which to upload the version.
+        #     Only specify this field when uploading a new version.
         # @!attribute [rw] model_id
         #   @return [::String]
         #     Optional. The ID to use for the uploaded Model, which will become the final
@@ -40,12 +41,23 @@ module Google
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AIPlatform::V1::Model]
         #     Required. The Model to create.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. The user-provided custom service account to use to do the model
+        #     upload. If empty, [Vertex AI Service
+        #     Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+        #     will be used. Users uploading the Model must have the
+        #     `iam.serviceAccounts.actAs` permission on this service account. Also, this
+        #     account must belong to the project specified in the `parent` field and have
+        #     all necessary read permissions.
         class UploadModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details of {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel} operation.
+        # Details of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel}
+        # operation.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The common part of the operation metadata.
@@ -54,7 +66,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message of {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel} operation.
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel}
+        # operation.
         # @!attribute [rw] model
         #   @return [::String]
         #     The name of the uploaded Model resource.
@@ -67,7 +81,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model ModelService.GetModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model ModelService.GetModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Model resource.
@@ -87,7 +102,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to list the Models from.
@@ -98,7 +114,8 @@ module Google
         #     both snake_case and camelCase are supported.
         #
         #       * `model` supports = and !=. `model` represents the Model ID,
-        #         i.e. the last segment of the Model's {::Google::Cloud::AIPlatform::V1::Model#name resource name}.
+        #         i.e. the last segment of the Model's [resource
+        #         name][google.cloud.aiplatform.v1.Model.name].
         #       * `display_name` supports = and !=
         #       * `labels` supports general map functions that is:
         #         * `labels.key=value` - key:value equality
@@ -117,8 +134,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -138,20 +157,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels}
         # @!attribute [rw] models
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model>]
         #     List of Models in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListModelsRequest#page_token ListModelsRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListModelsRequest#page_token ListModelsRequest.page_token}
+        #     to obtain that page.
         class ListModelsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ModelService.ListModelVersions}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ModelService.ListModelVersions}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the model to list versions for.
@@ -162,8 +185,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token} of the previous
-        #     [ModelService.ListModelversions][] call.
+        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ListModelVersions}
+        #     call.
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression for filtering the results of the request. For field names
@@ -180,12 +205,23 @@ module Google
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     A comma-separated list of fields to order by, sorted in ascending order.
+        #     Use "desc" after a field name for descending.
+        #     Supported fields:
+        #
+        #       * `create_time`
+        #       * `update_time`
+        #
+        #     Example: `update_time asc, create_time desc`.
         class ListModelVersionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ModelService.ListModelVersions}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ModelService.ListModelVersions}
         # @!attribute [rw] models
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model>]
         #     List of Model versions in the requested page.
@@ -194,13 +230,16 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest#page_token ListModelVersionsRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest#page_token ListModelVersionsRequest.page_token}
+        #     to obtain that page.
         class ListModelVersionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_model ModelService.UpdateModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_model ModelService.UpdateModel}.
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AIPlatform::V1::Model]
         #     Required. The Model which replaces the resource on the server.
@@ -224,13 +263,39 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The update mask applies to the resource.
-        #     For the `FieldMask` definition, see {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        #     For the `FieldMask` definition, see
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
         class UpdateModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model ModelService.DeleteModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The resource name of the Model to update.
+        #     Format: `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] examples
+        #   @return [::Google::Cloud::AIPlatform::V1::Examples]
+        #     The example config containing the location of the dataset.
+        class UpdateExplanationDatasetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class UpdateExplanationDatasetOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model ModelService.DeleteModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Model resource to be deleted.
@@ -240,11 +305,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model_version ModelService.DeleteModelVersion}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model_version ModelService.DeleteModelVersion}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the model version to be deleted, with a version ID explicitly
-        #     included.
+        #     Required. The name of the model version to be deleted, with a version ID
+        #     explicitly included.
         #
         #     Example: `projects/{project}/locations/{location}/models/{model}@1234`
         class DeleteModelVersionRequest
@@ -252,7 +318,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#merge_version_aliases ModelService.MergeVersionAliases}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#merge_version_aliases ModelService.MergeVersionAliases}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the model version to merge aliases, with a version ID
@@ -278,7 +345,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Model to export.
@@ -295,8 +363,9 @@ module Google
           # @!attribute [rw] export_format_id
           #   @return [::String]
           #     The ID of the format in which the Model must be exported. Each Model
-          #     lists the {::Google::Cloud::AIPlatform::V1::Model#supported_export_formats export formats it supports}.
-          #     If no value is provided here, then the first from the list of the Model's
+          #     lists the [export formats it
+          #     supports][google.cloud.aiplatform.v1.Model.supported_export_formats]. If
+          #     no value is provided here, then the first from the list of the Model's
           #     supported formats is used by default.
           # @!attribute [rw] artifact_destination
           #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
@@ -320,13 +389,16 @@ module Google
           end
         end
 
-        # Details of {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel} operation.
+        # Details of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel}
+        # operation.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The common part of the operation metadata.
         # @!attribute [r] output_info
         #   @return [::Google::Cloud::AIPlatform::V1::ExportModelOperationMetadata::OutputInfo]
-        #     Output only. Information further describing the output of this Model export.
+        #     Output only. Information further describing the output of this Model
+        #     export.
         class ExportModelOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -335,26 +407,95 @@ module Google
           # {::Google::Cloud::AIPlatform::V1::ExportModelRequest::OutputConfig ExportModelRequest.OutputConfig}.
           # @!attribute [r] artifact_output_uri
           #   @return [::String]
-          #     Output only. If the Model artifact is being exported to Google Cloud Storage this is
-          #     the full path of the directory created, into which the Model files are
-          #     being written to.
+          #     Output only. If the Model artifact is being exported to Google Cloud
+          #     Storage this is the full path of the directory created, into which the
+          #     Model files are being written to.
           # @!attribute [r] image_output_uri
           #   @return [::String]
-          #     Output only. If the Model image is being exported to Google Container Registry or
-          #     Artifact Registry this is the full path of the image created.
+          #     Output only. If the Model image is being exported to Google Container
+          #     Registry or Artifact Registry this is the full path of the image created.
           class OutputInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # Response message of {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel} operation.
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}
+        # operation.
+        class UpdateExplanationDatasetResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel}
+        # operation.
         class ExportModelResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#import_model_evaluation ModelService.ImportModelEvaluation}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model ModelService.CopyModel}.
+        # @!attribute [rw] model_id
+        #   @return [::String]
+        #     Optional. Copy source_model into a new Model with this ID. The ID will
+        #     become the final component of the model resource name.
+        #
+        #     This value may be up to 63 characters, and valid characters are
+        #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+        # @!attribute [rw] parent_model
+        #   @return [::String]
+        #     Optional. Specify this field to copy source_model into this existing
+        #     Model as a new version. Format:
+        #     `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location into which to copy the Model.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] source_model
+        #   @return [::String]
+        #     Required. The resource name of the Model to copy. That Model must be in the
+        #     same Project. Format:
+        #     `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key options. If this is set,
+        #     then the Model copy will be encrypted with the provided encryption key.
+        class CopyModelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model ModelService.CopyModel}
+        # operation.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class CopyModelOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model ModelService.CopyModel}
+        # operation.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     The name of the copied Model resource.
+        #     Format: `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [r] model_version_id
+        #   @return [::String]
+        #     Output only. The version ID of the model that is copied.
+        class CopyModelResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#import_model_evaluation ModelService.ImportModelEvaluation}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent model resource.
@@ -367,7 +508,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices ModelService.BatchImportModelEvaluationSlices}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices ModelService.BatchImportModelEvaluationSlices}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent ModelEvaluation resource.
@@ -381,16 +523,44 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices ModelService.BatchImportModelEvaluationSlices}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices ModelService.BatchImportModelEvaluationSlices}
         # @!attribute [r] imported_model_evaluation_slices
         #   @return [::Array<::String>]
-        #     Output only. List of imported {::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice#name ModelEvaluationSlice.name}.
+        #     Output only. List of imported
+        #     {::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice#name ModelEvaluationSlice.name}.
         class BatchImportModelEvaluationSlicesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation ModelService.GetModelEvaluation}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_evaluated_annotations ModelService.BatchImportEvaluatedAnnotations}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent ModelEvaluationSlice resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
+        # @!attribute [rw] evaluated_annotations
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation>]
+        #     Required. Evaluated annotations resource to be imported.
+        class BatchImportEvaluatedAnnotationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_evaluated_annotations ModelService.BatchImportEvaluatedAnnotations}
+        # @!attribute [r] imported_evaluated_annotations_count
+        #   @return [::Integer]
+        #     Output only. Number of EvaluatedAnnotations imported.
+        class BatchImportEvaluatedAnnotationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation ModelService.GetModelEvaluation}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the ModelEvaluation resource.
@@ -401,7 +571,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Model to list the ModelEvaluations from.
@@ -416,8 +587,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -426,20 +599,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations}.
         # @!attribute [rw] model_evaluations
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelEvaluation>]
         #     List of ModelEvaluations in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest#page_token ListModelEvaluationsRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest#page_token ListModelEvaluationsRequest.page_token}
+        #     to obtain that page.
         class ListModelEvaluationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation_slice ModelService.GetModelEvaluationSlice}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation_slice ModelService.GetModelEvaluationSlice}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the ModelEvaluationSlice resource.
@@ -450,11 +627,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
-        #     from. Format:
+        #     Required. The resource name of the ModelEvaluation to list the
+        #     ModelEvaluationSlices from. Format:
         #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
         # @!attribute [rw] filter
         #   @return [::String]
@@ -468,8 +646,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesResponse#next_page_token ListModelEvaluationSlicesResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesResponse#next_page_token ListModelEvaluationSlicesResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -478,15 +658,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}.
         # @!attribute [rw] model_evaluation_slices
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice>]
         #     List of ModelEvaluations in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesRequest#page_token ListModelEvaluationSlicesRequest.page_token} to obtain that
-        #     page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesRequest#page_token ListModelEvaluationSlicesRequest.page_token}
+        #     to obtain that page.
         class ListModelEvaluationSlicesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

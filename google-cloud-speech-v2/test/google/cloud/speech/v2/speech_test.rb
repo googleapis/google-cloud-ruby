@@ -614,6 +614,8 @@ class ::Google::Cloud::Speech::V2::Speech::ClientTest < Minitest::Test
     config = {}
     config_mask = {}
     files = [{}]
+    recognition_output_config = {}
+    processing_strategy = :PROCESSING_STRATEGY_UNSPECIFIED
 
     batch_recognize_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_recognize, name
@@ -622,6 +624,8 @@ class ::Google::Cloud::Speech::V2::Speech::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V2::RecognitionConfig), request["config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["config_mask"]
       assert_kind_of ::Google::Cloud::Speech::V2::BatchRecognizeFileMetadata, request["files"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V2::RecognitionOutputConfig), request["recognition_output_config"]
+      assert_equal :PROCESSING_STRATEGY_UNSPECIFIED, request["processing_strategy"]
       refute_nil options
     end
 
@@ -632,35 +636,35 @@ class ::Google::Cloud::Speech::V2::Speech::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files }) do |response, operation|
+      client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_recognize recognizer: recognizer, config: config, config_mask: config_mask, files: files do |response, operation|
+      client.batch_recognize recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_recognize ::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files) do |response, operation|
+      client.batch_recognize ::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files }, grpc_options) do |response, operation|
+      client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_recognize(::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files), grpc_options) do |response, operation|
+      client.batch_recognize(::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

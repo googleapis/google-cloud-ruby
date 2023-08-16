@@ -26,6 +26,7 @@ require "google/cloud/asset/v1/asset_service/credentials"
 require "google/cloud/asset/v1/asset_service/paths"
 require "google/cloud/asset/v1/asset_service/operations"
 require "google/cloud/asset/v1/asset_service/client"
+require "google/cloud/asset/v1/asset_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Asset service definition.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/asset/v1/asset_service"
         #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/asset/v1/asset_service/rest"
+        #     client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new
         #
         module AssetService
         end

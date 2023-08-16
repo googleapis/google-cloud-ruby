@@ -42,8 +42,8 @@ module Google
             #     Output only. The time the operation was submitted to the server.
             # @!attribute [rw] end_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     Output only. The time when the operation terminated, regardless of its success.
-            #     This field is unset if the operation is still ongoing.
+            #     Output only. The time when the operation terminated, regardless of its
+            #     success. This field is unset if the operation is still ongoing.
             class OperationMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,6 +84,16 @@ module Google
 
                 # A resource check operation.
                 CHECK = 4
+
+                # Saves snapshot of the resource operation.
+                SAVE_SNAPSHOT = 5
+
+                # Loads snapshot of the resource operation.
+                LOAD_SNAPSHOT = 6
+
+                # Triggers failover of environment's Cloud SQL instance (only for highly
+                # resilient environments).
+                DATABASE_FAILOVER = 7
               end
             end
           end

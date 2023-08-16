@@ -31,9 +31,9 @@ module Google
         ##
         # The RegionNetworkFirewallPolicies API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/region_network_firewall_policies"
+        #     require "google/cloud/compute/v1/region_network_firewall_policies/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client.new
         #
         module RegionNetworkFirewallPolicies

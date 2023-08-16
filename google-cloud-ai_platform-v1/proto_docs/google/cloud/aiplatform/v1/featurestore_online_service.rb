@@ -21,7 +21,58 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values FeaturestoreOnlineServingService.ReadFeatureValues}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#write_feature_values FeaturestoreOnlineServingService.WriteFeatureValues}.
+        # @!attribute [rw] entity_type
+        #   @return [::String]
+        #     Required. The resource name of the EntityType for the entities being
+        #     written. Value format:
+        #     `projects/{project}/locations/{location}/featurestores/
+        #     \\{featurestore}/entityTypes/\\{entityType}`. For example,
+        #     for a machine learning model predicting user clicks on a website, an
+        #     EntityType ID could be `user`.
+        # @!attribute [rw] payloads
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::WriteFeatureValuesPayload>]
+        #     Required. The entities to be written. Up to 100,000 feature values can be
+        #     written across all `payloads`.
+        class WriteFeatureValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains Feature values to be written for a specific entity.
+        # @!attribute [rw] entity_id
+        #   @return [::String]
+        #     Required. The ID of the entity.
+        # @!attribute [rw] feature_values
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::FeatureValue}]
+        #     Required. Feature values to be written, mapping from Feature ID to value.
+        #     Up to 100,000 `feature_values` entries may be written across all payloads.
+        #     The feature generation time, aligned by days, must be no older than five
+        #     years (1825 days) and no later than one year (366 days) in the future.
+        class WriteFeatureValuesPayload
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue]
+          class FeatureValuesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#write_feature_values FeaturestoreOnlineServingService.WriteFeatureValues}.
+        class WriteFeatureValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values FeaturestoreOnlineServingService.ReadFeatureValues}.
         # @!attribute [rw] entity_type
         #   @return [::String]
         #     Required. The resource name of the EntityType for the entity being read.
@@ -42,7 +93,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values FeaturestoreOnlineServingService.ReadFeatureValues}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values FeaturestoreOnlineServingService.ReadFeatureValues}.
         # @!attribute [rw] header
         #   @return [::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse::Header]
         #     Response header.
@@ -66,16 +118,18 @@ module Google
           end
 
           # Response header with metadata for the requested
-          # {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest#entity_type ReadFeatureValuesRequest.entity_type} and Features.
+          # {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest#entity_type ReadFeatureValuesRequest.entity_type}
+          # and Features.
           # @!attribute [rw] entity_type
           #   @return [::String]
           #     The resource name of the EntityType from the
-          #     {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest ReadFeatureValuesRequest}. Value format:
+          #     {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest ReadFeatureValuesRequest}.
+          #     Value format:
           #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
           # @!attribute [rw] feature_descriptors
           #   @return [::Array<::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse::FeatureDescriptor>]
           #     List of Feature metadata corresponding to each piece of
-          #     [ReadFeatureValuesResponse.data][].
+          #     {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse::EntityView#data ReadFeatureValuesResponse.EntityView.data}.
           class Header
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,7 +145,8 @@ module Google
           #     requested values for one requested Feature. If no values
           #     for the requested Feature exist, the corresponding cell will be empty.
           #     This has the same size and is in the same order as the features from the
-          #     header {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse#header ReadFeatureValuesResponse.header}.
+          #     header
+          #     {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse#header ReadFeatureValuesResponse.header}.
           class EntityView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,13 +181,13 @@ module Google
         #     EntityType ID could be `user`.
         # @!attribute [rw] entity_ids
         #   @return [::Array<::String>]
-        #     Required. IDs of entities to read Feature values of. The maximum number of IDs is
-        #     100. For example, for a machine learning model predicting user clicks on a
-        #     website, an entity ID could be `user_123`.
+        #     Required. IDs of entities to read Feature values of. The maximum number of
+        #     IDs is 100. For example, for a machine learning model predicting user
+        #     clicks on a website, an entity ID could be `user_123`.
         # @!attribute [rw] feature_selector
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureSelector]
-        #     Required. Selector choosing Features of the target EntityType. Feature IDs will be
-        #     deduplicated.
+        #     Required. Selector choosing Features of the target EntityType. Feature IDs
+        #     will be deduplicated.
         class StreamingReadFeatureValuesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

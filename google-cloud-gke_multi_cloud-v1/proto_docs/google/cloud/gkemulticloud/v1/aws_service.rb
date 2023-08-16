@@ -24,8 +24,9 @@ module Google
         # Request message for `AwsClusters.CreateAwsCluster` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent location where this {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource
-        #     will be created.
+        #     Required. The parent location where this
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource will be
+        #     created.
         #
         #     Location names are formatted as `projects/<project-id>/locations/<region>`.
         #
@@ -33,17 +34,19 @@ module Google
         #     for more details on Google Cloud resource names.
         # @!attribute [rw] aws_cluster
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsCluster]
-        #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to create.
+        #     Required. The specification of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to create.
         # @!attribute [rw] aws_cluster_id
         #   @return [::String]
-        #     Required. A client provided ID the resource. Must be unique within the parent
-        #     resource.
+        #     Required. A client provided ID the resource. Must be unique within the
+        #     parent resource.
         #
-        #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
-        #     resource name formatted as
+        #     The provided ID will be part of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource name
+        #     formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
         #
-        #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+        #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but do not actually create the cluster.
@@ -55,7 +58,8 @@ module Google
         # Request message for `AwsClusters.UpdateAwsCluster` method.
         # @!attribute [rw] aws_cluster
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsCluster]
-        #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to update.
+        #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+        #     resource to update.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but do not actually update the cluster.
@@ -77,14 +81,17 @@ module Google
         #      *   `control_plane.proxy_config`.
         #      *   `control_plane.proxy_config.secret_arn`.
         #      *   `control_plane.proxy_config.secret_version`.
+        #      *   `control_plane.root_volume.size_gib`.
+        #      *   `control_plane.root_volume.volume_type`.
         #      *   `control_plane.root_volume.iops`.
         #      *   `control_plane.root_volume.kms_key_arn`.
-        #      *   `control_plane.root_volume.volume_type`.
-        #      *   `control_plane.root_volume.size_gib`.
         #      *   `control_plane.ssh_config`.
         #      *   `control_plane.ssh_config.ec2_key_pair`.
         #      *   `control_plane.instance_placement.tenancy`.
-        #      *   `logging_config`.
+        #      *   `control_plane.iam_instance_profile`.
+        #      *   `logging_config.component_config.enable_components`.
+        #      *   `control_plane.tags`.
+        #      *   `monitoring_config.managed_prometheus_config.enabled`.
         class UpdateAwsClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,13 +100,15 @@ module Google
         # Request message for `AwsClusters.GetAwsCluster` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to describe.
+        #     Required. The name of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to
+        #     describe.
         #
         #     `AwsCluster` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         class GetAwsClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,7 +123,7 @@ module Google
         #     Location names are formatted as `projects/<project-id>/locations/<region>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of items to return.
@@ -122,12 +131,13 @@ module Google
         #     If not specified, a default value of 50 will be used by the service.
         #     Regardless of the pageSize value, the response can include a partial list
         #     and a caller should only rely on response's
-        #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersResponse#next_page_token nextPageToken} to determine if
-        #     there are more instances left to be queried.
+        #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersResponse#next_page_token nextPageToken}
+        #     to determine if there are more instances left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The `nextPageToken` value returned from a previous
-        #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters awsClusters.list} request, if any.
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters awsClusters.list}
+        #     request, if any.
         class ListAwsClustersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -136,8 +146,8 @@ module Google
         # Response message for `AwsClusters.ListAwsClusters` method.
         # @!attribute [rw] aws_clusters
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsCluster>]
-        #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources in the specified GCP
-        #     project and region region.
+        #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources
+        #     in the specified Google Cloud Platform project and region region.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -150,26 +160,29 @@ module Google
         # Request message for `AwsClusters.DeleteAwsCluster` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to delete.
+        #     Required. The resource name the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} to delete.
         #
         #     `AwsCluster` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but do not actually delete the resource.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource is not found,
-        #     the request will succeed but no action will be taken on the server and a
-        #     completed {::Google::Longrunning::Operation Operation} will be returned.
+        #     If set to true, and the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource is not
+        #     found, the request will succeed but no action will be taken on the server
+        #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
         #
         #     Useful for idempotent deletion.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     The current etag of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
+        #     The current etag of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
         #
         #     Allows clients to perform deletions through optimistic concurrency control.
         #
@@ -183,7 +196,8 @@ module Google
         # Response message for `AwsClusters.CreateAwsNodePool` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource where this node pool will be created.
+        #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
+        #     resource where this node pool will be created.
         #
         #     `AwsCluster` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -192,17 +206,19 @@ module Google
         #     for more details on Google Cloud resource names.
         # @!attribute [rw] aws_node_pool
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsNodePool]
-        #     Required. The specification of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to create.
+        #     Required. The specification of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to create.
         # @!attribute [rw] aws_node_pool_id
         #   @return [::String]
-        #     Required. A client provided ID the resource. Must be unique within the parent
-        #     resource.
+        #     Required. A client provided ID the resource. Must be unique within the
+        #     parent resource.
         #
-        #     The provided ID will be part of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
-        #     resource name formatted as
+        #     The provided ID will be part of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource name
+        #     formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
         #
-        #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+        #     Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but do not actually create the node
@@ -215,7 +231,8 @@ module Google
         # Request message for `AwsClusters.UpdateAwsNodePool` method.
         # @!attribute [rw] aws_node_pool
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsNodePool]
-        #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to update.
+        #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
+        #     resource to update.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but don't actually update the node pool.
@@ -240,6 +257,13 @@ module Google
         #      *   `config.proxy_config.secret_version`.
         #      *   `config.ssh_config`.
         #      *   `config.ssh_config.ec2_key_pair`.
+        #      *   `config.instance_placement.tenancy`.
+        #      *   `config.iam_instance_profile`.
+        #      *   `config.labels`.
+        #      *   `config.tags`.
+        #      *   `config.autoscaling_metrics_collection`.
+        #      *   `config.autoscaling_metrics_collection.granularity`.
+        #      *   `config.autoscaling_metrics_collection.metrics`.
         class UpdateAwsNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -248,7 +272,9 @@ module Google
         # Request message for `AwsClusters.GetAwsNodePool` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to describe.
+        #     Required. The name of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to
+        #     describe.
         #
         #     `AwsNodePool` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -278,12 +304,13 @@ module Google
         #     If not specified, a default value of 50 will be used by the service.
         #     Regardless of the pageSize value, the response can include a partial list
         #     and a caller should only rely on response's
-        #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsResponse#next_page_token nextPageToken} to determine if
-        #     there are more instances left to be queried.
+        #     {::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsResponse#next_page_token nextPageToken}
+        #     to determine if there are more instances left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The `nextPageToken` value returned from a previous
-        #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools awsNodePools.list} request, if any.
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools awsNodePools.list}
+        #     request, if any.
         class ListAwsNodePoolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -292,7 +319,8 @@ module Google
         # Response message for `AwsClusters.ListAwsNodePools` method.
         # @!attribute [rw] aws_node_pools
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsNodePool>]
-        #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resources in the specified `AwsCluster`.
+        #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
+        #     resources in the specified `AwsCluster`.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -302,10 +330,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for `AwsClusters.DeleteNodePool` method.
+        # Request message for `AwsClusters.DeleteAwsNodePool` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to delete.
+        #     Required. The resource name the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} to delete.
         #
         #     `AwsNodePool` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -318,14 +347,16 @@ module Google
         #     pool.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource is not found,
-        #     the request will succeed but no action will be taken on the server and a
-        #     completed {::Google::Longrunning::Operation Operation} will be returned.
+        #     If set to true, and the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource is not
+        #     found, the request will succeed but no action will be taken on the server
+        #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
         #
         #     Useful for idempotent deletion.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     The current ETag of the {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}.
+        #     The current ETag of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}.
         #
         #     Allows clients to perform deletions through optimistic concurrency control.
         #
@@ -339,7 +370,9 @@ module Google
         # GetAwsServerConfigRequest gets the server config of GKE cluster on AWS.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsServerConfig AwsServerConfig} resource to describe.
+        #     Required. The name of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsServerConfig AwsServerConfig} resource
+        #     to describe.
         #
         #     `AwsServerConfig` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsServerConfig`.
@@ -354,7 +387,9 @@ module Google
         # Request message for `AwsClusters.GenerateAwsAccessToken` method.
         # @!attribute [rw] aws_cluster
         #   @return [::String]
-        #     Required. The name of the {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to authenticate to.
+        #     Required. The name of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource to
+        #     authenticate to.
         #
         #     `AwsCluster` names are formatted as
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.

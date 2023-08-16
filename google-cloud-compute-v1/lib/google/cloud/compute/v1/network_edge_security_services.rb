@@ -31,9 +31,9 @@ module Google
         ##
         # The NetworkEdgeSecurityServices API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/network_edge_security_services"
+        #     require "google/cloud/compute/v1/network_edge_security_services/rest"
         #     client = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
         #
         module NetworkEdgeSecurityServices

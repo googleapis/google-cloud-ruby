@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the Documents service.
           #
-          # Service for managing knowledge {::Google::Cloud::Dialogflow::V2::Document Documents}.
+          # Service for managing knowledge
+          # {::Google::Cloud::Dialogflow::V2::Document Documents}.
           #
           class Client
             include Paths
@@ -129,7 +130,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -246,13 +247,11 @@ module Google
             #   # Call the list_documents method.
             #   result = client.list_documents request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Document.
-            #     p response
+            #     p item
             #   end
             #
             def list_documents request, options = nil
@@ -391,7 +390,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload create_document(request, options = nil)
@@ -436,14 +436,14 @@ module Google
             #   # Call the create_document method.
             #   result = client.create_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_document request, options = nil
@@ -497,8 +497,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ImportDocumentsResponse ImportDocumentsResponse}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ImportDocumentsResponse ImportDocumentsResponse}
             #
             # @overload import_documents(request, options = nil)
             #   Pass arguments to `import_documents` via a request object, either of type
@@ -520,7 +522,7 @@ module Google
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/knowledgeBases/<Knowledge Base ID>`.
             #   @param gcs_source [::Google::Cloud::Dialogflow::V2::GcsSources, ::Hash]
-            #     The Google Cloud Storage location for the documents.
+            #     Optional. The Google Cloud Storage location for the documents.
             #     The path can include a wildcard.
             #
             #     These URIs may have the forms
@@ -552,14 +554,14 @@ module Google
             #   # Call the import_documents method.
             #   result = client.import_documents request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_documents request, options = nil
@@ -611,7 +613,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #
@@ -655,14 +658,14 @@ module Google
             #   # Call the delete_document method.
             #   result = client.delete_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_document request, options = nil
@@ -714,7 +717,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload update_document(request, options = nil)
@@ -759,14 +763,14 @@ module Google
             #   # Call the update_document method.
             #   result = client.update_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_document request, options = nil
@@ -821,7 +825,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
@@ -847,8 +852,8 @@ module Google
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`
             #   @param content_uri [::String]
-            #     Optional. The path of gcs source file for reloading document content. For now,
-            #     only gcs uri is supported.
+            #     Optional. The path of gcs source file for reloading document content. For
+            #     now, only gcs uri is supported.
             #
             #     For documents stored in Google Cloud Storage, these URIs must have
             #     the form `gs://<bucket-name>/<object-name>`.
@@ -856,8 +861,8 @@ module Google
             #     Optional. Whether to import custom metadata from Google Cloud Storage.
             #     Only valid when the document source is Google Cloud Storage URI.
             #   @param smart_messaging_partial_update [::Boolean]
-            #     Optional. When enabled, the reload request is to apply partial update to the smart
-            #     messaging allowlist.
+            #     Optional. When enabled, the reload request is to apply partial update to
+            #     the smart messaging allowlist.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -879,14 +884,14 @@ module Google
             #   # Call the reload_document method.
             #   result = client.reload_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def reload_document request, options = nil
@@ -939,7 +944,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload export_document(request, options = nil)
@@ -990,14 +996,14 @@ module Google
             #   # Call the export_document method.
             #   result = client.export_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_document request, options = nil
@@ -1080,9 +1086,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1124,7 +1130,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

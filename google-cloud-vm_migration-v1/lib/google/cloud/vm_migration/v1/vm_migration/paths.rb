@@ -149,6 +149,29 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ReplicationCycle resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/sources/{source}/migratingVms/{migrating_vm}/replicationCycles/{replication_cycle}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param source [String]
+            # @param migrating_vm [String]
+            # @param replication_cycle [String]
+            #
+            # @return [::String]
+            def replication_cycle_path project:, location:, source:, migrating_vm:, replication_cycle:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+              raise ::ArgumentError, "migrating_vm cannot contain /" if migrating_vm.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/sources/#{source}/migratingVms/#{migrating_vm}/replicationCycles/#{replication_cycle}"
+            end
+
+            ##
             # Create a fully-qualified Source resource string.
             #
             # The resource will be in the following format:

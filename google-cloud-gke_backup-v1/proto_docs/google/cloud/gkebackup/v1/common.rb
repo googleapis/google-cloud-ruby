@@ -56,7 +56,7 @@ module Google
         # @!attribute [rw] gcp_kms_encryption_key
         #   @return [::String]
         #     Google Cloud KMS encryption key. Format:
-        #     projects/*/locations/*/keyRings/*/cryptoKeys/*
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`
         class EncryptionKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

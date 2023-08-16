@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-talent-v4",
-    "version": "0.8.1",
+    "version": "0.10.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "jobs_v4_generated_CompanyService_CreateCompany_sync",
-      "title": "Snippet for create_company in CompanyService",
-      "description": "Basic snippet for create_company in CompanyService",
+      "title": "Snippet for the create_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#create_company. It may require modification in order to execute successfully.",
       "file": "company_service/create_company.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_CompanyService_GetCompany_sync",
-      "title": "Snippet for get_company in CompanyService",
-      "description": "Basic snippet for get_company in CompanyService",
+      "title": "Snippet for the get_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#get_company. It may require modification in order to execute successfully.",
       "file": "company_service/get_company.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_CompanyService_UpdateCompany_sync",
-      "title": "Snippet for update_company in CompanyService",
-      "description": "Basic snippet for update_company in CompanyService",
+      "title": "Snippet for the update_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#update_company. It may require modification in order to execute successfully.",
       "file": "company_service/update_company.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_CompanyService_DeleteCompany_sync",
-      "title": "Snippet for delete_company in CompanyService",
-      "description": "Basic snippet for delete_company in CompanyService",
+      "title": "Snippet for the delete_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#delete_company. It may require modification in order to execute successfully.",
       "file": "company_service/delete_company.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_CompanyService_ListCompanies_sync",
-      "title": "Snippet for list_companies in CompanyService",
-      "description": "Basic snippet for list_companies in CompanyService",
+      "title": "Snippet for the list_companies call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#list_companies. It may require modification in order to execute successfully.",
       "file": "company_service/list_companies.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_Completion_CompleteQuery_sync",
-      "title": "Snippet for complete_query in Completion",
-      "description": "Basic snippet for complete_query in Completion",
+      "title": "Snippet for the complete_query call in the Completion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::Completion::Client#complete_query. It may require modification in order to execute successfully.",
       "file": "completion/complete_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_EventService_CreateClientEvent_sync",
-      "title": "Snippet for create_client_event in EventService",
-      "description": "Basic snippet for create_client_event in EventService",
+      "title": "Snippet for the create_client_event call in the EventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::EventService::Client#create_client_event. It may require modification in order to execute successfully.",
       "file": "event_service/create_client_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_CreateJob_sync",
-      "title": "Snippet for create_job in JobService",
-      "description": "Basic snippet for create_job in JobService",
+      "title": "Snippet for the create_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#create_job. It may require modification in order to execute successfully.",
       "file": "job_service/create_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_BatchCreateJobs_sync",
-      "title": "Snippet for batch_create_jobs in JobService",
-      "description": "Basic snippet for batch_create_jobs in JobService",
+      "title": "Snippet for the batch_create_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#batch_create_jobs. It may require modification in order to execute successfully.",
       "file": "job_service/batch_create_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_GetJob_sync",
-      "title": "Snippet for get_job in JobService",
-      "description": "Basic snippet for get_job in JobService",
+      "title": "Snippet for the get_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#get_job. It may require modification in order to execute successfully.",
       "file": "job_service/get_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_UpdateJob_sync",
-      "title": "Snippet for update_job in JobService",
-      "description": "Basic snippet for update_job in JobService",
+      "title": "Snippet for the update_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#update_job. It may require modification in order to execute successfully.",
       "file": "job_service/update_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_BatchUpdateJobs_sync",
-      "title": "Snippet for batch_update_jobs in JobService",
-      "description": "Basic snippet for batch_update_jobs in JobService",
+      "title": "Snippet for the batch_update_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#batch_update_jobs. It may require modification in order to execute successfully.",
       "file": "job_service/batch_update_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_DeleteJob_sync",
-      "title": "Snippet for delete_job in JobService",
-      "description": "Basic snippet for delete_job in JobService",
+      "title": "Snippet for the delete_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#delete_job. It may require modification in order to execute successfully.",
       "file": "job_service/delete_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_BatchDeleteJobs_sync",
-      "title": "Snippet for batch_delete_jobs in JobService",
-      "description": "Basic snippet for batch_delete_jobs in JobService",
+      "title": "Snippet for the batch_delete_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#batch_delete_jobs. It may require modification in order to execute successfully.",
       "file": "job_service/batch_delete_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_ListJobs_sync",
-      "title": "Snippet for list_jobs in JobService",
-      "description": "Basic snippet for list_jobs in JobService",
+      "title": "Snippet for the list_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#list_jobs. It may require modification in order to execute successfully.",
       "file": "job_service/list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_SearchJobs_sync",
-      "title": "Snippet for search_jobs in JobService",
-      "description": "Basic snippet for search_jobs in JobService",
+      "title": "Snippet for the search_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#search_jobs. It may require modification in order to execute successfully.",
       "file": "job_service/search_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_JobService_SearchJobsForAlert_sync",
-      "title": "Snippet for search_jobs_for_alert in JobService",
-      "description": "Basic snippet for search_jobs_for_alert in JobService",
+      "title": "Snippet for the search_jobs_for_alert call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#search_jobs_for_alert. It may require modification in order to execute successfully.",
       "file": "job_service/search_jobs_for_alert.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_TenantService_CreateTenant_sync",
-      "title": "Snippet for create_tenant in TenantService",
-      "description": "Basic snippet for create_tenant in TenantService",
+      "title": "Snippet for the create_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#create_tenant. It may require modification in order to execute successfully.",
       "file": "tenant_service/create_tenant.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_TenantService_GetTenant_sync",
-      "title": "Snippet for get_tenant in TenantService",
-      "description": "Basic snippet for get_tenant in TenantService",
+      "title": "Snippet for the get_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#get_tenant. It may require modification in order to execute successfully.",
       "file": "tenant_service/get_tenant.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_TenantService_UpdateTenant_sync",
-      "title": "Snippet for update_tenant in TenantService",
-      "description": "Basic snippet for update_tenant in TenantService",
+      "title": "Snippet for the update_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#update_tenant. It may require modification in order to execute successfully.",
       "file": "tenant_service/update_tenant.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_TenantService_DeleteTenant_sync",
-      "title": "Snippet for delete_tenant in TenantService",
-      "description": "Basic snippet for delete_tenant in TenantService",
+      "title": "Snippet for the delete_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#delete_tenant. It may require modification in order to execute successfully.",
       "file": "tenant_service/delete_tenant.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "jobs_v4_generated_TenantService_ListTenants_sync",
-      "title": "Snippet for list_tenants in TenantService",
-      "description": "Basic snippet for list_tenants in TenantService",
+      "title": "Snippet for the list_tenants call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#list_tenants. It may require modification in order to execute successfully.",
       "file": "tenant_service/list_tenants.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

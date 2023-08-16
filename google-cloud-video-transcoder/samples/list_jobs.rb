@@ -32,7 +32,7 @@ def list_jobs project_id:, location:
   puts "Jobs:"
   # Print out all jobs.
   response.each do |job|
-    puts job.name.to_s
+    puts job.name
   end
   # [END transcoder_list_jobs]
 end

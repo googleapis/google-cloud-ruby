@@ -24,6 +24,7 @@ require "google/cloud/orchestration/airflow/service/v1/version"
 
 require "google/cloud/orchestration/airflow/service/v1/image_versions/credentials"
 require "google/cloud/orchestration/airflow/service/v1/image_versions/client"
+require "google/cloud/orchestration/airflow/service/v1/image_versions/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
             ##
             # Readonly service to query available ImageVersions.
             #
-            # To load this service and instantiate a client:
+            # @example Load this service and instantiate a gRPC client
             #
             #     require "google/cloud/orchestration/airflow/service/v1/image_versions"
             #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client.new
+            #
+            # @example Load this service and instantiate a REST client
+            #
+            #     require "google/cloud/orchestration/airflow/service/v1/image_versions/rest"
+            #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest::Client.new
             #
             module ImageVersions
             end

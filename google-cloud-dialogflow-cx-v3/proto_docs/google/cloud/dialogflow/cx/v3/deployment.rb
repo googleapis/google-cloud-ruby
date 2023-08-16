@@ -22,7 +22,7 @@ module Google
     module Dialogflow
       module CX
         module V3
-          # Represents an deployment in an environment. A deployment happens when a flow
+          # Represents a deployment in an environment. A deployment happens when a flow
           # version configured to be active in the environment. You can configure running
           # pre-deployment steps, e.g. running validation test cases, experiment
           # auto-rollout, etc.
@@ -84,12 +84,14 @@ module Google
             end
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Deployments::Client#list_deployments Deployments.ListDeployments}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Deployments::Client#list_deployments Deployments.ListDeployments}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to list all environments for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>`.
+          #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
+          #     list all environments for. Format: `projects/<Project
+          #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+          #     ID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 20 and
@@ -102,7 +104,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response message for {::Google::Cloud::Dialogflow::CX::V3::Deployments::Client#list_deployments Deployments.ListDeployments}.
+          # The response message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Deployments::Client#list_deployments Deployments.ListDeployments}.
           # @!attribute [rw] deployments
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Deployment>]
           #     The list of deployments. There will be a maximum number of items
@@ -118,11 +121,13 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Deployments::Client#get_deployment Deployments.GetDeployment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Deployments::Client#get_deployment Deployments.GetDeployment}.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     Required. The name of the
+          #     {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
           class GetDeploymentRequest
             include ::Google::Protobuf::MessageExts

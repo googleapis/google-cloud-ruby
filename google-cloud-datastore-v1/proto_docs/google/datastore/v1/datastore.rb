@@ -58,6 +58,15 @@ module Google
         #     A list of keys that were not looked up due to resource constraints. The
         #     order of results in this field is undefined and has no relation to the
         #     order of the keys in the input.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     The identifier of the transaction that was started as part of this Lookup
+        #     request.
+        #
+        #     Set only when
+        #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        #     was set in
+        #     {::Google::Cloud::Datastore::V1::LookupRequest#read_options LookupRequest.read_options}.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which these entities were read or found missing.
@@ -96,19 +105,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#run_query Datastore.RunQuery}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#run_query Datastore.RunQuery}.
         # @!attribute [rw] batch
         #   @return [::Google::Cloud::Datastore::V1::QueryResultBatch]
         #     A batch of query results (always present).
         # @!attribute [rw] query
         #   @return [::Google::Cloud::Datastore::V1::Query]
         #     The parsed form of the `GqlQuery` from the request, if it was set.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     The identifier of the transaction that was started as part of this
+        #     RunQuery request.
+        #
+        #     Set only when
+        #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        #     was set in
+        #     {::Google::Cloud::Datastore::V1::RunQueryRequest#read_options RunQueryRequest.read_options}.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -138,19 +158,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
         # @!attribute [rw] batch
         #   @return [::Google::Cloud::Datastore::V1::AggregationResultBatch]
         #     A batch of aggregation results. Always present.
         # @!attribute [rw] query
         #   @return [::Google::Cloud::Datastore::V1::AggregationQuery]
         #     The parsed form of the `GqlQuery` from the request, if it was set.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     The identifier of the transaction that was started as part of this
+        #     RunAggregationQuery request.
+        #
+        #     Set only when
+        #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        #     was set in
+        #     {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest#read_options RunAggregationQueryRequest.read_options}.
         class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -168,7 +199,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The transaction identifier (always present).
@@ -196,8 +228,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#rollback Datastore.Rollback}.
-        # (an empty message).
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#rollback Datastore.Rollback}. (an empty
+        # message).
         class RollbackResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,6 +254,12 @@ module Google
         #     The identifier of the transaction associated with the commit. A
         #     transaction identifier is returned by a call to
         #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # @!attribute [rw] single_use_transaction
+        #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
+        #     Options for beginning a new transaction for this request.
+        #     The transaction is committed when the request completes. If specified,
+        #     {::Google::Cloud::Datastore::V1::TransactionOptions TransactionOptions.mode} must be
+        #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
         # @!attribute [rw] mutations
         #   @return [::Array<::Google::Cloud::Datastore::V1::Mutation>]
         #     The mutations to perform.
@@ -272,7 +311,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -284,14 +324,15 @@ module Google
         #     database.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
-        #     Required. A list of keys with incomplete key paths for which to allocate IDs.
-        #     No key may be reserved/read-only.
+        #     Required. A list of keys with incomplete key paths for which to allocate
+        #     IDs. No key may be reserved/read-only.
         class AllocateIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     The keys specified in the request (in the same order), each with
@@ -301,7 +342,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -313,14 +355,15 @@ module Google
         #     database.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
-        #     Required. A list of keys with complete key paths whose numeric IDs should not be
-        #     auto-allocated.
+        #     Required. A list of keys with complete key paths whose numeric IDs should
+        #     not be auto-allocated.
         class ReserveIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
         class ReserveIdsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -370,6 +413,9 @@ module Google
         #     be the version of the current entity or, if no entity is present, a version
         #     that is strictly greater than the version of any previous entity and less
         #     than the version of any possible future entity.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The create time of the entity. This field will not be set after a 'delete'.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The update time of the entity on the server after processing the mutation.
@@ -394,11 +440,23 @@ module Google
         #     The identifier of the transaction in which to read. A
         #     transaction identifier is returned by a call to
         #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # @!attribute [rw] new_transaction
+        #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
+        #     Options for beginning a new transaction for this request.
+        #
+        #     The new transaction identifier will be returned in the corresponding
+        #     response as either
+        #     {::Google::Cloud::Datastore::V1::LookupResponse#transaction LookupResponse.transaction}
+        #     or
+        #     {::Google::Cloud::Datastore::V1::RunQueryResponse#transaction RunQueryResponse.transaction}.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Reads entities as they were at the given time. This may not be older
-        #     than 270 seconds.  This value is only supported for Cloud Firestore in
-        #     Datastore mode.
+        #     Reads entities as they were at the given time. This value is only
+        #     supported for Cloud Firestore in Datastore mode.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class ReadOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -419,8 +477,10 @@ module Google
         # Options for beginning a new transaction.
         #
         # Transactions can be created explicitly with calls to
-        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction} or implicitly by setting
-        # [ReadOptions.new_transaction][google.datastore.v1.ReadOptions.new_transaction] in read requests.
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}
+        # or implicitly by setting
+        # {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        # in read requests.
         # @!attribute [rw] read_write
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite]
         #     The transaction should allow both reads and writes.
@@ -444,7 +504,10 @@ module Google
           # @!attribute [rw] read_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Reads entities at the given time.
-          #     This may not be older than 60 seconds.
+          #
+          #     This must be a microsecond precision timestamp within the past one hour,
+          #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+          #     minute timestamp within the past 7 days.
           class ReadOnly
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

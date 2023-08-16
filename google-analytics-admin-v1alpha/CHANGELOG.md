@@ -1,5 +1,107 @@
 # Release History
 
+### 0.23.0 (2023-08-15)
+
+#### Features
+
+* add `UpdateConversionEvent` method to the Admin API v1 alpha 
+* add the `ConversionCountingMethod` enum 
+* add the `counting_method` field to the `ConversionEvent` type 
+#### Bug Fixes
+
+* rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource ([#22766](https://github.com/googleapis/google-cloud-ruby/issues/22766)) 
+
+### 0.22.0 (2023-07-28)
+
+### ⚠ BREAKING CHANGES
+
+* update the `ReportingAttributionModel` enum
+
+#### Bug Fixes
+
+* update the `ReportingAttributionModel` enum 
+
+### 0.21.0 (2023-06-23)
+
+#### Features
+
+* support AdsWebConversionDataExportScope 
+#### Documentation
+
+* announce the deprecation of first-click, linear, time-decay and position-based attribution models 
+
+### 0.20.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21671](https://github.com/googleapis/google-cloud-ruby/issues/21671)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.19.0 (2023-05-15)
+
+#### Features
+
+* add AUDIENCE, EVENT_CREATE_RULE options to the ChangeHistoryResourceType enum 
+* add AdSenseLink type to the Admin API v1alpha 
+* add audience, event_create_rule fields to the ChangeHistoryResource.resource oneof field 
+* add CreateEventCreateRule, UpdateEventCreateRule,DeleteEventCreateRule, ListEventCreateRules methods to the Admin API v1alpha 
+* add EventCreateRule, MatchingCondition types to the Admin API v1alpha 
+* add FetchConnectedGa4Property method to the Admin API v1alpha 
+* add GetAdSenseLink, CreateAdSenseLink, DeleteAdSenseLink, ListAdSenseLinks methods to the Admin API v1alpha 
+
+### 0.18.0 (2023-05-04)
+
+#### Features
+
+* Added ChangeHistoryResource#channel_group 
+* Added CustomDimension::DimensionScope::ITEM 
+* Support for fetch_connected_ga4_property 
+* Support for managing channel groups 
+
+### 0.17.0 (2023-03-23)
+
+#### Features
+
+* Add account-level binding for the RunAccessReport method ([#20951](https://github.com/googleapis/google-cloud-ruby/issues/20951)) 
+* add enhanced_measurement_settings option to the ChangeHistoryResource.resource oneof field 
+* add ENHANCED_MEASUREMENT_SETTINGS option to the ChangeHistoryResourceType enum 
+* add intraday_export_enabled field to the BigQueryLink resource 
+
+### 0.16.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20624](https://github.com/googleapis/google-cloud-ruby/issues/20624)) 
+
+### 0.15.0 (2023-02-21)
+
+#### Features
+
+* Added support for access bindings ([#20481](https://github.com/googleapis/google-cloud-ruby/issues/20481)) 
+* Added support for expanded data sets 
+
+### 0.14.0 (2023-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed the PARTIAL_REGEXP match type for StringFilter
+* Removed the LESS_THAN_OR_EQUAL and GREATER_THAN_OR_EQUAL operation types for NumericFilter
+
+#### Features
+
+* Support for AccessQuota#tokens_per_project_per_hour 
+* Support for RPCs for getting and listing BigQueryLink resources 
+* Support for RPCs for managing SearchAds360Link resources ([#20137](https://github.com/googleapis/google-cloud-ruby/issues/20137)) 
+* Support for RPCs for setting and fetching AutomatedGa4ConfigurationOptOut resources 
+* Support for search_ads_360_link, bigquery_link and expanded_data_set fields in ChangeHistoryResource 
+* Support for the EXPANDED_DATA_SET and CHANNEL_GROUP values for ChangeHistoryResourceType 
+#### Bug Fixes
+
+* Removed the LESS_THAN_OR_EQUAL and GREATER_THAN_OR_EQUAL operation types for NumericFilter 
+* Removed the PARTIAL_REGEXP match type for StringFilter 
+
 ### 0.13.0 (2022-08-09)
 
 #### Features

@@ -190,6 +190,9 @@ module Google
         # @!attribute [rw] service_job
         #   @return [::String]
         #     The reference to the job within the service.
+        # @!attribute [rw] execution_trigger
+        #   @return [::Google::Cloud::Dataplex::V1::JobEvent::ExecutionTrigger]
+        #     Job execution trigger.
         class JobEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -232,6 +235,19 @@ module Google
             # Cloud Dataproc.
             DATAPROC = 1
           end
+
+          # Job Execution trigger.
+          module ExecutionTrigger
+            # The job execution trigger is unspecified.
+            EXECUTION_TRIGGER_UNSPECIFIED = 0
+
+            # The job was triggered by Dataplex based on trigger spec from task
+            # definition.
+            TASK_CONFIG = 1
+
+            # The job was triggered by the explicit call of Task API.
+            RUN_REQUEST = 2
+          end
         end
 
         # These messages contain information about sessions within an environment.
@@ -257,8 +273,8 @@ module Google
         #     The status of the event.
         # @!attribute [rw] fast_startup_enabled
         #   @return [::Boolean]
-        #     If the session is associated with an Environment with fast startup enabled,
-        #     and was pre-created before being assigned to a user.
+        #     If the session is associated with an environment with fast startup enabled,
+        #     and was created before being assigned to a user.
         # @!attribute [rw] unassigned_duration
         #   @return [::Google::Protobuf::Duration]
         #     The idle duration of a warm pooled session before it is assigned to user.
@@ -319,6 +335,333 @@ module Google
             # Event for creation of a cluster. It is not yet assigned to a user.
             # This comes before START in the sequence
             CREATE = 4
+          end
+        end
+
+        # These messages contain information about the execution of a datascan.
+        # The monitored resource is 'DataScan'
+        # Next ID: 13
+        # @!attribute [rw] data_source
+        #   @return [::String]
+        #     The data source of the data scan
+        # @!attribute [rw] job_id
+        #   @return [::String]
+        #     The identifier of the specific data scan job this log entry is for.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the data scan job was created.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the data scan job started to run.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the data scan job finished.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::ScanType]
+        #     The type of the data scan.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::State]
+        #     The status of the data scan job.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The message describing the data scan job event.
+        # @!attribute [rw] spec_version
+        #   @return [::String]
+        #     A version identifier of the spec which was used to execute this job.
+        # @!attribute [rw] trigger
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::Trigger]
+        #     The trigger type of the data scan job.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::Scope]
+        #     The scope of the data scan (e.g. full, incremental).
+        # @!attribute [rw] data_profile
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataProfileResult]
+        #     Data profile result for data profile type data scan.
+        # @!attribute [rw] data_quality
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataQualityResult]
+        #     Data quality result for data quality type data scan.
+        # @!attribute [rw] data_profile_configs
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataProfileAppliedConfigs]
+        #     Applied configs for data profile type data scan.
+        # @!attribute [rw] data_quality_configs
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataQualityAppliedConfigs]
+        #     Applied configs for data quality type data scan.
+        # @!attribute [rw] post_scan_actions_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::PostScanActionsResult]
+        #     The result of post scan actions.
+        class DataScanEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Data profile result for data scan job.
+          # @!attribute [rw] row_count
+          #   @return [::Integer]
+          #     The count of rows processed in the data scan job.
+          class DataProfileResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data quality result for data scan job.
+          # @!attribute [rw] row_count
+          #   @return [::Integer]
+          #     The count of rows processed in the data scan job.
+          # @!attribute [rw] passed
+          #   @return [::Boolean]
+          #     Whether the data quality result was `pass` or not.
+          # @!attribute [rw] dimension_passed
+          #   @return [::Google::Protobuf::Map{::String => ::Boolean}]
+          #     The result of each dimension for data quality result.
+          #     The key of the map is the name of the dimension.
+          #     The value is the bool value depicting whether the dimension result was
+          #     `pass` or not.
+          class DataQualityResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Boolean]
+            class DimensionPassedEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Applied configs for data profile type data scan job.
+          # @!attribute [rw] sampling_percent
+          #   @return [::Float]
+          #     The percentage of the records selected from the dataset for DataScan.
+          #
+          #     * Value ranges between 0.0 and 100.0.
+          #     * Value 0.0 or 100.0 imply that sampling was not applied.
+          # @!attribute [rw] row_filter_applied
+          #   @return [::Boolean]
+          #     Boolean indicating whether a row filter was applied in the DataScan job.
+          # @!attribute [rw] column_filter_applied
+          #   @return [::Boolean]
+          #     Boolean indicating whether a column filter was applied in the DataScan
+          #     job.
+          class DataProfileAppliedConfigs
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Applied configs for data quality type data scan job.
+          # @!attribute [rw] sampling_percent
+          #   @return [::Float]
+          #     The percentage of the records selected from the dataset for DataScan.
+          #
+          #     * Value ranges between 0.0 and 100.0.
+          #     * Value 0.0 or 100.0 imply that sampling was not applied.
+          # @!attribute [rw] row_filter_applied
+          #   @return [::Boolean]
+          #     Boolean indicating whether a row filter was applied in the DataScan job.
+          class DataQualityAppliedConfigs
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Post scan actions result for data scan job.
+          # @!attribute [rw] bigquery_export_result
+          #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::PostScanActionsResult::BigQueryExportResult]
+          #     The result of BigQuery export post scan action.
+          class PostScanActionsResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The result of BigQuery export post scan action.
+            # @!attribute [rw] state
+            #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::PostScanActionsResult::BigQueryExportResult::State]
+            #     Execution state for the BigQuery exporting.
+            # @!attribute [rw] message
+            #   @return [::String]
+            #     Additional information about the BigQuery exporting.
+            class BigQueryExportResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Execution state for the exporting.
+              module State
+                # The exporting state is unspecified.
+                STATE_UNSPECIFIED = 0
+
+                # The exporting completed successfully.
+                SUCCEEDED = 1
+
+                # The exporting is no longer running due to an error.
+                FAILED = 2
+
+                # The exporting is skipped due to no valid scan result to export
+                # (usually caused by scan failed).
+                SKIPPED = 3
+              end
+            end
+          end
+
+          # The type of the data scan.
+          module ScanType
+            # An unspecified data scan type.
+            SCAN_TYPE_UNSPECIFIED = 0
+
+            # Data scan for data profile.
+            DATA_PROFILE = 1
+
+            # Data scan for data quality.
+            DATA_QUALITY = 2
+          end
+
+          # The job state of the data scan.
+          module State
+            # Unspecified job state.
+            STATE_UNSPECIFIED = 0
+
+            # Data scan job started.
+            STARTED = 1
+
+            # Data scan job successfully completed.
+            SUCCEEDED = 2
+
+            # Data scan job was unsuccessful.
+            FAILED = 3
+
+            # Data scan job was cancelled.
+            CANCELLED = 4
+
+            # Data scan job was createed.
+            CREATED = 5
+          end
+
+          # The trigger type for the data scan.
+          module Trigger
+            # An unspecified trigger type.
+            TRIGGER_UNSPECIFIED = 0
+
+            # Data scan triggers on demand.
+            ON_DEMAND = 1
+
+            # Data scan triggers as per schedule.
+            SCHEDULE = 2
+          end
+
+          # The scope of job for the data scan.
+          module Scope
+            # An unspecified scope type.
+            SCOPE_UNSPECIFIED = 0
+
+            # Data scan runs on all of the data.
+            FULL = 1
+
+            # Data scan runs on incremental data.
+            INCREMENTAL = 2
+          end
+        end
+
+        # Information about the result of a data quality rule for data quality scan.
+        # The monitored resource is 'DataScan'.
+        # @!attribute [rw] job_id
+        #   @return [::String]
+        #     Identifier of the specific data scan job this log entry is for.
+        # @!attribute [rw] data_source
+        #   @return [::String]
+        #     The data source of the data scan (e.g. BigQuery table name).
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     The column which this rule is evaluated against.
+        # @!attribute [rw] rule_name
+        #   @return [::String]
+        #     The name of the data quality rule.
+        # @!attribute [rw] rule_type
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityScanRuleResult::RuleType]
+        #     The type of the data quality rule.
+        # @!attribute [rw] evalution_type
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityScanRuleResult::EvaluationType]
+        #     The evaluation type of the data quality rule.
+        # @!attribute [rw] rule_dimension
+        #   @return [::String]
+        #     The dimension of the data quality rule.
+        # @!attribute [rw] threshold_percent
+        #   @return [::Float]
+        #     The passing threshold ([0.0, 100.0]) of the data quality rule.
+        # @!attribute [rw] result
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityScanRuleResult::Result]
+        #     The result of the data quality rule.
+        # @!attribute [rw] evaluated_row_count
+        #   @return [::Integer]
+        #     The number of rows evaluated against the data quality rule.
+        #     This field is only valid for rules of PER_ROW evaluation type.
+        # @!attribute [rw] passed_row_count
+        #   @return [::Integer]
+        #     The number of rows which passed a rule evaluation.
+        #     This field is only valid for rules of PER_ROW evaluation type.
+        # @!attribute [rw] null_row_count
+        #   @return [::Integer]
+        #     The number of rows with null values in the specified column.
+        class DataQualityScanRuleResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the data quality rule.
+          module RuleType
+            # An unspecified rule type.
+            RULE_TYPE_UNSPECIFIED = 0
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#nonnullexpectation.
+            NON_NULL_EXPECTATION = 1
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#rangeexpectation.
+            RANGE_EXPECTATION = 2
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#regexexpectation.
+            REGEX_EXPECTATION = 3
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#rowconditionexpectation.
+            ROW_CONDITION_EXPECTATION = 4
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#setexpectation.
+            SET_EXPECTATION = 5
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#statisticrangeexpectation.
+            STATISTIC_RANGE_EXPECTATION = 6
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#tableconditionexpectation.
+            TABLE_CONDITION_EXPECTATION = 7
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#uniquenessexpectation.
+            UNIQUENESS_EXPECTATION = 8
+          end
+
+          # The evaluation type of the data quality rule.
+          module EvaluationType
+            # An unspecified evaluation type.
+            EVALUATION_TYPE_UNSPECIFIED = 0
+
+            # The rule evaluation is done at per row level.
+            PER_ROW = 1
+
+            # The rule evaluation is done for an aggregate of rows.
+            AGGREGATE = 2
+          end
+
+          # Whether the data quality rule passed or failed.
+          module Result
+            # An unspecified result.
+            RESULT_UNSPECIFIED = 0
+
+            # The data quality rule passed.
+            PASSED = 1
+
+            # The data quality rule failed.
+            FAILED = 2
           end
         end
       end

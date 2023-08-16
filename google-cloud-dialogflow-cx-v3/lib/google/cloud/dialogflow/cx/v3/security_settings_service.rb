@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/security_settings_service/credentials"
 require "google/cloud/dialogflow/cx/v3/security_settings_service/paths"
 require "google/cloud/dialogflow/cx/v3/security_settings_service/client"
+require "google/cloud/dialogflow/cx/v3/security_settings_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
           ##
           # Service for managing security settings for Dialogflow.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/security_settings_service"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/security_settings_service/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Rest::Client.new
           #
           module SecuritySettingsService
           end

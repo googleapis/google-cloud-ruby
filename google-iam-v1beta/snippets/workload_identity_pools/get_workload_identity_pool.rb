@@ -20,8 +20,11 @@
 require "google/iam/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool
+# Snippet for the get_workload_identity_pool call in the WorkloadIdentityPools service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool.
+# It may require modification in order to execute successfully.
 #
 def get_workload_identity_pool
   # Create a client object. The client can be reused for multiple calls.

@@ -18,6 +18,10 @@
     "lib/google/cloud/apigee_connect/v1/connection_service/client.rb",
     "lib/google/cloud/apigee_connect/v1/connection_service/credentials.rb",
     "lib/google/cloud/apigee_connect/v1/connection_service/paths.rb",
+    "lib/google/cloud/apigee_connect/v1/connection_service/rest.rb",
+    "lib/google/cloud/apigee_connect/v1/connection_service/rest/client.rb",
+    "lib/google/cloud/apigee_connect/v1/connection_service/rest/service_stub.rb",
+    "lib/google/cloud/apigee_connect/v1/rest.rb",
     "lib/google/cloud/apigee_connect/v1/tether.rb",
     "lib/google/cloud/apigee_connect/v1/tether/client.rb",
     "lib/google/cloud/apigee_connect/v1/tether/credentials.rb",
@@ -41,6 +45,7 @@
     "snippets/snippet_metadata_google.cloud.apigeeconnect.v1.json",
     "snippets/tether/egress.rb",
     "test/google/cloud/apigee_connect/v1/connection_service_paths_test.rb",
+    "test/google/cloud/apigee_connect/v1/connection_service_rest_test.rb",
     "test/google/cloud/apigee_connect/v1/connection_service_test.rb",
     "test/google/cloud/apigee_connect/v1/tether_test.rb",
     "test/helper.rb"

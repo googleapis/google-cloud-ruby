@@ -217,7 +217,7 @@ module Google
         #     The categories associated with a category page.
         #
         #     To represent full path of category, use '>' sign to separate different
-        #     hierarchies. If '>' is part of the category name, please replace it with
+        #     hierarchies. If '>' is part of the category name, replace it with
         #     other character(s).
         #
         #     Category pages include special pages such as sales or promotions. For
@@ -257,6 +257,13 @@ module Google
         #
         #     When using the client side event reporting with JavaScript pixel and Google
         #     Tag Manager, this value is filled in automatically.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     The entity for customers that may run multiple different entities, domains,
+        #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+        #     `google.com`, `youtube.com`, etc.
+        #     It is recommended to set this field to get better per-entity search,
+        #     completion and prediction results.
         class UserEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -146,7 +146,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -199,15 +199,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name for TagKey, parent of the TagValues to be listed,
-            #     in the format `tagKeys/123`.
+            #     Required.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of TagValues to return in the response. The server
-            #     allows a maximum of 300 TagValues to return. If unspecified, the server
-            #     will use 100 as the default.
+            #     Optional. The maximum number of TagValues to return in the response. The
+            #     server allows a maximum of 300 TagValues to return. If unspecified, the
+            #     server will use 100 as the default.
             #   @param page_token [::String]
-            #     Optional. A pagination token returned from a previous call to `ListTagValues`
-            #     that indicates where this listing should continue from.
+            #     Optional. A pagination token returned from a previous call to
+            #     `ListTagValues` that indicates where this listing should continue from.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ResourceManager::V3::TagValue>]
@@ -229,13 +228,11 @@ module Google
             #   # Call the list_tag_values method.
             #   result = client.list_tag_values request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ResourceManager::V3::TagValue.
-            #     p response
+            #     p item
             #   end
             #
             def list_tag_values request, options = nil
@@ -273,9 +270,8 @@ module Google
             end
 
             ##
-            # Retrieves TagValue. If the TagValue or namespaced name does not exist, or
-            # if the user does not have permission to view it, this method will return
-            # `PERMISSION_DENIED`.
+            # Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the
+            # value does not exist or the user does not have permission to view it.
             #
             # @overload get_tag_value(request, options = nil)
             #   Pass arguments to `get_tag_value` via a request object, either of type
@@ -293,7 +289,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name for TagValue to be fetched in the format `tagValues/456`.
+            #     Required. Resource name for TagValue to be fetched in the format
+            #     `tagValues/456`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ResourceManager::V3::TagValue]
@@ -360,9 +357,96 @@ module Google
             end
 
             ##
+            # Retrieves a TagValue by its namespaced name.
+            # This method will return `PERMISSION_DENIED` if the value does not exist
+            # or the user does not have permission to view it.
+            #
+            # @overload get_namespaced_tag_value(request, options = nil)
+            #   Pass arguments to `get_namespaced_tag_value` via a request object, either of type
+            #   {::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_namespaced_tag_value(name: nil)
+            #   Pass arguments to `get_namespaced_tag_value` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A namespaced tag value name in the following format:
+            #
+            #       `{parentId}/{tagKeyShort}/{tagValueShort}`
+            #
+            #     Examples:
+            #     - `42/foo/abc` for a value with short name "abc" under the key with short
+            #       name "foo" under the organization with ID 42
+            #     - `r2-d2/bar/xyz` for a value with short name "xyz" under the key with
+            #        short name "bar" under the project with ID "r2-d2"
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ResourceManager::V3::TagValue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ResourceManager::V3::TagValue]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::TagValues::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest.new
+            #
+            #   # Call the get_namespaced_tag_value method.
+            #   result = client.get_namespaced_tag_value request
+            #
+            #   # The returned object is of type Google::Cloud::ResourceManager::V3::TagValue.
+            #   p result
+            #
+            def get_namespaced_tag_value request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_namespaced_tag_value.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ResourceManager::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.get_namespaced_tag_value.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_namespaced_tag_value.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tag_values_stub.call_rpc :get_namespaced_tag_value, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a TagValue as a child of the specified TagKey. If a another
             # request with the same parameters is sent while the original request is in
-            # process the second request will receive an error. A maximum of 300
+            # process the second request will receive an error. A maximum of 1000
             # TagValues can exist under a TagKey at any given time.
             #
             # @overload create_tag_value(request, options = nil)
@@ -381,11 +465,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tag_value [::Google::Cloud::ResourceManager::V3::TagValue, ::Hash]
-            #     Required. The TagValue to be created. Only fields `short_name`, `description`,
-            #     and `parent` are considered during the creation request.
+            #     Required. The TagValue to be created. Only fields `short_name`,
+            #     `description`, and `parent` are considered during the creation request.
             #   @param validate_only [::Boolean]
-            #     Optional. Set as true to perform the validations necessary for creating the resource,
-            #     but not actually perform the action.
+            #     Optional. Set as true to perform the validations necessary for creating the
+            #     resource, but not actually perform the action.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -407,14 +491,14 @@ module Google
             #   # Call the create_tag_value method.
             #   result = client.create_tag_value request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_tag_value request, options = nil
@@ -470,15 +554,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tag_value [::Google::Cloud::ResourceManager::V3::TagValue, ::Hash]
-            #     Required. The new definition of the TagValue. Only fields `description` and `etag`
-            #     fields can be updated by this request. If the `etag` field is nonempty, it
-            #     must match the `etag` field of the existing ControlGroup. Otherwise,
-            #     `FAILED_PRECONDITION` will be returned.
+            #     Required. The new definition of the TagValue. Only fields `description` and
+            #     `etag` fields can be updated by this request. If the `etag` field is
+            #     nonempty, it must match the `etag` field of the existing ControlGroup.
+            #     Otherwise, `ABORTED` will be returned.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Fields to be updated.
             #   @param validate_only [::Boolean]
-            #     Optional. True to perform validations necessary for updating the resource, but not
-            #     actually perform the action.
+            #     Optional. True to perform validations necessary for updating the resource,
+            #     but not actually perform the action.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -500,14 +584,14 @@ module Google
             #   # Call the update_tag_value method.
             #   result = client.update_tag_value request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_tag_value request, options = nil
@@ -572,13 +656,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name for TagValue to be deleted in the format tagValues/456.
+            #     Required. Resource name for TagValue to be deleted in the format
+            #     tagValues/456.
             #   @param validate_only [::Boolean]
-            #     Optional. Set as true to perform the validations necessary for deletion, but not
-            #     actually perform the action.
+            #     Optional. Set as true to perform the validations necessary for deletion,
+            #     but not actually perform the action.
             #   @param etag [::String]
-            #     Optional. The etag known to the client for the expected state of the TagValue. This
-            #     is to be used for optimistic concurrency.
+            #     Optional. The etag known to the client for the expected state of the
+            #     TagValue. This is to be used for optimistic concurrency.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -600,14 +685,14 @@ module Google
             #   # Call the delete_tag_value method.
             #   result = client.delete_tag_value request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_tag_value request, options = nil
@@ -980,9 +1065,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1024,7 +1109,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudresourcemanager.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudresourcemanager.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1088,6 +1175,11 @@ module Google
                 #
                 attr_reader :get_tag_value
                 ##
+                # RPC-specific configuration for `get_namespaced_tag_value`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_namespaced_tag_value
+                ##
                 # RPC-specific configuration for `create_tag_value`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1124,6 +1216,8 @@ module Google
                   @list_tag_values = ::Gapic::Config::Method.new list_tag_values_config
                   get_tag_value_config = parent_rpcs.get_tag_value if parent_rpcs.respond_to? :get_tag_value
                   @get_tag_value = ::Gapic::Config::Method.new get_tag_value_config
+                  get_namespaced_tag_value_config = parent_rpcs.get_namespaced_tag_value if parent_rpcs.respond_to? :get_namespaced_tag_value
+                  @get_namespaced_tag_value = ::Gapic::Config::Method.new get_namespaced_tag_value_config
                   create_tag_value_config = parent_rpcs.create_tag_value if parent_rpcs.respond_to? :create_tag_value
                   @create_tag_value = ::Gapic::Config::Method.new create_tag_value_config
                   update_tag_value_config = parent_rpcs.update_tag_value if parent_rpcs.respond_to? :update_tag_value

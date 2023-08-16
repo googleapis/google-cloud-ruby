@@ -20,8 +20,11 @@
 require "google/cloud/api_keys/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ApiKeys::V2::ApiKeys::Client#lookup_key
+# Snippet for the lookup_key call in the ApiKeys service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ApiKeys::V2::ApiKeys::Client#lookup_key. It may require
+# modification in order to execute successfully.
 #
 def lookup_key
   # Create a client object. The client can be reused for multiple calls.

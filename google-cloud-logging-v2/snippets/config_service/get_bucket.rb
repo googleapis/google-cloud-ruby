@@ -20,8 +20,11 @@
 require "google/cloud/logging/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Logging::V2::ConfigService::Client#get_bucket
+# Snippet for the get_bucket call in the ConfigService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#get_bucket. It may require
+# modification in order to execute successfully.
 #
 def get_bucket
   # Create a client object. The client can be reused for multiple calls.

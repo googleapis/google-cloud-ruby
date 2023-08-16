@@ -141,6 +141,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.analyze_org_policies.timeout = 60.0
+                default_config.rpcs.analyze_org_policies.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.analyze_org_policy_governed_containers.timeout = 60.0
+                default_config.rpcs.analyze_org_policy_governed_containers.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.analyze_org_policy_governed_assets.timeout = 60.0
+                default_config.rpcs.analyze_org_policy_governed_assets.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -200,7 +215,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -238,13 +253,14 @@ module Google
             # Exports assets with time and resource types to a given Cloud Storage
             # location/BigQuery table. For Cloud Storage location destinations, the
             # output format is newline-delimited JSON. Each line represents a
-            # {::Google::Cloud::Asset::V1::Asset google.cloud.asset.v1.Asset} in the JSON format; for BigQuery table
-            # destinations, the output table stores the fields in asset Protobuf as
-            # columns. This API implements the {::Google::Longrunning::Operation google.longrunning.Operation} API,
-            # which allows you to keep track of the export. We recommend intervals of at
-            # least 2 seconds with exponential retry to poll the export operation result.
-            # For regular-size resource parent, the export operation usually finishes
-            # within 5 minutes.
+            # {::Google::Cloud::Asset::V1::Asset google.cloud.asset.v1.Asset} in the JSON
+            # format; for BigQuery table destinations, the output table stores the fields
+            # in asset Protobuf as columns. This API implements the
+            # {::Google::Longrunning::Operation google.longrunning.Operation} API, which
+            # allows you to keep track of the export. We recommend intervals of at least
+            # 2 seconds with exponential retry to poll the export operation result. For
+            # regular-size resource parent, the export operation usually finishes within
+            # 5 minutes.
             #
             # @overload export_assets(request, options = nil)
             #   Pass arguments to `export_assets` via a request object, either of type
@@ -295,7 +311,8 @@ module Google
             #     Asset content type. If not specified, no content but the asset name will be
             #     returned.
             #   @param output_config [::Google::Cloud::Asset::V1::OutputConfig, ::Hash]
-            #     Required. Output configuration indicating where the results will be output to.
+            #     Required. Output configuration indicating where the results will be output
+            #     to.
             #   @param relationship_types [::Array<::String>]
             #     A list of relationship types to export, for example:
             #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
@@ -333,14 +350,14 @@ module Google
             #   # Call the export_assets method.
             #   result = client.export_assets request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_assets request, options = nil
@@ -405,11 +422,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization, folder, or project the assets belong to. Format:
-            #     "organizations/[organization-number]" (such as "organizations/123"),
-            #     "projects/[project-id]" (such as "projects/my-project-id"),
-            #     "projects/[project-number]" (such as "projects/12345"), or
-            #     "folders/[folder-number]" (such as "folders/12345").
+            #     Required. Name of the organization, folder, or project the assets belong
+            #     to. Format: "organizations/[organization-number]" (such as
+            #     "organizations/123"), "projects/[project-id]" (such as
+            #     "projects/my-project-id"), "projects/[project-number]" (such as
+            #     "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Timestamp to take an asset snapshot. This can only be set to a timestamp
             #     between the current time and the current time minus 35 days (inclusive).
@@ -482,13 +499,11 @@ module Google
             #   # Call the list_assets method.
             #   result = client.list_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::Asset.
-            #     p response
+            #     p item
             #   end
             #
             def list_assets request, options = nil
@@ -684,15 +699,14 @@ module Google
             #     Required. The name of the project/folder/organization where this feed
             #     should be created in. It can only be an organization number (such as
             #     "organizations/123"), a folder number (such as "folders/123"), a project ID
-            #     (such as "projects/my-project-id")", or a project number (such as
+            #     (such as "projects/my-project-id"), or a project number (such as
             #     "projects/12345").
             #   @param feed_id [::String]
             #     Required. This is the client-assigned asset feed identifier and it needs to
             #     be unique under a specific parent project/folder/organization.
             #   @param feed [::Google::Cloud::Asset::V1::Feed, ::Hash]
-            #     Required. The feed details. The field `name` must be empty and it will be generated
-            #     in the format of:
-            #     projects/project_number/feeds/feed_id
+            #     Required. The feed details. The field `name` must be empty and it will be
+            #     generated in the format of: projects/project_number/feeds/feed_id
             #     folders/folder_number/feeds/feed_id
             #     organizations/organization_number/feeds/feed_id
             #
@@ -954,8 +968,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param feed [::Google::Cloud::Asset::V1::Feed, ::Hash]
-            #     Required. The new values of feed details. It must match an existing feed and the
-            #     field `name` must be in the format of:
+            #     Required. The new values of feed details. It must match an existing feed
+            #     and the field `name` must be in the format of:
             #     projects/project_number/feeds/feed_id or
             #     folders/folder_number/feeds/feed_id or
             #     organizations/organization_number/feeds/feed_id.
@@ -1117,8 +1131,8 @@ module Google
             end
 
             ##
-            # Searches all Cloud resources within the specified scope, such as a project,
-            # folder, or organization. The caller must be granted the
+            # Searches all Google Cloud resources within the specified scope, such as a
+            # project, folder, or organization. The caller must be granted the
             # `cloudasset.assets.searchAllResources` permission on the desired scope,
             # otherwise the request will be rejected.
             #
@@ -1138,8 +1152,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. A scope can be a project, a folder, or an organization. The search is
-            #     limited to the resources within the `scope`. The caller must be granted the
+            #     Required. A scope can be a project, a folder, or an organization. The
+            #     search is limited to the resources within the `scope`. The caller must be
+            #     granted the
             #     [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
             #     permission on the desired scope.
             #
@@ -1157,54 +1172,54 @@ module Google
             #
             #     Examples:
             #
-            #     * `name:Important` to find Cloud resources whose name contains
+            #     * `name:Important` to find Google Cloud resources whose name contains
             #       "Important" as a word.
-            #     * `name=Important` to find the Cloud resource whose name is exactly
+            #     * `name=Important` to find the Google Cloud resource whose name is exactly
             #       "Important".
-            #     * `displayName:Impor*` to find Cloud resources whose display name
+            #     * `displayName:Impor*` to find Google Cloud resources whose display name
             #       contains "Impor" as a prefix of any word in the field.
-            #     * `location:us-west*` to find Cloud resources whose location contains both
-            #       "us" and "west" as prefixes.
-            #     * `labels:prod` to find Cloud resources whose labels contain "prod" as
-            #       a key or value.
-            #     * `labels.env:prod` to find Cloud resources that have a label "env"
+            #     * `location:us-west*` to find Google Cloud resources whose location
+            #       contains both "us" and "west" as prefixes.
+            #     * `labels:prod` to find Google Cloud resources whose labels contain "prod"
+            #       as a key or value.
+            #     * `labels.env:prod` to find Google Cloud resources that have a label "env"
             #       and its value is "prod".
-            #     * `labels.env:*` to find Cloud resources that have a label "env".
-            #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
-            #       encryption key whose name contains "key" as a word. This field is
-            #       deprecated. Please use the `kmsKeys` field to retrieve KMS key
-            #       information.
-            #     * `kmsKeys:key` to find Cloud resources encrypted with customer-managed
-            #       encryption keys whose name contains the word "key".
-            #     * `relationships:instance-group-1` to find Cloud resources that have
+            #     * `labels.env:*` to find Google Cloud resources that have a label "env".
+            #     * `kmsKey:key` to find Google Cloud resources encrypted with a
+            #       customer-managed encryption key whose name contains "key" as a word. This
+            #       field is deprecated. Please use the `kmsKeys` field to retrieve Cloud KMS
+            #       key information.
+            #     * `kmsKeys:key` to find Google Cloud resources encrypted with
+            #       customer-managed encryption keys whose name contains the word "key".
+            #     * `relationships:instance-group-1` to find Google Cloud resources that have
             #       relationships with "instance-group-1" in the related resource name.
-            #     * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute instances that
-            #       have relationships of type "INSTANCE_TO_INSTANCEGROUP".
+            #     * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
+            #       instances that have relationships of type "INSTANCE_TO_INSTANCEGROUP".
             #     * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
-            #       compute instances that have relationships with "instance-group-1" in the
-            #       compute instance group resource name, for relationship type
+            #       Compute Engine instances that have relationships with "instance-group-1"
+            #       in the Compute Engine instance group resource name, for relationship type
             #       "INSTANCE_TO_INSTANCEGROUP".
-            #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
-            #       word.
-            #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+            #     * `state:ACTIVE` to find Google Cloud resources whose state contains
             #       "ACTIVE" as a word.
-            #     * `createTime<1609459200` to find Cloud resources that were created before
-            #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+            #     * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
+            #       contain "ACTIVE" as a word.
+            #     * `createTime<1609459200` to find Google Cloud resources that were created
+            #       before "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
             #       "2021-01-01 00:00:00 UTC" in seconds.
-            #     * `updateTime>1609459200` to find Cloud resources that were updated after
-            #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+            #     * `updateTime>1609459200` to find Google Cloud resources that were updated
+            #       after "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
             #       "2021-01-01 00:00:00 UTC" in seconds.
-            #     * `Important` to find Cloud resources that contain "Important" as a word
-            #       in any of the searchable fields.
-            #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+            #     * `Important` to find Google Cloud resources that contain "Important" as a
             #       word in any of the searchable fields.
-            #     * `Important location:(us-west1 OR global)` to find Cloud
+            #     * `Impor*` to find Google Cloud resources that contain "Impor" as a prefix
+            #       of any word in any of the searchable fields.
+            #     * `Important location:(us-west1 OR global)` to find Google Cloud
             #       resources that contain "Important" as a word in any of the searchable
             #       fields and are also located in the "us-west1" region or the "global"
             #       location.
             #   @param asset_types [::Array<::String>]
-            #     Optional. A list of asset types that this request searches for. If empty, it will
-            #     search all the [searchable asset
+            #     Optional. A list of asset types that this request searches for. If empty,
+            #     it will search all the [searchable asset
             #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
             #
             #     Regular expressions are also supported. For example:
@@ -1218,19 +1233,20 @@ module Google
             #     regular expression syntax. If the regular expression does not match any
             #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #   @param page_size [::Integer]
-            #     Optional. The page size for search result pagination. Page size is capped at 500 even
-            #     if a larger value is given. If set to zero, server will pick an appropriate
-            #     default. Returned results may be fewer than requested. When this happens,
-            #     there could be more results as long as `next_page_token` is returned.
+            #     Optional. The page size for search result pagination. Page size is capped
+            #     at 500 even if a larger value is given. If set to zero, server will pick an
+            #     appropriate default. Returned results may be fewer than requested. When
+            #     this happens, there could be more results as long as `next_page_token` is
+            #     returned.
             #   @param page_token [::String]
-            #     Optional. If present, then retrieve the next batch of results from the preceding call
-            #     to this method. `page_token` must be the value of `next_page_token` from
-            #     the previous response. The values of all other method parameters, must be
-            #     identical to those in the previous call.
+            #     Optional. If present, then retrieve the next batch of results from the
+            #     preceding call to this method. `page_token` must be the value of
+            #     `next_page_token` from the previous response. The values of all other
+            #     method parameters, must be identical to those in the previous call.
             #   @param order_by [::String]
-            #     Optional. A comma-separated list of fields specifying the sorting order of the
-            #     results. The default order is ascending. Add " DESC" after the field name
-            #     to indicate descending order. Redundant space characters are ignored.
+            #     Optional. A comma-separated list of fields specifying the sorting order of
+            #     the results. The default order is ascending. Add " DESC" after the field
+            #     name to indicate descending order. Redundant space characters are ignored.
             #     Example: "location DESC, name".
             #     Only singular primitive fields in the response are sortable:
             #
@@ -1250,10 +1266,10 @@ module Google
             #     `kmsKeys`), map fields (e.g., `labels`) and struct fields (e.g.,
             #     `additionalAttributes`) are not supported.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. A comma-separated list of fields specifying which fields to be returned in
-            #     ResourceSearchResult. Only '*' or combination of top level fields can be
-            #     specified. Field names of both snake_case and camelCase are supported.
-            #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+            #     Optional. A comma-separated list of fields specifying which fields to be
+            #     returned in ResourceSearchResult. Only '*' or combination of top level
+            #     fields can be specified. Field names of both snake_case and camelCase are
+            #     supported. Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
             #
             #     The read_mask paths must be valid field paths listed but not limited to
             #     (both snake_case and camelCase are supported):
@@ -1270,7 +1286,7 @@ module Google
             #       * labels
             #       * networkTags
             #       * kmsKey (This field is deprecated. Please use the `kmsKeys` field to
-            #         retrieve KMS key information.)
+            #         retrieve Cloud KMS key information.)
             #       * kmsKeys
             #       * createTime
             #       * updateTime
@@ -1304,13 +1320,11 @@ module Google
             #   # Call the search_all_resources method.
             #   result = client.search_all_resources request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search_all_resources request, options = nil
@@ -1377,9 +1391,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. A scope can be a project, a folder, or an organization. The search is
-            #     limited to the IAM policies within the `scope`. The caller must be granted
-            #     the
+            #     Required. A scope can be a project, a folder, or an organization. The
+            #     search is limited to the IAM policies within the `scope`. The caller must
+            #     be granted the
             #     [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
             #     permission on the desired scope.
             #
@@ -1394,8 +1408,8 @@ module Google
             #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
             #     for more information. If not specified or empty, it will search all the
             #     IAM policies within the specified `scope`. Note that the query string is
-            #     compared against each Cloud IAM policy binding, including its principals,
-            #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+            #     compared against each IAM policy binding, including its principals,
+            #     roles, and IAM conditions. The returned IAM policies will only
             #     contain the bindings that match your query. To learn more about the IAM
             #     policy structure, see the [IAM policy
             #     documentation](https://cloud.google.com/iam/help/allow-policies/structure).
@@ -1433,18 +1447,20 @@ module Google
             #     * `memberTypes:user` to find IAM policy bindings that contain the
             #       principal type "user".
             #   @param page_size [::Integer]
-            #     Optional. The page size for search result pagination. Page size is capped at 500 even
-            #     if a larger value is given. If set to zero, server will pick an appropriate
-            #     default. Returned results may be fewer than requested. When this happens,
-            #     there could be more results as long as `next_page_token` is returned.
+            #     Optional. The page size for search result pagination. Page size is capped
+            #     at 500 even if a larger value is given. If set to zero, server will pick an
+            #     appropriate default. Returned results may be fewer than requested. When
+            #     this happens, there could be more results as long as `next_page_token` is
+            #     returned.
             #   @param page_token [::String]
-            #     Optional. If present, retrieve the next batch of results from the preceding call to
-            #     this method. `page_token` must be the value of `next_page_token` from the
-            #     previous response. The values of all other method parameters must be
-            #     identical to those in the previous call.
+            #     Optional. If present, retrieve the next batch of results from the preceding
+            #     call to this method. `page_token` must be the value of `next_page_token`
+            #     from the previous response. The values of all other method parameters must
+            #     be identical to those in the previous call.
             #   @param asset_types [::Array<::String>]
-            #     Optional. A list of asset types that the IAM policies are attached to. If empty, it
-            #     will search the IAM policies that are attached to all the [searchable asset
+            #     Optional. A list of asset types that the IAM policies are attached to. If
+            #     empty, it will search the IAM policies that are attached to all the
+            #     [searchable asset
             #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
             #
             #     Regular expressions are also supported. For example:
@@ -1460,9 +1476,9 @@ module Google
             #     regular expression syntax. If the regular expression does not match any
             #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #   @param order_by [::String]
-            #     Optional. A comma-separated list of fields specifying the sorting order of the
-            #     results. The default order is ascending. Add " DESC" after the field name
-            #     to indicate descending order. Redundant space characters are ignored.
+            #     Optional. A comma-separated list of fields specifying the sorting order of
+            #     the results. The default order is ascending. Add " DESC" after the field
+            #     name to indicate descending order. Redundant space characters are ignored.
             #     Example: "assetType DESC, resource".
             #     Only singular primitive fields in the response are sortable:
             #       * resource
@@ -1491,13 +1507,11 @@ module Google
             #   # Call the search_all_iam_policies method.
             #   result = client.search_all_iam_policies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::IamPolicySearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search_all_iam_policies request, options = nil
@@ -1581,7 +1595,8 @@ module Google
             #     0 or empty string, etc., because we use proto3, which doesn't support field
             #     presence yet.
             #   @param execution_timeout [::Google::Protobuf::Duration, ::Hash]
-            #     Optional. Amount of time executable has to complete.  See JSON representation of
+            #     Optional. Amount of time executable has to complete.  See JSON
+            #     representation of
             #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
             #
             #     If this field is set with a value less than the RPC deadline, and the
@@ -1661,11 +1676,12 @@ module Google
             # accesses on which resources, and writes the analysis results to a Google
             # Cloud Storage or a BigQuery destination. For Cloud Storage destination, the
             # output format is the JSON format that represents a
-            # {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse AnalyzeIamPolicyResponse}. This method implements the
-            # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows you to track the operation
-            # status. We recommend intervals of at least 2 seconds with exponential
-            # backoff retry to poll the operation result. The metadata contains the
-            # metadata for the long-running operation.
+            # {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse AnalyzeIamPolicyResponse}.
+            # This method implements the
+            # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows
+            # you to track the operation status. We recommend intervals of at least 2
+            # seconds with exponential backoff retry to poll the operation result. The
+            # metadata contains the metadata for the long-running operation.
             #
             # @overload analyze_iam_policy_longrunning(request, options = nil)
             #   Pass arguments to `analyze_iam_policy_longrunning` via a request object, either of type
@@ -1702,7 +1718,8 @@ module Google
             #     0 or empty string, etc., because we use proto3, which doesn't support field
             #     presence yet.
             #   @param output_config [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig, ::Hash]
-            #     Required. Output configuration indicating where the results will be output to.
+            #     Required. Output configuration indicating where the results will be output
+            #     to.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1724,14 +1741,14 @@ module Google
             #   # Call the analyze_iam_policy_longrunning method.
             #   result = client.analyze_iam_policy_longrunning request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def analyze_iam_policy_longrunning request, options = nil
@@ -1800,14 +1817,14 @@ module Google
             #
             #   @param resource [::String]
             #     Required. Name of the resource to perform the analysis against.
-            #     Only GCP Project are supported as of today. Hence, this can only be Project
-            #     ID (such as "projects/my-project-id") or a Project Number (such as
-            #     "projects/12345").
+            #     Only Google Cloud projects are supported as of today. Hence, this can only
+            #     be a project ID (such as "projects/my-project-id") or a project number
+            #     (such as "projects/12345").
             #   @param destination_parent [::String]
-            #     Required. Name of the GCP Folder or Organization to reparent the target
-            #     resource. The analysis will be performed against hypothetically moving the
-            #     resource to this specified desitination parent. This can only be a Folder
-            #     number (such as "folders/123") or an Organization number (such as
+            #     Required. Name of the Google Cloud folder or organization to reparent the
+            #     target resource. The analysis will be performed against hypothetically
+            #     moving the resource to this specified desitination parent. This can only be
+            #     a folder number (such as "folders/123") or an organization number (such as
             #     "organizations/123").
             #   @param view [::Google::Cloud::Asset::V1::AnalyzeMoveRequest::AnalysisView]
             #     Analysis view indicating what information should be included in the
@@ -1919,11 +1936,11 @@ module Google
             #     Optional. A SQL statement that's compatible with [BigQuery Standard
             #     SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
             #   @param job_reference [::String]
-            #     Optional. Reference to the query job, which is from the `QueryAssetsResponse` of
-            #     previous `QueryAssets` call.
+            #     Optional. Reference to the query job, which is from the
+            #     `QueryAssetsResponse` of previous `QueryAssets` call.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of rows to return in the results. Responses are limited
-            #     to 10 MB and 1000 rows.
+            #     Optional. The maximum number of rows to return in the results. Responses
+            #     are limited to 10 MB and 1000 rows.
             #
             #     By default, the maximum row count is 1000. When the byte or row count limit
             #     is reached, the rest of the query results will be paginated.
@@ -1934,10 +1951,11 @@ module Google
             #
             #     The field will be ignored when [output_config] is specified.
             #   @param timeout [::Google::Protobuf::Duration, ::Hash]
-            #     Optional. Specifies the maximum amount of time that the client is willing to wait
-            #     for the query to complete. By default, this limit is 5 min for the first
-            #     query, and 1 minute for the following queries. If the query is complete,
-            #     the `done` field in the `QueryAssetsResponse` is true, otherwise false.
+            #     Optional. Specifies the maximum amount of time that the client is willing
+            #     to wait for the query to complete. By default, this limit is 5 min for the
+            #     first query, and 1 minute for the following queries. If the query is
+            #     complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
+            #     false.
             #
             #     Like BigQuery [jobs.query
             #     API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
@@ -1947,11 +1965,12 @@ module Google
             #
             #     The field will be ignored when [output_config] is specified.
             #   @param read_time_window [::Google::Cloud::Asset::V1::TimeWindow, ::Hash]
-            #     Optional. [start_time] is required. [start_time] must be less than [end_time]
-            #     Defaults [end_time] to now if [start_time] is set and [end_time] isn't.
-            #     Maximum permitted time range is 7 days.
+            #     Optional. [start_time] is required. [start_time] must be less than
+            #     [end_time] Defaults [end_time] to now if [start_time] is set and
+            #     [end_time] isn't. Maximum permitted time range is 7 days.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Optional. Queries cloud assets as they appeared at the specified point in time.
+            #     Optional. Queries cloud assets as they appeared at the specified point in
+            #     time.
             #   @param output_config [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig, ::Hash]
             #     Optional. Destination where the query results will be saved.
             #
@@ -2046,21 +2065,21 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project/folder/organization where this saved_query
-            #     should be created in. It can only be an organization number (such as
-            #     "organizations/123"), a folder number (such as "folders/123"), a project ID
-            #     (such as "projects/my-project-id")", or a project number (such as
+            #     Required. The name of the project/folder/organization where this
+            #     saved_query should be created in. It can only be an organization number
+            #     (such as "organizations/123"), a folder number (such as "folders/123"), a
+            #     project ID (such as "projects/my-project-id"), or a project number (such as
             #     "projects/12345").
             #   @param saved_query [::Google::Cloud::Asset::V1::SavedQuery, ::Hash]
-            #     Required. The saved_query details. The `name` field must be empty as it will be
-            #     generated based on the parent and saved_query_id.
+            #     Required. The saved_query details. The `name` field must be empty as it
+            #     will be generated based on the parent and saved_query_id.
             #   @param saved_query_id [::String]
-            #     Required. The ID to use for the saved query, which must be unique in the specified
-            #     parent. It will become the final component of the saved query's resource
-            #     name.
+            #     Required. The ID to use for the saved query, which must be unique in the
+            #     specified parent. It will become the final component of the saved query's
+            #     resource name.
             #
             #     This value should be 4-63 characters, and valid characters
-            #     are /[a-z][0-9]-/.
+            #     are `[a-z][0-9]-`.
             #
             #     Notice that this field is required in the saved query creation, and the
             #     `name` field of the `saved_query` will be ignored.
@@ -2237,8 +2256,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent project/folder/organization whose savedQueries are to be
-            #     listed. It can only be using project/folder/organization number (such as
+            #     Required. The parent project/folder/organization whose savedQueries are to
+            #     be listed. It can only be using project/folder/organization number (such as
             #     "folders/12345")", or a project ID (such as "projects/my-project-id").
             #   @param filter [::String]
             #     Optional. The expression to filter resources.
@@ -2249,9 +2268,10 @@ module Google
             #
             #     See https://google.aip.dev/160 for more information on the grammar.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of saved queries to return per page. The service may
-            #     return fewer than this value. If unspecified, at most 50 will be returned.
-            #      The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. The maximum number of saved queries to return per page. The
+            #     service may return fewer than this value. If unspecified, at most 50 will
+            #     be returned. The maximum value is 1000; values above 1000 will be coerced
+            #     to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous `ListSavedQueries` call.
             #     Provide this to retrieve the subsequent page.
@@ -2279,13 +2299,11 @@ module Google
             #   # Call the list_saved_queries method.
             #   result = client.list_saved_queries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::SavedQuery.
-            #     p response
+            #     p item
             #   end
             #
             def list_saved_queries request, options = nil
@@ -2443,7 +2461,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the saved query to delete. It must be in the format of:
+            #     Required. The name of the saved query to delete. It must be in the format
+            #     of:
             #
             #     * projects/project_number/savedQueries/saved_query_id
             #     * folders/folder_number/savedQueries/saved_query_id
@@ -2615,6 +2634,368 @@ module Google
             end
 
             ##
+            # Analyzes organization policies under a scope.
+            #
+            # @overload analyze_org_policies(request, options = nil)
+            #   Pass arguments to `analyze_org_policies` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload analyze_org_policies(scope: nil, constraint: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `analyze_org_policies` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param scope [::String]
+            #     Required. The organization to scope the request. Only organization
+            #     policies within the scope will be analyzed.
+            #
+            #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+            #   @param constraint [::String]
+            #     Required. The name of the constraint to analyze organization policies for.
+            #     The response only contains analyzed organization policies for the provided
+            #     constraint.
+            #   @param filter [::String]
+            #     The expression to filter
+            #     {::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse#org_policy_results AnalyzeOrgPoliciesResponse.org_policy_results}.
+            #     The only supported field is `consolidated_policy.attached_resource`, and
+            #     the only supported operator is `=`.
+            #
+            #     Example:
+            #     consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
+            #     will return the org policy results of"folders/001".
+            #   @param page_size [::Integer]
+            #     The maximum number of items to return per page. If unspecified,
+            #     {::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse#org_policy_results AnalyzeOrgPoliciesResponse.org_policy_results}
+            #     will contain 20 items with a maximum of 200.
+            #   @param page_token [::String]
+            #     The pagination token to retrieve the next page.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new
+            #
+            #   # Call the analyze_org_policies method.
+            #   result = client.analyze_org_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult.
+            #     p item
+            #   end
+            #
+            def analyze_org_policies request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.analyze_org_policies.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.scope
+                header_params["scope"] = request.scope
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.analyze_org_policies.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.analyze_org_policies.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :analyze_org_policies, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @asset_service_stub, :analyze_org_policies, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Analyzes organization policies governed containers (projects, folders or
+            # organization) under a scope.
+            #
+            # @overload analyze_org_policy_governed_containers(request, options = nil)
+            #   Pass arguments to `analyze_org_policy_governed_containers` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload analyze_org_policy_governed_containers(scope: nil, constraint: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `analyze_org_policy_governed_containers` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param scope [::String]
+            #     Required. The organization to scope the request. Only organization
+            #     policies within the scope will be analyzed. The output containers will
+            #     also be limited to the ones governed by those in-scope organization
+            #     policies.
+            #
+            #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+            #   @param constraint [::String]
+            #     Required. The name of the constraint to analyze governed containers for.
+            #     The analysis only contains organization policies for the provided
+            #     constraint.
+            #   @param filter [::String]
+            #     The expression to filter the governed containers in result.
+            #     The only supported field is `parent`, and the only supported operator is
+            #     `=`.
+            #
+            #     Example:
+            #     parent="//cloudresourcemanager.googleapis.com/folders/001" will return all
+            #     containers under "folders/001".
+            #   @param page_size [::Integer]
+            #     The maximum number of items to return per page. If unspecified,
+            #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse#governed_containers AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+            #     will contain 100 items with a maximum of 200.
+            #   @param page_token [::String]
+            #     The pagination token to retrieve the next page.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new
+            #
+            #   # Call the analyze_org_policy_governed_containers method.
+            #   result = client.analyze_org_policy_governed_containers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer.
+            #     p item
+            #   end
+            #
+            def analyze_org_policy_governed_containers request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.analyze_org_policy_governed_containers.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.scope
+                header_params["scope"] = request.scope
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.analyze_org_policy_governed_containers.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.analyze_org_policy_governed_containers.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :analyze_org_policy_governed_containers, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @asset_service_stub, :analyze_org_policy_governed_containers, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Analyzes organization policies governed assets (Google Cloud resources or
+            # policies) under a scope. This RPC supports custom constraints and the
+            # following 10 canned constraints:
+            #
+            # * storage.uniformBucketLevelAccess
+            # * iam.disableServiceAccountKeyCreation
+            # * iam.allowedPolicyMemberDomains
+            # * compute.vmExternalIpAccess
+            # * appengine.enforceServiceAccountActAsCheck
+            # * gcp.resourceLocations
+            # * compute.trustedImageProjects
+            # * compute.skipDefaultNetworkCreation
+            # * compute.requireOsLogin
+            # * compute.disableNestedVirtualization
+            #
+            # This RPC only returns either resources of types supported by [searchable
+            # asset
+            # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types),
+            # or IAM policies.
+            #
+            # @overload analyze_org_policy_governed_assets(request, options = nil)
+            #   Pass arguments to `analyze_org_policy_governed_assets` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload analyze_org_policy_governed_assets(scope: nil, constraint: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `analyze_org_policy_governed_assets` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param scope [::String]
+            #     Required. The organization to scope the request. Only organization
+            #     policies within the scope will be analyzed. The output assets will
+            #     also be limited to the ones governed by those in-scope organization
+            #     policies.
+            #
+            #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+            #   @param constraint [::String]
+            #     Required. The name of the constraint to analyze governed assets for. The
+            #     analysis only contains analyzed organization policies for the provided
+            #     constraint.
+            #   @param filter [::String]
+            #     The expression to filter the governed assets in result. The only supported
+            #     fields for governed resources are `governed_resource.project` and
+            #     `governed_resource.folders`. The only supported fields for governed iam
+            #     policies are `governed_iam_policy.project` and
+            #     `governed_iam_policy.folders`. The only supported operator is `=`.
+            #
+            #     Example 1: governed_resource.project="projects/12345678" filter will return
+            #     all governed resources under projects/12345678 including the project
+            #     ifself, if applicable.
+            #
+            #     Example 2: governed_iam_policy.folders="folders/12345678" filter will
+            #     return all governed iam policies under folders/12345678, if applicable.
+            #   @param page_size [::Integer]
+            #     The maximum number of items to return per page. If unspecified,
+            #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse#governed_assets AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+            #     will contain 100 items with a maximum of 200.
+            #   @param page_token [::String]
+            #     The pagination token to retrieve the next page.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new
+            #
+            #   # Call the analyze_org_policy_governed_assets method.
+            #   result = client.analyze_org_policy_governed_assets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset.
+            #     p item
+            #   end
+            #
+            def analyze_org_policy_governed_assets request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.analyze_org_policy_governed_assets.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.scope
+                header_params["scope"] = request.scope
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.analyze_org_policy_governed_assets.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.analyze_org_policy_governed_assets.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :analyze_org_policy_governed_assets, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @asset_service_stub, :analyze_org_policy_governed_assets, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AssetService API.
             #
             # This class represents the configuration for AssetService,
@@ -2652,9 +3033,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2696,7 +3077,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudasset.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudasset.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2849,6 +3232,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_get_effective_iam_policies
+                ##
+                # RPC-specific configuration for `analyze_org_policies`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :analyze_org_policies
+                ##
+                # RPC-specific configuration for `analyze_org_policy_governed_containers`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :analyze_org_policy_governed_containers
+                ##
+                # RPC-specific configuration for `analyze_org_policy_governed_assets`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :analyze_org_policy_governed_assets
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2892,6 +3290,12 @@ module Google
                   @delete_saved_query = ::Gapic::Config::Method.new delete_saved_query_config
                   batch_get_effective_iam_policies_config = parent_rpcs.batch_get_effective_iam_policies if parent_rpcs.respond_to? :batch_get_effective_iam_policies
                   @batch_get_effective_iam_policies = ::Gapic::Config::Method.new batch_get_effective_iam_policies_config
+                  analyze_org_policies_config = parent_rpcs.analyze_org_policies if parent_rpcs.respond_to? :analyze_org_policies
+                  @analyze_org_policies = ::Gapic::Config::Method.new analyze_org_policies_config
+                  analyze_org_policy_governed_containers_config = parent_rpcs.analyze_org_policy_governed_containers if parent_rpcs.respond_to? :analyze_org_policy_governed_containers
+                  @analyze_org_policy_governed_containers = ::Gapic::Config::Method.new analyze_org_policy_governed_containers_config
+                  analyze_org_policy_governed_assets_config = parent_rpcs.analyze_org_policy_governed_assets if parent_rpcs.respond_to? :analyze_org_policy_governed_assets
+                  @analyze_org_policy_governed_assets = ::Gapic::Config::Method.new analyze_org_policy_governed_assets_config
 
                   yield self if block_given?
                 end

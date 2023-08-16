@@ -34,7 +34,7 @@ module Google
         ##
         # TensorboardService
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/tensorboard_service"
         #     client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new

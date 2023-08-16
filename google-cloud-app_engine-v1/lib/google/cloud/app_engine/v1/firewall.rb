@@ -24,6 +24,7 @@ require "google/cloud/app_engine/v1/version"
 
 require "google/cloud/app_engine/v1/firewall/credentials"
 require "google/cloud/app_engine/v1/firewall/client"
+require "google/cloud/app_engine/v1/firewall/rest"
 
 module Google
   module Cloud
@@ -41,10 +42,15 @@ module Google
         # IP addresses. The default final rule for a newly-created application will be
         # set to "allow" if not otherwise specified by the user.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/firewall"
         #     client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/app_engine/v1/firewall/rest"
+        #     client = ::Google::Cloud::AppEngine::V1::Firewall::Rest::Client.new
         #
         module Firewall
         end

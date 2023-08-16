@@ -20,8 +20,11 @@
 require "google/cloud/eventarc/publishing/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Eventarc::Publishing::V1::Publisher::Client#publish_events
+# Snippet for the publish_events call in the Publisher service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Eventarc::Publishing::V1::Publisher::Client#publish_events. It
+# may require modification in order to execute successfully.
 #
 def publish_events
   # Create a client object. The client can be reused for multiple calls.

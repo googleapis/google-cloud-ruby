@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Contact Center AI Insights helps users detect and visualize patterns in their contact center data. Understanding conversational data drives business value, improves operational efficiency, and provides a voice for customer feedback.",
     "ruby-cloud-product-url": "https://cloud.google.com/contact-center/insights/docs",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

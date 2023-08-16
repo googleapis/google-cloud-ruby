@@ -125,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -206,7 +206,8 @@ module Google
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri instance_schema_uri}.
             #   @param parameters [::Google::Protobuf::Value, ::Hash]
             #     The parameters that govern the prediction. The schema of the parameters may
-            #     be specified via Endpoint's DeployedModels' [Model's ][google.cloud.aiplatform.v1.DeployedModel.model]
+            #     be specified via Endpoint's DeployedModels' [Model's
+            #     ][google.cloud.aiplatform.v1.DeployedModel.model]
             #     [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#parameters_schema_uri parameters_schema_uri}.
             #
@@ -279,11 +280,13 @@ module Google
             #
             # The response includes the following HTTP headers:
             #
-            # * `X-Vertex-AI-Endpoint-Id`: ID of the {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} that served this
+            # * `X-Vertex-AI-Endpoint-Id`: ID of the
+            # {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} that served this
             # prediction.
             #
-            # * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel}
-            # that served this prediction.
+            # * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's
+            # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} that served this
+            # prediction.
             #
             # @overload raw_predict(request, options = nil)
             #   Pass arguments to `raw_predict` via a request object, either of type
@@ -307,16 +310,18 @@ module Google
             #   @param http_body [::Google::Api::HttpBody, ::Hash]
             #     The prediction input. Supports HTTP headers and arbitrary data payload.
             #
-            #     A {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} may have an upper limit on the number of instances it
-            #     supports per request. When this limit it is exceeded for an AutoML model,
-            #     the {::Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict RawPredict} method returns an error.
-            #     When this limit is exceeded for a custom-trained model, the behavior varies
-            #     depending on the model.
+            #     A {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} may have an
+            #     upper limit on the number of instances it supports per request. When this
+            #     limit it is exceeded for an AutoML model, the
+            #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict RawPredict}
+            #     method returns an error. When this limit is exceeded for a custom-trained
+            #     model, the behavior varies depending on the model.
             #
             #     You can specify the schema for each instance in the
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri predict_schemata.instance_schema_uri}
-            #     field when you create a {::Google::Cloud::AIPlatform::V1::Model Model}. This schema applies when you deploy the
-            #     `Model` as a `DeployedModel` to an {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} and use the `RawPredict`
+            #     field when you create a {::Google::Cloud::AIPlatform::V1::Model Model}. This
+            #     schema applies when you deploy the `Model` as a `DeployedModel` to an
+            #     {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} and use the `RawPredict`
             #     method.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -384,16 +389,112 @@ module Google
             end
 
             ##
+            # Perform a server-side streaming online prediction request for Vertex
+            # LLM streaming.
+            #
+            # @overload server_streaming_predict(request, options = nil)
+            #   Pass arguments to `server_streaming_predict` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::StreamingPredictRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::StreamingPredictRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload server_streaming_predict(endpoint: nil, inputs: nil, parameters: nil)
+            #   Pass arguments to `server_streaming_predict` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param endpoint [::String]
+            #     Required. The name of the Endpoint requested to serve the prediction.
+            #     Format:
+            #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+            #   @param inputs [::Array<::Google::Cloud::AIPlatform::V1::Tensor, ::Hash>]
+            #     The prediction input.
+            #   @param parameters [::Google::Cloud::AIPlatform::V1::Tensor, ::Hash]
+            #     The parameters that govern the prediction.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::AIPlatform::V1::StreamingPredictResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::AIPlatform::V1::StreamingPredictResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new
+            #
+            #   # Call the server_streaming_predict method to start streaming.
+            #   output = client.server_streaming_predict request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def server_streaming_predict request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.server_streaming_predict.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.endpoint
+                header_params["endpoint"] = request.endpoint
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.server_streaming_predict.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.server_streaming_predict.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @prediction_service_stub.call_rpc :server_streaming_predict, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Perform an online explanation.
             #
-            # If {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id} is specified,
-            # the corresponding DeployModel must have
+            # If
+            # {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
+            # is specified, the corresponding DeployModel must have
             # {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
-            # populated. If {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
+            # populated. If
+            # {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
             # is not specified, all DeployedModels must have
             # {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
-            # populated. Only deployed AutoML tabular Models have
-            # explanation_spec.
+            # populated.
             #
             # @overload explain(request, options = nil)
             #   Pass arguments to `explain` via a request object, either of type
@@ -426,21 +527,23 @@ module Google
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri instance_schema_uri}.
             #   @param parameters [::Google::Protobuf::Value, ::Hash]
             #     The parameters that govern the prediction. The schema of the parameters may
-            #     be specified via Endpoint's DeployedModels' [Model's ][google.cloud.aiplatform.v1.DeployedModel.model]
+            #     be specified via Endpoint's DeployedModels' [Model's
+            #     ][google.cloud.aiplatform.v1.DeployedModel.model]
             #     [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#parameters_schema_uri parameters_schema_uri}.
             #   @param explanation_spec_override [::Google::Cloud::AIPlatform::V1::ExplanationSpecOverride, ::Hash]
             #     If specified, overrides the
-            #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} of the DeployedModel.
-            #     Can be used for explaining prediction results with different
-            #     configurations, such as:
+            #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+            #     of the DeployedModel. Can be used for explaining prediction results with
+            #     different configurations, such as:
             #      - Explaining top-5 predictions results as opposed to top-1;
             #      - Increasing path count or step count of the attribution methods to reduce
             #        approximate errors;
             #      - Using different baselines for explaining the prediction results.
             #   @param deployed_model_id [::String]
             #     If specified, this ExplainRequest will be served by the chosen
-            #     DeployedModel, overriding {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split Endpoint.traffic_split}.
+            #     DeployedModel, overriding
+            #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split Endpoint.traffic_split}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::ExplainResponse]
@@ -544,9 +647,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -588,7 +691,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -652,6 +757,11 @@ module Google
                 #
                 attr_reader :raw_predict
                 ##
+                # RPC-specific configuration for `server_streaming_predict`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :server_streaming_predict
+                ##
                 # RPC-specific configuration for `explain`
                 # @return [::Gapic::Config::Method]
                 #
@@ -663,6 +773,8 @@ module Google
                   @predict = ::Gapic::Config::Method.new predict_config
                   raw_predict_config = parent_rpcs.raw_predict if parent_rpcs.respond_to? :raw_predict
                   @raw_predict = ::Gapic::Config::Method.new raw_predict_config
+                  server_streaming_predict_config = parent_rpcs.server_streaming_predict if parent_rpcs.respond_to? :server_streaming_predict
+                  @server_streaming_predict = ::Gapic::Config::Method.new server_streaming_predict_config
                   explain_config = parent_rpcs.explain if parent_rpcs.respond_to? :explain
                   @explain = ::Gapic::Config::Method.new explain_config
 

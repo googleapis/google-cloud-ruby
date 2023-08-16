@@ -20,8 +20,11 @@
 require "google/cloud/logging/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Logging::V2::LoggingService::Client#write_log_entries
+# Snippet for the write_log_entries call in the LoggingService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Logging::V2::LoggingService::Client#write_log_entries. It may
+# require modification in order to execute successfully.
 #
 def write_log_entries
   # Create a client object. The client can be reused for multiple calls.

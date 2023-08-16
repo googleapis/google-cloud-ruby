@@ -48,12 +48,14 @@ module Google
       # Create a new client object for Snapshots.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Snapshots::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Snapshots/Client.html)
-      # for version V1beta3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataflow::V1beta3::Snapshots::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Snapshots-Client)
+      # for a gRPC client for version V1beta3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Snapshots service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Snapshots
       #
@@ -61,29 +63,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
-      # @return [Snapshots::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.snapshots version: :v1beta3, &block
+      def self.snapshots version: :v1beta3, transport: :grpc, &block
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataflow.const_get package_name
-        package_module.const_get(:Snapshots).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Snapshots)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for Jobs.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Jobs::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Jobs/Client.html)
-      # for version V1beta3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataflow::V1beta3::Jobs::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Jobs-Client)
+      # for a gRPC client for version V1beta3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Jobs service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Jobs
       #
@@ -92,29 +98,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
-      # @return [Jobs::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.jobs version: :v1beta3, &block
+      def self.jobs version: :v1beta3, transport: :grpc, &block
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataflow.const_get package_name
-        package_module.const_get(:Jobs).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Jobs)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for Messages.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Messages::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Messages/Client.html)
-      # for version V1beta3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataflow::V1beta3::Messages::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Messages-Client)
+      # for a gRPC client for version V1beta3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Messages service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Messages
       #
@@ -123,29 +133,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
-      # @return [Messages::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.messages version: :v1beta3, &block
+      def self.messages version: :v1beta3, transport: :grpc, &block
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataflow.const_get package_name
-        package_module.const_get(:Messages).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Messages)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for Metrics.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Metrics::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Metrics/Client.html)
-      # for version V1beta3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataflow::V1beta3::Metrics::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Metrics-Client)
+      # for a gRPC client for version V1beta3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Metrics service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Metrics
       #
@@ -154,29 +168,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
-      # @return [Metrics::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.metrics version: :v1beta3, &block
+      def self.metrics version: :v1beta3, transport: :grpc, &block
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataflow.const_get package_name
-        package_module.const_get(:Metrics).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Metrics)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for TemplatesService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::TemplatesService::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/TemplatesService/Client.html)
-      # for version V1beta3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataflow::V1beta3::TemplatesService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-TemplatesService-Client)
+      # for a gRPC client for version V1beta3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TemplatesService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About TemplatesService
       #
@@ -184,29 +202,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
-      # @return [TemplatesService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.templates_service version: :v1beta3, &block
+      def self.templates_service version: :v1beta3, transport: :grpc, &block
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataflow.const_get package_name
-        package_module.const_get(:TemplatesService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:TemplatesService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for FlexTemplatesService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/FlexTemplatesService/Client.html)
-      # for version V1beta3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-FlexTemplatesService-Client)
+      # for a gRPC client for version V1beta3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FlexTemplatesService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About FlexTemplatesService
       #
@@ -214,17 +236,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
-      # @return [FlexTemplatesService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.flex_templates_service version: :v1beta3, &block
+      def self.flex_templates_service version: :v1beta3, transport: :grpc, &block
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataflow.const_get package_name
-        package_module.const_get(:FlexTemplatesService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:FlexTemplatesService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -244,7 +268,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

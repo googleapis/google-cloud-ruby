@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::DatasetService::Client#update_dataset
+# Snippet for the update_dataset call in the DatasetService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::DatasetService::Client#update_dataset. It may
+# require modification in order to execute successfully.
 #
 def update_dataset
   # Create a client object. The client can be reused for multiple calls.

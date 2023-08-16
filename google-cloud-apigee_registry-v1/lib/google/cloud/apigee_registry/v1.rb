@@ -24,12 +24,17 @@ module Google
   module Cloud
     module ApigeeRegistry
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/apigee_registry/v1"
       #     client = ::Google::Cloud::ApigeeRegistry::V1::Provisioning::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/apigee_registry/v1"
+      #     client = ::Google::Cloud::ApigeeRegistry::V1::Provisioning::Rest::Client.new
       #
       module V1
       end

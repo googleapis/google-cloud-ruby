@@ -20,8 +20,11 @@
 require "google/cloud/beyond_corp/app_connections/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#resolve_app_connections
+# Snippet for the resolve_app_connections call in the AppConnectionsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#resolve_app_connections.
+# It may require modification in order to execute successfully.
 #
 def resolve_app_connections
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def resolve_app_connections
   # Call the resolve_app_connections method.
   result = client.resolve_app_connections request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::BeyondCorp::AppConnections::V1::ResolveAppConnectionsResponse::AppConnectionDetails.
-    p response
+    p item
   end
 end
 # [END beyondcorp_v1_generated_AppConnectionsService_ResolveAppConnections_sync]

@@ -14,5 +14,5 @@
     "ruby-cloud-description": "With Game Servers, studios and publishers can deploy and manage their game server infrastructure hosted on multiple Agones clusters around the world through a single interface.",
     "ruby-cloud-env-prefix": "GAMING",
     "ruby-cloud-product-url": "https://cloud.google.com/game-servers",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

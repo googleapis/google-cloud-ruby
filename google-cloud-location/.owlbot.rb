@@ -15,4 +15,7 @@
 # Custom readme because this isn't an end-user client.
 OwlBot.prevent_overwrite_of_existing "README.md"
 
+# We've customized a few fields in repo-metadata.
+OwlBot.prevent_overwrite_of_existing ".repo-metadata.json"
+
 OwlBot.move_files

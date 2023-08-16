@@ -22,7 +22,7 @@ module Google
     module AIPlatform
       module V1
         # Tensorboard is a physical database that stores users' training metrics.
-        # A default Tensorboard is provided in each region of a GCP project.
+        # A default Tensorboard is provided in each region of a Google Cloud project.
         # If needed users can also create extra Tensorboards in their projects.
         # @!attribute [r] name
         #   @return [::String]
@@ -42,8 +42,8 @@ module Google
         #     this key.
         # @!attribute [r] blob_storage_path_prefix
         #   @return [::String]
-        #     Output only. Consumer project Cloud Storage path prefix used to store blob data, which
-        #     can either be a bucket or directory. Does not end with a '/'.
+        #     Output only. Consumer project Cloud Storage path prefix used to store blob
+        #     data, which can either be a bucket or directory. Does not end with a '/'.
         # @!attribute [r] run_count
         #   @return [::Integer]
         #     Output only. The number of Runs stored in this Tensorboard.
@@ -70,6 +70,13 @@ module Google
         #   @return [::String]
         #     Used to perform a consistent read-modify-write updates. If not set, a blind
         #     "overwrite" update happens.
+        # @!attribute [rw] is_default
+        #   @return [::Boolean]
+        #     Used to indicate if the TensorBoard instance is the default one.
+        #     Each project & region can have at most one default TensorBoard instance.
+        #     Creation of a default TensorBoard instance and updating an existing
+        #     TensorBoard instance to be default will mark all other TensorBoard
+        #     instances (if any) as non default.
         class Tensorboard
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

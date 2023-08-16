@@ -29,8 +29,9 @@ module Google
         # @!attribute [rw] job_id
         #   @return [::String]
         #     ID used to uniquely identify the Job within its parent scope.
-        #     This field should contain at most 63 characters.
-        #     Only alphanumeric characters or '-' are accepted.
+        #     This field should contain at most 63 characters and must start with
+        #     lowercase characters.
+        #     Only lowercase characters, numbers and '-' are accepted.
         #     The '-' character cannot be the first or the last one.
         #     A system generated ID will be used if the field is not set.
         #
@@ -41,13 +42,13 @@ module Google
         #     Required. The Job to create.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. An optional request ID to identify requests. Specify a unique request ID
-        #     so that if you must retry your request, the server will know to ignore
-        #     the request if it has already been completed. The server will guarantee
-        #     that for at least 60 minutes since the first request.
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -77,13 +78,13 @@ module Google
         #     Optional. Reason for this deletion.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. An optional request ID to identify requests. Specify a unique request ID
-        #     so that if you must retry your request, the server will know to ignore
-        #     the request if it has already been completed. The server will guarantee
-        #     that for at least 60 minutes after the first request.
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -102,6 +103,10 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     List filter.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results. Supported are "name", "name desc", "create_time",
+        #     and "create_time desc".
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Page size.
@@ -194,8 +199,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

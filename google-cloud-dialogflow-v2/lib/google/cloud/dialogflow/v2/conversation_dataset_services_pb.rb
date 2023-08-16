@@ -42,8 +42,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: [CreateConversationDatasetOperationMetadata][google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata]
-            # - `response`: [ConversationDataset][google.cloud.dialogflow.v2.ConversationDataset]
+            # - `metadata`:
+            # [CreateConversationDatasetOperationMetadata][google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata]
+            # - `response`:
+            # [ConversationDataset][google.cloud.dialogflow.v2.ConversationDataset]
             rpc :CreateConversationDataset, ::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest, ::Google::Longrunning::Operation
             # Retrieves the specified conversation dataset.
             rpc :GetConversationDataset, ::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest, ::Google::Cloud::Dialogflow::V2::ConversationDataset
@@ -56,7 +58,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: [DeleteConversationDatasetOperationMetadata][google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata]
+            # - `metadata`:
+            # [DeleteConversationDatasetOperationMetadata][google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata]
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             rpc :DeleteConversationDataset, ::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest, ::Google::Longrunning::Operation
@@ -68,8 +71,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: [ImportConversationDataOperationMetadata][google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata]
-            # - `response`: [ImportConversationDataOperationResponse][google.cloud.dialogflow.v2.ImportConversationDataOperationResponse]
+            # - `metadata`:
+            # [ImportConversationDataOperationMetadata][google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata]
+            # - `response`:
+            # [ImportConversationDataOperationResponse][google.cloud.dialogflow.v2.ImportConversationDataOperationResponse]
             rpc :ImportConversationData, ::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest, ::Google::Longrunning::Operation
           end
 

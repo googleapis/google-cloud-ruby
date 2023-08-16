@@ -25,11 +25,13 @@ module Google
         # Used to restrict a get or update operation on a document to a subset of its
         # fields.
         # This is different from standard field masks, as this is always scoped to a
-        # {::Google::Cloud::Firestore::V1::Document Document}, and takes in account the dynamic nature of {::Google::Cloud::Firestore::V1::Value Value}.
+        # {::Google::Cloud::Firestore::V1::Document Document}, and takes in account the dynamic
+        # nature of {::Google::Cloud::Firestore::V1::Value Value}.
         # @!attribute [rw] field_paths
         #   @return [::Array<::String>]
-        #     The list of field paths in the mask. See {::Google::Cloud::Firestore::V1::Document#fields Document.fields} for a field
-        #     path syntax reference.
+        #     The list of field paths in the mask. See
+        #     {::Google::Cloud::Firestore::V1::Document#fields Document.fields} for a field path
+        #     syntax reference.
         class DocumentMask
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -61,6 +63,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Options for a transaction that can be used to read and write documents.
+          #
+          # Firestore does not allow 3rd party auth requests to create read-write.
+          # transactions.
           # @!attribute [rw] retry_transaction
           #   @return [::String]
           #     An optional transaction to retry.
@@ -73,7 +78,10 @@ module Google
           # @!attribute [rw] read_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Reads documents at the given time.
-          #     This may not be older than 60 seconds.
+          #
+          #     This must be a microsecond precision timestamp within the past one
+          #     hour, or if Point-in-Time Recovery is enabled, can additionally be a
+          #     whole minute timestamp within the past 7 days.
           class ReadOnly
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

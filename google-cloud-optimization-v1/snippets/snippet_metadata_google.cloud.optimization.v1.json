@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-optimization-v1",
-    "version": "0.2.0",
+    "version": "0.4.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudoptimization_v1_generated_FleetRouting_OptimizeTours_sync",
-      "title": "Snippet for optimize_tours in FleetRouting",
-      "description": "Basic snippet for optimize_tours in FleetRouting",
+      "title": "Snippet for the optimize_tours call in the FleetRouting service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Optimization::V1::FleetRouting::Client#optimize_tours. It may require modification in order to execute successfully.",
       "file": "fleet_routing/optimize_tours.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_sync",
-      "title": "Snippet for batch_optimize_tours in FleetRouting",
-      "description": "Basic snippet for batch_optimize_tours in FleetRouting",
+      "title": "Snippet for the batch_optimize_tours call in the FleetRouting service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Optimization::V1::FleetRouting::Client#batch_optimize_tours. It may require modification in order to execute successfully.",
       "file": "fleet_routing/batch_optimize_tours.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

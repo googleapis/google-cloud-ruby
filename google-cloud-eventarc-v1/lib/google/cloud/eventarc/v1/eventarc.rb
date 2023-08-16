@@ -26,6 +26,7 @@ require "google/cloud/eventarc/v1/eventarc/credentials"
 require "google/cloud/eventarc/v1/eventarc/paths"
 require "google/cloud/eventarc/v1/eventarc/operations"
 require "google/cloud/eventarc/v1/eventarc/client"
+require "google/cloud/eventarc/v1/eventarc/rest"
 
 module Google
   module Cloud
@@ -35,10 +36,15 @@ module Google
         # Eventarc allows users to subscribe to various events that are provided by
         # Google Cloud services and forward them to supported destinations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/eventarc/v1/eventarc"
         #     client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/eventarc/v1/eventarc/rest"
+        #     client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
         #
         module Eventarc
         end

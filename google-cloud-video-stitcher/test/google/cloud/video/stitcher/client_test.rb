@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Video::Stitcher::ClientConstructionMinitest < Minitest::Test
-  def test_video_stitcher_service
+  def test_video_stitcher_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Video::Stitcher.video_stitcher_service do |config|

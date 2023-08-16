@@ -1,5 +1,35 @@
 # Release History
 
+### 0.12.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.12.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.11.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20627](https://github.com/googleapis/google-cloud-ruby/issues/20627)) 
+
+### 0.10.0 (2023-01-12)
+
+#### Features
+
+* added support for horizontal bar rendering and column settings on time series tables ([#19993](https://github.com/googleapis/google-cloud-ruby/issues/19993)) 
+
+### 0.9.1 (2022-12-09)
+
+#### Documentation
+
+* Small fix to reference documentation formatting ([#19484](https://github.com/googleapis/google-cloud-ruby/issues/19484)) 
+
 ### 0.9.0 (2022-11-01)
 
 #### Features

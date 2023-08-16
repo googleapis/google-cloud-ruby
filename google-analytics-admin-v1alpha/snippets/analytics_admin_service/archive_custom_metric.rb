@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#archive_custom_metric
+# Snippet for the archive_custom_metric call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#archive_custom_metric.
+# It may require modification in order to execute successfully.
 #
 def archive_custom_metric
   # Create a client object. The client can be reused for multiple calls.

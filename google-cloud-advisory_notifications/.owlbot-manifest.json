@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-advisory_notifications.gemspec",
+    "lib/google-cloud-advisory_notifications.rb",
+    "lib/google/cloud/advisory_notifications.rb",
+    "lib/google/cloud/advisory_notifications/version.rb",
+    "test/google/cloud/advisory_notifications/client_test.rb",
+    "test/google/cloud/advisory_notifications/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

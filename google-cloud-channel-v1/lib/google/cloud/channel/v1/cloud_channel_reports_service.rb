@@ -26,6 +26,7 @@ require "google/cloud/channel/v1/cloud_channel_reports_service/credentials"
 require "google/cloud/channel/v1/cloud_channel_reports_service/paths"
 require "google/cloud/channel/v1/cloud_channel_reports_service/operations"
 require "google/cloud/channel/v1/cloud_channel_reports_service/client"
+require "google/cloud/channel/v1/cloud_channel_reports_service/rest"
 
 module Google
   module Cloud
@@ -34,13 +35,17 @@ module Google
         ##
         # CloudChannelReportsService lets Google Cloud resellers and
         # distributors retrieve and combine a variety of data in Cloud Channel for
-        # multiple products (Google Cloud Platform (GCP), Google Voice, and
-        # Google Workspace.)
+        # multiple products (Google Cloud, Google Voice, and Google Workspace.)
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/channel/v1/cloud_channel_reports_service"
         #     client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/channel/v1/cloud_channel_reports_service/rest"
+        #     client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new
         #
         module CloudChannelReportsService
         end

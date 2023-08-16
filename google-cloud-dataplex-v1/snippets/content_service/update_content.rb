@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::ContentService::Client#update_content
+# Snippet for the update_content call in the ContentService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::ContentService::Client#update_content. It may
+# require modification in order to execute successfully.
 #
 def update_content
   # Create a client object. The client can be reused for multiple calls.

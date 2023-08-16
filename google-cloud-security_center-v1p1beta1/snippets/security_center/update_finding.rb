@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_finding
+# Snippet for the update_finding call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_finding.
+# It may require modification in order to execute successfully.
 #
 def update_finding
   # Create a client object. The client can be reused for multiple calls.

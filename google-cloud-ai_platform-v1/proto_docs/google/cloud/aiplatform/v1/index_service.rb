@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#create_index IndexService.CreateIndex}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#create_index IndexService.CreateIndex}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to create the Index in.
@@ -34,7 +35,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Runtime operation information for {::Google::Cloud::AIPlatform::V1::IndexService::Client#create_index IndexService.CreateIndex}.
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#create_index IndexService.CreateIndex}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.
@@ -46,7 +48,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#get_index IndexService.GetIndex}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#get_index IndexService.GetIndex}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Index resource.
@@ -57,7 +60,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location from which to list the Indexes.
@@ -72,8 +76,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListIndexesResponse#next_page_token ListIndexesResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListIndexesResponse#next_page_token ListIndexesResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -82,33 +88,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes}.
         # @!attribute [rw] indexes
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Index>]
         #     List of indexes in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListIndexesRequest#page_token ListIndexesRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListIndexesRequest#page_token ListIndexesRequest.page_token}
+        #     to obtain that page.
         class ListIndexesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#update_index IndexService.UpdateIndex}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#update_index IndexService.UpdateIndex}.
         # @!attribute [rw] index
         #   @return [::Google::Cloud::AIPlatform::V1::Index]
         #     Required. The Index which updates the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The update mask applies to the resource.
-        #     For the `FieldMask` definition, see {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        #     For the `FieldMask` definition, see
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
         class UpdateIndexRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Runtime operation information for {::Google::Cloud::AIPlatform::V1::IndexService::Client#update_index IndexService.UpdateIndex}.
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#update_index IndexService.UpdateIndex}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.
@@ -120,7 +132,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#delete_index IndexService.DeleteIndex}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#delete_index IndexService.DeleteIndex}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Index resource to be deleted.
@@ -131,7 +144,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints IndexService.UpsertDatapoints}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints IndexService.UpsertDatapoints}
         # @!attribute [rw] index
         #   @return [::String]
         #     Required. The name of the Index resource to be updated.
@@ -145,13 +159,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints IndexService.UpsertDatapoints}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints IndexService.UpsertDatapoints}
         class UpsertDatapointsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints IndexService.RemoveDatapoints}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints IndexService.RemoveDatapoints}
         # @!attribute [rw] index
         #   @return [::String]
         #     Required. The name of the Index resource to be updated.
@@ -165,7 +181,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints IndexService.RemoveDatapoints}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints IndexService.RemoveDatapoints}
         class RemoveDatapointsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,7 +193,8 @@ module Google
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::NearestNeighborSearchOperationMetadata::ContentValidationStats>]
         #     The validation stats of the content (per file) to be inserted or
         #     updated on the Matching Engine Index resource. Populated if
-        #     contentsDeltaUri is provided as part of {::Google::Cloud::AIPlatform::V1::Index#metadata Index.metadata}. Please note
+        #     contentsDeltaUri is provided as part of
+        #     {::Google::Cloud::AIPlatform::V1::Index#metadata Index.metadata}. Please note
         #     that, currently for those files that are broken or has unsupported file
         #     format, we will not have the stats for those files.
         # @!attribute [rw] data_bytes_count

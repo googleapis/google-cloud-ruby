@@ -49,6 +49,18 @@ module Google
             rpc :ListDockerImages, ::Google::Cloud::ArtifactRegistry::V1::ListDockerImagesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListDockerImagesResponse
             # Gets a docker image.
             rpc :GetDockerImage, ::Google::Cloud::ArtifactRegistry::V1::GetDockerImageRequest, ::Google::Cloud::ArtifactRegistry::V1::DockerImage
+            # Lists maven artifacts.
+            rpc :ListMavenArtifacts, ::Google::Cloud::ArtifactRegistry::V1::ListMavenArtifactsRequest, ::Google::Cloud::ArtifactRegistry::V1::ListMavenArtifactsResponse
+            # Gets a maven artifact.
+            rpc :GetMavenArtifact, ::Google::Cloud::ArtifactRegistry::V1::GetMavenArtifactRequest, ::Google::Cloud::ArtifactRegistry::V1::MavenArtifact
+            # Lists npm packages.
+            rpc :ListNpmPackages, ::Google::Cloud::ArtifactRegistry::V1::ListNpmPackagesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListNpmPackagesResponse
+            # Gets a npm package.
+            rpc :GetNpmPackage, ::Google::Cloud::ArtifactRegistry::V1::GetNpmPackageRequest, ::Google::Cloud::ArtifactRegistry::V1::NpmPackage
+            # Lists python packages.
+            rpc :ListPythonPackages, ::Google::Cloud::ArtifactRegistry::V1::ListPythonPackagesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListPythonPackagesResponse
+            # Gets a python package.
+            rpc :GetPythonPackage, ::Google::Cloud::ArtifactRegistry::V1::GetPythonPackageRequest, ::Google::Cloud::ArtifactRegistry::V1::PythonPackage
             # Imports Apt artifacts. The returned Operation will complete once the
             # resources are imported. Package, Version, and File resources are created
             # based on the imported artifacts. Imported artifacts that conflict with
@@ -110,6 +122,10 @@ module Google
             rpc :GetProjectSettings, ::Google::Cloud::ArtifactRegistry::V1::GetProjectSettingsRequest, ::Google::Cloud::ArtifactRegistry::V1::ProjectSettings
             # Updates the Settings for the Project.
             rpc :UpdateProjectSettings, ::Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest, ::Google::Cloud::ArtifactRegistry::V1::ProjectSettings
+            # Retrieves the VPCSC Config for the Project.
+            rpc :GetVPCSCConfig, ::Google::Cloud::ArtifactRegistry::V1::GetVPCSCConfigRequest, ::Google::Cloud::ArtifactRegistry::V1::VPCSCConfig
+            # Updates the VPCSC Config for the Project.
+            rpc :UpdateVPCSCConfig, ::Google::Cloud::ArtifactRegistry::V1::UpdateVPCSCConfigRequest, ::Google::Cloud::ArtifactRegistry::V1::VPCSCConfig
           end
 
           Stub = Service.rpc_stub_class

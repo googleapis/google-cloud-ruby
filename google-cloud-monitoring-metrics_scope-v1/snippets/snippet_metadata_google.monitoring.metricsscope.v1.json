@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-monitoring-metrics_scope-v1",
-    "version": "0.2.0",
+    "version": "0.3.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "monitoring_v1_generated_MetricsScopes_GetMetricsScope_sync",
-      "title": "Snippet for get_metrics_scope in MetricsScopes",
-      "description": "Basic snippet for get_metrics_scope in MetricsScopes",
+      "title": "Snippet for the get_metrics_scope call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#get_metrics_scope. It may require modification in order to execute successfully.",
       "file": "metrics_scopes/get_metrics_scope.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_MetricsScopes_ListMetricsScopesByMonitoredProject_sync",
-      "title": "Snippet for list_metrics_scopes_by_monitored_project in MetricsScopes",
-      "description": "Basic snippet for list_metrics_scopes_by_monitored_project in MetricsScopes",
+      "title": "Snippet for the list_metrics_scopes_by_monitored_project call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#list_metrics_scopes_by_monitored_project. It may require modification in order to execute successfully.",
       "file": "metrics_scopes/list_metrics_scopes_by_monitored_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_MetricsScopes_CreateMonitoredProject_sync",
-      "title": "Snippet for create_monitored_project in MetricsScopes",
-      "description": "Basic snippet for create_monitored_project in MetricsScopes",
+      "title": "Snippet for the create_monitored_project call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#create_monitored_project. It may require modification in order to execute successfully.",
       "file": "metrics_scopes/create_monitored_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_MetricsScopes_DeleteMonitoredProject_sync",
-      "title": "Snippet for delete_monitored_project in MetricsScopes",
-      "description": "Basic snippet for delete_monitored_project in MetricsScopes",
+      "title": "Snippet for the delete_monitored_project call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#delete_monitored_project. It may require modification in order to execute successfully.",
       "file": "metrics_scopes/delete_monitored_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

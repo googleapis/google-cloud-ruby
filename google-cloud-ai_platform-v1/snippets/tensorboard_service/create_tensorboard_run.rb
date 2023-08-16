@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::TensorboardService::Client#create_tensorboard_run
+# Snippet for the create_tensorboard_run call in the TensorboardService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#create_tensorboard_run.
+# It may require modification in order to execute successfully.
 #
 def create_tensorboard_run
   # Create a client object. The client can be reused for multiple calls.

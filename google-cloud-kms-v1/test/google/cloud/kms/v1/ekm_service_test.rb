@@ -298,6 +298,182 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_ekm_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::EkmConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_ekm_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_ekm_config, name
+      assert_kind_of ::Google::Cloud::Kms::V1::GetEkmConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_ekm_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_ekm_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_ekm_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_ekm_config ::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_ekm_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_ekm_config(::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_ekm_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_ekm_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::EkmConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    ekm_config = {}
+    update_mask = {}
+
+    update_ekm_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_ekm_config, name
+      assert_kind_of ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::EkmConfig), request["ekm_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_ekm_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_ekm_config ekm_config: ekm_config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_ekm_config ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_ekm_config(::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_ekm_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_verify_connectivity
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::VerifyConnectivityResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    verify_connectivity_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :verify_connectivity, name
+      assert_kind_of ::Google::Cloud::Kms::V1::VerifyConnectivityRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, verify_connectivity_client_stub do
+      # Create client
+      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.verify_connectivity({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.verify_connectivity name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.verify_connectivity ::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.verify_connectivity({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.verify_connectivity(::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, verify_connectivity_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

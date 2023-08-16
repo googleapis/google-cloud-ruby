@@ -25,15 +25,15 @@ module Google
           # Request message for VideoStitcherService.createCdnKey.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project in which the CDN key should be created, in the form of
-          #     `projects/{project_number}/locations/{location}`.
+          #     Required. The project in which the CDN key should be created, in the form
+          #     of `projects/{project_number}/locations/{location}`.
           # @!attribute [rw] cdn_key
           #   @return [::Google::Cloud::Video::Stitcher::V1::CdnKey]
           #     Required. The CDN key resource to create.
           # @!attribute [rw] cdn_key_id
           #   @return [::String]
-          #     Required. The ID to use for the CDN key, which will become the final component of
-          #     the CDN key's resource name.
+          #     Required. The ID to use for the CDN key, which will become the final
+          #     component of the CDN key's resource name.
           #
           #     This value should conform to RFC-1034, which restricts to
           #     lower-case letters, numbers, and hyphen, with the first character a
@@ -118,8 +118,8 @@ module Google
           # Request message for VideoStitcherService.createVodSession
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project and location in which the VOD session should be created, in the
-          #     form of `projects/{project_number}/locations/{location}`.
+          #     Required. The project and location in which the VOD session should be
+          #     created, in the form of `projects/{project_number}/locations/{location}`.
           # @!attribute [rw] vod_session
           #   @return [::Google::Cloud::Video::Stitcher::V1::VodSession]
           #     Required. Parameters for creating a session.
@@ -141,8 +141,8 @@ module Google
           # Request message for VideoStitcherService.listVodStitchDetails.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The VOD session where the stitch details belong to, in the form of
-          #     `projects/{project}/locations/{location}/vodSessions/{id}`.
+          #     Required. The VOD session where the stitch details belong to, in the form
+          #     of `projects/{project}/locations/{location}/vodSessions/{id}`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return.
@@ -169,7 +169,8 @@ module Google
           # Request message for VideoStitcherService.getVodStitchDetail.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the stitch detail in the specified VOD session, in the form of
+          #     Required. The name of the stitch detail in the specified VOD session, in
+          #     the form of
           #     `projects/{project}/locations/{location}/vodSessions/{vod_session_id}/vodStitchDetails/{id}`.
           class GetVodStitchDetailRequest
             include ::Google::Protobuf::MessageExts
@@ -179,8 +180,8 @@ module Google
           # Request message for VideoStitcherService.listVodAdTagDetails.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The VOD session which the ad tag details belong to, in the form of
-          #     `projects/{project}/locations/{location}/vodSessions/{vod_session_id}`.
+          #     Required. The VOD session which the ad tag details belong to, in the form
+          #     of `projects/{project}/locations/{location}/vodSessions/{vod_session_id}`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return.
@@ -207,7 +208,8 @@ module Google
           # Request message for VideoStitcherService.getVodAdTagDetail
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the ad tag detail for the specified VOD session, in the form of
+          #     Required. The name of the ad tag detail for the specified VOD session, in
+          #     the form of
           #     `projects/{project}/locations/{location}/vodSessions/{vod_session_id}/vodAdTagDetails/{vod_ad_tag_detail}`.
           class GetVodAdTagDetailRequest
             include ::Google::Protobuf::MessageExts
@@ -256,7 +258,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The project in which the slate should be created, in the form of
-          #     `projects/{project_number}`.
+          #     `projects/{project_number}/locations/{location}`.
           # @!attribute [rw] slate_id
           #   @return [::String]
           #     Required. The unique identifier for the slate.
@@ -266,6 +268,21 @@ module Google
           # @!attribute [rw] slate
           #   @return [::Google::Cloud::Video::Stitcher::V1::Slate]
           #     Required. The slate to create.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
           class CreateSlateRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -274,8 +291,8 @@ module Google
           # Request message for VideoStitcherService.getSlate.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the slate to be retrieved, of the slate, in the form of
-          #     `projects/{project_number}/locations/{location}/slates/{id}`.
+          #     Required. The name of the slate to be retrieved, of the slate, in the form
+          #     of `projects/{project_number}/locations/{location}/slates/{id}`.
           class GetSlateRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -284,7 +301,8 @@ module Google
           # Request message for VideoStitcherService.listSlates.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project to list slates, in the form of `projects/{project_number}`.
+          #     Required. The project to list slates, in the form of
+          #     `projects/{project_number}/locations/{location}`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Requested page size. Server may return fewer items than requested.
@@ -343,8 +361,8 @@ module Google
           # Request message for VideoStitcherService.createLiveSession.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project and location in which the live session should be created,
-          #     in the form of `projects/{project_number}/locations/{location}`.
+          #     Required. The project and location in which the live session should be
+          #     created, in the form of `projects/{project_number}/locations/{location}`.
           # @!attribute [rw] live_session
           #   @return [::Google::Cloud::Video::Stitcher::V1::LiveSession]
           #     Required. Parameters for creating a live session.
@@ -359,6 +377,116 @@ module Google
           #     Required. The name of the live session, in the form of
           #     `projects/{project_number}/locations/{location}/liveSessions/{id}`.
           class GetLiveSessionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.createLiveConfig
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The project in which the live config should be created, in
+          #     the form of `projects/{project_number}/locations/{location}`.
+          # @!attribute [rw] live_config_id
+          #   @return [::String]
+          #     Required. The unique identifier ID to use for the live config.
+          # @!attribute [rw] live_config
+          #   @return [::Google::Cloud::Video::Stitcher::V1::LiveConfig]
+          #     Required. The live config resource to create.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class CreateLiveConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.listLiveConfig.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The project that contains the list of live configs, in the
+          #     form of `projects/{project_number}/locations/{location}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     The maximum number of items to return.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     The next_page_token value returned from a previous List request, if any.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter to apply to list results (see
+          #     [Filtering](https://google.aip.dev/160)).
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     Optional. Specifies the ordering of results following
+          #     [Cloud API
+          #     syntax](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+          class ListLiveConfigsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for VideoStitcher.ListLiveConfig.
+          # @!attribute [rw] live_configs
+          #   @return [::Array<::Google::Cloud::Video::Stitcher::V1::LiveConfig>]
+          #     List of live configs.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     The pagination token.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Locations that could not be reached.
+          class ListLiveConfigsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.getLiveConfig.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the live config to be retrieved, in the form
+          #     of
+          #     `projects/{project_number}/locations/{location}/liveConfigs/{id}`.
+          class GetLiveConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.deleteLiveConfig.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the live config to be deleted, in the form of
+          #     `projects/{project_number}/locations/{location}/liveConfigs/{id}`.
+          class DeleteLiveConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents the metadata of the long-running operation.
+          # @!attribute [rw] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time the operation was created.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time the operation finished running.
+          # @!attribute [rw] target
+          #   @return [::String]
+          #     Server-defined resource path for the target of the operation.
+          # @!attribute [rw] verb
+          #   @return [::String]
+          #     Name of the verb executed by the operation.
+          class OperationMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

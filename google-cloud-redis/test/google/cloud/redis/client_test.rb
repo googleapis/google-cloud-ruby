@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/redis"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Redis::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_redis
+  def test_cloud_redis_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Redis.cloud_redis do |config|
+      client = Google::Cloud::Redis.cloud_redis transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Redis::V1::CloudRedis::Client, client
+    end
+  end
+
+  def test_cloud_redis_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Redis.cloud_redis transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Redis::V1::CloudRedis::Rest::Client, client
     end
   end
 end

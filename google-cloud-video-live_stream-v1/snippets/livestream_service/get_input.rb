@@ -20,8 +20,11 @@
 require "google/cloud/video/live_stream/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_input
+# Snippet for the get_input call in the LivestreamService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_input. It
+# may require modification in order to execute successfully.
 #
 def get_input
   # Create a client object. The client can be reused for multiple calls.

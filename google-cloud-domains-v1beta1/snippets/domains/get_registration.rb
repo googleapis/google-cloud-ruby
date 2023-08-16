@@ -20,8 +20,11 @@
 require "google/cloud/domains/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Domains::V1beta1::Domains::Client#get_registration
+# Snippet for the get_registration call in the Domains service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Domains::V1beta1::Domains::Client#get_registration. It may
+# require modification in order to execute successfully.
 #
 def get_registration
   # Create a client object. The client can be reused for multiple calls.

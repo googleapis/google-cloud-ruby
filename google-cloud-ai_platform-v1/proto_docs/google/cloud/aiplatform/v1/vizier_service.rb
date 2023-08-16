@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#get_study VizierService.GetStudy}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#get_study VizierService.GetStudy}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Study resource.
@@ -31,7 +32,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#create_study VizierService.CreateStudy}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#create_study VizierService.CreateStudy}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to create the CustomJob in.
@@ -44,7 +46,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_studies VizierService.ListStudies}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_studies VizierService.ListStudies}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to list the Study from.
@@ -62,7 +65,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_studies VizierService.ListStudies}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_studies VizierService.ListStudies}.
         # @!attribute [rw] studies
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Study>]
         #     The studies associated with the project.
@@ -76,7 +80,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#delete_study VizierService.DeleteStudy}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#delete_study VizierService.DeleteStudy}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Study resource to be deleted.
@@ -86,7 +91,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#lookup_study VizierService.LookupStudy}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#lookup_study VizierService.LookupStudy}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to get the Study from.
@@ -99,7 +105,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#suggest_trials VizierService.SuggestTrials}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#suggest_trials VizierService.SuggestTrials}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location that the Study belongs to.
@@ -119,7 +126,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#suggest_trials VizierService.SuggestTrials}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#suggest_trials VizierService.SuggestTrials}.
         # @!attribute [rw] trials
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Trial>]
         #     A list of Trials.
@@ -153,7 +161,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#create_trial VizierService.CreateTrial}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#create_trial VizierService.CreateTrial}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Study to create the Trial in.
@@ -166,7 +175,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#get_trial VizierService.GetTrial}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#get_trial VizierService.GetTrial}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Trial resource.
@@ -177,7 +187,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_trials VizierService.ListTrials}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_trials VizierService.ListTrials}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Study to list the Trial from.
@@ -195,7 +206,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_trials VizierService.ListTrials}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_trials VizierService.ListTrials}.
         # @!attribute [rw] trials
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Trial>]
         #     The Trials associated with the Study.
@@ -209,7 +221,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#add_trial_measurement VizierService.AddTrialMeasurement}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#add_trial_measurement VizierService.AddTrialMeasurement}.
         # @!attribute [rw] trial_name
         #   @return [::String]
         #     Required. The name of the trial to add measurement.
@@ -223,7 +236,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#complete_trial VizierService.CompleteTrial}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#complete_trial VizierService.CompleteTrial}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The Trial's name.
@@ -247,7 +261,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#delete_trial VizierService.DeleteTrial}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#delete_trial VizierService.DeleteTrial}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The Trial's name.
@@ -258,7 +273,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#check_trial_early_stopping_state VizierService.CheckTrialEarlyStoppingState}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#check_trial_early_stopping_state VizierService.CheckTrialEarlyStoppingState}.
         # @!attribute [rw] trial_name
         #   @return [::String]
         #     Required. The Trial's name.
@@ -269,7 +285,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#check_trial_early_stopping_state VizierService.CheckTrialEarlyStoppingState}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#check_trial_early_stopping_state VizierService.CheckTrialEarlyStoppingState}.
         # @!attribute [rw] should_stop
         #   @return [::Boolean]
         #     True if the Trial should stop.
@@ -295,7 +312,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#stop_trial VizierService.StopTrial}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#stop_trial VizierService.StopTrial}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The Trial's name.
@@ -306,7 +324,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_optimal_trials VizierService.ListOptimalTrials}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_optimal_trials VizierService.ListOptimalTrials}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the Study that the optimal Trial belongs to.
@@ -315,7 +334,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_optimal_trials VizierService.ListOptimalTrials}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VizierService::Client#list_optimal_trials VizierService.ListOptimalTrials}.
         # @!attribute [rw] optimal_trials
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Trial>]
         #     The pareto-optimal Trials for multiple objective Study or the

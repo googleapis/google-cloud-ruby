@@ -14,5 +14,5 @@
     "ruby-cloud-description": "An API for controlling access to data by Google personnel.",
     "ruby-cloud-env-prefix": "ACCESS_APPROVAL",
     "ruby-cloud-product-url": "https://cloud.google.com/access-approval/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

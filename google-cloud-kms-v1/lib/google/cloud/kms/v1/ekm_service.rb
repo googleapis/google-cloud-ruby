@@ -25,6 +25,7 @@ require "google/cloud/kms/v1/version"
 require "google/cloud/kms/v1/ekm_service/credentials"
 require "google/cloud/kms/v1/ekm_service/paths"
 require "google/cloud/kms/v1/ekm_service/client"
+require "google/cloud/kms/v1/ekm_service/rest"
 
 module Google
   module Cloud
@@ -37,10 +38,15 @@ module Google
         # Implements a REST model with the following objects:
         # * {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/kms/v1/ekm_service"
         #     client = ::Google::Cloud::Kms::V1::EkmService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/kms/v1/ekm_service/rest"
+        #     client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new
         #
         module EkmService
         end

@@ -31,9 +31,9 @@ module Google
         ##
         # The InterconnectLocations API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/interconnect_locations"
+        #     require "google/cloud/compute/v1/interconnect_locations/rest"
         #     client = ::Google::Cloud::Compute::V1::InterconnectLocations::Rest::Client.new
         #
         module InterconnectLocations

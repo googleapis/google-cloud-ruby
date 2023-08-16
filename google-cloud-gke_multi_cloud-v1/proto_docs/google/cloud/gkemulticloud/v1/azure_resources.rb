@@ -30,7 +30,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/azureClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A human readable description of this cluster.
@@ -45,16 +45,18 @@ module Google
         #     to list all supported Azure regions within a given Google Cloud region.
         # @!attribute [rw] resource_group_id
         #   @return [::String]
-        #     Required. The ARM ID of the resource group where the cluster resources are deployed.
-        #     For example:
+        #     Required. The ARM ID of the resource group where the cluster resources are
+        #     deployed. For example:
         #     `/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>`
         # @!attribute [rw] azure_client
         #   @return [::String]
-        #     Required. Name of the {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} that contains authentication configuration for
-        #     how the Anthos Multi-Cloud API connects to Azure APIs.
+        #     Optional. Name of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} that contains
+        #     authentication configuration for how the Anthos Multi-Cloud API connects to
+        #     Azure APIs.
         #
-        #     The `AzureClient` resource must reside on the same GCP project and region
-        #     as the `AzureCluster`.
+        #     The `AzureClient` resource must reside on the same Google Cloud Platform
+        #     project and region as the `AzureCluster`.
         #
         #     `AzureClient` names are formatted as
         #     `projects/<project-number>/locations/<region>/azureClients/<client-id>`.
@@ -70,6 +72,9 @@ module Google
         # @!attribute [rw] authorization
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureAuthorization]
         #     Required. Configuration related to the cluster RBAC settings.
+        # @!attribute [rw] azure_services_authentication
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureServicesAuthentication]
+        #     Optional. Authentication configuration for management of Azure resources.
         # @!attribute [r] state
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureCluster::State]
         #     Output only. The current state of the cluster.
@@ -114,13 +119,19 @@ module Google
         #     Output only. PEM encoded x509 certificate of the cluster root of trust.
         # @!attribute [rw] fleet
         #   @return [::Google::Cloud::GkeMultiCloud::V1::Fleet]
-        #     Optional. Fleet configuration.
+        #     Required. Fleet configuration.
         # @!attribute [r] managed_resources
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureClusterResources]
-        #     Output only. Mananged Azure resources for this cluster.
+        #     Output only. Managed Azure resources for this cluster.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::LoggingConfig]
         #     Optional. Logging configuration for this cluster.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureClusterError>]
+        #     Output only. A set of errors found in the cluster.
+        # @!attribute [rw] monitoring_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::MonitoringConfig]
+        #     Optional. Monitoring configuration for this cluster.
         class AzureCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -166,8 +177,8 @@ module Google
         # ClusterNetworking contains cluster-wide networking configuration.
         # @!attribute [rw] virtual_network_id
         #   @return [::String]
-        #     Required. The Azure Resource Manager (ARM) ID of the VNet associated with your
-        #     cluster.
+        #     Required. The Azure Resource Manager (ARM) ID of the VNet associated with
+        #     your cluster.
         #
         #     All components in the cluster (i.e. control plane and node pools) run on a
         #     single VNet.
@@ -196,8 +207,8 @@ module Google
         #     This field cannot be changed after creating a cluster.
         # @!attribute [rw] service_load_balancer_subnet_id
         #   @return [::String]
-        #     Optional. The ARM ID of the subnet where Kubernetes private service type load
-        #     balancers are deployed. When unspecified, it defaults to
+        #     Optional. The ARM ID of the subnet where Kubernetes private service type
+        #     load balancers are deployed. When unspecified, it defaults to
         #     AzureControlPlane.subnet_id.
         #
         #     Example:
@@ -218,8 +229,8 @@ module Google
         #     {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_server_config GetAzureServerConfig}.
         # @!attribute [rw] subnet_id
         #   @return [::String]
-        #     Optional. The ARM ID of the default subnet for the control plane. The control plane
-        #     VMs are deployed in this subnet, unless
+        #     Optional. The ARM ID of the default subnet for the control plane. The
+        #     control plane VMs are deployed in this subnet, unless
         #     `AzureControlPlane.replica_placements` is specified. This subnet will also
         #     be used as default for `AzureControlPlane.endpoint_subnet_id` if
         #     `AzureControlPlane.endpoint_subnet_id` is not specified. Similarly it will
@@ -264,7 +275,8 @@ module Google
         #     Optional. Configuration related to vm config encryption.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. A set of tags to apply to all underlying control plane Azure resources.
+        #     Optional. A set of tags to apply to all underlying control plane Azure
+        #     resources.
         # @!attribute [rw] replica_placements
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::ReplicaPlacement>]
         #     Optional. Configuration for where to place the control plane replicas.
@@ -274,8 +286,8 @@ module Google
         #     to the three control plane replicas as evenly as possible.
         # @!attribute [rw] endpoint_subnet_id
         #   @return [::String]
-        #     Optional. The ARM ID of the subnet where the control plane load balancer is deployed.
-        #     When unspecified, it defaults to AzureControlPlane.subnet_id.
+        #     Optional. The ARM ID of the subnet where the control plane load balancer is
+        #     deployed. When unspecified, it defaults to AzureControlPlane.subnet_id.
         #
         #     Example:
         #     "/subscriptions/d00494d6-6f3c-4280-bbb2-899e163d1d30/resourceGroups/anthos_cluster_gkeust4/providers/Microsoft.Network/virtualNetworks/gke-vnet-gkeust4/subnets/subnetid123"
@@ -296,13 +308,13 @@ module Google
         # Configuration for the placement of a control plane replica.
         # @!attribute [rw] subnet_id
         #   @return [::String]
-        #     Required. For a given replica, the ARM ID of the subnet where the control plane VM is
-        #     deployed. Make sure it's a subnet under the virtual network in the cluster
-        #     configuration.
+        #     Required. For a given replica, the ARM ID of the subnet where the control
+        #     plane VM is deployed. Make sure it's a subnet under the virtual network in
+        #     the cluster configuration.
         # @!attribute [rw] azure_availability_zone
         #   @return [::String]
-        #     Required. For a given replica, the Azure availability zone where to provision the
-        #     control plane VM and the ETCD disk.
+        #     Required. For a given replica, the Azure availability zone where to
+        #     provision the control plane VM and the ETCD disk.
         class ReplicaPlacement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -318,6 +330,10 @@ module Google
         # @!attribute [rw] secret_id
         #   @return [::String]
         #     The URL the of the proxy setting secret with its version.
+        #
+        #     The secret must be a JSON encoded proxy configuration
+        #     as described in
+        #     https://cloud.google.com/anthos/clusters/docs/multi-cloud/azure/how-to/use-a-proxy#create_a_proxy_configuration_file
         #
         #     Secret ids are formatted as
         #     `https://<key-vault-name>.vault.azure.net/secrets/<secret-name>/<secret-version>`.
@@ -349,13 +365,15 @@ module Google
         # key.
         # @!attribute [rw] key_id
         #   @return [::String]
-        #     Required. The ARM ID of the Azure Key Vault key to encrypt / decrypt config data.
+        #     Required. The ARM ID of the Azure Key Vault key to encrypt / decrypt config
+        #     data.
         #
         #     For example:
         #     `/subscriptions/<subscription-id>/resourceGroups/<resource-group-id>/providers/Microsoft.KeyVault/vaults/<key-vault-id>/keys/<key-name>`
         # @!attribute [rw] public_key
         #   @return [::String]
-        #     Optional. RSA key of the Azure Key Vault public key to use for encrypting the data.
+        #     Optional. RSA key of the Azure Key Vault public key to use for encrypting
+        #     the data.
         #
         #     This key must be formatted as a PEM-encoded SubjectPublicKeyInfo (RFC 5280)
         #     in ASN.1 DER form. The string must be comprised of a single PEM block of
@@ -380,9 +398,10 @@ module Google
         # `AzureClient` resources hold client authentication information needed by the
         # Anthos Multi-Cloud API to manage Azure resources on your Azure subscription.
         #
-        # When an {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} is created, an `AzureClient` resource needs to be
-        # provided and all operations on Azure resources associated to that cluster
-        # will authenticate to Azure services using the given client.
+        # When an {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} is
+        # created, an `AzureClient` resource needs to be provided and all operations on
+        # Azure resources associated to that cluster will authenticate to Azure
+        # services using the given client.
         #
         # `AzureClient` resources are immutable and cannot be modified upon creation.
         #
@@ -403,6 +422,9 @@ module Google
         # @!attribute [rw] application_id
         #   @return [::String]
         #     Required. The Azure Active Directory Application ID.
+        # @!attribute [r] reconciling
+        #   @return [::Boolean]
+        #     Output only. If set, there are currently pending changes to the client.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Annotations on the resource.
@@ -423,6 +445,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which this resource was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which this client was last updated.
         class AzureClient
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -451,6 +476,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Authentication configuration for the management of Azure resources.
+        # @!attribute [rw] tenant_id
+        #   @return [::String]
+        #     Required. The Azure Active Directory Tenant ID.
+        # @!attribute [rw] application_id
+        #   @return [::String]
+        #     Required. The Azure Active Directory Application ID.
+        class AzureServicesAuthentication
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Identities of a user-type subject for Azure clusters.
         # @!attribute [rw] username
         #   @return [::String]
@@ -472,14 +509,15 @@ module Google
         #     see [Resource Names](https://cloud.google.com/apis/design/resource_names)
         # @!attribute [rw] version
         #   @return [::String]
-        #     Required. The Kubernetes version (e.g. `1.19.10-gke.1000`) running on this node pool.
+        #     Required. The Kubernetes version (e.g. `1.19.10-gke.1000`) running on this
+        #     node pool.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureNodeConfig]
         #     Required. The node configuration of the node pool.
         # @!attribute [rw] subnet_id
         #   @return [::String]
-        #     Required. The ARM ID of the subnet where the node pool VMs run. Make sure it's a
-        #     subnet under the virtual network in the cluster configuration.
+        #     Required. The ARM ID of the subnet where the node pool VMs run. Make sure
+        #     it's a subnet under the virtual network in the cluster configuration.
         # @!attribute [rw] autoscaling
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureNodePoolAutoscaling]
         #     Required. Autoscaler configuration for this node pool.
@@ -526,6 +564,9 @@ module Google
         #     Optional. The Azure availability zone of the nodes in this nodepool.
         #
         #     When unspecified, it defaults to `1`.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureNodePoolError>]
+        #     Output only. A set of errors found in the node pool.
         class AzureNodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -585,8 +626,8 @@ module Google
         #     When unspecified, it defaults to a 32-GiB Azure Disk.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. A set of tags to apply to all underlying Azure resources for this node
-        #     pool. This currently only includes Virtual Machine Scale Sets.
+        #     Optional. A set of tags to apply to all underlying Azure resources for this
+        #     node pool. This currently only includes Virtual Machine Scale Sets.
         #
         #     Specify at most 50 pairs containing alphanumerics, spaces, and symbols
         #     (.+-=_:@/). Keys can be up to 127 Unicode characters. Values can be up to
@@ -644,12 +685,12 @@ module Google
         # size of the node pool based on the cluster load.
         # @!attribute [rw] min_node_count
         #   @return [::Integer]
-        #     Required. Minimum number of nodes in the node pool. Must be greater than or equal to
-        #     1 and less than or equal to max_node_count.
+        #     Required. Minimum number of nodes in the node pool. Must be greater than or
+        #     equal to 1 and less than or equal to max_node_count.
         # @!attribute [rw] max_node_count
         #   @return [::Integer]
-        #     Required. Maximum number of nodes in the node pool. Must be greater than or equal to
-        #     min_node_count and less than or equal to 50.
+        #     Required. Maximum number of nodes in the node pool. Must be greater than or
+        #     equal to min_node_count and less than or equal to 50.
         class AzureNodePoolAutoscaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -665,7 +706,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/azureServerConfig`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] valid_versions
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureK8sVersionInfo>]
         #     List of valid Kubernetes versions.
@@ -689,9 +730,9 @@ module Google
         # SSH configuration for Azure resources.
         # @!attribute [rw] authorized_key
         #   @return [::String]
-        #     Required. The SSH public key data for VMs managed by Anthos. This accepts the
-        #     authorized_keys file format used in OpenSSH according to the sshd(8) manual
-        #     page.
+        #     Required. The SSH public key data for VMs managed by Anthos. This accepts
+        #     the authorized_keys file format used in OpenSSH according to the sshd(8)
+        #     manual page.
         class AzureSshConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -707,6 +748,24 @@ module Google
         #   @return [::String]
         #     Output only. The ARM ID of the control plane application security group.
         class AzureClusterResources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AzureClusterError describes errors found on Azure clusters.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Human-friendly description of the error.
+        class AzureClusterError
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AzureNodePoolError describes errors found on Azure node pools.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Human-friendly description of the error.
+        class AzureNodePoolError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

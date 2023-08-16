@@ -27,9 +27,9 @@ module Google
           # preferences, playlists, and so on.
           #
           # You can redefine a session entity type at the session level to extend or
-          # replace a {::Google::Cloud::Dialogflow::CX::V3::EntityType custom entity type} at the user session level (we
-          # refer to the entity types defined at the agent level as "custom entity
-          # types").
+          # replace a {::Google::Cloud::Dialogflow::CX::V3::EntityType custom entity type} at
+          # the user session level (we refer to the entity types defined at the agent
+          # level as "custom entity types").
           #
           # Note: session entity types apply to all queries, regardless of the language.
           #
@@ -46,12 +46,12 @@ module Google
           #     environment.
           # @!attribute [rw] entity_override_mode
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SessionEntityType::EntityOverrideMode]
-          #     Required. Indicates whether the additional data should override or supplement the
-          #     custom entity type definition.
+          #     Required. Indicates whether the additional data should override or
+          #     supplement the custom entity type definition.
           # @!attribute [rw] entities
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::EntityType::Entity>]
-          #     Required. The collection of entities to override or supplement the custom entity
-          #     type.
+          #     Required. The collection of entities to override or supplement the custom
+          #     entity type.
           class SessionEntityType
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,13 +72,15 @@ module Google
               # `GetSessionEntityType`, `CreateSessionEntityType` and
               # `UpdateSessionEntityType` only return the additional entities added in
               # this session entity type. If you want to get the supplemented list,
-              # please call {::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#get_entity_type EntityTypes.GetEntityType} on the custom entity type
-              # and merge.
+              # please call
+              # {::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#get_entity_type EntityTypes.GetEntityType}
+              # on the custom entity type and merge.
               ENTITY_OVERRIDE_MODE_SUPPLEMENT = 2
             end
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#list_session_entity_types SessionEntityTypes.ListSessionEntityTypes}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#list_session_entity_types SessionEntityTypes.ListSessionEntityTypes}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The session to list all session entity types from.
@@ -99,7 +101,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response message for {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#list_session_entity_types SessionEntityTypes.ListSessionEntityTypes}.
+          # The response message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#list_session_entity_types SessionEntityTypes.ListSessionEntityTypes}.
           # @!attribute [rw] session_entity_types
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::SessionEntityType>]
           #     The list of session entity types. There will be a maximum number of items
@@ -113,7 +116,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#get_session_entity_type SessionEntityTypes.GetSessionEntityType}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#get_session_entity_type SessionEntityTypes.GetSessionEntityType}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the session entity type.
@@ -128,7 +132,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#create_session_entity_type SessionEntityTypes.CreateSessionEntityType}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#create_session_entity_type SessionEntityTypes.CreateSessionEntityType}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The session to create a session entity type for.
@@ -145,7 +150,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#update_session_entity_type SessionEntityTypes.UpdateSessionEntityType}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#update_session_entity_type SessionEntityTypes.UpdateSessionEntityType}.
           # @!attribute [rw] session_entity_type
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SessionEntityType]
           #     Required. The session entity type to update.
@@ -163,7 +169,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#delete_session_entity_type SessionEntityTypes.DeleteSessionEntityType}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#delete_session_entity_type SessionEntityTypes.DeleteSessionEntityType}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the session entity type to delete.

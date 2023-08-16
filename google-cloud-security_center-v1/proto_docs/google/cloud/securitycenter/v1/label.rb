@@ -21,14 +21,16 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Label represents a generic name=value label. Label has separate name and
-        # value fields to support filtering with contains().
+        # Represents a generic name-value label. A label has separate name and value
+        # fields to support filtering with the `contains()` function. For more
+        # information, see [Filtering on array-type
+        # fields](https://cloud.google.com/security-command-center/docs/how-to-api-list-findings#array-contains-filtering).
         # @!attribute [rw] name
         #   @return [::String]
-        #     Label name.
+        #     Name of the label.
         # @!attribute [rw] value
         #   @return [::String]
-        #     Label value.
+        #     Value that corresponds to the label's name.
         class Label
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

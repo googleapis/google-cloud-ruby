@@ -29,7 +29,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the Endpoint.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
@@ -37,8 +37,11 @@ module Google
         # @!attribute [r] deployed_models
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::DeployedModel>]
         #     Output only. The models deployed in this Endpoint.
-        #     To add or remove DeployedModels use {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel} and
-        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel} respectively.
+        #     To add or remove DeployedModels use
+        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}
+        #     respectively.
         # @!attribute [rw] traffic_split
         #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     A map from a DeployedModel's ID to the percentage of this Endpoint's
@@ -75,14 +78,15 @@ module Google
         #     this key.
         # @!attribute [rw] network
         #   @return [::String]
-        #     The full name of the Google Compute Engine
+        #     Optional. The full name of the Google Compute Engine
         #     [network](https://cloud.google.com//compute/docs/networks-and-firewalls#networks)
         #     to which the Endpoint should be peered.
         #
         #     Private services access must already be configured for the network. If left
         #     unspecified, the Endpoint is not peered with any network.
         #
-        #     Only one of the fields, {::Google::Cloud::AIPlatform::V1::Endpoint#network network} or
+        #     Only one of the fields,
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#enable_private_service_connect enable_private_service_connect},
         #     can be set.
         #
@@ -94,13 +98,15 @@ module Google
         #   @return [::Boolean]
         #     Deprecated: If true, expose the Endpoint via private service connect.
         #
-        #     Only one of the fields, {::Google::Cloud::AIPlatform::V1::Endpoint#network network} or
+        #     Only one of the fields,
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#enable_private_service_connect enable_private_service_connect},
         #     can be set.
         # @!attribute [r] model_deployment_monitoring_job
         #   @return [::String]
-        #     Output only. Resource name of the Model Monitoring job associated with this Endpoint
-        #     if monitoring is enabled by [CreateModelDeploymentMonitoringJob][].
+        #     Output only. Resource name of the Model Monitoring job associated with this
+        #     Endpoint if monitoring is enabled by
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#create_model_deployment_monitoring_job JobService.CreateModelDeploymentMonitoringJob}.
         #     Format:
         #     `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
         # @!attribute [rw] predict_request_response_logging_config
@@ -140,17 +146,22 @@ module Google
         #     AI, and require only a modest additional configuration.
         # @!attribute [rw] id
         #   @return [::String]
-        #     Immutable. The ID of the DeployedModel. If not provided upon deployment, Vertex AI
-        #     will generate a value for this ID.
+        #     Immutable. The ID of the DeployedModel. If not provided upon deployment,
+        #     Vertex AI will generate a value for this ID.
         #
         #     This value should be 1-10 characters, and valid characters are /[0-9]/.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. The resource name of the Model that this is the deployment of. Note that
-        #     the Model may be in a different location than the DeployedModel's Endpoint.
+        #     Required. The resource name of the Model that this is the deployment of.
+        #     Note that the Model may be in a different location than the DeployedModel's
+        #     Endpoint.
         #
         #     The resource name may contain version id or version alias to specify the
-        #     version, if no version is specified, the default version will be deployed.
+        #     version.
+        #      Example: `projects/{project}/locations/{location}/models/{model}@2`
+        #                  or
+        #                `projects/{project}/locations/{location}/models/{model}@golden`
+        #     if no version is specified, the default version will be deployed.
         # @!attribute [r] model_version_id
         #   @return [::String]
         #     Output only. The version ID of the model that is deployed.
@@ -165,13 +176,21 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationSpec]
         #     Explanation configuration for this DeployedModel.
         #
-        #     When deploying a Model using {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}, this value
-        #     overrides the value of {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec}. All fields of
-        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} are optional in the request. If a field of
-        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} is not populated, the value of the same field of
-        #     {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec} is inherited. If the corresponding
-        #     {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec} is not populated, all fields of the
-        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} will be used for the explanation configuration.
+        #     When deploying a Model using
+        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel},
+        #     this value overrides the value of
+        #     {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec}.
+        #     All fields of
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+        #     are optional in the request. If a field of
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+        #     is not populated, the value of the same field of
+        #     {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec}
+        #     is inherited. If the corresponding
+        #     {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec}
+        #     is not populated, all fields of the
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+        #     will be used for the explanation configuration.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account that the DeployedModel's container runs as. Specify the
@@ -185,24 +204,27 @@ module Google
         #   @return [::Boolean]
         #     For custom-trained Models and AutoML Tabular Models, the container of the
         #     DeployedModel instances will send `stderr` and `stdout` streams to
-        #     Stackdriver Logging by default. Please note that the logs incur cost,
+        #     Cloud Logging by default. Please note that the logs incur cost,
         #     which are subject to [Cloud Logging
-        #     pricing](https://cloud.google.com/stackdriver/pricing).
+        #     pricing](https://cloud.google.com/logging/pricing).
         #
         #     User can disable container logging by setting this flag to true.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
+        #     If true, online prediction access logs are sent to Cloud
+        #     Logging.
         #     These logs are like standard server access logs, containing
         #     information like timestamp and latency for each prediction request.
         #
-        #     Note that Stackdriver logs may incur a cost, especially if your project
+        #     Note that logs may incur a cost, especially if your project
         #     receives prediction requests at a high queries per second rate (QPS).
         #     Estimate your costs before enabling this option.
         # @!attribute [r] private_endpoints
         #   @return [::Google::Cloud::AIPlatform::V1::PrivateEndpoints]
-        #     Output only. Provide paths for users to send predict/explain/health requests directly to
-        #     the deployed model services running on Cloud via private services access.
-        #     This field is populated if {::Google::Cloud::AIPlatform::V1::Endpoint#network network} is configured.
+        #     Output only. Provide paths for users to send predict/explain/health
+        #     requests directly to the deployed model services running on Cloud via
+        #     private services access. This field is populated if
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} is configured.
         class DeployedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -224,8 +246,8 @@ module Google
         #     Output only. Http(s) path to send health check requests.
         # @!attribute [r] service_attachment
         #   @return [::String]
-        #     Output only. The name of the service attachment resource. Populated if private service
-        #     connect is enabled.
+        #     Output only. The name of the service attachment resource. Populated if
+        #     private service connect is enabled.
         class PrivateEndpoints
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

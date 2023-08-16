@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::TagValues::Client#get_tag_value
+# Snippet for the get_tag_value call in the TagValues service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::TagValues::Client#get_tag_value. It may
+# require modification in order to execute successfully.
 #
 def get_tag_value
   # Create a client object. The client can be reused for multiple calls.

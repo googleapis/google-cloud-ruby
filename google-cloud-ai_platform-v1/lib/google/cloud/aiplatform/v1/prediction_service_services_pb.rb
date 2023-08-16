@@ -39,22 +39,28 @@ module Google
             #
             # The response includes the following HTTP headers:
             #
-            # * `X-Vertex-AI-Endpoint-Id`: ID of the [Endpoint][google.cloud.aiplatform.v1.Endpoint] that served this
+            # * `X-Vertex-AI-Endpoint-Id`: ID of the
+            # [Endpoint][google.cloud.aiplatform.v1.Endpoint] that served this
             # prediction.
             #
-            # * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's [DeployedModel][google.cloud.aiplatform.v1.DeployedModel]
-            # that served this prediction.
+            # * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's
+            # [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] that served this
+            # prediction.
             rpc :RawPredict, ::Google::Cloud::AIPlatform::V1::RawPredictRequest, ::Google::Api::HttpBody
+            # Perform a server-side streaming online prediction request for Vertex
+            # LLM streaming.
+            rpc :ServerStreamingPredict, ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest, stream(::Google::Cloud::AIPlatform::V1::StreamingPredictResponse)
             # Perform an online explanation.
             #
-            # If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is specified,
-            # the corresponding DeployModel must have
+            # If
+            # [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id]
+            # is specified, the corresponding DeployModel must have
             # [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec]
-            # populated. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id]
+            # populated. If
+            # [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id]
             # is not specified, all DeployedModels must have
             # [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec]
-            # populated. Only deployed AutoML tabular Models have
-            # explanation_spec.
+            # populated.
             rpc :Explain, ::Google::Cloud::AIPlatform::V1::ExplainRequest, ::Google::Cloud::AIPlatform::V1::ExplainResponse
           end
 

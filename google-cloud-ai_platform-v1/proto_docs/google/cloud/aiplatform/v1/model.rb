@@ -51,7 +51,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the Model.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
@@ -63,13 +63,15 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::PredictSchemata]
         #     The schemata that describe formats of the Model's predictions and
         #     explanations as given and returned via
-        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict} and {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}.
+        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}.
         # @!attribute [rw] metadata_schema_uri
         #   @return [::String]
-        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing additional
-        #     information about the Model, that is specific to it. Unset if the Model
-        #     does not have any additional information.
-        #     The schema is defined as an OpenAPI 3.0.2 [Schema
+        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing
+        #     additional information about the Model, that is specific to it. Unset if
+        #     the Model does not have any additional information. The schema is defined
+        #     as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         #     AutoML Models always have this field populated by Vertex AI, if no
         #     additional metadata is needed, this field is set to an empty string.
@@ -78,48 +80,59 @@ module Google
         #     point to a location where the user only has a read access.
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Value]
-        #     Immutable. An additional information about the Model; the schema of the metadata can
-        #     be found in {::Google::Cloud::AIPlatform::V1::Model#metadata_schema_uri metadata_schema}.
+        #     Immutable. An additional information about the Model; the schema of the
+        #     metadata can be found in
+        #     {::Google::Cloud::AIPlatform::V1::Model#metadata_schema_uri metadata_schema}.
         #     Unset if the Model does not have any additional information.
         # @!attribute [r] supported_export_formats
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model::ExportFormat>]
-        #     Output only. The formats in which this Model may be exported. If empty, this Model is
-        #     not available for export.
+        #     Output only. The formats in which this Model may be exported. If empty,
+        #     this Model is not available for export.
         # @!attribute [r] training_pipeline
         #   @return [::String]
-        #     Output only. The resource name of the TrainingPipeline that uploaded this Model, if
-        #     any.
+        #     Output only. The resource name of the TrainingPipeline that uploaded this
+        #     Model, if any.
+        # @!attribute [rw] pipeline_job
+        #   @return [::String]
+        #     Optional. This field is populated if the model is produced by a pipeline
+        #     job.
         # @!attribute [rw] container_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ModelContainerSpec]
-        #     Input only. The specification of the container that is to be used when deploying
-        #     this Model. The specification is ingested upon
-        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel}, and all binaries it contains are copied
-        #     and stored internally by Vertex AI.
-        #     Not present for AutoML Models.
+        #     Input only. The specification of the container that is to be used when
+        #     deploying this Model. The specification is ingested upon
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel},
+        #     and all binaries it contains are copied and stored internally by Vertex AI.
+        #     Not present for AutoML Models or Large Models.
         # @!attribute [rw] artifact_uri
         #   @return [::String]
-        #     Immutable. The path to the directory containing the Model artifact and any of its
-        #     supporting files.
-        #     Not present for AutoML Models.
+        #     Immutable. The path to the directory containing the Model artifact and any
+        #     of its supporting files. Not present for AutoML Models or Large Models.
         # @!attribute [r] supported_deployment_resources_types
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model::DeploymentResourcesType>]
-        #     Output only. When this Model is deployed, its prediction resources are described by the
-        #     `prediction_resources` field of the {::Google::Cloud::AIPlatform::V1::Endpoint#deployed_models Endpoint.deployed_models} object.
-        #     Because not all Models support all resource configuration types, the
-        #     configuration types this Model supports are listed here. If no
+        #     Output only. When this Model is deployed, its prediction resources are
+        #     described by the `prediction_resources` field of the
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#deployed_models Endpoint.deployed_models}
+        #     object. Because not all Models support all resource configuration types,
+        #     the configuration types this Model supports are listed here. If no
         #     configuration types are listed, the Model cannot be deployed to an
         #     {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} and does not support
-        #     online predictions ({::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict} or
-        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}). Such a Model can serve predictions by
-        #     using a {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}, if it has at least one entry each in
-        #     {::Google::Cloud::AIPlatform::V1::Model#supported_input_storage_formats supported_input_storage_formats} and
+        #     online predictions
+        #     ({::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict}
+        #     or
+        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}).
+        #     Such a Model can serve predictions by using a
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}, if it
+        #     has at least one entry each in
+        #     {::Google::Cloud::AIPlatform::V1::Model#supported_input_storage_formats supported_input_storage_formats}
+        #     and
         #     {::Google::Cloud::AIPlatform::V1::Model#supported_output_storage_formats supported_output_storage_formats}.
         # @!attribute [r] supported_input_storage_formats
         #   @return [::Array<::String>]
         #     Output only. The formats this Model supports in
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#input_config BatchPredictionJob.input_config}. If
-        #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri PredictSchemata.instance_schema_uri} exists, the instances
-        #     should be given as per that schema.
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#input_config BatchPredictionJob.input_config}.
+        #     If
+        #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri PredictSchemata.instance_schema_uri}
+        #     exists, the instances should be given as per that schema.
         #
         #     The possible formats are:
         #
@@ -130,11 +143,13 @@ module Google
         #     * `csv`
         #     The CSV format, where each instance is a single comma-separated line.
         #     The first line in the file is the header, containing comma-separated field
-        #     names. Uses {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InputConfig#gcs_source GcsSource}.
+        #     names. Uses
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InputConfig#gcs_source GcsSource}.
         #
         #     * `tf-record`
         #     The TFRecord format, where each instance is a single record in tfrecord
-        #     syntax. Uses {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InputConfig#gcs_source GcsSource}.
+        #     syntax. Uses
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InputConfig#gcs_source GcsSource}.
         #
         #     * `tf-record-gzip`
         #     Similar to `tf-record`, but the file is gzipped. Uses
@@ -147,23 +162,30 @@ module Google
         #     * `file-list`
         #     Each line of the file is the location of an instance to process, uses
         #     `gcs_source` field of the
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InputConfig InputConfig} object.
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InputConfig InputConfig}
+        #     object.
         #
         #
         #     If this Model doesn't support any of these formats it means it cannot be
-        #     used with a {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}. However, if it has
-        #     {::Google::Cloud::AIPlatform::V1::Model#supported_deployment_resources_types supported_deployment_resources_types}, it could serve online
-        #     predictions by using {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict} or
+        #     used with a
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
+        #     However, if it has
+        #     {::Google::Cloud::AIPlatform::V1::Model#supported_deployment_resources_types supported_deployment_resources_types},
+        #     it could serve online predictions by using
+        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict}
+        #     or
         #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}.
         # @!attribute [r] supported_output_storage_formats
         #   @return [::Array<::String>]
         #     Output only. The formats this Model supports in
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#output_config BatchPredictionJob.output_config}. If both
-        #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri PredictSchemata.instance_schema_uri} and
-        #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#prediction_schema_uri PredictSchemata.prediction_schema_uri} exist, the predictions
-        #     are returned together with their instances. In other words, the
-        #     prediction has the original instance data first, followed
-        #     by the actual prediction content (as per the schema).
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#output_config BatchPredictionJob.output_config}.
+        #     If both
+        #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri PredictSchemata.instance_schema_uri}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#prediction_schema_uri PredictSchemata.prediction_schema_uri}
+        #     exist, the predictions are returned together with their instances. In other
+        #     words, the prediction has the original instance data first, followed by the
+        #     actual prediction content (as per the schema).
         #
         #     The possible formats are:
         #
@@ -184,9 +206,13 @@ module Google
         #
         #
         #     If this Model doesn't support any of these formats it means it cannot be
-        #     used with a {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}. However, if it has
-        #     {::Google::Cloud::AIPlatform::V1::Model#supported_deployment_resources_types supported_deployment_resources_types}, it could serve online
-        #     predictions by using {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict} or
+        #     used with a
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
+        #     However, if it has
+        #     {::Google::Cloud::AIPlatform::V1::Model#supported_deployment_resources_types supported_deployment_resources_types},
+        #     it could serve online predictions by using
+        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict}
+        #     or
         #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -196,32 +222,41 @@ module Google
         #     Output only. Timestamp when this Model was most recently updated.
         # @!attribute [r] deployed_models
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::DeployedModelRef>]
-        #     Output only. The pointers to DeployedModels created from this Model. Note that
-        #     Model could have been deployed to Endpoints in different Locations.
+        #     Output only. The pointers to DeployedModels created from this Model. Note
+        #     that Model could have been deployed to Endpoints in different Locations.
         # @!attribute [rw] explanation_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationSpec]
         #     The default explanation specification for this Model.
         #
-        #     The Model can be used for [requesting
-        #     explanation][PredictionService.Explain] after being
-        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model deployed} if it is populated.
-        #     The Model can be used for [batch
-        #     explanation][BatchPredictionJob.generate_explanation] if it is populated.
+        #     The Model can be used for
+        #     [requesting
+        #     explanation][google.cloud.aiplatform.v1.PredictionService.Explain] after
+        #     being {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model deployed} if
+        #     it is populated. The Model can be used for [batch
+        #     explanation][google.cloud.aiplatform.v1.BatchPredictionJob.generate_explanation]
+        #     if it is populated.
         #
         #     All fields of the explanation_spec can be overridden by
-        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} of
-        #     {::Google::Cloud::AIPlatform::V1::DeployModelRequest#deployed_model DeployModelRequest.deployed_model}, or
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#explanation_spec explanation_spec} of
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+        #     of
+        #     {::Google::Cloud::AIPlatform::V1::DeployModelRequest#deployed_model DeployModelRequest.deployed_model},
+        #     or
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#explanation_spec explanation_spec}
+        #     of {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
         #
         #     If the default explanation specification is not set for this Model, this
-        #     Model can still be used for [requesting
-        #     explanation][PredictionService.Explain] by setting
-        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} of
-        #     {::Google::Cloud::AIPlatform::V1::DeployModelRequest#deployed_model DeployModelRequest.deployed_model} and for [batch
-        #     explanation][BatchPredictionJob.generate_explanation] by setting
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#explanation_spec explanation_spec} of
-        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
+        #     Model can still be used for
+        #     [requesting
+        #     explanation][google.cloud.aiplatform.v1.PredictionService.Explain] by
+        #     setting
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+        #     of
+        #     {::Google::Cloud::AIPlatform::V1::DeployModelRequest#deployed_model DeployModelRequest.deployed_model}
+        #     and for [batch
+        #     explanation][google.cloud.aiplatform.v1.BatchPredictionJob.generate_explanation]
+        #     by setting
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#explanation_spec explanation_spec}
+        #     of {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Used to perform consistent read-modify-write updates. If not set, a blind
@@ -241,12 +276,17 @@ module Google
         #     Model and all sub-resources of this Model will be secured by this key.
         # @!attribute [r] model_source_info
         #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo]
-        #     Output only. Source of a model. It can either be automl training pipeline, custom
-        #     training pipeline, BigQuery ML, or existing Vertex AI Model.
+        #     Output only. Source of a model. It can either be automl training pipeline,
+        #     custom training pipeline, BigQuery ML, or existing Vertex AI Model.
+        # @!attribute [r] original_model_info
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::OriginalModelInfo]
+        #     Output only. If this Model is a copy of another Model, this contains info
+        #     about the original.
         # @!attribute [r] metadata_artifact
         #   @return [::String]
-        #     Output only. The resource name of the Artifact that was created in MetadataStore when
-        #     creating the Model. The Artifact resource name pattern is
+        #     Output only. The resource name of the Artifact that was created in
+        #     MetadataStore when creating the Model. The Artifact resource name pattern
+        #     is
         #     `projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}`.
         class Model
           include ::Google::Protobuf::MessageExts
@@ -291,14 +331,28 @@ module Google
 
               # Model artifact and any of its supported files. Will be exported to the
               # location specified by the `artifactDestination` field of the
-              # {::Google::Cloud::AIPlatform::V1::ExportModelRequest#output_config ExportModelRequest.output_config} object.
+              # {::Google::Cloud::AIPlatform::V1::ExportModelRequest#output_config ExportModelRequest.output_config}
+              # object.
               ARTIFACT = 1
 
               # The container image that is to be used when deploying this Model. Will
               # be exported to the location specified by the `imageDestination` field
-              # of the {::Google::Cloud::AIPlatform::V1::ExportModelRequest#output_config ExportModelRequest.output_config} object.
+              # of the
+              # {::Google::Cloud::AIPlatform::V1::ExportModelRequest#output_config ExportModelRequest.output_config}
+              # object.
               IMAGE = 2
             end
+          end
+
+          # Contains information about the original Model if this Model is a copy.
+          # @!attribute [r] model
+          #   @return [::String]
+          #     Output only. The resource name of the Model this Model is a copy of,
+          #     including the revision. Format:
+          #     `projects/{project}/locations/{location}/models/{model_id}@{version_id}`
+          class OriginalModelInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
@@ -315,28 +369,44 @@ module Google
             # Should not be used.
             DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED = 0
 
-            # Resources that are dedicated to the {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel}, and that need a
-            # higher degree of manual configuration.
+            # Resources that are dedicated to the
+            # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel}, and that need
+            # a higher degree of manual configuration.
             DEDICATED_RESOURCES = 1
 
             # Resources that to large degree are decided by Vertex AI, and require
             # only a modest additional configuration.
             AUTOMATIC_RESOURCES = 2
 
-            # Resources that can be shared by multiple {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModels}.
-            # A pre-configured [DeploymentResourcePool][] is required.
+            # Resources that can be shared by multiple
+            # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModels}. A
+            # pre-configured [DeploymentResourcePool][] is required.
             SHARED_RESOURCES = 3
           end
         end
 
+        # Contains information about the Large Model.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The unique name of the large Foundation or pre-built model. Like
+        #     "chat-bison", "text-bison". Or model name with version ID, like
+        #     "chat-bison@001", "text-bison@005", etc.
+        class LargeModelReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Contains the schemata used in Model's predictions and explanations via
-        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict}, {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain} and
-        # {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict PredictionService.Predict},
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain PredictionService.Explain}
+        # and {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
         # @!attribute [rw] instance_schema_uri
         #   @return [::String]
-        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing the format
-        #     of a single instance, which are used in {::Google::Cloud::AIPlatform::V1::PredictRequest#instances PredictRequest.instances},
-        #     {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances ExplainRequest.instances} and
+        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing
+        #     the format of a single instance, which are used in
+        #     {::Google::Cloud::AIPlatform::V1::PredictRequest#instances PredictRequest.instances},
+        #     {::Google::Cloud::AIPlatform::V1::ExplainRequest#instances ExplainRequest.instances}
+        #     and
         #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#input_config BatchPredictionJob.input_config}.
         #     The schema is defined as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
@@ -346,9 +416,11 @@ module Google
         #     point to a location where the user only has a read access.
         # @!attribute [rw] parameters_schema_uri
         #   @return [::String]
-        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing the
-        #     parameters of prediction and explanation via
-        #     {::Google::Cloud::AIPlatform::V1::PredictRequest#parameters PredictRequest.parameters}, {::Google::Cloud::AIPlatform::V1::ExplainRequest#parameters ExplainRequest.parameters} and
+        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing
+        #     the parameters of prediction and explanation via
+        #     {::Google::Cloud::AIPlatform::V1::PredictRequest#parameters PredictRequest.parameters},
+        #     {::Google::Cloud::AIPlatform::V1::ExplainRequest#parameters ExplainRequest.parameters}
+        #     and
         #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#model_parameters BatchPredictionJob.model_parameters}.
         #     The schema is defined as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
@@ -359,9 +431,12 @@ module Google
         #     point to a location where the user only has a read access.
         # @!attribute [rw] prediction_schema_uri
         #   @return [::String]
-        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing the format
-        #     of a single prediction produced by this Model, which are returned via
-        #     {::Google::Cloud::AIPlatform::V1::PredictResponse#predictions PredictResponse.predictions}, {::Google::Cloud::AIPlatform::V1::ExplainResponse#explanations ExplainResponse.explanations}, and
+        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing
+        #     the format of a single prediction produced by this Model, which are
+        #     returned via
+        #     {::Google::Cloud::AIPlatform::V1::PredictResponse#predictions PredictResponse.predictions},
+        #     {::Google::Cloud::AIPlatform::V1::ExplainResponse#explanations ExplainResponse.explanations},
+        #     and
         #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#output_config BatchPredictionJob.output_config}.
         #     The schema is defined as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
@@ -379,14 +454,16 @@ module Google
         # specification](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core).
         # @!attribute [rw] image_uri
         #   @return [::String]
-        #     Required. Immutable. URI of the Docker image to be used as the custom container for serving
-        #     predictions. This URI must identify an image in Artifact Registry or
-        #     Container Registry. Learn more about the [container publishing
+        #     Required. Immutable. URI of the Docker image to be used as the custom
+        #     container for serving predictions. This URI must identify an image in
+        #     Artifact Registry or Container Registry. Learn more about the [container
+        #     publishing
         #     requirements](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#publishing),
         #     including permissions requirements for the Vertex AI Service Agent.
         #
-        #     The container image is ingested upon {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel}, stored
-        #     internally, and this original path is afterwards not used.
+        #     The container image is ingested upon
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel},
+        #     stored internally, and this original path is afterwards not used.
         #
         #     To learn about the requirements for the Docker image itself, see
         #     [Custom container
@@ -397,14 +474,15 @@ module Google
         #     in this field.
         # @!attribute [rw] command
         #   @return [::Array<::String>]
-        #     Immutable. Specifies the command that runs when the container starts. This overrides
-        #     the container's
+        #     Immutable. Specifies the command that runs when the container starts. This
+        #     overrides the container's
         #     [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint).
         #     Specify this field as an array of executable and arguments, similar to a
         #     Docker `ENTRYPOINT`'s "exec" form, not its "shell" form.
         #
         #     If you do not specify this field, then the container's `ENTRYPOINT` runs,
-        #     in conjunction with the {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#args args} field or the
+        #     in conjunction with the
+        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#args args} field or the
         #     container's [`CMD`](https://docs.docker.com/engine/reference/builder/#cmd),
         #     if either exists. If this field is not specified and the container does not
         #     have an `ENTRYPOINT`, then refer to the Docker documentation about [how
@@ -420,32 +498,30 @@ module Google
         #
         #     In this field, you can reference [environment variables set by Vertex
         #     AI](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables)
-        #     and environment variables set in the {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#env env} field.
-        #     You cannot reference environment variables set in the Docker image. In
-        #     order for environment variables to be expanded, reference them by using the
-        #     following syntax:
-        #     <code>$(<var>VARIABLE_NAME</var>)</code>
-        #     Note that this differs from Bash variable expansion, which does not use
-        #     parentheses. If a variable cannot be resolved, the reference in the input
-        #     string is used unchanged. To avoid variable expansion, you can escape this
-        #     syntax with `$$`; for example:
-        #     <code>$$(<var>VARIABLE_NAME</var>)</code>
-        #     This field corresponds to the `command` field of the Kubernetes Containers
-        #     [v1 core
+        #     and environment variables set in the
+        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#env env} field. You cannot
+        #     reference environment variables set in the Docker image. In order for
+        #     environment variables to be expanded, reference them by using the following
+        #     syntax: <code>$(<var>VARIABLE_NAME</var>)</code> Note that this differs
+        #     from Bash variable expansion, which does not use parentheses. If a variable
+        #     cannot be resolved, the reference in the input string is used unchanged. To
+        #     avoid variable expansion, you can escape this syntax with `$$`; for
+        #     example: <code>$$(<var>VARIABLE_NAME</var>)</code> This field corresponds
+        #     to the `command` field of the Kubernetes Containers [v1 core
         #     API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core).
         # @!attribute [rw] args
         #   @return [::Array<::String>]
-        #     Immutable. Specifies arguments for the command that runs when the container starts.
-        #     This overrides the container's
+        #     Immutable. Specifies arguments for the command that runs when the container
+        #     starts. This overrides the container's
         #     [`CMD`](https://docs.docker.com/engine/reference/builder/#cmd). Specify
         #     this field as an array of executable and arguments, similar to a Docker
         #     `CMD`'s "default parameters" form.
         #
         #     If you don't specify this field but do specify the
-        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#command command} field, then the command from the
-        #     `command` field runs without any additional arguments. See the
-        #     [Kubernetes documentation about how the
-        #     `command` and `args` fields interact with a container's `ENTRYPOINT` and
+        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#command command} field,
+        #     then the command from the `command` field runs without any additional
+        #     arguments. See the [Kubernetes documentation about how the `command` and
+        #     `args` fields interact with a container's `ENTRYPOINT` and
         #     `CMD`](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#notes).
         #
         #     If you don't specify this field and don't specify the `command` field,
@@ -458,29 +534,29 @@ module Google
         #     In this field, you can reference [environment variables
         #     set by Vertex
         #     AI](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables)
-        #     and environment variables set in the {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#env env} field.
-        #     You cannot reference environment variables set in the Docker image. In
-        #     order for environment variables to be expanded, reference them by using the
-        #     following syntax:
-        #     <code>$(<var>VARIABLE_NAME</var>)</code>
-        #     Note that this differs from Bash variable expansion, which does not use
-        #     parentheses. If a variable cannot be resolved, the reference in the input
-        #     string is used unchanged. To avoid variable expansion, you can escape this
-        #     syntax with `$$`; for example:
-        #     <code>$$(<var>VARIABLE_NAME</var>)</code>
-        #     This field corresponds to the `args` field of the Kubernetes Containers
-        #     [v1 core
+        #     and environment variables set in the
+        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#env env} field. You cannot
+        #     reference environment variables set in the Docker image. In order for
+        #     environment variables to be expanded, reference them by using the following
+        #     syntax: <code>$(<var>VARIABLE_NAME</var>)</code> Note that this differs
+        #     from Bash variable expansion, which does not use parentheses. If a variable
+        #     cannot be resolved, the reference in the input string is used unchanged. To
+        #     avoid variable expansion, you can escape this syntax with `$$`; for
+        #     example: <code>$$(<var>VARIABLE_NAME</var>)</code> This field corresponds
+        #     to the `args` field of the Kubernetes Containers [v1 core
         #     API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core).
         # @!attribute [rw] env
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::EnvVar>]
-        #     Immutable. List of environment variables to set in the container. After the container
-        #     starts running, code running in the container can read these environment
-        #     variables.
+        #     Immutable. List of environment variables to set in the container. After the
+        #     container starts running, code running in the container can read these
+        #     environment variables.
         #
-        #     Additionally, the {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#command command} and
-        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#args args} fields can reference these variables. Later
-        #     entries in this list can also reference earlier entries. For example, the
-        #     following example sets the variable `VAR_2` to have the value `foo bar`:
+        #     Additionally, the
+        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#command command} and
+        #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#args args} fields can
+        #     reference these variables. Later entries in this list can also reference
+        #     earlier entries. For example, the following example sets the variable
+        #     `VAR_2` to have the value `foo bar`:
         #
         #     ```json
         #     [
@@ -526,11 +602,11 @@ module Google
         #     API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core).
         # @!attribute [rw] predict_route
         #   @return [::String]
-        #     Immutable. HTTP path on the container to send prediction requests to. Vertex AI
-        #     forwards requests sent using
-        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict projects.locations.endpoints.predict} to this
-        #     path on the container's IP address and port. Vertex AI then returns the
-        #     container's response in the API response.
+        #     Immutable. HTTP path on the container to send prediction requests to.
+        #     Vertex AI forwards requests sent using
+        #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict projects.locations.endpoints.predict}
+        #     to this path on the container's IP address and port. Vertex AI then returns
+        #     the container's response in the API response.
         #
         #     For example, if you set this field to `/foo`, then when Vertex AI
         #     receives a prediction request, it forwards the request body in a POST
@@ -539,7 +615,8 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#ports ports} field.
         #
         #     If you don't specify this field, it defaults to the following value when
-        #     you {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model deploy this Model to an Endpoint}:
+        #     you [deploy this Model to an
+        #     Endpoint][google.cloud.aiplatform.v1.EndpointService.DeployModel]:
         #     <code>/v1/endpoints/<var>ENDPOINT</var>/deployedModels/<var>DEPLOYED_MODEL</var>:predict</code>
         #     The placeholders in this value are replaced as follows:
         #
@@ -549,7 +626,9 @@ module Google
         #       as the [`AIP_ENDPOINT_ID` environment
         #      variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
         #
-        #     * <var>DEPLOYED_MODEL</var>: {::Google::Cloud::AIPlatform::V1::DeployedModel#id DeployedModel.id} of the `DeployedModel`.
+        #     * <var>DEPLOYED_MODEL</var>:
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#id DeployedModel.id} of the
+        #     `DeployedModel`.
         #       (Vertex AI makes this value available to your container code
         #       as the [`AIP_DEPLOYED_MODEL_ID` environment
         #       variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
@@ -567,7 +646,8 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::ModelContainerSpec#ports ports} field.
         #
         #     If you don't specify this field, it defaults to the following value when
-        #     you {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model deploy this Model to an Endpoint}:
+        #     you [deploy this Model to an
+        #     Endpoint][google.cloud.aiplatform.v1.EndpointService.DeployModel]:
         #     <code>/v1/endpoints/<var>ENDPOINT</var>/deployedModels/<var>DEPLOYED_MODEL</var>:predict</code>
         #     The placeholders in this value are replaced as follows:
         #
@@ -577,7 +657,9 @@ module Google
         #       as the [`AIP_ENDPOINT_ID` environment
         #       variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
         #
-        #     * <var>DEPLOYED_MODEL</var>: {::Google::Cloud::AIPlatform::V1::DeployedModel#id DeployedModel.id} of the `DeployedModel`.
+        #     * <var>DEPLOYED_MODEL</var>:
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#id DeployedModel.id} of the
+        #     `DeployedModel`.
         #       (Vertex AI makes this value available to your container code as the
         #       [`AIP_DEPLOYED_MODEL_ID` environment
         #       variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
@@ -600,6 +682,11 @@ module Google
         # @!attribute [rw] source_type
         #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo::ModelSourceType]
         #     Type of the model source.
+        # @!attribute [rw] copy
+        #   @return [::Boolean]
+        #     If this Model is copy of another Model. If true then
+        #     {::Google::Cloud::AIPlatform::V1::ModelSourceInfo#source_type source_type}
+        #     pertains to the original.
         class ModelSourceInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -617,6 +704,12 @@ module Google
 
             # The Model is registered and sync'ed from BigQuery ML.
             BQML = 3
+
+            # The Model is saved or tuned from Model Garden.
+            MODEL_GARDEN = 4
+
+            # The Model is saved or tuned from Genie.
+            GENIE = 5
           end
         end
       end

@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the Pipeline.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -64,6 +64,9 @@ module Google
         #     characters, underscores and dashes. International characters are allowed.
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
+        #
+        #     Note there is some reserved label key for Vertex AI Pipelines.
+        #     - `vertex-ai-pipelines-run-billing-id`, user set value will get overrided.
         # @!attribute [rw] runtime_config
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig]
         #     Runtime config of the pipeline.
@@ -93,18 +96,34 @@ module Google
         #     network name.
         #
         #     Private services access must already be configured for the network.
-        #     Pipeline job will apply the network configuration to the GCP resources
-        #     being launched, if applied, such as Vertex AI
+        #     Pipeline job will apply the network configuration to the Google Cloud
+        #     resources being launched, if applied, such as Vertex AI
         #     Training or Dataflow job. If left unspecified, the workload is not peered
         #     with any network.
+        # @!attribute [rw] reserved_ip_ranges
+        #   @return [::Array<::String>]
+        #     A list of names for the reserved ip ranges under the VPC network
+        #     that can be used for this Pipeline Job's workload.
+        #
+        #     If set, we will deploy the Pipeline Job's workload within the provided ip
+        #     ranges. Otherwise, the job will be deployed to any ip ranges under the
+        #     provided VPC network.
+        #
+        #     Example: ['vertex-ai-ip-range'].
         # @!attribute [rw] template_uri
         #   @return [::String]
-        #     A template uri from where the {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}, if empty, will
-        #     be downloaded.
+        #     A template uri from where the
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec},
+        #     if empty, will be downloaded.
         # @!attribute [r] template_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineTemplateMetadata]
         #     Output only. Pipeline template metadata. Will fill up fields if
-        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri} is from supported template registry.
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri}
+        #     is from supported template registry.
+        # @!attribute [r] schedule_name
+        #   @return [::String]
+        #     Output only. The schedule resource name.
+        #     Only returned if the Pipeline is created by Schedule API.
         class PipelineJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,16 +131,18 @@ module Google
           # The runtime config of a PipelineJob.
           # @!attribute [rw] parameters
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::Value}]
-          #     Deprecated. Use {::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig#parameter_values RuntimeConfig.parameter_values} instead. The runtime
-          #     parameters of the PipelineJob. The parameters will be passed into
-          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec} to replace the placeholders at runtime.
-          #     This field is used by pipelines built using
-          #     `PipelineJob.pipeline_spec.schema_version` 2.0.0 or lower, such as
-          #     pipelines built using Kubeflow Pipelines SDK 1.8 or lower.
+          #     Deprecated. Use
+          #     {::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig#parameter_values RuntimeConfig.parameter_values}
+          #     instead. The runtime parameters of the PipelineJob. The parameters will
+          #     be passed into
+          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}
+          #     to replace the placeholders at runtime. This field is used by pipelines
+          #     built using `PipelineJob.pipeline_spec.schema_version` 2.0.0 or lower,
+          #     such as pipelines built using Kubeflow Pipelines SDK 1.8 or lower.
           # @!attribute [rw] gcs_output_directory
           #   @return [::String]
-          #     Required. A path in a Cloud Storage bucket, which will be treated as the root
-          #     output directory of the pipeline. It is used by the system to
+          #     Required. A path in a Cloud Storage bucket, which will be treated as the
+          #     root output directory of the pipeline. It is used by the system to
           #     generate the paths of output artifacts. The artifact paths are generated
           #     with a sub-path pattern `{job_id}/{task_id}/{output_key}` under the
           #     specified output directory. The service account specified in this
@@ -130,10 +151,12 @@ module Google
           # @!attribute [rw] parameter_values
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
           #     The runtime parameters of the PipelineJob. The parameters will be
-          #     passed into {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec} to replace the placeholders
-          #     at runtime. This field is used by pipelines built using
-          #     `PipelineJob.pipeline_spec.schema_version` 2.1.0, such as pipelines built
-          #     using Kubeflow Pipelines SDK 1.9 or higher and the v2 DSL.
+          #     passed into
+          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}
+          #     to replace the placeholders at runtime. This field is used by pipelines
+          #     built using `PipelineJob.pipeline_spec.schema_version` 2.1.0, such as
+          #     pipelines built using Kubeflow Pipelines SDK 1.9 or higher and the v2
+          #     DSL.
           # @!attribute [rw] failure_policy
           #   @return [::Google::Cloud::AIPlatform::V1::PipelineFailurePolicy]
           #     Represents the failure policy of a pipeline. Currently, the default of a
@@ -201,15 +224,17 @@ module Google
           end
         end
 
-        # Pipeline template metadata if {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri} is from supported
-        # template registry. Currently, the only supported registry is Artifact
-        # Registry.
+        # Pipeline template metadata if
+        # {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri}
+        # is from supported template registry. Currently, the only supported registry
+        # is Artifact Registry.
         # @!attribute [rw] version
         #   @return [::String]
         #     The version_name in artifact registry.
         #
-        #     Will always be presented in output if the {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri} is
-        #     from supported template registry.
+        #     Will always be presented in output if the
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri}
+        #     is from supported template registry.
         #
         #     Format is "sha256:abcdef123456...".
         class PipelineTemplateMetadata
@@ -238,12 +263,12 @@ module Google
         #     Output only. The system generated ID of the task.
         # @!attribute [r] parent_task_id
         #   @return [::Integer]
-        #     Output only. The id of the parent task if the task is within a component scope.
-        #     Empty if the task is at the root level.
+        #     Output only. The id of the parent task if the task is within a component
+        #     scope. Empty if the task is at the root level.
         # @!attribute [r] task_name
         #   @return [::String]
         #     Output only. The user specified name of the task that is defined in
-        #     [PipelineJob.spec][].
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec pipeline_spec}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Task create time.
@@ -268,8 +293,8 @@ module Google
         #     Only populated when the task's state is FAILED or CANCELLED.
         # @!attribute [r] pipeline_task_status
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::PipelineTaskDetail::PipelineTaskStatus>]
-        #     Output only. A list of task status. This field keeps a record of task status evolving
-        #     over time.
+        #     Output only. A list of task status. This field keeps a record of task
+        #     status evolving over time.
         # @!attribute [r] inputs
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::PipelineTaskDetail::ArtifactList}]
         #     Output only. The runtime input artifacts of the task.
@@ -289,12 +314,11 @@ module Google
           #     Output only. The state of the task.
           # @!attribute [r] error
           #   @return [::Google::Rpc::Status]
-          #     Output only. The error that occurred during the state. May be set when the state is
-          #     any of the non-final state (PENDING/RUNNING/CANCELLING) or FAILED state.
-          #     If the state is FAILED, the error here is final and not going to be
-          #     retried.
-          #     If the state is a non-final state, the error indicates a system-error
-          #     being retried.
+          #     Output only. The error that occurred during the state. May be set when
+          #     the state is any of the non-final state (PENDING/RUNNING/CANCELLING) or
+          #     FAILED state. If the state is FAILED, the error here is final and not
+          #     going to be retried. If the state is a non-final state, the error
+          #     indicates a system-error being retried.
           class PipelineTaskStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -358,7 +382,8 @@ module Google
 
             # Specifies that the task was not triggered because the task's trigger
             # policy is not satisfied. The trigger policy is specified in the
-            # `condition` field of {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}.
+            # `condition` field of
+            # {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}.
             NOT_TRIGGERED = 9
           end
         end
@@ -378,24 +403,29 @@ module Google
           # lifecycle of a container execution.
           # @!attribute [r] main_job
           #   @return [::String]
-          #     Output only. The name of the {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the main container execution.
+          #     Output only. The name of the
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the main container
+          #     execution.
           # @!attribute [r] pre_caching_check_job
           #   @return [::String]
-          #     Output only. The name of the {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the pre-caching-check container
-          #     execution. This job will be available if the
-          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec} specifies the `pre_caching_check` hook in
-          #     the lifecycle events.
+          #     Output only. The name of the
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the
+          #     pre-caching-check container execution. This job will be available if the
+          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}
+          #     specifies the `pre_caching_check` hook in the lifecycle events.
           # @!attribute [r] failed_main_jobs
           #   @return [::Array<::String>]
-          #     Output only. The names of the previously failed {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the main container
+          #     Output only. The names of the previously failed
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the main container
           #     executions. The list includes the all attempts in chronological order.
           # @!attribute [r] failed_pre_caching_check_jobs
           #   @return [::Array<::String>]
-          #     Output only. The names of the previously failed {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the
+          #     Output only. The names of the previously failed
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the
           #     pre-caching-check container executions. This job will be available if the
-          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec} specifies the `pre_caching_check` hook in
-          #     the lifecycle events.
-          #     The list includes the all attempts in chronological order.
+          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}
+          #     specifies the `pre_caching_check` hook in the lifecycle events. The list
+          #     includes the all attempts in chronological order.
           class ContainerDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -404,7 +434,13 @@ module Google
           # The detailed info for a custom job executor.
           # @!attribute [r] job
           #   @return [::String]
-          #     Output only. The name of the {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob}.
+          #     Output only. The name of the
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob}.
+          # @!attribute [r] failed_jobs
+          #   @return [::Array<::String>]
+          #     Output only. The names of the previously failed
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob}. The list includes the
+          #     all attempts in chronological order.
           class CustomJobDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

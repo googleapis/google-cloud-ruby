@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments
+# Snippet for the list_experiments call in the Experiments service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments. It
+# may require modification in order to execute successfully.
 #
 def list_experiments
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_experiments
   # Call the list_experiments method.
   result = client.list_experiments request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Experiment.
-    p response
+    p item
   end
 end
 # [END dialogflow_v3_generated_Experiments_ListExperiments_sync]

@@ -23,12 +23,17 @@ module Google
   module Cloud
     module AssuredWorkloads
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/assured_workloads/v1beta1"
       #     client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/assured_workloads/v1beta1"
+      #     client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new
       #
       module V1beta1
       end

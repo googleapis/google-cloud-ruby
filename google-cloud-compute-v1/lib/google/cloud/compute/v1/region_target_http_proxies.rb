@@ -31,9 +31,9 @@ module Google
         ##
         # The RegionTargetHttpProxies API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/region_target_http_proxies"
+        #     require "google/cloud/compute/v1/region_target_http_proxies/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::Client.new
         #
         module RegionTargetHttpProxies

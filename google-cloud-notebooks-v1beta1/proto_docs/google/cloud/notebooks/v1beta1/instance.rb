@@ -67,7 +67,7 @@ module Google
         #   @return [::String]
         #     Path to a Bash script that automatically runs after a notebook instance
         #     fully boots up. The path must be a URL or
-        #     Cloud Storage path (gs://path-to-file/file-name).
+        #     Cloud Storage path (`gs://path-to-file/file-name`).
         # @!attribute [r] proxy_uri
         #   @return [::String]
         #     Output only. The proxy endpoint that is used to access the Jupyter notebook.
@@ -90,14 +90,15 @@ module Google
         #     is used.
         # @!attribute [rw] machine_type
         #   @return [::String]
-        #     Required. The [Compute Engine machine type](/compute/docs/machine-types) of this
+        #     Required. The [Compute Engine machine
+        #     type](https://cloud.google.com/compute/docs/machine-types) of this
         #     instance.
         # @!attribute [rw] accelerator_config
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorConfig]
         #     The hardware accelerator used on this instance. If you use
         #     accelerators, make sure that your configuration has
-        #     [enough vCPUs and memory to support the `machine_type` you
-        #     have selected](/compute/docs/gpus/#gpus-list).
+        #     [enough vCPUs and memory to support the `machine_type` you have
+        #     selected](https://cloud.google.com/compute/docs/gpus/#gpus-list).
         # @!attribute [r] state
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::State]
         #     Output only. The state of this instance.
@@ -118,8 +119,8 @@ module Google
         # @!attribute [rw] boot_disk_size_gb
         #   @return [::Integer]
         #     Input only. The size of the boot disk in GB attached to this instance, up to a maximum
-        #     of 64000&nbsp;GB (64&nbsp;TB). The minimum recommended value is
-        #     100&nbsp;GB. If not specified, this defaults to 100.
+        #     of 64000 GB (64 TB). The minimum recommended value is 100 GB. If not
+        #     specified, this defaults to 100.
         # @!attribute [rw] data_disk_type
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskType]
         #     Input only. The type of the data disk attached to this instance, defaults to
@@ -127,9 +128,8 @@ module Google
         # @!attribute [rw] data_disk_size_gb
         #   @return [::Integer]
         #     Input only. The size of the data disk in GB attached to this instance, up to a maximum
-        #     of 64000&nbsp;GB (64&nbsp;TB). You can choose the size of the data disk
-        #     based on how big your notebooks and data are. If not specified, this
-        #     defaults to 100.
+        #     of 64000 GB (64 TB). You can choose the size of the data disk based on how
+        #     big your notebooks and data are. If not specified, this defaults to 100.
         # @!attribute [rw] no_remove_data_disk
         #   @return [::Boolean]
         #     Input only. If true, the data disk will not be auto deleted when deleting the instance.
@@ -143,7 +143,8 @@ module Google
         #     Format:
         #     `projects/{project_id}/locations/{location}/keyRings/{key_ring_id}/cryptoKeys/{key_id}`
         #
-        #     Learn more about [using your own encryption keys](/kms/docs/quickstart).
+        #     Learn more about [using your own encryption
+        #     keys](https://cloud.google.com/kms/docs/quickstart).
         # @!attribute [rw] no_public_ip
         #   @return [::Boolean]
         #     If true, no public IP will be assigned to this instance.
@@ -192,9 +193,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Definition of a hardware accelerator. Note that not all combinations
-          # of `type` and `core_count` are valid. Check [GPUs on
-          # Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid
-          # combination. TPUs are not supported.
+          # of `type` and `core_count` are valid. Check [GPUs on Compute
+          # Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
+          # valid combination. TPUs are not supported.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorType]
           #     Type of this accelerator.

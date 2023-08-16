@@ -20,8 +20,11 @@
 require "google/cloud/pubsub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::PubSub::V1::Publisher::Client#list_topic_subscriptions
+# Snippet for the list_topic_subscriptions call in the Publisher service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Publisher::Client#list_topic_subscriptions. It may
+# require modification in order to execute successfully.
 #
 def list_topic_subscriptions
   # Create a client object. The client can be reused for multiple calls.

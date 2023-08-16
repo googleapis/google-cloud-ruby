@@ -20,8 +20,11 @@
 require "google/cloud/video/stitcher/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#update_cdn_key
+# Snippet for the update_cdn_key call in the VideoStitcherService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#update_cdn_key.
+# It may require modification in order to execute successfully.
 #
 def update_cdn_key
   # Create a client object. The client can be reused for multiple calls.
@@ -33,7 +36,14 @@ def update_cdn_key
   # Call the update_cdn_key method.
   result = client.update_cdn_key request
 
-  # The returned object is of type Google::Cloud::Video::Stitcher::V1::CdnKey.
-  p result
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_v1_generated_VideoStitcherService_UpdateCdnKey_sync]

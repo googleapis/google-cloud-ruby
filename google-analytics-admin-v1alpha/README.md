@@ -1,6 +1,6 @@
 # Ruby Client for the Google Analytics Admin V1alpha API
 
-API Client library for the Google Analytics Admin V1alpha API
+Manage properties in Google Analytics. Warning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning.
 
 The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.
 
@@ -37,14 +37,14 @@ request = ::Google::Analytics::Admin::V1alpha::GetAccountRequest.new # (request 
 response = client.get_account request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-admin-v1alpha/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-analytics-admin-v1alpha)
 for class and method documentation.
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
+or a [`Google::Cloud::Logging::Logger`](https://cloud.google.com/ruby/docs/reference/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 

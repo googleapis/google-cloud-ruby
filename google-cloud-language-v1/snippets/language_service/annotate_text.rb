@@ -20,8 +20,11 @@
 require "google/cloud/language/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Language::V1::LanguageService::Client#annotate_text
+# Snippet for the annotate_text call in the LanguageService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Language::V1::LanguageService::Client#annotate_text. It may
+# require modification in order to execute successfully.
 #
 def annotate_text
   # Create a client object. The client can be reused for multiple calls.

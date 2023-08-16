@@ -88,7 +88,17 @@ class MockBigquery < Minitest::Spec
       "creationTime" => time_millis,
       "lastModifiedTime" => time_millis,
       "location" => location,
-      "labels" => { "foo" => "bar" }
+      "labels" => { "foo" => "bar" },
+      "tags" => [
+        {
+          "tagKey" => "2424242256/environment",
+          "tagValue" => "production"
+        },
+        {
+          "tagKey" => "2424242256/cost_center",
+          "tagValue" => "sales"
+        }
+      ]
     }
   end
 
@@ -310,6 +320,34 @@ class MockBigquery < Minitest::Spec
 
   def destination_table_json
     hash = random_table_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "target_project_id",
+      "datasetId" => "target_dataset_id",
+      "tableId"   => "target_table_id"
+    }
+    hash.to_json
+  end
+
+  def source_table_partial_gapi
+    Google::Apis::BigqueryV2::Table.from_json source_table_partial_json
+  end
+
+  def source_table_partial_json
+    hash = random_table_partial_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "source_project_id",
+      "datasetId" => "source_dataset_id",
+      "tableId"   => "source_table_id"
+    }
+    hash.to_json
+  end
+
+  def destination_table_partial_gapi
+    Google::Apis::BigqueryV2::Table.from_json destination_table_partial_json
+  end
+
+  def destination_table_partial_json
+    hash = random_table_partial_hash "getting_replaced_dataset_id"
     hash["tableReference"] = {
       "projectId" => "target_project_id",
       "datasetId" => "target_dataset_id",
@@ -1148,5 +1186,37 @@ class MockBigquery < Minitest::Spec
 
   def formatted_table_path dataset_id, table_id
     "projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}"
+  end
+
+  def table_metadata_view_type_for str
+    return nil if str.nil?
+    { "unspecified" => "TABLE_METADATA_VIEW_UNSPECIFIED",
+      "basic" => "BASIC",
+      "storage" => "STORAGE_STATS",
+      "full" => "FULL"
+    }[str.to_s.downcase]
+  end
+
+  def verify_table_metadata table, view
+    if view == "basic"
+      assert_nil(table.bytes_count)
+      assert_nil(table.rows_count)
+      assert_nil(table.modified_at)
+    else
+      refute_nil table.bytes_count, "Transient stats should not be nil"
+      refute_nil table.rows_count, "Transient stats should not be nil"
+      refute_nil table.modified_at, "Transient stats should not be nil"
+    end
+  end
+
+  def patch_table_args selected_fields: nil,
+                       view: nil,
+                       fields: nil,
+                       quota_user: nil,
+                       user_ip: nil,
+                       options: nil
+    {
+      view: table_metadata_view_type_for(view)
+    }
   end
 end

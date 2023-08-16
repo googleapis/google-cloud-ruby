@@ -20,8 +20,11 @@
 require "google/cloud/gke_multi_cloud/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_node_pool
+# Snippet for the delete_aws_node_pool call in the AwsClusters service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_node_pool. It
+# may require modification in order to execute successfully.
 #
 def delete_aws_node_pool
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_aws_node_pool
   # Call the delete_aws_node_pool method.
   result = client.delete_aws_node_pool request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_sync]

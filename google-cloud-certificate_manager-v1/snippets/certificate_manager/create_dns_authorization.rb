@@ -20,8 +20,11 @@
 require "google/cloud/certificate_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_dns_authorization
+# Snippet for the create_dns_authorization call in the CertificateManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_dns_authorization.
+# It may require modification in order to execute successfully.
 #
 def create_dns_authorization
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_dns_authorization
   # Call the create_dns_authorization method.
   result = client.create_dns_authorization request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END certificatemanager_v1_generated_CertificateManager_CreateDnsAuthorization_sync]

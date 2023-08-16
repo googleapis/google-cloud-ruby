@@ -1,5 +1,33 @@
 # Release History
 
+### 0.14.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.14.0 (2023-06-01)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+
+### 0.13.0 (2023-03-23)
+
+#### Features
+
+* Add support for reCAPTCHA Enterprise FraudPrevention API ([#20939](https://github.com/googleapis/google-cloud-ruby/issues/20939)) 
+* Add support for reCAPTCHA Enterprise TransactionData 
+* Add support for reCAPTCHA Enterprise TransactionEvent 
+
+### 0.12.0 (2022-12-09)
+
+#### Features
+
+* Added account verification information to the Assessment resource ([#19836](https://github.com/googleapis/google-cloud-ruby/issues/19836)) 
+* Added Android package or iOS bundle with which a token was generated 
+* Added option to skip the billing check when migrating a key to reCAPTCHA Enterprise 
+
 ### 0.11.0 (2022-10-18)
 
 #### Features

@@ -26,6 +26,7 @@ require "google/cloud/gke_backup/v1/backup_for_gke/credentials"
 require "google/cloud/gke_backup/v1/backup_for_gke/paths"
 require "google/cloud/gke_backup/v1/backup_for_gke/operations"
 require "google/cloud/gke_backup/v1/backup_for_gke/client"
+require "google/cloud/gke_backup/v1/backup_for_gke/rest"
 
 module Google
   module Cloud
@@ -35,10 +36,15 @@ module Google
         # BackupForGKE allows Kubernetes administrators to configure, execute, and
         # manage backup and restore operations for their GKE clusters.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gke_backup/v1/backup_for_gke"
         #     client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gke_backup/v1/backup_for_gke/rest"
+        #     client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
         #
         module BackupForGKE
         end

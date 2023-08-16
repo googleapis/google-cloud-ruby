@@ -56,15 +56,19 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    legacy_app_engine_cron = true
 
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::ListJobsRequest, request
       assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["legacy_app_engine_cron"]
       refute_nil options
     end
 
@@ -75,35 +79,35 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
       end
 
       # Use hash object
-      client.list_jobs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_jobs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_jobs ::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_jobs ::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_jobs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_jobs(::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_jobs(::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -301,11 +305,13 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
 
     # Create request parameters for a unary method.
     name = "hello world"
+    legacy_app_engine_cron = true
 
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["legacy_app_engine_cron"]
       refute_nil options
     end
 
@@ -316,31 +322,31 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
       end
 
       # Use hash object
-      client.delete_job({ name: name }) do |response, operation|
+      client.delete_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_job name: name do |response, operation|
+      client.delete_job name: name, legacy_app_engine_cron: legacy_app_engine_cron do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_job ::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name) do |response, operation|
+      client.delete_job ::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_job({ name: name }, grpc_options) do |response, operation|
+      client.delete_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_job(::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_job(::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -475,11 +481,13 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
 
     # Create request parameters for a unary method.
     name = "hello world"
+    legacy_app_engine_cron = true
 
     run_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::RunJobRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["legacy_app_engine_cron"]
       refute_nil options
     end
 
@@ -490,31 +498,31 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
       end
 
       # Use hash object
-      client.run_job({ name: name }) do |response, operation|
+      client.run_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_job name: name do |response, operation|
+      client.run_job name: name, legacy_app_engine_cron: legacy_app_engine_cron do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_job ::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name) do |response, operation|
+      client.run_job ::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_job({ name: name }, grpc_options) do |response, operation|
+      client.run_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_job(::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name), grpc_options) do |response, operation|
+      client.run_job(::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

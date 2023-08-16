@@ -25,6 +25,7 @@ require "google/cloud/dataform/v1beta1/version"
 require "google/cloud/dataform/v1beta1/dataform/credentials"
 require "google/cloud/dataform/v1beta1/dataform/paths"
 require "google/cloud/dataform/v1beta1/dataform/client"
+require "google/cloud/dataform/v1beta1/dataform/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         # Dataform is a service to develop, create, document, test, and update curated
         # tables in BigQuery.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataform/v1beta1/dataform"
         #     client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataform/v1beta1/dataform/rest"
+        #     client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
         #
         module Dataform
         end

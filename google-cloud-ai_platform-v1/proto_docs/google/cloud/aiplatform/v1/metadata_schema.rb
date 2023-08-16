@@ -32,9 +32,9 @@ module Google
         #     allow to order/compare different versions. Example: 1.0.0, 1.0.1, etc.
         # @!attribute [rw] schema
         #   @return [::String]
-        #     Required. The raw YAML string representation of the MetadataSchema. The combination
-        #     of [MetadataSchema.version] and the schema name given by `title` in
-        #     [MetadataSchema.schema] must be unique within a MetadataStore.
+        #     Required. The raw YAML string representation of the MetadataSchema. The
+        #     combination of [MetadataSchema.version] and the schema name given by
+        #     `title` in [MetadataSchema.schema] must be unique within a MetadataStore.
         #
         #     The schema is defined as an OpenAPI 3.0.2
         #     [MetadataSchema

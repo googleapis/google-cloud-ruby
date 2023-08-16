@@ -25,6 +25,7 @@ require "google/cloud/scheduler/v1beta1/version"
 require "google/cloud/scheduler/v1beta1/cloud_scheduler/credentials"
 require "google/cloud/scheduler/v1beta1/cloud_scheduler/paths"
 require "google/cloud/scheduler/v1beta1/cloud_scheduler/client"
+require "google/cloud/scheduler/v1beta1/cloud_scheduler/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         # The Cloud Scheduler API allows external entities to reliably
         # schedule asynchronous jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/scheduler/v1beta1/cloud_scheduler"
         #     client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/scheduler/v1beta1/cloud_scheduler/rest"
+        #     client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
         #
         module CloudScheduler
         end

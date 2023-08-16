@@ -65,23 +65,23 @@ module Google
         #     (0-9), or underscores (_).
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the big query export was created.
+        #     Output only. The time at which the BigQuery export was created.
         #     This field is set by the server and will be ignored if provided on export
         #     on creation.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The most recent time at which the big export was updated.
+        #     Output only. The most recent time at which the BigQuery export was updated.
         #     This field is set by the server and will be ignored if provided on export
         #     creation or update.
         # @!attribute [r] most_recent_editor
         #   @return [::String]
-        #     Output only. Email address of the user who last edited the big query export.
+        #     Output only. Email address of the user who last edited the BigQuery export.
         #     This field is set by the server and will be ignored if provided on export
         #     creation or update.
         # @!attribute [r] principal
         #   @return [::String]
-        #     Output only. The service account that needs permission to create table, upload data to
-        #     the big query dataset.
+        #     Output only. The service account that needs permission to create table and
+        #     upload data to the BigQuery dataset.
         class BigQueryExport
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

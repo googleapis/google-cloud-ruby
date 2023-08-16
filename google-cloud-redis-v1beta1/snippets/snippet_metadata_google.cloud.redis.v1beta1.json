@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-redis-v1beta1",
-    "version": "0.8.0",
+    "version": "0.10.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_ListInstances_sync",
-      "title": "Snippet for list_instances in CloudRedis",
-      "description": "Basic snippet for list_instances in CloudRedis",
+      "title": "Snippet for the list_instances call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "cloud_redis/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_GetInstance_sync",
-      "title": "Snippet for get_instance in CloudRedis",
-      "description": "Basic snippet for get_instance in CloudRedis",
+      "title": "Snippet for the get_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_GetInstanceAuthString_sync",
-      "title": "Snippet for get_instance_auth_string in CloudRedis",
-      "description": "Basic snippet for get_instance_auth_string in CloudRedis",
+      "title": "Snippet for the get_instance_auth_string call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#get_instance_auth_string. It may require modification in order to execute successfully.",
       "file": "cloud_redis/get_instance_auth_string.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_CreateInstance_sync",
-      "title": "Snippet for create_instance in CloudRedis",
-      "description": "Basic snippet for create_instance in CloudRedis",
+      "title": "Snippet for the create_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_UpdateInstance_sync",
-      "title": "Snippet for update_instance in CloudRedis",
-      "description": "Basic snippet for update_instance in CloudRedis",
+      "title": "Snippet for the update_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_UpgradeInstance_sync",
-      "title": "Snippet for upgrade_instance in CloudRedis",
-      "description": "Basic snippet for upgrade_instance in CloudRedis",
+      "title": "Snippet for the upgrade_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#upgrade_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/upgrade_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_ImportInstance_sync",
-      "title": "Snippet for import_instance in CloudRedis",
-      "description": "Basic snippet for import_instance in CloudRedis",
+      "title": "Snippet for the import_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#import_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/import_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_ExportInstance_sync",
-      "title": "Snippet for export_instance in CloudRedis",
-      "description": "Basic snippet for export_instance in CloudRedis",
+      "title": "Snippet for the export_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#export_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/export_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_FailoverInstance_sync",
-      "title": "Snippet for failover_instance in CloudRedis",
-      "description": "Basic snippet for failover_instance in CloudRedis",
+      "title": "Snippet for the failover_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#failover_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/failover_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in CloudRedis",
-      "description": "Basic snippet for delete_instance in CloudRedis",
+      "title": "Snippet for the delete_instance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "redis_v1beta1_generated_CloudRedis_RescheduleMaintenance_sync",
-      "title": "Snippet for reschedule_maintenance in CloudRedis",
-      "description": "Basic snippet for reschedule_maintenance in CloudRedis",
+      "title": "Snippet for the reschedule_maintenance call in the CloudRedis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::V1beta1::CloudRedis::Client#reschedule_maintenance. It may require modification in order to execute successfully.",
       "file": "cloud_redis/reschedule_maintenance.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

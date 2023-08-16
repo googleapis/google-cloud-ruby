@@ -26,6 +26,7 @@ require "google/cloud/speech/v2/speech/credentials"
 require "google/cloud/speech/v2/speech/paths"
 require "google/cloud/speech/v2/speech/operations"
 require "google/cloud/speech/v2/speech/client"
+require "google/cloud/speech/v2/speech/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Enables speech transcription and resource management.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/speech/v2/speech"
         #     client = ::Google::Cloud::Speech::V2::Speech::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/speech/v2/speech/rest"
+        #     client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new
         #
         module Speech
         end

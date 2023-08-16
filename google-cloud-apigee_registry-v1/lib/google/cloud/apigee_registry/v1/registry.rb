@@ -25,6 +25,7 @@ require "google/cloud/apigee_registry/v1/version"
 require "google/cloud/apigee_registry/v1/registry/credentials"
 require "google/cloud/apigee_registry/v1/registry/paths"
 require "google/cloud/apigee_registry/v1/registry/client"
+require "google/cloud/apigee_registry/v1/registry/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # The Registry service allows teams to manage descriptions of APIs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/apigee_registry/v1/registry"
         #     client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/apigee_registry/v1/registry/rest"
+        #     client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
         #
         module Registry
         end

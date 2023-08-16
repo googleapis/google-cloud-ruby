@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/billing"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_billing_service
+  def test_cloud_billing_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Billing.cloud_billing_service do |config|
+      client = Google::Cloud::Billing.cloud_billing_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Billing::V1::CloudBilling::Client, client
     end
   end
 
-  def test_cloud_catalog_service
+  def test_cloud_billing_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Billing.cloud_billing_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Billing::V1::CloudBilling::Rest::Client, client
+    end
+  end
+
+  def test_cloud_catalog_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Billing.cloud_catalog_service do |config|
+      client = Google::Cloud::Billing.cloud_catalog_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Billing::V1::CloudCatalog::Client, client
+    end
+  end
+
+  def test_cloud_catalog_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Billing.cloud_catalog_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Billing::V1::CloudCatalog::Rest::Client, client
     end
   end
 end

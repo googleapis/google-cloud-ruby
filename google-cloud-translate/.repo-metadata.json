@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.",
     "ruby-cloud-env-prefix": "TRANSLATE",
     "ruby-cloud-product-url": "https://cloud.google.com/translate",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

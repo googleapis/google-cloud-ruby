@@ -29,17 +29,17 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the Index.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
         #     The description of the Index.
         # @!attribute [rw] metadata_schema_uri
         #   @return [::String]
-        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing additional
-        #     information about the Index, that is specific to it. Unset if the Index
-        #     does not have any additional information.
-        #     The schema is defined as an OpenAPI 3.0.2 [Schema
+        #     Immutable. Points to a YAML file stored on Google Cloud Storage describing
+        #     additional information about the Index, that is specific to it. Unset if
+        #     the Index does not have any additional information. The schema is defined
+        #     as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         #     Note: The URI given on output will be immutable and probably different,
         #     including the URI scheme, than the one given on input. The output URI will
@@ -47,7 +47,8 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Value]
         #     An additional information about the Index; the schema of the metadata can
-        #     be found in {::Google::Cloud::AIPlatform::V1::Index#metadata_schema_uri metadata_schema}.
+        #     be found in
+        #     {::Google::Cloud::AIPlatform::V1::Index#metadata_schema_uri metadata_schema}.
         # @!attribute [r] deployed_indexes
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::DeployedIndexRef>]
         #     Output only. The pointers to DeployedIndexes created from this Index.
@@ -75,17 +76,17 @@ module Google
         #     This also includes any update to the contents of the Index.
         #     Note that Operations working on this Index may have their
         #     [Operations.metadata.generic_metadata.update_time]
-        #     [google.cloud.aiplatform.v1.GenericOperationMetadata.update_time] a little after the value of this
-        #     timestamp, yet that does not mean their results are not already reflected
-        #     in the Index. Result of any successfully completed Operation on the Index
-        #     is reflected in it.
+        #     [google.cloud.aiplatform.v1.GenericOperationMetadata.update_time] a little
+        #     after the value of this timestamp, yet that does not mean their results are
+        #     not already reflected in the Index. Result of any successfully completed
+        #     Operation on the Index is reflected in it.
         # @!attribute [r] index_stats
         #   @return [::Google::Cloud::AIPlatform::V1::IndexStats]
         #     Output only. Stats of the index resource.
         # @!attribute [rw] index_update_method
         #   @return [::Google::Cloud::AIPlatform::V1::Index::IndexUpdateMethod]
-        #     Immutable. The update method to use with this Index. If not set, BATCH_UPDATE will be
-        #     used by default.
+        #     Immutable. The update method to use with this Index. If not set,
+        #     BATCH_UPDATE will be used by default.
         class Index
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,14 +126,14 @@ module Google
         #     [NearestNeighborSearchConfig.dimensions].
         # @!attribute [rw] restricts
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint::Restriction>]
-        #     Optional. List of Restrict of the datapoint, used to perform "restricted searches"
-        #     where boolean rule are used to filter the subset of the database eligible
-        #     for matching.
-        #     See: https://cloud.google.com/vertex-ai/docs/matching-engine/filtering
+        #     Optional. List of Restrict of the datapoint, used to perform "restricted
+        #     searches" where boolean rule are used to filter the subset of the database
+        #     eligible for matching. See:
+        #     https://cloud.google.com/vertex-ai/docs/matching-engine/filtering
         # @!attribute [rw] crowding_tag
         #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::CrowdingTag]
-        #     Optional. CrowdingTag of the datapoint, the number of neighbors to return in each
-        #     crowding can be configured during query.
+        #     Optional. CrowdingTag of the datapoint, the number of neighbors to return
+        #     in each crowding can be configured during query.
         class IndexDatapoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

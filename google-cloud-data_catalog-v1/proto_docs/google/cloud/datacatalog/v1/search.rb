@@ -61,8 +61,8 @@ module Google
         #     The last modification timestamp of the entry in the source system.
         # @!attribute [r] integrated_system
         #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
-        #     Output only. The source system that Data Catalog automatically integrates  with, such
-        #     as BigQuery, Cloud Pub/Sub, or Dataproc Metastore.
+        #     Output only. The source system that Data Catalog automatically integrates
+        #     with, such as BigQuery, Cloud Pub/Sub, or Dataproc Metastore.
         # @!attribute [rw] user_specified_system
         #   @return [::String]
         #     Custom source system that you can manually integrate Data Catalog with.

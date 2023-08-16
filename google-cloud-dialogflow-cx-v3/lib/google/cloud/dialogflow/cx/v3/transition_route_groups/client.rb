@@ -29,7 +29,8 @@ module Google
             ##
             # Client for the TransitionRouteGroups service.
             #
-            # Service for managing {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroups}.
+            # Service for managing
+            # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroups}.
             #
             class Client
               include Paths
@@ -130,7 +131,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -185,7 +186,8 @@ module Google
               #   @param parent [::String]
               #     Required. The flow to list all transition route groups for.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     ID>/flows/<Flow ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 100 and
               #     at most 1000.
@@ -226,13 +228,11 @@ module Google
               #   # Call the list_transition_route_groups method.
               #   result = client.list_transition_route_groups request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
-              #     p response
+              #     p item
               #   end
               #
               def list_transition_route_groups request, options = nil
@@ -278,7 +278,8 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #
               # @overload get_transition_route_group(request, options = nil)
               #   Pass arguments to `get_transition_route_group` via a request object, either of type
@@ -296,9 +297,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param language_code [::String]
               #     The language to retrieve the transition route group for. The following
               #     fields are language dependent:
@@ -378,7 +382,9 @@ module Google
               end
 
               ##
-              # Creates an {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup} in the specified flow.
+              # Creates an
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
+              # in the specified flow.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -400,9 +406,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The flow to create an {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup} for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Required. The flow to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
+              #     for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/flows/<Flow ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+              #     for agent-level groups.
               #   @param transition_route_group [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup, ::Hash]
               #     Required. The transition route group to create.
               #   @param language_code [::String]
@@ -483,7 +492,8 @@ module Google
               end
 
               ##
-              # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              # Updates the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -586,7 +596,8 @@ module Google
               end
 
               ##
-              # Deletes the specified {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              # Deletes the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -608,9 +619,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
+              #     to delete. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
+              #     Route Group ID>` or `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param force [::Boolean]
               #     This field has no effect for transition route group that no page is using.
               #     If the transition route group is referenced by any page:
@@ -722,9 +736,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -766,7 +780,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

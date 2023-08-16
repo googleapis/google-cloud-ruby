@@ -38,8 +38,8 @@ module Google
         #     Optional. User friendly display name.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. System generated globally unique ID for the lake. This ID will be
-        #     different if the lake is deleted and re-created with the same name.
+        #     Output only. System generated globally unique ID for the lake. This ID will
+        #     be different if the lake is deleted and re-created with the same name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the lake was created.
@@ -57,8 +57,9 @@ module Google
         #     Output only. Current state of the lake.
         # @!attribute [r] service_account
         #   @return [::String]
-        #     Output only. Service account associated with this lake. This service account must be
-        #     authorized to access or operate on resources managed by the lake.
+        #     Output only. Service account associated with this lake. This service
+        #     account must be authorized to access or operate on resources managed by the
+        #     lake.
         # @!attribute [rw] metastore
         #   @return [::Google::Cloud::Dataplex::V1::Lake::Metastore]
         #     Optional. Settings to manage lake and Dataproc Metastore service instance
@@ -160,8 +161,8 @@ module Google
         #     Optional. User friendly display name.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. System generated globally unique ID for the zone. This ID will be
-        #     different if the zone is deleted and re-created with the same name.
+        #     Output only. System generated globally unique ID for the zone. This ID will
+        #     be different if the zone is deleted and re-created with the same name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the zone was created.
@@ -182,11 +183,12 @@ module Google
         #     Required. Immutable. The type of the zone.
         # @!attribute [rw] discovery_spec
         #   @return [::Google::Cloud::Dataplex::V1::Zone::DiscoverySpec]
-        #     Optional. Specification of the discovery feature applied to data in this zone.
+        #     Optional. Specification of the discovery feature applied to data in this
+        #     zone.
         # @!attribute [rw] resource_spec
         #   @return [::Google::Cloud::Dataplex::V1::Zone::ResourceSpec]
-        #     Required. Specification of the resources that are referenced by the assets within
-        #     this zone.
+        #     Required. Specification of the resources that are referenced by the assets
+        #     within this zone.
         # @!attribute [r] asset_status
         #   @return [::Google::Cloud::Dataplex::V1::AssetStatus]
         #     Output only. Aggregated status of the underlying assets of the zone.
@@ -197,8 +199,8 @@ module Google
           # Settings for resources attached as assets within a zone.
           # @!attribute [rw] location_type
           #   @return [::Google::Cloud::Dataplex::V1::Zone::ResourceSpec::LocationType]
-          #     Required. Immutable. The location type of the resources that are allowed to be attached to the
-          #     assets within this zone.
+          #     Required. Immutable. The location type of the resources that are allowed
+          #     to be attached to the assets within this zone.
           class ResourceSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -222,16 +224,16 @@ module Google
           #     Required. Whether discovery is enabled.
           # @!attribute [rw] include_patterns
           #   @return [::Array<::String>]
-          #     Optional. The list of patterns to apply for selecting data to include during
-          #     discovery if only a subset of the data should considered. For Cloud
-          #     Storage bucket assets, these are interpreted as glob patterns used to
-          #     match object names. For BigQuery dataset assets, these are
-          #     interpreted as patterns to match table names.
+          #     Optional. The list of patterns to apply for selecting data to include
+          #     during discovery if only a subset of the data should considered. For
+          #     Cloud Storage bucket assets, these are interpreted as glob patterns used
+          #     to match object names. For BigQuery dataset assets, these are interpreted
+          #     as patterns to match table names.
           # @!attribute [rw] exclude_patterns
           #   @return [::Array<::String>]
-          #     Optional. The list of patterns to apply for selecting data to exclude during
-          #     discovery.  For Cloud Storage bucket assets, these are interpreted as
-          #     glob patterns used to match object names. For BigQuery dataset assets,
+          #     Optional. The list of patterns to apply for selecting data to exclude
+          #     during discovery.  For Cloud Storage bucket assets, these are interpreted
+          #     as glob patterns used to match object names. For BigQuery dataset assets,
           #     these are interpreted as patterns to match table names.
           # @!attribute [rw] csv_options
           #   @return [::Google::Cloud::Dataplex::V1::Zone::DiscoverySpec::CsvOptions]
@@ -241,15 +243,14 @@ module Google
           #     Optional. Configuration for Json data.
           # @!attribute [rw] schedule
           #   @return [::String]
-          #     Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for running
-          #     discovery periodically. Successive discovery runs must be scheduled at
-          #     least 60 minutes apart.
-          #     The default value is to run discovery every 60 minutes.
-          #     To explicitly set a timezone to the cron tab, apply a prefix in the
-          #     cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or TZ=$\\{IANA_TIME_ZONE}".
-          #     The $\\{IANA_TIME_ZONE} may only be a valid string from IANA time zone
-          #     database. For example, "CRON_TZ=America/New_York 1 * * * *", or
-          #     "TZ=America/New_York 1 * * * *".
+          #     Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for
+          #     running discovery periodically. Successive discovery runs must be
+          #     scheduled at least 60 minutes apart. The default value is to run
+          #     discovery every 60 minutes. To explicitly set a timezone to the cron
+          #     tab, apply a prefix in the cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or
+          #     TZ=$\\{IANA_TIME_ZONE}". The $\\{IANA_TIME_ZONE} may only be a valid string
+          #     from IANA time zone database. For example, `CRON_TZ=America/New_York 1
+          #     * * * *`, or `TZ=America/New_York 1 * * * *`.
           class DiscoverySpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -257,11 +258,12 @@ module Google
             # Describe CSV and similar semi-structured data formats.
             # @!attribute [rw] header_rows
             #   @return [::Integer]
-            #     Optional. The number of rows to interpret as header rows that should be skipped
-            #     when reading data rows.
+            #     Optional. The number of rows to interpret as header rows that should be
+            #     skipped when reading data rows.
             # @!attribute [rw] delimiter
             #   @return [::String]
-            #     Optional. The delimiter being used to separate values. This defaults to ','.
+            #     Optional. The delimiter being used to separate values. This defaults to
+            #     ','.
             # @!attribute [rw] encoding
             #   @return [::String]
             #     Optional. The character encoding of the data. The default is UTF-8.
@@ -520,8 +522,9 @@ module Google
         #     Optional. User friendly display name.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. System generated globally unique ID for the asset. This ID will be
-        #     different if the asset is deleted and re-created with the same name.
+        #     Output only. System generated globally unique ID for the asset. This ID
+        #     will be different if the asset is deleted and re-created with the same
+        #     name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the asset was created.
@@ -545,16 +548,17 @@ module Google
         #     Output only. Status of the resource referenced by this asset.
         # @!attribute [r] security_status
         #   @return [::Google::Cloud::Dataplex::V1::Asset::SecurityStatus]
-        #     Output only. Status of the security policy applied to resource referenced by this asset.
+        #     Output only. Status of the security policy applied to resource referenced
+        #     by this asset.
         # @!attribute [rw] discovery_spec
         #   @return [::Google::Cloud::Dataplex::V1::Asset::DiscoverySpec]
-        #     Optional. Specification of the discovery feature applied to data referenced by this
-        #     asset.
-        #     When this spec is left unset, the asset will use the spec set on the parent
-        #     zone.
+        #     Optional. Specification of the discovery feature applied to data referenced
+        #     by this asset. When this spec is left unset, the asset will use the spec
+        #     set on the parent zone.
         # @!attribute [r] discovery_status
         #   @return [::Google::Cloud::Dataplex::V1::Asset::DiscoveryStatus]
-        #     Output only. Status of the discovery feature applied to data referenced by this asset.
+        #     Output only. Status of the discovery feature applied to data referenced by
+        #     this asset.
         class Asset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -599,16 +603,16 @@ module Google
           #     Optional. Whether discovery is enabled.
           # @!attribute [rw] include_patterns
           #   @return [::Array<::String>]
-          #     Optional. The list of patterns to apply for selecting data to include during
-          #     discovery if only a subset of the data should considered.  For Cloud
-          #     Storage bucket assets, these are interpreted as glob patterns used to
-          #     match object names. For BigQuery dataset assets, these are interpreted as
-          #     patterns to match table names.
+          #     Optional. The list of patterns to apply for selecting data to include
+          #     during discovery if only a subset of the data should considered.  For
+          #     Cloud Storage bucket assets, these are interpreted as glob patterns used
+          #     to match object names. For BigQuery dataset assets, these are interpreted
+          #     as patterns to match table names.
           # @!attribute [rw] exclude_patterns
           #   @return [::Array<::String>]
-          #     Optional. The list of patterns to apply for selecting data to exclude during
-          #     discovery.  For Cloud Storage bucket assets, these are interpreted as
-          #     glob patterns used to match object names. For BigQuery dataset assets,
+          #     Optional. The list of patterns to apply for selecting data to exclude
+          #     during discovery.  For Cloud Storage bucket assets, these are interpreted
+          #     as glob patterns used to match object names. For BigQuery dataset assets,
           #     these are interpreted as patterns to match table names.
           # @!attribute [rw] csv_options
           #   @return [::Google::Cloud::Dataplex::V1::Asset::DiscoverySpec::CsvOptions]
@@ -618,15 +622,14 @@ module Google
           #     Optional. Configuration for Json data.
           # @!attribute [rw] schedule
           #   @return [::String]
-          #     Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for running
-          #     discovery periodically. Successive discovery runs must be scheduled at
-          #     least 60 minutes apart.
-          #     The default value is to run discovery every 60 minutes.
-          #     To explicitly set a timezone to the cron tab, apply a prefix in the
-          #     cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or TZ=$\\{IANA_TIME_ZONE}".
-          #     The $\\{IANA_TIME_ZONE} may only be a valid string from IANA time zone
-          #     database. For example, "CRON_TZ=America/New_York 1 * * * *", or
-          #     "TZ=America/New_York 1 * * * *".
+          #     Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for
+          #     running discovery periodically. Successive discovery runs must be
+          #     scheduled at least 60 minutes apart. The default value is to run
+          #     discovery every 60 minutes. To explicitly set a timezone to the cron
+          #     tab, apply a prefix in the cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or
+          #     TZ=$\\{IANA_TIME_ZONE}". The $\\{IANA_TIME_ZONE} may only be a valid string
+          #     from IANA time zone database. For example, `CRON_TZ=America/New_York 1
+          #     * * * *`, or `TZ=America/New_York 1 * * * *`.
           class DiscoverySpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -634,11 +637,12 @@ module Google
             # Describe CSV and similar semi-structured data formats.
             # @!attribute [rw] header_rows
             #   @return [::Integer]
-            #     Optional. The number of rows to interpret as header rows that should be skipped
-            #     when reading data rows.
+            #     Optional. The number of rows to interpret as header rows that should be
+            #     skipped when reading data rows.
             # @!attribute [rw] delimiter
             #   @return [::String]
-            #     Optional. The delimiter being used to separate values. This defaults to ','.
+            #     Optional. The delimiter being used to separate values. This defaults to
+            #     ','.
             # @!attribute [rw] encoding
             #   @return [::String]
             #     Optional. The character encoding of the data. The default is UTF-8.
@@ -669,13 +673,17 @@ module Google
           # Identifies the cloud resource that is referenced by this asset.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Immutable. Relative name of the cloud resource that contains the data that is
-          #     being managed within a lake. For example:
+          #     Immutable. Relative name of the cloud resource that contains the data
+          #     that is being managed within a lake. For example:
           #       `projects/{project_number}/buckets/{bucket_id}`
           #       `projects/{project_number}/datasets/{dataset_id}`
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Dataplex::V1::Asset::ResourceSpec::Type]
           #     Required. Immutable. Type of resource.
+          # @!attribute [rw] read_access_mode
+          #   @return [::Google::Cloud::Dataplex::V1::Asset::ResourceSpec::AccessMode]
+          #     Optional. Determines how read permissions are handled for each asset and
+          #     their associated tables. Only available to storage buckets assets.
           class ResourceSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -691,6 +699,19 @@ module Google
               # BigQuery dataset.
               BIGQUERY_DATASET = 2
             end
+
+            # Access Mode determines how data stored within the resource is read. This
+            # is only applicable to storage bucket assets.
+            module AccessMode
+              # Access mode unspecified.
+              ACCESS_MODE_UNSPECIFIED = 0
+
+              # Default. Data is accessed directly using storage APIs.
+              DIRECT = 1
+
+              # Data is accessed through a managed interface using BigQuery APIs.
+              MANAGED = 2
+            end
           end
 
           # Status of the resource referenced by an asset.
@@ -703,6 +724,9 @@ module Google
           # @!attribute [rw] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Last update time of the status.
+          # @!attribute [r] managed_access_identity
+          #   @return [::String]
+          #     Output only. Service account associated with the BigQuery Connection.
           class ResourceStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

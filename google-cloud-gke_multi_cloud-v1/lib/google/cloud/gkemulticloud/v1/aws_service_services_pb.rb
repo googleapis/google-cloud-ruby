@@ -34,7 +34,8 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.gkemulticloud.v1.AwsClusters'
 
-            # Creates a new [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource on a given GCP project and region.
+            # Creates a new [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster]
+            # resource on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be
@@ -42,15 +43,17 @@ module Google
             rpc :CreateAwsCluster, ::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest, ::Google::Longrunning::Operation
             # Updates an [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster].
             rpc :UpdateAwsCluster, ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsClusterRequest, ::Google::Longrunning::Operation
-            # Describes a specific [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource.
+            # Describes a specific [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster]
+            # resource.
             rpc :GetAwsCluster, ::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest, ::Google::Cloud::GkeMultiCloud::V1::AwsCluster
-            # Lists all [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resources on a given Google Cloud project and
-            # region.
+            # Lists all [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resources
+            # on a given Google Cloud project and region.
             rpc :ListAwsClusters, ::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersRequest, ::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersResponse
-            # Deletes a specific [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource.
+            # Deletes a specific [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster]
+            # resource.
             #
-            # Fails if the cluster has one or more associated [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool]
-            # resources.
+            # Fails if the cluster has one or more associated
+            # [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] resources.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be
@@ -59,7 +62,8 @@ module Google
             # Generates a short-lived access token to authenticate to a given
             # [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource.
             rpc :GenerateAwsAccessToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenResponse
-            # Creates a new [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool], attached to a given [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster].
+            # Creates a new [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool],
+            # attached to a given [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster].
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be
@@ -67,11 +71,15 @@ module Google
             rpc :CreateAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest, ::Google::Longrunning::Operation
             # Updates an [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool].
             rpc :UpdateAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest, ::Google::Longrunning::Operation
-            # Describes a specific [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] resource.
+            # Describes a specific
+            # [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] resource.
             rpc :GetAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest, ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool
-            # Lists all [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] resources on a given [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster].
+            # Lists all [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool]
+            # resources on a given
+            # [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster].
             rpc :ListAwsNodePools, ::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest, ::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsResponse
-            # Deletes a specific [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] resource.
+            # Deletes a specific [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool]
+            # resource.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be

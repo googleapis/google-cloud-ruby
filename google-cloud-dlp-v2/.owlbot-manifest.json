@@ -18,6 +18,10 @@
     "lib/google/cloud/dlp/v2/dlp_service/client.rb",
     "lib/google/cloud/dlp/v2/dlp_service/credentials.rb",
     "lib/google/cloud/dlp/v2/dlp_service/paths.rb",
+    "lib/google/cloud/dlp/v2/dlp_service/rest.rb",
+    "lib/google/cloud/dlp/v2/dlp_service/rest/client.rb",
+    "lib/google/cloud/dlp/v2/dlp_service/rest/service_stub.rb",
+    "lib/google/cloud/dlp/v2/rest.rb",
     "lib/google/cloud/dlp/v2/version.rb",
     "lib/google/privacy/dlp/v2/dlp_pb.rb",
     "lib/google/privacy/dlp/v2/dlp_services_pb.rb",
@@ -75,6 +79,7 @@
     "snippets/dlp_service/update_stored_info_type.rb",
     "snippets/snippet_metadata_google.privacy.dlp.v2.json",
     "test/google/cloud/dlp/v2/dlp_service_paths_test.rb",
+    "test/google/cloud/dlp/v2/dlp_service_rest_test.rb",
     "test/google/cloud/dlp/v2/dlp_service_test.rb",
     "test/helper.rb"
   ],

@@ -19,6 +19,9 @@ desc "Updates all release levels in repo-metadata.json files"
 flag :git_remote, "--remote=NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
+flag :enable_fork, "--fork" do
+  desc "Use a fork to open the pull request"
+end
 
 include :exec, e: true
 include "yoshi-pr-generator"
@@ -27,12 +30,17 @@ def run
   require "json"
 
   yoshi_utils.git_ensure_identity
+  if enable_fork
+    set :git_remote, "pull-request-fork" unless git_remote
+    yoshi_utils.gh_ensure_fork remote: git_remote
+  end
+
   updated, pr_result = update_release_levels
   output_result updated, pr_result
 end
 
 def update_release_levels
-  timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
+  timestamp = Time.now.utc.strftime "%Y%m%d-%H%M%S"
   branch_name = "pr/update-release-levels-#{timestamp}"
   updated = []
   pr_result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
@@ -61,9 +69,9 @@ end
 def selected_gems
   Dir.chdir context_directory
   Dir.glob("*/.repo-metadata.json")
-    .map { |path| File.dirname path }
-    .find_all { |gem_name| File.file? "#{gem_name}/#{gem_name}.gemspec" }
-    .sort
+     .map { |path| File.dirname path }
+     .find_all { |gem_name| File.file? "#{gem_name}/#{gem_name}.gemspec" }
+     .sort
 end
 
 def update_gem gem_name
@@ -75,9 +83,7 @@ def update_gem gem_name
     return false
   end
   logger.info "Updated repo-metadata for #{gem_name}"
-  File.open "#{gem_name}/.repo-metadata.json", "w" do |file|
-    file.write updated_metadata
-  end
+  File.write "#{gem_name}/.repo-metadata.json", updated_metadata
   true
 end
 

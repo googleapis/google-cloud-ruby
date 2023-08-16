@@ -1,5 +1,33 @@
 # Release History
 
+### 0.10.0 (2023-06-06)
+
+#### Features
+
+* Support for create_database ([#22073](https://github.com/googleapis/google-cloud-ruby/issues/22073)) 
+* Uses binary protobuf definitions for better forward compatibility ([#21675](https://github.com/googleapis/google-cloud-ruby/issues/21675)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.9.0 (2023-05-19)
+
+#### Features
+
+* add ApiScope and COLLECTION_RECURSIVE query_scope for Firestore index 
+
+### 0.8.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.7.1 (2023-01-15)
+
+#### Documentation
+
+* Reference the correct main client gem name ([#19994](https://github.com/googleapis/google-cloud-ruby/issues/19994)) 
+
 ### 0.7.0 (2022-09-16)
 
 #### Features

@@ -25,6 +25,7 @@ require "google/cloud/app_engine/v1/version"
 require "google/cloud/app_engine/v1/applications/credentials"
 require "google/cloud/app_engine/v1/applications/operations"
 require "google/cloud/app_engine/v1/applications/client"
+require "google/cloud/app_engine/v1/applications/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Manages App Engine applications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/applications"
         #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/app_engine/v1/applications/rest"
+        #     client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
         #
         module Applications
         end

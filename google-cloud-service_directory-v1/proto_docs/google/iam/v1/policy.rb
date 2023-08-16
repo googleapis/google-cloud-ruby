@@ -35,10 +35,12 @@ module Google
       # only if the expression evaluates to `true`. A condition can add constraints
       # based on attributes of the request, the resource, or both. To learn which
       # resources support conditions in their IAM policies, see the
-      # [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+      # [IAM
+      # documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
       #
       # **JSON example:**
       #
+      # ```
       #     {
       #       "bindings": [
       #         {
@@ -58,16 +60,19 @@ module Google
       #           "condition": {
       #             "title": "expirable access",
       #             "description": "Does not grant access after Sep 2020",
-      #             "expression": "request.time < timestamp('2020-10-01T00:00:00.000Z')",
+      #             "expression": "request.time <
+      #             timestamp('2020-10-01T00:00:00.000Z')",
       #           }
       #         }
       #       ],
       #       "etag": "BwWWja0YfJA=",
       #       "version": 3
       #     }
+      # ```
       #
       # **YAML example:**
       #
+      # ```
       #     bindings:
       #     - members:
       #       - user:mike@example.com
@@ -84,6 +89,7 @@ module Google
       #         expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
       #     etag: BwWWja0YfJA=
       #     version: 3
+      # ```
       #
       # For a description of IAM and its features, see the
       # [IAM documentation](https://cloud.google.com/iam/docs/).
@@ -112,7 +118,8 @@ module Google
       #     specify any valid version or leave the field unset.
       #
       #     To learn which resources support conditions in their IAM policies, see the
-      #     [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+      #     [IAM
+      #     documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
       # @!attribute [rw] bindings
       #   @return [::Array<::Google::Iam::V1::Binding>]
       #     Associates a list of `members`, or principals, with a `role`. Optionally,
@@ -154,7 +161,7 @@ module Google
       #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       # @!attribute [rw] members
       #   @return [::Array<::String>]
-      #     Specifies the principals requesting access for a Cloud Platform resource.
+      #     Specifies the principals requesting access for a Google Cloud resource.
       #     `members` can have the following values:
       #
       #     * `allUsers`: A special identifier that represents anyone who is
@@ -264,8 +271,8 @@ module Google
       #     }
       #
       # For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      # logging. It also exempts jose@example.com from DATA_READ logging, and
-      # aliya@example.com from DATA_WRITE logging.
+      # logging. It also exempts `jose@example.com` from DATA_READ logging, and
+      # `aliya@example.com` from DATA_WRITE logging.
       # @!attribute [rw] service
       #   @return [::String]
       #     Specifies a service that will be enabled for audit logging.
@@ -305,7 +312,8 @@ module Google
       #   @return [::Array<::String>]
       #     Specifies the identities that do not cause logging for this type of
       #     permission.
-      #     Follows the same format of {::Google::Iam::V1::Binding#members Binding.members}.
+      #     Follows the same format of
+      #     {::Google::Iam::V1::Binding#members Binding.members}.
       class AuditLogConfig
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -352,7 +360,7 @@ module Google
       #     Required
       # @!attribute [rw] member
       #   @return [::String]
-      #     A single identity requesting access for a Cloud Platform resource.
+      #     A single identity requesting access for a Google Cloud resource.
       #     Follows the same format of Binding.members.
       #     Required
       # @!attribute [rw] condition

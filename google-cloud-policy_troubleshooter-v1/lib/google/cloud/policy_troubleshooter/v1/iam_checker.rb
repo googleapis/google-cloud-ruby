@@ -24,6 +24,7 @@ require "google/cloud/policy_troubleshooter/v1/version"
 
 require "google/cloud/policy_troubleshooter/v1/iam_checker/credentials"
 require "google/cloud/policy_troubleshooter/v1/iam_checker/client"
+require "google/cloud/policy_troubleshooter/v1/iam_checker/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         #
         # This service helps you troubleshoot access issues for Google Cloud resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/policy_troubleshooter/v1/iam_checker"
         #     client = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/policy_troubleshooter/v1/iam_checker/rest"
+        #     client = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::Client.new
         #
         module IamChecker
         end

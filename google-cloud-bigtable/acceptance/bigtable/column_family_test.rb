@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
   let(:instance_id) { bigtable_instance_id }
-  let(:table_id) { "test-table-#{random_str}" }
+  let(:table_id) { "test-table-#{Time.now.to_i}-#{random_str}" }
   let(:table){
     add_table_to_cleanup_list(table_id)
 

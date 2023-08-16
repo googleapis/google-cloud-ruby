@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/ids"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::IDS::ClientConstructionMinitest < Minitest::Test
-  def test_ids
+  def test_ids_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::IDS.ids do |config|
+      client = Google::Cloud::IDS.ids transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::IDS::V1::IDS::Client, client
+    end
+  end
+
+  def test_ids_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::IDS.ids transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::IDS::V1::IDS::Rest::Client, client
     end
   end
 end

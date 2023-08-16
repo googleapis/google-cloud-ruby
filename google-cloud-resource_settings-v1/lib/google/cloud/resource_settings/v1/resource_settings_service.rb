@@ -25,6 +25,7 @@ require "google/cloud/resource_settings/v1/version"
 require "google/cloud/resource_settings/v1/resource_settings_service/credentials"
 require "google/cloud/resource_settings/v1/resource_settings_service/paths"
 require "google/cloud/resource_settings/v1/resource_settings_service/client"
+require "google/cloud/resource_settings/v1/resource_settings_service/rest"
 
 module Google
   module Cloud
@@ -44,10 +45,15 @@ module Google
         # For all requests, returns a `google.rpc.Status` with
         # `google.rpc.Code.INVALID_ARGUMENT` if the request is malformed.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_settings/v1/resource_settings_service"
         #     client = ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_settings/v1/resource_settings_service/rest"
+        #     client = ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Rest::Client.new
         #
         module ResourceSettingsService
         end

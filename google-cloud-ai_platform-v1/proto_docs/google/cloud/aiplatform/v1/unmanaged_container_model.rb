@@ -32,8 +32,8 @@ module Google
         #     Contains the schemata used in Model's predictions and explanations
         # @!attribute [rw] container_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ModelContainerSpec]
-        #     Input only. The specification of the container that is to be used when deploying
-        #     this Model.
+        #     Input only. The specification of the container that is to be used when
+        #     deploying this Model.
         class UnmanagedContainerModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

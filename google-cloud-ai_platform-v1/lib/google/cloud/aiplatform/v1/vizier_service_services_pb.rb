@@ -53,7 +53,8 @@ module Google
             # suggested by Vertex AI Vizier. Returns a long-running
             # operation associated with the generation of Trial suggestions.
             # When this long-running operation succeeds, it will contain
-            # a [SuggestTrialsResponse][google.cloud.ml.v1.SuggestTrialsResponse].
+            # a
+            # [SuggestTrialsResponse][google.cloud.aiplatform.v1.SuggestTrialsResponse].
             rpc :SuggestTrials, ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest, ::Google::Longrunning::Operation
             # Adds a user provided Trial to a Study.
             rpc :CreateTrial, ::Google::Cloud::AIPlatform::V1::CreateTrialRequest, ::Google::Cloud::AIPlatform::V1::Trial
@@ -71,7 +72,7 @@ module Google
             # Checks  whether a Trial should stop or not. Returns a
             # long-running operation. When the operation is successful,
             # it will contain a
-            # [CheckTrialEarlyStoppingStateResponse][google.cloud.ml.v1.CheckTrialEarlyStoppingStateResponse].
+            # [CheckTrialEarlyStoppingStateResponse][google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateResponse].
             rpc :CheckTrialEarlyStoppingState, ::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest, ::Google::Longrunning::Operation
             # Stops a Trial.
             rpc :StopTrial, ::Google::Cloud::AIPlatform::V1::StopTrialRequest, ::Google::Cloud::AIPlatform::V1::Trial

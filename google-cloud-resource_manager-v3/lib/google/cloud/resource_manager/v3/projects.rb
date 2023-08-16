@@ -26,6 +26,7 @@ require "google/cloud/resource_manager/v3/projects/credentials"
 require "google/cloud/resource_manager/v3/projects/paths"
 require "google/cloud/resource_manager/v3/projects/operations"
 require "google/cloud/resource_manager/v3/projects/client"
+require "google/cloud/resource_manager/v3/projects/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Manages Google Cloud Projects.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_manager/v3/projects"
         #     client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_manager/v3/projects/rest"
+        #     client = ::Google::Cloud::ResourceManager::V3::Projects::Rest::Client.new
         #
         module Projects
         end

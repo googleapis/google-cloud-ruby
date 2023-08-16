@@ -31,9 +31,9 @@ module Google
         ##
         # The GlobalOrganizationOperations API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/global_organization_operations"
+        #     require "google/cloud/compute/v1/global_organization_operations/rest"
         #     client = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new
         #
         module GlobalOrganizationOperations

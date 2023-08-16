@@ -89,6 +89,10 @@ module Google
         #     characters and underscores. For example, an attribute named
         #     `attributes.abc_xyz` can be indexed, but an attribute named
         #     `attributes.abc-xyz` cannot be indexed.
+        #
+        #     If the attribute key starts with `attributes.`, then the attribute is a
+        #     custom attribute. Attributes such as `brands`, `patterns`, and `title` are
+        #     built-in and called system attributes.
         # @!attribute [r] in_use
         #   @return [::Boolean]
         #     Output only. Indicates whether this attribute has been used by any
@@ -105,13 +109,13 @@ module Google
         #     APIs. This field is `False` for pre-loaded
         #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}s.
         #
-        #     Only pre-loaded
-        #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}s that are
-        #     neither in use by products nor predefined can be deleted.
-        #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}s that are
-        #     either in use by products or are predefined cannot be deleted; however,
-        #     their configuration properties will reset to default values upon removal
-        #     request.
+        #     Only pre-loaded [catalog
+        #     attributes][google.cloud.retail.v2.CatalogAttribute] that are neither in
+        #     use by products nor predefined can be deleted. [Catalog
+        #     attributes][google.cloud.retail.v2.CatalogAttribute] that are
+        #     either in use by products or are predefined attributes cannot be deleted;
+        #     however, their configuration properties will reset to default values upon
+        #     removal request.
         #
         #     After catalog changes, it takes about 10 minutes for this field to update.
         # @!attribute [r] type
@@ -125,12 +129,16 @@ module Google
         #     is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if INDEXABLE_ENABLED attribute values
         #     are indexed so that it can be filtered, faceted, or boosted in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
+        #
+        #     Must be specified, otherwise throws INVALID_FORMAT error.
         # @!attribute [rw] dynamic_facetable_option
         #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::DynamicFacetableOption]
         #     If DYNAMIC_FACETABLE_ENABLED, attribute values are available for dynamic
         #     facet. Could only be DYNAMIC_FACETABLE_DISABLED if
         #     {::Google::Cloud::Retail::V2::CatalogAttribute#indexable_option CatalogAttribute.indexable_option}
         #     is INDEXABLE_DISABLED. Otherwise, an INVALID_ARGUMENT error is returned.
+        #
+        #     Must be specified, otherwise throws INVALID_FORMAT error.
         # @!attribute [rw] searchable_option
         #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::SearchableOption]
         #     When
@@ -143,6 +151,20 @@ module Google
         #     will not be searchable by text queries in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}, as
         #     there are no text values associated to numerical attributes.
+        #
+        #     Must be specified, otherwise throws INVALID_FORMAT error.
+        # @!attribute [rw] exact_searchable_option
+        #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption]
+        #     If EXACT_SEARCHABLE_ENABLED, attribute values will be exact searchable.
+        #     This property only applies to textual custom attributes and requires
+        #     indexable set to enabled to enable exact-searchable. If unset, the server
+        #     behavior defaults to
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption::EXACT_SEARCHABLE_DISABLED EXACT_SEARCHABLE_DISABLED}.
+        # @!attribute [rw] retrievable_option
+        #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption]
+        #     If RETRIEVABLE_ENABLED, attribute values are retrievable in the search
+        #     results. If unset, the server behavior defaults to
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption::RETRIEVABLE_DISABLED RETRIEVABLE_DISABLED}.
         class CatalogAttribute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,8 +186,7 @@ module Google
 
           # The status of the indexable option of a catalog attribute.
           module IndexableOption
-            # Value used when unset. Defaults to
-            # {::Google::Cloud::Retail::V2::CatalogAttribute::IndexableOption::INDEXABLE_ENABLED INDEXABLE_ENABLED}.
+            # Value used when unset.
             INDEXABLE_OPTION_UNSPECIFIED = 0
 
             # Indexable option enabled for an attribute.
@@ -177,8 +198,7 @@ module Google
 
           # The status of the dynamic facetable option of a catalog attribute.
           module DynamicFacetableOption
-            # Value used when unset. Defaults to
-            # {::Google::Cloud::Retail::V2::CatalogAttribute::DynamicFacetableOption::DYNAMIC_FACETABLE_ENABLED DYNAMIC_FACETABLE_ENABLED}.
+            # Value used when unset.
             DYNAMIC_FACETABLE_OPTION_UNSPECIFIED = 0
 
             # Dynamic facetable option enabled for an attribute.
@@ -190,8 +210,7 @@ module Google
 
           # The status of the searchable option of a catalog attribute.
           module SearchableOption
-            # Value used when unset. Defaults to
-            # {::Google::Cloud::Retail::V2::CatalogAttribute::SearchableOption::SEARCHABLE_DISABLED SEARCHABLE_DISABLED}.
+            # Value used when unset.
             SEARCHABLE_OPTION_UNSPECIFIED = 0
 
             # Searchable option enabled for an attribute.
@@ -199,6 +218,30 @@ module Google
 
             # Searchable option disabled for an attribute.
             SEARCHABLE_DISABLED = 2
+          end
+
+          # The status of the exact-searchable option of a catalog attribute.
+          module ExactSearchableOption
+            # Value used when unset.
+            EXACT_SEARCHABLE_OPTION_UNSPECIFIED = 0
+
+            # Exact searchable option enabled for an attribute.
+            EXACT_SEARCHABLE_ENABLED = 1
+
+            # Exact searchable option disabled for an attribute.
+            EXACT_SEARCHABLE_DISABLED = 2
+          end
+
+          # The status of the retrievable option of a catalog attribute.
+          module RetrievableOption
+            # Value used when unset.
+            RETRIEVABLE_OPTION_UNSPECIFIED = 0
+
+            # Retrievable option enabled for an attribute.
+            RETRIEVABLE_ENABLED = 1
+
+            # Retrievable option disabled for an attribute.
+            RETRIEVABLE_DISABLED = 2
           end
         end
 

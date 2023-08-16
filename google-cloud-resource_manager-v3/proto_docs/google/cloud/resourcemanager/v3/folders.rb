@@ -58,9 +58,9 @@ module Google
         #     Output only. Timestamp when the folder was requested to be deleted.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. A checksum computed by the server based on the current value of the folder
-        #     resource. This may be sent on update and delete requests to ensure the
-        #     client has an up-to-date value before proceeding.
+        #     Output only. A checksum computed by the server based on the current value
+        #     of the folder resource. This may be sent on update and delete requests to
+        #     ensure the client has an up-to-date value before proceeding.
         class Folder
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,15 +91,20 @@ module Google
         # The ListFolders request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the organization or folder whose folders are
-        #     being listed.
-        #     Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+        #     Required. The name of the parent resource whose folders are being listed.
+        #     Only children of this parent resource are listed; descendants are not
+        #     listed.
+        #
+        #     If the parent is a folder, use the value `folders/{folder_id}`. If the
+        #     parent is an organization, use the value `organizations/{org_id}`.
+        #
         #     Access to this method is controlled by checking the
         #     `resourcemanager.folders.list` permission on the `parent`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of folders to return in the response.
-        #     If unspecified, server picks an appropriate default.
+        #     Optional. The maximum number of folders to return in the response. The
+        #     server can return fewer folders than requested. If unspecified, server
+        #     picks an appropriate default.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A pagination token returned from a previous call to `ListFolders`
@@ -131,12 +136,13 @@ module Google
         # The request message for searching folders.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of folders to return in the response.
-        #     If unspecified, server picks an appropriate default.
+        #     Optional. The maximum number of folders to return in the response. The
+        #     server can return fewer folders than requested. If unspecified, server
+        #     picks an appropriate default.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous call to `SearchFolders`
-        #     that indicates from where search should continue.
+        #     Optional. A pagination token returned from a previous call to
+        #     `SearchFolders` that indicates from where search should continue.
         # @!attribute [rw] query
         #   @return [::String]
         #     Optional. Search criteria used to select the folders to return.
@@ -192,8 +198,8 @@ module Google
         # The CreateFolder request message.
         # @!attribute [rw] folder
         #   @return [::Google::Cloud::ResourceManager::V3::Folder]
-        #     Required. The folder being created, only the display name and parent will be
-        #     consulted. All other fields will be ignored.
+        #     Required. The folder being created, only the display name and parent will
+        #     be consulted. All other fields will be ignored.
         class CreateFolderRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -222,8 +228,8 @@ module Google
         # change the `parent` field.
         # @!attribute [rw] folder
         #   @return [::Google::Cloud::ResourceManager::V3::Folder]
-        #     Required. The new definition of the Folder. It must include the `name` field, which
-        #     cannot be changed.
+        #     Required. The new definition of the Folder. It must include the `name`
+        #     field, which cannot be changed.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Fields to be updated.
@@ -247,9 +253,9 @@ module Google
         #     Must be of the form folders/\\{folder_id}
         # @!attribute [rw] destination_parent
         #   @return [::String]
-        #     Required. The resource name of the folder or organization which should be the
-        #     folder's new parent.
-        #     Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+        #     Required. The resource name of the folder or organization which should be
+        #     the folder's new parent. Must be of the form `folders/{folder_id}` or
+        #     `organizations/{org_id}`.
         class MoveFolderRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

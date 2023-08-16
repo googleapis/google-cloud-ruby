@@ -27,10 +27,16 @@ def delete_slate project_id:, location:, slate_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the slate.
-  name = client.slate_path project: project_id, location: location, slate: slate_id
+  name = client.slate_path project: project_id, location: location,
+                           slate: slate_id
 
   # Delete the slate.
-  client.delete_slate name: name
+  operation = client.delete_slate name: name
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print a success message.
   puts "Deleted slate"

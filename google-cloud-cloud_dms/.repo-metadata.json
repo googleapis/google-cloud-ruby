@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "DATABASE_MIGRATION",
     "ruby-cloud-product-url": "https://cloud.google.com/database-migration/",
     "ruby-cloud-namespace-override": "CloudDms=CloudDMS",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

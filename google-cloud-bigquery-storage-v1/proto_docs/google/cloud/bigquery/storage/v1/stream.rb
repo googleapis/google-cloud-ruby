@@ -29,12 +29,14 @@ module Google
           #     `projects/{project_id}/locations/{location}/sessions/{session_id}`.
           # @!attribute [r] expire_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. Time at which the session becomes invalid. After this time, subsequent
-          #     requests to read this Session will return errors. The expire_time is
-          #     automatically assigned and currently cannot be specified or updated.
+          #     Output only. Time at which the session becomes invalid. After this time,
+          #     subsequent requests to read this Session will return errors. The
+          #     expire_time is automatically assigned and currently cannot be specified or
+          #     updated.
           # @!attribute [rw] data_format
           #   @return [::Google::Cloud::Bigquery::Storage::V1::DataFormat]
-          #     Immutable. Data format of the output data. DATA_FORMAT_UNSPECIFIED not supported.
+          #     Immutable. Data format of the output data. DATA_FORMAT_UNSPECIFIED not
+          #     supported.
           # @!attribute [r] avro_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSchema]
           #     Output only. Avro schema.
@@ -47,7 +49,8 @@ module Google
           #     `projects/{project_id}/datasets/{dataset_id}/tables/{table_id}`
           # @!attribute [rw] table_modifiers
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableModifiers]
-          #     Optional. Any modifiers which are applied when reading from the specified table.
+          #     Optional. Any modifiers which are applied when reading from the specified
+          #     table.
           # @!attribute [rw] read_options
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableReadOptions]
           #     Optional. Read options for this session (e.g. column selection, filters).
@@ -64,10 +67,22 @@ module Google
           #     Output only. An estimate on the number of bytes this session will scan when
           #     all streams are completely consumed. This estimate is based on
           #     metadata from the table which might be incomplete or stale.
+          # @!attribute [r] estimated_total_physical_file_size
+          #   @return [::Integer]
+          #     Output only. A pre-projected estimate of the total physical size of files
+          #     (in bytes) that this session will scan when all streams are consumed. This
+          #     estimate is independent of the selected columns and can be based on
+          #     incomplete or stale metadata from the table.  This field is only set for
+          #     BigLake tables.
+          # @!attribute [r] estimated_row_count
+          #   @return [::Integer]
+          #     Output only. An estimate on the number of rows present in this session's
+          #     streams. This estimate is based on metadata from the table which might be
+          #     incomplete or stale.
           # @!attribute [rw] trace_id
           #   @return [::String]
-          #     Optional. ID set by client to annotate a session identity.  This does not need
-          #     to be strictly unique, but instead the same ID should be used to group
+          #     Optional. ID set by client to annotate a session identity.  This does not
+          #     need to be strictly unique, but instead the same ID should be used to group
           #     logically connected sessions (e.g. All using the same ID for all sessions
           #     needed to complete a Spark SQL query is reasonable).
           #
@@ -153,6 +168,14 @@ module Google
             # @!attribute [rw] avro_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSerializationOptions]
             #     Optional. Options specific to the Apache Avro output format
+            # @!attribute [rw] sample_percentage
+            #   @return [::Float]
+            #     Optional. Specifies a table sampling percentage. Specifically, the query
+            #     planner will use TABLESAMPLE SYSTEM (sample_percentage PERCENT). The
+            #     sampling percentage is applied at the data block granularity. It will
+            #     randomly choose for each data block whether to read the rows in that data
+            #     block. For more details, see
+            #     https://cloud.google.com/bigquery/docs/table-sampling)
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,8 +204,8 @@ module Google
           #     Immutable. Type of the stream.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. Create time of the stream. For the _default stream, this is the
-          #     creation_time of the table.
+          #     Output only. Create time of the stream. For the _default stream, this is
+          #     the creation_time of the table.
           # @!attribute [r] commit_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Commit time of the stream.

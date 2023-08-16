@@ -31,9 +31,9 @@ module Google
         ##
         # The VpnTunnels API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/vpn_tunnels"
+        #     require "google/cloud/compute/v1/vpn_tunnels/rest"
         #     client = ::Google::Cloud::Compute::V1::VpnTunnels::Rest::Client.new
         #
         module VpnTunnels

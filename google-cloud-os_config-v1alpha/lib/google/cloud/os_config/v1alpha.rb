@@ -23,12 +23,17 @@ module Google
   module Cloud
     module OsConfig
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/os_config/v1alpha"
       #     client = ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/os_config/v1alpha"
+      #     client = ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Rest::Client.new
       #
       module V1alpha
       end

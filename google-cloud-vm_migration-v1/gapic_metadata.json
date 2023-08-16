@@ -229,6 +229,16 @@
               "methods": [
                 "delete_target_project"
               ]
+            },
+            "ListReplicationCycles": {
+              "methods": [
+                "list_replication_cycles"
+              ]
+            },
+            "GetReplicationCycle": {
+              "methods": [
+                "get_replication_cycle"
+              ]
             }
           }
         }

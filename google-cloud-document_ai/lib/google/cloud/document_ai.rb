@@ -48,33 +48,37 @@ module Google
       # Create a new client object for DocumentProcessorService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client](https://googleapis.dev/ruby/google-cloud-document_ai-v1/latest/Google/Cloud/DocumentAI/V1/DocumentProcessorService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-document_ai-v1/latest/Google-Cloud-DocumentAI-V1-DocumentProcessorService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DocumentProcessorService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About DocumentProcessorService
       #
-      # Service to call Cloud DocumentAI to process documents according to the
+      # Service to call Document AI to process documents according to the
       # processor's definition. Processors are built using state-of-the-art Google
       # AI such as natural language, computer vision, and translation to extract
       # structured information from unstructured or semi-structured documents.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [DocumentProcessorService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.document_processor_service version: :v1, &block
+      def self.document_processor_service version: :v1, transport: :grpc, &block
         require "google/cloud/document_ai/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DocumentAI
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::DocumentAI.const_get package_name
-        package_module.const_get(:DocumentProcessorService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::DocumentAI.const_get(package_name).const_get(:DocumentProcessorService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -94,7 +98,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

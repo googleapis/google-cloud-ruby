@@ -20,8 +20,10 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   end
 
   it "creates topic with async options when skip_lookup enabled" do
-    topic = pubsub.topic("test", skip_lookup: true, async: { interval: 1 })
+    topic = pubsub.topic("test", skip_lookup: true, async: { interval: 1, compress: true, compression_bytes_threshold: 140 })
     topic.publish_async("{}")
     _(topic.async_publisher.instance_variable_get("@interval")).must_equal 1
+    _(topic.async_publisher.instance_variable_get("@compress")).must_equal true
+    _(topic.async_publisher.instance_variable_get("@compression_bytes_threshold")).must_equal 140
   end
 end

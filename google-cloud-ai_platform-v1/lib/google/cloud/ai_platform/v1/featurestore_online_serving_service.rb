@@ -33,7 +33,7 @@ module Google
         ##
         # A service for serving online feature values.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/featurestore_online_serving_service"
         #     client = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client.new

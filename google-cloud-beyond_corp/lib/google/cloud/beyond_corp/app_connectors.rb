@@ -49,9 +49,9 @@ module Google
         # Create a new client object for AppConnectorsService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client](https://googleapis.dev/ruby/google-cloud-beyond_corp-app_connectors-v1/latest/Google/Cloud/BeyondCorp/AppConnectors/V1/AppConnectorsService/Client.html)
-        # for version V1 of the API.
-        # However, you can specify specify a different API version by passing it in the
+        # [Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest/Google-Cloud-BeyondCorp-AppConnectors-V1-AppConnectorsService-Client)
+        # for a gRPC client for version V1 of the API.
+        # However, you can specify a different API version by passing it in the
         # `version` parameter. If the AppConnectorsService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
@@ -75,7 +75,7 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
-        # @return [AppConnectorsService::Client] A client object for the specified version.
+        # @return [::Object] A client object for the specified version.
         #
         def self.app_connectors_service version: :v1, &block
           require "google/cloud/beyond_corp/app_connectors/#{version.to_s.downcase}"
@@ -84,8 +84,8 @@ module Google
                          .constants
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
-          package_module = Google::Cloud::BeyondCorp::AppConnectors.const_get package_name
-          package_module.const_get(:AppConnectorsService).const_get(:Client).new(&block)
+          service_module = Google::Cloud::BeyondCorp::AppConnectors.const_get(package_name).const_get(:AppConnectorsService)
+          service_module.const_get(:Client).new(&block)
         end
 
         ##
@@ -105,7 +105,7 @@ module Google
         # * `timeout` (*type:* `Numeric`) -
         #   Default timeout in seconds.
         # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-        #   Additional gRPC headers to be sent with the call.
+        #   Additional headers to be sent with the call.
         # * `retry_policy` (*type:* `Hash`) -
         #   The retry policy. The value is a hash with the following keys:
         #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

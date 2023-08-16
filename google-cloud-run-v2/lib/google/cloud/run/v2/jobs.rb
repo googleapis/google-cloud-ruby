@@ -26,6 +26,7 @@ require "google/cloud/run/v2/jobs/credentials"
 require "google/cloud/run/v2/jobs/paths"
 require "google/cloud/run/v2/jobs/operations"
 require "google/cloud/run/v2/jobs/client"
+require "google/cloud/run/v2/jobs/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Cloud Run Job Control Plane API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/run/v2/jobs"
         #     client = ::Google::Cloud::Run::V2::Jobs::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/run/v2/jobs/rest"
+        #     client = ::Google::Cloud::Run::V2::Jobs::Rest::Client.new
         #
         module Jobs
         end

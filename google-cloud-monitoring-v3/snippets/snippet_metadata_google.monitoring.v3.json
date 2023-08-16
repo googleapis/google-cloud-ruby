@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-monitoring-v3",
-    "version": "0.9.0",
+    "version": "0.12.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "monitoring_v3_generated_AlertPolicyService_ListAlertPolicies_sync",
-      "title": "Snippet for list_alert_policies in AlertPolicyService",
-      "description": "Basic snippet for list_alert_policies in AlertPolicyService",
+      "title": "Snippet for the list_alert_policies call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#list_alert_policies. It may require modification in order to execute successfully.",
       "file": "alert_policy_service/list_alert_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_AlertPolicyService_GetAlertPolicy_sync",
-      "title": "Snippet for get_alert_policy in AlertPolicyService",
-      "description": "Basic snippet for get_alert_policy in AlertPolicyService",
+      "title": "Snippet for the get_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#get_alert_policy. It may require modification in order to execute successfully.",
       "file": "alert_policy_service/get_alert_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_AlertPolicyService_CreateAlertPolicy_sync",
-      "title": "Snippet for create_alert_policy in AlertPolicyService",
-      "description": "Basic snippet for create_alert_policy in AlertPolicyService",
+      "title": "Snippet for the create_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy. It may require modification in order to execute successfully.",
       "file": "alert_policy_service/create_alert_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_AlertPolicyService_DeleteAlertPolicy_sync",
-      "title": "Snippet for delete_alert_policy in AlertPolicyService",
-      "description": "Basic snippet for delete_alert_policy in AlertPolicyService",
+      "title": "Snippet for the delete_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#delete_alert_policy. It may require modification in order to execute successfully.",
       "file": "alert_policy_service/delete_alert_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_AlertPolicyService_UpdateAlertPolicy_sync",
-      "title": "Snippet for update_alert_policy in AlertPolicyService",
-      "description": "Basic snippet for update_alert_policy in AlertPolicyService",
+      "title": "Snippet for the update_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#update_alert_policy. It may require modification in order to execute successfully.",
       "file": "alert_policy_service/update_alert_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_GroupService_ListGroups_sync",
-      "title": "Snippet for list_groups in GroupService",
-      "description": "Basic snippet for list_groups in GroupService",
+      "title": "Snippet for the list_groups call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#list_groups. It may require modification in order to execute successfully.",
       "file": "group_service/list_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_GroupService_GetGroup_sync",
-      "title": "Snippet for get_group in GroupService",
-      "description": "Basic snippet for get_group in GroupService",
+      "title": "Snippet for the get_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#get_group. It may require modification in order to execute successfully.",
       "file": "group_service/get_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_GroupService_CreateGroup_sync",
-      "title": "Snippet for create_group in GroupService",
-      "description": "Basic snippet for create_group in GroupService",
+      "title": "Snippet for the create_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#create_group. It may require modification in order to execute successfully.",
       "file": "group_service/create_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_GroupService_UpdateGroup_sync",
-      "title": "Snippet for update_group in GroupService",
-      "description": "Basic snippet for update_group in GroupService",
+      "title": "Snippet for the update_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#update_group. It may require modification in order to execute successfully.",
       "file": "group_service/update_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_GroupService_DeleteGroup_sync",
-      "title": "Snippet for delete_group in GroupService",
-      "description": "Basic snippet for delete_group in GroupService",
+      "title": "Snippet for the delete_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#delete_group. It may require modification in order to execute successfully.",
       "file": "group_service/delete_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_GroupService_ListGroupMembers_sync",
-      "title": "Snippet for list_group_members in GroupService",
-      "description": "Basic snippet for list_group_members in GroupService",
+      "title": "Snippet for the list_group_members call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#list_group_members. It may require modification in order to execute successfully.",
       "file": "group_service/list_group_members.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_ListMonitoredResourceDescriptors_sync",
-      "title": "Snippet for list_monitored_resource_descriptors in MetricService",
-      "description": "Basic snippet for list_monitored_resource_descriptors in MetricService",
+      "title": "Snippet for the list_monitored_resource_descriptors call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#list_monitored_resource_descriptors. It may require modification in order to execute successfully.",
       "file": "metric_service/list_monitored_resource_descriptors.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_GetMonitoredResourceDescriptor_sync",
-      "title": "Snippet for get_monitored_resource_descriptor in MetricService",
-      "description": "Basic snippet for get_monitored_resource_descriptor in MetricService",
+      "title": "Snippet for the get_monitored_resource_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#get_monitored_resource_descriptor. It may require modification in order to execute successfully.",
       "file": "metric_service/get_monitored_resource_descriptor.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_ListMetricDescriptors_sync",
-      "title": "Snippet for list_metric_descriptors in MetricService",
-      "description": "Basic snippet for list_metric_descriptors in MetricService",
+      "title": "Snippet for the list_metric_descriptors call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#list_metric_descriptors. It may require modification in order to execute successfully.",
       "file": "metric_service/list_metric_descriptors.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_GetMetricDescriptor_sync",
-      "title": "Snippet for get_metric_descriptor in MetricService",
-      "description": "Basic snippet for get_metric_descriptor in MetricService",
+      "title": "Snippet for the get_metric_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#get_metric_descriptor. It may require modification in order to execute successfully.",
       "file": "metric_service/get_metric_descriptor.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_CreateMetricDescriptor_sync",
-      "title": "Snippet for create_metric_descriptor in MetricService",
-      "description": "Basic snippet for create_metric_descriptor in MetricService",
+      "title": "Snippet for the create_metric_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#create_metric_descriptor. It may require modification in order to execute successfully.",
       "file": "metric_service/create_metric_descriptor.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_DeleteMetricDescriptor_sync",
-      "title": "Snippet for delete_metric_descriptor in MetricService",
-      "description": "Basic snippet for delete_metric_descriptor in MetricService",
+      "title": "Snippet for the delete_metric_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#delete_metric_descriptor. It may require modification in order to execute successfully.",
       "file": "metric_service/delete_metric_descriptor.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_ListTimeSeries_sync",
-      "title": "Snippet for list_time_series in MetricService",
-      "description": "Basic snippet for list_time_series in MetricService",
+      "title": "Snippet for the list_time_series call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#list_time_series. It may require modification in order to execute successfully.",
       "file": "metric_service/list_time_series.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_CreateTimeSeries_sync",
-      "title": "Snippet for create_time_series in MetricService",
-      "description": "Basic snippet for create_time_series in MetricService",
+      "title": "Snippet for the create_time_series call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#create_time_series. It may require modification in order to execute successfully.",
       "file": "metric_service/create_time_series.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_MetricService_CreateServiceTimeSeries_sync",
-      "title": "Snippet for create_service_time_series in MetricService",
-      "description": "Basic snippet for create_service_time_series in MetricService",
+      "title": "Snippet for the create_service_time_series call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#create_service_time_series. It may require modification in order to execute successfully.",
       "file": "metric_service/create_service_time_series.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_ListNotificationChannelDescriptors_sync",
-      "title": "Snippet for list_notification_channel_descriptors in NotificationChannelService",
-      "description": "Basic snippet for list_notification_channel_descriptors in NotificationChannelService",
+      "title": "Snippet for the list_notification_channel_descriptors call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channel_descriptors. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/list_notification_channel_descriptors.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_GetNotificationChannelDescriptor_sync",
-      "title": "Snippet for get_notification_channel_descriptor in NotificationChannelService",
-      "description": "Basic snippet for get_notification_channel_descriptor in NotificationChannelService",
+      "title": "Snippet for the get_notification_channel_descriptor call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/get_notification_channel_descriptor.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_ListNotificationChannels_sync",
-      "title": "Snippet for list_notification_channels in NotificationChannelService",
-      "description": "Basic snippet for list_notification_channels in NotificationChannelService",
+      "title": "Snippet for the list_notification_channels call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channels. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/list_notification_channels.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_GetNotificationChannel_sync",
-      "title": "Snippet for get_notification_channel in NotificationChannelService",
-      "description": "Basic snippet for get_notification_channel in NotificationChannelService",
+      "title": "Snippet for the get_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/get_notification_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_CreateNotificationChannel_sync",
-      "title": "Snippet for create_notification_channel in NotificationChannelService",
-      "description": "Basic snippet for create_notification_channel in NotificationChannelService",
+      "title": "Snippet for the create_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#create_notification_channel. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/create_notification_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_UpdateNotificationChannel_sync",
-      "title": "Snippet for update_notification_channel in NotificationChannelService",
-      "description": "Basic snippet for update_notification_channel in NotificationChannelService",
+      "title": "Snippet for the update_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/update_notification_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_DeleteNotificationChannel_sync",
-      "title": "Snippet for delete_notification_channel in NotificationChannelService",
-      "description": "Basic snippet for delete_notification_channel in NotificationChannelService",
+      "title": "Snippet for the delete_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#delete_notification_channel. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/delete_notification_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_SendNotificationChannelVerificationCode_sync",
-      "title": "Snippet for send_notification_channel_verification_code in NotificationChannelService",
-      "description": "Basic snippet for send_notification_channel_verification_code in NotificationChannelService",
+      "title": "Snippet for the send_notification_channel_verification_code call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#send_notification_channel_verification_code. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/send_notification_channel_verification_code.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_GetNotificationChannelVerificationCode_sync",
-      "title": "Snippet for get_notification_channel_verification_code in NotificationChannelService",
-      "description": "Basic snippet for get_notification_channel_verification_code in NotificationChannelService",
+      "title": "Snippet for the get_notification_channel_verification_code call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_verification_code. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/get_notification_channel_verification_code.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_NotificationChannelService_VerifyNotificationChannel_sync",
-      "title": "Snippet for verify_notification_channel in NotificationChannelService",
-      "description": "Basic snippet for verify_notification_channel in NotificationChannelService",
+      "title": "Snippet for the verify_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#verify_notification_channel. It may require modification in order to execute successfully.",
       "file": "notification_channel_service/verify_notification_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_QueryService_QueryTimeSeries_sync",
-      "title": "Snippet for query_time_series in QueryService",
-      "description": "Basic snippet for query_time_series in QueryService",
+      "title": "Snippet for the query_time_series call in the QueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::QueryService::Client#query_time_series. It may require modification in order to execute successfully.",
       "file": "query_service/query_time_series.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_CreateService_sync",
-      "title": "Snippet for create_service in ServiceMonitoringService",
-      "description": "Basic snippet for create_service in ServiceMonitoringService",
+      "title": "Snippet for the create_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/create_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_GetService_sync",
-      "title": "Snippet for get_service in ServiceMonitoringService",
-      "description": "Basic snippet for get_service in ServiceMonitoringService",
+      "title": "Snippet for the get_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#get_service. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/get_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_ListServices_sync",
-      "title": "Snippet for list_services in ServiceMonitoringService",
-      "description": "Basic snippet for list_services in ServiceMonitoringService",
+      "title": "Snippet for the list_services call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_services. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_UpdateService_sync",
-      "title": "Snippet for update_service in ServiceMonitoringService",
-      "description": "Basic snippet for update_service in ServiceMonitoringService",
+      "title": "Snippet for the update_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/update_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_DeleteService_sync",
-      "title": "Snippet for delete_service in ServiceMonitoringService",
-      "description": "Basic snippet for delete_service in ServiceMonitoringService",
+      "title": "Snippet for the delete_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/delete_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_sync",
-      "title": "Snippet for create_service_level_objective in ServiceMonitoringService",
-      "description": "Basic snippet for create_service_level_objective in ServiceMonitoringService",
+      "title": "Snippet for the create_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service_level_objective. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/create_service_level_objective.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_GetServiceLevelObjective_sync",
-      "title": "Snippet for get_service_level_objective in ServiceMonitoringService",
-      "description": "Basic snippet for get_service_level_objective in ServiceMonitoringService",
+      "title": "Snippet for the get_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#get_service_level_objective. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/get_service_level_objective.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,15 +1526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_sync",
-      "title": "Snippet for list_service_level_objectives in ServiceMonitoringService",
-      "description": "Basic snippet for list_service_level_objectives in ServiceMonitoringService",
+      "title": "Snippet for the list_service_level_objectives call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_service_level_objectives. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/list_service_level_objectives.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,15 +1566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_UpdateServiceLevelObjective_sync",
-      "title": "Snippet for update_service_level_objective in ServiceMonitoringService",
-      "description": "Basic snippet for update_service_level_objective in ServiceMonitoringService",
+      "title": "Snippet for the update_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service_level_objective. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/update_service_level_objective.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,15 +1606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_ServiceMonitoringService_DeleteServiceLevelObjective_sync",
-      "title": "Snippet for delete_service_level_objective in ServiceMonitoringService",
-      "description": "Basic snippet for delete_service_level_objective in ServiceMonitoringService",
+      "title": "Snippet for the delete_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service_level_objective. It may require modification in order to execute successfully.",
       "file": "service_monitoring_service/delete_service_level_objective.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,15 +1646,175 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_CreateSnooze_sync",
+      "title": "Snippet for the create_snooze call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#create_snooze. It may require modification in order to execute successfully.",
+      "file": "snooze_service/create_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#create_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "CreateSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.CreateSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_ListSnoozes_sync",
+      "title": "Snippet for the list_snoozes call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#list_snoozes. It may require modification in order to execute successfully.",
+      "file": "snooze_service/list_snoozes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snoozes",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#list_snoozes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListSnoozesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListSnoozesResponse",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "ListSnoozes",
+          "full_name": "google.monitoring.v3.SnoozeService.ListSnoozes",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_GetSnooze_sync",
+      "title": "Snippet for the get_snooze call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze. It may require modification in order to execute successfully.",
+      "file": "snooze_service/get_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "GetSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.GetSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_UpdateSnooze_sync",
+      "title": "Snippet for the update_snooze call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#update_snooze. It may require modification in order to execute successfully.",
+      "file": "snooze_service/update_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#update_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.UpdateSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_UptimeCheckService_ListUptimeCheckConfigs_sync",
-      "title": "Snippet for list_uptime_check_configs in UptimeCheckService",
-      "description": "Basic snippet for list_uptime_check_configs in UptimeCheckService",
+      "title": "Snippet for the list_uptime_check_configs call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#list_uptime_check_configs. It may require modification in order to execute successfully.",
       "file": "uptime_check_service/list_uptime_check_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,15 +1846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_UptimeCheckService_GetUptimeCheckConfig_sync",
-      "title": "Snippet for get_uptime_check_config in UptimeCheckService",
-      "description": "Basic snippet for get_uptime_check_config in UptimeCheckService",
+      "title": "Snippet for the get_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#get_uptime_check_config. It may require modification in order to execute successfully.",
       "file": "uptime_check_service/get_uptime_check_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,15 +1886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_UptimeCheckService_CreateUptimeCheckConfig_sync",
-      "title": "Snippet for create_uptime_check_config in UptimeCheckService",
-      "description": "Basic snippet for create_uptime_check_config in UptimeCheckService",
+      "title": "Snippet for the create_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#create_uptime_check_config. It may require modification in order to execute successfully.",
       "file": "uptime_check_service/create_uptime_check_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,15 +1926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_UptimeCheckService_UpdateUptimeCheckConfig_sync",
-      "title": "Snippet for update_uptime_check_config in UptimeCheckService",
-      "description": "Basic snippet for update_uptime_check_config in UptimeCheckService",
+      "title": "Snippet for the update_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#update_uptime_check_config. It may require modification in order to execute successfully.",
       "file": "uptime_check_service/update_uptime_check_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,15 +1966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_UptimeCheckService_DeleteUptimeCheckConfig_sync",
-      "title": "Snippet for delete_uptime_check_config in UptimeCheckService",
-      "description": "Basic snippet for delete_uptime_check_config in UptimeCheckService",
+      "title": "Snippet for the delete_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#delete_uptime_check_config. It may require modification in order to execute successfully.",
       "file": "uptime_check_service/delete_uptime_check_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,15 +2006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v3_generated_UptimeCheckService_ListUptimeCheckIps_sync",
-      "title": "Snippet for list_uptime_check_ips in UptimeCheckService",
-      "description": "Basic snippet for list_uptime_check_ips in UptimeCheckService",
+      "title": "Snippet for the list_uptime_check_ips call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#list_uptime_check_ips. It may require modification in order to execute successfully.",
       "file": "uptime_check_service/list_uptime_check_ips.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +2046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

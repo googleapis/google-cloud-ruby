@@ -49,6 +49,31 @@ module Google
 
           # Dataplex.
           DATAPLEX = 4
+
+          # Cloud Spanner
+          CLOUD_SPANNER = 6
+
+          # Cloud Bigtable
+          CLOUD_BIGTABLE = 7
+
+          # Cloud Sql
+          CLOUD_SQL = 8
+
+          # Looker
+          LOOKER = 9
+        end
+
+        # This enum describes all the systems that manage
+        # Taxonomy and PolicyTag resources in DataCatalog.
+        module ManagingSystem
+          # Default value
+          MANAGING_SYSTEM_UNSPECIFIED = 0
+
+          # Dataplex.
+          MANAGING_SYSTEM_DATAPLEX = 1
+
+          # Other
+          MANAGING_SYSTEM_OTHER = 2
         end
       end
     end

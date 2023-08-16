@@ -25,6 +25,7 @@ require "google/cloud/tasks/v2beta2/version"
 require "google/cloud/tasks/v2beta2/cloud_tasks/credentials"
 require "google/cloud/tasks/v2beta2/cloud_tasks/paths"
 require "google/cloud/tasks/v2beta2/cloud_tasks/client"
+require "google/cloud/tasks/v2beta2/cloud_tasks/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         # Cloud Tasks allows developers to manage the execution of background
         # work in their applications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/tasks/v2beta2/cloud_tasks"
         #     client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/tasks/v2beta2/cloud_tasks/rest"
+        #     client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Rest::Client.new
         #
         module CloudTasks
         end

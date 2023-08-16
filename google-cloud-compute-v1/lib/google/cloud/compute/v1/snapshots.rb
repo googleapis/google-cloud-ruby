@@ -31,9 +31,9 @@ module Google
         ##
         # The Snapshots API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/snapshots"
+        #     require "google/cloud/compute/v1/snapshots/rest"
         #     client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new
         #
         module Snapshots

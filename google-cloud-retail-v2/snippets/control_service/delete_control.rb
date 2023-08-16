@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ControlService::Client#delete_control
+# Snippet for the delete_control call in the ControlService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ControlService::Client#delete_control. It may
+# require modification in order to execute successfully.
 #
 def delete_control
   # Create a client object. The client can be reused for multiple calls.

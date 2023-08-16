@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-batch-v1",
-    "version": "0.4.1",
+    "version": "0.10.3",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "batch_v1_generated_BatchService_CreateJob_sync",
-      "title": "Snippet for create_job in BatchService",
-      "description": "Basic snippet for create_job in BatchService",
+      "title": "Snippet for the create_job call in the BatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Batch::V1::BatchService::Client#create_job. It may require modification in order to execute successfully.",
       "file": "batch_service/create_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "batch_v1_generated_BatchService_GetJob_sync",
-      "title": "Snippet for get_job in BatchService",
-      "description": "Basic snippet for get_job in BatchService",
+      "title": "Snippet for the get_job call in the BatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Batch::V1::BatchService::Client#get_job. It may require modification in order to execute successfully.",
       "file": "batch_service/get_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "batch_v1_generated_BatchService_DeleteJob_sync",
-      "title": "Snippet for delete_job in BatchService",
-      "description": "Basic snippet for delete_job in BatchService",
+      "title": "Snippet for the delete_job call in the BatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Batch::V1::BatchService::Client#delete_job. It may require modification in order to execute successfully.",
       "file": "batch_service/delete_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "batch_v1_generated_BatchService_ListJobs_sync",
-      "title": "Snippet for list_jobs in BatchService",
-      "description": "Basic snippet for list_jobs in BatchService",
+      "title": "Snippet for the list_jobs call in the BatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Batch::V1::BatchService::Client#list_jobs. It may require modification in order to execute successfully.",
       "file": "batch_service/list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "batch_v1_generated_BatchService_GetTask_sync",
-      "title": "Snippet for get_task in BatchService",
-      "description": "Basic snippet for get_task in BatchService",
+      "title": "Snippet for the get_task call in the BatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Batch::V1::BatchService::Client#get_task. It may require modification in order to execute successfully.",
       "file": "batch_service/get_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "batch_v1_generated_BatchService_ListTasks_sync",
-      "title": "Snippet for list_tasks in BatchService",
-      "description": "Basic snippet for list_tasks in BatchService",
+      "title": "Snippet for the list_tasks call in the BatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Batch::V1::BatchService::Client#list_tasks. It may require modification in order to execute successfully.",
       "file": "batch_service/list_tasks.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

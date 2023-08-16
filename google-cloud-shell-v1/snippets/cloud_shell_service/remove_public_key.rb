@@ -20,8 +20,11 @@
 require "google/cloud/shell/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Shell::V1::CloudShellService::Client#remove_public_key
+# Snippet for the remove_public_key call in the CloudShellService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Shell::V1::CloudShellService::Client#remove_public_key. It may
+# require modification in order to execute successfully.
 #
 def remove_public_key
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def remove_public_key
   # Call the remove_public_key method.
   result = client.remove_public_key request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END cloudshell_v1_generated_CloudShellService_RemovePublicKey_sync]

@@ -47,10 +47,6 @@ module Google
         #         must be a DNS subdomain: a series of DNS labels separated by dots (.),
         #         not longer than 253 characters in total, followed by a slash (/).
         #         Metadata that fails to meet these requirements are rejected
-        #     *   The `(*.)google.com/` and `(*.)googleapis.com/` prefixes are reserved
-        #         for system metadata managed by Service Directory. If the user tries
-        #         to write to these keyspaces, those entries are silently ignored by
-        #         the system
         #
         #     Note: This field is equivalent to the `annotations` field in the v1 API.
         #     They have the same syntax and read/write to the same location in Service
@@ -58,16 +54,21 @@ module Google
         # @!attribute [r] endpoints
         #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
         #     Output only. Endpoints associated with this service. Returned on
-        #     {::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}. Control plane clients should use
+        #     {::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
+        #     Control plane clients should use
         #     {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the service was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp when the service was last updated. Note: endpoints being
-        #     created/deleted/updated within the service are not considered service
-        #     updates for the purpose of this timestamp.
+        #     Output only. The timestamp when the service was last updated. Note:
+        #     endpoints being created/deleted/updated within the service are not
+        #     considered service updates for the purpose of this timestamp.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. A globally unique identifier (in UUID4 format) for this
+        #     service.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

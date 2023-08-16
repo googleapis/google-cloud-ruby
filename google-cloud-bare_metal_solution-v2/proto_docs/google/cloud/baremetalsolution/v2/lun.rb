@@ -53,6 +53,13 @@ module Google
         # @!attribute [rw] wwid
         #   @return [::String]
         #     The WWID for this LUN.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time after which LUN will be fully deleted.
+        #     It is filled only for LUNs in COOL_OFF state.
+        # @!attribute [r] instances
+        #   @return [::Array<::String>]
+        #     Output only. Instances this Lun is attached to.
         class Lun
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -73,6 +80,9 @@ module Google
 
             # The LUN has been requested to be deleted.
             DELETING = 4
+
+            # The LUN is in cool off state. It will be deleted after `expire_time`.
+            COOL_OFF = 5
           end
 
           # Display the operating systems present for the LUN multiprotocol type.
@@ -133,6 +143,15 @@ module Google
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
         class ListLunsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for skip lun cooloff and delete it.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the lun.
+        class EvictLunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

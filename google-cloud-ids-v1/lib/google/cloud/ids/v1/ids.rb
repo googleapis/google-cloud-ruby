@@ -26,6 +26,7 @@ require "google/cloud/ids/v1/ids/credentials"
 require "google/cloud/ids/v1/ids/paths"
 require "google/cloud/ids/v1/ids/operations"
 require "google/cloud/ids/v1/ids/client"
+require "google/cloud/ids/v1/ids/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # The IDS Service
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ids/v1/ids"
         #     client = ::Google::Cloud::IDS::V1::IDS::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ids/v1/ids/rest"
+        #     client = ::Google::Cloud::IDS::V1::IDS::Rest::Client.new
         #
         module IDS
         end

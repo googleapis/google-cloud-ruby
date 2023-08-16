@@ -48,9 +48,9 @@ module Google
       # Create a new client object for AutoSuggestionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest/Google/Cloud/DataQnA/V1alpha/AutoSuggestionService/Client.html)
-      # for version V1alpha of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna-v1alpha/latest/Google-Cloud-DataQnA-V1alpha-AutoSuggestionService-Client)
+      # for a gRPC client for version V1alpha of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AutoSuggestionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -126,7 +126,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
-      # @return [AutoSuggestionService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.auto_suggestion_service version: :v1alpha, &block
         require "google/cloud/dataqna/#{version.to_s.downcase}"
@@ -135,17 +135,17 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::DataQnA.const_get package_name
-        package_module.const_get(:AutoSuggestionService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:AutoSuggestionService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for QuestionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataQnA::V1alpha::QuestionService::Client](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest/Google/Cloud/DataQnA/V1alpha/QuestionService/Client.html)
-      # for version V1alpha of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::DataQnA::V1alpha::QuestionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna-v1alpha/latest/Google-Cloud-DataQnA-V1alpha-QuestionService-Client)
+      # for a gRPC client for version V1alpha of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the QuestionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -170,7 +170,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
-      # @return [QuestionService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.question_service version: :v1alpha, &block
         require "google/cloud/dataqna/#{version.to_s.downcase}"
@@ -179,8 +179,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::DataQnA.const_get package_name
-        package_module.const_get(:QuestionService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:QuestionService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -200,7 +200,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

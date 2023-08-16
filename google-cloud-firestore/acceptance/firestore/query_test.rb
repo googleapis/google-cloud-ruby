@@ -39,6 +39,26 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal "bar"
   end
 
+  it "run query with read time argument" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    results = []
+    results_1 = []
+
+    rand_query_col.add({foo: "bar", bar: "foo"})
+
+    sleep(1)
+    read_time = Time.now
+    sleep(1)
+
+    rand_query_col.add({foo: "bar", bar: "foo"})
+
+    rand_query_col.where(:foo, :==, :bar).get(read_time: read_time) { |doc| results << doc }
+    rand_query_col.where(:foo, :==, :bar).get { |doc| results_1 << doc }
+
+    _(results.count).must_equal 1
+    _(results_1.count).must_equal 2
+  end
+
   it "has where method with !=" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "bar", bar: "foo"})
@@ -131,6 +151,35 @@ describe "Query", :firestore_acceptance do
     result_snp = rand_query_col.where(:foo, :!=, nil).get.first
     _(result_snp).wont_be :nil?
     _(result_snp[:foo]).must_equal "bar"
+  end
+
+  it "has where method with a basic filter object as input" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "bar"})
+
+    filter = Google::Cloud::Firestore::Filter.new(:foo, :!=, nil)
+    result_snp = rand_query_col.where(filter).get.first
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_equal "bar"
+  end
+
+  it "has where method with a complex filter object as input" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "bar"})
+    rand_query_col.add({foo: "baz"})
+
+    filter_1 = Google::Cloud::Firestore::Filter.new(:foo, :!=, nil)
+    filter_2 = Google::Cloud::Firestore::Filter.new(:foo, :==, "bar")
+    filter_3 = Google::Cloud::Firestore::Filter.new(:foo, :==, "baz")
+
+    filter = firestore.filter(:foo, :==, "bar").and(filter_1)
+    result_snp = rand_query_col.where(filter).get.first
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_equal "bar"
+
+    filter = filter_2.or(filter_3).and(filter_1)
+    result_snp = rand_query_col.where(filter).get
+    _(result_snp.map { |doc| doc[:foo] }).must_equal ["bar", "baz"]
   end
 
   it "has order method" do

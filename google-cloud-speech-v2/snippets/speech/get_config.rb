@@ -20,8 +20,11 @@
 require "google/cloud/speech/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Speech::V2::Speech::Client#get_config
+# Snippet for the get_config call in the Speech service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#get_config. It may require
+# modification in order to execute successfully.
 #
 def get_config
   # Create a client object. The client can be reused for multiple calls.

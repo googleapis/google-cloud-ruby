@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.",
     "ruby-cloud-env-prefix": "MEMCACHE",
     "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/memcached/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

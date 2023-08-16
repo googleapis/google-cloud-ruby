@@ -148,6 +148,9 @@ module Grafeas
     # @!attribute [rw] dsse_attestation
     #   @return [::Grafeas::V1::DSSEAttestationNote]
     #     A note describing a dsse attestation note.
+    # @!attribute [rw] vulnerability_assessment
+    #   @return [::Grafeas::V1::VulnerabilityAssessmentNote]
+    #     A note describing a vulnerability assessment.
     class Note
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

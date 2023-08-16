@@ -35,6 +35,10 @@ module Google
 
             # Creates a conversation.
             rpc :CreateConversation, ::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest, ::Google::Cloud::ContactCenterInsights::V1::Conversation
+            # Create a longrunning conversation upload operation. This method differs
+            # from CreateConversation by allowing audio transcription and optional DLP
+            # redaction.
+            rpc :UploadConversation, ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest, ::Google::Longrunning::Operation
             # Updates a conversation.
             rpc :UpdateConversation, ::Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest, ::Google::Cloud::ContactCenterInsights::V1::Conversation
             # Gets a conversation.
@@ -52,6 +56,11 @@ module Google
             rpc :ListAnalyses, ::Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest, ::Google::Cloud::ContactCenterInsights::V1::ListAnalysesResponse
             # Deletes an analysis.
             rpc :DeleteAnalysis, ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest, ::Google::Protobuf::Empty
+            # Analyzes multiple conversations in a single request.
+            rpc :BulkAnalyzeConversations, ::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest, ::Google::Longrunning::Operation
+            # Imports conversations and processes them according to the user's
+            # configuration.
+            rpc :IngestConversations, ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest, ::Google::Longrunning::Operation
             # Export insights data to a destination defined in the request body.
             rpc :ExportInsightsData, ::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest, ::Google::Longrunning::Operation
             # Creates an issue model.
@@ -76,6 +85,8 @@ module Google
             rpc :ListIssues, ::Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest, ::Google::Cloud::ContactCenterInsights::V1::ListIssuesResponse
             # Updates an issue.
             rpc :UpdateIssue, ::Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest, ::Google::Cloud::ContactCenterInsights::V1::Issue
+            # Deletes an issue.
+            rpc :DeleteIssue, ::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest, ::Google::Protobuf::Empty
             # Gets an issue model's statistics.
             rpc :CalculateIssueModelStats, ::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest, ::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsResponse
             # Creates a phrase matcher.

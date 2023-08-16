@@ -1,6 +1,6 @@
 # Ruby Client for the Google Analytics Data V1beta API
 
-API Client library for the Google Analytics Data V1beta API
+Accesses report data in Google Analytics. Warning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning.
 
 The Google Analytics Data API provides programmatic methods to access report data in Google Analytics 4 (GA4) properties. Google Analytics 4 helps you understand how people use your web, iOS, or Android app.
 
@@ -37,7 +37,7 @@ request = ::Google::Analytics::Data::V1beta::RunReportRequest.new # (request fie
 response = client.run_report request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-analytics-data-v1beta)
 for class and method documentation.
 
 See also the [Product Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1)
@@ -46,8 +46,8 @@ for general usage information.
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
+or a [`Google::Cloud::Logging::Logger`](https://cloud.google.com/ruby/docs/reference/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 

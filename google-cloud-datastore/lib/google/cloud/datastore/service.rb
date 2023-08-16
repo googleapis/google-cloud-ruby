@@ -29,14 +29,16 @@ module Google
         attr_accessor :credentials
         attr_accessor :host
         attr_accessor :timeout
+        attr_accessor :database
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil
+        def initialize project, credentials, database, host: nil, timeout: nil
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
+          @database = database
         end
 
         def service
@@ -47,34 +49,34 @@ module Google
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::Datastore::VERSION
-            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{database}" }
           end
         end
+
         attr_accessor :mocked_service
 
         ##
         # Allocate IDs for incomplete keys.
         # (This is useful for referencing an entity before it is inserted.)
         def allocate_ids *incomplete_keys
-          service.allocate_ids project_id: project, keys: incomplete_keys
+          service.allocate_ids project_id: project, database_id: database, keys: incomplete_keys
         end
 
         ##
         # Look up entities by keys.
-        def lookup *keys, consistency: nil, transaction: nil
-          read_options = generate_read_options consistency, transaction
-
-          service.lookup project_id: project, keys: keys, read_options: read_options
+        def lookup *keys, consistency: nil, transaction: nil, read_time: nil
+          read_options = generate_read_options consistency, transaction, read_time
+          service.lookup project_id: project, database_id: database, keys: keys, read_options: read_options
         end
 
         # Query for entities.
-        def run_query query, namespace = nil, consistency: nil, transaction: nil
+        def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
             gql_query = query
             query = nil
           end
-          read_options = generate_read_options consistency, transaction
+          read_options = generate_read_options consistency, transaction, read_time
           if namespace
             partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
               namespace_id: namespace
@@ -82,19 +84,43 @@ module Google
           end
 
           service.run_query project_id: project,
+                            database_id: database,
                             partition_id: partition_id,
                             read_options: read_options,
                             query: query,
                             gql_query: gql_query
         end
 
+        ## Query for aggregates
+        def run_aggregation_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
+          gql_query = nil
+          if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
+            gql_query = query
+            query = nil
+          end
+          read_options = generate_read_options consistency, transaction, read_time
+          if namespace
+            partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
+              namespace_id: namespace
+            )
+          end
+
+          service.run_aggregation_query project_id: project,
+                                        partition_id: partition_id,
+                                        read_options: read_options,
+                                        aggregation_query: query,
+                                        gql_query: gql_query
+        end
+
         ##
         # Begin a new transaction.
-        def begin_transaction read_only: nil, previous_transaction: nil
+        def begin_transaction read_only: nil, previous_transaction: nil, read_time: nil
           if read_only
             transaction_options = Google::Cloud::Datastore::V1::TransactionOptions.new
             transaction_options.read_only = \
-              Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new
+              Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new \
+                read_time: read_time_to_timestamp(read_time)
+
           end
           if previous_transaction
             transaction_options ||= \
@@ -104,7 +130,7 @@ module Google
             )
             transaction_options.read_write = rw
           end
-          service.begin_transaction project_id: project, transaction_options: transaction_options
+          service.begin_transaction project_id: project, database_id: database, transaction_options: transaction_options
         end
 
         ##
@@ -112,22 +138,23 @@ module Google
         # some entities.
         def commit mutations, transaction: nil
           mode = transaction.nil? ? :NON_TRANSACTIONAL : :TRANSACTIONAL
-          service.commit project_id: project, mode: mode, mutations: mutations, transaction: transaction
+          service.commit project_id: project, database_id: database, mode: mode,
+                         mutations: mutations, transaction: transaction
         end
 
         ##
         # Roll back a transaction.
         def rollback transaction
-          service.rollback project_id: project, transaction: transaction
+          service.rollback project_id: project, database_id: database, transaction: transaction
         end
 
         def inspect
-          "#{self.class}(#{@project})"
+          "#{self.class}(#{@project})(#{database})"
         end
 
         protected
 
-        def generate_read_options consistency, transaction
+        def generate_read_options consistency, transaction, read_time
           if consistency == :eventual
             return Google::Cloud::Datastore::V1::ReadOptions.new(
               read_consistency: :EVENTUAL
@@ -140,8 +167,24 @@ module Google
             return Google::Cloud::Datastore::V1::ReadOptions.new(
               transaction: transaction
             )
+          elsif read_time
+            return Google::Cloud::Datastore::V1::ReadOptions.new(
+              read_time: read_time_to_timestamp(read_time)
+            )
           end
           nil
+        end
+
+        def read_time_to_timestamp time
+          return nil if time.nil?
+
+          # Force the object to be a Time object.
+          time = time.to_time.utc
+
+          Google::Protobuf::Timestamp.new(
+            seconds: time.to_i,
+            nanos: time.usec * 1000
+          )
         end
       end
     end

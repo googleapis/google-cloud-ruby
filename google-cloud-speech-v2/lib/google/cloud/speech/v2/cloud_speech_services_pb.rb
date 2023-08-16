@@ -39,7 +39,7 @@ module Google
             rpc :ListRecognizers, ::Google::Cloud::Speech::V2::ListRecognizersRequest, ::Google::Cloud::Speech::V2::ListRecognizersResponse
             # Returns the requested
             # [Recognizer][google.cloud.speech.v2.Recognizer]. Fails with
-            # [NOT_FOUND][google.rpc.Code.NOT_FOUND] if the requested recognizer doesn't
+            # [NOT_FOUND][google.rpc.Code.NOT_FOUND] if the requested Recognizer doesn't
             # exist.
             rpc :GetRecognizer, ::Google::Cloud::Speech::V2::GetRecognizerRequest, ::Google::Cloud::Speech::V2::Recognizer
             # Updates the [Recognizer][google.cloud.speech.v2.Recognizer].

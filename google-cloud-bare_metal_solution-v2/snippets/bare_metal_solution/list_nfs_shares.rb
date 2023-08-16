@@ -20,8 +20,11 @@
 require "google/cloud/bare_metal_solution/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_nfs_shares
+# Snippet for the list_nfs_shares call in the BareMetalSolution service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_nfs_shares.
+# It may require modification in order to execute successfully.
 #
 def list_nfs_shares
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_nfs_shares
   # Call the list_nfs_shares method.
   result = client.list_nfs_shares request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::NfsShare.
-    p response
+    p item
   end
 end
 # [END baremetalsolution_v2_generated_BareMetalSolution_ListNfsShares_sync]

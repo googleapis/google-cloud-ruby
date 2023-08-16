@@ -20,8 +20,11 @@
 require "google/cloud/channel/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Channel::V1::CloudChannelService::Client#lookup_offer
+# Snippet for the lookup_offer call in the CloudChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#lookup_offer. It may
+# require modification in order to execute successfully.
 #
 def lookup_offer
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/secret_manager/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client#delete_secret
+# Snippet for the delete_secret call in the SecretManagerService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client#delete_secret.
+# It may require modification in order to execute successfully.
 #
 def delete_secret
   # Create a client object. The client can be reused for multiple calls.

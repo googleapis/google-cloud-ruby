@@ -1,7 +1,7 @@
 {
     "api_id": "iam.googleapis.com",
     "api_shortname": "iam",
-    "client_documentation": "https://googleapis.dev/ruby/google-iam-client/latest",
+    "client_documentation": "https://rubydoc.info/gems/google-iam-client",
     "distribution_name": "google-iam-client",
     "is_cloud": false,
     "language": "ruby",
@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Manages identity and access control policies for Google Cloud Platform resources.",
     "ruby-cloud-product-url": "https://cloud.google.com/iam",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

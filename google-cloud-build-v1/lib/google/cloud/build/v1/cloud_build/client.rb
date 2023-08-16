@@ -183,7 +183,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -267,14 +267,14 @@ module Google
             #   # Call the create_build method.
             #   result = client.create_build request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_build request, options = nil
@@ -295,11 +295,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_build.timeout,
@@ -389,14 +392,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.id
-                header_params["id"] = request.id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_build.timeout,
@@ -438,7 +441,7 @@ module Google
             #
             #   @param parent [::String]
             #     The parent of the collection of `Builds`.
-            #     Format: `projects/{project}/locations/location`
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param page_size [::Integer]
@@ -476,13 +479,11 @@ module Google
             #   # Call the list_builds method.
             #   result = client.list_builds request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Build::V1::Build.
-            #     p response
+            #     p item
             #   end
             #
             def list_builds request, options = nil
@@ -503,11 +504,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_builds.timeout,
@@ -594,14 +598,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.id
-                header_params["id"] = request.id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_build.timeout,
@@ -641,7 +645,7 @@ module Google
             #
             # For builds that specify `StorageSource`:
             #
-            # * If the original build pulled source from Google Cloud Storage without
+            # * If the original build pulled source from Cloud Storage without
             # specifying the generation of the object, the new build will use the current
             # object, which may be different from the original build source.
             # * If the original build pulled source from Cloud Storage and specified the
@@ -692,14 +696,14 @@ module Google
             #   # Call the retry_build method.
             #   result = client.retry_build request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def retry_build request, options = nil
@@ -720,14 +724,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.id
-                header_params["id"] = request.id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.retry_build.timeout,
@@ -796,14 +800,14 @@ module Google
             #   # Call the approve_build method.
             #   result = client.approve_build request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def approve_build request, options = nil
@@ -825,10 +829,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.approve_build.timeout,
@@ -917,11 +924,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_build_trigger.timeout,
@@ -1009,14 +1019,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_build_trigger.timeout,
@@ -1085,13 +1095,11 @@ module Google
             #   # Call the list_build_triggers method.
             #   result = client.list_build_triggers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Build::V1::BuildTrigger.
-            #     p response
+            #     p item
             #   end
             #
             def list_build_triggers request, options = nil
@@ -1112,11 +1120,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_build_triggers.timeout,
@@ -1205,14 +1216,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_build_trigger.timeout,
@@ -1246,7 +1257,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_build_trigger(project_id: nil, trigger_id: nil, trigger: nil)
+            # @overload update_build_trigger(project_id: nil, trigger_id: nil, trigger: nil, update_mask: nil)
             #   Pass arguments to `update_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1257,6 +1268,10 @@ module Google
             #     Required. ID of the `BuildTrigger` to update.
             #   @param trigger [::Google::Cloud::Build::V1::BuildTrigger, ::Hash]
             #     Required. `BuildTrigger` to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Update mask for the resource. If this is set,
+            #     the server will only update the fields specified in the field mask.
+            #     Otherwise, a full update of the mutable resource fields will be performed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Build::V1::BuildTrigger]
@@ -1299,14 +1314,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.trigger&.resource_name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.trigger.resource_name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_build_trigger.timeout,
@@ -1327,6 +1342,12 @@ module Google
 
             ##
             # Runs a `BuildTrigger` at a particular source revision.
+            #
+            # To run a regional or global trigger, use the POST request
+            # that includes the location endpoint in the path (ex.
+            # v1/projects/\\{projectId}/locations/\\{region}/triggers/\\{triggerId}:run). The
+            # POST request that does not include the location endpoint in the path can
+            # only be used when running global triggers.
             #
             # @overload run_build_trigger(request, options = nil)
             #   Pass arguments to `run_build_trigger` via a request object, either of type
@@ -1352,6 +1373,7 @@ module Google
             #     Required. ID of the trigger.
             #   @param source [::Google::Cloud::Build::V1::RepoSource, ::Hash]
             #     Source to build against this trigger.
+            #     Branch and tag names cannot consist of regular expressions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1373,14 +1395,14 @@ module Google
             #   # Call the run_build_trigger method.
             #   result = client.run_build_trigger request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def run_build_trigger request, options = nil
@@ -1401,14 +1423,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_build_trigger.timeout,
@@ -1579,14 +1601,14 @@ module Google
             #   # Call the create_worker_pool method.
             #   result = client.create_worker_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_worker_pool request, options = nil
@@ -1608,10 +1630,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_worker_pool.timeout,
@@ -1695,10 +1720,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_worker_pool.timeout,
@@ -1738,10 +1766,10 @@ module Google
             #   @param name [::String]
             #     Required. The name of the `WorkerPool` to delete.
             #     Format:
-            #     `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+            #     `projects/{project}/locations/{location}/workerPools/{workerPool}`.
             #   @param etag [::String]
-            #     Optional. If this is provided, it must match the server's etag on the
-            #     workerpool for the request to be processed.
+            #     Optional. If provided, it must match the server's etag on the workerpool
+            #     for the request to be processed.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the `WorkerPool` is not found, the request will succeed
             #     but no action will be taken on the server.
@@ -1769,14 +1797,14 @@ module Google
             #   # Call the delete_worker_pool method.
             #   result = client.delete_worker_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_worker_pool request, options = nil
@@ -1798,10 +1826,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_worker_pool.timeout,
@@ -1870,14 +1901,14 @@ module Google
             #   # Call the update_worker_pool method.
             #   result = client.update_worker_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_worker_pool request, options = nil
@@ -1899,10 +1930,13 @@ module Google
 
               header_params = {}
               if request.worker_pool&.name
-                header_params["worker_pool.name"] = request.worker_pool.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+/?$}.match request.worker_pool.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_worker_pool.timeout,
@@ -1970,13 +2004,11 @@ module Google
             #   # Call the list_worker_pools method.
             #   result = client.list_worker_pools request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Build::V1::WorkerPool.
-            #     p response
+            #     p item
             #   end
             #
             def list_worker_pools request, options = nil
@@ -1998,10 +2030,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_worker_pools.timeout,
@@ -2059,9 +2094,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2103,7 +2138,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudbuild.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudbuild.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

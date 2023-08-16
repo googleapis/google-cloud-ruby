@@ -1,5 +1,39 @@
 # Release History
 
+### 0.10.0 (2023-08-03)
+
+#### Features
+
+* Provide more enum options for Parameter type ([#22670](https://github.com/googleapis/google-cloud-ruby/issues/22670)) 
+* Support Encryption configuration in Transfer Config ([#22670](https://github.com/googleapis/google-cloud-ruby/issues/22670)) 
+
+### 0.9.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.7.1 (2023-02-28)
+
+#### Documentation
+
+* Clarify service account name description ([#20536](https://github.com/googleapis/google-cloud-ruby/issues/20536)) 
+
+### 0.7.0 (2023-01-05)
+
+#### Features
+
+* Added support for location ([#19935](https://github.com/googleapis/google-cloud-ruby/issues/19935)) 
+
 ### 0.6.1 (2022-11-17)
 
 #### Documentation

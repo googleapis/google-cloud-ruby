@@ -1,5 +1,50 @@
 # Changelog
 
+### 0.10.0 (2023-07-10)
+
+#### Features
+
+* added support for batch mode priority 
+* added support for content encryption (DRM) 
+* added support for disabling job processing optimizations 
+* added support for segment template manifest generation with DASH ([#22503](https://github.com/googleapis/google-cloud-ruby/issues/22503)) 
+
+### 0.9.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.9.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+
+### 0.8.0 (2023-04-16)
+
+#### Features
+
+* support batch processing mode 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20630](https://github.com/googleapis/google-cloud-ruby/issues/20630)) 
+
+### 0.6.0 (2023-03-03)
+
+#### Features
+
+* add support for language_code for audio stream, display_name for audio and text stream. ([#20585](https://github.com/googleapis/google-cloud-ruby/issues/20585)) 
+
+### 0.5.0 (2022-12-09)
+
+#### Features
+
+* add Deinterlace to PreprocessingConfig 
+
 ### 0.4.0 (2022-07-08)
 
 #### Features

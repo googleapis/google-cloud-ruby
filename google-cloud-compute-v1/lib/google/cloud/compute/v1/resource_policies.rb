@@ -31,9 +31,9 @@ module Google
         ##
         # The ResourcePolicies API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/resource_policies"
+        #     require "google/cloud/compute/v1/resource_policies/rest"
         #     client = ::Google::Cloud::Compute::V1::ResourcePolicies::Rest::Client.new
         #
         module ResourcePolicies

@@ -26,6 +26,7 @@ require "google/cloud/metastore/v1/dataproc_metastore/credentials"
 require "google/cloud/metastore/v1/dataproc_metastore/paths"
 require "google/cloud/metastore/v1/dataproc_metastore/operations"
 require "google/cloud/metastore/v1/dataproc_metastore/client"
+require "google/cloud/metastore/v1/dataproc_metastore/rest"
 
 module Google
   module Cloud
@@ -50,10 +51,15 @@ module Google
         #
         #   `/projects/{project_number}/locations/{location_id}/services/{service_id}`.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/metastore/v1/dataproc_metastore"
         #     client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/metastore/v1/dataproc_metastore/rest"
+        #     client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new
         #
         module DataprocMetastore
         end

@@ -26,6 +26,7 @@ require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/creden
 require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/paths"
 require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/operations"
 require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/client"
+require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Service to manage AssuredWorkloads.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/assured_workloads/v1beta1/assured_workloads_service"
         #     client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/rest"
+        #     client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new
         #
         module AssuredWorkloadsService
         end

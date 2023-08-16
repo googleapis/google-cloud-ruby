@@ -13,8 +13,27 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../topics.rb"
-require_relative "../subscriptions.rb"
+require_relative "../pubsub_create_pull_subscription.rb"
+require_relative "../pubsub_create_push_subscription.rb"
+require_relative "../pubsub_create_topic.rb"
+require_relative "../pubsub_dead_letter_create_subscription.rb"
+require_relative "../pubsub_dead_letter_delivery_attempt.rb"
+require_relative "../pubsub_dead_letter_remove.rb"
+require_relative "../pubsub_dead_letter_update_subscription.rb"
+require_relative "../pubsub_delete_topic.rb"
+require_relative "../pubsub_enable_subscription_ordering.rb"
+require_relative "../pubsub_list_topic_subscriptions.rb"
+require_relative "../pubsub_list_topics.rb"
+require_relative "../pubsub_publish.rb"
+require_relative "../pubsub_publish_custom_attributes.rb"
+require_relative "../pubsub_publish_with_ordering_keys.rb"
+require_relative "../pubsub_publisher_batch_settings.rb"
+require_relative "../pubsub_publisher_concurrency_control.rb"
+require_relative "../pubsub_publisher_flow_control.rb"
+require_relative "../pubsub_quickstart_publisher.rb"
+require_relative "../pubsub_resume_publish_with_ordering_keys.rb"
+require_relative "../pubsub_set_topic_policy.rb"
+require_relative "../pubsub_test_topic_permissions.rb"
 
 describe "topics" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -104,7 +123,7 @@ describe "topics" do
 
     # pubsub_enable_subscription_ordering
     assert_output "Pull subscription #{subscription_id} created with message ordering.\n" do
-      create_ordered_pull_subscription topic_id: topic_id, subscription_id: subscription_id
+      enable_subscription_ordering topic_id: topic_id, subscription_id: subscription_id
     end
     @subscription = @topic.subscription subscription_id
     assert @subscription
@@ -238,6 +257,28 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish" do
+      @subscription.pull(immediate: false, max: 1).each do |message|
+        messages << message
+        message.acknowledge!
+      end
+      assert_equal 1, messages.length
+      assert_equal "This is a test message.", messages[0].data
+    end
+  end
+
+  it "supports pubsub_publisher_with_compression" do
+    #setup
+    sample = SampleLoader.load "pubsub_publisher_with_compression.rb"
+    @topic = pubsub.create_topic topic_id
+    @subscription = @topic.subscribe random_subscription_id
+
+    # pubsub_publisher_with_compression
+    assert_output /Published a compressed message of message ID:/ do
+      sample.run project_id: pubsub.project, topic_id: topic_id
+    end
+
+    messages = []
+    expect_with_retry "pubsub_publisher_with_compression" do
       @subscription.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!

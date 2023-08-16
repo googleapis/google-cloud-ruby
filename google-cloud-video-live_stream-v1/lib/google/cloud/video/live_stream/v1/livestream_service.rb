@@ -26,6 +26,7 @@ require "google/cloud/video/live_stream/v1/livestream_service/credentials"
 require "google/cloud/video/live_stream/v1/livestream_service/paths"
 require "google/cloud/video/live_stream/v1/livestream_service/operations"
 require "google/cloud/video/live_stream/v1/livestream_service/client"
+require "google/cloud/video/live_stream/v1/livestream_service/rest"
 
 module Google
   module Cloud
@@ -39,10 +40,15 @@ module Google
           # a source stream in the various ways, including Real-Time Messaging
           # Protocol (RTMP) and Secure Reliable Transport (SRT).
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/video/live_stream/v1/livestream_service"
           #     client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/video/live_stream/v1/livestream_service/rest"
+          #     client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
           #
           module LivestreamService
           end

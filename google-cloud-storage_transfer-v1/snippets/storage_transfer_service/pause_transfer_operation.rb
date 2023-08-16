@@ -20,8 +20,11 @@
 require "google/cloud/storage_transfer/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#pause_transfer_operation
+# Snippet for the pause_transfer_operation call in the StorageTransferService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#pause_transfer_operation.
+# It may require modification in order to execute successfully.
 #
 def pause_transfer_operation
   # Create a client object. The client can be reused for multiple calls.

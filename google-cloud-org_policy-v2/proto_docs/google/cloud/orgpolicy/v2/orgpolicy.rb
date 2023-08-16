@@ -43,6 +43,11 @@ module Google
         # @!attribute [rw] alternate
         #   @return [::Google::Cloud::OrgPolicy::V2::AlternatePolicySpec]
         #     Deprecated.
+        # @!attribute [rw] dry_run_spec
+        #   @return [::Google::Cloud::OrgPolicy::V2::PolicySpec]
+        #     dry-run policy.
+        #     Audit-only policy, can be used to monitor how the policy would have
+        #     impacted the existing and future resources if it's enforced.
         class Policy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -182,8 +187,8 @@ module Google
         # [google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints] method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The Cloud resource that parents the constraint. Must be in one of the
-        #     following forms:
+        #     Required. The Cloud resource that parents the constraint. Must be in one of
+        #     the following forms:
         #     * `projects/{project_number}`
         #     * `projects/{project_id}`
         #     * `folders/{folder_id}`
@@ -219,9 +224,9 @@ module Google
         # [google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies] method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The target Cloud resource that parents the set of constraints and policies
-        #     that will be returned from this call. Must be in one of the following
-        #     forms:
+        #     Required. The target Cloud resource that parents the set of constraints and
+        #     policies that will be returned from this call. Must be in one of the
+        #     following forms:
         #     * `projects/{project_number}`
         #     * `projects/{project_id}`
         #     * `folders/{folder_id}`
@@ -260,7 +265,8 @@ module Google
         # [google.cloud.orgpolicy.v2.OrgPolicy.GetPolicy] method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the policy. See `Policy` for naming requirements.
+        #     Required. Resource name of the policy. See `Policy` for naming
+        #     requirements.
         class GetPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -280,8 +286,8 @@ module Google
         # [google.cloud.orgpolicy.v2.OrgPolicy.CreatePolicy] method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The Cloud resource that will parent the new Policy. Must be in one of the
-        #     following forms:
+        #     Required. The Cloud resource that will parent the new Policy. Must be in
+        #     one of the following forms:
         #     * `projects/{project_number}`
         #     * `projects/{project_id}`
         #     * `folders/{folder_id}`
@@ -299,6 +305,11 @@ module Google
         # @!attribute [rw] policy
         #   @return [::Google::Cloud::OrgPolicy::V2::Policy]
         #     Required. `Policy` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Field mask used to specify the fields to be overwritten in the policy
+        #     by the set. The fields specified in the update_mask are relative to the
+        #     policy, not the full request.
         class UpdatePolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

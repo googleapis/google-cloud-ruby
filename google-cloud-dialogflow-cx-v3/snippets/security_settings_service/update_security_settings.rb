@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings
+# Snippet for the update_security_settings call in the SecuritySettingsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings.
+# It may require modification in order to execute successfully.
 #
 def update_security_settings
   # Create a client object. The client can be reused for multiple calls.

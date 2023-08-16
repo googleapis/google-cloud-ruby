@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/region_instance_group_managers"
+require "google/cloud/compute/v1/region_instance_group_managers/rest"
 
 
-class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -82,39 +82,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, abandon_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_abandon_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, abandon_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.abandon_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.abandon_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.abandon_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.abandon_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.abandon_instances ::Google::Cloud::Compute::V1::AbandonInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.abandon_instances ::Google::Cloud::Compute::V1::AbandonInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.abandon_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.abandon_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.abandon_instances(::Google::Cloud::Compute::V1::AbandonInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.abandon_instances(::Google::Cloud::Compute::V1::AbandonInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_abandon_instances_request_resource: region_instance_group_managers_abandon_instances_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, abandon_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, abandon_instances_client_stub.call_count
+      end
     end
   end
 
@@ -137,39 +139,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, apply_updates_to_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_apply_updates_to_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, apply_updates_to_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.apply_updates_to_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.apply_updates_to_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.apply_updates_to_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.apply_updates_to_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.apply_updates_to_instances ::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.apply_updates_to_instances ::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.apply_updates_to_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.apply_updates_to_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.apply_updates_to_instances(::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.apply_updates_to_instances(::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_apply_updates_request_resource: region_instance_group_managers_apply_updates_request_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, apply_updates_to_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, apply_updates_to_instances_client_stub.call_count
+      end
     end
   end
 
@@ -193,39 +197,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, create_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_create_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.create_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.create_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.create_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.create_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.create_instances ::Google::Cloud::Compute::V1::CreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.create_instances ::Google::Cloud::Compute::V1::CreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.create_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.create_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.create_instances(::Google::Cloud::Compute::V1::CreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.create_instances(::Google::Cloud::Compute::V1::CreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_create_instances_request_resource: region_instance_group_managers_create_instances_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, create_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, create_instances_client_stub.call_count
+      end
     end
   end
 
@@ -248,39 +254,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, delete_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.delete instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.delete instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.delete ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.delete(::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, delete_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, delete_client_stub.call_count
+      end
     end
   end
 
@@ -304,39 +312,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, delete_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_delete_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.delete_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.delete_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.delete_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.delete_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.delete_instances ::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.delete_instances ::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.delete_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.delete_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.delete_instances(::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.delete_instances(::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, delete_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, delete_instances_client_stub.call_count
+      end
     end
   end
 
@@ -359,39 +369,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, delete_per_instance_configs_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_delete_per_instance_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_per_instance_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.delete_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.delete_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.delete_per_instance_configs instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.delete_per_instance_configs instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.delete_per_instance_configs ::Google::Cloud::Compute::V1::DeletePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.delete_per_instance_configs ::Google::Cloud::Compute::V1::DeletePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.delete_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.delete_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.delete_per_instance_configs(::Google::Cloud::Compute::V1::DeletePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.delete_per_instance_configs(::Google::Cloud::Compute::V1::DeletePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_delete_instance_config_req_resource: region_instance_group_manager_delete_instance_config_req_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, delete_per_instance_configs_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, delete_per_instance_configs_client_stub.call_count
+      end
     end
   end
 
@@ -413,39 +425,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, get_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.get({ instance_group_manager: instance_group_manager, project: project, region: region }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.get({ instance_group_manager: instance_group_manager, project: project, region: region }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.get instance_group_manager: instance_group_manager, project: project, region: region do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.get instance_group_manager: instance_group_manager, project: project, region: region do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.get ::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.get({ instance_group_manager: instance_group_manager, project: project, region: region }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.get({ instance_group_manager: instance_group_manager, project: project, region: region }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.get(::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, get_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, get_client_stub.call_count
+      end
     end
   end
 
@@ -468,39 +482,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, insert_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, insert_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.insert({ instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.insert({ instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.insert instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.insert instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerRequest.new(instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.insert ::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerRequest.new(instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.insert({ instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.insert({ instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerRequest.new(instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.insert(::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerRequest.new(instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, insert_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, insert_client_stub.call_count
+      end
     end
   end
 
@@ -526,39 +542,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_client_stub.call_count
+      end
     end
   end
 
@@ -585,39 +603,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_errors_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_list_errors_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_errors_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list_errors filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list_errors filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list_errors ::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list_errors ::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list_errors(::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list_errors(::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_errors_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_errors_client_stub.call_count
+      end
     end
   end
 
@@ -644,39 +664,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_managed_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_list_managed_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_managed_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list_managed_instances filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list_managed_instances filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list_managed_instances ::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list_managed_instances ::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list_managed_instances(::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list_managed_instances(::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_managed_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_managed_instances_client_stub.call_count
+      end
     end
   end
 
@@ -703,39 +725,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, list_per_instance_configs_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_list_per_instance_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_per_instance_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.list_per_instance_configs filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.list_per_instance_configs filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.list_per_instance_configs ::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.list_per_instance_configs ::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.list_per_instance_configs(::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.list_per_instance_configs(::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, list_per_instance_configs_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, list_per_instance_configs_client_stub.call_count
+      end
     end
   end
 
@@ -759,39 +783,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, patch_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.patch({ instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.patch({ instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.patch instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.patch instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.patch ::Google::Cloud::Compute::V1::PatchRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.patch({ instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.patch({ instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.patch(::Google::Cloud::Compute::V1::PatchRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, patch_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, patch_client_stub.call_count
+      end
     end
   end
 
@@ -815,39 +841,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, patch_per_instance_configs_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_patch_per_instance_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_per_instance_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.patch_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.patch_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.patch_per_instance_configs instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.patch_per_instance_configs instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.patch_per_instance_configs ::Google::Cloud::Compute::V1::PatchPerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.patch_per_instance_configs ::Google::Cloud::Compute::V1::PatchPerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.patch_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.patch_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.patch_per_instance_configs(::Google::Cloud::Compute::V1::PatchPerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.patch_per_instance_configs(::Google::Cloud::Compute::V1::PatchPerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_patch_instance_config_req_resource: region_instance_group_manager_patch_instance_config_req_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, patch_per_instance_configs_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, patch_per_instance_configs_client_stub.call_count
+      end
     end
   end
 
@@ -871,39 +899,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, recreate_instances_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_recreate_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, recreate_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.recreate_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.recreate_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.recreate_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.recreate_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.recreate_instances ::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.recreate_instances ::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.recreate_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.recreate_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.recreate_instances(::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.recreate_instances(::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, recreate_instances_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, recreate_instances_client_stub.call_count
+      end
     end
   end
 
@@ -927,39 +957,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, resize_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_resize_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, resize_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.resize({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.resize({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.resize instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.resize instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.resize ::Google::Cloud::Compute::V1::ResizeRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.resize ::Google::Cloud::Compute::V1::ResizeRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.resize({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.resize({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.resize(::Google::Cloud::Compute::V1::ResizeRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.resize(::Google::Cloud::Compute::V1::ResizeRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, size: size), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, resize_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, resize_client_stub.call_count
+      end
     end
   end
 
@@ -983,39 +1015,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, set_instance_template_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_set_instance_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_instance_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.set_instance_template({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.set_instance_template({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.set_instance_template instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.set_instance_template instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.set_instance_template ::Google::Cloud::Compute::V1::SetInstanceTemplateRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.set_instance_template ::Google::Cloud::Compute::V1::SetInstanceTemplateRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.set_instance_template({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.set_instance_template({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.set_instance_template(::Google::Cloud::Compute::V1::SetInstanceTemplateRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.set_instance_template(::Google::Cloud::Compute::V1::SetInstanceTemplateRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_template_request_resource: region_instance_group_managers_set_template_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, set_instance_template_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, set_instance_template_client_stub.call_count
+      end
     end
   end
 
@@ -1039,39 +1073,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, set_target_pools_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_set_target_pools_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_target_pools_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.set_target_pools({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.set_target_pools({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.set_target_pools instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.set_target_pools instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.set_target_pools ::Google::Cloud::Compute::V1::SetTargetPoolsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.set_target_pools ::Google::Cloud::Compute::V1::SetTargetPoolsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.set_target_pools({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.set_target_pools({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.set_target_pools(::Google::Cloud::Compute::V1::SetTargetPoolsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.set_target_pools(::Google::Cloud::Compute::V1::SetTargetPoolsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_set_target_pools_request_resource: region_instance_group_managers_set_target_pools_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, set_target_pools_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, set_target_pools_client_stub.call_count
+      end
     end
   end
 
@@ -1095,39 +1131,41 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::ClientTest < Mi
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    Gapic::Rest::ClientStub.stub :new, update_per_instance_configs_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
+    ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ServiceStub.stub :transcode_update_per_instance_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_per_instance_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
 
-      # Use hash object
-      client.update_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id }) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object
+        client.update_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use named arguments
-      client.update_per_instance_configs instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use named arguments
+        client.update_per_instance_configs instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object
-      client.update_per_instance_configs ::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object
+        client.update_per_instance_configs ::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use hash object with options
-      client.update_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use hash object with options
+        client.update_per_instance_configs({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Use protobuf object with options
-      client.update_per_instance_configs(::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
+        # Use protobuf object with options
+        client.update_per_instance_configs(::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_manager_update_instance_config_req_resource: region_instance_group_manager_update_instance_config_req_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
 
-      # Verify method calls
-      assert_equal 5, update_per_instance_configs_client_stub.call_count
+        # Verify method calls
+        assert_equal 5, update_per_instance_configs_client_stub.call_count
+      end
     end
   end
 

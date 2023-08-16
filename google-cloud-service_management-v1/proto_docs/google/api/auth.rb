@@ -63,7 +63,8 @@ module Google
     #   @return [::String]
     #     Selects the methods to which this rule applies.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] oauth
     #   @return [::Google::Api::OAuthRequirements]
     #     The requirements for OAuth credentials.

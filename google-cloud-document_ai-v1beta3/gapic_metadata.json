@@ -30,6 +30,11 @@
                 "list_processor_types"
               ]
             },
+            "GetProcessorType": {
+              "methods": [
+                "get_processor_type"
+              ]
+            },
             "ListProcessors": {
               "methods": [
                 "list_processors"
@@ -113,6 +118,50 @@
             "ListEvaluations": {
               "methods": [
                 "list_evaluations"
+              ]
+            },
+            "ImportProcessorVersion": {
+              "methods": [
+                "import_processor_version"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DocumentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DocumentAI::V1beta3::DocumentService::Client",
+          "rpcs": {
+            "UpdateDataset": {
+              "methods": [
+                "update_dataset"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "import_documents"
+              ]
+            },
+            "GetDocument": {
+              "methods": [
+                "get_document"
+              ]
+            },
+            "BatchDeleteDocuments": {
+              "methods": [
+                "batch_delete_documents"
+              ]
+            },
+            "GetDatasetSchema": {
+              "methods": [
+                "get_dataset_schema"
+              ]
+            },
+            "UpdateDatasetSchema": {
+              "methods": [
+                "update_dataset_schema"
               ]
             }
           }

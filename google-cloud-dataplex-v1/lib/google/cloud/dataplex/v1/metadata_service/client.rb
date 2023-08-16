@@ -156,7 +156,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -404,8 +404,8 @@ module Google
             #     Required. The resource name of the entity:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
             #   @param etag [::String]
-            #     Required. The etag associated with the entity, which can be retrieved with a
-            #     [GetEntity][] request.
+            #     Required. The etag associated with the entity, which can be retrieved with
+            #     a [GetEntity][] request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -584,17 +584,18 @@ module Google
             #   @param view [::Google::Cloud::Dataplex::V1::ListEntitiesRequest::EntityView]
             #     Required. Specify the entity view to make a partial list request.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of entities to return. The service may return fewer than
-            #     this value. If unspecified, 100 entities will be returned by default. The
-            #     maximum value is 500; larger values will will be truncated to 500.
+            #     Optional. Maximum number of entities to return. The service may return
+            #     fewer than this value. If unspecified, 100 entities will be returned by
+            #     default. The maximum value is 500; larger values will will be truncated to
+            #     500.
             #   @param page_token [::String]
             #     Optional. Page token received from a previous `ListEntities` call. Provide
             #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListEntities` must match the call that provided the
             #     page token.
             #   @param filter [::String]
-            #     Optional. The following filter parameters can be added to the URL to limit the
-            #     entities returned by the API:
+            #     Optional. The following filter parameters can be added to the URL to limit
+            #     the entities returned by the API:
             #
             #     - Entity ID: ?filter="id=entityID"
             #     - Asset ID: ?filter="asset=assetID"
@@ -622,13 +623,11 @@ module Google
             #   # Call the list_entities method.
             #   result = client.list_entities request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Entity.
-            #     p response
+            #     p item
             #   end
             #
             def list_entities request, options = nil
@@ -965,17 +964,18 @@ module Google
             #     Required. The resource name of the parent entity:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
             #   @param page_size [::Integer]
-            #     Optional. Maximum number of partitions to return. The service may return fewer than
-            #     this value. If unspecified, 100 partitions will be returned by default. The
-            #     maximum page size is 500; larger values will will be truncated to 500.
+            #     Optional. Maximum number of partitions to return. The service may return
+            #     fewer than this value. If unspecified, 100 partitions will be returned by
+            #     default. The maximum page size is 500; larger values will will be truncated
+            #     to 500.
             #   @param page_token [::String]
-            #     Optional. Page token received from a previous `ListPartitions` call. Provide
-            #     this to retrieve the subsequent page. When paginating, all other parameters
-            #     provided to `ListPartitions` must match the call that provided the
-            #     page token.
+            #     Optional. Page token received from a previous `ListPartitions` call.
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters provided to `ListPartitions` must match the call that provided
+            #     the page token.
             #   @param filter [::String]
-            #     Optional. Filter the partitions returned to the caller using a key value pair
-            #     expression. Supported operators and syntax:
+            #     Optional. Filter the partitions returned to the caller using a key value
+            #     pair expression. Supported operators and syntax:
             #
             #     - logic operators: AND, OR
             #     - comparison operators: <, >, >=, <= ,=, !=
@@ -1014,13 +1014,11 @@ module Google
             #   # Call the list_partitions method.
             #   result = client.list_partitions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Partition.
-            #     p response
+            #     p item
             #   end
             #
             def list_partitions request, options = nil
@@ -1103,9 +1101,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1147,7 +1145,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dataplex.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dataplex.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

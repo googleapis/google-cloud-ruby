@@ -51,28 +51,58 @@ module Google
         # @!attribute [rw] source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     Source to build against this trigger.
+        #     Branch and tag names cannot consist of regular expressions.
         class RunBuildTriggerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Location of the source in an archive file in Google Cloud Storage.
+        # Location of the source in an archive file in Cloud Storage.
         # @!attribute [rw] bucket
         #   @return [::String]
-        #     Google Cloud Storage bucket containing the source (see
+        #     Cloud Storage bucket containing the source (see
         #     [Bucket Name
         #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         # @!attribute [rw] object
         #   @return [::String]
-        #     Google Cloud Storage object containing the source.
+        #     Cloud Storage object containing the source.
         #
-        #     This object must be a gzipped archive file (`.tar.gz`) containing source to
-        #     build.
+        #     This object must be a zipped (`.zip`) or gzipped archive file (`.tar.gz`)
+        #     containing source to build.
         # @!attribute [rw] generation
         #   @return [::Integer]
-        #     Google Cloud Storage generation for the object. If the generation is
+        #     Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
         class StorageSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Location of the source in any accessible Git repository.
+        # @!attribute [rw] url
+        #   @return [::String]
+        #     Location of the Git repo to build.
+        #
+        #     This will be used as a `git remote`, see
+        #     https://git-scm.com/docs/git-remote.
+        # @!attribute [rw] dir
+        #   @return [::String]
+        #     Directory, relative to the source root, in which to run the build.
+        #
+        #     This must be a relative path. If a step's `dir` is specified and is an
+        #     absolute path, this value is ignored for that step's execution.
+        # @!attribute [rw] revision
+        #   @return [::String]
+        #     The revision to fetch from the Git repository such as a branch, a tag, a
+        #     commit SHA, or any Git ref.
+        #
+        #     Cloud Build uses `git fetch` to fetch the revision from the Git
+        #     repository; therefore make sure that the string you provide for `revision`
+        #     is parsable  by the command. For information on string values accepted by
+        #     `git fetch`, see
+        #     https://git-scm.com/docs/gitrevisions#_specifying_revisions. For
+        #     information on `git fetch`, see https://git-scm.com/docs/git-fetch.
+        class GitSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -128,22 +158,22 @@ module Google
           end
         end
 
-        # Location of the source manifest in Google Cloud Storage.
+        # Location of the source manifest in Cloud Storage.
         # This feature is in Preview; see description
         # [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
         # @!attribute [rw] bucket
         #   @return [::String]
-        #     Google Cloud Storage bucket containing the source manifest (see [Bucket
+        #     Cloud Storage bucket containing the source manifest (see [Bucket
         #     Name
         #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         # @!attribute [rw] object
         #   @return [::String]
-        #     Google Cloud Storage object containing the source manifest.
+        #     Cloud Storage object containing the source manifest.
         #
         #     This object must be a JSON file.
         # @!attribute [rw] generation
         #   @return [::Integer]
-        #     Google Cloud Storage generation for the object. If the generation is
+        #     Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
         class StorageSourceManifest
           include ::Google::Protobuf::MessageExts
@@ -153,14 +183,17 @@ module Google
         # Location of the source in a supported storage service.
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Build::V1::StorageSource]
-        #     If provided, get the source from this location in Google Cloud Storage.
+        #     If provided, get the source from this location in Cloud Storage.
         # @!attribute [rw] repo_source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        # @!attribute [rw] git_source
+        #   @return [::Google::Cloud::Build::V1::GitSource]
+        #     If provided, get the source from this Git repository.
         # @!attribute [rw] storage_source_manifest
         #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
-        #     If provided, get the source from this manifest in Google Cloud Storage.
+        #     If provided, get the source from this manifest in Cloud Storage.
         #     This feature is in Preview; see description
         #     [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
         class Source
@@ -210,6 +243,22 @@ module Google
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
         #     Output only. Stores timing information for pushing the specified artifact.
         class UploadedMavenArtifact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An npm package uploaded to Artifact Registry using the NpmPackage
+        # directive.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of the uploaded npm package.
+        # @!attribute [rw] file_hashes
+        #   @return [::Google::Cloud::Build::V1::FileHashes]
+        #     Hash types and values of the npm package.
+        # @!attribute [r] push_timing
+        #   @return [::Google::Cloud::Build::V1::TimeSpan]
+        #     Output only. Stores timing information for pushing the specified artifact.
+        class UploadedNpmPackage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -327,6 +376,11 @@ module Google
         #     A shell script to be executed in the step.
         #
         #     When script is provided, the user cannot specify the entrypoint or args.
+        # @!attribute [rw] automap_substitutions
+        #   @return [::Boolean]
+        #     Option to include built-in and custom substitutions as env variables
+        #     for this build step. This option will override the global option
+        #     in BuildOption.
         class BuildStep
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -361,10 +415,12 @@ module Google
         #     indices.
         # @!attribute [rw] artifact_manifest
         #   @return [::String]
-        #     Path to the artifact manifest. Only populated when artifacts are uploaded.
+        #     Path to the artifact manifest for non-container artifacts uploaded to Cloud
+        #     Storage. Only populated when artifacts are uploaded to Cloud Storage.
         # @!attribute [rw] num_artifacts
         #   @return [::Integer]
-        #     Number of artifacts uploaded. Only populated when artifacts are uploaded.
+        #     Number of non-container artifacts uploaded to Cloud Storage. Only populated
+        #     when artifacts are uploaded to Cloud Storage.
         # @!attribute [rw] build_step_outputs
         #   @return [::Array<::String>]
         #     List of build step outputs, produced by builder images, in the order
@@ -375,13 +431,16 @@ module Google
         #     Only the first 4KB of data is stored.
         # @!attribute [rw] artifact_timing
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
-        #     Time to push all non-container artifacts.
+        #     Time to push all non-container artifacts to Cloud Storage.
         # @!attribute [rw] python_packages
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedPythonPackage>]
         #     Python artifacts uploaded to Artifact Registry at the end of the build.
         # @!attribute [rw] maven_artifacts
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedMavenArtifact>]
         #     Maven artifacts uploaded to Artifact Registry at the end of the build.
+        # @!attribute [rw] npm_packages
+        #   @return [::Array<::Google::Cloud::Build::V1::UploadedNpmPackage>]
+        #     Npm packages uploaded to Artifact Registry at the end of the build.
         class Results
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -391,7 +450,7 @@ module Google
         # is a single record in the artifact manifest JSON file.
         # @!attribute [rw] location
         #   @return [::String]
-        #     The path of an artifact in a Google Cloud Storage bucket, with the
+        #     The path of an artifact in a Cloud Storage bucket, with the
         #     generation number. For example,
         #     `gs://mybucket/path/to/output.jar#generation`.
         # @!attribute [rw] file_hash
@@ -413,6 +472,7 @@ module Google
         #
         # - $PROJECT_ID: the project ID of the build.
         # - $PROJECT_NUMBER: the project number of the build.
+        # - $LOCATION: the location/region of the build.
         # - $BUILD_ID: the autogenerated ID of the build.
         # - $REPO_NAME: the source repository name specified by RepoSource.
         # - $BRANCH_NAME: the branch name specified by RepoSource.
@@ -466,7 +526,7 @@ module Google
         #
         #     `timeout` starts ticking from `startTime`.
         #
-        #     Default time is ten minutes.
+        #     Default time is 60 minutes.
         # @!attribute [rw] images
         #   @return [::Array<::String>]
         #     A list of images to be pushed upon the successful completion of all build
@@ -492,7 +552,7 @@ module Google
         #     successful completion of all build steps.
         # @!attribute [rw] logs_bucket
         #   @return [::String]
-        #     Google Cloud Storage bucket where logs should be written (see
+        #     Cloud Storage bucket where logs should be written (see
         #     [Bucket Name
         #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         #     Logs file names will be of the format `${logs_bucket}/log-${build_id}.txt`.
@@ -528,7 +588,8 @@ module Google
         #     are:
         #
         #     * BUILD: time to execute all build steps.
-        #     * PUSH: time to push all specified images.
+        #     * PUSH: time to push all artifacts including docker images and non docker
+        #     artifacts.
         #     * FETCHSOURCE: time to fetch source.
         #     * SETUPBUILD: time to set up build.
         #
@@ -718,6 +779,16 @@ module Google
         #     The build service account credentials will be used to perform the upload.
         #
         #     If any objects fail to be pushed, the build is marked FAILURE.
+        # @!attribute [rw] npm_packages
+        #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::NpmPackage>]
+        #     A list of npm packages to be uploaded to Artifact Registry upon
+        #     successful completion of all build steps.
+        #
+        #     Npm packages in the specified paths will be uploaded
+        #     to the specified Artifact Registry repository using the builder service
+        #     account's credentials.
+        #
+        #     If any packages fail to be pushed, the build is marked FAILURE.
         class Artifacts
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -793,6 +864,24 @@ module Google
           #     Twine, this is usually `dist/*`, and sometimes additionally an `.asc`
           #     file.
           class PythonPackage
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Npm package to upload to Artifact Registry upon successful completion
+          # of all build steps.
+          # @!attribute [rw] repository
+          #   @return [::String]
+          #     Artifact Registry repository, in the form
+          #     "https://$REGION-npm.pkg.dev/$PROJECT/$REPOSITORY"
+          #
+          #     Npm package in the workspace specified by path will be zipped and
+          #     uploaded to Artifact Registry with this location as a prefix.
+          # @!attribute [rw] package_path
+          #   @return [::String]
+          #     Path to the package.json.
+          #     e.g. workspace/path/to/package
+          class NpmPackage
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -891,6 +980,9 @@ module Google
 
             # Use a md5 hash.
             MD5 = 2
+
+            # Use a sha512 hash.
+            SHA512 = 4
           end
         end
 
@@ -1016,7 +1108,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     The parent of the collection of `Builds`.
-        #     Format: `projects/{project}/locations/location`
+        #     Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. ID of the project.
@@ -1168,6 +1260,92 @@ module Google
           end
         end
 
+        # GitRepoSource describes a repo and ref of a code repository.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the repo (e.g. https://github.com/user/repo.git).
+        #     Either `uri` or `repository` can be specified and is required.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     The connected repository resource name, in the format
+        #     `projects/*/locations/*/connections/*/repositories/*`. Either `uri` or
+        #     `repository` can be specified and is required.
+        # @!attribute [rw] ref
+        #   @return [::String]
+        #     The branch or tag to use. Must start with "refs/" (required).
+        # @!attribute [rw] repo_type
+        #   @return [::Google::Cloud::Build::V1::GitFileSource::RepoType]
+        #     See RepoType below.
+        # @!attribute [rw] github_enterprise_config
+        #   @return [::String]
+        #     The full resource name of the github enterprise config.
+        #     Format:
+        #     `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.
+        #     `projects/{project}/githubEnterpriseConfigs/{id}`.
+        class GitRepoSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GitFileSource describes a file within a (possibly remote) code repository.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     The path of the file, with the repo root as the root of the path.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the repo.
+        #     Either uri or repository can be specified.
+        #     If unspecified, the repo from which the trigger invocation originated is
+        #     assumed to be the repo from which to read the specified path.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     The fully qualified resource name of the Repos API repository.
+        #     Either URI or repository can be specified.
+        #     If unspecified, the repo from which the trigger invocation originated is
+        #     assumed to be the repo from which to read the specified path.
+        # @!attribute [rw] repo_type
+        #   @return [::Google::Cloud::Build::V1::GitFileSource::RepoType]
+        #     See RepoType above.
+        # @!attribute [rw] revision
+        #   @return [::String]
+        #     The branch, tag, arbitrary ref, or SHA version of the repo to use when
+        #     resolving the filename (optional).
+        #     This field respects the same syntax/resolution as described here:
+        #     https://git-scm.com/docs/gitrevisions
+        #     If unspecified, the revision from which the trigger invocation originated
+        #     is assumed to be the revision from which to read the specified path.
+        # @!attribute [rw] github_enterprise_config
+        #   @return [::String]
+        #     The full resource name of the github enterprise config.
+        #     Format:
+        #     `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.
+        #     `projects/{project}/githubEnterpriseConfigs/{id}`.
+        class GitFileSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the repo, since it may not be explicit from the `repo` field
+          # (e.g from a URL).
+          module RepoType
+            # The default, unknown repo type. Don't use it, instead use one of
+            # the other repo types.
+            UNKNOWN = 0
+
+            # A Google Cloud Source Repositories-hosted repo.
+            CLOUD_SOURCE_REPOSITORIES = 1
+
+            # A GitHub-hosted repo not necessarily on "github.com" (i.e. GitHub
+            # Enterprise).
+            GITHUB = 2
+
+            # A Bitbucket Server-hosted repo.
+            BITBUCKET_SERVER = 3
+
+            # A GitLab-hosted repo.
+            GITLAB = 4
+          end
+        end
+
         # Configuration for an automated build in response to source repository
         # changes.
         # @!attribute [rw] resource_name
@@ -1233,6 +1411,9 @@ module Google
         #   @return [::String]
         #     Path, from the source root, to the build configuration file
         #     (i.e. cloudbuild.yaml).
+        # @!attribute [rw] git_file_source
+        #   @return [::Google::Cloud::Build::V1::GitFileSource]
+        #     The file source describing the local or remote Build template.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the trigger was created.
@@ -1267,6 +1448,14 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. A Common Expression Language string.
+        # @!attribute [rw] source_to_build
+        #   @return [::Google::Cloud::Build::V1::GitRepoSource]
+        #     The repo and ref of the repository from which to build. This field
+        #     is used only for those triggers that do not respond to SCM events.
+        #     Triggers that respond to such events build source at whatever commit
+        #     caused the event.
+        #     This field is currently only used by Webhook, Pub/Sub, Manual, and Cron
+        #     triggers.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account used for all user-controlled operations including
@@ -1274,6 +1463,10 @@ module Google
         #     If no service account is set, then the standard Cloud Build service account
         #     ([PROJECT_NUM]@system.gserviceaccount.com) will be used instead.
         #     Format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_ID_OR_EMAIL}`
+        # @!attribute [rw] repository_event_config
+        #   @return [::Google::Cloud::Build::V1::RepositoryEventConfig]
+        #     The configuration of a trigger that creates a build whenever an event from
+        #     Repo API is received.
         class BuildTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1288,10 +1481,42 @@ module Google
           end
         end
 
+        # The configuration of a trigger that creates a build whenever an event from
+        # Repo API is received.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     The resource name of the Repo API resource.
+        # @!attribute [r] repository_type
+        #   @return [::Google::Cloud::Build::V1::RepositoryEventConfig::RepositoryType]
+        #     Output only. The type of the SCM vendor the repository points to.
+        # @!attribute [rw] pull_request
+        #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
+        #     Filter to match changes in pull requests.
+        # @!attribute [rw] push
+        #   @return [::Google::Cloud::Build::V1::PushFilter]
+        #     Filter to match changes in refs like branches, tags.
+        class RepositoryEventConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # All possible SCM repo types from Repo API.
+          module RepositoryType
+            # If unspecified, RepositoryType defaults to GITHUB.
+            REPOSITORY_TYPE_UNSPECIFIED = 0
+
+            # The SCM repo is GITHUB.
+            GITHUB = 1
+
+            # The SCM repo is GITHUB Enterprise.
+            GITHUB_ENTERPRISE = 2
+
+            # The SCM repo is GITLAB Enterprise.
+            GITLAB_ENTERPRISE = 3
+          end
+        end
+
         # GitHubEventsConfig describes the configuration of a trigger that creates a
         # build whenever a GitHub event is received.
-        #
-        # This message is experimental.
         # @!attribute [rw] installation_id
         #   @return [::Integer]
         #     The installationID that emits the GitHub event.
@@ -1528,6 +1753,11 @@ module Google
         # @!attribute [rw] trigger
         #   @return [::Google::Cloud::Build::V1::BuildTrigger]
         #     Required. `BuildTrigger` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Update mask for the resource. If this is set,
+        #     the server will only update the fields specified in the field mask.
+        #     Otherwise, a full update of the mutable resource fields will be performed.
         class UpdateBuildTriggerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1549,7 +1779,7 @@ module Google
         #     "disk free"; some of the space will be used by the operating system and
         #     build utilities. Also note that this is the minimum disk size that will be
         #     allocated for the build -- the build may run with a larger disk than
-        #     requested. At present, the maximum disk size is 1000GB; builds that request
+        #     requested. At present, the maximum disk size is 2000GB; builds that request
         #     more than the maximum are rejected with an error.
         # @!attribute [rw] substitution_option
         #   @return [::Google::Cloud::Build::V1::BuildOptions::SubstitutionOption]
@@ -1565,9 +1795,13 @@ module Google
         #
         #     NOTE: this is always enabled for triggered builds and cannot be
         #     overridden in the build configuration file.
+        # @!attribute [rw] automap_substitutions
+        #   @return [::Boolean]
+        #     Option to include built-in and custom substitutions as env variables
+        #     for all build steps.
         # @!attribute [rw] log_streaming_option
         #   @return [::Google::Cloud::Build::V1::BuildOptions::LogStreamingOption]
-        #     Option to define build log streaming behavior to Google Cloud
+        #     Option to define build log streaming behavior to Cloud
         #     Storage.
         # @!attribute [rw] worker_pool
         #   @return [::String]
@@ -1608,6 +1842,9 @@ module Google
         #
         #     Using a global volume in a build with only one step is not valid as
         #     it is indicative of a build request with an incorrect configuration.
+        # @!attribute [rw] default_logs_bucket_behavior
+        #   @return [::Google::Cloud::Build::V1::BuildOptions::DefaultLogsBucketBehavior]
+        #     Optional. Option to specify how default logs buckets are setup.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1630,11 +1867,20 @@ module Google
           end
 
           # Specifies the manner in which the build should be verified, if at all.
+          #
+          # If a verified build is requested, and any part of the process to generate
+          # and upload provenance fails, the build will also fail.
+          #
+          # If the build does not request verification then that process may occur, but
+          # is not guaranteed to. If it does occur and fails, the build will not fail.
+          #
+          # For more information, see [Viewing Build
+          # Provenance](https://cloud.google.com/build/docs/securing-builds/view-build-provenance).
           module VerifyOption
-            # Not a verifiable build. (default)
+            # Not a verifiable build (the default).
             NOT_VERIFIED = 0
 
-            # Verified build.
+            # Build must be verified.
             VERIFIED = 1
           end
 
@@ -1656,6 +1902,9 @@ module Google
 
             # Highcpu e2 machine with 32 CPUs.
             E2_HIGHCPU_32 = 6
+
+            # E2 machine with 1 CPU.
+            E2_MEDIUM = 7
           end
 
           # Specifies the behavior when there is an error in the substitution checks.
@@ -1668,15 +1917,15 @@ module Google
             ALLOW_LOOSE = 1
           end
 
-          # Specifies the behavior when writing build logs to Google Cloud Storage.
+          # Specifies the behavior when writing build logs to Cloud Storage.
           module LogStreamingOption
             # Service may automatically determine build log streaming behavior.
             STREAM_DEFAULT = 0
 
-            # Build logs should be streamed to Google Cloud Storage.
+            # Build logs should be streamed to Cloud Storage.
             STREAM_ON = 1
 
-            # Build logs should not be streamed to Google Cloud Storage; they will be
+            # Build logs should not be streamed to Cloud Storage; they will be
             # written when the build is completed.
             STREAM_OFF = 2
           end
@@ -1687,22 +1936,33 @@ module Google
             # rely on the default logging behavior as it may change in the future.
             LOGGING_UNSPECIFIED = 0
 
-            # Cloud Logging and Cloud Storage logging are enabled.
+            # Build logs are stored in Cloud Logging and Cloud Storage.
             LEGACY = 1
 
-            # Only Cloud Storage logging is enabled.
+            # Build logs are stored in Cloud Storage.
             GCS_ONLY = 2
 
             # This option is the same as CLOUD_LOGGING_ONLY.
             STACKDRIVER_ONLY = 3
 
-            # Only Cloud Logging is enabled. Note that logs for both the Cloud Console
-            # UI and Cloud SDK are based on Cloud Storage logs, so neither will provide
-            # logs if this option is chosen.
+            # Build logs are stored in Cloud Logging. Selecting this option will not
+            # allow [logs
+            # streaming](https://cloud.google.com/sdk/gcloud/reference/builds/log).
             CLOUD_LOGGING_ONLY = 5
 
             # Turn off all logging. No build logs will be captured.
             NONE = 4
+          end
+
+          # Default GCS log bucket behavior options.
+          module DefaultLogsBucketBehavior
+            # Unspecified.
+            DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED = 0
+
+            # Bucket is located in user-owned project in the same region as the
+            # build. The builder service account must have access to create and write
+            # to GCS buckets in the build project.
+            REGIONAL_USER_OWNED_BUCKET = 1
           end
         end
 
@@ -1732,6 +1992,71 @@ module Google
         # ReceiveTriggerWebhookResponse [Experimental] is the response object for the
         # ReceiveTriggerWebhook method.
         class ReceiveTriggerWebhookResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. The full resource name for the GitHubEnterpriseConfig
+        #     For example:
+        #     "projects/\\{$project_id}/locations/\\{$location_id}/githubEnterpriseConfigs/\\{$config_id}"
+        # @!attribute [rw] host_url
+        #   @return [::String]
+        #     The URL of the github enterprise host the configuration is for.
+        # @!attribute [rw] app_id
+        #   @return [::Integer]
+        #     Required. The GitHub app id of the Cloud Build app on the GitHub Enterprise
+        #     server.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the installation was associated with the project.
+        # @!attribute [rw] webhook_key
+        #   @return [::String]
+        #     The key that should be attached to webhook calls to the ReceiveWebhook
+        #     endpoint.
+        # @!attribute [rw] peered_network
+        #   @return [::String]
+        #     Optional. The network to be used when reaching out to the GitHub
+        #     Enterprise server. The VPC network must be enabled for private
+        #     service connection. This should be set if the GitHub Enterprise server is
+        #     hosted on-premises and not reachable by public internet.
+        #     If this field is left empty, no network peering will occur and calls to
+        #     the GitHub Enterprise server will be made over the public internet.
+        #     Must be in the format
+        #     `projects/{project}/global/networks/{network}`, where \\{project}
+        #     is a project number or id and \\{network} is the name of a
+        #     VPC network in the project.
+        # @!attribute [rw] secrets
+        #   @return [::Google::Cloud::Build::V1::GitHubEnterpriseSecrets]
+        #     Names of secrets in Secret Manager.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name to display for this config.
+        # @!attribute [rw] ssl_ca
+        #   @return [::String]
+        #     Optional. SSL certificate to use for requests to GitHub Enterprise.
+        class GitHubEnterpriseConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GitHubEnterpriseSecrets represents the names of all necessary secrets in
+        # Secret Manager for a GitHub Enterprise server.
+        # Format is: projects/<project number>/secrets/<secret name>.
+        # @!attribute [rw] private_key_version_name
+        #   @return [::String]
+        #     The resource name for the private key secret version.
+        # @!attribute [rw] webhook_secret_version_name
+        #   @return [::String]
+        #     The resource name for the webhook secret secret version in Secret Manager.
+        # @!attribute [rw] oauth_secret_version_name
+        #   @return [::String]
+        #     The resource name for the OAuth secret secret version in Secret Manager.
+        # @!attribute [rw] oauth_client_id_version_name
+        #   @return [::String]
+        #     The resource name for the OAuth client ID secret version in Secret Manager.
+        class GitHubEnterpriseSecrets
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1784,7 +2109,7 @@ module Google
         #     Output only. `WorkerPool` state.
         # @!attribute [rw] private_pool_v1_config
         #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config]
-        #     Private Pool using a v1 configuration.
+        #     Legacy Private Pool configuration.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. Checksum computed by the server. May be sent on update and
@@ -1819,6 +2144,9 @@ module Google
 
             # `WorkerPool` is deleted.
             DELETED = 4
+
+            # `WorkerPool` is being updated; new builds cannot be run.
+            UPDATING = 5
           end
         end
 
@@ -1846,7 +2174,7 @@ module Google
           #     Size of the disk attached to the worker, in GB.
           #     See [Worker pool config
           #     file](https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema).
-          #     Specify a value of up to 1000. If `0` is specified, Cloud Build will use
+          #     Specify a value of up to 2000. If `0` is specified, Cloud Build will use
           #     a standard disk size.
           class WorkerConfig
             include ::Google::Protobuf::MessageExts
@@ -1867,6 +2195,16 @@ module Google
           # @!attribute [rw] egress_option
           #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::NetworkConfig::EgressOption]
           #     Option to configure network egress for the workers.
+          # @!attribute [rw] peered_network_ip_range
+          #   @return [::String]
+          #     Immutable. Subnet IP range within the peered network. This is specified
+          #     in CIDR notation with a slash and the subnet prefix size. You can
+          #     optionally specify an IP address before the subnet prefix value. e.g.
+          #     `192.168.0.0/29` would specify an IP range starting at 192.168.0.0 with a
+          #     prefix size of 29 bits.
+          #     `/16` would specify a prefix size of 16 bits, with an automatically
+          #     determined IP within the peered VPC.
+          #     If unspecified, a value of `/24` will be used.
           class NetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1926,11 +2264,11 @@ module Google
         #   @return [::String]
         #     Required. The name of the `WorkerPool` to delete.
         #     Format:
-        #     `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+        #     `projects/{project}/locations/{location}/workerPools/{workerPool}`.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. If this is provided, it must match the server's etag on the
-        #     workerpool for the request to be processed.
+        #     Optional. If provided, it must match the server's etag on the workerpool
+        #     for the request to be processed.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the `WorkerPool` is not found, the request will succeed

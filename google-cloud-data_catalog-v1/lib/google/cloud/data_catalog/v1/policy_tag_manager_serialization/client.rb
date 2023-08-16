@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/datacatalog/v1/policytagmanagerserialization_pb"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -128,7 +129,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -138,6 +139,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @policy_tag_manager_serialization_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Stub,
                 credentials:  credentials,
@@ -146,6 +153,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -274,7 +288,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of project that the imported taxonomies will belong to.
+            #     Required. Resource name of project that the imported taxonomies will belong
+            #     to.
             #   @param inline_source [::Google::Cloud::DataCatalog::V1::InlineSource, ::Hash]
             #     Inline source taxonomy to import.
             #   @param cross_regional_source [::Google::Cloud::DataCatalog::V1::CrossRegionalSource, ::Hash]
@@ -368,7 +383,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the project that the exported taxonomies belong to.
+            #     Required. Resource name of the project that the exported taxonomies belong
+            #     to.
             #   @param taxonomies [::Array<::String>]
             #     Required. Resource names of the taxonomies to export.
             #   @param serialized_taxonomies [::Boolean]
@@ -477,9 +493,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -521,7 +537,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "datacatalog.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "datacatalog.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

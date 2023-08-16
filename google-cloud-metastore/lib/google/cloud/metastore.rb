@@ -48,12 +48,14 @@ module Google
       # Create a new client object for DataprocMetastore.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Metastore::V1::DataprocMetastore::Client](https://googleapis.dev/ruby/google-cloud-metastore-v1/latest/Google/Cloud/Metastore/V1/DataprocMetastore/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Metastore::V1::DataprocMetastore::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1/latest/Google-Cloud-Metastore-V1-DataprocMetastore-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataprocMetastore service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About DataprocMetastore
       #
@@ -77,17 +79,65 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [DataprocMetastore::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.dataproc_metastore version: :v1, &block
+      def self.dataproc_metastore version: :v1, transport: :grpc, &block
         require "google/cloud/metastore/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Metastore
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Metastore.const_get package_name
-        package_module.const_get(:DataprocMetastore).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Metastore.const_get(package_name).const_get(:DataprocMetastore)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for DataprocMetastoreFederation.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1/latest/Google-Cloud-Metastore-V1-DataprocMetastoreFederation-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the DataprocMetastoreFederation service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # ## About DataprocMetastoreFederation
+      #
+      # Configures and manages metastore federation services.
+      # Dataproc Metastore Federation Service allows federating a collection of
+      # backend metastores like BigQuery, Dataplex Lakes, and other Dataproc
+      # Metastores. The Federation Service exposes a gRPC URL through which metadata
+      # from the backend metastores are served at query time.
+      #
+      # The Dataproc Metastore Federation API defines the following resource model:
+      # * The service works with a collection of Google Cloud projects.
+      # * Each project has a collection of available locations.
+      # * Each location has a collection of federations.
+      # * Dataproc Metastore Federations are resources with names of the
+      # form:
+      # `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.dataproc_metastore_federation version: :v1, transport: :grpc, &block
+        require "google/cloud/metastore/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Metastore
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Metastore.const_get(package_name).const_get(:DataprocMetastoreFederation)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -107,7 +157,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

@@ -24,8 +24,7 @@ module Google
     module AIPlatform
       module V1
         module DatasetService
-          # The service that handles the CRUD of Vertex AI Dataset and its child
-          # resources.
+          # The service that manages Vertex AI Dataset and its child resources.
           class Service
 
             include ::GRPC::GenericService
@@ -50,8 +49,12 @@ module Google
             rpc :ExportData, ::Google::Cloud::AIPlatform::V1::ExportDataRequest, ::Google::Longrunning::Operation
             # Lists DataItems in a Dataset.
             rpc :ListDataItems, ::Google::Cloud::AIPlatform::V1::ListDataItemsRequest, ::Google::Cloud::AIPlatform::V1::ListDataItemsResponse
+            # Searches DataItems in a Dataset.
+            rpc :SearchDataItems, ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest, ::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse
             # Lists SavedQueries in a Dataset.
             rpc :ListSavedQueries, ::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest, ::Google::Cloud::AIPlatform::V1::ListSavedQueriesResponse
+            # Deletes a SavedQuery.
+            rpc :DeleteSavedQuery, ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest, ::Google::Longrunning::Operation
             # Gets an AnnotationSpec.
             rpc :GetAnnotationSpec, ::Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest, ::Google::Cloud::AIPlatform::V1::AnnotationSpec
             # Lists Annotations belongs to a dataitem

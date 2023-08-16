@@ -25,6 +25,45 @@ module Google
           # Path helper methods for the AnalyticsAdminService API.
           module Paths
             ##
+            # Create a fully-qualified AccessBinding resource string.
+            #
+            # @overload access_binding_path(account:, access_binding:)
+            #   The resource will be in the following format:
+            #
+            #   `accounts/{account}/accessBindings/{access_binding}`
+            #
+            #   @param account [String]
+            #   @param access_binding [String]
+            #
+            # @overload access_binding_path(property:, access_binding:)
+            #   The resource will be in the following format:
+            #
+            #   `properties/{property}/accessBindings/{access_binding}`
+            #
+            #   @param property [String]
+            #   @param access_binding [String]
+            #
+            # @return [::String]
+            def access_binding_path **args
+              resources = {
+                "access_binding:account" => (proc do |account:, access_binding:|
+                  raise ::ArgumentError, "account cannot contain /" if account.to_s.include? "/"
+
+                  "accounts/#{account}/accessBindings/#{access_binding}"
+                end),
+                "access_binding:property" => (proc do |property:, access_binding:|
+                  raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+                  "properties/#{property}/accessBindings/#{access_binding}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Account resource string.
             #
             # The resource will be in the following format:
@@ -36,6 +75,23 @@ module Google
             # @return [::String]
             def account_path account:
               "accounts/#{account}"
+            end
+
+            ##
+            # Create a fully-qualified AdSenseLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/adSenseLinks/{adsense_link}`
+            #
+            # @param property [String]
+            # @param adsense_link [String]
+            #
+            # @return [::String]
+            def ad_sense_link_path property:, adsense_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/adSenseLinks/#{adsense_link}"
             end
 
             ##
@@ -67,6 +123,40 @@ module Google
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
               "properties/#{property}/audiences/#{audience}"
+            end
+
+            ##
+            # Create a fully-qualified BigQueryLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/bigQueryLinks/{bigquery_link}`
+            #
+            # @param property [String]
+            # @param bigquery_link [String]
+            #
+            # @return [::String]
+            def big_query_link_path property:, bigquery_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/bigQueryLinks/#{bigquery_link}"
+            end
+
+            ##
+            # Create a fully-qualified ChannelGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/channelGroups/{channel_group}`
+            #
+            # @param property [String]
+            # @param channel_group [String]
+            #
+            # @return [::String]
+            def channel_group_path property:, channel_group:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/channelGroups/#{channel_group}"
             end
 
             ##
@@ -200,6 +290,59 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EnhancedMeasurementSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/enhancedMeasurementSettings`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            #
+            # @return [::String]
+            def enhanced_measurement_settings_path property:, data_stream:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/enhancedMeasurementSettings"
+            end
+
+            ##
+            # Create a fully-qualified EventCreateRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/eventCreateRules/{event_create_rule}`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            # @param event_create_rule [String]
+            #
+            # @return [::String]
+            def event_create_rule_path property:, data_stream:, event_create_rule:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+              raise ::ArgumentError, "data_stream cannot contain /" if data_stream.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/eventCreateRules/#{event_create_rule}"
+            end
+
+            ##
+            # Create a fully-qualified ExpandedDataSet resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/expandedDataSets/{expanded_data_set}`
+            #
+            # @param property [String]
+            # @param expanded_data_set [String]
+            #
+            # @return [::String]
+            def expanded_data_set_path property:, expanded_data_set:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/expandedDataSets/#{expanded_data_set}"
+            end
+
+            ##
             # Create a fully-qualified FirebaseLink resource string.
             #
             # The resource will be in the following format:
@@ -295,6 +438,23 @@ module Google
             # @return [::String]
             def property_path property:
               "properties/#{property}"
+            end
+
+            ##
+            # Create a fully-qualified SearchAds360Link resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/searchAds360Links/{search_ads_360_link}`
+            #
+            # @param property [String]
+            # @param search_ads_360_link [String]
+            #
+            # @return [::String]
+            def search_ads360_link_path property:, search_ads_360_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/searchAds360Links/#{search_ads_360_link}"
             end
 
             ##

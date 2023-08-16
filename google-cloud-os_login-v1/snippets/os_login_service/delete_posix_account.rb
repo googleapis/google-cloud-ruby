@@ -20,8 +20,11 @@
 require "google/cloud/os_login/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::OsLogin::V1::OsLoginService::Client#delete_posix_account
+# Snippet for the delete_posix_account call in the OsLoginService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::OsLogin::V1::OsLoginService::Client#delete_posix_account. It
+# may require modification in order to execute successfully.
 #
 def delete_posix_account
   # Create a client object. The client can be reused for multiple calls.

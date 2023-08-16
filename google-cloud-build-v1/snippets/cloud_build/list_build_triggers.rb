@@ -20,8 +20,11 @@
 require "google/cloud/build/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Build::V1::CloudBuild::Client#list_build_triggers
+# Snippet for the list_build_triggers call in the CloudBuild service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#list_build_triggers. It may
+# require modification in order to execute successfully.
 #
 def list_build_triggers
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_build_triggers
   # Call the list_build_triggers method.
   result = client.list_build_triggers request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Build::V1::BuildTrigger.
-    p response
+    p item
   end
 end
 # [END cloudbuild_v1_generated_CloudBuild_ListBuildTriggers_sync]

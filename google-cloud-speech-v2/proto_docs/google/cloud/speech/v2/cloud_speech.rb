@@ -134,8 +134,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of Recognizers to return. The service may return fewer
-        #     than this value. If unspecified, at most 20 Recognizers will be returned.
-        #     The maximum value is 20; values above 20 will be coerced to 20.
+        #     than this value. If unspecified, at most 5 Recognizers will be returned.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
@@ -260,37 +260,22 @@ module Google
         #     characters or less.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. Which model to use for recognition requests. Select the model
+        #     Optional. Which model to use for recognition requests. Select the model
         #     best suited to your domain to get best results.
         #
-        #     Supported models:
-        #
-        #     - `latest_long`
-        #
-        #       Best for long form content like media or conversation.
-        #
-        #     - `latest_short`
-        #
-        #       Best for short form content like commands or single shot directed speech.
-        #       When using this model, the service will stop transcribing audio after the
-        #       first utterance is detected and completed.
-        #
-        #     When using this model,
-        #     {::Google::Cloud::Speech::V2::RecognitionFeatures::MultiChannelMode::SEPARATE_RECOGNITION_PER_CHANNEL SEPARATE_RECOGNITION_PER_CHANNEL}
-        #     is not supported; multi-channel audio is accepted, but only the first
-        #     channel will be processed and transcribed.
+        #     Guidance for choosing which model to use can be found in the [Transcription
+        #     Models
+        #     Documentation](https://cloud.google.com/speech-to-text/v2/docs/transcription-model)
+        #     and the models supported in each region can be found in the [Table Of
+        #     Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         # @!attribute [rw] language_codes
         #   @return [::Array<::String>]
-        #     Required. The language of the supplied audio as a
+        #     Optional. The language of the supplied audio as a
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
         #
-        #     Supported languages:
-        #
-        #     - `en-US`
-        #
-        #     - `en-GB`
-        #
-        #     - `fr-FR`
+        #     Supported languages for each model are listed in the [Table of Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         #
         #     If additional languages are provided, recognition result will contain
         #     recognition in the most likely language detected. The recognition result
@@ -373,14 +358,23 @@ module Google
 
         # Automatically detected decoding parameters.
         # Supported for the following encodings:
+        #
         # * WAV_LINEAR16: 16-bit signed little-endian PCM samples in a WAV container.
+        #
         # * WAV_MULAW: 8-bit companded mulaw samples in a WAV container.
+        #
         # * WAV_ALAW: 8-bit companded alaw samples in a WAV container.
+        #
         # * RFC4867_5_AMR: AMR frames with an rfc4867.5 header.
+        #
         # * RFC4867_5_AMRWB: AMR-WB frames with an rfc4867.5 header.
+        #
         # * FLAC: FLAC frames in the "native FLAC" container format.
+        #
         # * MP3: MPEG audio frames with optional (ignored) ID3 metadata.
+        #
         # * OGG_OPUS: Opus audio frames in an Ogg container.
+        #
         # * WEBM_OPUS: Opus audio frames in a WebM container.
         class AutoDetectDecodingConfig
           include ::Google::Protobuf::MessageExts
@@ -398,16 +392,24 @@ module Google
         #     sampling rate of the audio source to 16000 Hz. If that's not possible, use
         #     the native sample rate of the audio source (instead of re-sampling).
         #     Supported for the following encodings:
+        #
         #     * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
+        #
         #     * MULAW: Headerless 8-bit companded mulaw samples.
+        #
         #     * ALAW: Headerless 8-bit companded alaw samples.
         # @!attribute [rw] audio_channel_count
         #   @return [::Integer]
         #     Number of channels present in the audio data sent for recognition.
         #     Supported for the following encodings:
+        #
         #     * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
+        #
         #     * MULAW: Headerless 8-bit companded mulaw samples.
+        #
         #     * ALAW: Headerless 8-bit companded alaw samples.
+        #
+        #     The maximum allowed value is 8.
         class ExplicitDecodingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -433,7 +435,7 @@ module Google
         #   @return [::Integer]
         #     Required. Minimum number of speakers in the conversation. This range gives
         #     you more flexibility by allowing the system to automatically determine the
-        #     correct number of speakers. If not set, the default value is 2.
+        #     correct number of speakers.
         #
         #     To fix the number of speakers detected in the audio, set
         #     `min_speaker_count` = `max_speaker_count`.
@@ -521,28 +523,28 @@ module Google
         end
 
         # Provides "hints" to the speech recognizer to favor specific words and phrases
-        # in the results. Phrase sets can be specified as an inline resource, or a
-        # reference to an existing phrase set resource.
+        # in the results. PhraseSets can be specified as an inline resource, or a
+        # reference to an existing PhraseSet resource.
         # @!attribute [rw] phrase_sets
         #   @return [::Array<::Google::Cloud::Speech::V2::SpeechAdaptation::AdaptationPhraseSet>]
-        #     A list of inline or referenced phrase sets.
+        #     A list of inline or referenced PhraseSets.
         # @!attribute [rw] custom_classes
         #   @return [::Array<::Google::Cloud::Speech::V2::CustomClass>]
-        #     A list of inline custom classes. Existing custom class resources can be
-        #     referenced directly in a phrase set.
+        #     A list of inline CustomClasses. Existing CustomClass resources can be
+        #     referenced directly in a PhraseSet.
         class SpeechAdaptation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A biasing phrase set, which can be either a string referencing the name of
-          # an existing phrase set resource, or an inline definition of a phrase set.
+          # A biasing PhraseSet, which can be either a string referencing the name of
+          # an existing PhraseSets resource, or an inline definition of a PhraseSet.
           # @!attribute [rw] phrase_set
           #   @return [::String]
-          #     The name of an existing phrase set resource. The user must have read
+          #     The name of an existing PhraseSet resource. The user must have read
           #     access to the resource and it must not be deleted.
           # @!attribute [rw] inline_phrase_set
           #   @return [::Google::Cloud::Speech::V2::PhraseSet]
-          #     An inline defined phrase set.
+          #     An inline defined PhraseSet.
           class AdaptationPhraseSet
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -559,6 +561,30 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::ExplicitDecodingConfig]
         #     Explicitly specified decoding parameters.
         #     Required if using headerless PCM audio (linear16, mulaw, alaw).
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Optional. Which model to use for recognition requests. Select the model
+        #     best suited to your domain to get best results.
+        #
+        #     Guidance for choosing which model to use can be found in the [Transcription
+        #     Models
+        #     Documentation](https://cloud.google.com/speech-to-text/v2/docs/transcription-model)
+        #     and the models supported in each region can be found in the [Table Of
+        #     Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
+        # @!attribute [rw] language_codes
+        #   @return [::Array<::String>]
+        #     Optional. The language of the supplied audio as a
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+        #     Language tags are normalized to BCP-47 before they are used eg "en-us"
+        #     becomes "en-US".
+        #
+        #     Supported languages for each model are listed in the [Table of Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
+        #
+        #     If additional languages are provided, recognition result will contain
+        #     recognition in the most likely language detected. The recognition result
+        #     will include the language tag of the language detected in the audio.
         # @!attribute [rw] features
         #   @return [::Google::Cloud::Speech::V2::RecognitionFeatures]
         #     Speech recognition features to enable.
@@ -580,7 +606,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the Recognizer to use during recognition. The
         #     expected format is
-        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`.
+        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+        #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Speech::V2::RecognitionConfig]
         #     Features and audio metadata to use for the Automatic Speech Recognition.
@@ -651,9 +678,9 @@ module Google
         # @!attribute [rw] words
         #   @return [::Array<::Google::Cloud::Speech::V2::WordInfo>]
         #     A list of word-specific information for each recognized word.
-        #     When
-        #     [enable_speaker_diarization][google.cloud.speech.v2.SpeakerDiarizationConfig.enable_speaker_diarization]
-        #     is true, you will see all the words from the beginning of the audio.
+        #     When the
+        #     {::Google::Cloud::Speech::V2::SpeakerDiarizationConfig SpeakerDiarizationConfig}
+        #     is set, you will see all the words from the beginning of the audio.
         class SpeechRecognitionAlternative
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -694,8 +721,8 @@ module Google
         #     A distinct label is assigned for every speaker within the audio. This field
         #     specifies which one of those speakers was detected to have spoken this
         #     word. `speaker_label` is set if
-        #     [enable_speaker_diarization][google.cloud.speech.v2.SpeakerDiarizationConfig.enable_speaker_diarization]
-        #     is `true` and only in the top alternative.
+        #     {::Google::Cloud::Speech::V2::SpeakerDiarizationConfig SpeakerDiarizationConfig}
+        #     is given and only in the top alternative.
         class WordInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -795,9 +822,9 @@ module Google
         #     of the recognizer during this recognition request. If no mask is provided,
         #     all non-default valued fields in
         #     {::Google::Cloud::Speech::V2::StreamingRecognitionConfig#config config} override
-        #     the values in the recognizer for this recognition request. If a mask is
+        #     the values in the Recognizer for this recognition request. If a mask is
         #     provided, only the fields listed in the mask override the config in the
-        #     recognizer for this recognition request. If a wildcard (`*`) is provided,
+        #     Recognizer for this recognition request. If a wildcard (`*`) is provided,
         #     {::Google::Cloud::Speech::V2::StreamingRecognitionConfig#config config}
         #     completely overrides and replaces the config in the recognizer for this
         #     recognition request.
@@ -814,25 +841,28 @@ module Google
         # {::Google::Cloud::Speech::V2::Speech::Client#streaming_recognize StreamingRecognize}
         # method. Multiple
         # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest StreamingRecognizeRequest}
-        # messages are sent. The first message must contain a
+        # messages are sent in one call.
+        #
+        # If the {::Google::Cloud::Speech::V2::Recognizer Recognizer} referenced by
+        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#recognizer recognizer}
+        # contains a fully specified request configuration then the stream may only
+        # contain messages with only
+        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio} set.
+        #
+        # Otherwise the first message must contain a
         # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#recognizer recognizer} and
-        # optionally a
+        # a
         # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#streaming_config streaming_config}
-        # message and must not contain
-        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio}. All
-        # subsequent messages must contain
-        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio} and must not
-        # contain a
-        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#streaming_config streaming_config}
-        # message.
+        # message that together fully specify the request configuration and must not
+        # contain {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio}. All
+        # subsequent messages must only have
+        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio} set.
         # @!attribute [rw] recognizer
         #   @return [::String]
-        #     Required. Streaming recognition should start with an initial request having
-        #     a `recognizer`. Subsequent requests carry the audio data to be recognized.
-        #
-        #     The initial request with configuration can be omitted if the Recognizer
-        #     being used has a
-        #     {::Google::Cloud::Speech::V2::Recognizer#default_recognition_config default_recognition_config}.
+        #     Required. The name of the Recognizer to use during recognition. The
+        #     expected format is
+        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+        #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
         # @!attribute [rw] streaming_config
         #   @return [::Google::Cloud::Speech::V2::StreamingRecognitionConfig]
         #     StreamingRecognitionConfig to be used in this recognition attempt.
@@ -841,6 +871,7 @@ module Google
         # @!attribute [rw] audio
         #   @return [::String]
         #     Inline audio bytes to be Recognized.
+        #     Maximum size for this field is 15 KB per request.
         class StreamingRecognizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -851,7 +882,10 @@ module Google
         # method.
         # @!attribute [rw] recognizer
         #   @return [::String]
-        #     Required. Resource name of the recognizer to be used for ASR.
+        #     Required. The name of the Recognizer to use during recognition. The
+        #     expected format is
+        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+        #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Speech::V2::RecognitionConfig]
         #     Features and audio metadata to use for the Automatic Speech Recognition.
@@ -878,7 +912,58 @@ module Google
         # @!attribute [rw] files
         #   @return [::Array<::Google::Cloud::Speech::V2::BatchRecognizeFileMetadata>]
         #     Audio files with file metadata for ASR.
+        #     The maximum number of files allowed to be specified is 5.
+        # @!attribute [rw] recognition_output_config
+        #   @return [::Google::Cloud::Speech::V2::RecognitionOutputConfig]
+        #     Configuration options for where to output the transcripts of each file.
+        # @!attribute [rw] processing_strategy
+        #   @return [::Google::Cloud::Speech::V2::BatchRecognizeRequest::ProcessingStrategy]
+        #     Processing strategy to use for this request.
         class BatchRecognizeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible processing strategies for batch requests.
+          module ProcessingStrategy
+            # Default value for the processing strategy. The request is processed as
+            # soon as its received.
+            PROCESSING_STRATEGY_UNSPECIFIED = 0
+
+            # If selected, processes the request during lower utilization periods for a
+            # price discount. The request is fulfilled within 24 hours.
+            DYNAMIC_BATCHING = 1
+          end
+        end
+
+        # Output configurations for Cloud Storage.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The Cloud Storage URI prefix with which recognition results will be
+        #     written.
+        class GcsOutputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Output configurations for inline response.
+        class InlineOutputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration options for the output(s) of recognition.
+        # @!attribute [rw] gcs_output_config
+        #   @return [::Google::Cloud::Speech::V2::GcsOutputConfig]
+        #     If this message is populated, recognition results are written to the
+        #     provided Google Cloud Storage URI.
+        # @!attribute [rw] inline_response_config
+        #   @return [::Google::Cloud::Speech::V2::InlineOutputConfig]
+        #     If this message is populated, recognition results are provided in the
+        #     {::Google::Cloud::Speech::V2::BatchRecognizeResponse BatchRecognizeResponse}
+        #     message of the Operation when completed. This is only supported when
+        #     calling {::Google::Cloud::Speech::V2::Speech::Client#batch_recognize BatchRecognize}
+        #     with just one audio file.
+        class RecognitionOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -889,6 +974,9 @@ module Google
         # @!attribute [rw] results
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Speech::V2::BatchRecognizeFileResult}]
         #     Map from filename to the final result for that file.
+        # @!attribute [rw] total_billed_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         class BatchRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -903,13 +991,36 @@ module Google
           end
         end
 
+        # Output type for Cloud Storage of BatchRecognize transcripts. Though this
+        # proto isn't returned in this API anywhere, the Cloud Storage transcripts will
+        # be this proto serialized and should be parsed as such.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Speech::V2::SpeechRecognitionResult>]
+        #     Sequential list of transcription results corresponding to sequential
+        #     portions of audio.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Speech::V2::RecognitionResponseMetadata]
+        #     Metadata about the recognition.
+        class BatchRecognizeResults
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Final results for a single file.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     The GCS URI to which recognition results were written.
+        #     The Cloud Storage URI to which recognition results were written.
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     Error if one was encountered.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Speech::V2::RecognitionResponseMetadata]
+        # @!attribute [rw] transcript
+        #   @return [::Google::Cloud::Speech::V2::BatchRecognizeResults]
+        #     The transcript for the audio file. This is populated only when
+        #     {::Google::Cloud::Speech::V2::InlineOutputConfig InlineOutputConfig} is set in
+        #     the
+        #     [RecognitionOutputConfig][[google.cloud.speech.v2.RecognitionOutputConfig].
         class BatchRecognizeFileResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -925,7 +1036,7 @@ module Google
         #     Error if one was encountered.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     The GCS URI to which recognition results will be written.
+        #     The Cloud Storage URI to which recognition results will be written.
         class BatchRecognizeTranscriptionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1290,7 +1401,8 @@ module Google
         #     phrase will be recognized over other similar sounding phrases. The higher
         #     the boost, the higher the chance of false positive recognition as well.
         #     Valid `boost` values are between 0 (exclusive) and 20. We recommend using a
-        #     binary search approach to finding the optimal value for your use case.
+        #     binary search approach to finding the optimal value for your use case as
+        #     well as adding phrases both with and without boost to your requests.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     User-settable, human-readable name for the PhraseSet. Must be 63
@@ -1358,11 +1470,11 @@ module Google
           #     be recognized over other similar sounding phrases. The higher the boost,
           #     the higher the chance of false positive recognition as well. Negative
           #     boost values would correspond to anti-biasing. Anti-biasing is not
-          #     enabled, so negative boost will simply be ignored. Though `boost` can
-          #     accept a wide range of positive values, most use cases are best served
-          #     with values between 0 and 20. We recommend using a binary search approach
-          #     to finding the optimal value for your use case. Speech recognition
-          #     will skip PhraseSets with a boost value of 0.
+          #     enabled, so negative boost values will return an error. Boost values must
+          #     be between 0 and 20. Any values outside that range will return an error.
+          #     We recommend using a binary search approach to finding the optimal value
+          #     for your use case as well as adding phrases both with and without boost
+          #     to your requests.
           class Phrase
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1424,10 +1536,10 @@ module Google
         #     expected format is `projects/{project}/locations/{location}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Number of results per requests. A valid page_size ranges from 0 to 20
+        #     Number of results per requests. A valid page_size ranges from 0 to 100
         #     inclusive. If the page_size is zero or unspecified, a page size of 5 will
-        #     be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-        #     that a call might return fewer results than the requested page size.
+        #     be chosen. If the page size exceeds 100, it will be coerced down to 100.
+        #     Note that a call might return fewer results than the requested page size.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
@@ -1575,8 +1687,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of PhraseSets to return. The service may return fewer
-        #     than this value. If unspecified, at most 20 PhraseSets will be returned.
-        #     The maximum value is 20; values above 20 will be coerced to 20.
+        #     than this value. If unspecified, at most 5 PhraseSets will be returned.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous

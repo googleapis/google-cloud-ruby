@@ -29,10 +29,31 @@ module Google
         #     automatically generated based on the Service name.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style labels for the resource.
+        #     Unstructured key value map that can be used to organize and categorize
+        #     objects.
+        #     User-provided labels are shared with Google's billing system, so they can
+        #     be used to filter, or break down billing charges by team, component,
+        #     environment, state, etc. For more information, visit
+        #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
+        #     https://cloud.google.com/run/docs/configuring/labels.
+        #
+        #     <p>Cloud Run API v2 does not support labels with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system labels in v1 now have a
+        #     corresponding field in v2 RevisionTemplate.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style annotations for the resource.
+        #     Unstructured key value map that may be set by external tools to store and
+        #     arbitrary metadata. They are not queryable and should be preserved
+        #     when modifying objects.
+        #
+        #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system annotations in v1 now
+        #     have a corresponding field in v2 RevisionTemplate.
+        #
+        #     <p>This field follows Kubernetes annotations' namespacing, limits, and
+        #     rules.
         # @!attribute [rw] scaling
         #   @return [::Google::Cloud::Run::V2::RevisionScaling]
         #     Scaling settings for this Revision.
@@ -67,6 +88,9 @@ module Google
         # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
         #     Sets the maximum number of requests that each serving instance can receive.
+        # @!attribute [rw] session_affinity
+        #   @return [::Boolean]
+        #     Enable session affinity.
         class RevisionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

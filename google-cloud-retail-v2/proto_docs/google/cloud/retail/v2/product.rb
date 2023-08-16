@@ -26,7 +26,13 @@ module Google
         # @!attribute [rw] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp when this product becomes unavailable for
-        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}. Note
+        #     that this is only applicable to
+        #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} and
+        #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}, and
+        #     ignored for {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}.
+        #     In general, we suggest the users to delete the stale products explicitly,
+        #     instead of using this field to determine staleness.
         #
         #     If it is set, the {::Google::Cloud::Retail::V2::Product Product} is not
         #     available for
@@ -46,7 +52,13 @@ module Google
         #     [expiration_date](https://support.google.com/merchants/answer/6324499).
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
-        #     Input only. The TTL (time to live) of the product.
+        #     Input only. The TTL (time to live) of the product. Note that this is only
+        #     applicable to {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY}
+        #     and {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION},
+        #     and ignored for
+        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}. In general,
+        #     we suggest the users to delete the stale products explicitly, instead of
+        #     using this field to determine staleness.
         #
         #     If it is set, it must be a non-negative value, and
         #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time} is set as
@@ -146,7 +158,7 @@ module Google
         #
         #
         #     To represent full path of category, use '>' sign to separate different
-        #     hierarchies. If '>' is part of the category name, please replace it with
+        #     hierarchies. If '>' is part of the category name, replace it with
         #     other character(s).
         #
         #     For example, if a shoes product belongs to both
@@ -276,7 +288,11 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp when this {::Google::Cloud::Retail::V2::Product Product} becomes
         #     available for
-        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}. Note
+        #     that this is only applicable to
+        #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} and
+        #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}, and
+        #     ignored for {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}.
         # @!attribute [rw] availability
         #   @return [::Google::Cloud::Retail::V2::Product::Availability]
         #     The online availability of the {::Google::Cloud::Retail::V2::Product Product}.
@@ -462,6 +478,8 @@ module Google
         #     Note: Returning more fields in
         #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} can increase
         #     response payload size and serving latency.
+        #
+        #     This field is deprecated. Use the retrievable site-wide control instead.
         # @!attribute [r] variants
         #   @return [::Array<::Google::Cloud::Retail::V2::Product>]
         #     Output only. Product variants grouped together on primary product which
@@ -478,8 +496,11 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::LocalInventory>]
         #     Output only. A list of local inventories specific to different places.
         #
-        #     This is only available for users who have Retail Search enabled, and it can
-        #     be managed by [AddLocalInventories][] and [RemoveLocalInventories][] APIs.
+        #     This field can be managed by
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+        #     and
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+        #     APIs if fine-grained, high-volume updates are necessary.
         class Product
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

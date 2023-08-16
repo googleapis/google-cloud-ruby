@@ -23,11 +23,14 @@ require "google/cloud/ai_platform/v1/featurestore_service"
 require "google/cloud/ai_platform/v1/index_endpoint_service"
 require "google/cloud/ai_platform/v1/index_service"
 require "google/cloud/ai_platform/v1/job_service"
+require "google/cloud/ai_platform/v1/match_service"
 require "google/cloud/ai_platform/v1/metadata_service"
 require "google/cloud/ai_platform/v1/migration_service"
 require "google/cloud/ai_platform/v1/model_service"
+require "google/cloud/ai_platform/v1/model_garden_service"
 require "google/cloud/ai_platform/v1/pipeline_service"
 require "google/cloud/ai_platform/v1/prediction_service"
+require "google/cloud/ai_platform/v1/schedule_service"
 require "google/cloud/ai_platform/v1/specialist_pool_service"
 require "google/cloud/ai_platform/v1/tensorboard_service"
 require "google/cloud/ai_platform/v1/vizier_service"
@@ -37,9 +40,9 @@ module Google
   module Cloud
     module AIPlatform
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/ai_platform/v1"
       #     client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new

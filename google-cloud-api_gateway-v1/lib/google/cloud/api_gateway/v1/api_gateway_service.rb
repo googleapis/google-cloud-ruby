@@ -26,6 +26,7 @@ require "google/cloud/api_gateway/v1/api_gateway_service/credentials"
 require "google/cloud/api_gateway/v1/api_gateway_service/paths"
 require "google/cloud/api_gateway/v1/api_gateway_service/operations"
 require "google/cloud/api_gateway/v1/api_gateway_service/client"
+require "google/cloud/api_gateway/v1/api_gateway_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # The API Gateway Service is the interface for managing API Gateways.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/api_gateway/v1/api_gateway_service"
         #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/api_gateway/v1/api_gateway_service/rest"
+        #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new
         #
         module ApiGatewayService
         end

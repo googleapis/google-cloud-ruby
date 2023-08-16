@@ -24,9 +24,9 @@ module Google
     module Monitoring
       module MetricsScope
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/metrics_scope/v1"
         #     client = ::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new

@@ -22,7 +22,8 @@ module Google
     module Dialogflow
       module CX
         module V3
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#get_security_settings SecuritySettingsService.GetSecuritySettings}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#get_security_settings SecuritySettingsService.GetSecuritySettings}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the settings.
@@ -33,15 +34,16 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings SecuritySettingsService.UpdateSecuritySettings}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings SecuritySettingsService.UpdateSecuritySettings}.
           # @!attribute [rw] security_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
           #     Required. [SecuritySettings] object that contains values for each of the
           #     fields to update.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
-          #     Required. The mask to control which fields get updated. If the mask is not present,
-          #     all fields will be updated.
+          #     Required. The mask to control which fields get updated. If the mask is not
+          #     present, all fields will be updated.
           class UpdateSecuritySettingsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -80,7 +82,8 @@ module Google
           # The request message for [SecuritySettings.CreateSecuritySettings][].
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The location to create an {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} for.
+          #     Required. The location to create an
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} for.
           #     Format: `projects/<Project ID>/locations/<Location ID>`.
           # @!attribute [rw] security_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
@@ -93,8 +96,9 @@ module Google
           # The request message for [SecuritySettings.DeleteSecuritySettings][].
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} to delete.
-          #     Format: `projects/<Project ID>/locations/<Location
+          #     Required. The name of the
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} to
+          #     delete. Format: `projects/<Project ID>/locations/<Location
           #     ID>/securitySettings/<Security Settings ID>`.
           class DeleteSecuritySettingsRequest
             include ::Google::Protobuf::MessageExts
@@ -107,15 +111,16 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Resource name of the settings.
-          #     Required for the {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings SecuritySettingsService.UpdateSecuritySettings} method.
-          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#create_security_settings SecuritySettingsService.CreateSecuritySettings} populates the name
-          #     automatically.
-          #     Format: `projects/<Project ID>/locations/<Location
-          #     ID>/securitySettings/<Security Settings ID>`.
+          #     Required for the
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings SecuritySettingsService.UpdateSecuritySettings}
+          #     method.
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#create_security_settings SecuritySettingsService.CreateSecuritySettings}
+          #     populates the name automatically. Format: `projects/<Project
+          #     ID>/locations/<Location ID>/securitySettings/<Security Settings ID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
-          #     Required. The human-readable name of the security settings, unique within the
-          #     location.
+          #     Required. The human-readable name of the security settings, unique within
+          #     the location.
           # @!attribute [rw] redaction_strategy
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::RedactionStrategy]
           #     Strategy that defines how we do redaction.
@@ -178,22 +183,28 @@ module Google
           #     ingesting audio to conversations via [Participants.AnalyzeContent][] or
           #     [Participants.StreamingAnalyzeContent][].
           #
-          #     If [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy] is set to REMOVE_AFTER_CONVERSATION or
-          #     [audio_export_settings.gcs_bucket][] is empty, audio export is disabled.
+          #     If
+          #     [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy]
+          #     is set to REMOVE_AFTER_CONVERSATION or [audio_export_settings.gcs_bucket][]
+          #     is empty, audio export is disabled.
           #
           #     If audio export is enabled, audio is recorded and saved to
           #     [audio_export_settings.gcs_bucket][], subject to retention policy of
           #     [audio_export_settings.gcs_bucket][].
           #
           #     This setting won't effect audio input for implicit sessions via
-          #     {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent Sessions.DetectIntent} or {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent}.
+          #     {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent Sessions.DetectIntent}
+          #     or
+          #     {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent}.
           # @!attribute [rw] insights_export_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::InsightsExportSettings]
           #     Controls conversation exporting settings to Insights after conversation is
           #     completed.
           #
-          #     If [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy] is set to REMOVE_AFTER_CONVERSATION,
-          #     Insights export is disabled no matter what you configure here.
+          #     If
+          #     [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy]
+          #     is set to REMOVE_AFTER_CONVERSATION, Insights export is disabled no matter
+          #     what you configure here.
           class SecuritySettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

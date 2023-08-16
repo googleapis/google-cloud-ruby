@@ -25,22 +25,30 @@ require "google/cloud/trace/v2/version"
 require "google/cloud/trace/v2/trace_service/credentials"
 require "google/cloud/trace/v2/trace_service/paths"
 require "google/cloud/trace/v2/trace_service/client"
+require "google/cloud/trace/v2/trace_service/rest"
 
 module Google
   module Cloud
     module Trace
       module V2
         ##
-        # This file describes an API for collecting and viewing traces and spans
-        # within a trace.  A Trace is a collection of spans corresponding to a single
-        # operation or set of operations for an application. A span is an individual
-        # timed event which forms a node of the trace tree. A single trace may
-        # contain span(s) from multiple services.
+        # Service for collecting and viewing traces and spans within a trace.
         #
-        # To load this service and instantiate a client:
+        # A trace is a collection of spans corresponding to a single
+        # operation or a set of operations in an application.
+        #
+        # A span is an individual timed event which forms a node of the trace tree.
+        # A single trace can contain spans from multiple services.
+        #
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/trace/v2/trace_service"
         #     client = ::Google::Cloud::Trace::V2::TraceService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/trace/v2/trace_service/rest"
+        #     client = ::Google::Cloud::Trace::V2::TraceService::Rest::Client.new
         #
         module TraceService
         end

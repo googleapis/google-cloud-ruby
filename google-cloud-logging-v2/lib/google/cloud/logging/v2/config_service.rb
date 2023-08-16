@@ -34,7 +34,7 @@ module Google
         ##
         # Service for configuring sinks used to route log entries.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/logging/v2/config_service"
         #     client = ::Google::Cloud::Logging::V2::ConfigService::Client.new

@@ -20,8 +20,11 @@
 require "google/cloud/data_labeling/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_instruction
+# Snippet for the delete_instruction call in the DataLabelingService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_instruction.
+# It may require modification in order to execute successfully.
 #
 def delete_instruction
   # Create a client object. The client can be reused for multiple calls.

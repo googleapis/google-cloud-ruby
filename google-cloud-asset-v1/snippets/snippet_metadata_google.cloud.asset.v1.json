@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-asset-v1",
-    "version": "0.22.0",
+    "version": "0.26.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudasset_v1_generated_AssetService_ExportAssets_sync",
-      "title": "Snippet for export_assets in AssetService",
-      "description": "Basic snippet for export_assets in AssetService",
+      "title": "Snippet for the export_assets call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#export_assets. It may require modification in order to execute successfully.",
       "file": "asset_service/export_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_ListAssets_sync",
-      "title": "Snippet for list_assets in AssetService",
-      "description": "Basic snippet for list_assets in AssetService",
+      "title": "Snippet for the list_assets call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#list_assets. It may require modification in order to execute successfully.",
       "file": "asset_service/list_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_sync",
-      "title": "Snippet for batch_get_assets_history in AssetService",
-      "description": "Basic snippet for batch_get_assets_history in AssetService",
+      "title": "Snippet for the batch_get_assets_history call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#batch_get_assets_history. It may require modification in order to execute successfully.",
       "file": "asset_service/batch_get_assets_history.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_CreateFeed_sync",
-      "title": "Snippet for create_feed in AssetService",
-      "description": "Basic snippet for create_feed in AssetService",
+      "title": "Snippet for the create_feed call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#create_feed. It may require modification in order to execute successfully.",
       "file": "asset_service/create_feed.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_GetFeed_sync",
-      "title": "Snippet for get_feed in AssetService",
-      "description": "Basic snippet for get_feed in AssetService",
+      "title": "Snippet for the get_feed call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#get_feed. It may require modification in order to execute successfully.",
       "file": "asset_service/get_feed.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_ListFeeds_sync",
-      "title": "Snippet for list_feeds in AssetService",
-      "description": "Basic snippet for list_feeds in AssetService",
+      "title": "Snippet for the list_feeds call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#list_feeds. It may require modification in order to execute successfully.",
       "file": "asset_service/list_feeds.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_UpdateFeed_sync",
-      "title": "Snippet for update_feed in AssetService",
-      "description": "Basic snippet for update_feed in AssetService",
+      "title": "Snippet for the update_feed call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#update_feed. It may require modification in order to execute successfully.",
       "file": "asset_service/update_feed.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_DeleteFeed_sync",
-      "title": "Snippet for delete_feed in AssetService",
-      "description": "Basic snippet for delete_feed in AssetService",
+      "title": "Snippet for the delete_feed call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#delete_feed. It may require modification in order to execute successfully.",
       "file": "asset_service/delete_feed.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_SearchAllResources_sync",
-      "title": "Snippet for search_all_resources in AssetService",
-      "description": "Basic snippet for search_all_resources in AssetService",
+      "title": "Snippet for the search_all_resources call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#search_all_resources. It may require modification in order to execute successfully.",
       "file": "asset_service/search_all_resources.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_SearchAllIamPolicies_sync",
-      "title": "Snippet for search_all_iam_policies in AssetService",
-      "description": "Basic snippet for search_all_iam_policies in AssetService",
+      "title": "Snippet for the search_all_iam_policies call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#search_all_iam_policies. It may require modification in order to execute successfully.",
       "file": "asset_service/search_all_iam_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeIamPolicy_sync",
-      "title": "Snippet for analyze_iam_policy in AssetService",
-      "description": "Basic snippet for analyze_iam_policy in AssetService",
+      "title": "Snippet for the analyze_iam_policy call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy. It may require modification in order to execute successfully.",
       "file": "asset_service/analyze_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_sync",
-      "title": "Snippet for analyze_iam_policy_longrunning in AssetService",
-      "description": "Basic snippet for analyze_iam_policy_longrunning in AssetService",
+      "title": "Snippet for the analyze_iam_policy_longrunning call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning. It may require modification in order to execute successfully.",
       "file": "asset_service/analyze_iam_policy_longrunning.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeMove_sync",
-      "title": "Snippet for analyze_move in AssetService",
-      "description": "Basic snippet for analyze_move in AssetService",
+      "title": "Snippet for the analyze_move call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#analyze_move. It may require modification in order to execute successfully.",
       "file": "asset_service/analyze_move.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_QueryAssets_sync",
-      "title": "Snippet for query_assets in AssetService",
-      "description": "Basic snippet for query_assets in AssetService",
+      "title": "Snippet for the query_assets call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#query_assets. It may require modification in order to execute successfully.",
       "file": "asset_service/query_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_CreateSavedQuery_sync",
-      "title": "Snippet for create_saved_query in AssetService",
-      "description": "Basic snippet for create_saved_query in AssetService",
+      "title": "Snippet for the create_saved_query call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#create_saved_query. It may require modification in order to execute successfully.",
       "file": "asset_service/create_saved_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_GetSavedQuery_sync",
-      "title": "Snippet for get_saved_query in AssetService",
-      "description": "Basic snippet for get_saved_query in AssetService",
+      "title": "Snippet for the get_saved_query call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#get_saved_query. It may require modification in order to execute successfully.",
       "file": "asset_service/get_saved_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_ListSavedQueries_sync",
-      "title": "Snippet for list_saved_queries in AssetService",
-      "description": "Basic snippet for list_saved_queries in AssetService",
+      "title": "Snippet for the list_saved_queries call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#list_saved_queries. It may require modification in order to execute successfully.",
       "file": "asset_service/list_saved_queries.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_UpdateSavedQuery_sync",
-      "title": "Snippet for update_saved_query in AssetService",
-      "description": "Basic snippet for update_saved_query in AssetService",
+      "title": "Snippet for the update_saved_query call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#update_saved_query. It may require modification in order to execute successfully.",
       "file": "asset_service/update_saved_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_DeleteSavedQuery_sync",
-      "title": "Snippet for delete_saved_query in AssetService",
-      "description": "Basic snippet for delete_saved_query in AssetService",
+      "title": "Snippet for the delete_saved_query call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#delete_saved_query. It may require modification in order to execute successfully.",
       "file": "asset_service/delete_saved_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_sync",
-      "title": "Snippet for batch_get_effective_iam_policies in AssetService",
-      "description": "Basic snippet for batch_get_effective_iam_policies in AssetService",
+      "title": "Snippet for the batch_get_effective_iam_policies call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies. It may require modification in order to execute successfully.",
       "file": "asset_service/batch_get_effective_iam_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,127 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicies_sync",
+      "title": "Snippet for the analyze_org_policies call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policies. It may require modification in order to execute successfully.",
+      "file": "asset_service/analyze_org_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_org_policies",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeOrgPolicies",
+          "full_name": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicies",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedContainers_sync",
+      "title": "Snippet for the analyze_org_policy_governed_containers call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policy_governed_containers. It may require modification in order to execute successfully.",
+      "file": "asset_service/analyze_org_policy_governed_containers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_org_policy_governed_containers",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policy_governed_containers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeOrgPolicyGovernedContainers",
+          "full_name": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainers",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedAssets_sync",
+      "title": "Snippet for the analyze_org_policy_governed_assets call in the AssetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policy_governed_assets. It may require modification in order to execute successfully.",
+      "file": "asset_service/analyze_org_policy_governed_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_org_policy_governed_assets",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policy_governed_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeOrgPolicyGovernedAssets",
+          "full_name": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedAssets",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]

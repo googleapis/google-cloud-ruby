@@ -25,7 +25,7 @@ module Google
       module V3
         module TagBindings
           # Allow users to create and manage TagBindings between TagValues and
-          # different cloud resources throughout the GCP resource hierarchy.
+          # different Google Cloud resources throughout the GCP resource hierarchy.
           class Service
 
             include ::GRPC::GenericService
@@ -34,17 +34,19 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.resourcemanager.v3.TagBindings'
 
-            # Lists the TagBindings for the given cloud resource, as specified with
-            # `parent`.
+            # Lists the TagBindings for the given Google Cloud resource, as specified
+            # with `parent`.
             #
             # NOTE: The `parent` field is expected to be a full resource name:
             # https://cloud.google.com/apis/design/resource_names#full_resource_name
             rpc :ListTagBindings, ::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest, ::Google::Cloud::ResourceManager::V3::ListTagBindingsResponse
-            # Creates a TagBinding between a TagValue and a cloud resource
-            # (currently project, folder, or organization).
+            # Creates a TagBinding between a TagValue and a Google Cloud resource.
             rpc :CreateTagBinding, ::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest, ::Google::Longrunning::Operation
             # Deletes a TagBinding.
             rpc :DeleteTagBinding, ::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest, ::Google::Longrunning::Operation
+            # Return a list of effective tags for the given Google Cloud resource, as
+            # specified in `parent`.
+            rpc :ListEffectiveTags, ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest, ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsResponse
           end
 
           Stub = Service.rpc_stub_class

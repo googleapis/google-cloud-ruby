@@ -48,12 +48,14 @@ module Google
       # Create a new client object for CertificateManager.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::CertificateManager::V1::CertificateManager::Client](https://googleapis.dev/ruby/google-cloud-certificate_manager-v1/latest/Google/Cloud/CertificateManager/V1/CertificateManager/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::CertificateManager::V1::CertificateManager::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-certificate_manager-v1/latest/Google-Cloud-CertificateManager-V1-CertificateManager-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CertificateManager service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CertificateManager
       #
@@ -70,15 +72,15 @@ module Google
       #
       # The Certificates Manager service exposes the following resources:
       #
-      # * `Certificate` which describes a single TLS certificate.
-      # * `CertificateMap` which describes a collection of certificates that can be
+      # * `Certificate` that describes a single TLS certificate.
+      # * `CertificateMap` that describes a collection of certificates that can be
       # attached to a target resource.
-      # * `CertificateMapEntry` which describes a single configuration entry that
+      # * `CertificateMapEntry` that describes a single configuration entry that
       # consists of a SNI and a group of certificates. It's a subresource of
       # CertificateMap.
       #
       # Certificate, CertificateMap and CertificateMapEntry IDs
-      # have to match "^[a-z0-9-]\\{1,63}$" regexp, which means that
+      # have to fully match the regexp `[a-z0-9-]{1,63}`. In other words,
       # - only lower case letters, digits, and hyphen are allowed
       # - length of the resource ID has to be in [1,63] range.
       #
@@ -86,17 +88,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [CertificateManager::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.certificate_manager version: :v1, &block
+      def self.certificate_manager version: :v1, transport: :grpc, &block
         require "google/cloud/certificate_manager/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::CertificateManager
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::CertificateManager.const_get package_name
-        package_module.const_get(:CertificateManager).const_get(:Client).new(&block)
+        service_module = Google::Cloud::CertificateManager.const_get(package_name).const_get(:CertificateManager)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -116,7 +120,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

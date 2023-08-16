@@ -21,31 +21,37 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Represents database access information, such as queries.
-        # A database may be a sub-resource of an instance (as in the case of CloudSQL
-        # instances or Cloud Spanner instances), or the database instance itself.
-        # Some database resources may not have the full resource name populated
-        # because these resource types are not yet supported by Cloud Asset Inventory
-        # (e.g. CloudSQL databases).  In these cases only the display name will be
+        # Represents database access information, such as queries. A database may be a
+        # sub-resource of an instance (as in the case of Cloud SQL instances or Cloud
+        # Spanner instances), or the database instance itself. Some database resources
+        # might not have the [full resource
+        # name](https://google.aip.dev/122#full-resource-names) populated because these
+        # resource types, such as Cloud SQL databases, are not yet supported by Cloud
+        # Asset Inventory. In these cases only the display name is provided.
+        # Some database resources may not have the [full resource
+        # name](https://google.aip.dev/122#full-resource-names) populated because
+        # these resource types are not yet supported by Cloud Asset Inventory (e.g.
+        # Cloud SQL databases). In these cases only the display name will be
         # provided.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The full resource name of the database the user connected to, if it is
-        #     supported by CAI. (https://google.aip.dev/122#full-resource-names)
+        #     The [full resource name](https://google.aip.dev/122#full-resource-names) of
+        #     the database that the user connected to, if it is supported by Cloud Asset
+        #     Inventory.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The human readable name of the database the user connected to.
+        #     The human-readable name of the database that the user connected to.
         # @!attribute [rw] user_name
         #   @return [::String]
-        #     The username used to connect to the DB. This may not necessarily be an IAM
-        #     principal, and has no required format.
+        #     The username used to connect to the database. The username might not be an
+        #     IAM principal and does not have a set format.
         # @!attribute [rw] query
         #   @return [::String]
-        #     The SQL statement associated with the relevant access.
+        #     The SQL statement that is associated with the database access.
         # @!attribute [rw] grantees
         #   @return [::Array<::String>]
-        #     The target usernames/roles/groups of a SQL privilege grant (not an IAM
-        #     policy change).
+        #     The target usernames, roles, or groups of an SQL privilege grant, which is
+        #     not an IAM policy change.
         class Database
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

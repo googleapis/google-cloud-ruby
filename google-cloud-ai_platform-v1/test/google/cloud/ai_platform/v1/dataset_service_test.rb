@@ -571,6 +571,92 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
     end
   end
 
+  def test_search_data_items
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    order_by_data_item = "hello world"
+    dataset = "hello world"
+    saved_query = "hello world"
+    data_labeling_job = "hello world"
+    data_item_filter = "hello world"
+    annotations_filter = "hello world"
+    annotation_filters = ["hello world"]
+    field_mask = {}
+    annotations_limit = 42
+    page_size = 42
+    order_by = "hello world"
+    page_token = "hello world"
+
+    search_data_items_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_data_items, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest, request
+      assert_equal "hello world", request["order_by_data_item"]
+      assert_equal :order_by_data_item, request.order
+      assert_equal "hello world", request["dataset"]
+      assert_equal "hello world", request["saved_query"]
+      assert_equal "hello world", request["data_labeling_job"]
+      assert_equal "hello world", request["data_item_filter"]
+      assert_equal "hello world", request["annotations_filter"]
+      assert_equal ["hello world"], request["annotation_filters"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      assert_equal 42, request["annotations_limit"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_data_items_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.search_data_items({ order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.search_data_items order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.search_data_items ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new(order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.search_data_items({ order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.search_data_items(::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new(order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_data_items_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_saved_queries
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::ListSavedQueriesResponse.new
@@ -641,6 +727,69 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, list_saved_queries_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_saved_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_saved_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_saved_query, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_saved_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_saved_query({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_saved_query name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_saved_query ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_saved_query({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_saved_query(::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_saved_query_client_stub.call_rpc_count
     end
   end
 

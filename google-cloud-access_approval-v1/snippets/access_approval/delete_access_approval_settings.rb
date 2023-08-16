@@ -20,8 +20,11 @@
 require "google/cloud/access_approval/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AccessApproval::V1::AccessApproval::Client#delete_access_approval_settings
+# Snippet for the delete_access_approval_settings call in the AccessApproval service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AccessApproval::V1::AccessApproval::Client#delete_access_approval_settings.
+# It may require modification in order to execute successfully.
 #
 def delete_access_approval_settings
   # Create a client object. The client can be reused for multiple calls.

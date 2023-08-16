@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service
+# Snippet for the update_service call in the ServiceMonitoringService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service.
+# It may require modification in order to execute successfully.
 #
 def update_service
   # Create a client object. The client can be reused for multiple calls.

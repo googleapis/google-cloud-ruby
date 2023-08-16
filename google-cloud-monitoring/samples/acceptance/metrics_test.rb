@@ -22,6 +22,8 @@ describe "metrics", :monitoring do
   describe "create_metric_descriptor" do
     after do
       client.delete_metric_descriptor name: metric_name
+    rescue StandardError => e
+      warn "Unexpectedly failed to delete newly created metric: #{e}"
     end
 
     it "creates a metric descriptor" do

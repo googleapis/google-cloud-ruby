@@ -20,15 +20,25 @@ require "helper"
 require "google/identity/access_context_manager"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Identity::AccessContextManager::ClientConstructionMinitest < Minitest::Test
-  def test_access_context_manager
+  def test_access_context_manager_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Identity::AccessContextManager.access_context_manager do |config|
+      client = Google::Identity::AccessContextManager.access_context_manager transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Identity::AccessContextManager::V1::AccessContextManager::Client, client
+    end
+  end
+
+  def test_access_context_manager_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Identity::AccessContextManager.access_context_manager transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Identity::AccessContextManager::V1::AccessContextManager::Rest::Client, client
     end
   end
 end

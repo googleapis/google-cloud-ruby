@@ -28,6 +28,16 @@ describe Google::Cloud::Firestore::DocumentReference, :set, :mock_firestore do
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Alice" }))
     )]
   end
+  let :set_writes_2 do
+    [Google::Cloud::Firestore::V1::Write.new(
+      update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
+        field_paths: ["nullField"],
+      ),
+      update: Google::Cloud::Firestore::V1::Document.new(
+        name: "#{documents_path}/#{document_path}",
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ nullField: nil }))
+    )]
+  end
   let :commit_resp do
     Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
@@ -42,6 +52,17 @@ describe Google::Cloud::Firestore::DocumentReference, :set, :mock_firestore do
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     resp = document.set({ name: "Alice" })
+
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse::WriteResult
+    _(resp.update_time).must_equal commit_time
+  end
+
+  it "merge an empty field in a document" do
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: set_writes_2)
+
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+
+    resp = document.set( { nullField: nil } , merge: true)
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse::WriteResult
     _(resp.update_time).must_equal commit_time

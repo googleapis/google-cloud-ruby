@@ -327,6 +327,50 @@
         }
       }
     },
+    "ConversationProfiles": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client",
+          "rpcs": {
+            "ListConversationProfiles": {
+              "methods": [
+                "list_conversation_profiles"
+              ]
+            },
+            "GetConversationProfile": {
+              "methods": [
+                "get_conversation_profile"
+              ]
+            },
+            "CreateConversationProfile": {
+              "methods": [
+                "create_conversation_profile"
+              ]
+            },
+            "UpdateConversationProfile": {
+              "methods": [
+                "update_conversation_profile"
+              ]
+            },
+            "DeleteConversationProfile": {
+              "methods": [
+                "delete_conversation_profile"
+              ]
+            },
+            "SetSuggestionFeatureConfig": {
+              "methods": [
+                "set_suggestion_feature_config"
+              ]
+            },
+            "ClearSuggestionFeatureConfig": {
+              "methods": [
+                "clear_suggestion_feature_config"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Conversations": {
       "clients": {
         "grpc": {
@@ -355,6 +399,16 @@
             "ListMessages": {
               "methods": [
                 "list_messages"
+              ]
+            },
+            "SuggestConversationSummary": {
+              "methods": [
+                "suggest_conversation_summary"
+              ]
+            },
+            "GenerateStatelessSummary": {
+              "methods": [
+                "generate_stateless_summary"
               ]
             }
           }
@@ -443,50 +497,6 @@
             "CreateConversationModelEvaluation": {
               "methods": [
                 "create_conversation_model_evaluation"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "ConversationProfiles": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client",
-          "rpcs": {
-            "ListConversationProfiles": {
-              "methods": [
-                "list_conversation_profiles"
-              ]
-            },
-            "GetConversationProfile": {
-              "methods": [
-                "get_conversation_profile"
-              ]
-            },
-            "CreateConversationProfile": {
-              "methods": [
-                "create_conversation_profile"
-              ]
-            },
-            "UpdateConversationProfile": {
-              "methods": [
-                "update_conversation_profile"
-              ]
-            },
-            "DeleteConversationProfile": {
-              "methods": [
-                "delete_conversation_profile"
-              ]
-            },
-            "SetSuggestionFeatureConfig": {
-              "methods": [
-                "set_suggestion_feature_config"
-              ]
-            },
-            "ClearSuggestionFeatureConfig": {
-              "methods": [
-                "clear_suggestion_feature_config"
               ]
             }
           }

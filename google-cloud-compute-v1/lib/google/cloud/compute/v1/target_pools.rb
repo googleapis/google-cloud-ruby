@@ -31,9 +31,9 @@ module Google
         ##
         # The TargetPools API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/target_pools"
+        #     require "google/cloud/compute/v1/target_pools/rest"
         #     client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new
         #
         module TargetPools

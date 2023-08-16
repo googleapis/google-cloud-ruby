@@ -21,10 +21,10 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Exfiltration represents a data exfiltration attempt of one or more
-        # sources to one or more targets.  Sources represent the source
-        # of data that is exfiltrated, and Targets represents the destination the
-        # data was copied to.
+        # Exfiltration represents a data exfiltration attempt from one or more sources
+        # to one or more targets. The `sources` attribute lists the sources of the
+        # exfiltrated data. The `targets` attribute lists the destinations the data was
+        # copied to.
         # @!attribute [rw] sources
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::ExfilResource>]
         #     If there are multiple sources, then the data is considered "joined" between
@@ -39,16 +39,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Resource that has been exfiltrated or exfiltrated_to.
+        # Resource where data was exfiltrated from or exfiltrated to.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource's URI (https://google.aip.dev/122#full-resource-names)
+        #     The resource's [full resource
+        #     name](https://cloud.google.com/apis/design/resource_names#full_resource_name).
         # @!attribute [rw] components
         #   @return [::Array<::String>]
-        #     Subcomponents of the asset that is exfiltrated - these could be
-        #     URIs used during exfiltration, table names, databases, filenames, etc.
-        #     For example, multiple tables may be exfiltrated from the same CloudSQL
-        #     instance, or multiple files from the same Cloud Storage bucket.
+        #     Subcomponents of the asset that was exfiltrated, like URIs used during
+        #     exfiltration, table names, databases, and filenames. For example, multiple
+        #     tables might have been exfiltrated from the same Cloud SQL instance, or
+        #     multiple files might have been exfiltrated from the same Cloud Storage
+        #     bucket.
         class ExfilResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,36 @@
 # Release History
 
+### 0.11.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21675](https://github.com/googleapis/google-cloud-ruby/issues/21675)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-16)
+
+#### Features
+
+* added helper methods for long running operations, IAM, and locations 
+#### Documentation
+
+* apply general style guide updates to descriptions 
+* clarify that vpcConnector shortname is only returned if the connector is in the same project as the function 
+
+### 0.9.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.8.1 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20449](https://github.com/googleapis/google-cloud-ruby/issues/20449)) 
+
 ### 0.8.0 (2022-07-02)
 
 #### Features

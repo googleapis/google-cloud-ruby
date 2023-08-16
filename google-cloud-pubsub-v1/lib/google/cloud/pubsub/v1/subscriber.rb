@@ -35,7 +35,7 @@ module Google
         # consume messages from a subscription via the `Pull` method or by
         # establishing a bi-directional stream using the `StreamingPull` method.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/pubsub/v1/subscriber"
         #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new

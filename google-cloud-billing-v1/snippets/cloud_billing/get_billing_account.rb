@@ -20,8 +20,11 @@
 require "google/cloud/billing/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Billing::V1::CloudBilling::Client#get_billing_account
+# Snippet for the get_billing_account call in the CloudBilling service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Billing::V1::CloudBilling::Client#get_billing_account. It may
+# require modification in order to execute successfully.
 #
 def get_billing_account
   # Create a client object. The client can be reused for multiple calls.

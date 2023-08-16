@@ -29,7 +29,7 @@ module Google
         #     `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
         #     or the name of the legacy placement resource, such as
         #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
-        #     This field is used to identify the serving configuration name and the set
+        #     This field is used to identify the serving config name and the set
         #     of models that will be used to make the search.
         # @!attribute [rw] branch
         #   @return [::String]
@@ -124,7 +124,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::SearchRequest::FacetSpec>]
         #     Facet specifications for faceted search. If empty, no facets are returned.
         #
-        #     A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+        #     A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
         #     is returned.
         # @!attribute [rw] dynamic_facet_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec]
@@ -230,7 +230,7 @@ module Google
         #     {::Google::Cloud::Retail::V2::UserEvent#page_categories UserEvent.page_categories};
         #
         #     To represent full path of category, use '>' sign to separate different
-        #     hierarchies. If '>' is part of the category name, please replace it with
+        #     hierarchies. If '>' is part of the category name, replace it with
         #     other character(s).
         #
         #     Category pages include special pages such as sales or promotions. For
@@ -275,6 +275,14 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec]
         #     The spell correction specification that specifies the mode under
         #     which spell correction will take effect.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     The entity for customers that may run multiple different entities, domains,
+        #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+        #     `google.com`, `youtube.com`, etc.
+        #     If this is set, it should be exactly matched with
+        #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get search
+        #     results boosted by entity.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -286,7 +294,7 @@ module Google
           # @!attribute [rw] limit
           #   @return [::Integer]
           #     Maximum of facet values that should be returned for this facet. If
-          #     unspecified, defaults to 20. The maximum allowed value is 300. Values
+          #     unspecified, defaults to 50. The maximum allowed value is 300. Values
           #     above 300 will be coerced to 300.
           #
           #     If this field is negative, an INVALID_ARGUMENT is returned.
@@ -402,7 +410,16 @@ module Google
             #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
             #     Set only if values should be bucketized into intervals. Must be set
             #     for facets with numerical values. Must not be set for facet with text
-            #     values. Maximum number of intervals is 30.
+            #     values. Maximum number of intervals is 40.
+            #
+            #     For all numerical facet keys that appear in the list of products from
+            #     the catalog, the percentiles 0, 10, 30, 50, 70, 90 and 100 are
+            #     computed from their distribution weekly. If the model assigns a high
+            #     score to a numerical facet key and its intervals are not specified in
+            #     the search request, these percentiles will become the bounds
+            #     for its intervals and will be returned in the response. If the
+            #     facet key intervals are specified in the request, then the specified
+            #     intervals will be returned instead.
             # @!attribute [rw] restricted_values
             #   @return [::Array<::String>]
             #     Only get facet for the given restricted values. For example, when using
@@ -686,15 +703,20 @@ module Google
           # The search mode of each search request.
           module SearchMode
             # Default value. In this case both product search and faceted search will
-            # be performed. Both [SearchResponse.SearchResult] and
-            # [SearchResponse.Facet] will be returned.
+            # be performed. Both
+            # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
+            # and {::Google::Cloud::Retail::V2::SearchResponse::Facet SearchResponse.Facet}
+            # will be returned.
             SEARCH_MODE_UNSPECIFIED = 0
 
             # Only product search will be performed. The faceted search will be
             # disabled.
             #
-            # Only [SearchResponse.SearchResult] will be returned.
-            # [SearchResponse.Facet] will not be returned, even if
+            # Only
+            # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
+            # will be returned.
+            # {::Google::Cloud::Retail::V2::SearchResponse::Facet SearchResponse.Facet} will
+            # not be returned, even if
             # {::Google::Cloud::Retail::V2::SearchRequest#facet_specs SearchRequest.facet_specs}
             # or
             # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
@@ -709,7 +731,9 @@ module Google
             # and
             # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
             # should be set. Otherwise, an INVALID_ARGUMENT error is returned. Only
-            # [SearchResponse.Facet] will be returned. [SearchResponse.SearchResult]
+            # {::Google::Cloud::Retail::V2::SearchResponse::Facet SearchResponse.Facet} will
+            # be returned.
+            # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
             # will not be returned.
             FACETED_SEARCH_ONLY = 2
           end
@@ -765,6 +789,10 @@ module Google
         #     The invalid
         #     {::Google::Cloud::Retail::V2::SearchRequest::BoostSpec#condition_boost_specs SearchRequest.BoostSpec.condition_boost_specs}
         #     that are not applied during serving.
+        # @!attribute [rw] experiment_info
+        #   @return [::Array<::Google::Cloud::Retail::V2::ExperimentInfo>]
+        #     Metadata related to A/B testing [Experiment][] associated with this
+        #     response. Only exists when an experiment is triggered.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -936,6 +964,39 @@ module Google
           #     {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec#pin_unexpanded_results SearchRequest.QueryExpansionSpec.pin_unexpanded_results}
           #     is set to true.
           class QueryExpansionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metadata for active A/B testing [Experiments][].
+        # @!attribute [rw] serving_config_experiment
+        #   @return [::Google::Cloud::Retail::V2::ExperimentInfo::ServingConfigExperiment]
+        #     A/B test between existing Cloud Retail Search
+        #     {::Google::Cloud::Retail::V2::ServingConfig ServingConfig}s.
+        # @!attribute [rw] experiment
+        #   @return [::String]
+        #     The fully qualified resource name of the experiment that provides the
+        #     serving config under test, should an active experiment exist. For example:
+        #     `projects/*/locations/global/catalogs/default_catalog/experiments/experiment_id`
+        class ExperimentInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Metadata for active serving config A/B tests.
+          # @!attribute [rw] original_serving_config
+          #   @return [::String]
+          #     The fully qualified resource name of the original
+          #     {::Google::Cloud::Retail::V2::SearchRequest#placement SearchRequest.placement}
+          #     in the search request prior to reassignment by experiment API. For
+          #     example: `projects/*/locations/*/catalogs/*/servingConfigs/*`.
+          # @!attribute [rw] experiment_serving_config
+          #   @return [::String]
+          #     The fully qualified resource name of the serving config
+          #     [VariantArm.serving_config_id][] responsible for generating the search
+          #     response. For example:
+          #     `projects/*/locations/*/catalogs/*/servingConfigs/*`.
+          class ServingConfigExperiment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

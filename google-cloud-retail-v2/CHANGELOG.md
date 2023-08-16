@@ -1,5 +1,54 @@
 # Release History
 
+### 0.16.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.16.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+
+### 0.15.0 (2023-04-10)
+
+#### Features
+
+* add model service ([#21060](https://github.com/googleapis/google-cloud-ruby/issues/21060)) 
+* expose A/B experiment info in search response 
+* support new filter syntax for recommendation 
+* support per-entity search and autocomplete 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 0.14.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.13.0 (2023-02-17)
+
+#### Features
+
+* Include the location mixin client ([#20459](https://github.com/googleapis/google-cloud-ruby/issues/20459)) 
+
+### 0.12.0 (2023-01-05)
+
+#### Features
+
+* Support asynchronous operation of write_user_event ([#19892](https://github.com/googleapis/google-cloud-ruby/issues/19892)) 
+* Support for diversity_type in ServingConfig 
+* Support for exact_searchable_option and retrievable_option in catalog attributes 
+* Support prebuilt rule names for collect_user_event 
+* Support raw JSON user event payload for collect_user_event 
+#### Documentation
+
+* Various fixes for documentation formatting 
+
 ### 0.11.0 (2022-08-24)
 
 #### Features

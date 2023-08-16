@@ -74,6 +74,8 @@ module Google
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Datastore emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] database_id Identifier for a Datastore database in the project. If not
+      #   present, the default database of the project will be used.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -103,13 +105,15 @@ module Google
                    timeout: nil,
                    endpoint: nil,
                    emulator_host: nil,
+                   database_id: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= (project || default_project_id)
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
+        project_id = get_project_id project_id, project
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        endpoint ||= configure.endpoint
         emulator_host ||= configure.emulator_host
+        database_id ||= configure.database_id
 
         if emulator_host
           project_id = project_id.to_s # Always cast to a string
@@ -117,7 +121,7 @@ module Google
 
           return Datastore::Dataset.new(
             Datastore::Service.new(
-              project_id, :this_channel_is_insecure,
+              project_id, :this_channel_is_insecure, database_id,
               host: emulator_host, timeout: timeout
             )
           )
@@ -136,7 +140,7 @@ module Google
 
         Datastore::Dataset.new(
           Datastore::Service.new(
-            project_id, credentials,
+            project_id, credentials, database_id,
             host: endpoint, timeout: timeout
           )
         )
@@ -173,6 +177,14 @@ module Google
         yield Google::Cloud.configure.datastore if block_given?
 
         Google::Cloud.configure.datastore
+      end
+
+      ##
+      # @private Default project.
+      def self.get_project_id project_id, project
+        project_id || project || Google::Cloud.configure.datastore.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
       end
 
       ##

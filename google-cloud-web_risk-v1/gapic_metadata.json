@@ -29,6 +29,11 @@
               "methods": [
                 "create_submission"
               ]
+            },
+            "SubmitUri": {
+              "methods": [
+                "submit_uri"
+              ]
             }
           }
         }

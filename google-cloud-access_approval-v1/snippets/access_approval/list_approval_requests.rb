@@ -20,8 +20,11 @@
 require "google/cloud/access_approval/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AccessApproval::V1::AccessApproval::Client#list_approval_requests
+# Snippet for the list_approval_requests call in the AccessApproval service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AccessApproval::V1::AccessApproval::Client#list_approval_requests.
+# It may require modification in order to execute successfully.
 #
 def list_approval_requests
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_approval_requests
   # Call the list_approval_requests method.
   result = client.list_approval_requests request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AccessApproval::V1::ApprovalRequest.
-    p response
+    p item
   end
 end
 # [END accessapproval_v1_generated_AccessApproval_ListApprovalRequests_sync]

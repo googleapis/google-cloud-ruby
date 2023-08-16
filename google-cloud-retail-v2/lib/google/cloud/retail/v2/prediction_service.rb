@@ -25,6 +25,7 @@ require "google/cloud/retail/v2/version"
 require "google/cloud/retail/v2/prediction_service/credentials"
 require "google/cloud/retail/v2/prediction_service/paths"
 require "google/cloud/retail/v2/prediction_service/client"
+require "google/cloud/retail/v2/prediction_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service for making recommendation prediction.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/prediction_service"
         #     client = ::Google::Cloud::Retail::V2::PredictionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/retail/v2/prediction_service/rest"
+        #     client = ::Google::Cloud::Retail::V2::PredictionService::Rest::Client.new
         #
         module PredictionService
         end

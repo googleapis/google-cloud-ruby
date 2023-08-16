@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-data_labeling-v1beta1",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_sync",
-      "title": "Snippet for create_dataset in DataLabelingService",
-      "description": "Basic snippet for create_dataset in DataLabelingService",
+      "title": "Snippet for the create_dataset call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#create_dataset. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/create_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetDataset_sync",
-      "title": "Snippet for get_dataset in DataLabelingService",
-      "description": "Basic snippet for get_dataset in DataLabelingService",
+      "title": "Snippet for the get_dataset call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_dataset. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListDatasets_sync",
-      "title": "Snippet for list_datasets in DataLabelingService",
-      "description": "Basic snippet for list_datasets in DataLabelingService",
+      "title": "Snippet for the list_datasets call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_datasets. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_datasets.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteDataset_sync",
-      "title": "Snippet for delete_dataset in DataLabelingService",
-      "description": "Basic snippet for delete_dataset in DataLabelingService",
+      "title": "Snippet for the delete_dataset call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_dataset. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/delete_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ImportData_sync",
-      "title": "Snippet for import_data in DataLabelingService",
-      "description": "Basic snippet for import_data in DataLabelingService",
+      "title": "Snippet for the import_data call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#import_data. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/import_data.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ExportData_sync",
-      "title": "Snippet for export_data in DataLabelingService",
-      "description": "Basic snippet for export_data in DataLabelingService",
+      "title": "Snippet for the export_data call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#export_data. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/export_data.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_sync",
-      "title": "Snippet for get_data_item in DataLabelingService",
-      "description": "Basic snippet for get_data_item in DataLabelingService",
+      "title": "Snippet for the get_data_item call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_data_item. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_data_item.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_sync",
-      "title": "Snippet for list_data_items in DataLabelingService",
-      "description": "Basic snippet for list_data_items in DataLabelingService",
+      "title": "Snippet for the list_data_items call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_data_items. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_data_items.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_sync",
-      "title": "Snippet for get_annotated_dataset in DataLabelingService",
-      "description": "Basic snippet for get_annotated_dataset in DataLabelingService",
+      "title": "Snippet for the get_annotated_dataset call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_annotated_dataset. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_annotated_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListAnnotatedDatasets_sync",
-      "title": "Snippet for list_annotated_datasets in DataLabelingService",
-      "description": "Basic snippet for list_annotated_datasets in DataLabelingService",
+      "title": "Snippet for the list_annotated_datasets call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_annotated_datasets. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_annotated_datasets.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotatedDataset_sync",
-      "title": "Snippet for delete_annotated_dataset in DataLabelingService",
-      "description": "Basic snippet for delete_annotated_dataset in DataLabelingService",
+      "title": "Snippet for the delete_annotated_dataset call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_annotated_dataset. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/delete_annotated_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_LabelImage_sync",
-      "title": "Snippet for label_image in DataLabelingService",
-      "description": "Basic snippet for label_image in DataLabelingService",
+      "title": "Snippet for the label_image call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#label_image. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/label_image.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_sync",
-      "title": "Snippet for label_video in DataLabelingService",
-      "description": "Basic snippet for label_video in DataLabelingService",
+      "title": "Snippet for the label_video call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#label_video. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/label_video.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_LabelText_sync",
-      "title": "Snippet for label_text in DataLabelingService",
-      "description": "Basic snippet for label_text in DataLabelingService",
+      "title": "Snippet for the label_text call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#label_text. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/label_text.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetExample_sync",
-      "title": "Snippet for get_example in DataLabelingService",
-      "description": "Basic snippet for get_example in DataLabelingService",
+      "title": "Snippet for the get_example call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_example. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_example.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListExamples_sync",
-      "title": "Snippet for list_examples in DataLabelingService",
-      "description": "Basic snippet for list_examples in DataLabelingService",
+      "title": "Snippet for the list_examples call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_examples. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_examples.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_CreateAnnotationSpecSet_sync",
-      "title": "Snippet for create_annotation_spec_set in DataLabelingService",
-      "description": "Basic snippet for create_annotation_spec_set in DataLabelingService",
+      "title": "Snippet for the create_annotation_spec_set call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#create_annotation_spec_set. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/create_annotation_spec_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetAnnotationSpecSet_sync",
-      "title": "Snippet for get_annotation_spec_set in DataLabelingService",
-      "description": "Basic snippet for get_annotation_spec_set in DataLabelingService",
+      "title": "Snippet for the get_annotation_spec_set call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_annotation_spec_set. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_annotation_spec_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListAnnotationSpecSets_sync",
-      "title": "Snippet for list_annotation_spec_sets in DataLabelingService",
-      "description": "Basic snippet for list_annotation_spec_sets in DataLabelingService",
+      "title": "Snippet for the list_annotation_spec_sets call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_annotation_spec_sets. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_annotation_spec_sets.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotationSpecSet_sync",
-      "title": "Snippet for delete_annotation_spec_set in DataLabelingService",
-      "description": "Basic snippet for delete_annotation_spec_set in DataLabelingService",
+      "title": "Snippet for the delete_annotation_spec_set call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_annotation_spec_set. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/delete_annotation_spec_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_sync",
-      "title": "Snippet for create_instruction in DataLabelingService",
-      "description": "Basic snippet for create_instruction in DataLabelingService",
+      "title": "Snippet for the create_instruction call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#create_instruction. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/create_instruction.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_sync",
-      "title": "Snippet for get_instruction in DataLabelingService",
-      "description": "Basic snippet for get_instruction in DataLabelingService",
+      "title": "Snippet for the get_instruction call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_instruction. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_instruction.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListInstructions_sync",
-      "title": "Snippet for list_instructions in DataLabelingService",
-      "description": "Basic snippet for list_instructions in DataLabelingService",
+      "title": "Snippet for the list_instructions call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_instructions. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_instructions.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_sync",
-      "title": "Snippet for delete_instruction in DataLabelingService",
-      "description": "Basic snippet for delete_instruction in DataLabelingService",
+      "title": "Snippet for the delete_instruction call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_instruction. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/delete_instruction.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetEvaluation_sync",
-      "title": "Snippet for get_evaluation in DataLabelingService",
-      "description": "Basic snippet for get_evaluation in DataLabelingService",
+      "title": "Snippet for the get_evaluation call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_evaluation. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_evaluation.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_SearchEvaluations_sync",
-      "title": "Snippet for search_evaluations in DataLabelingService",
-      "description": "Basic snippet for search_evaluations in DataLabelingService",
+      "title": "Snippet for the search_evaluations call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#search_evaluations. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/search_evaluations.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_SearchExampleComparisons_sync",
-      "title": "Snippet for search_example_comparisons in DataLabelingService",
-      "description": "Basic snippet for search_example_comparisons in DataLabelingService",
+      "title": "Snippet for the search_example_comparisons call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#search_example_comparisons. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/search_example_comparisons.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_CreateEvaluationJob_sync",
-      "title": "Snippet for create_evaluation_job in DataLabelingService",
-      "description": "Basic snippet for create_evaluation_job in DataLabelingService",
+      "title": "Snippet for the create_evaluation_job call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#create_evaluation_job. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/create_evaluation_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_UpdateEvaluationJob_sync",
-      "title": "Snippet for update_evaluation_job in DataLabelingService",
-      "description": "Basic snippet for update_evaluation_job in DataLabelingService",
+      "title": "Snippet for the update_evaluation_job call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#update_evaluation_job. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/update_evaluation_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_sync",
-      "title": "Snippet for get_evaluation_job in DataLabelingService",
-      "description": "Basic snippet for get_evaluation_job in DataLabelingService",
+      "title": "Snippet for the get_evaluation_job call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_evaluation_job. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/get_evaluation_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_PauseEvaluationJob_sync",
-      "title": "Snippet for pause_evaluation_job in DataLabelingService",
-      "description": "Basic snippet for pause_evaluation_job in DataLabelingService",
+      "title": "Snippet for the pause_evaluation_job call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#pause_evaluation_job. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/pause_evaluation_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ResumeEvaluationJob_sync",
-      "title": "Snippet for resume_evaluation_job in DataLabelingService",
-      "description": "Basic snippet for resume_evaluation_job in DataLabelingService",
+      "title": "Snippet for the resume_evaluation_job call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#resume_evaluation_job. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/resume_evaluation_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteEvaluationJob_sync",
-      "title": "Snippet for delete_evaluation_job in DataLabelingService",
-      "description": "Basic snippet for delete_evaluation_job in DataLabelingService",
+      "title": "Snippet for the delete_evaluation_job call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_evaluation_job. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/delete_evaluation_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalabeling_v1beta1_generated_DataLabelingService_ListEvaluationJobs_sync",
-      "title": "Snippet for list_evaluation_jobs in DataLabelingService",
-      "description": "Basic snippet for list_evaluation_jobs in DataLabelingService",
+      "title": "Snippet for the list_evaluation_jobs call in the DataLabelingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_evaluation_jobs. It may require modification in order to execute successfully.",
       "file": "data_labeling_service/list_evaluation_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

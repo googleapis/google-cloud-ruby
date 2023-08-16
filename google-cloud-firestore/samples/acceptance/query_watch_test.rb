@@ -17,6 +17,7 @@ require_relative "../query_watch"
 
 describe "Google Cloud Firestore API samples - Query Data" do
   before do
+    skip if Google::Cloud.configure.firestore.transport == :rest
     @firestore_project = ENV["FIRESTORE_PROJECT"]
     @collection_path = random_name "cities"
   end

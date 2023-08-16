@@ -77,8 +77,9 @@ module Google
           # A transformation of a field of the document.
           # @!attribute [rw] field_path
           #   @return [::String]
-          #     The path of the field. See {::Google::Cloud::Firestore::V1::Document#fields Document.fields} for the field path syntax
-          #     reference.
+          #     The path of the field. See
+          #     {::Google::Cloud::Firestore::V1::Document#fields Document.fields} for the field path
+          #     syntax reference.
           # @!attribute [rw] set_to_server_value
           #   @return [::Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform::ServerValue]
           #     Sets the field to the given server value.
@@ -175,8 +176,9 @@ module Google
         #     previous update_time.
         # @!attribute [rw] transform_results
         #   @return [::Array<::Google::Cloud::Firestore::V1::Value>]
-        #     The results of applying each {::Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform DocumentTransform.FieldTransform}, in the
-        #     same order.
+        #     The results of applying each
+        #     {::Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform DocumentTransform.FieldTransform},
+        #     in the same order.
         class WriteResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,11 +186,12 @@ module Google
 
         # A {::Google::Cloud::Firestore::V1::Document Document} has changed.
         #
-        # May be the result of multiple {::Google::Cloud::Firestore::V1::Write writes}, including deletes, that
-        # ultimately resulted in a new value for the {::Google::Cloud::Firestore::V1::Document Document}.
+        # May be the result of multiple {::Google::Cloud::Firestore::V1::Write writes}, including
+        # deletes, that ultimately resulted in a new value for the
+        # {::Google::Cloud::Firestore::V1::Document Document}.
         #
-        # Multiple {::Google::Cloud::Firestore::V1::DocumentChange DocumentChange} messages may be returned for the same logical
-        # change, if multiple targets are affected.
+        # Multiple {::Google::Cloud::Firestore::V1::DocumentChange DocumentChange} messages may be
+        # returned for the same logical change, if multiple targets are affected.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Firestore::V1::Document]
         #     The new state of the {::Google::Cloud::Firestore::V1::Document Document}.
@@ -207,14 +210,16 @@ module Google
 
         # A {::Google::Cloud::Firestore::V1::Document Document} has been deleted.
         #
-        # May be the result of multiple {::Google::Cloud::Firestore::V1::Write writes}, including updates, the
-        # last of which deleted the {::Google::Cloud::Firestore::V1::Document Document}.
+        # May be the result of multiple {::Google::Cloud::Firestore::V1::Write writes}, including
+        # updates, the last of which deleted the
+        # {::Google::Cloud::Firestore::V1::Document Document}.
         #
-        # Multiple {::Google::Cloud::Firestore::V1::DocumentDelete DocumentDelete} messages may be returned for the same logical
-        # delete, if multiple targets are affected.
+        # Multiple {::Google::Cloud::Firestore::V1::DocumentDelete DocumentDelete} messages may be
+        # returned for the same logical delete, if multiple targets are affected.
         # @!attribute [rw] document
         #   @return [::String]
-        #     The resource name of the {::Google::Cloud::Firestore::V1::Document Document} that was deleted.
+        #     The resource name of the {::Google::Cloud::Firestore::V1::Document Document} that was
+        #     deleted.
         # @!attribute [rw] removed_target_ids
         #   @return [::Array<::Integer>]
         #     A set of target IDs for targets that previously matched this entity.
@@ -228,17 +233,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A {::Google::Cloud::Firestore::V1::Document Document} has been removed from the view of the targets.
+        # A {::Google::Cloud::Firestore::V1::Document Document} has been removed from the view of
+        # the targets.
         #
         # Sent if the document is no longer relevant to a target and is out of view.
         # Can be sent instead of a DocumentDelete or a DocumentChange if the server
         # can not send the new value of the document.
         #
-        # Multiple {::Google::Cloud::Firestore::V1::DocumentRemove DocumentRemove} messages may be returned for the same logical
-        # write or delete, if multiple targets are affected.
+        # Multiple {::Google::Cloud::Firestore::V1::DocumentRemove DocumentRemove} messages may be
+        # returned for the same logical write or delete, if multiple targets are
+        # affected.
         # @!attribute [rw] document
         #   @return [::String]
-        #     The resource name of the {::Google::Cloud::Firestore::V1::Document Document} that has gone out of view.
+        #     The resource name of the {::Google::Cloud::Firestore::V1::Document Document} that has
+        #     gone out of view.
         # @!attribute [rw] removed_target_ids
         #   @return [::Array<::Integer>]
         #     A set of target IDs for targets that previously matched this document.
@@ -258,10 +266,29 @@ module Google
         #     The target ID to which this filter applies.
         # @!attribute [rw] count
         #   @return [::Integer]
-        #     The total count of documents that match {::Google::Cloud::Firestore::V1::ExistenceFilter#target_id target_id}.
+        #     The total count of documents that match
+        #     {::Google::Cloud::Firestore::V1::ExistenceFilter#target_id target_id}.
         #
         #     If different from the count of documents in the client that match, the
         #     client must manually determine which documents no longer match the target.
+        #
+        #     The client can use the `unchanged_names` bloom filter to assist with
+        #     this determination by testing ALL the document names against the filter;
+        #     if the document name is NOT in the filter, it means the document no
+        #     longer matches the target.
+        # @!attribute [rw] unchanged_names
+        #   @return [::Google::Cloud::Firestore::V1::BloomFilter]
+        #     A bloom filter that, despite its name, contains the UTF-8 byte encodings of
+        #     the resource names of ALL the documents that match
+        #     {::Google::Cloud::Firestore::V1::ExistenceFilter#target_id target_id}, in the form
+        #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        #
+        #     This bloom filter may be omitted at the server's discretion, such as if it
+        #     is deemed that the client will not make use of it or if it is too
+        #     computationally expensive to calculate or transmit. Clients must gracefully
+        #     handle this field being absent by falling back to the logic used before
+        #     this field existed; that is, re-add the target without a resume token to
+        #     figure out which documents in the client's cache are out of sync.
         class ExistenceFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

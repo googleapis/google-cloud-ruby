@@ -27,7 +27,8 @@ def list_vod_ad_tag_details project_id:, location:, session_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
-  parent = client.vod_session_path project: project_id, location: location, vod_session: session_id
+  parent = client.vod_session_path project: project_id, location: location,
+                                   vod_session: session_id
 
   # List all ad tag details for the VOD session.
   response = client.list_vod_ad_tag_details parent: parent
@@ -35,7 +36,7 @@ def list_vod_ad_tag_details project_id:, location:, session_id:
   puts "VOD ad tag details:"
   # Print out all VOD ad tag details.
   response.each do |vod_ad_tag_detail|
-    puts vod_ad_tag_detail.name.to_s
+    puts vod_ad_tag_detail.name
   end
 end
 # [END videostitcher_list_vod_ad_tag_details]

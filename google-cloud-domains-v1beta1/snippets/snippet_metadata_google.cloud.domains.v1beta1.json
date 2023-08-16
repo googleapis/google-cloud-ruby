@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-domains-v1beta1",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "domains_v1beta1_generated_Domains_SearchDomains_sync",
-      "title": "Snippet for search_domains in Domains",
-      "description": "Basic snippet for search_domains in Domains",
+      "title": "Snippet for the search_domains call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#search_domains. It may require modification in order to execute successfully.",
       "file": "domains/search_domains.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_RetrieveRegisterParameters_sync",
-      "title": "Snippet for retrieve_register_parameters in Domains",
-      "description": "Basic snippet for retrieve_register_parameters in Domains",
+      "title": "Snippet for the retrieve_register_parameters call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_register_parameters. It may require modification in order to execute successfully.",
       "file": "domains/retrieve_register_parameters.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_RegisterDomain_sync",
-      "title": "Snippet for register_domain in Domains",
-      "description": "Basic snippet for register_domain in Domains",
+      "title": "Snippet for the register_domain call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#register_domain. It may require modification in order to execute successfully.",
       "file": "domains/register_domain.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_RetrieveTransferParameters_sync",
-      "title": "Snippet for retrieve_transfer_parameters in Domains",
-      "description": "Basic snippet for retrieve_transfer_parameters in Domains",
+      "title": "Snippet for the retrieve_transfer_parameters call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_transfer_parameters. It may require modification in order to execute successfully.",
       "file": "domains/retrieve_transfer_parameters.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_TransferDomain_sync",
-      "title": "Snippet for transfer_domain in Domains",
-      "description": "Basic snippet for transfer_domain in Domains",
+      "title": "Snippet for the transfer_domain call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#transfer_domain. It may require modification in order to execute successfully.",
       "file": "domains/transfer_domain.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_ListRegistrations_sync",
-      "title": "Snippet for list_registrations in Domains",
-      "description": "Basic snippet for list_registrations in Domains",
+      "title": "Snippet for the list_registrations call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#list_registrations. It may require modification in order to execute successfully.",
       "file": "domains/list_registrations.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_GetRegistration_sync",
-      "title": "Snippet for get_registration in Domains",
-      "description": "Basic snippet for get_registration in Domains",
+      "title": "Snippet for the get_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#get_registration. It may require modification in order to execute successfully.",
       "file": "domains/get_registration.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_UpdateRegistration_sync",
-      "title": "Snippet for update_registration in Domains",
-      "description": "Basic snippet for update_registration in Domains",
+      "title": "Snippet for the update_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#update_registration. It may require modification in order to execute successfully.",
       "file": "domains/update_registration.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_ConfigureManagementSettings_sync",
-      "title": "Snippet for configure_management_settings in Domains",
-      "description": "Basic snippet for configure_management_settings in Domains",
+      "title": "Snippet for the configure_management_settings call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#configure_management_settings. It may require modification in order to execute successfully.",
       "file": "domains/configure_management_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_ConfigureDnsSettings_sync",
-      "title": "Snippet for configure_dns_settings in Domains",
-      "description": "Basic snippet for configure_dns_settings in Domains",
+      "title": "Snippet for the configure_dns_settings call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#configure_dns_settings. It may require modification in order to execute successfully.",
       "file": "domains/configure_dns_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_ConfigureContactSettings_sync",
-      "title": "Snippet for configure_contact_settings in Domains",
-      "description": "Basic snippet for configure_contact_settings in Domains",
+      "title": "Snippet for the configure_contact_settings call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#configure_contact_settings. It may require modification in order to execute successfully.",
       "file": "domains/configure_contact_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_ExportRegistration_sync",
-      "title": "Snippet for export_registration in Domains",
-      "description": "Basic snippet for export_registration in Domains",
+      "title": "Snippet for the export_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#export_registration. It may require modification in order to execute successfully.",
       "file": "domains/export_registration.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_DeleteRegistration_sync",
-      "title": "Snippet for delete_registration in Domains",
-      "description": "Basic snippet for delete_registration in Domains",
+      "title": "Snippet for the delete_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#delete_registration. It may require modification in order to execute successfully.",
       "file": "domains/delete_registration.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_RetrieveAuthorizationCode_sync",
-      "title": "Snippet for retrieve_authorization_code in Domains",
-      "description": "Basic snippet for retrieve_authorization_code in Domains",
+      "title": "Snippet for the retrieve_authorization_code call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_authorization_code. It may require modification in order to execute successfully.",
       "file": "domains/retrieve_authorization_code.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "domains_v1beta1_generated_Domains_ResetAuthorizationCode_sync",
-      "title": "Snippet for reset_authorization_code in Domains",
-      "description": "Basic snippet for reset_authorization_code in Domains",
+      "title": "Snippet for the reset_authorization_code call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#reset_authorization_code. It may require modification in order to execute successfully.",
       "file": "domains/reset_authorization_code.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

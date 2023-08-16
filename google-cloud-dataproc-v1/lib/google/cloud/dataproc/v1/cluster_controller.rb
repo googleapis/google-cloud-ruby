@@ -26,6 +26,7 @@ require "google/cloud/dataproc/v1/cluster_controller/credentials"
 require "google/cloud/dataproc/v1/cluster_controller/paths"
 require "google/cloud/dataproc/v1/cluster_controller/operations"
 require "google/cloud/dataproc/v1/cluster_controller/client"
+require "google/cloud/dataproc/v1/cluster_controller/rest"
 
 module Google
   module Cloud
@@ -35,10 +36,15 @@ module Google
         # The ClusterControllerService provides methods to manage clusters
         # of Compute Engine instances.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/cluster_controller"
         #     client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataproc/v1/cluster_controller/rest"
+        #     client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new
         #
         module ClusterController
         end

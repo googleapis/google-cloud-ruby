@@ -1,5 +1,34 @@
 # Release History
 
+### 0.9.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.1 (2023-03-29)
+
+#### Documentation
+
+* Clarify that editions are a preview feature ([#21017](https://github.com/googleapis/google-cloud-ruby/issues/21017)) 
+
+### 0.8.0 (2023-03-24)
+
+#### Features
+
+* Added new types of CommitmentPlan in CapacityCommitment 
+* Added support for Autoscale 
+* Added support for Edition ([#20997](https://github.com/googleapis/google-cloud-ruby/issues/20997)) 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
 ### 0.6.0 (2022-07-01)
 
 #### Features

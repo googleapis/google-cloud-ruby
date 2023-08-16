@@ -25,6 +25,7 @@ require "google/cloud/binary_authorization/v1beta1/version"
 require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/credentials"
 require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/paths"
 require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/client"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/rest"
 
 module Google
   module Cloud
@@ -39,10 +40,15 @@ module Google
         # * {::Google::Cloud::BinaryAuthorization::V1beta1::Policy Policy}
         # * {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor Attestor}
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/binary_authorization/v1beta1/binauthz_management_service"
         #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/rest"
+        #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new
         #
         module BinauthzManagementService
         end

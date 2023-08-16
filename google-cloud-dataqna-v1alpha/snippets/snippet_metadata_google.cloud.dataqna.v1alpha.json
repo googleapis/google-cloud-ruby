@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataqna-v1alpha",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "dataqna_v1alpha_generated_AutoSuggestionService_SuggestQueries_sync",
-      "title": "Snippet for suggest_queries in AutoSuggestionService",
-      "description": "Basic snippet for suggest_queries in AutoSuggestionService",
+      "title": "Snippet for the suggest_queries call in the AutoSuggestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client#suggest_queries. It may require modification in order to execute successfully.",
       "file": "auto_suggestion_service/suggest_queries.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataqna_v1alpha_generated_QuestionService_GetQuestion_sync",
-      "title": "Snippet for get_question in QuestionService",
-      "description": "Basic snippet for get_question in QuestionService",
+      "title": "Snippet for the get_question call in the QuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataQnA::V1alpha::QuestionService::Client#get_question. It may require modification in order to execute successfully.",
       "file": "question_service/get_question.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataqna_v1alpha_generated_QuestionService_CreateQuestion_sync",
-      "title": "Snippet for create_question in QuestionService",
-      "description": "Basic snippet for create_question in QuestionService",
+      "title": "Snippet for the create_question call in the QuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataQnA::V1alpha::QuestionService::Client#create_question. It may require modification in order to execute successfully.",
       "file": "question_service/create_question.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataqna_v1alpha_generated_QuestionService_ExecuteQuestion_sync",
-      "title": "Snippet for execute_question in QuestionService",
-      "description": "Basic snippet for execute_question in QuestionService",
+      "title": "Snippet for the execute_question call in the QuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataQnA::V1alpha::QuestionService::Client#execute_question. It may require modification in order to execute successfully.",
       "file": "question_service/execute_question.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataqna_v1alpha_generated_QuestionService_GetUserFeedback_sync",
-      "title": "Snippet for get_user_feedback in QuestionService",
-      "description": "Basic snippet for get_user_feedback in QuestionService",
+      "title": "Snippet for the get_user_feedback call in the QuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataQnA::V1alpha::QuestionService::Client#get_user_feedback. It may require modification in order to execute successfully.",
       "file": "question_service/get_user_feedback.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataqna_v1alpha_generated_QuestionService_UpdateUserFeedback_sync",
-      "title": "Snippet for update_user_feedback in QuestionService",
-      "description": "Basic snippet for update_user_feedback in QuestionService",
+      "title": "Snippet for the update_user_feedback call in the QuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataQnA::V1alpha::QuestionService::Client#update_user_feedback. It may require modification in order to execute successfully.",
       "file": "question_service/update_user_feedback.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

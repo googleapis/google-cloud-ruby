@@ -28,13 +28,13 @@ module Google
           # Client for the UptimeCheckService service.
           #
           # The UptimeCheckService API is used to manage (list, create, delete, edit)
-          # Uptime check configurations in the Stackdriver Monitoring product. An Uptime
+          # Uptime check configurations in the Cloud Monitoring product. An Uptime
           # check is a piece of configuration that determines which resources and
           # services to monitor for availability. These configurations can also be
-          # configured interactively by navigating to the [Cloud Console]
-          # (http://console.cloud.google.com), selecting the appropriate project,
-          # clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
-          # and then clicking on "Uptime".
+          # configured interactively by navigating to the [Cloud console]
+          # (https://console.cloud.google.com), selecting the appropriate project,
+          # clicking on "Monitoring" on the left-hand side to navigate to Cloud
+          # Monitoring, and then clicking on "Uptime".
           #
           class Client
             include Paths
@@ -154,7 +154,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -189,7 +189,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_uptime_check_configs(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_uptime_check_configs(parent: nil, filter: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_uptime_check_configs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -200,6 +200,12 @@ module Google
             #     Uptime check configurations are listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
+            #   @param filter [::String]
+            #     If provided, this field specifies the criteria that must be met by
+            #     uptime checks to be included in the response.
+            #
+            #     For more details, see [Filtering
+            #     syntax](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering#filter_syntax).
             #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. The server
             #     may further constrain the maximum number of results returned in a single
@@ -230,13 +236,11 @@ module Google
             #   # Call the list_uptime_check_configs method.
             #   result = client.list_uptime_check_configs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Monitoring::V3::UptimeCheckConfig.
-            #     p response
+            #     p item
             #   end
             #
             def list_uptime_check_configs request, options = nil
@@ -490,7 +494,7 @@ module Google
             #     the values for the set of fields mentioned in the `updateMask`. If an
             #     `updateMask` has not been given, this Uptime check configuration replaces
             #     the current configuration. If a field is mentioned in `updateMask` but
-            #     the corresonding field is omitted in this partial Uptime check
+            #     the corresponding field is omitted in this partial Uptime check
             #     configuration, it has the effect of deleting/clearing the field from the
             #     configuration on the server.
             #
@@ -701,13 +705,11 @@ module Google
             #   # Call the list_uptime_check_ips method.
             #   result = client.list_uptime_check_ips request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Monitoring::V3::UptimeCheckIp.
-            #     p response
+            #     p item
             #   end
             #
             def list_uptime_check_ips request, options = nil
@@ -782,9 +784,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -826,7 +828,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "monitoring.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "monitoring.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

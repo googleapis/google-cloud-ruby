@@ -20,8 +20,11 @@
 require "google/cloud/speech/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Speech::V2::Speech::Client#get_recognizer
+# Snippet for the get_recognizer call in the Speech service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#get_recognizer. It may require
+# modification in order to execute successfully.
 #
 def get_recognizer
   # Create a client object. The client can be reused for multiple calls.

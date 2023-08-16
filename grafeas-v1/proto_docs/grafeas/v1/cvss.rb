@@ -162,6 +162,8 @@ module Grafeas
         ATTACK_COMPLEXITY_LOW = 1
 
         ATTACK_COMPLEXITY_HIGH = 2
+
+        ATTACK_COMPLEXITY_MEDIUM = 3
       end
 
       module Authentication
@@ -208,6 +210,10 @@ module Grafeas
         IMPACT_LOW = 2
 
         IMPACT_NONE = 3
+
+        IMPACT_PARTIAL = 4
+
+        IMPACT_COMPLETE = 5
       end
     end
 

@@ -137,7 +137,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -260,7 +260,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil, transaction_event: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -269,17 +269,21 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     "projects/\\{project}/assessments/\\{assessment}".
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can be left
-            #     empty to provide reasons that apply to an event without concluding whether
-            #     the event is legitimate or fraudulent.
+            #     Optional. The annotation that will be assigned to the Event. This field can
+            #     be left empty to provide reasons that apply to an event without concluding
+            #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+            #     Optional. Optional reasons for the annotation that will be assigned to the
+            #     Event.
             #   @param hashed_account_id [::String]
             #     Optional. Unique stable hashed user identifier to apply to the assessment.
             #     This is an alternative to setting the hashed_account_id in
             #     CreateAssessment, for example when the account identifier is not yet known
             #     in the initial request. It is recommended that the identifier is hashed
             #     using hmac-sha256 with stable secret.
+            #   @param transaction_event [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent, ::Hash]
+            #     Optional. If the assessment is part of a payment transaction, provide
+            #     details on payment lifecycle events that occur in the transaction.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse]
@@ -481,13 +485,11 @@ module Google
             #   # Call the list_keys method.
             #   result = client.list_keys request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::Key.
-            #     p response
+            #     p item
             #   end
             #
             def list_keys request, options = nil
@@ -553,8 +555,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param key [::String]
-            #     Required. The public key name linked to the requested secret key in the format
-            #     "projects/\\{project}/keys/\\{key}".
+            #     Required. The public key name linked to the requested secret key in the
+            #     format "projects/\\{project}/keys/\\{key}".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse]
@@ -727,8 +729,8 @@ module Google
             #   @param key [::Google::Cloud::RecaptchaEnterprise::V1::Key, ::Hash]
             #     Required. The key to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. The mask to control which fields of the key get updated. If the mask is not
-            #     present, all fields will be updated.
+            #     Optional. The mask to control which fields of the key get updated. If the
+            #     mask is not present, all fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -898,7 +900,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload migrate_key(name: nil)
+            # @overload migrate_key(name: nil, skip_billing_check: nil)
             #   Pass arguments to `migrate_key` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -906,6 +908,15 @@ module Google
             #   @param name [::String]
             #     Required. The name of the key to be migrated, in the format
             #     "projects/\\{project}/keys/\\{key}".
+            #   @param skip_billing_check [::Boolean]
+            #     Optional. If true, skips the billing check.
+            #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
+            #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
+            #     https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+            #     any disruption of your usage, we check that a billing account is present.
+            #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
+            #     billing check and proceed with the migration. See
+            #     https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -1077,16 +1088,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project to list related account groups from, in the format
-            #     "projects/\\{project}".
+            #     Required. The name of the project to list related account groups from, in
+            #     the format "projects/\\{project}".
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service might return fewer than
-            #     this value.
-            #     If unspecified, at most 50 groups are returned.
-            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #     Optional. The maximum number of groups to return. The service might return
+            #     fewer than this value. If unspecified, at most 50 groups are returned. The
+            #     maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-            #     Provide this to retrieve the subsequent page.
+            #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -1112,13 +1122,11 @@ module Google
             #   # Call the list_related_account_groups method.
             #   result = client.list_related_account_groups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroup.
-            #     p response
+            #     p item
             #   end
             #
             def list_related_account_groups request, options = nil
@@ -1185,13 +1193,12 @@ module Google
             #     Required. The resource name for the related account group in the format
             #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of accounts to return. The service might return fewer
-            #     than this value.
-            #     If unspecified, at most 50 accounts are returned.
-            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #     Optional. The maximum number of accounts to return. The service might
+            #     return fewer than this value. If unspecified, at most 50 accounts are
+            #     returned. The maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-            #     call.
+            #     Optional. A page token, received from a previous
+            #     `ListRelatedAccountGroupMemberships` call.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1217,13 +1224,11 @@ module Google
             #   # Call the list_related_account_group_memberships method.
             #   result = client.list_related_account_group_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-            #     p response
+            #     p item
             #   end
             #
             def list_related_account_group_memberships request, options = nil
@@ -1287,17 +1292,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. The name of the project to search related account group memberships from.
-            #     Specify the project name in the following format: "projects/\\{project}".
+            #     Required. The name of the project to search related account group
+            #     memberships from. Specify the project name in the following format:
+            #     "projects/\\{project}".
             #   @param hashed_account_id [::String]
-            #     Optional. The unique stable hashed user identifier we should search connections to.
-            #     The identifier should correspond to a `hashed_account_id` provided in a
-            #     previous `CreateAssessment` or `AnnotateAssessment` call.
+            #     Optional. The unique stable hashed user identifier we should search
+            #     connections to. The identifier should correspond to a `hashed_account_id`
+            #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service might return fewer than
-            #     this value.
-            #     If unspecified, at most 50 groups are returned.
-            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #     Optional. The maximum number of groups to return. The service might return
+            #     fewer than this value. If unspecified, at most 50 groups are returned. The
+            #     maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous
             #     `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
@@ -1327,13 +1332,11 @@ module Google
             #   # Call the search_related_account_group_memberships method.
             #   result = client.search_related_account_group_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-            #     p response
+            #     p item
             #   end
             #
             def search_related_account_group_memberships request, options = nil
@@ -1416,9 +1419,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1460,7 +1463,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "recaptchaenterprise.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "recaptchaenterprise.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

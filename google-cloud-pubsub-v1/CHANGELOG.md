@@ -1,5 +1,78 @@
 # Release History
 
+### 0.17.3 (2023-07-28)
+
+#### Documentation
+
+* clarified where ordering_key will be written if write_metadata is set ([#22601](https://github.com/googleapis/google-cloud-ruby/issues/22601)) 
+
+### 0.17.2 (2023-06-27)
+
+#### Documentation
+
+* Clarify naming pattern for Storage's filename suffix ([#22451](https://github.com/googleapis/google-cloud-ruby/issues/22451)) 
+
+### 0.17.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.17.0 (2023-05-31)
+
+#### Features
+
+* Support for pushing JSON representations of a PubsubMessage to a push endpoint ([#21687](https://github.com/googleapis/google-cloud-ruby/issues/21687)) 
+* Uses binary protobuf definitions for better forward compatibility 
+
+### 0.16.0 (2023-05-18)
+
+#### Features
+
+* add cloud storage subscription fields ([#21576](https://github.com/googleapis/google-cloud-ruby/issues/21576)) 
+
+### 0.15.1 (2023-02-23)
+
+#### Documentation
+
+* Minor updates ([#20492](https://github.com/googleapis/google-cloud-ruby/issues/20492)) 
+
+### 0.15.0 (2023-02-17)
+
+#### Features
+
+* ModifyAckDeadlineConfirmation includes a list of ack IDs that failed with temporary issues ([#20445](https://github.com/googleapis/google-cloud-ruby/issues/20445)) 
+#### Bug Fixes
+
+* Make INTERNAL a retryable error for the pull RPC 
+
+### 0.14.0 (2023-02-16)
+
+#### Features
+
+* AcknowledgeConfirmation includes a list of ack IDs that failed with temporary issues ([#20431](https://github.com/googleapis/google-cloud-ruby/issues/20431)) 
+#### Documentation
+
+* Various fixes and clarifications in reference documentation 
+
+### 0.13.1 (2023-02-13)
+
+#### Documentation
+
+* Deprecated the revision_id parameter to commit_schema_revision and delete_schema_revision ([#20139](https://github.com/googleapis/google-cloud-ruby/issues/20139)) 
+
+### 0.13.0 (2023-01-12)
+
+#### Features
+
+* Added support for schema evolution, including managing schema revisions, and schema commit and rollback ([#19981](https://github.com/googleapis/google-cloud-ruby/issues/19981)) 
+
+### 0.12.1 (2023-01-05)
+
+#### Documentation
+
+* Update some reference documents ([#19901](https://github.com/googleapis/google-cloud-ruby/issues/19901)) 
+
 ### 0.12.0 (2022-10-21)
 
 #### Features

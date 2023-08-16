@@ -34,6 +34,127 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Describes an event in the lifecycle of a payment transaction.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent::TransactionEventType]
+        #     Optional. The type of this transaction event.
+        # @!attribute [rw] reason
+        #   @return [::String]
+        #     Optional. The reason or standardized code that corresponds with this
+        #     transaction event, if one exists. For example, a CHARGEBACK event with code
+        #     6005.
+        # @!attribute [rw] value
+        #   @return [::Float]
+        #     Optional. The value that corresponds with this transaction event, if one
+        #     exists. For example, a refund event where $5.00 was refunded. Currency is
+        #     obtained from the original transaction data.
+        # @!attribute [rw] event_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp when this transaction event occurred; otherwise assumed
+        #     to be the time of the API call.
+        class TransactionEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that represents an event in the payment transaction lifecycle.
+          module TransactionEventType
+            # Default, unspecified event type.
+            TRANSACTION_EVENT_TYPE_UNSPECIFIED = 0
+
+            # Indicates that the transaction is approved by the merchant. The
+            # accompanying reasons can include terms such as 'INHOUSE', 'ACCERTIFY',
+            # 'CYBERSOURCE', or 'MANUAL_REVIEW'.
+            MERCHANT_APPROVE = 1
+
+            # Indicates that the transaction is denied and concluded due to risks
+            # detected by the merchant. The accompanying reasons can include terms such
+            # as 'INHOUSE',  'ACCERTIFY',  'CYBERSOURCE', or 'MANUAL_REVIEW'.
+            MERCHANT_DENY = 2
+
+            # Indicates that the transaction is being evaluated by a human, due to
+            # suspicion or risk.
+            MANUAL_REVIEW = 3
+
+            # Indicates that the authorization attempt with the card issuer succeeded.
+            AUTHORIZATION = 4
+
+            # Indicates that the authorization attempt with the card issuer failed.
+            # The accompanying reasons can include Visa's '54' indicating that the card
+            # is expired, or '82' indicating that the CVV is incorrect.
+            AUTHORIZATION_DECLINE = 5
+
+            # Indicates that the transaction is completed because the funds were
+            # settled.
+            PAYMENT_CAPTURE = 6
+
+            # Indicates that the transaction could not be completed because the funds
+            # were not settled.
+            PAYMENT_CAPTURE_DECLINE = 7
+
+            # Indicates that the transaction has been canceled. Specify the reason
+            # for the cancellation. For example, 'INSUFFICIENT_INVENTORY'.
+            CANCEL = 8
+
+            # Indicates that the merchant has received a chargeback inquiry due to
+            # fraud for the transaction, requesting additional information before a
+            # fraud chargeback is officially issued and a formal chargeback
+            # notification is sent.
+            CHARGEBACK_INQUIRY = 9
+
+            # Indicates that the merchant has received a chargeback alert due to fraud
+            # for the transaction. The process of resolving the dispute without
+            # involving the payment network is started.
+            CHARGEBACK_ALERT = 10
+
+            # Indicates that a fraud notification is issued for the transaction, sent
+            # by the payment instrument's issuing bank because the transaction appears
+            # to be fraudulent. We recommend including TC40 or SAFE data in the
+            # `reason` field for this event type. For partial chargebacks, we recommend
+            # that you include an amount in the `value` field.
+            FRAUD_NOTIFICATION = 11
+
+            # Indicates that the merchant is informed by the payment network that the
+            # transaction has entered the chargeback process due to fraud. Reason code
+            # examples include Discover's '6005' and '6041'. For partial chargebacks,
+            # we recommend that you include an amount in the `value` field.
+            CHARGEBACK = 12
+
+            # Indicates that the transaction has entered the chargeback process due to
+            # fraud, and that the merchant has chosen to enter representment. Reason
+            # examples include Discover's '6005' and '6041'. For partial chargebacks,
+            # we recommend that you include an amount in the `value` field.
+            CHARGEBACK_REPRESENTMENT = 13
+
+            # Indicates that the transaction has had a fraud chargeback which was
+            # illegitimate and was reversed as a result. For partial chargebacks, we
+            # recommend that you include an amount in the `value` field.
+            CHARGEBACK_REVERSE = 14
+
+            # Indicates that the merchant has received a refund for a completed
+            # transaction. For partial refunds, we recommend that you include an amount
+            # in the `value` field. Reason example: 'TAX_EXEMPT' (partial refund of
+            # exempt tax)
+            REFUND_REQUEST = 15
+
+            # Indicates that the merchant has received a refund request for this
+            # transaction, but that they have declined it. For partial refunds, we
+            # recommend that you include an amount in the `value` field. Reason
+            # example: 'TAX_EXEMPT' (partial refund of exempt tax)
+            REFUND_DECLINE = 16
+
+            # Indicates that the completed transaction was refunded by the merchant.
+            # For partial refunds, we recommend that you include an amount in the
+            # `value` field. Reason example: 'TAX_EXEMPT' (partial refund of exempt
+            # tax)
+            REFUND = 17
+
+            # Indicates that the completed transaction was refunded by the merchant,
+            # and that this refund was reversed. For partial refunds, we recommend that
+            # you include an amount in the `value` field.
+            REFUND_REVERSE = 18
+          end
+        end
+
         # The request message to annotate an Assessment.
         # @!attribute [rw] name
         #   @return [::String]
@@ -41,12 +162,13 @@ module Google
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that will be assigned to the Event. This field can be left
-        #     empty to provide reasons that apply to an event without concluding whether
-        #     the event is legitimate or fraudulent.
+        #     Optional. The annotation that will be assigned to the Event. This field can
+        #     be left empty to provide reasons that apply to an event without concluding
+        #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-        #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+        #     Optional. Optional reasons for the annotation that will be assigned to the
+        #     Event.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
         #     Optional. Unique stable hashed user identifier to apply to the assessment.
@@ -54,6 +176,10 @@ module Google
         #     CreateAssessment, for example when the account identifier is not yet known
         #     in the initial request. It is recommended that the identifier is hashed
         #     using hmac-sha256 with stable secret.
+        # @!attribute [rw] transaction_event
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent]
+        #     Optional. If the assessment is part of a payment transaction, provide
+        #     details on payment lifecycle events that occur in the transaction.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -152,32 +278,117 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Information about a verification endpoint that can be used for 2FA.
+        # @!attribute [rw] email_address
+        #   @return [::String]
+        #     Email address for which to trigger a verification request.
+        # @!attribute [rw] phone_number
+        #   @return [::String]
+        #     Phone number for which to trigger a verification request. Should be given
+        #     in E.164 format.
+        # @!attribute [r] request_token
+        #   @return [::String]
+        #     Output only. Token to provide to the client to trigger endpoint
+        #     verification. It must be used within 15 minutes.
+        # @!attribute [r] last_verification_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp of the last successful verification for the
+        #     endpoint, if any.
+        class EndpointVerificationInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information about account verification, used for identity verification.
+        # @!attribute [rw] endpoints
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::EndpointVerificationInfo>]
+        #     Endpoints that can be used for identity verification.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Language code preference for the verification message, set as a IETF BCP 47
+        #     language code.
+        # @!attribute [r] latest_verification_result
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountVerificationInfo::Result]
+        #     Output only. Result of the latest account verification challenge.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Username of the account that is being verified. Deprecated. Customers
+        #     should now provide the hashed account ID field in Event.
+        class AccountVerificationInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Result of the account verification as contained in the verdict token issued
+          # at the end of the verification flow.
+          module Result
+            # No information about the latest account verification.
+            RESULT_UNSPECIFIED = 0
+
+            # The user was successfully verified. This means the account verification
+            # challenge was successfully completed.
+            SUCCESS_USER_VERIFIED = 1
+
+            # The user failed the verification challenge.
+            ERROR_USER_NOT_VERIFIED = 2
+
+            # The site is not properly onboarded to use the account verification
+            # feature.
+            ERROR_SITE_ONBOARDING_INCOMPLETE = 3
+
+            # The recipient is not allowed for account verification. This can occur
+            # during integration but should not occur in production.
+            ERROR_RECIPIENT_NOT_ALLOWED = 4
+
+            # The recipient has already been sent too many verification codes in a
+            # short amount of time.
+            ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED = 5
+
+            # The verification flow could not be completed due to a critical internal
+            # error.
+            ERROR_CRITICAL_INTERNAL = 6
+
+            # The client has exceeded their two factor request quota for this period of
+            # time.
+            ERROR_CUSTOMER_QUOTA_EXHAUSTED = 7
+
+            # The request cannot be processed at the time because of an incident. This
+            # bypass can be restricted to a problematic destination email domain, a
+            # customer, or could affect the entire service.
+            ERROR_VERIFICATION_BYPASSED = 8
+
+            # The request parameters do not match with the token provided and cannot be
+            # processed.
+            ERROR_VERDICT_MISMATCH = 9
+          end
+        end
+
         # Private password leak verification info.
         # @!attribute [rw] lookup_hash_prefix
         #   @return [::String]
-        #     Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized username. It
-        #     is used to look up password leaks associated with that hash prefix.
+        #     Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized
+        #     username. It is used to look up password leaks associated with that hash
+        #     prefix.
         # @!attribute [rw] encrypted_user_credentials_hash
         #   @return [::String]
-        #     Optional. Encrypted Scrypt hash of the canonicalized username+password. It is
-        #     re-encrypted by the server and returned through
+        #     Optional. Encrypted Scrypt hash of the canonicalized username+password. It
+        #     is re-encrypted by the server and returned through
         #     `reencrypted_user_credentials_hash`.
         # @!attribute [r] encrypted_leak_match_prefixes
         #   @return [::Array<::String>]
-        #     Output only. List of prefixes of the encrypted potential password leaks that matched the
-        #     given parameters. They must be compared with the client-side decryption
-        #     prefix of `reencrypted_user_credentials_hash`
+        #     Output only. List of prefixes of the encrypted potential password leaks
+        #     that matched the given parameters. They must be compared with the
+        #     client-side decryption prefix of `reencrypted_user_credentials_hash`
         # @!attribute [r] reencrypted_user_credentials_hash
         #   @return [::String]
-        #     Output only. Corresponds to the re-encryption of the `encrypted_user_credentials_hash`
-        #     field. It is used to match potential password leaks within
-        #     `encrypted_leak_match_prefixes`.
+        #     Output only. Corresponds to the re-encryption of the
+        #     `encrypted_user_credentials_hash` field. It is used to match potential
+        #     password leaks within `encrypted_leak_match_prefixes`.
         class PrivatePasswordLeakVerification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A recaptcha assessment resource.
+        # A reCAPTCHA Enterprise assessment resource.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for the Assessment in the format
@@ -191,6 +402,10 @@ module Google
         # @!attribute [r] token_properties
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties]
         #     Output only. Properties of the provided event token.
+        # @!attribute [rw] account_verification
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountVerificationInfo]
+        #     Account verification information for identity verification. The assessment
+        #     event must include a token and site key to use this feature.
         # @!attribute [rw] account_defender_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
         #     Assessment returned by account defender when a hashed_account_id is
@@ -199,38 +414,200 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PrivatePasswordLeakVerification]
         #     The private password leak verification field contains the parameters that
         #     are used to to check for leaks privately without sharing user credentials.
+        # @!attribute [rw] fraud_prevention_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment]
+        #     Assessment returned by Fraud Prevention when TransactionData is provided.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The event being assessed.
         # @!attribute [rw] token
         #   @return [::String]
-        #     Optional. The user response token provided by the reCAPTCHA client-side integration
-        #     on your site.
+        #     Optional. The user response token provided by the reCAPTCHA Enterprise
+        #     client-side integration on your site.
         # @!attribute [rw] site_key
         #   @return [::String]
-        #     Optional. The site key that was used to invoke reCAPTCHA on your site and generate
-        #     the token.
+        #     Optional. The site key that was used to invoke reCAPTCHA Enterprise on your
+        #     site and generate the token.
         # @!attribute [rw] user_agent
         #   @return [::String]
-        #     Optional. The user agent present in the request from the user's device related to
-        #     this event.
+        #     Optional. The user agent present in the request from the user's device
+        #     related to this event.
         # @!attribute [rw] user_ip_address
         #   @return [::String]
-        #     Optional. The IP address in the request from the user's device related to this event.
+        #     Optional. The IP address in the request from the user's device related to
+        #     this event.
         # @!attribute [rw] expected_action
         #   @return [::String]
-        #     Optional. The expected action for this type of event. This should be the same action
-        #     provided at token generation time on client-side platforms already
-        #     integrated with recaptcha enterprise.
+        #     Optional. The expected action for this type of event. This should be the
+        #     same action provided at token generation time on client-side platforms
+        #     already integrated with recaptcha enterprise.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. Unique stable hashed user identifier for the request. The identifier must
-        #     be hashed using hmac-sha256 with stable secret.
+        #     Optional. Unique stable hashed user identifier for the request. The
+        #     identifier must be hashed using hmac-sha256 with stable secret.
+        # @!attribute [rw] transaction_data
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData]
+        #     Optional. Data describing a payment transaction to be assessed. Sending
+        #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
+        #     FraudPreventionAssessment component in the response.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Transaction data associated with a payment protected by reCAPTCHA Enterprise.
+        # All fields are optional.
+        # @!attribute [rw] transaction_id
+        #   @return [::String]
+        #     Unique identifier for the transaction. This custom identifier can be used
+        #     to reference this transaction in the future, for example, labeling a refund
+        #     or chargeback event. Two attempts at the same transaction should use the
+        #     same transaction id.
+        # @!attribute [rw] payment_method
+        #   @return [::String]
+        #     The payment method for the transaction. The allowed values are:
+        #
+        #     * credit-card
+        #     * debit-card
+        #     * gift-card
+        #     * processor-\\{name} (If a third-party is used, for example,
+        #     processor-paypal)
+        #     * custom-\\{name} (If an alternative method is used, for example,
+        #     custom-crypto)
+        # @!attribute [rw] card_bin
+        #   @return [::String]
+        #     The Bank Identification Number - generally the first 6 or 8 digits of the
+        #     card.
+        # @!attribute [rw] card_last_four
+        #   @return [::String]
+        #     The last four digits of the card.
+        # @!attribute [rw] currency_code
+        #   @return [::String]
+        #     The currency code in ISO-4217 format.
+        # @!attribute [rw] value
+        #   @return [::Float]
+        #     The decimal value of the transaction in the specified currency.
+        # @!attribute [rw] shipping_value
+        #   @return [::Float]
+        #     The value of shipping in the specified currency. 0 for free or no shipping.
+        # @!attribute [rw] shipping_address
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData::Address]
+        #     Destination address if this transaction involves shipping a physical item.
+        # @!attribute [rw] billing_address
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData::Address]
+        #     Address associated with the payment method when applicable.
+        # @!attribute [rw] user
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData::User]
+        #     Information about the user paying/initiating the transaction.
+        # @!attribute [rw] merchants
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::TransactionData::User>]
+        #     Information about the user or users fulfilling the transaction.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::TransactionData::Item>]
+        #     Items purchased in this transaction.
+        # @!attribute [rw] gateway_info
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData::GatewayInfo]
+        #     Information about the payment gateway's response to the transaction.
+        class TransactionData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Structured address format for billing and shipping addresses.
+          # @!attribute [rw] recipient
+          #   @return [::String]
+          #     The recipient name, potentially including information such as "care of".
+          # @!attribute [rw] address
+          #   @return [::Array<::String>]
+          #     The first lines of the address. The first line generally contains the
+          #     street name and number, and further lines may include information such as
+          #     an apartment number.
+          # @!attribute [rw] locality
+          #   @return [::String]
+          #     The town/city of the address.
+          # @!attribute [rw] administrative_area
+          #   @return [::String]
+          #     The state, province, or otherwise administrative area of the address.
+          # @!attribute [rw] region_code
+          #   @return [::String]
+          #     The CLDR country/region of the address.
+          # @!attribute [rw] postal_code
+          #   @return [::String]
+          #     The postal or ZIP code of the address.
+          class Address
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details about a user's account involved in the transaction.
+          # @!attribute [rw] account_id
+          #   @return [::String]
+          #     Unique account identifier for this user. If using account defender,
+          #     this should match the hashed_account_id field. Otherwise, a unique and
+          #     persistent identifier for this account.
+          # @!attribute [rw] creation_ms
+          #   @return [::Integer]
+          #     The epoch milliseconds of the user's account creation.
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     The email address of the user.
+          # @!attribute [rw] email_verified
+          #   @return [::Boolean]
+          #     Whether the email has been verified to be accessible by the user (OTP or
+          #     similar).
+          # @!attribute [rw] phone_number
+          #   @return [::String]
+          #     The phone number of the user, with country code.
+          # @!attribute [rw] phone_verified
+          #   @return [::Boolean]
+          #     Whether the phone number has been verified to be accessible by the user
+          #     (OTP or similar).
+          class User
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Line items being purchased in this transaction.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The full name of the item.
+          # @!attribute [rw] value
+          #   @return [::Float]
+          #     The value per item that the user is paying, in the transaction currency,
+          #     after discounts.
+          # @!attribute [rw] quantity
+          #   @return [::Integer]
+          #     The quantity of this item that is being purchased.
+          # @!attribute [rw] merchant_account_id
+          #   @return [::String]
+          #     When a merchant is specified, its corresponding account_id. Necessary to
+          #     populate marketplace-style transactions.
+          class Item
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details about the transaction from the gateway.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Name of the gateway service (for example, stripe, square, paypal).
+          # @!attribute [rw] gateway_response_code
+          #   @return [::String]
+          #     Gateway response code describing the state of the transaction.
+          # @!attribute [rw] avs_response_code
+          #   @return [::String]
+          #     AVS response code from the gateway
+          #     (available only when reCAPTCHA Enterprise is called after authorization).
+          # @!attribute [rw] cvv_response_code
+          #   @return [::String]
+          #     CVV response code from the gateway
+          #     (available only when reCAPTCHA Enterprise is called after authorization).
+          class GatewayInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Risk analysis result for an event.
@@ -267,9 +644,16 @@ module Google
             # Too little traffic has been received from this site thus far to generate
             # quality risk analysis.
             LOW_CONFIDENCE_SCORE = 5
+
+            # The request matches behavioral characteristics of a carding attack.
+            SUSPECTED_CARDING = 6
+
+            # The request matches behavioral characteristics of chargebacks for fraud.
+            SUSPECTED_CHARGEBACK = 7
           end
         end
 
+        # Properties of the provided event token.
         # @!attribute [rw] valid
         #   @return [::Boolean]
         #     Whether the provided user response token is valid. When valid = false, the
@@ -286,6 +670,14 @@ module Google
         # @!attribute [rw] hostname
         #   @return [::String]
         #     The hostname of the page on which the token was generated (Web keys only).
+        # @!attribute [rw] android_package_name
+        #   @return [::String]
+        #     The name of the Android package with which the token was generated (Android
+        #     keys only).
+        # @!attribute [rw] ios_bundle_id
+        #   @return [::String]
+        #     The ID of the iOS bundle with which the token was generated (iOS keys
+        #     only).
         # @!attribute [rw] action
         #   @return [::String]
         #     Action name provided at token generation.
@@ -316,6 +708,45 @@ module Google
             # A retriable error (such as network failure) occurred on the browser.
             # Could easily be simulated by an attacker.
             BROWSER_ERROR = 6
+          end
+        end
+
+        # Assessment for Fraud Prevention.
+        # @!attribute [rw] transaction_risk
+        #   @return [::Float]
+        #     Probability (0-1) of this transaction being fraudulent. Summarizes the
+        #     combined risk of attack vectors below.
+        # @!attribute [rw] stolen_instrument_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::StolenInstrumentVerdict]
+        #     Assessment of this transaction for risk of a stolen instrument.
+        # @!attribute [rw] card_testing_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::CardTestingVerdict]
+        #     Assessment of this transaction for risk of being part of a card testing
+        #     attack.
+        class FraudPreventionAssessment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about stolen instrument fraud, where the user is not the
+          # legitimate owner of the instrument being used for the purchase.
+          # @!attribute [rw] risk
+          #   @return [::Float]
+          #     Probability (0-1) of this transaction being executed with a stolen
+          #     instrument.
+          class StolenInstrumentVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information about card testing fraud, where an adversary is testing
+          # fraudulently obtained cards or brute forcing their details.
+          # @!attribute [rw] risk
+          #   @return [::Float]
+          #     Probability (0-1) of this transaction attempt being part of a card
+          #     testing attack.
+          class CardTestingVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -397,8 +828,8 @@ module Google
         # The retrieve legacy secret key request message.
         # @!attribute [rw] key
         #   @return [::String]
-        #     Required. The public key name linked to the requested secret key in the format
-        #     "projects/\\{project}/keys/\\{key}".
+        #     Required. The public key name linked to the requested secret key in the
+        #     format "projects/\\{project}/keys/\\{key}".
         class RetrieveLegacySecretKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -420,8 +851,8 @@ module Google
         #     Required. The key to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which fields of the key get updated. If the mask is not
-        #     present, all fields will be updated.
+        #     Optional. The mask to control which fields of the key get updated. If the
+        #     mask is not present, all fields will be updated.
         class UpdateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -442,6 +873,16 @@ module Google
         #   @return [::String]
         #     Required. The name of the key to be migrated, in the format
         #     "projects/\\{project}/keys/\\{key}".
+        # @!attribute [rw] skip_billing_check
+        #   @return [::Boolean]
+        #     Optional. If true, skips the billing check.
+        #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
+        #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
+        #     https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+        #     any disruption of your usage, we check that a billing account is present.
+        #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
+        #     billing check and proceed with the migration. See
+        #     https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
         class MigrateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -514,9 +955,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
         #     Creating and managing labels</a>.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The timestamp corresponding to the creation of this Key.
+        #     Output only. The timestamp corresponding to the creation of this Key.
         # @!attribute [rw] testing_options
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions]
         #     Options for user acceptance testing.
@@ -685,7 +1126,6 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution}]
         #     Action-based metrics. The map key is the action name which specified by the
         #     site owners at time of the "execute" client-side call.
-        #     Populated only for SCORE keys.
         class ScoreMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -729,14 +1169,13 @@ module Google
         #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of accounts to return. The service might return fewer
-        #     than this value.
-        #     If unspecified, at most 50 accounts are returned.
-        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        #     Optional. The maximum number of accounts to return. The service might
+        #     return fewer than this value. If unspecified, at most 50 accounts are
+        #     returned. The maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-        #     call.
+        #     Optional. A page token, received from a previous
+        #     `ListRelatedAccountGroupMemberships` call.
         #
         #     When paginating, all other parameters provided to
         #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -762,18 +1201,17 @@ module Google
         # The request message to list related account groups.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project to list related account groups from, in the format
-        #     "projects/\\{project}".
+        #     Required. The name of the project to list related account groups from, in
+        #     the format "projects/\\{project}".
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of groups to return. The service might return fewer than
-        #     this value.
-        #     If unspecified, at most 50 groups are returned.
-        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        #     Optional. The maximum number of groups to return. The service might return
+        #     fewer than this value. If unspecified, at most 50 groups are returned. The
+        #     maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -799,19 +1237,19 @@ module Google
         # The request message to search related account group memberships.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the project to search related account group memberships from.
-        #     Specify the project name in the following format: "projects/\\{project}".
+        #     Required. The name of the project to search related account group
+        #     memberships from. Specify the project name in the following format:
+        #     "projects/\\{project}".
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. The unique stable hashed user identifier we should search connections to.
-        #     The identifier should correspond to a `hashed_account_id` provided in a
-        #     previous `CreateAssessment` or `AnnotateAssessment` call.
+        #     Optional. The unique stable hashed user identifier we should search
+        #     connections to. The identifier should correspond to a `hashed_account_id`
+        #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of groups to return. The service might return fewer than
-        #     this value.
-        #     If unspecified, at most 50 groups are returned.
-        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        #     Optional. The maximum number of groups to return. The service might return
+        #     fewer than this value. If unspecified, at most 50 groups are returned. The
+        #     maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous

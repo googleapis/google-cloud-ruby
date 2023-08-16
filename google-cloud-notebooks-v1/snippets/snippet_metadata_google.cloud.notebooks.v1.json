@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-notebooks-v1",
-    "version": "0.4.0",
+    "version": "0.6.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_ListRuntimes_sync",
-      "title": "Snippet for list_runtimes in ManagedNotebookService",
-      "description": "Basic snippet for list_runtimes in ManagedNotebookService",
+      "title": "Snippet for the list_runtimes call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#list_runtimes. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/list_runtimes.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_GetRuntime_sync",
-      "title": "Snippet for get_runtime in ManagedNotebookService",
-      "description": "Basic snippet for get_runtime in ManagedNotebookService",
+      "title": "Snippet for the get_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#get_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/get_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_CreateRuntime_sync",
-      "title": "Snippet for create_runtime in ManagedNotebookService",
-      "description": "Basic snippet for create_runtime in ManagedNotebookService",
+      "title": "Snippet for the create_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#create_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/create_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_sync",
-      "title": "Snippet for update_runtime in ManagedNotebookService",
-      "description": "Basic snippet for update_runtime in ManagedNotebookService",
+      "title": "Snippet for the update_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#update_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/update_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_sync",
-      "title": "Snippet for delete_runtime in ManagedNotebookService",
-      "description": "Basic snippet for delete_runtime in ManagedNotebookService",
+      "title": "Snippet for the delete_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#delete_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/delete_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_StartRuntime_sync",
-      "title": "Snippet for start_runtime in ManagedNotebookService",
-      "description": "Basic snippet for start_runtime in ManagedNotebookService",
+      "title": "Snippet for the start_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#start_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/start_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_StopRuntime_sync",
-      "title": "Snippet for stop_runtime in ManagedNotebookService",
-      "description": "Basic snippet for stop_runtime in ManagedNotebookService",
+      "title": "Snippet for the stop_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#stop_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/stop_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_SwitchRuntime_sync",
-      "title": "Snippet for switch_runtime in ManagedNotebookService",
-      "description": "Basic snippet for switch_runtime in ManagedNotebookService",
+      "title": "Snippet for the switch_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#switch_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/switch_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_ResetRuntime_sync",
-      "title": "Snippet for reset_runtime in ManagedNotebookService",
-      "description": "Basic snippet for reset_runtime in ManagedNotebookService",
+      "title": "Snippet for the reset_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#reset_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/reset_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_sync",
-      "title": "Snippet for upgrade_runtime in ManagedNotebookService",
-      "description": "Basic snippet for upgrade_runtime in ManagedNotebookService",
+      "title": "Snippet for the upgrade_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#upgrade_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/upgrade_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_sync",
-      "title": "Snippet for report_runtime_event in ManagedNotebookService",
-      "description": "Basic snippet for report_runtime_event in ManagedNotebookService",
+      "title": "Snippet for the report_runtime_event call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#report_runtime_event. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/report_runtime_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_sync",
-      "title": "Snippet for refresh_runtime_token_internal in ManagedNotebookService",
-      "description": "Basic snippet for refresh_runtime_token_internal in ManagedNotebookService",
+      "title": "Snippet for the refresh_runtime_token_internal call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#refresh_runtime_token_internal. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/refresh_runtime_token_internal.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_sync",
-      "title": "Snippet for diagnose_runtime in ManagedNotebookService",
-      "description": "Basic snippet for diagnose_runtime in ManagedNotebookService",
+      "title": "Snippet for the diagnose_runtime call in the ManagedNotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#diagnose_runtime. It may require modification in order to execute successfully.",
       "file": "managed_notebook_service/diagnose_runtime.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_ListInstances_sync",
-      "title": "Snippet for list_instances in NotebookService",
-      "description": "Basic snippet for list_instances in NotebookService",
+      "title": "Snippet for the list_instances call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "notebook_service/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_GetInstance_sync",
-      "title": "Snippet for get_instance in NotebookService",
-      "description": "Basic snippet for get_instance in NotebookService",
+      "title": "Snippet for the get_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_CreateInstance_sync",
-      "title": "Snippet for create_instance in NotebookService",
-      "description": "Basic snippet for create_instance in NotebookService",
+      "title": "Snippet for the create_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_RegisterInstance_sync",
-      "title": "Snippet for register_instance in NotebookService",
-      "description": "Basic snippet for register_instance in NotebookService",
+      "title": "Snippet for the register_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#register_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/register_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_SetInstanceAccelerator_sync",
-      "title": "Snippet for set_instance_accelerator in NotebookService",
-      "description": "Basic snippet for set_instance_accelerator in NotebookService",
+      "title": "Snippet for the set_instance_accelerator call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#set_instance_accelerator. It may require modification in order to execute successfully.",
       "file": "notebook_service/set_instance_accelerator.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_SetInstanceMachineType_sync",
-      "title": "Snippet for set_instance_machine_type in NotebookService",
-      "description": "Basic snippet for set_instance_machine_type in NotebookService",
+      "title": "Snippet for the set_instance_machine_type call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#set_instance_machine_type. It may require modification in order to execute successfully.",
       "file": "notebook_service/set_instance_machine_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_UpdateInstanceConfig_sync",
-      "title": "Snippet for update_instance_config in NotebookService",
-      "description": "Basic snippet for update_instance_config in NotebookService",
+      "title": "Snippet for the update_instance_config call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#update_instance_config. It may require modification in order to execute successfully.",
       "file": "notebook_service/update_instance_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_UpdateShieldedInstanceConfig_sync",
-      "title": "Snippet for update_shielded_instance_config in NotebookService",
-      "description": "Basic snippet for update_shielded_instance_config in NotebookService",
+      "title": "Snippet for the update_shielded_instance_config call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#update_shielded_instance_config. It may require modification in order to execute successfully.",
       "file": "notebook_service/update_shielded_instance_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_SetInstanceLabels_sync",
-      "title": "Snippet for set_instance_labels in NotebookService",
-      "description": "Basic snippet for set_instance_labels in NotebookService",
+      "title": "Snippet for the set_instance_labels call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#set_instance_labels. It may require modification in order to execute successfully.",
       "file": "notebook_service/set_instance_labels.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_sync",
-      "title": "Snippet for update_instance_metadata_items in NotebookService",
-      "description": "Basic snippet for update_instance_metadata_items in NotebookService",
+      "title": "Snippet for the update_instance_metadata_items call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#update_instance_metadata_items. It may require modification in order to execute successfully.",
       "file": "notebook_service/update_instance_metadata_items.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in NotebookService",
-      "description": "Basic snippet for delete_instance in NotebookService",
+      "title": "Snippet for the delete_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_StartInstance_sync",
-      "title": "Snippet for start_instance in NotebookService",
-      "description": "Basic snippet for start_instance in NotebookService",
+      "title": "Snippet for the start_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#start_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/start_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_StopInstance_sync",
-      "title": "Snippet for stop_instance in NotebookService",
-      "description": "Basic snippet for stop_instance in NotebookService",
+      "title": "Snippet for the stop_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#stop_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/stop_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_ResetInstance_sync",
-      "title": "Snippet for reset_instance in NotebookService",
-      "description": "Basic snippet for reset_instance in NotebookService",
+      "title": "Snippet for the reset_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#reset_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/reset_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_ReportInstanceInfo_sync",
-      "title": "Snippet for report_instance_info in NotebookService",
-      "description": "Basic snippet for report_instance_info in NotebookService",
+      "title": "Snippet for the report_instance_info call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#report_instance_info. It may require modification in order to execute successfully.",
       "file": "notebook_service/report_instance_info.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_IsInstanceUpgradeable_sync",
-      "title": "Snippet for is_instance_upgradeable in NotebookService",
-      "description": "Basic snippet for is_instance_upgradeable in NotebookService",
+      "title": "Snippet for the is_instance_upgradeable call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#is_instance_upgradeable. It may require modification in order to execute successfully.",
       "file": "notebook_service/is_instance_upgradeable.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_GetInstanceHealth_sync",
-      "title": "Snippet for get_instance_health in NotebookService",
-      "description": "Basic snippet for get_instance_health in NotebookService",
+      "title": "Snippet for the get_instance_health call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#get_instance_health. It may require modification in order to execute successfully.",
       "file": "notebook_service/get_instance_health.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_UpgradeInstance_sync",
-      "title": "Snippet for upgrade_instance in NotebookService",
-      "description": "Basic snippet for upgrade_instance in NotebookService",
+      "title": "Snippet for the upgrade_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#upgrade_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/upgrade_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_RollbackInstance_sync",
-      "title": "Snippet for rollback_instance in NotebookService",
-      "description": "Basic snippet for rollback_instance in NotebookService",
+      "title": "Snippet for the rollback_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#rollback_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/rollback_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_DiagnoseInstance_sync",
-      "title": "Snippet for diagnose_instance in NotebookService",
-      "description": "Basic snippet for diagnose_instance in NotebookService",
+      "title": "Snippet for the diagnose_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#diagnose_instance. It may require modification in order to execute successfully.",
       "file": "notebook_service/diagnose_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_UpgradeInstanceInternal_sync",
-      "title": "Snippet for upgrade_instance_internal in NotebookService",
-      "description": "Basic snippet for upgrade_instance_internal in NotebookService",
+      "title": "Snippet for the upgrade_instance_internal call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#upgrade_instance_internal. It may require modification in order to execute successfully.",
       "file": "notebook_service/upgrade_instance_internal.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_ListEnvironments_sync",
-      "title": "Snippet for list_environments in NotebookService",
-      "description": "Basic snippet for list_environments in NotebookService",
+      "title": "Snippet for the list_environments call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#list_environments. It may require modification in order to execute successfully.",
       "file": "notebook_service/list_environments.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_GetEnvironment_sync",
-      "title": "Snippet for get_environment in NotebookService",
-      "description": "Basic snippet for get_environment in NotebookService",
+      "title": "Snippet for the get_environment call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#get_environment. It may require modification in order to execute successfully.",
       "file": "notebook_service/get_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_CreateEnvironment_sync",
-      "title": "Snippet for create_environment in NotebookService",
-      "description": "Basic snippet for create_environment in NotebookService",
+      "title": "Snippet for the create_environment call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#create_environment. It may require modification in order to execute successfully.",
       "file": "notebook_service/create_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_DeleteEnvironment_sync",
-      "title": "Snippet for delete_environment in NotebookService",
-      "description": "Basic snippet for delete_environment in NotebookService",
+      "title": "Snippet for the delete_environment call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#delete_environment. It may require modification in order to execute successfully.",
       "file": "notebook_service/delete_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,15 +1526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_ListSchedules_sync",
-      "title": "Snippet for list_schedules in NotebookService",
-      "description": "Basic snippet for list_schedules in NotebookService",
+      "title": "Snippet for the list_schedules call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#list_schedules. It may require modification in order to execute successfully.",
       "file": "notebook_service/list_schedules.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,15 +1566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_GetSchedule_sync",
-      "title": "Snippet for get_schedule in NotebookService",
-      "description": "Basic snippet for get_schedule in NotebookService",
+      "title": "Snippet for the get_schedule call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#get_schedule. It may require modification in order to execute successfully.",
       "file": "notebook_service/get_schedule.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,15 +1606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_DeleteSchedule_sync",
-      "title": "Snippet for delete_schedule in NotebookService",
-      "description": "Basic snippet for delete_schedule in NotebookService",
+      "title": "Snippet for the delete_schedule call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#delete_schedule. It may require modification in order to execute successfully.",
       "file": "notebook_service/delete_schedule.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,15 +1646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_CreateSchedule_sync",
-      "title": "Snippet for create_schedule in NotebookService",
-      "description": "Basic snippet for create_schedule in NotebookService",
+      "title": "Snippet for the create_schedule call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#create_schedule. It may require modification in order to execute successfully.",
       "file": "notebook_service/create_schedule.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,15 +1686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_TriggerSchedule_sync",
-      "title": "Snippet for trigger_schedule in NotebookService",
-      "description": "Basic snippet for trigger_schedule in NotebookService",
+      "title": "Snippet for the trigger_schedule call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#trigger_schedule. It may require modification in order to execute successfully.",
       "file": "notebook_service/trigger_schedule.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,15 +1726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_ListExecutions_sync",
-      "title": "Snippet for list_executions in NotebookService",
-      "description": "Basic snippet for list_executions in NotebookService",
+      "title": "Snippet for the list_executions call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#list_executions. It may require modification in order to execute successfully.",
       "file": "notebook_service/list_executions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,15 +1766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_GetExecution_sync",
-      "title": "Snippet for get_execution in NotebookService",
-      "description": "Basic snippet for get_execution in NotebookService",
+      "title": "Snippet for the get_execution call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#get_execution. It may require modification in order to execute successfully.",
       "file": "notebook_service/get_execution.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,15 +1806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_DeleteExecution_sync",
-      "title": "Snippet for delete_execution in NotebookService",
-      "description": "Basic snippet for delete_execution in NotebookService",
+      "title": "Snippet for the delete_execution call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#delete_execution. It may require modification in order to execute successfully.",
       "file": "notebook_service/delete_execution.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,15 +1846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "notebooks_v1_generated_NotebookService_CreateExecution_sync",
-      "title": "Snippet for create_execution in NotebookService",
-      "description": "Basic snippet for create_execution in NotebookService",
+      "title": "Snippet for the create_execution call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1::NotebookService::Client#create_execution. It may require modification in order to execute successfully.",
       "file": "notebook_service/create_execution.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

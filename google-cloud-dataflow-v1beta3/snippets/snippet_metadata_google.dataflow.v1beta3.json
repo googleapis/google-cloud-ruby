@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataflow-v1beta3",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "dataflow_v1beta3_generated_Snapshots_GetSnapshot_sync",
-      "title": "Snippet for get_snapshot in Snapshots",
-      "description": "Basic snippet for get_snapshot in Snapshots",
+      "title": "Snippet for the get_snapshot call in the Snapshots service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Snapshots::Client#get_snapshot. It may require modification in order to execute successfully.",
       "file": "snapshots/get_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Snapshots_DeleteSnapshot_sync",
-      "title": "Snippet for delete_snapshot in Snapshots",
-      "description": "Basic snippet for delete_snapshot in Snapshots",
+      "title": "Snippet for the delete_snapshot call in the Snapshots service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Snapshots::Client#delete_snapshot. It may require modification in order to execute successfully.",
       "file": "snapshots/delete_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Snapshots_ListSnapshots_sync",
-      "title": "Snippet for list_snapshots in Snapshots",
-      "description": "Basic snippet for list_snapshots in Snapshots",
+      "title": "Snippet for the list_snapshots call in the Snapshots service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Snapshots::Client#list_snapshots. It may require modification in order to execute successfully.",
       "file": "snapshots/list_snapshots.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_CreateJob_sync",
-      "title": "Snippet for create_job in Jobs",
-      "description": "Basic snippet for create_job in Jobs",
+      "title": "Snippet for the create_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#create_job. It may require modification in order to execute successfully.",
       "file": "jobs/create_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_GetJob_sync",
-      "title": "Snippet for get_job in Jobs",
-      "description": "Basic snippet for get_job in Jobs",
+      "title": "Snippet for the get_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#get_job. It may require modification in order to execute successfully.",
       "file": "jobs/get_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_UpdateJob_sync",
-      "title": "Snippet for update_job in Jobs",
-      "description": "Basic snippet for update_job in Jobs",
+      "title": "Snippet for the update_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#update_job. It may require modification in order to execute successfully.",
       "file": "jobs/update_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_ListJobs_sync",
-      "title": "Snippet for list_jobs in Jobs",
-      "description": "Basic snippet for list_jobs in Jobs",
+      "title": "Snippet for the list_jobs call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#list_jobs. It may require modification in order to execute successfully.",
       "file": "jobs/list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_AggregatedListJobs_sync",
-      "title": "Snippet for aggregated_list_jobs in Jobs",
-      "description": "Basic snippet for aggregated_list_jobs in Jobs",
+      "title": "Snippet for the aggregated_list_jobs call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#aggregated_list_jobs. It may require modification in order to execute successfully.",
       "file": "jobs/aggregated_list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_CheckActiveJobs_sync",
-      "title": "Snippet for check_active_jobs in Jobs",
-      "description": "Basic snippet for check_active_jobs in Jobs",
+      "title": "Snippet for the check_active_jobs call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#check_active_jobs. It may require modification in order to execute successfully.",
       "file": "jobs/check_active_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Jobs_SnapshotJob_sync",
-      "title": "Snippet for snapshot_job in Jobs",
-      "description": "Basic snippet for snapshot_job in Jobs",
+      "title": "Snippet for the snapshot_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#snapshot_job. It may require modification in order to execute successfully.",
       "file": "jobs/snapshot_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Messages_ListJobMessages_sync",
-      "title": "Snippet for list_job_messages in Messages",
-      "description": "Basic snippet for list_job_messages in Messages",
+      "title": "Snippet for the list_job_messages call in the Messages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Messages::Client#list_job_messages. It may require modification in order to execute successfully.",
       "file": "messages/list_job_messages.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Metrics_GetJobMetrics_sync",
-      "title": "Snippet for get_job_metrics in Metrics",
-      "description": "Basic snippet for get_job_metrics in Metrics",
+      "title": "Snippet for the get_job_metrics call in the Metrics service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_metrics. It may require modification in order to execute successfully.",
       "file": "metrics/get_job_metrics.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Metrics_GetJobExecutionDetails_sync",
-      "title": "Snippet for get_job_execution_details in Metrics",
-      "description": "Basic snippet for get_job_execution_details in Metrics",
+      "title": "Snippet for the get_job_execution_details call in the Metrics service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_execution_details. It may require modification in order to execute successfully.",
       "file": "metrics/get_job_execution_details.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_Metrics_GetStageExecutionDetails_sync",
-      "title": "Snippet for get_stage_execution_details in Metrics",
-      "description": "Basic snippet for get_stage_execution_details in Metrics",
+      "title": "Snippet for the get_stage_execution_details call in the Metrics service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_stage_execution_details. It may require modification in order to execute successfully.",
       "file": "metrics/get_stage_execution_details.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_TemplatesService_CreateJobFromTemplate_sync",
-      "title": "Snippet for create_job_from_template in TemplatesService",
-      "description": "Basic snippet for create_job_from_template in TemplatesService",
+      "title": "Snippet for the create_job_from_template call in the TemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#create_job_from_template. It may require modification in order to execute successfully.",
       "file": "templates_service/create_job_from_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_sync",
-      "title": "Snippet for launch_template in TemplatesService",
-      "description": "Basic snippet for launch_template in TemplatesService",
+      "title": "Snippet for the launch_template call in the TemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#launch_template. It may require modification in order to execute successfully.",
       "file": "templates_service/launch_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_TemplatesService_GetTemplate_sync",
-      "title": "Snippet for get_template in TemplatesService",
-      "description": "Basic snippet for get_template in TemplatesService",
+      "title": "Snippet for the get_template call in the TemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#get_template. It may require modification in order to execute successfully.",
       "file": "templates_service/get_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_sync",
-      "title": "Snippet for launch_flex_template in FlexTemplatesService",
-      "description": "Basic snippet for launch_flex_template in FlexTemplatesService",
+      "title": "Snippet for the launch_flex_template call in the FlexTemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client#launch_flex_template. It may require modification in order to execute successfully.",
       "file": "flex_templates_service/launch_flex_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

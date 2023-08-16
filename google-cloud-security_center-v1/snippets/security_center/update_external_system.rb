@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_external_system
+# Snippet for the update_external_system call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_external_system.
+# It may require modification in order to execute successfully.
 #
 def update_external_system
   # Create a client object. The client can be reused for multiple calls.

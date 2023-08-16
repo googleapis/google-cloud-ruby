@@ -26,6 +26,7 @@ require "google/cloud/spanner/admin/database/v1/database_admin/credentials"
 require "google/cloud/spanner/admin/database/v1/database_admin/paths"
 require "google/cloud/spanner/admin/database/v1/database_admin/operations"
 require "google/cloud/spanner/admin/database/v1/database_admin/client"
+require "google/cloud/spanner/admin/database/v1/database_admin/rest"
 
 module Google
   module Cloud
@@ -42,10 +43,15 @@ module Google
             #   * create, delete and list backups for a database
             #   * restore a database from an existing backup
             #
-            # To load this service and instantiate a client:
+            # @example Load this service and instantiate a gRPC client
             #
             #     require "google/cloud/spanner/admin/database/v1/database_admin"
             #     client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+            #
+            # @example Load this service and instantiate a REST client
+            #
+            #     require "google/cloud/spanner/admin/database/v1/database_admin/rest"
+            #     client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new
             #
             module DatabaseAdmin
             end

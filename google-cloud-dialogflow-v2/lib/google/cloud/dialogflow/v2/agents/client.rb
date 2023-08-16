@@ -129,7 +129,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -492,13 +492,11 @@ module Google
             #   # Call the search_agents method.
             #   result = client.search_agents request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Agent.
-            #     p response
+            #     p item
             #   end
             #
             def search_agents request, options = nil
@@ -598,14 +596,14 @@ module Google
             #   # Call the train_agent method.
             #   result = client.train_agent request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def train_agent request, options = nil
@@ -659,7 +657,8 @@ module Google
             #
             # - `metadata`: An empty [Struct
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse}
             #
             # @overload export_agent(request, options = nil)
             #   Pass arguments to `export_agent` via a request object, either of type
@@ -680,10 +679,10 @@ module Google
             #     Required. The project that the agent to export is associated with.
             #     Format: `projects/<Project ID>`.
             #   @param agent_uri [::String]
-            #     Required. The [Google Cloud Storage](https://cloud.google.com/storage/docs/)
-            #     URI to export the agent to.
-            #     The format of this URI must be `gs://<bucket-name>/<object-name>`.
-            #     If left unspecified, the serialized agent is returned inline.
+            #     Required. The [Google Cloud
+            #     Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+            #     to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+            #     left unspecified, the serialized agent is returned inline.
             #
             #     Dialogflow performs a write operation for the Cloud Storage object
             #     on the caller's behalf, so your request authentication must
@@ -711,14 +710,14 @@ module Google
             #   # Call the export_agent method.
             #   result = client.export_agent request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_agent request, options = nil
@@ -768,11 +767,13 @@ module Google
             #
             # Uploads new intents and entity types without deleting the existing ones.
             # Intents and entity types with the same name are replaced with the new
-            # versions from {::Google::Cloud::Dialogflow::V2::ImportAgentRequest ImportAgentRequest}. After the import, the imported draft
-            # agent will be trained automatically (unless disabled in agent settings).
-            # However, once the import is done, training may not be completed yet. Please
-            # call {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the operation it returns in order to train
-            # explicitly.
+            # versions from
+            # {::Google::Cloud::Dialogflow::V2::ImportAgentRequest ImportAgentRequest}. After
+            # the import, the imported draft agent will be trained automatically (unless
+            # disabled in agent settings). However, once the import is done, training may
+            # not be completed yet. Please call
+            # {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the
+            # operation it returns in order to train explicitly.
             #
             # This method is a [long-running
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
@@ -840,14 +841,14 @@ module Google
             #   # Call the import_agent method.
             #   result = client.import_agent request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_agent request, options = nil
@@ -899,8 +900,9 @@ module Google
             # entity types in the older version are deleted. After the restore, the
             # restored draft agent will be trained automatically (unless disabled in
             # agent settings). However, once the restore is done, training may not be
-            # completed yet. Please call {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the operation it
-            # returns in order to train explicitly.
+            # completed yet. Please call
+            # {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the
+            # operation it returns in order to train explicitly.
             #
             # This method is a [long-running
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
@@ -968,14 +970,14 @@ module Google
             #   # Call the restore_agent method.
             #   result = client.restore_agent request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def restore_agent request, options = nil
@@ -1151,9 +1153,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1195,7 +1197,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

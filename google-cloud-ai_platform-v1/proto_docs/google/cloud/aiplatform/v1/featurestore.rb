@@ -36,11 +36,12 @@ module Google
         #     Output only. Timestamp when this Featurestore was last updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Used to perform consistent read-modify-write updates. If not set, a blind
-        #     "overwrite" update happens.
+        #     Optional. Used to perform consistent read-modify-write updates. If not set,
+        #     a blind "overwrite" update happens.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. The labels with user-defined metadata to organize your Featurestore.
+        #     Optional. The labels with user-defined metadata to organize your
+        #     Featurestore.
         #
         #     Label keys and values can be no longer than 64 characters
         #     (Unicode codepoints), can only contain lowercase letters, numeric
@@ -53,17 +54,25 @@ module Google
         #     and are immutable.
         # @!attribute [rw] online_serving_config
         #   @return [::Google::Cloud::AIPlatform::V1::Featurestore::OnlineServingConfig]
-        #     Optional. Config for online storage resources. The field should not co-exist with the
-        #     field of `OnlineStoreReplicationConfig`. If both of it and
-        #     OnlineStoreReplicationConfig are unset, the feature store will not have an
-        #     online store and cannot be used for online serving.
+        #     Optional. Config for online storage resources. The field should not
+        #     co-exist with the field of `OnlineStoreReplicationConfig`. If both of it
+        #     and OnlineStoreReplicationConfig are unset, the feature store will not have
+        #     an online store and cannot be used for online serving.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::Featurestore::State]
         #     Output only. State of the featurestore.
+        # @!attribute [rw] online_storage_ttl_days
+        #   @return [::Integer]
+        #     Optional. TTL in days for feature values that will be stored in online
+        #     serving storage. The Feature Store online storage periodically removes
+        #     obsolete feature values older than `online_storage_ttl_days` since the
+        #     feature generation time. Note that `online_storage_ttl_days` should be less
+        #     than or equal to `offline_storage_ttl_days` for each EntityType under a
+        #     featurestore. If not set, default to 4000 days
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
-        #     Optional. Customer-managed encryption key spec for data storage. If set, both of the
-        #     online and offline data storage will be secured by this key.
+        #     Optional. Customer-managed encryption key spec for data storage. If set,
+        #     both of the online and offline data storage will be secured by this key.
         class Featurestore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,12 +99,21 @@ module Google
             # with the fixed number of node (no auto-scaling).
             # @!attribute [rw] min_node_count
             #   @return [::Integer]
-            #     Required. The minimum number of nodes to scale down to. Must be greater than or
-            #     equal to 1.
+            #     Required. The minimum number of nodes to scale down to. Must be greater
+            #     than or equal to 1.
             # @!attribute [rw] max_node_count
             #   @return [::Integer]
             #     The maximum number of nodes to scale up to. Must be greater than
             #     min_node_count, and less than or equal to 10 times of 'min_node_count'.
+            # @!attribute [rw] cpu_utilization_target
+            #   @return [::Integer]
+            #     Optional. The cpu utilization that the Autoscaler should be trying to
+            #     achieve. This number is on a scale from 0 (no utilization) to 100
+            #     (total utilization), and is limited between 10 and 80. When a cluster's
+            #     CPU utilization exceeds the target that you have set, Bigtable
+            #     immediately adds nodes to the cluster. When CPU utilization is
+            #     substantially lower than the target, Bigtable removes nodes. If not set
+            #     or set to 0, default to 50.
             class Scaling
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -31,9 +31,9 @@ module Google
         ##
         # The GlobalPublicDelegatedPrefixes API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/global_public_delegated_prefixes"
+        #     require "google/cloud/compute/v1/global_public_delegated_prefixes/rest"
         #     client = ::Google::Cloud::Compute::V1::GlobalPublicDelegatedPrefixes::Rest::Client.new
         #
         module GlobalPublicDelegatedPrefixes

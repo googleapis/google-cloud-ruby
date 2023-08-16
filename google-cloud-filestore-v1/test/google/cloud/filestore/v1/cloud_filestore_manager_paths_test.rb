@@ -58,4 +58,16 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientPathsTest < M
       assert_equal "projects/value0/locations/value1", path
     end
   end
+
+  def test_snapshot_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.snapshot_path project: "value0", location: "value1", instance: "value2", snapshot: "value3"
+      assert_equal "projects/value0/locations/value1/instances/value2/snapshots/value3", path
+    end
+  end
 end

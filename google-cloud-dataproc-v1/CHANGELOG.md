@@ -1,5 +1,57 @@
 # Release History
 
+### 0.18.1 (2023-08-03)
+
+#### Documentation
+
+* Improve documentation format ([#22680](https://github.com/googleapis/google-cloud-ruby/issues/22680)) 
+
+### 0.18.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.17.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.16.0 (2023-02-23)
+
+#### Features
+
+* ClusterOperationMetadata includes child operation IDs 
+* Expose approximate and current batches resources usage 
+* Include a mixin client for IAM policies 
+* Include boot disk KMS key in GkeNodeConfig 
+* Include GPU partition size in GkeNodePoolAcceleratorConfig 
+* Include spot flag in GkeNodeConfig 
+* Support batch TTL 
+* Support custom staging bucket for batches 
+* Support filtering and ordering in list_batches API 
+* Support for the HIVEMETASTORE metric source 
+* Support Hudi and Trino components ([#20497](https://github.com/googleapis/google-cloud-ruby/issues/20497)) 
+* Support Trino jobs on 2.1+ image clusters 
+
+### 0.15.0 (2023-01-24)
+
+#### Features
+
+* Support for the SPOT preemptibility option ([#20045](https://github.com/googleapis/google-cloud-ruby/issues/20045)) 
+
+### 0.14.0 (2022-12-14)
+
+#### Features
+
+* Support for configuring driver scheduling in a Job 
+* Support for setting auxiliary node groups in a ClusterConfig 
+* Support for the NodeGroupController service ([#19853](https://github.com/googleapis/google-cloud-ruby/issues/19853)) 
+
 ### 0.13.0 (2022-09-28)
 
 #### Features

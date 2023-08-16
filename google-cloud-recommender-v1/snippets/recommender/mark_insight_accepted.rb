@@ -20,8 +20,11 @@
 require "google/cloud/recommender/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Recommender::V1::Recommender::Client#mark_insight_accepted
+# Snippet for the mark_insight_accepted call in the Recommender service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#mark_insight_accepted. It
+# may require modification in order to execute successfully.
 #
 def mark_insight_accepted
   # Create a client object. The client can be reused for multiple calls.

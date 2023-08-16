@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The GKE Hub API centrally manages features and services on all your Kubernetes clusters running in a variety of environments, including Google cloud, on premises in customer datacenters, or other third party clouds.",
     "ruby-cloud-env-prefix": "GKE_HUB",
     "ruby-cloud-product-url": "https://cloud.google.com/anthos/clusters/docs",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

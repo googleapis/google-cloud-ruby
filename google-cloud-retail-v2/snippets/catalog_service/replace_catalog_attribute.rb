@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute
+# Snippet for the replace_catalog_attribute call in the CatalogService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute.
+# It may require modification in order to execute successfully.
 #
 def replace_catalog_attribute
   # Create a client object. The client can be reused for multiple calls.

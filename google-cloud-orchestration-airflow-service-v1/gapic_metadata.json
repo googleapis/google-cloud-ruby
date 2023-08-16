@@ -34,6 +34,41 @@
               "methods": [
                 "delete_environment"
               ]
+            },
+            "ExecuteAirflowCommand": {
+              "methods": [
+                "execute_airflow_command"
+              ]
+            },
+            "StopAirflowCommand": {
+              "methods": [
+                "stop_airflow_command"
+              ]
+            },
+            "PollAirflowCommand": {
+              "methods": [
+                "poll_airflow_command"
+              ]
+            },
+            "SaveSnapshot": {
+              "methods": [
+                "save_snapshot"
+              ]
+            },
+            "LoadSnapshot": {
+              "methods": [
+                "load_snapshot"
+              ]
+            },
+            "DatabaseFailover": {
+              "methods": [
+                "database_failover"
+              ]
+            },
+            "FetchDatabaseProperties": {
+              "methods": [
+                "fetch_database_properties"
+              ]
             }
           }
         }

@@ -34,7 +34,7 @@ module Google
         # The Notification Channel API provides access to configuration that
         # controls how messages related to incidents are sent.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/v3/notification_channel_service"
         #     client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new

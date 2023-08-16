@@ -45,7 +45,7 @@ module Google
         # there would be one note for the vulnerability and an occurrence for each
         # image with the vulnerability referring to that note.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/container_analysis/v1/container_analysis"
         #     client = ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new

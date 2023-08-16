@@ -24,6 +24,7 @@ require "google/cloud/dataflow/v1beta3/version"
 
 require "google/cloud/dataflow/v1beta3/flex_templates_service/credentials"
 require "google/cloud/dataflow/v1beta3/flex_templates_service/client"
+require "google/cloud/dataflow/v1beta3/flex_templates_service/rest"
 
 module Google
   module Cloud
@@ -32,10 +33,15 @@ module Google
         ##
         # Provides a service for Flex templates. This feature is not ready yet.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/flex_templates_service"
         #     client = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataflow/v1beta3/flex_templates_service/rest"
+        #     client = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Rest::Client.new
         #
         module FlexTemplatesService
         end

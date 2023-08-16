@@ -35,7 +35,9 @@ module Google
                 # the REST modules only when it's required.
                 require "gapic/rest"
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials, numeric_enums: false
+                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials,
+                                                             numeric_enums: false,
+                                                             raise_faraday_errors: false
               end
 
               ##
@@ -46,18 +48,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def add_access_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_add_access_config_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_add_access_config_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -69,9 +71,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -83,18 +86,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def add_resource_policies request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_add_resource_policies_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_add_resource_policies_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -106,9 +109,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -120,18 +124,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstanceAggregatedList]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::InstanceAggregatedList]
               #   A result object deserialized from the server's reply
               def aggregated_list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_aggregated_list_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_aggregated_list_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -143,9 +147,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceAggregatedList.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -157,18 +162,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def attach_disk request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_attach_disk_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_attach_disk_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -180,9 +185,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -194,18 +200,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def bulk_insert request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_bulk_insert_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_bulk_insert_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -217,9 +223,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -231,18 +238,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def delete request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_delete_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -254,9 +261,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -268,18 +276,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def delete_access_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_delete_access_config_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_access_config_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -291,9 +299,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -305,18 +314,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def detach_disk request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_detach_disk_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_detach_disk_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -328,9 +337,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -342,18 +352,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Instance]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Instance]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -365,9 +375,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Instance.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -379,18 +390,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
               #   A result object deserialized from the server's reply
               def get_effective_firewalls request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_effective_firewalls_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_effective_firewalls_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -402,9 +413,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -416,18 +428,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::GuestAttributes]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::GuestAttributes]
               #   A result object deserialized from the server's reply
               def get_guest_attributes request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_guest_attributes_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_guest_attributes_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -439,9 +451,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::GuestAttributes.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -453,18 +466,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Policy]
               #   A result object deserialized from the server's reply
               def get_iam_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_iam_policy_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_iam_policy_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -476,9 +489,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -490,18 +504,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Screenshot]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Screenshot]
               #   A result object deserialized from the server's reply
               def get_screenshot request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_screenshot_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_screenshot_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -513,9 +527,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Screenshot.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -527,18 +542,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::SerialPortOutput]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::SerialPortOutput]
               #   A result object deserialized from the server's reply
               def get_serial_port_output request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_serial_port_output_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_serial_port_output_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -550,9 +565,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::SerialPortOutput.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -564,18 +580,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::ShieldedInstanceIdentity]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::ShieldedInstanceIdentity]
               #   A result object deserialized from the server's reply
               def get_shielded_instance_identity request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_get_shielded_instance_identity_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_shielded_instance_identity_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -587,9 +603,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::ShieldedInstanceIdentity.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -601,18 +618,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def insert request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_insert_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_insert_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -624,9 +641,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -638,18 +656,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstanceList]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::InstanceList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_list_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -661,9 +679,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceList.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -675,18 +694,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstanceListReferrers]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::InstanceListReferrers]
               #   A result object deserialized from the server's reply
               def list_referrers request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_list_referrers_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_referrers_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -698,9 +717,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceListReferrers.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -712,18 +732,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def remove_resource_policies request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_remove_resource_policies_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_remove_resource_policies_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -735,9 +755,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -749,18 +770,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def reset request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_reset_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_reset_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -772,9 +793,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -786,18 +808,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def resume request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_resume_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_resume_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -809,9 +831,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -823,18 +846,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
               #   A result object deserialized from the server's reply
               def send_diagnostic_interrupt request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_send_diagnostic_interrupt_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_send_diagnostic_interrupt_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -846,9 +869,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -860,18 +884,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_deletion_protection request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_deletion_protection_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_deletion_protection_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -883,9 +907,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -897,18 +922,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_disk_auto_delete request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_disk_auto_delete_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_disk_auto_delete_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -920,9 +945,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -934,18 +960,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Policy]
               #   A result object deserialized from the server's reply
               def set_iam_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_iam_policy_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_iam_policy_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -957,9 +983,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -971,18 +998,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_labels request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_labels_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_labels_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -994,9 +1021,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1008,18 +1036,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_machine_resources request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_machine_resources_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_machine_resources_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1031,9 +1059,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1045,18 +1074,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_machine_type request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_machine_type_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_machine_type_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1068,9 +1097,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1082,18 +1112,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_metadata request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_metadata_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_metadata_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1105,9 +1135,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1119,18 +1150,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_min_cpu_platform request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_min_cpu_platform_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_min_cpu_platform_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1142,9 +1173,48 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the set_name REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetNameInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def set_name request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_name_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
                 result
               end
 
@@ -1156,18 +1226,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_scheduling request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_scheduling_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_scheduling_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1179,9 +1249,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1193,18 +1264,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_service_account request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_service_account_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_service_account_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1216,9 +1287,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1230,18 +1302,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_shielded_instance_integrity_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_shielded_instance_integrity_policy_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_shielded_instance_integrity_policy_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1253,9 +1325,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1267,18 +1340,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def set_tags request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_set_tags_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_tags_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1290,9 +1363,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1304,18 +1378,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def simulate_maintenance_event request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_simulate_maintenance_event_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_simulate_maintenance_event_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1327,9 +1401,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1341,18 +1416,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def start request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_start_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_start_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1364,9 +1439,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1378,18 +1454,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def start_with_encryption_key request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_start_with_encryption_key_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_start_with_encryption_key_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1401,9 +1477,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1415,18 +1492,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def stop request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_stop_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_stop_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1438,9 +1515,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1452,18 +1530,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def suspend request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_suspend_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_suspend_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1475,9 +1553,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1489,18 +1568,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #   A result object deserialized from the server's reply
               def test_iam_permissions request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_test_iam_permissions_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_test_iam_permissions_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1512,9 +1591,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1526,18 +1606,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def update request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_update_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1549,9 +1629,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1563,18 +1644,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def update_access_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_update_access_config_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_access_config_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1586,9 +1667,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1600,18 +1682,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def update_display_device request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_update_display_device_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_display_device_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1623,9 +1705,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1637,18 +1720,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def update_network_interface request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_update_network_interface_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_network_interface_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1660,9 +1743,10 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
 
@@ -1674,18 +1758,18 @@ module Google
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
               def update_shielded_instance_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = transcode_update_shielded_instance_config_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_shielded_instance_config_request request_pb
                 query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                        query_string_params.to_h { |p| p.split "=", 2 }
                                       else
                                         {}
                                       end
@@ -1697,14 +1781,12 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
+                operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 result
               end
-
-
-              private
 
               ##
               # @private
@@ -1715,7 +1797,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_add_access_config_request request_pb
+              def self.transcode_add_access_config_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -1739,7 +1821,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_add_resource_policies_request request_pb
+              def self.transcode_add_resource_policies_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -1763,7 +1845,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_aggregated_list_request request_pb
+              def self.transcode_aggregated_list_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -1784,7 +1866,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_attach_disk_request request_pb
+              def self.transcode_attach_disk_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -1808,7 +1890,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_bulk_insert_request request_pb
+              def self.transcode_bulk_insert_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -1831,7 +1913,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_delete_request request_pb
+              def self.transcode_delete_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
@@ -1854,7 +1936,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_delete_access_config_request request_pb
+              def self.transcode_delete_access_config_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -1877,7 +1959,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_detach_disk_request request_pb
+              def self.transcode_detach_disk_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -1900,7 +1982,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_request request_pb
+              def self.transcode_get_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -1923,7 +2005,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_effective_firewalls_request request_pb
+              def self.transcode_get_effective_firewalls_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -1946,7 +2028,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_guest_attributes_request request_pb
+              def self.transcode_get_guest_attributes_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -1969,7 +2051,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_iam_policy_request request_pb
+              def self.transcode_get_iam_policy_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -1992,7 +2074,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_screenshot_request request_pb
+              def self.transcode_get_screenshot_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -2015,7 +2097,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_serial_port_output_request request_pb
+              def self.transcode_get_serial_port_output_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -2038,7 +2120,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_get_shielded_instance_identity_request request_pb
+              def self.transcode_get_shielded_instance_identity_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -2061,7 +2143,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_insert_request request_pb
+              def self.transcode_insert_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2084,7 +2166,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_list_request request_pb
+              def self.transcode_list_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -2106,7 +2188,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_list_referrers_request request_pb
+              def self.transcode_list_referrers_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
@@ -2129,7 +2211,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_remove_resource_policies_request request_pb
+              def self.transcode_remove_resource_policies_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2153,7 +2235,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_reset_request request_pb
+              def self.transcode_reset_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2176,7 +2258,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_resume_request request_pb
+              def self.transcode_resume_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2199,7 +2281,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_send_diagnostic_interrupt_request request_pb
+              def self.transcode_send_diagnostic_interrupt_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2222,7 +2304,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_deletion_protection_request request_pb
+              def self.transcode_set_deletion_protection_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2245,7 +2327,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_disk_auto_delete_request request_pb
+              def self.transcode_set_disk_auto_delete_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2268,7 +2350,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_iam_policy_request request_pb
+              def self.transcode_set_iam_policy_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2292,7 +2374,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_labels_request request_pb
+              def self.transcode_set_labels_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2316,7 +2398,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_machine_resources_request request_pb
+              def self.transcode_set_machine_resources_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2340,7 +2422,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_machine_type_request request_pb
+              def self.transcode_set_machine_type_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2364,7 +2446,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_metadata_request request_pb
+              def self.transcode_set_metadata_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2388,12 +2470,36 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_min_cpu_platform_request request_pb
+              def self.transcode_set_min_cpu_platform_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform",
                                                           body: "instances_set_min_cpu_platform_request_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_name REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetNameInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_set_name_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setName",
+                                                          body: "instances_set_name_request_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],
@@ -2412,7 +2518,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_scheduling_request request_pb
+              def self.transcode_set_scheduling_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2436,7 +2542,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_service_account_request request_pb
+              def self.transcode_set_service_account_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2460,7 +2566,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_shielded_instance_integrity_policy_request request_pb
+              def self.transcode_set_shielded_instance_integrity_policy_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :patch,
@@ -2484,7 +2590,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_set_tags_request request_pb
+              def self.transcode_set_tags_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2508,7 +2614,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_simulate_maintenance_event_request request_pb
+              def self.transcode_simulate_maintenance_event_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2531,7 +2637,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_start_request request_pb
+              def self.transcode_start_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2554,7 +2660,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_start_with_encryption_key_request request_pb
+              def self.transcode_start_with_encryption_key_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2578,7 +2684,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_stop_request request_pb
+              def self.transcode_stop_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2601,7 +2707,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_suspend_request request_pb
+              def self.transcode_suspend_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2624,7 +2730,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_test_iam_permissions_request request_pb
+              def self.transcode_test_iam_permissions_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2648,7 +2754,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_update_request request_pb
+              def self.transcode_update_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :put,
@@ -2672,7 +2778,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_update_access_config_request request_pb
+              def self.transcode_update_access_config_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
@@ -2696,7 +2802,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_update_display_device_request request_pb
+              def self.transcode_update_display_device_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :patch,
@@ -2720,7 +2826,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_update_network_interface_request request_pb
+              def self.transcode_update_network_interface_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :patch,
@@ -2744,7 +2850,7 @@ module Google
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def transcode_update_shielded_instance_config_request request_pb
+              def self.transcode_update_shielded_instance_config_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :patch,

@@ -26,6 +26,7 @@ require "google/cloud/firestore/admin/v1/firestore_admin/credentials"
 require "google/cloud/firestore/admin/v1/firestore_admin/paths"
 require "google/cloud/firestore/admin/v1/firestore_admin/operations"
 require "google/cloud/firestore/admin/v1/firestore_admin/client"
+require "google/cloud/firestore/admin/v1/firestore_admin/rest"
 
 module Google
   module Cloud
@@ -62,10 +63,15 @@ module Google
           # Operations are created by service `FirestoreAdmin`, but are accessed via
           # service `google.longrunning.Operations`.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/firestore/admin/v1/firestore_admin"
           #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/firestore/admin/v1/firestore_admin/rest"
+          #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
           #
           module FirestoreAdmin
           end

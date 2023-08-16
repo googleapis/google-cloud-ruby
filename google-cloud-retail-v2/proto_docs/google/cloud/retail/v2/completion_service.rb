@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Retail
       module V2
-        # Auto-complete parameters.
+        # Autocomplete parameters.
         # @!attribute [rw] catalog
         #   @return [::String]
         #     Required. Catalog for which the completion is performed.
@@ -55,8 +55,10 @@ module Google
         #     number of language codes is 3.
         # @!attribute [rw] device_type
         #   @return [::String]
-        #     The device type context for completion suggestions.
-        #     It is useful to apply different suggestions on different device types, e.g.
+        #     The device type context for completion suggestions. We recommend that you
+        #     leave this field empty.
+        #
+        #     It can apply different suggestions on different device types, e.g.
         #     `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device
         #     types.
         #
@@ -92,12 +94,20 @@ module Google
         #
         #     The maximum allowed max suggestions is 20. If it is set higher, it will be
         #     capped by 20.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     The entity for customers that may run multiple different entities, domains,
+        #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+        #     `google.com`, `youtube.com`, etc.
+        #     If this is set, it should be exactly matched with
+        #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get
+        #     per-entity autocomplete results.
         class CompleteQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response of the auto-complete query.
+        # Response of the autocomplete query.
         # @!attribute [rw] completion_results
         #   @return [::Array<::Google::Cloud::Retail::V2::CompleteQueryResponse::CompletionResult>]
         #     Results of the matching suggestions. The result list is ordered and the

@@ -28,10 +28,9 @@ module Google
         # @!attribute [rw] uri
         #   @return [::String]
         #     Optional. Currently supports Google Cloud Storage URI of the form
-        #        `gs://bucket_name/object_name`. Object versioning is not supported.
-        #        See [Google Cloud Storage Request
-        #        URIs](https://cloud.google.com/storage/docs/reference-uris) for more
-        #        info.
+        #     `gs://bucket_name/object_name`. Object versioning is not supported.
+        #     For more information, refer to [Google Cloud Storage Request
+        #     URIs](https://cloud.google.com/storage/docs/reference-uris).
         # @!attribute [rw] content
         #   @return [::String]
         #     Optional. Inline document content, represented as a stream of bytes.
@@ -39,30 +38,32 @@ module Google
         #     representation, whereas JSON representations use base64.
         # @!attribute [rw] mime_type
         #   @return [::String]
-        #     An IANA published MIME type (also referred to as media type). For more
-        #     information, see
-        #     https://www.iana.org/assignments/media-types/media-types.xhtml.
+        #     An IANA published [media type (MIME
+        #     type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
         # @!attribute [rw] text
         #   @return [::String]
         #     Optional. UTF-8 encoded text in reading order from the document.
         # @!attribute [rw] text_styles
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Style>]
-        #     Placeholder.  Styles for the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+        #     Styles for the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
         # @!attribute [rw] pages
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page>]
         #     Visual page layout for the {::Google::Cloud::DocumentAI::V1::Document Document}.
         # @!attribute [rw] entities
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Entity>]
-        #     A list of entities detected on {::Google::Cloud::DocumentAI::V1::Document#text Document.text}. For document shards,
-        #     entities in this list may cross shard boundaries.
+        #     A list of entities detected on
+        #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}. For document
+        #     shards, entities in this list may cross shard boundaries.
         # @!attribute [rw] entity_relations
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::EntityRelation>]
-        #     Placeholder.  Relationship among {::Google::Cloud::DocumentAI::V1::Document#entities Document.entities}.
+        #     Placeholder.  Relationship among
+        #     {::Google::Cloud::DocumentAI::V1::Document#entities Document.entities}.
         # @!attribute [rw] text_changes
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::TextChange>]
-        #     Placeholder.  A list of text corrections made to {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.  This
-        #     is usually used for annotating corrections to OCR mistakes.  Text changes
-        #     for a given revision may not overlap with each other.
+        #     Placeholder.  A list of text corrections made to
+        #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.  This is usually
+        #     used for annotating corrections to OCR mistakes.  Text changes for a given
+        #     revision may not overlap with each other.
         # @!attribute [rw] shard_info
         #   @return [::Google::Cloud::DocumentAI::V1::Document::ShardInfo]
         #     Information about the sharding if this document is sharded part of a larger
@@ -88,7 +89,8 @@ module Google
           #     Total number of shards.
           # @!attribute [rw] text_offset
           #   @return [::Integer]
-          #     The index of the first character in {::Google::Cloud::DocumentAI::V1::Document#text Document.text} in the overall
+          #     The index of the first character in
+          #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text} in the overall
           #     document global text.
           class ShardInfo
             include ::Google::Protobuf::MessageExts
@@ -99,7 +101,8 @@ module Google
           # conventions as much as possible.
           # @!attribute [rw] text_anchor
           #   @return [::Google::Cloud::DocumentAI::V1::Document::TextAnchor]
-          #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+          #     Text anchor indexing into the
+          #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] color
           #   @return [::Google::Type::Color]
           #     Text color.
@@ -108,17 +111,18 @@ module Google
           #     Text background color.
           # @!attribute [rw] font_weight
           #   @return [::String]
-          #     Font weight. Possible values are normal, bold, bolder, and lighter.
-          #     https://www.w3schools.com/cssref/pr_font_weight.asp
+          #     [Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp).
+          #     Possible values are `normal`, `bold`, `bolder`, and `lighter`.
           # @!attribute [rw] text_style
           #   @return [::String]
-          #     Text style. Possible values are normal, italic, and oblique.
-          #     https://www.w3schools.com/cssref/pr_font_font-style.asp
+          #     [Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp).
+          #     Possible values are `normal`, `italic`, and `oblique`.
           # @!attribute [rw] text_decoration
           #   @return [::String]
-          #     Text decoration. Follows CSS standard.
-          #     <text-decoration-line> <text-decoration-color> <text-decoration-style>
-          #     https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          #     [Text
+          #     decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp).
+          #     Follows CSS standard. <text-decoration-line> <text-decoration-color>
+          #     <text-decoration-style>
           # @!attribute [rw] font_size
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Style::FontSize]
           #     Font size.
@@ -136,7 +140,8 @@ module Google
             #     Font size for the text.
             # @!attribute [rw] unit
             #   @return [::String]
-            #     Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+            #     Unit for the font size. Follows CSS naming (such as `in`, `px`, and
+            #     `pt`).
             class FontSize
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,9 +151,11 @@ module Google
           # A page in a {::Google::Cloud::DocumentAI::V1::Document Document}.
           # @!attribute [rw] page_number
           #   @return [::Integer]
-          #     1-based index for current {::Google::Cloud::DocumentAI::V1::Document::Page Page} in a parent {::Google::Cloud::DocumentAI::V1::Document Document}.
-          #     Useful when a page is taken out of a {::Google::Cloud::DocumentAI::V1::Document Document} for individual
-          #     processing.
+          #     1-based index for current
+          #     {::Google::Cloud::DocumentAI::V1::Document::Page Page} in a parent
+          #     {::Google::Cloud::DocumentAI::V1::Document Document}. Useful when a page is
+          #     taken out of a {::Google::Cloud::DocumentAI::V1::Document Document} for
+          #     individual processing.
           # @!attribute [rw] image
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Image]
           #     Rendered image for this page. This image is preprocessed to remove any
@@ -201,7 +208,7 @@ module Google
           #     A list of detected barcodes.
           # @!attribute [rw] image_quality_scores
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::ImageQualityScores]
-          #     Image Quality Scores.
+          #     Image quality scores.
           # @!attribute [rw] provenance
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
           #     The history of this page.
@@ -230,7 +237,9 @@ module Google
             #     Raw byte content of the image.
             # @!attribute [rw] mime_type
             #   @return [::String]
-            #     Encoding mime type for the image.
+            #     Encoding [media type (MIME
+            #     type)](https://www.iana.org/assignments/media-types/media-types.xhtml)
+            #     for the image.
             # @!attribute [rw] width
             #   @return [::Integer]
             #     Width of the image in pixels.
@@ -267,18 +276,23 @@ module Google
             # Visual element describing a layout unit on a page.
             # @!attribute [rw] text_anchor
             #   @return [::Google::Cloud::DocumentAI::V1::Document::TextAnchor]
-            #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+            #     Text anchor indexing into the
+            #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
             # @!attribute [rw] confidence
             #   @return [::Float]
-            #     Confidence of the current {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} within context of the object this
-            #     layout is for. e.g. confidence can be for a single token, a table,
-            #     a visual element, etc. depending on context. Range `[0, 1]`.
+            #     Confidence of the current
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} within
+            #     context of the object this layout is for. e.g. confidence can be for a
+            #     single token, a table, a visual element, etc. depending on context.
+            #     Range `[0, 1]`.
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1::BoundingPoly]
-            #     The bounding polygon for the {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout}.
+            #     The bounding polygon for the
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout}.
             # @!attribute [rw] orientation
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout::Orientation]
-            #     Detected orientation for the {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout}.
+            #     Detected orientation for the
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout}.
             class Layout
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -309,7 +323,8 @@ module Google
             # common line-spacing and orientation.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Block Block}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Block Block}.
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
@@ -324,7 +339,8 @@ module Google
             # A collection of lines that a human would perceive as a paragraph.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Paragraph Paragraph}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Paragraph Paragraph}.
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
@@ -340,7 +356,8 @@ module Google
             # Does not cross column boundaries, can be horizontal, vertical, etc.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Line Line}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Line Line}.
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
@@ -355,21 +372,27 @@ module Google
             # A detected token.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Token Token}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Token Token}.
             # @!attribute [rw] detected_break
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Token::DetectedBreak]
-            #     Detected break at the end of a {::Google::Cloud::DocumentAI::V1::Document::Page::Token Token}.
+            #     Detected break at the end of a
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Token Token}.
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
             # @!attribute [rw] provenance
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
             #     The history of this annotation.
+            # @!attribute [rw] style_info
+            #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Token::StyleInfo]
+            #     Text style attributes.
             class Token
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
-              # Detected break at the end of a {::Google::Cloud::DocumentAI::V1::Document::Page::Token Token}.
+              # Detected break at the end of a
+              # {::Google::Cloud::DocumentAI::V1::Document::Page::Token Token}.
               # @!attribute [rw] type
               #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Token::DetectedBreak::Type]
               #     Detected break type.
@@ -392,12 +415,69 @@ module Google
                   HYPHEN = 3
                 end
               end
+
+              # Font and other text style attributes.
+              # @!attribute [rw] font_size
+              #   @return [::Integer]
+              #     Font size in points (`1` point is `¹⁄₇₂` inches).
+              # @!attribute [rw] pixel_font_size
+              #   @return [::Float]
+              #     Font size in pixels, equal to _unrounded
+              #     {::Google::Cloud::DocumentAI::V1::Document::Page::Token::StyleInfo#font_size font_size}_
+              #     * _resolution_ ÷ `72.0`.
+              # @!attribute [rw] letter_spacing
+              #   @return [::Float]
+              #     Letter spacing in points.
+              # @!attribute [rw] font_type
+              #   @return [::String]
+              #     Name or style of the font.
+              # @!attribute [rw] bold
+              #   @return [::Boolean]
+              #     Whether the text is bold (equivalent to
+              #     {::Google::Cloud::DocumentAI::V1::Document::Page::Token::StyleInfo#font_weight font_weight}
+              #     is at least `700`).
+              # @!attribute [rw] italic
+              #   @return [::Boolean]
+              #     Whether the text is italic.
+              # @!attribute [rw] underlined
+              #   @return [::Boolean]
+              #     Whether the text is underlined.
+              # @!attribute [rw] strikeout
+              #   @return [::Boolean]
+              #     Whether the text is strikethrough.
+              # @!attribute [rw] subscript
+              #   @return [::Boolean]
+              #     Whether the text is a subscript.
+              # @!attribute [rw] superscript
+              #   @return [::Boolean]
+              #     Whether the text is a superscript.
+              # @!attribute [rw] smallcaps
+              #   @return [::Boolean]
+              #     Whether the text is in small caps.
+              # @!attribute [rw] font_weight
+              #   @return [::Integer]
+              #     TrueType weight on a scale `100` (thin) to `1000` (ultra-heavy).
+              #     Normal is `400`, bold is `700`.
+              # @!attribute [rw] handwritten
+              #   @return [::Boolean]
+              #     Whether the text is handwritten.
+              # @!attribute [rw] text_color
+              #   @return [::Google::Type::Color]
+              #     Color of the text.
+              # @!attribute [rw] background_color
+              #   @return [::Google::Type::Color]
+              #     Color of the background.
+              class StyleInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # A detected symbol.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Symbol Symbol}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Symbol Symbol}.
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
@@ -410,10 +490,12 @@ module Google
             # page.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::VisualElement VisualElement}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::VisualElement VisualElement}.
             # @!attribute [rw] type
             #   @return [::String]
-            #     Type of the {::Google::Cloud::DocumentAI::V1::Document::Page::VisualElement VisualElement}.
+            #     Type of the
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::VisualElement VisualElement}.
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
@@ -425,7 +507,8 @@ module Google
             # A table representation similar to HTML table structure.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Table Table}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Table Table}.
             # @!attribute [rw] header_rows
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::Table::TableRow>]
             #     Header rows of the table.
@@ -454,7 +537,8 @@ module Google
               # A cell representation inside the table.
               # @!attribute [rw] layout
               #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-              #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Table::TableCell TableCell}.
+              #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+              #     {::Google::Cloud::DocumentAI::V1::Document::Page::Table::TableCell TableCell}.
               # @!attribute [rw] row_span
               #   @return [::Integer]
               #     How many rows this cell spans.
@@ -473,11 +557,13 @@ module Google
             # A form field detected on the page.
             # @!attribute [rw] field_name
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for the {::Google::Cloud::DocumentAI::V1::Document::Page::FormField FormField} name. e.g. `Address`, `Email`,
-            #     `Grand total`, `Phone number`, etc.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for the
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::FormField FormField} name.
+            #     e.g. `Address`, `Email`, `Grand total`, `Phone number`, etc.
             # @!attribute [rw] field_value
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for the {::Google::Cloud::DocumentAI::V1::Document::Page::FormField FormField} value.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for the
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::FormField FormField} value.
             # @!attribute [rw] name_detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages for name together with confidence.
@@ -488,9 +574,10 @@ module Google
             #   @return [::String]
             #     If the value is non-textual, this field represents the type. Current
             #     valid values are:
-            #     - blank (this indicates the field_value is normal text)
-            #     - "unfilled_checkbox"
-            #     - "filled_checkbox"
+            #
+            #     - blank (this indicates the `field_value` is normal text)
+            #     - `unfilled_checkbox`
+            #     - `filled_checkbox`
             # @!attribute [rw] corrected_key_text
             #   @return [::String]
             #     Created for Labeling UI to export key text.
@@ -512,10 +599,12 @@ module Google
             # A detected barcode.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
-            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode DetectedBarcode}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode DetectedBarcode}.
             # @!attribute [rw] barcode
             #   @return [::Google::Cloud::DocumentAI::V1::Barcode]
-            #     Detailed barcode information of the {::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode DetectedBarcode}.
+            #     Detailed barcode information of the
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode DetectedBarcode}.
             class DetectedBarcode
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -524,9 +613,9 @@ module Google
             # Detected language for a structural component.
             # @!attribute [rw] language_code
             #   @return [::String]
-            #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
-            #     information, see
-            #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            #     The [BCP-47 language
+            #     code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier),
+            #     such as `en-US` or `sr-Latn`.
             # @!attribute [rw] confidence
             #   @return [::Float]
             #     Confidence of detected language. Range `[0, 1]`.
@@ -535,10 +624,10 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Image Quality Scores for the page image
+            # Image quality scores for the page image.
             # @!attribute [rw] quality_score
             #   @return [::Float]
-            #     The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+            #     The overall quality score. Range `[0, 1]` where `1` is perfect quality.
             # @!attribute [rw] detected_defects
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::ImageQualityScores::DetectedDefect>]
             #     A list of detected defects.
@@ -561,8 +650,8 @@ module Google
               #     - `quality/defect_glare`
               # @!attribute [rw] confidence
               #   @return [::Float]
-              #     Confidence of detected defect. Range `[0, 1]` where 1 indicates
-              #     strong confidence of that the defect exists.
+              #     Confidence of detected defect. Range `[0, 1]` where `1` indicates
+              #     strong confidence that the defect exists.
               class DetectedDefect
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -576,7 +665,8 @@ module Google
           # @!attribute [rw] text_anchor
           #   @return [::Google::Cloud::DocumentAI::V1::Document::TextAnchor]
           #     Optional. Provenance of the entity.
-          #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+          #     Text anchor indexing into the
+          #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
           #     Required. Entity type from a schema e.g. `Address`.
@@ -591,28 +681,29 @@ module Google
           #     Optional. Confidence of detected Schema entity. Range `[0, 1]`.
           # @!attribute [rw] page_anchor
           #   @return [::Google::Cloud::DocumentAI::V1::Document::PageAnchor]
-          #     Optional. Represents the provenance of this entity wrt. the location on the
-          #     page where it was found.
+          #     Optional. Represents the provenance of this entity wrt. the location on
+          #     the page where it was found.
           # @!attribute [rw] id
           #   @return [::String]
           #     Optional. Canonical id. This will be a unique value in the entity list
           #     for this document.
           # @!attribute [rw] normalized_value
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Entity::NormalizedValue]
-          #     Optional. Normalized entity value. Absent if the extracted value could not be
-          #     converted or the type (e.g. address) is not supported for certain
+          #     Optional. Normalized entity value. Absent if the extracted value could
+          #     not be converted or the type (e.g. address) is not supported for certain
           #     parsers. This field is also only populated for certain supported document
           #     types.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Entity>]
-          #     Optional. Entities can be nested to form a hierarchical data structure representing
-          #     the content in the document.
+          #     Optional. Entities can be nested to form a hierarchical data structure
+          #     representing the content in the document.
           # @!attribute [rw] provenance
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
           #     Optional. The history of this annotation.
           # @!attribute [rw] redacted
           #   @return [::Boolean]
-          #     Optional. Whether the entity will be redacted for de-identification purposes.
+          #     Optional. Whether the entity will be redacted for de-identification
+          #     purposes.
           class Entity
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -649,8 +740,8 @@ module Google
             #     Optional. An optional field to store a normalized string.
             #     For some entity types, one of respective `structured_value` fields may
             #     also be populated. Also not all the types of `structured_value` will be
-            #     normalized. For example, some processors may not generate float
-            #     or int normalized text by default.
+            #     normalized. For example, some processors may not generate `float`
+            #     or `integer` normalized text by default.
             #
             #     Below are sample formats mapped to structured values.
             #
@@ -663,7 +754,8 @@ module Google
             end
           end
 
-          # Relationship between {::Google::Cloud::DocumentAI::V1::Document::Entity Entities}.
+          # Relationship between
+          # {::Google::Cloud::DocumentAI::V1::Document::Entity Entities}.
           # @!attribute [rw] subject_id
           #   @return [::String]
           #     Subject entity id.
@@ -678,10 +770,12 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Text reference indexing into the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+          # Text reference indexing into the
+          # {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] text_segments
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::TextAnchor::TextSegment>]
-          #     The text segments from the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+          #     The text segments from the
+          #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] content
           #   @return [::String]
           #     Contains the content of the text span so that users do
@@ -691,15 +785,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # A text segment in the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}. The indices may be out of bounds
-            # which indicate that the text extends into another document shard for
-            # large sharded documents. See {::Google::Cloud::DocumentAI::V1::Document::ShardInfo#text_offset ShardInfo.text_offset}
+            # A text segment in the
+            # {::Google::Cloud::DocumentAI::V1::Document#text Document.text}. The indices
+            # may be out of bounds which indicate that the text extends into another
+            # document shard for large sharded documents. See
+            # {::Google::Cloud::DocumentAI::V1::Document::ShardInfo#text_offset ShardInfo.text_offset}
             # @!attribute [rw] start_index
             #   @return [::Integer]
-            #     {::Google::Cloud::DocumentAI::V1::Document::TextAnchor::TextSegment TextSegment} start UTF-8 char index in the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+            #     {::Google::Cloud::DocumentAI::V1::Document::TextAnchor::TextSegment TextSegment}
+            #     start UTF-8 char index in the
+            #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
             # @!attribute [rw] end_index
             #   @return [::Integer]
-            #     {::Google::Cloud::DocumentAI::V1::Document::TextAnchor::TextSegment TextSegment} half open end UTF-8 char index in the
+            #     {::Google::Cloud::DocumentAI::V1::Document::TextAnchor::TextSegment TextSegment}
+            #     half open end UTF-8 char index in the
             #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
             class TextSegment
               include ::Google::Protobuf::MessageExts
@@ -707,9 +806,10 @@ module Google
             end
           end
 
-          # Referencing the visual context of the entity in the {::Google::Cloud::DocumentAI::V1::Document#pages Document.pages}.
-          # Page anchors can be cross-page, consist of multiple bounding polygons and
-          # optionally reference specific layout element types.
+          # Referencing the visual context of the entity in the
+          # {::Google::Cloud::DocumentAI::V1::Document#pages Document.pages}. Page anchors
+          # can be cross-page, consist of multiple bounding polygons and optionally
+          # reference specific layout element types.
           # @!attribute [rw] page_refs
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::PageAnchor::PageRef>]
           #     One or more references to visual page elements
@@ -720,22 +820,29 @@ module Google
             # Represents a weak reference to a page element within a document.
             # @!attribute [rw] page
             #   @return [::Integer]
-            #     Required. Index into the {::Google::Cloud::DocumentAI::V1::Document#pages Document.pages} element, for example using
-            #     [Document.pages][page_refs.page] to locate the related page element.
-            #     This field is skipped when its value is the default 0. See
+            #     Required. Index into the
+            #     {::Google::Cloud::DocumentAI::V1::Document#pages Document.pages} element,
+            #     for example using
+            #     `[Document.pages][page_refs.page]` to locate the related page element.
+            #     This field is skipped when its value is the default `0`. See
             #     https://developers.google.com/protocol-buffers/docs/proto3#json.
             # @!attribute [rw] layout_type
             #   @return [::Google::Cloud::DocumentAI::V1::Document::PageAnchor::PageRef::LayoutType]
-            #     Optional. The type of the layout element that is being referenced if any.
+            #     Optional. The type of the layout element that is being referenced if
+            #     any.
             # @!attribute [rw] layout_id
             #   @return [::String]
-            #     Optional. Deprecated.  Use {::Google::Cloud::DocumentAI::V1::Document::PageAnchor::PageRef#bounding_poly PageRef.bounding_poly} instead.
+            #     Optional. Deprecated.  Use
+            #     {::Google::Cloud::DocumentAI::V1::Document::PageAnchor::PageRef#bounding_poly PageRef.bounding_poly}
+            #     instead.
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1::BoundingPoly]
-            #     Optional. Identifies the bounding polygon of a layout element on the page.
+            #     Optional. Identifies the bounding polygon of a layout element on the
+            #     page.
             # @!attribute [rw] confidence
             #   @return [::Float]
-            #     Optional. Confidence of detected page element, if applicable. Range `[0, 1]`.
+            #     Optional. Confidence of detected page element, if applicable. Range
+            #     `[0, 1]`.
             class PageRef
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -745,25 +852,38 @@ module Google
                 # Layout Unspecified.
                 LAYOUT_TYPE_UNSPECIFIED = 0
 
-                # References a {::Google::Cloud::DocumentAI::V1::Document::Page#blocks Page.blocks} element.
+                # References a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#blocks Page.blocks}
+                # element.
                 BLOCK = 1
 
-                # References a {::Google::Cloud::DocumentAI::V1::Document::Page#paragraphs Page.paragraphs} element.
+                # References a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#paragraphs Page.paragraphs}
+                # element.
                 PARAGRAPH = 2
 
-                # References a {::Google::Cloud::DocumentAI::V1::Document::Page#lines Page.lines} element.
+                # References a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#lines Page.lines} element.
                 LINE = 3
 
-                # References a {::Google::Cloud::DocumentAI::V1::Document::Page#tokens Page.tokens} element.
+                # References a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#tokens Page.tokens}
+                # element.
                 TOKEN = 4
 
-                # References a {::Google::Cloud::DocumentAI::V1::Document::Page#visual_elements Page.visual_elements} element.
+                # References a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#visual_elements Page.visual_elements}
+                # element.
                 VISUAL_ELEMENT = 5
 
-                # Refrrences a {::Google::Cloud::DocumentAI::V1::Document::Page#tables Page.tables} element.
+                # Refrrences a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#tables Page.tables}
+                # element.
                 TABLE = 6
 
-                # References a {::Google::Cloud::DocumentAI::V1::Document::Page#form_fields Page.form_fields} element.
+                # References a
+                # {::Google::Cloud::DocumentAI::V1::Document::Page#form_fields Page.form_fields}
+                # element.
                 FORM_FIELD = 7
               end
             end
@@ -817,17 +937,24 @@ module Google
               # Remove an element identified by `parent`.
               REMOVE = 2
 
-              # Replace an element identified by `parent`.
+              # Updates any fields within the given provenance scope of the message. It
+              # overwrites the fields rather than replacing them.  Use this when you
+              # want to update a field value of an entity without also updating all the
+              # child properties.
+              UPDATE = 7
+
+              # Currently unused. Replace an element identified by `parent`.
               REPLACE = 3
 
-              # Request human review for the element identified by `parent`.
+              # Deprecated. Request human review for the element identified by
+              # `parent`.
               EVAL_REQUESTED = 4
 
-              # Element is reviewed and approved at human review, confidence will be
-              # set to 1.0.
+              # Deprecated. Element is reviewed and approved at human review,
+              # confidence will be set to 1.0.
               EVAL_APPROVED = 5
 
-              # Element is skipped in the validation process.
+              # Deprecated. Element is skipped in the validation process.
               EVAL_SKIPPED = 6
             end
           end
@@ -843,7 +970,8 @@ module Google
           #     resource name.
           # @!attribute [rw] id
           #   @return [::String]
-          #     Id of the revision.  Unique within the context of the document.
+          #     Id of the revision, internally generated by doc proto storage.
+          #     Unique within the context of the document.
           # @!attribute [rw] parent
           #   @return [::Array<::Integer>]
           #     The revisions that this revision is based on.  This can include one or
@@ -856,7 +984,8 @@ module Google
           #     `provenance.parent.revision` fields that index into this field.
           # @!attribute [rw] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The time that the revision was created.
+          #     The time that the revision was created, internally generated by
+          #     doc proto storage at the time of create.
           # @!attribute [rw] human_review
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Revision::HumanReview]
           #     Human Review information of this revision.
@@ -882,8 +1011,9 @@ module Google
           # @!attribute [rw] text_anchor
           #   @return [::Google::Cloud::DocumentAI::V1::Document::TextAnchor]
           #     Provenance of the correction.
-          #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.  There can only be a
-          #     single `TextAnchor.text_segments` element.  If the start and
+          #     Text anchor indexing into the
+          #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.  There can
+          #     only be a single `TextAnchor.text_segments` element.  If the start and
           #     end index of the text segment are the same, the text change is inserted
           #     before that index.
           # @!attribute [rw] changed_text

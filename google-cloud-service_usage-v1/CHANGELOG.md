@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.3.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.3.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
+### 0.2.1 (2023-03-05)
+
+#### Bug Fixes
+
+* Remove spurious header parameters when calling list_operations ([#20599](https://github.com/googleapis/google-cloud-ruby/issues/20599)) 
+#### Documentation
+
+* Updates to gem descriptions 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features

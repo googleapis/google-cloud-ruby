@@ -30,29 +30,34 @@ module Google
         attr_accessor :credentials
         attr_accessor :timeout
         attr_accessor :host
+        attr_accessor :database
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil
+        def initialize project, credentials, host: nil, timeout: nil, database: nil, transport: :grpc
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
+          @database = database
+          @transport = transport
         end
 
         def firestore
-          @firestore ||= \
-            V1::Firestore::Client.new do |config|
+          @firestore ||= begin
+            client_class = @transport == :rest ? V1::Firestore::Rest::Client : V1::Firestore::Client
+            client_class.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Firestore::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/(default)" }
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}" }
             end
+          end
         end
 
-        def get_documents document_paths, mask: nil, transaction: nil
+        def get_documents document_paths, mask: nil, transaction: nil, read_time: nil
           batch_get_req = {
             database:  database_path,
             documents: document_paths,
@@ -63,7 +68,9 @@ module Google
           elsif transaction
             batch_get_req[:new_transaction] = transaction
           end
-
+          if read_time
+            batch_get_req[:read_time] = read_time_to_timestamp(read_time)
+          end
           firestore.batch_get_documents batch_get_req, call_options(parent: database_path)
         end
 
@@ -74,23 +81,25 @@ module Google
         # the showMissing flag to true to support full document traversal. If
         # there are too many documents, recommendation will be not to call this
         # method.
-        def list_documents parent, collection_id, token: nil, max: nil
+        def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           mask = { field_paths: [] }
-          paged_enum = firestore.list_documents parent:        parent,
+          paged_enum = firestore.list_documents parent: parent,
                                                 collection_id: collection_id,
-                                                page_size:     max,
-                                                page_token:    token,
-                                                mask:          mask,
-                                                show_missing:  true
+                                                page_size: max,
+                                                page_token: token,
+                                                mask: mask,
+                                                show_missing: true,
+                                                read_time: read_time_to_timestamp(read_time)
           paged_enum.response
         end
 
-        def list_collections parent, token: nil, max: nil
+        def list_collections parent, token: nil, max: nil, read_time: nil
           firestore.list_collection_ids(
             {
-              parent:     parent,
-              page_size:  max,
-              page_token: token
+              parent: parent,
+              page_size: max,
+              page_token: token,
+              read_time: read_time_to_timestamp(read_time)
             },
             call_options(parent: database_path)
           )
@@ -98,19 +107,20 @@ module Google
 
         ##
         # Returns Google::Cloud::Firestore::V1::PartitionQueryResponse
-        def partition_query parent, query_grpc, partition_count, token: nil, max: nil
+        def partition_query parent, query_grpc, partition_count, token: nil, max: nil, read_time: nil
           request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new(
             parent: parent,
             structured_query: query_grpc,
             partition_count: partition_count,
             page_token: token,
-            page_size: max
+            page_size: max,
+            read_time: read_time_to_timestamp(read_time)
           )
           paged_enum = firestore.partition_query request
           paged_enum.response
         end
 
-        def run_query path, query_grpc, transaction: nil
+        def run_query path, query_grpc, transaction: nil, read_time: nil
           run_query_req = {
             parent:           path,
             structured_query: query_grpc
@@ -120,8 +130,26 @@ module Google
           elsif transaction
             run_query_req[:new_transaction] = transaction
           end
+          if read_time
+            run_query_req[:read_time] = read_time_to_timestamp(read_time)
+          end
 
           firestore.run_query run_query_req, call_options(parent: database_path)
+        end
+
+        ##
+        # Returns Google::Cloud::Firestore::V1::RunAggregationQueryResponse
+        def run_aggregate_query parent, structured_aggregation_query, transaction: nil
+          request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+            parent: parent,
+            structured_aggregation_query: structured_aggregation_query
+          )
+          if transaction.is_a? String
+            request.transaction = transaction
+          elsif transaction
+            request.new_transaction = transaction
+          end
+          firestore.run_aggregation_query request
         end
 
         def listen enum
@@ -158,18 +186,41 @@ module Google
           )
         end
 
-        def database_path project_id: project, database_id: "(default)"
+        ##
+        # Makes the BatchWrite API call. Contains the list of write operations to be processed.
+        #
+        # @return [::Google::Cloud::Firestore::V1::BatchWriteResponse]
+        def batch_write writes
+          batch_write_req = {
+            database: database_path,
+            writes: writes
+          }
+          firestore.batch_write batch_write_req, call_options(parent: database_path)
+        end
+
+        def database_path project_id: project, database_id: database
           # Originally used V1::FirestoreClient.database_root_path until it was removed in #5405.
           "projects/#{project_id}/databases/#{database_id}"
         end
 
-        def documents_path project_id: project, database_id: "(default)"
+        def documents_path project_id: project, database_id: database
           # Originally used V1::FirestoreClient.document_root_path until it was removed in #5405.
           "projects/#{project_id}/databases/#{database_id}/documents"
         end
 
         def inspect
-          "#{self.class}(#{@project})"
+          "#{self.class}(#{@project})(#{@database})"
+        end
+
+        def read_time_to_timestamp read_time
+          return nil if read_time.nil?
+
+          raise TypeError, "read_time is expected to be a Time object" unless read_time.is_a? Time
+
+          Google::Protobuf::Timestamp.new(
+            seconds: read_time.to_i,
+            nanos:   read_time.usec * 1000
+          )
         end
 
         protected
@@ -183,7 +234,7 @@ module Google
           Gapic::CallOptions.new(**{
             metadata:   default_headers(parent),
             page_token: token
-          }.delete_if { |_, v| v.nil? })
+          }.compact)
         end
 
         def document_mask mask

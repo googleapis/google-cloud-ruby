@@ -7,19 +7,19 @@
 
 # @googleapis/ruby-team is the default owner for anything not
 # explicitly taken by someone else.
-*                                    @googleapis/ruby-team
+*                                    @googleapis/ruby-team yoshi-approver
 
-/google-cloud-automl*/.              @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-bigquery*/.            @googleapis/ruby-team @googleapis/api-bigquery
-/google-cloud-bigtable*/.            @googleapis/ruby-team @googleapis/api-bigtable
-/google-cloud-datastore*/.           @googleapis/ruby-team @googleapis/firestore-dpe
-/google-cloud-firestore*/.           @googleapis/ruby-team @googleapis/firestore-dpe
-/google-cloud-language*/.            @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-pubsub*/.              @googleapis/ruby-team @googleapis/api-pubsub
-/google-cloud-speech*/.              @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-storage/               @googleapis/ruby-team @googleapis/cloud-storage-dpe
-/google-cloud-talent*/.              @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-text_to_speech*/.      @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-translate*/.           @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-video_intelligence*/.  @googleapis/ruby-team @googleapis/ml-apis
-/google-cloud-vision*/.              @googleapis/ruby-team @googleapis/ml-apis
+/google-cloud-automl*/.              @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-bigquery*/.            @googleapis/ruby-team yoshi-approver @googleapis/api-bigquery
+/google-cloud-bigtable*/.            @googleapis/ruby-team yoshi-approver @googleapis/api-bigtable
+/google-cloud-datastore*/.           @googleapis/ruby-team yoshi-approver @googleapis/api-datastore-sdk
+/google-cloud-firestore*/.           @googleapis/ruby-team yoshi-approver @googleapis/firestore-dpe
+/google-cloud-language*/.            @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-pubsub*/.              @googleapis/ruby-team yoshi-approver @googleapis/api-pubsub
+/google-cloud-speech*/.              @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-storage/               @googleapis/ruby-team yoshi-approver @googleapis/cloud-storage-dpe
+/google-cloud-talent*/.              @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-text_to_speech*/.      @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-translate*/.           @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-video_intelligence*/.  @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-vision*/.              @googleapis/ruby-team yoshi-approver @googleapis/ml-apis

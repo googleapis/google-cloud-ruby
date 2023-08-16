@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Storage Transfer Service allows you to quickly import online data into Cloud Storage. You can also set up a repeating schedule for transferring data, as well as transfer data within Cloud Storage, from one bucket to another.",
     "ruby-cloud-product-url": "https://cloud.google.com/storage-transfer-service/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

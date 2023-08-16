@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#update_transition_route_group
+# Snippet for the update_transition_route_group call in the TransitionRouteGroups service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#update_transition_route_group.
+# It may require modification in order to execute successfully.
 #
 def update_transition_route_group
   # Create a client object. The client can be reused for multiple calls.

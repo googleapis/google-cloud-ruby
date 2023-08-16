@@ -13,8 +13,17 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../schemas.rb"
-require_relative "../subscriptions.rb"
+require_relative "../pubsub_create_avro_schema.rb"
+require_relative "../pubsub_create_topic_with_schema.rb"
+require_relative "../pubsub_create_proto_schema.rb"
+require_relative "../pubsub_delete_schema.rb"
+require_relative "../pubsub_get_schema.rb"
+require_relative "../pubsub_list_schemas.rb"
+require_relative "../pubsub_publish_avro_records.rb"
+require_relative "../pubsub_subscribe_avro_records.rb"
+require_relative "../pubsub_publish_proto_messages.rb"
+require_relative "../pubsub_subscribe_proto_messages.rb"
+
 
 describe "schemas" do
   let(:pubsub) { Google::Cloud::Pubsub.new }

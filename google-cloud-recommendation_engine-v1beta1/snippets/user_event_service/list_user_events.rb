@@ -20,8 +20,11 @@
 require "google/cloud/recommendation_engine/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#list_user_events
+# Snippet for the list_user_events call in the UserEventService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#list_user_events.
+# It may require modification in order to execute successfully.
 #
 def list_user_events
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_user_events
   # Call the list_user_events method.
   result = client.list_user_events request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent.
-    p response
+    p item
   end
 end
 # [END recommendationengine_v1beta1_generated_UserEventService_ListUserEvents_sync]

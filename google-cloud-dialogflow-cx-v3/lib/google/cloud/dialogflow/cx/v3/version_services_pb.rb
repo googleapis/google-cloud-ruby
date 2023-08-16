@@ -34,17 +34,20 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.dialogflow.cx.v3.Versions'
 
-              # Returns the list of all versions in the specified [Flow][google.cloud.dialogflow.cx.v3.Flow].
+              # Returns the list of all versions in the specified
+              # [Flow][google.cloud.dialogflow.cx.v3.Flow].
               rpc :ListVersions, ::Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListVersionsResponse
               # Retrieves the specified [Version][google.cloud.dialogflow.cx.v3.Version].
               rpc :GetVersion, ::Google::Cloud::Dialogflow::CX::V3::GetVersionRequest, ::Google::Cloud::Dialogflow::CX::V3::Version
-              # Creates a [Version][google.cloud.dialogflow.cx.v3.Version] in the specified [Flow][google.cloud.dialogflow.cx.v3.Flow].
+              # Creates a [Version][google.cloud.dialogflow.cx.v3.Version] in the specified
+              # [Flow][google.cloud.dialogflow.cx.v3.Flow].
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: [CreateVersionOperationMetadata][google.cloud.dialogflow.cx.v3.CreateVersionOperationMetadata]
+              # - `metadata`:
+              # [CreateVersionOperationMetadata][google.cloud.dialogflow.cx.v3.CreateVersionOperationMetadata]
               # - `response`: [Version][google.cloud.dialogflow.cx.v3.Version]
               rpc :CreateVersion, ::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest, ::Google::Longrunning::Operation
               # Updates the specified [Version][google.cloud.dialogflow.cx.v3.Version].

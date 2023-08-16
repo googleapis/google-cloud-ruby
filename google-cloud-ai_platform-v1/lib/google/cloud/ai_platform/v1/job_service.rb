@@ -34,7 +34,7 @@ module Google
         ##
         # A service for creating and managing Vertex AI's jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/job_service"
         #     client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new

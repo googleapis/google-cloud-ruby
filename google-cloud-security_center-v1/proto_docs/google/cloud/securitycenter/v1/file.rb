@@ -44,8 +44,7 @@ module Google
         #     True when the hash covers only a prefix of the file.
         # @!attribute [rw] contents
         #   @return [::String]
-        #     Prefix of the file contents as a JSON encoded string.
-        #     (Currently only populated for Malicious Script Executed findings.)
+        #     Prefix of the file contents as a JSON-encoded string.
         class File
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

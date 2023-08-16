@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-eventarc-v1",
-    "version": "0.5.0",
+    "version": "0.7.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "eventarc_v1_generated_Eventarc_GetTrigger_sync",
-      "title": "Snippet for get_trigger in Eventarc",
-      "description": "Basic snippet for get_trigger in Eventarc",
+      "title": "Snippet for the get_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_trigger. It may require modification in order to execute successfully.",
       "file": "eventarc/get_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_ListTriggers_sync",
-      "title": "Snippet for list_triggers in Eventarc",
-      "description": "Basic snippet for list_triggers in Eventarc",
+      "title": "Snippet for the list_triggers call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_triggers. It may require modification in order to execute successfully.",
       "file": "eventarc/list_triggers.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_CreateTrigger_sync",
-      "title": "Snippet for create_trigger in Eventarc",
-      "description": "Basic snippet for create_trigger in Eventarc",
+      "title": "Snippet for the create_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#create_trigger. It may require modification in order to execute successfully.",
       "file": "eventarc/create_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_UpdateTrigger_sync",
-      "title": "Snippet for update_trigger in Eventarc",
-      "description": "Basic snippet for update_trigger in Eventarc",
+      "title": "Snippet for the update_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#update_trigger. It may require modification in order to execute successfully.",
       "file": "eventarc/update_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_DeleteTrigger_sync",
-      "title": "Snippet for delete_trigger in Eventarc",
-      "description": "Basic snippet for delete_trigger in Eventarc",
+      "title": "Snippet for the delete_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#delete_trigger. It may require modification in order to execute successfully.",
       "file": "eventarc/delete_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_GetChannel_sync",
-      "title": "Snippet for get_channel in Eventarc",
-      "description": "Basic snippet for get_channel in Eventarc",
+      "title": "Snippet for the get_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel. It may require modification in order to execute successfully.",
       "file": "eventarc/get_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_ListChannels_sync",
-      "title": "Snippet for list_channels in Eventarc",
-      "description": "Basic snippet for list_channels in Eventarc",
+      "title": "Snippet for the list_channels call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_channels. It may require modification in order to execute successfully.",
       "file": "eventarc/list_channels.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_CreateChannel_sync",
-      "title": "Snippet for create_channel in Eventarc",
-      "description": "Basic snippet for create_channel in Eventarc",
+      "title": "Snippet for the create_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#create_channel. It may require modification in order to execute successfully.",
       "file": "eventarc/create_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_UpdateChannel_sync",
-      "title": "Snippet for update_channel in Eventarc",
-      "description": "Basic snippet for update_channel in Eventarc",
+      "title": "Snippet for the update_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#update_channel. It may require modification in order to execute successfully.",
       "file": "eventarc/update_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_DeleteChannel_sync",
-      "title": "Snippet for delete_channel in Eventarc",
-      "description": "Basic snippet for delete_channel in Eventarc",
+      "title": "Snippet for the delete_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#delete_channel. It may require modification in order to execute successfully.",
       "file": "eventarc/delete_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_GetProvider_sync",
-      "title": "Snippet for get_provider in Eventarc",
-      "description": "Basic snippet for get_provider in Eventarc",
+      "title": "Snippet for the get_provider call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_provider. It may require modification in order to execute successfully.",
       "file": "eventarc/get_provider.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_ListProviders_sync",
-      "title": "Snippet for list_providers in Eventarc",
-      "description": "Basic snippet for list_providers in Eventarc",
+      "title": "Snippet for the list_providers call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_providers. It may require modification in order to execute successfully.",
       "file": "eventarc/list_providers.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_GetChannelConnection_sync",
-      "title": "Snippet for get_channel_connection in Eventarc",
-      "description": "Basic snippet for get_channel_connection in Eventarc",
+      "title": "Snippet for the get_channel_connection call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel_connection. It may require modification in order to execute successfully.",
       "file": "eventarc/get_channel_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_ListChannelConnections_sync",
-      "title": "Snippet for list_channel_connections in Eventarc",
-      "description": "Basic snippet for list_channel_connections in Eventarc",
+      "title": "Snippet for the list_channel_connections call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_channel_connections. It may require modification in order to execute successfully.",
       "file": "eventarc/list_channel_connections.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_CreateChannelConnection_sync",
-      "title": "Snippet for create_channel_connection in Eventarc",
-      "description": "Basic snippet for create_channel_connection in Eventarc",
+      "title": "Snippet for the create_channel_connection call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#create_channel_connection. It may require modification in order to execute successfully.",
       "file": "eventarc/create_channel_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_DeleteChannelConnection_sync",
-      "title": "Snippet for delete_channel_connection in Eventarc",
-      "description": "Basic snippet for delete_channel_connection in Eventarc",
+      "title": "Snippet for the delete_channel_connection call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#delete_channel_connection. It may require modification in order to execute successfully.",
       "file": "eventarc/delete_channel_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_GetGoogleChannelConfig_sync",
-      "title": "Snippet for get_google_channel_config in Eventarc",
-      "description": "Basic snippet for get_google_channel_config in Eventarc",
+      "title": "Snippet for the get_google_channel_config call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_google_channel_config. It may require modification in order to execute successfully.",
       "file": "eventarc/get_google_channel_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "eventarc_v1_generated_Eventarc_UpdateGoogleChannelConfig_sync",
-      "title": "Snippet for update_google_channel_config in Eventarc",
-      "description": "Basic snippet for update_google_channel_config in Eventarc",
+      "title": "Snippet for the update_google_channel_config call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#update_google_channel_config. It may require modification in order to execute successfully.",
       "file": "eventarc/update_google_channel_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

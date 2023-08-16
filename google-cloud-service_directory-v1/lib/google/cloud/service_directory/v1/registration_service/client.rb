@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/servicedirectory/v1/registration_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -142,7 +143,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -151,6 +152,12 @@ module Google
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @registration_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Stub,
@@ -161,10 +168,17 @@ module Google
               )
             end
 
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
             # Service calls
 
             ##
-            # Creates a namespace, and returns the new Namespace.
+            # Creates a namespace, and returns the new namespace.
             #
             # @overload create_namespace(request, options = nil)
             #   Pass arguments to `create_namespace` via a request object, either of type
@@ -279,46 +293,52 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the project and location whose namespaces
-            #     we'd like to list.
+            #     you'd like to list.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.
             #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous List request,
             #     if any.
             #   @param filter [::String]
-            #     Optional. The filter to list result by.
+            #     Optional. The filter to list results by.
             #
-            #     General filter string syntax:
-            #     <field> <operator> <value> (<logical connector>)
-            #     <field> can be "name", or "labels.<key>" for map field.
-            #     <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
-            #     is roughly the same as "=".
-            #     <value> must be the same data type as field.
-            #     <logical connector> can be "AND, OR, NOT".
+            #     General `filter` string syntax:
+            #     `<field> <operator> <value> (<logical connector>)`
+            #
+            #     *   `<field>` can be `name` or `labels.<key>` for map field
+            #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+            #         means `HAS`, and is roughly the same as `=`
+            #     *   `<value>` must be the same data type as field
+            #     *   `<logical connector>` can be `AND`, `OR`, `NOT`
             #
             #     Examples of valid filters:
-            #     * "labels.owner" returns Namespaces that have a label with the key "owner"
-            #       this is the same as "labels:owner".
-            #     * "labels.protocol=gRPC" returns Namespaces that have key/value
-            #       "protocol=gRPC".
-            #     * "name>projects/my-project/locations/us-east/namespaces/namespace-c"
-            #       returns Namespaces that have name that is alphabetically later than the
-            #       string, so "namespace-e" will be returned but "namespace-a" will not be.
-            #     * "labels.owner!=sd AND labels.foo=bar" returns Namespaces that have
-            #       "owner" in label key but value is not "sd" AND have key/value foo=bar.
-            #     * "doesnotexist.foo=bar" returns an empty list. Note that Namespace doesn't
-            #       have a field called "doesnotexist". Since the filter does not match any
-            #       Namespaces, it returns no results.
-            #   @param order_by [::String]
-            #     Optional. The order to list result by.
             #
-            #     General order by string syntax:
-            #     <field> (<asc|desc>) (,)
-            #     <field> allows values \\{"name"}
-            #     <asc/desc> ascending or descending order by <field>. If this is left
-            #     blank, "asc" is used.
-            #     Note that an empty order_by string result in default order, which is order
-            #     by name in ascending order.
+            #     *   `labels.owner` returns namespaces that have a label with the key
+            #         `owner`, this is the same as `labels:owner`
+            #     *   `labels.owner=sd` returns namespaces that have key/value
+            #         `owner=sd`
+            #     *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
+            #         returns namespaces that have name that is alphabetically later than the
+            #         string, so "namespace-e" is returned but "namespace-a" is not
+            #     *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
+            #         `owner` in label key but value is not `sd` AND have key/value `foo=bar`
+            #     *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
+            #         doesn't have a field called "doesnotexist". Since the filter does not
+            #         match any namespaces, it returns no results
+            #
+            #     For more information about filtering, see
+            #     [API Filtering](https://aip.dev/160).
+            #   @param order_by [::String]
+            #     Optional. The order to list results by.
+            #
+            #     General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+            #
+            #     *   `<field>` allows value: `name`
+            #     *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+            #         left blank, `asc` is used
+            #
+            #     Note that an empty `order_by` string results in default order, which is
+            #     order by `name` in ascending order.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1::Namespace>]
@@ -340,13 +360,11 @@ module Google
             #   # Call the list_namespaces method.
             #   result = client.list_namespaces request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ServiceDirectory::V1::Namespace.
-            #     p response
+            #     p item
             #   end
             #
             def list_namespaces request, options = nil
@@ -650,7 +668,7 @@ module Google
             end
 
             ##
-            # Creates a service, and returns the new Service.
+            # Creates a service, and returns the new service.
             #
             # @overload create_service(request, options = nil)
             #   Pass arguments to `create_service` via a request object, either of type
@@ -763,7 +781,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the namespace whose services we'd
+            #     Required. The resource name of the namespace whose services you'd
             #     like to list.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.
@@ -771,31 +789,47 @@ module Google
             #     Optional. The next_page_token value returned from a previous List request,
             #     if any.
             #   @param filter [::String]
-            #     Optional. The filter to list result by.
+            #     Optional. The filter to list results by.
             #
-            #     General filter string syntax:
-            #     <field> <operator> <value> (<logical connector>)
-            #     <field> can be "name", or "metadata.<key>" for map field.
-            #     <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
-            #     is roughly the same as "=".
-            #     <value> must be the same data type as field.
-            #     <logical connector> can be "AND, OR, NOT".
+            #     General `filter` string syntax:
+            #     `<field> <operator> <value> (<logical connector>)`
+            #
+            #     *   `<field>` can be `name` or `annotations.<key>` for map field
+            #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+            #         means `HAS`, and is roughly the same as `=`
+            #     *   `<value>` must be the same data type as field
+            #     *   `<logical connector>` can be `AND`, `OR`, `NOT`
             #
             #     Examples of valid filters:
-            #     * "metadata.owner" returns Services that have a label with the key "owner"
-            #       this is the same as "metadata:owner".
-            #     * "metadata.protocol=gRPC" returns Services that have key/value
-            #       "protocol=gRPC".
-            #     * "name>projects/my-project/locations/us-east/namespaces/my-namespace/services/service-c"
-            #       returns Services that have name that is alphabetically later than the
-            #       string, so "service-e" will be returned but "service-a" will not be.
-            #     * "metadata.owner!=sd AND metadata.foo=bar" returns Services that have
-            #       "owner" in label key but value is not "sd" AND have key/value foo=bar.
-            #     * "doesnotexist.foo=bar" returns an empty list. Note that Service doesn't
-            #       have a field called "doesnotexist". Since the filter does not match any
-            #       Services, it returns no results.
+            #
+            #     *   `annotations.owner` returns services that have a annotation with the
+            #         key `owner`, this is the same as `annotations:owner`
+            #     *   `annotations.protocol=gRPC` returns services that have key/value
+            #         `protocol=gRPC`
+            #     *
+            #     `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
+            #         returns services that have name that is alphabetically later than the
+            #         string, so "service-e" is returned but "service-a" is not
+            #     *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
+            #         have `owner` in annotation key but value is not `sd` AND have
+            #         key/value `foo=bar`
+            #     *   `doesnotexist.foo=bar` returns an empty list. Note that service
+            #         doesn't have a field called "doesnotexist". Since the filter does not
+            #         match any services, it returns no results
+            #
+            #     For more information about filtering, see
+            #     [API Filtering](https://aip.dev/160).
             #   @param order_by [::String]
-            #     Optional. The order to list result by.
+            #     Optional. The order to list results by.
+            #
+            #     General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+            #
+            #     *   `<field>` allows value: `name`
+            #     *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+            #         left blank, `asc` is used
+            #
+            #     Note that an empty `order_by` string results in default order, which is
+            #     order by `name` in ascending order.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1::Service>]
@@ -817,13 +851,11 @@ module Google
             #   # Call the list_services method.
             #   result = client.list_services request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ServiceDirectory::V1::Service.
-            #     p response
+            #     p item
             #   end
             #
             def list_services request, options = nil
@@ -1127,7 +1159,7 @@ module Google
             end
 
             ##
-            # Creates a endpoint, and returns the new Endpoint.
+            # Creates an endpoint, and returns the new endpoint.
             #
             # @overload create_endpoint(request, options = nil)
             #   Pass arguments to `create_endpoint` via a request object, either of type
@@ -1240,7 +1272,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the service whose endpoints we'd like to
+            #     Required. The resource name of the service whose endpoints you'd like to
             #     list.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.
@@ -1248,33 +1280,50 @@ module Google
             #     Optional. The next_page_token value returned from a previous List request,
             #     if any.
             #   @param filter [::String]
-            #     Optional. The filter to list result by.
+            #     Optional. The filter to list results by.
             #
-            #     General filter string syntax:
-            #     <field> <operator> <value> (<logical connector>)
-            #     <field> can be "name", "address", "port" or "metadata.<key>" for map field.
-            #     <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
-            #     is roughly the same as "=".
-            #     <value> must be the same data type as field.
-            #     <logical connector> can be "AND, OR, NOT".
+            #     General `filter` string syntax:
+            #     `<field> <operator> <value> (<logical connector>)`
+            #
+            #     *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
+            #          map field
+            #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+            #         means `HAS`, and is roughly the same as `=`
+            #     *   `<value>` must be the same data type as field
+            #     *   `<logical connector>` can be `AND`, `OR`, `NOT`
             #
             #     Examples of valid filters:
-            #     * "metadata.owner" returns Endpoints that have a label with the key "owner"
-            #       this is the same as "metadata:owner".
-            #     * "metadata.protocol=gRPC" returns Endpoints that have key/value
-            #       "protocol=gRPC".
-            #     * "address=192.108.1.105" returns Endpoints that have this address.
-            #     * "port>8080" returns Endpoints that have port number larger than 8080.
-            #     * "name>projects/my-project/locations/us-east/namespaces/my-namespace/services/my-service/endpoints/endpoint-c"
-            #       returns Endpoints that have name that is alphabetically later than the
-            #       string, so "endpoint-e" will be returned but "endpoint-a" will not be.
-            #     * "metadata.owner!=sd AND metadata.foo=bar" returns Endpoints that have
-            #       "owner" in label key but value is not "sd" AND have key/value foo=bar.
-            #     * "doesnotexist.foo=bar" returns an empty list. Note that Endpoint doesn't
-            #       have a field called "doesnotexist". Since the filter does not match any
-            #       Endpoints, it returns no results.
+            #
+            #     *   `annotations.owner` returns endpoints that have a annotation with the
+            #         key `owner`, this is the same as `annotations:owner`
+            #     *   `annotations.protocol=gRPC` returns endpoints that have key/value
+            #         `protocol=gRPC`
+            #     *   `address=192.108.1.105` returns endpoints that have this address
+            #     *   `port>8080` returns endpoints that have port number larger than 8080
+            #     *
+            #     `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+            #         returns endpoints that have name that is alphabetically later than the
+            #         string, so "endpoint-e" is returned but "endpoint-a" is not
+            #     *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
+            #         have `owner` in annotation key but value is not `sd` AND have
+            #         key/value `foo=bar`
+            #     *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+            #         doesn't have a field called "doesnotexist". Since the filter does not
+            #         match any endpoints, it returns no results
+            #
+            #     For more information about filtering, see
+            #     [API Filtering](https://aip.dev/160).
             #   @param order_by [::String]
-            #     Optional. The order to list result by.
+            #     Optional. The order to list results by.
+            #
+            #     General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+            #
+            #     *   `<field>` allows values: `name`, `address`, `port`
+            #     *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+            #         left blank, `asc` is used
+            #
+            #     Note that an empty `order_by` string results in default order, which is
+            #     order by `name` in ascending order.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1::Endpoint>]
@@ -1296,13 +1345,11 @@ module Google
             #   # Call the list_endpoints method.
             #   result = client.list_endpoints request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ServiceDirectory::V1::Endpoint.
-            #     p response
+            #     p item
             #   end
             #
             def list_endpoints request, options = nil
@@ -1348,7 +1395,7 @@ module Google
             end
 
             ##
-            # Gets a endpoint.
+            # Gets an endpoint.
             #
             # @overload get_endpoint(request, options = nil)
             #   Pass arguments to `get_endpoint` via a request object, either of type
@@ -1433,7 +1480,7 @@ module Google
             end
 
             ##
-            # Updates a endpoint.
+            # Updates an endpoint.
             #
             # @overload update_endpoint(request, options = nil)
             #   Pass arguments to `update_endpoint` via a request object, either of type
@@ -1520,7 +1567,7 @@ module Google
             end
 
             ##
-            # Deletes a endpoint.
+            # Deletes an endpoint.
             #
             # @overload delete_endpoint(request, options = nil)
             #   Pass arguments to `delete_endpoint` via a request object, either of type
@@ -1919,9 +1966,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1963,7 +2010,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "servicedirectory.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "servicedirectory.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

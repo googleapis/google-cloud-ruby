@@ -195,7 +195,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -563,13 +563,11 @@ module Google
             #   # Call the list_sessions method.
             #   result = client.list_sessions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Spanner::V1::Session.
-            #     p response
+            #     p item
             #   end
             #
             def list_sessions request, options = nil
@@ -724,7 +722,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil)
+            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, data_boost_enabled: nil)
             #   Pass arguments to `execute_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -798,6 +796,12 @@ module Google
             #     Query optimizer configuration to use for the given query.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
+            #   @param data_boost_enabled [::Boolean]
+            #     If this is for a partitioned query and this field is set to `true`, the
+            #     request will be executed via Spanner independent compute resources.
+            #
+            #     If the field is set to `true` but the request does not set
+            #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -880,7 +884,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil)
+            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, data_boost_enabled: nil)
             #   Pass arguments to `execute_streaming_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -954,6 +958,12 @@ module Google
             #     Query optimizer configuration to use for the given query.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
+            #   @param data_boost_enabled [::Boolean]
+            #     If this is for a partitioned query and this field is set to `true`, the
+            #     request will be executed via Spanner independent compute resources.
+            #
+            #     If the field is set to `true` but the request does not set
+            #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -972,13 +982,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Spanner::V1::ExecuteSqlRequest.new
             #
-            #   # Call the execute_streaming_sql method.
-            #   result = client.execute_streaming_sql request
+            #   # Call the execute_streaming_sql method to start streaming.
+            #   output = client.execute_streaming_sql request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::PartialResultSet
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def execute_streaming_sql request, options = nil
@@ -1166,7 +1176,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil)
+            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, data_boost_enabled: nil)
             #   Pass arguments to `read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1216,6 +1226,12 @@ module Google
             #     PartitionReadRequest message used to create this partition_token.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
+            #   @param data_boost_enabled [::Boolean]
+            #     If this is for a partitioned read and this field is set to `true`, the
+            #     request will be executed via Spanner independent compute resources.
+            #
+            #     If the field is set to `true` but the request does not set
+            #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -1298,7 +1314,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil)
+            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, data_boost_enabled: nil)
             #   Pass arguments to `streaming_read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1348,6 +1364,12 @@ module Google
             #     PartitionReadRequest message used to create this partition_token.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
+            #   @param data_boost_enabled [::Boolean]
+            #     If this is for a partitioned read and this field is set to `true`, the
+            #     request will be executed via Spanner independent compute resources.
+            #
+            #     If the field is set to `true` but the request does not set
+            #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1366,13 +1388,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Spanner::V1::ReadRequest.new
             #
-            #   # Call the streaming_read method.
-            #   result = client.streaming_read request
+            #   # Call the streaming_read method to start streaming.
+            #   output = client.streaming_read request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::PartialResultSet
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_read request, options = nil
@@ -2016,9 +2038,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2060,7 +2082,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "spanner.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "spanner.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

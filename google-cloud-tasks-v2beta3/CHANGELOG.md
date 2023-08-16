@@ -1,5 +1,29 @@
 # Release History
 
+### 0.10.2 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22685](https://github.com/googleapis/google-cloud-ruby/issues/22685)) 
+
+### 0.10.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+
+### 0.9.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20629](https://github.com/googleapis/google-cloud-ruby/issues/20629)) 
+
 ### 0.8.0 (2022-07-08)
 
 #### Features

@@ -8,10 +8,10 @@
     "name": "cloudoptimization",
     "name_pretty": "Cloud Optimization API",
     "product_documentation": "https://cloud.google.com/optimization",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Optimization API provides a portfolio of solvers to address common optimization use cases starting with optimal route planning for vehicle fleets.",
     "ruby-cloud-product-url": "https://cloud.google.com/optimization",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

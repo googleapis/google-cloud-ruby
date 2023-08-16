@@ -18,6 +18,10 @@
     "lib/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/client.rb",
     "lib/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/credentials.rb",
     "lib/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/paths.rb",
+    "lib/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/rest.rb",
+    "lib/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/rest/client.rb",
+    "lib/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/rest/service_stub.rb",
+    "lib/google/cloud/recaptcha_enterprise/v1beta1/rest.rb",
     "lib/google/cloud/recaptcha_enterprise/v1beta1/version.rb",
     "lib/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise_pb.rb",
     "lib/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise_services_pb.rb",
@@ -34,6 +38,7 @@
     "snippets/recaptcha_enterprise_service/create_assessment.rb",
     "snippets/snippet_metadata_google.cloud.recaptchaenterprise.v1beta1.json",
     "test/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service_paths_test.rb",
+    "test/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service_rest_test.rb",
     "test/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service_test.rb",
     "test/helper.rb"
   ],

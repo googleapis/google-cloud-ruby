@@ -34,8 +34,8 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.gkemulticloud.v1.AzureClusters'
 
-            # Creates a new [AzureClient][google.cloud.gkemulticloud.v1.AzureClient] resource on a given Google Cloud project
-            # and region.
+            # Creates a new [AzureClient][google.cloud.gkemulticloud.v1.AzureClient]
+            # resource on a given Google Cloud project and region.
             #
             # `AzureClient` resources hold client authentication
             # information needed by the Anthos Multicloud API to manage Azure resources
@@ -45,12 +45,14 @@ module Google
             # [Operation][google.longrunning.Operation] resource that can be
             # described to track the status of the operation.
             rpc :CreateAzureClient, ::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest, ::Google::Longrunning::Operation
-            # Describes a specific [AzureClient][google.cloud.gkemulticloud.v1.AzureClient] resource.
+            # Describes a specific
+            # [AzureClient][google.cloud.gkemulticloud.v1.AzureClient] resource.
             rpc :GetAzureClient, ::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest, ::Google::Cloud::GkeMultiCloud::V1::AzureClient
-            # Lists all [AzureClient][google.cloud.gkemulticloud.v1.AzureClient] resources on a given Google Cloud project and
-            # region.
+            # Lists all [AzureClient][google.cloud.gkemulticloud.v1.AzureClient]
+            # resources on a given Google Cloud project and region.
             rpc :ListAzureClients, ::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsRequest, ::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsResponse
-            # Deletes a specific [AzureClient][google.cloud.gkemulticloud.v1.AzureClient] resource.
+            # Deletes a specific [AzureClient][google.cloud.gkemulticloud.v1.AzureClient]
+            # resource.
             #
             # If the client is used by one or more clusters, deletion will
             # fail and a `FAILED_PRECONDITION` error will be returned.
@@ -59,7 +61,8 @@ module Google
             # [Operation][google.longrunning.Operation] resource that can be
             # described to track the status of the operation.
             rpc :DeleteAzureClient, ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest, ::Google::Longrunning::Operation
-            # Creates a new [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource on a given GCP project and region.
+            # Creates a new [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster]
+            # resource on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be
@@ -67,15 +70,17 @@ module Google
             rpc :CreateAzureCluster, ::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest, ::Google::Longrunning::Operation
             # Updates an [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster].
             rpc :UpdateAzureCluster, ::Google::Cloud::GkeMultiCloud::V1::UpdateAzureClusterRequest, ::Google::Longrunning::Operation
-            # Describes a specific [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource.
+            # Describes a specific
+            # [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource.
             rpc :GetAzureCluster, ::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest, ::Google::Cloud::GkeMultiCloud::V1::AzureCluster
-            # Lists all [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resources on a given Google Cloud project and
-            # region.
+            # Lists all [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster]
+            # resources on a given Google Cloud project and region.
             rpc :ListAzureClusters, ::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersRequest, ::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersResponse
-            # Deletes a specific [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource.
+            # Deletes a specific
+            # [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource.
             #
-            # Fails if the cluster has one or more associated [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool]
-            # resources.
+            # Fails if the cluster has one or more associated
+            # [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool] resources.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be
@@ -84,7 +89,9 @@ module Google
             # Generates a short-lived access token to authenticate to a given
             # [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource.
             rpc :GenerateAzureAccessToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenResponse
-            # Creates a new [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool], attached to a given [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster].
+            # Creates a new [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool],
+            # attached to a given
+            # [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster].
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be
@@ -92,11 +99,15 @@ module Google
             rpc :CreateAzureNodePool, ::Google::Cloud::GkeMultiCloud::V1::CreateAzureNodePoolRequest, ::Google::Longrunning::Operation
             # Updates an [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool].
             rpc :UpdateAzureNodePool, ::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest, ::Google::Longrunning::Operation
-            # Describes a specific [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool] resource.
+            # Describes a specific
+            # [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool] resource.
             rpc :GetAzureNodePool, ::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest, ::Google::Cloud::GkeMultiCloud::V1::AzureNodePool
-            # Lists all [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool] resources on a given [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster].
+            # Lists all [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool]
+            # resources on a given
+            # [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster].
             rpc :ListAzureNodePools, ::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsRequest, ::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsResponse
-            # Deletes a specific [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool] resource.
+            # Deletes a specific
+            # [AzureNodePool][google.cloud.gkemulticloud.v1.AzureNodePool] resource.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be

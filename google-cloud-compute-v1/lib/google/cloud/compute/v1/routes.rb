@@ -31,9 +31,9 @@ module Google
         ##
         # The Routes API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/routes"
+        #     require "google/cloud/compute/v1/routes/rest"
         #     client = ::Google::Cloud::Compute::V1::Routes::Rest::Client.new
         #
         module Routes

@@ -25,6 +25,7 @@ require "google/cloud/talent/v4beta1/version"
 require "google/cloud/talent/v4beta1/completion/credentials"
 require "google/cloud/talent/v4beta1/completion/paths"
 require "google/cloud/talent/v4beta1/completion/client"
+require "google/cloud/talent/v4beta1/completion/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # A service handles auto completion.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4beta1/completion"
         #     client = ::Google::Cloud::Talent::V4beta1::Completion::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4beta1/completion/rest"
+        #     client = ::Google::Cloud::Talent::V4beta1::Completion::Rest::Client.new
         #
         module Completion
         end

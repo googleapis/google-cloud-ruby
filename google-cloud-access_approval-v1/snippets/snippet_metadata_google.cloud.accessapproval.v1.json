@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-access_approval-v1",
-    "version": "0.7.1",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_ListApprovalRequests_sync",
-      "title": "Snippet for list_approval_requests in AccessApproval",
-      "description": "Basic snippet for list_approval_requests in AccessApproval",
+      "title": "Snippet for the list_approval_requests call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#list_approval_requests. It may require modification in order to execute successfully.",
       "file": "access_approval/list_approval_requests.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_GetApprovalRequest_sync",
-      "title": "Snippet for get_approval_request in AccessApproval",
-      "description": "Basic snippet for get_approval_request in AccessApproval",
+      "title": "Snippet for the get_approval_request call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#get_approval_request. It may require modification in order to execute successfully.",
       "file": "access_approval/get_approval_request.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_ApproveApprovalRequest_sync",
-      "title": "Snippet for approve_approval_request in AccessApproval",
-      "description": "Basic snippet for approve_approval_request in AccessApproval",
+      "title": "Snippet for the approve_approval_request call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#approve_approval_request. It may require modification in order to execute successfully.",
       "file": "access_approval/approve_approval_request.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_DismissApprovalRequest_sync",
-      "title": "Snippet for dismiss_approval_request in AccessApproval",
-      "description": "Basic snippet for dismiss_approval_request in AccessApproval",
+      "title": "Snippet for the dismiss_approval_request call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#dismiss_approval_request. It may require modification in order to execute successfully.",
       "file": "access_approval/dismiss_approval_request.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_InvalidateApprovalRequest_sync",
-      "title": "Snippet for invalidate_approval_request in AccessApproval",
-      "description": "Basic snippet for invalidate_approval_request in AccessApproval",
+      "title": "Snippet for the invalidate_approval_request call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#invalidate_approval_request. It may require modification in order to execute successfully.",
       "file": "access_approval/invalidate_approval_request.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalSettings_sync",
-      "title": "Snippet for get_access_approval_settings in AccessApproval",
-      "description": "Basic snippet for get_access_approval_settings in AccessApproval",
+      "title": "Snippet for the get_access_approval_settings call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#get_access_approval_settings. It may require modification in order to execute successfully.",
       "file": "access_approval/get_access_approval_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_UpdateAccessApprovalSettings_sync",
-      "title": "Snippet for update_access_approval_settings in AccessApproval",
-      "description": "Basic snippet for update_access_approval_settings in AccessApproval",
+      "title": "Snippet for the update_access_approval_settings call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#update_access_approval_settings. It may require modification in order to execute successfully.",
       "file": "access_approval/update_access_approval_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_DeleteAccessApprovalSettings_sync",
-      "title": "Snippet for delete_access_approval_settings in AccessApproval",
-      "description": "Basic snippet for delete_access_approval_settings in AccessApproval",
+      "title": "Snippet for the delete_access_approval_settings call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#delete_access_approval_settings. It may require modification in order to execute successfully.",
       "file": "access_approval/delete_access_approval_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalServiceAccount_sync",
-      "title": "Snippet for get_access_approval_service_account in AccessApproval",
-      "description": "Basic snippet for get_access_approval_service_account in AccessApproval",
+      "title": "Snippet for the get_access_approval_service_account call in the AccessApproval service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AccessApproval::V1::AccessApproval::Client#get_access_approval_service_account. It may require modification in order to execute successfully.",
       "file": "access_approval/get_access_approval_service_account.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

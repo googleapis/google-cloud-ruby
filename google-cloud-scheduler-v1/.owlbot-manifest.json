@@ -14,13 +14,18 @@
     "google-cloud-scheduler-v1.gemspec",
     "lib/google-cloud-scheduler-v1.rb",
     "lib/google/cloud/scheduler/v1.rb",
+    "lib/google/cloud/scheduler/v1/bindings_override.rb",
     "lib/google/cloud/scheduler/v1/cloud_scheduler.rb",
     "lib/google/cloud/scheduler/v1/cloud_scheduler/client.rb",
     "lib/google/cloud/scheduler/v1/cloud_scheduler/credentials.rb",
     "lib/google/cloud/scheduler/v1/cloud_scheduler/paths.rb",
+    "lib/google/cloud/scheduler/v1/cloud_scheduler/rest.rb",
+    "lib/google/cloud/scheduler/v1/cloud_scheduler/rest/client.rb",
+    "lib/google/cloud/scheduler/v1/cloud_scheduler/rest/service_stub.rb",
     "lib/google/cloud/scheduler/v1/cloudscheduler_pb.rb",
     "lib/google/cloud/scheduler/v1/cloudscheduler_services_pb.rb",
     "lib/google/cloud/scheduler/v1/job_pb.rb",
+    "lib/google/cloud/scheduler/v1/rest.rb",
     "lib/google/cloud/scheduler/v1/target_pb.rb",
     "lib/google/cloud/scheduler/v1/version.rb",
     "proto_docs/README.md",
@@ -48,10 +53,12 @@
     "snippets/cloud_scheduler/update_job.rb",
     "snippets/snippet_metadata_google.cloud.scheduler.v1.json",
     "test/google/cloud/scheduler/v1/cloud_scheduler_paths_test.rb",
+    "test/google/cloud/scheduler/v1/cloud_scheduler_rest_test.rb",
     "test/google/cloud/scheduler/v1/cloud_scheduler_test.rb",
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }

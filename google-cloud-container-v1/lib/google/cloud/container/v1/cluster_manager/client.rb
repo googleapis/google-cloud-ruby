@@ -210,7 +210,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -650,7 +650,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, logging_config: nil, resource_labels: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -683,7 +683,9 @@ module Google
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
             #   @param image_type [::String]
-            #     Required. The desired image type for the node pool.
+            #     Required. The desired image type for the node pool. Please see
+            #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+            #     available image types.
             #   @param name [::String]
             #     The name (project, location, cluster, node pool) of the node pool to
             #     update. Specified in the format
@@ -723,11 +725,19 @@ module Google
             #     All the nodes in the node pool will be Confidential VM once enabled.
             #   @param gvnic [::Google::Cloud::Container::V1::VirtualNIC, ::Hash]
             #     Enable or disable gvnic on the node pool.
+            #   @param etag [::String]
+            #     The current etag of the node pool.
+            #     If an etag is provided and does not match the current etag of the node
+            #     pool, update will be blocked and an ABORTED error will be returned.
+            #   @param fast_socket [::Google::Cloud::Container::V1::FastSocket, ::Hash]
+            #     Enable or disable NCCL fast socket for the node pool.
             #   @param logging_config [::Google::Cloud::Container::V1::NodePoolLoggingConfig, ::Hash]
             #     Logging configuration.
             #   @param resource_labels [::Google::Cloud::Container::V1::ResourceLabels, ::Hash]
             #     The resource labels for the node pool to use to annotate any related
             #     Google Compute Engine resources.
+            #   @param windows_node_config [::Google::Cloud::Container::V1::WindowsNodeConfig, ::Hash]
+            #     Parameters that can be configured on Windows nodes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -1148,8 +1158,8 @@ module Google
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to run in the
-            #     cluster.
+            #     Required. The desired configurations for the various addons available to
+            #     run in the cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
@@ -3590,13 +3600,11 @@ module Google
             #   # Call the list_usable_subnetworks method.
             #   result = client.list_usable_subnetworks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Container::V1::UsableSubnetwork.
-            #     p response
+            #     p item
             #   end
             #
             def list_usable_subnetworks request, options = nil
@@ -3642,6 +3650,93 @@ module Google
             end
 
             ##
+            # Checks the cluster compatibility with Autopilot mode, and returns a list of
+            # compatibility issues.
+            #
+            # @overload check_autopilot_compatibility(request, options = nil)
+            #   Pass arguments to `check_autopilot_compatibility` via a request object, either of type
+            #   {::Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload check_autopilot_compatibility(name: nil)
+            #   Pass arguments to `check_autopilot_compatibility` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name (project, location, cluster) of the cluster to retrieve.
+            #     Specified in the format `projects/*/locations/*/clusters/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Container::V1::CheckAutopilotCompatibilityResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Container::V1::CheckAutopilotCompatibilityResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest.new
+            #
+            #   # Call the check_autopilot_compatibility method.
+            #   result = client.check_autopilot_compatibility request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::CheckAutopilotCompatibilityResponse.
+            #   p result
+            #
+            def check_autopilot_compatibility request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.check_autopilot_compatibility.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.check_autopilot_compatibility.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.check_autopilot_compatibility.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :check_autopilot_compatibility, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ClusterManager API.
             #
             # This class represents the configuration for ClusterManager,
@@ -3679,9 +3774,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -3723,7 +3818,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "container.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "container.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -3941,6 +4038,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_usable_subnetworks
+                ##
+                # RPC-specific configuration for `check_autopilot_compatibility`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :check_autopilot_compatibility
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4010,6 +4112,8 @@ module Google
                   @set_maintenance_policy = ::Gapic::Config::Method.new set_maintenance_policy_config
                   list_usable_subnetworks_config = parent_rpcs.list_usable_subnetworks if parent_rpcs.respond_to? :list_usable_subnetworks
                   @list_usable_subnetworks = ::Gapic::Config::Method.new list_usable_subnetworks_config
+                  check_autopilot_compatibility_config = parent_rpcs.check_autopilot_compatibility if parent_rpcs.respond_to? :check_autopilot_compatibility
+                  @check_autopilot_compatibility = ::Gapic::Config::Method.new check_autopilot_compatibility_config
 
                   yield self if block_given?
                 end

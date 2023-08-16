@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/data_transfer/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#schedule_transfer_runs
+# Snippet for the schedule_transfer_runs call in the DataTransferService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#schedule_transfer_runs.
+# It may require modification in order to execute successfully.
 #
 def schedule_transfer_runs
   # Create a client object. The client can be reused for multiple calls.

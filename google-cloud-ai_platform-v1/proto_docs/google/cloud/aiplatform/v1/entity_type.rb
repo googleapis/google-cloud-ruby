@@ -45,7 +45,8 @@ module Google
         #     Output only. Timestamp when this EntityType was most recently updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. The labels with user-defined metadata to organize your EntityTypes.
+        #     Optional. The labels with user-defined metadata to organize your
+        #     EntityTypes.
         #
         #     Label keys and values can be no longer than 64 characters
         #     (Unicode codepoints), can only contain lowercase letters, numeric
@@ -58,18 +59,26 @@ module Google
         #     and are immutable.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Used to perform a consistent read-modify-write updates. If not set, a blind
-        #     "overwrite" update happens.
+        #     Optional. Used to perform a consistent read-modify-write updates. If not
+        #     set, a blind "overwrite" update happens.
         # @!attribute [rw] monitoring_config
         #   @return [::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig]
-        #     Optional. The default monitoring configuration for all Features with value type
-        #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL, STRING, DOUBLE or INT64 under this
-        #     EntityType.
+        #     Optional. The default monitoring configuration for all Features with value
+        #     type
+        #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL,
+        #     STRING, DOUBLE or INT64 under this EntityType.
         #
         #     If this is populated with
         #     [FeaturestoreMonitoringConfig.monitoring_interval] specified, snapshot
         #     analysis monitoring is enabled. Otherwise, snapshot analysis monitoring is
         #     disabled.
+        # @!attribute [rw] offline_storage_ttl_days
+        #   @return [::Integer]
+        #     Optional. Config for data retention policy in offline storage.
+        #     TTL in days for feature values that will be stored in offline storage.
+        #     The Feature Store offline storage periodically removes obsolete feature
+        #     values older than `offline_storage_ttl_days` since the feature generation
+        #     time. If unset (or explicitly set to 0), default to 4000 days TTL.
         class EntityType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

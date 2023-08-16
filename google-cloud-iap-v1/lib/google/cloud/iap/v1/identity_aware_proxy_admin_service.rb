@@ -25,6 +25,7 @@ require "google/cloud/iap/v1/version"
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service/credentials"
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service/paths"
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service/client"
+require "google/cloud/iap/v1/identity_aware_proxy_admin_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # APIs for Identity-Aware Proxy Admin configurations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/iap/v1/identity_aware_proxy_admin_service"
         #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/iap/v1/identity_aware_proxy_admin_service/rest"
+        #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
         #
         module IdentityAwareProxyAdminService
         end

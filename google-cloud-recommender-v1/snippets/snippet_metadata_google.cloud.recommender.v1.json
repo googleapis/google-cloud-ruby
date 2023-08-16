@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-recommender-v1",
-    "version": "0.11.0",
+    "version": "0.13.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "recommender_v1_generated_Recommender_ListInsights_sync",
-      "title": "Snippet for list_insights in Recommender",
-      "description": "Basic snippet for list_insights in Recommender",
+      "title": "Snippet for the list_insights call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#list_insights. It may require modification in order to execute successfully.",
       "file": "recommender/list_insights.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_GetInsight_sync",
-      "title": "Snippet for get_insight in Recommender",
-      "description": "Basic snippet for get_insight in Recommender",
+      "title": "Snippet for the get_insight call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_insight. It may require modification in order to execute successfully.",
       "file": "recommender/get_insight.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_MarkInsightAccepted_sync",
-      "title": "Snippet for mark_insight_accepted in Recommender",
-      "description": "Basic snippet for mark_insight_accepted in Recommender",
+      "title": "Snippet for the mark_insight_accepted call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_insight_accepted. It may require modification in order to execute successfully.",
       "file": "recommender/mark_insight_accepted.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_ListRecommendations_sync",
-      "title": "Snippet for list_recommendations in Recommender",
-      "description": "Basic snippet for list_recommendations in Recommender",
+      "title": "Snippet for the list_recommendations call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#list_recommendations. It may require modification in order to execute successfully.",
       "file": "recommender/list_recommendations.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_GetRecommendation_sync",
-      "title": "Snippet for get_recommendation in Recommender",
-      "description": "Basic snippet for get_recommendation in Recommender",
+      "title": "Snippet for the get_recommendation call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_recommendation. It may require modification in order to execute successfully.",
       "file": "recommender/get_recommendation.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationClaimed_sync",
-      "title": "Snippet for mark_recommendation_claimed in Recommender",
-      "description": "Basic snippet for mark_recommendation_claimed in Recommender",
+      "title": "Snippet for the mark_recommendation_claimed call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_claimed. It may require modification in order to execute successfully.",
       "file": "recommender/mark_recommendation_claimed.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationSucceeded_sync",
-      "title": "Snippet for mark_recommendation_succeeded in Recommender",
-      "description": "Basic snippet for mark_recommendation_succeeded in Recommender",
+      "title": "Snippet for the mark_recommendation_succeeded call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_succeeded. It may require modification in order to execute successfully.",
       "file": "recommender/mark_recommendation_succeeded.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationFailed_sync",
-      "title": "Snippet for mark_recommendation_failed in Recommender",
-      "description": "Basic snippet for mark_recommendation_failed in Recommender",
+      "title": "Snippet for the mark_recommendation_failed call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_failed. It may require modification in order to execute successfully.",
       "file": "recommender/mark_recommendation_failed.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_GetRecommenderConfig_sync",
-      "title": "Snippet for get_recommender_config in Recommender",
-      "description": "Basic snippet for get_recommender_config in Recommender",
+      "title": "Snippet for the get_recommender_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_recommender_config. It may require modification in order to execute successfully.",
       "file": "recommender/get_recommender_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_UpdateRecommenderConfig_sync",
-      "title": "Snippet for update_recommender_config in Recommender",
-      "description": "Basic snippet for update_recommender_config in Recommender",
+      "title": "Snippet for the update_recommender_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#update_recommender_config. It may require modification in order to execute successfully.",
       "file": "recommender/update_recommender_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_GetInsightTypeConfig_sync",
-      "title": "Snippet for get_insight_type_config in Recommender",
-      "description": "Basic snippet for get_insight_type_config in Recommender",
+      "title": "Snippet for the get_insight_type_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_insight_type_config. It may require modification in order to execute successfully.",
       "file": "recommender/get_insight_type_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "recommender_v1_generated_Recommender_UpdateInsightTypeConfig_sync",
-      "title": "Snippet for update_insight_type_config in Recommender",
-      "description": "Basic snippet for update_insight_type_config in Recommender",
+      "title": "Snippet for the update_insight_type_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#update_insight_type_config. It may require modification in order to execute successfully.",
       "file": "recommender/update_insight_type_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

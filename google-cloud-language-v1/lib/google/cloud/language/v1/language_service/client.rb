@@ -152,7 +152,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -334,8 +334,10 @@ module Google
             end
 
             ##
-            # Finds entities, similar to {::Google::Cloud::Language::V1::LanguageService::Client#analyze_entities AnalyzeEntities} in the text and analyzes
-            # sentiment associated with each entity and its mentions.
+            # Finds entities, similar to
+            # {::Google::Cloud::Language::V1::LanguageService::Client#analyze_entities AnalyzeEntities}
+            # in the text and analyzes sentiment associated with each entity and its
+            # mentions.
             #
             # @overload analyze_entity_sentiment(request, options = nil)
             #   Pass arguments to `analyze_entity_sentiment` via a request object, either of type
@@ -575,6 +577,83 @@ module Google
             end
 
             ##
+            # Moderates a document for harmful and sensitive categories.
+            #
+            # @overload moderate_text(request, options = nil)
+            #   Pass arguments to `moderate_text` via a request object, either of type
+            #   {::Google::Cloud::Language::V1::ModerateTextRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Language::V1::ModerateTextRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload moderate_text(document: nil)
+            #   Pass arguments to `moderate_text` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param document [::Google::Cloud::Language::V1::Document, ::Hash]
+            #     Required. Input document.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Language::V1::ModerateTextResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Language::V1::ModerateTextResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/language/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1::ModerateTextRequest.new
+            #
+            #   # Call the moderate_text method.
+            #   result = client.moderate_text request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1::ModerateTextResponse.
+            #   p result
+            #
+            def moderate_text request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Language::V1::ModerateTextRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.moderate_text.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Language::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.moderate_text.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.moderate_text.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @language_service_stub.call_rpc :moderate_text, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # A convenience method that provides all the features that analyzeSentiment,
             # analyzeEntities, and analyzeSyntax provide in one call.
             #
@@ -694,9 +773,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -738,7 +817,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "language.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "language.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -817,6 +898,11 @@ module Google
                 #
                 attr_reader :classify_text
                 ##
+                # RPC-specific configuration for `moderate_text`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :moderate_text
+                ##
                 # RPC-specific configuration for `annotate_text`
                 # @return [::Gapic::Config::Method]
                 #
@@ -834,6 +920,8 @@ module Google
                   @analyze_syntax = ::Gapic::Config::Method.new analyze_syntax_config
                   classify_text_config = parent_rpcs.classify_text if parent_rpcs.respond_to? :classify_text
                   @classify_text = ::Gapic::Config::Method.new classify_text_config
+                  moderate_text_config = parent_rpcs.moderate_text if parent_rpcs.respond_to? :moderate_text
+                  @moderate_text = ::Gapic::Config::Method.new moderate_text_config
                   annotate_text_config = parent_rpcs.annotate_text if parent_rpcs.respond_to? :annotate_text
                   @annotate_text = ::Gapic::Config::Method.new annotate_text_config
 

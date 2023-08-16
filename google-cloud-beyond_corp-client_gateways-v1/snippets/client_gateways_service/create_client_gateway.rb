@@ -20,8 +20,11 @@
 require "google/cloud/beyond_corp/client_gateways/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client#create_client_gateway
+# Snippet for the create_client_gateway call in the ClientGatewaysService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client#create_client_gateway.
+# It may require modification in order to execute successfully.
 #
 def create_client_gateway
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_client_gateway
   # Call the create_client_gateway method.
   result = client.create_client_gateway request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END beyondcorp_v1_generated_ClientGatewaysService_CreateClientGateway_sync]

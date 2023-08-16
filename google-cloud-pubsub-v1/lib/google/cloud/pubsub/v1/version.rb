@@ -21,7 +21,7 @@ module Google
   module Cloud
     module PubSub
       module V1
-        VERSION = "0.12.0"
+        VERSION = "0.17.3"
       end
     end
   end

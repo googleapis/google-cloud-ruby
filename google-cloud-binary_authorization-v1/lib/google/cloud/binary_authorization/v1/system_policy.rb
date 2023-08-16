@@ -25,6 +25,7 @@ require "google/cloud/binary_authorization/v1/version"
 require "google/cloud/binary_authorization/v1/system_policy/credentials"
 require "google/cloud/binary_authorization/v1/system_policy/paths"
 require "google/cloud/binary_authorization/v1/system_policy/client"
+require "google/cloud/binary_authorization/v1/system_policy/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # API for working with the system policy.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/binary_authorization/v1/system_policy"
         #     client = ::Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/binary_authorization/v1/system_policy/rest"
+        #     client = ::Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Rest::Client.new
         #
         module SystemPolicy
         end

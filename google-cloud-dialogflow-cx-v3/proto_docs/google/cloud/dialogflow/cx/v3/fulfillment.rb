@@ -28,10 +28,14 @@ module Google
           #   * Set parameter values.
           #   * Call the webhook.
           #
-          # Fulfillments can be called at various stages in the {::Google::Cloud::Dialogflow::CX::V3::Page Page} or
-          # {::Google::Cloud::Dialogflow::CX::V3::Form Form} lifecycle. For example, when a {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest DetectIntentRequest} drives a
-          # session to enter a new page, the page's entry fulfillment can add a static
-          # response to the {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} in the returning {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse DetectIntentResponse},
+          # Fulfillments can be called at various stages in the
+          # {::Google::Cloud::Dialogflow::CX::V3::Page Page} or
+          # {::Google::Cloud::Dialogflow::CX::V3::Form Form} lifecycle. For example, when a
+          # {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest DetectIntentRequest}
+          # drives a session to enter a new page, the page's entry fulfillment can add a
+          # static response to the
+          # {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} in the returning
+          # {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse DetectIntentResponse},
           # call the webhook (for example, to load user data from a database), or both.
           # @!attribute [rw] messages
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::ResponseMessage>]
@@ -54,7 +58,8 @@ module Google
           #     that have slow webhooks.
           # @!attribute [rw] tag
           #   @return [::String]
-          #     The value of this field will be populated in the {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}
+          #     The value of this field will be populated in the
+          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}
           #     `fulfillmentInfo.tag` field by Dialogflow when the associated webhook is
           #     called.
           #     The tag is typically used by the webhook service to identify which

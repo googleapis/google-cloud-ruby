@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices
+# Snippet for the batch_import_model_evaluation_slices call in the ModelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices.
+# It may require modification in order to execute successfully.
 #
 def batch_import_model_evaluation_slices
   # Create a client object. The client can be reused for multiple calls.

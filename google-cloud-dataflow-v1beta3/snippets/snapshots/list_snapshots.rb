@@ -20,8 +20,11 @@
 require "google/cloud/dataflow/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataflow::V1beta3::Snapshots::Client#list_snapshots
+# Snippet for the list_snapshots call in the Snapshots service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Snapshots::Client#list_snapshots. It may
+# require modification in order to execute successfully.
 #
 def list_snapshots
   # Create a client object. The client can be reused for multiple calls.

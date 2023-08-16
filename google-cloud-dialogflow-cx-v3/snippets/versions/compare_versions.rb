@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Versions::Client#compare_versions
+# Snippet for the compare_versions call in the Versions service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Versions::Client#compare_versions. It may
+# require modification in order to execute successfully.
 #
 def compare_versions
   # Create a client object. The client can be reused for multiple calls.

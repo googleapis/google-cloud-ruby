@@ -1,5 +1,130 @@
 # Release History
 
+### 0.26.0 (2023-08-15)
+
+#### Features
+
+* add APIs for GKE OOTB metrics packages ([#22753](https://github.com/googleapis/google-cloud-ruby/issues/22753)) 
+* Support for configuring a container's binary authorization policies ([#22774](https://github.com/googleapis/google-cloud-ruby/issues/22774)) 
+
+### 0.25.0 (2023-07-25)
+
+#### Features
+
+* add enable_multi_networking to NetworkConfig 
+* add policy_name to PlacementPolicy message within a node pool 
+* add support for AdditionalPodNetworkConfig and AdditionalNodeNetworkConfig 
+* add support for HostMaintenancePolicy 
+
+### 0.24.0 (2023-07-13)
+
+#### Features
+
+* Support for advanced datapath observability configs ([#22520](https://github.com/googleapis/google-cloud-ruby/issues/22520)) 
+
+### 0.23.0 (2023-07-10)
+
+#### Features
+
+* Added a flag for toggling the Kubelet readonly port 
+* Report the utilization of the IPv4 range for a pod 
+* Support for network performance configuration ([#22466](https://github.com/googleapis/google-cloud-ruby/issues/22466)) 
+* Support for the TPU placement topology 
+* Support for using KubeDNS for DNS resolution 
+
+### 0.22.0 (2023-06-06)
+
+#### Features
+
+* Support enabling FQDN Network Policy for a Cluster 
+* Support for best-effort provisioning in a NodePool 
+* Support for check_autopilot_compatibility ([#21908](https://github.com/googleapis/google-cloud-ruby/issues/21908)) 
+* Support for Kubernetes Beta APIs in a Cluster 
+* Support parameters for node pools to be backed by shared sole tenant node groups 
+* Uses binary protobuf definitions for better forward compatibility ([#21673](https://github.com/googleapis/google-cloud-ruby/issues/21673)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.21.1 (2023-05-19)
+
+#### Documentation
+
+* clarify release channel defaulting behavior 
+
+### 0.21.0 (2023-05-08)
+
+#### Features
+
+* Support for configuring the Cloud Storage Fuse CSI driver 
+* Support for fleet registration via cluster update 
+
+### 0.20.0 (2023-04-27)
+
+#### Features
+
+* Add option RESIZE_CLUSTER to enum Operation Type ([#21483](https://github.com/googleapis/google-cloud-ruby/issues/21483)) 
+* Add state field to DatabaseEncryption ([#21483](https://github.com/googleapis/google-cloud-ruby/issues/21483)) 
+#### Documentation
+
+* Expand documentation for Operation Type ([#21483](https://github.com/googleapis/google-cloud-ruby/issues/21483)) 
+
+### 0.19.0 (2023-04-21)
+
+#### Features
+
+* Support additional pod IPv4 ranges ([#21443](https://github.com/googleapis/google-cloud-ruby/issues/21443)) 
+
+### 0.18.0 (2023-04-10)
+
+#### Features
+
+* support AdditionalPodRangesConfig for IPAllocationPolicy 
+
+### 0.17.0 (2023-03-29)
+
+#### Features
+
+* Added support for fleet registration ([#21031](https://github.com/googleapis/google-cloud-ruby/issues/21031)) 
+
+### 0.16.3 (2023-03-08)
+
+#### Documentation
+
+* minor typo fix ([#20607](https://github.com/googleapis/google-cloud-ruby/issues/20607)) 
+
+### 0.16.2 (2023-02-13)
+
+#### Documentation
+
+* Improve documentation for NodePool ([#20114](https://github.com/googleapis/google-cloud-ruby/issues/20114)) 
+
+### 0.16.1 (2023-01-31)
+
+#### Documentation
+
+* clarify wording around the NodePoolUpdateStrategy default behavior ([#20100](https://github.com/googleapis/google-cloud-ruby/issues/20100)) 
+
+### 0.16.0 (2023-01-11)
+
+#### Features
+
+* Support for etags in clusters and node pools ([#19980](https://github.com/googleapis/google-cloud-ruby/issues/19980)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* add stack type for clusters ([#19895](https://github.com/googleapis/google-cloud-ruby/issues/19895)) 
+* Support for local SSD configs in a node config 
+* Support for setting windows node config when updating a node pool ([#19907](https://github.com/googleapis/google-cloud-ruby/issues/19907)) 
+
+### 0.14.0 (2022-12-09)
+
+#### Features
+
+* Support for enabling NCCL Fast Sockets in a node pool ([#19477](https://github.com/googleapis/google-cloud-ruby/issues/19477)) 
+
 ### 0.13.0 (2022-11-08)
 
 #### Features

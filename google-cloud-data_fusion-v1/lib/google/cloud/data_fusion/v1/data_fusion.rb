@@ -26,6 +26,7 @@ require "google/cloud/data_fusion/v1/data_fusion/credentials"
 require "google/cloud/data_fusion/v1/data_fusion/paths"
 require "google/cloud/data_fusion/v1/data_fusion/operations"
 require "google/cloud/data_fusion/v1/data_fusion/client"
+require "google/cloud/data_fusion/v1/data_fusion/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # Data Fusion enables ETL developers to build code-free, data integration
         # pipelines via a point-and-click UI.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_fusion/v1/data_fusion"
         #     client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/data_fusion/v1/data_fusion/rest"
+        #     client = ::Google::Cloud::DataFusion::V1::DataFusion::Rest::Client.new
         #
         module DataFusion
         end

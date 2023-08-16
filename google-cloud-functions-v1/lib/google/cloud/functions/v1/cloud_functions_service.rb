@@ -26,6 +26,7 @@ require "google/cloud/functions/v1/cloud_functions_service/credentials"
 require "google/cloud/functions/v1/cloud_functions_service/paths"
 require "google/cloud/functions/v1/cloud_functions_service/operations"
 require "google/cloud/functions/v1/cloud_functions_service/client"
+require "google/cloud/functions/v1/cloud_functions_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # A service that application uses to manipulate triggers and functions.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/functions/v1/cloud_functions_service"
         #     client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/functions/v1/cloud_functions_service/rest"
+        #     client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Rest::Client.new
         #
         module CloudFunctionsService
         end

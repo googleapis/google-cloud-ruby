@@ -26,6 +26,7 @@ require "google/cloud/retail/v2/user_event_service/credentials"
 require "google/cloud/retail/v2/user_event_service/paths"
 require "google/cloud/retail/v2/user_event_service/operations"
 require "google/cloud/retail/v2/user_event_service/client"
+require "google/cloud/retail/v2/user_event_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Service for ingesting end user actions on the customer website.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/user_event_service"
         #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/retail/v2/user_event_service/rest"
+        #     client = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new
         #
         module UserEventService
         end

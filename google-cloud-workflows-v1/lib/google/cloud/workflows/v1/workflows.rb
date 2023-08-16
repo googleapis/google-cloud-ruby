@@ -26,6 +26,7 @@ require "google/cloud/workflows/v1/workflows/credentials"
 require "google/cloud/workflows/v1/workflows/paths"
 require "google/cloud/workflows/v1/workflows/operations"
 require "google/cloud/workflows/v1/workflows/client"
+require "google/cloud/workflows/v1/workflows/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # Workflows makes sure the program executes reliably, despite hardware and
         # networking interruptions.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/workflows/v1/workflows"
         #     client = ::Google::Cloud::Workflows::V1::Workflows::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/workflows/v1/workflows/rest"
+        #     client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new
         #
         module Workflows
         end

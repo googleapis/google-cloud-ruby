@@ -32,7 +32,7 @@ module Google
         ##
         # Provides translation from/to media types.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/media_translation/v1beta1/speech_translation_service"
         #     client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new

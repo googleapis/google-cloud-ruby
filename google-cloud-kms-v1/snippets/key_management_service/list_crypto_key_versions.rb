@@ -20,8 +20,11 @@
 require "google/cloud/kms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_key_versions
+# Snippet for the list_crypto_key_versions call in the KeyManagementService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_key_versions.
+# It may require modification in order to execute successfully.
 #
 def list_crypto_key_versions
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_crypto_key_versions
   # Call the list_crypto_key_versions method.
   result = client.list_crypto_key_versions request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Kms::V1::CryptoKeyVersion.
-    p response
+    p item
   end
 end
 # [END cloudkms_v1_generated_KeyManagementService_ListCryptoKeyVersions_sync]

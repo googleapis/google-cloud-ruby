@@ -35,7 +35,7 @@ module Google
         # The AwsClusters API provides a single centrally managed service
         # to create and manage Anthos clusters that run on AWS infrastructure.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gke_multi_cloud/v1/aws_clusters"
         #     client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new

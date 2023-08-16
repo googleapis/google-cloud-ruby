@@ -1,5 +1,47 @@
 # Changelog
 
+### 0.7.0 (2023-06-16)
+
+#### Features
+
+* added support for StopAirflowCommand, ExecuteAirflowCommand, PollAirflowCommand, DatabaseFailover, FetchDatabaseProperties ([#22388](https://github.com/googleapis/google-cloud-ruby/issues/22388)) 
+
+### 0.6.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.6.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.5.0 (2023-04-28)
+
+#### Features
+
+* Add airflow_byoid_uri field to EnvironmentConfig ([#21486](https://github.com/googleapis/google-cloud-ruby/issues/21486)) 
+
+### 0.4.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20627](https://github.com/googleapis/google-cloud-ruby/issues/20627)) 
+
+### 0.3.1 (2023-02-13)
+
+#### Documentation
+
+* Minor formatting fixes to reference docs ([#20140](https://github.com/googleapis/google-cloud-ruby/issues/20140)) 
+
+### 0.3.0 (2022-12-09)
+
+#### Features
+
+* Added support for load_snapshot and save_snapshot calls ([#19485](https://github.com/googleapis/google-cloud-ruby/issues/19485)) 
+
 ### 0.2.0 (2022-07-06)
 
 #### Features

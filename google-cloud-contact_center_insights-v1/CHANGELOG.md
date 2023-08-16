@@ -1,5 +1,62 @@
 # Changelog
 
+### 0.16.0 (2023-07-10)
+
+#### Features
+
+* Support topic model type V2 ([#22482](https://github.com/googleapis/google-cloud-ruby/issues/22482)) 
+
+### 0.15.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21673](https://github.com/googleapis/google-cloud-ruby/issues/21673)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.14.0 (2023-05-02)
+
+#### Features
+
+* Support summary generation during conversation analysis ([#21497](https://github.com/googleapis/google-cloud-ruby/issues/21497)) 
+
+### 0.13.0 (2023-04-10)
+
+#### Features
+
+* support upload_conversation api 
+
+### 0.12.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.11.0 (2023-03-03)
+
+#### Features
+
+* add upload_conversation_analysis_percentage in AnalysisConfig ([#20588](https://github.com/googleapis/google-cloud-ruby/issues/20588)) 
+
+### 0.10.0 (2023-02-13)
+
+#### Features
+
+* Support for IngestConversationsStats ([#20122](https://github.com/googleapis/google-cloud-ruby/issues/20122)) 
+* Support for IssueModel#issue_count 
+
+### 0.9.0 (2022-12-14)
+
+#### Features
+
+* Added annotator_selector field to Analysis 
+* Added issue match data to CallAnnotation 
+* Added sample utterances to Issue 
+* Support for the bulk_analyze_conversations RPC ([#19857](https://github.com/googleapis/google-cloud-ruby/issues/19857)) 
+* Support for the delete_issue RPC 
+* Support for the ingest_conversations RPC 
+
 ### 0.8.2 (2022-08-24)
 
 #### Documentation

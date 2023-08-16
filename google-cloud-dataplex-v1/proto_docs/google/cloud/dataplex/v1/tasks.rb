@@ -29,8 +29,8 @@ module Google
         #     tasks/\\{task_id}.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. System generated globally unique ID for the task. This ID will be
-        #     different if the task is deleted and re-created with the same name.
+        #     Output only. System generated globally unique ID for the task. This ID will
+        #     be different if the task is deleted and re-created with the same name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the task was created.
@@ -113,12 +113,10 @@ module Google
             #     For example, gs://bucket-name/my/path/to/lib.tar.gz
             # @!attribute [rw] properties
             #   @return [::Google::Protobuf::Map{::String => ::String}]
-            #     Optional. Override to common configuration of open source components installed on
-            #     the Dataproc cluster.
-            #     The properties to set on daemon config files.
-            #     Property keys are specified in `prefix:property` format, for example
-            #     `core:hadoop.tmp.dir`.
-            #     For more information, see [Cluster
+            #     Optional. Override to common configuration of open source components
+            #     installed on the Dataproc cluster. The properties to set on daemon
+            #     config files. Property keys are specified in `prefix:property` format,
+            #     for example `core:hadoop.tmp.dir`. For more information, see [Cluster
             #     properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
             class ContainerImageRuntime
               include ::Google::Protobuf::MessageExts
@@ -137,8 +135,8 @@ module Google
             # Cloud VPC Network used to run the infrastructure.
             # @!attribute [rw] network
             #   @return [::String]
-            #     Optional. The Cloud VPC network in which the job is run. By default, the Cloud
-            #     VPC network named Default within the project is used.
+            #     Optional. The Cloud VPC network in which the job is run. By default,
+            #     the Cloud VPC network named Default within the project is used.
             # @!attribute [rw] sub_network
             #   @return [::String]
             #     Optional. The Cloud VPC sub-network in which the job is run.
@@ -171,14 +169,13 @@ module Google
           #     Set to zero to never attempt to retry a failed task.
           # @!attribute [rw] schedule
           #   @return [::String]
-          #     Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for running
-          #     tasks periodically.
-          #     To explicitly set a timezone to the cron tab, apply a prefix in the
-          #     cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or "TZ=$\\{IANA_TIME_ZONE}".
-          #     The $\\{IANA_TIME_ZONE} may only be a valid string from IANA time zone
-          #     database. For example, "CRON_TZ=America/New_York 1 * * * *", or
-          #     "TZ=America/New_York 1 * * * *".
-          #     This field is required for RECURRING tasks.
+          #     Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for
+          #     running tasks periodically. To explicitly set a timezone to the cron
+          #     tab, apply a prefix in the cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or
+          #     "TZ=$\\{IANA_TIME_ZONE}". The $\\{IANA_TIME_ZONE} may only be a valid
+          #     string from IANA time zone database. For example,
+          #     `CRON_TZ=America/New_York 1 * * * *`, or `TZ=America/New_York 1 * * *
+          #     *`. This field is required for RECURRING tasks.
           class TriggerSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -218,9 +215,10 @@ module Google
           #     used.
           # @!attribute [rw] project
           #   @return [::String]
-          #     Optional. The project in which jobs are run. By default, the project containing the
-          #     Lake is used. If a project is provided, the
-          #     {::Google::Cloud::Dataplex::V1::Task::ExecutionSpec#service_account ExecutionSpec.service_account} must belong to this project.
+          #     Optional. The project in which jobs are run. By default, the project
+          #     containing the Lake is used. If a project is provided, the
+          #     {::Google::Cloud::Dataplex::V1::Task::ExecutionSpec#service_account ExecutionSpec.service_account}
+          #     must belong to this project.
           # @!attribute [rw] max_job_execution_lifetime
           #   @return [::Google::Protobuf::Duration]
           #     Optional. The maximum duration after which the job execution is expired.
@@ -273,13 +271,13 @@ module Google
           #     (`set key="value";`).
           # @!attribute [rw] file_uris
           #   @return [::Array<::String>]
-          #     Optional. Cloud Storage URIs of files to be placed in the working directory of each
-          #     executor.
+          #     Optional. Cloud Storage URIs of files to be placed in the working
+          #     directory of each executor.
           # @!attribute [rw] archive_uris
           #   @return [::Array<::String>]
-          #     Optional. Cloud Storage URIs of archives to be extracted into the working directory
-          #     of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and
-          #     .zip.
+          #     Optional. Cloud Storage URIs of archives to be extracted into the working
+          #     directory of each executor. Supported file types: .jar, .tar, .tar.gz,
+          #     .tgz, and .zip.
           # @!attribute [rw] infrastructure_spec
           #   @return [::Google::Cloud::Dataplex::V1::Task::InfrastructureSpec]
           #     Optional. Infrastructure specification for the execution.
@@ -291,22 +289,22 @@ module Google
           # Config for running scheduled notebooks.
           # @!attribute [rw] notebook
           #   @return [::String]
-          #     Required. Path to input notebook. This can be the Cloud Storage URI of the notebook
-          #     file or the path to a Notebook Content. The execution args are accessible
-          #     as environment variables
+          #     Required. Path to input notebook. This can be the Cloud Storage URI of
+          #     the notebook file or the path to a Notebook Content. The execution args
+          #     are accessible as environment variables
           #     (`TASK_key=value`).
           # @!attribute [rw] infrastructure_spec
           #   @return [::Google::Cloud::Dataplex::V1::Task::InfrastructureSpec]
           #     Optional. Infrastructure specification for the execution.
           # @!attribute [rw] file_uris
           #   @return [::Array<::String>]
-          #     Optional. Cloud Storage URIs of files to be placed in the working directory of each
-          #     executor.
+          #     Optional. Cloud Storage URIs of files to be placed in the working
+          #     directory of each executor.
           # @!attribute [rw] archive_uris
           #   @return [::Array<::String>]
-          #     Optional. Cloud Storage URIs of archives to be extracted into the working directory
-          #     of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and
-          #     .zip.
+          #     Optional. Cloud Storage URIs of archives to be extracted into the working
+          #     directory of each executor. Supported file types: .jar, .tar, .tar.gz,
+          #     .tgz, and .zip.
           class NotebookTaskConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,13 +358,32 @@ module Google
         #     Output only. The underlying service running a job.
         # @!attribute [r] service_job
         #   @return [::String]
-        #     Output only. The full resource name for the job run under a particular service.
+        #     Output only. The full resource name for the job run under a particular
+        #     service.
         # @!attribute [r] message
         #   @return [::String]
         #     Output only. Additional information about the current state.
+        # @!attribute [r] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. User-defined labels for the task.
+        # @!attribute [r] trigger
+        #   @return [::Google::Cloud::Dataplex::V1::Job::Trigger]
+        #     Output only. Job execution trigger.
+        # @!attribute [r] execution_spec
+        #   @return [::Google::Cloud::Dataplex::V1::Task::ExecutionSpec]
+        #     Output only. Spec related to how a task is executed.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           module Service
             # Service used to run the job is unspecified.
@@ -397,6 +414,19 @@ module Google
 
             # The job was cancelled outside of Dataplex.
             ABORTED = 6
+          end
+
+          # Job execution trigger.
+          module Trigger
+            # The trigger is unspecified.
+            TRIGGER_UNSPECIFIED = 0
+
+            # The job was triggered by Dataplex based on trigger spec from task
+            # definition.
+            TASK_CONFIG = 1
+
+            # The job was triggered by the explicit call of Task API.
+            RUN_REQUEST = 2
           end
         end
       end

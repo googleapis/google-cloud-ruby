@@ -1,6 +1,6 @@
 # Ruby Client for the Firestore in Datastore mode Admin V1 API
 
-API Client library for the Firestore in Datastore mode Admin V1 API
+Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
 
 Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
@@ -9,7 +9,7 @@ https://github.com/googleapis/google-cloud-ruby
 This gem is a _versioned_ client. It provides basic client classes for a
 specific version of the Firestore in Datastore mode Admin V1 API. Most users should consider using
 the main client gem,
-[google-cloud-datastore](https://rubygems.org/gems/google-cloud-datastore).
+[google-cloud-datastore-admin](https://rubygems.org/gems/google-cloud-datastore-admin).
 See the section below titled *Which client should I use?* for more information.
 
 ## Installation
@@ -46,8 +46,8 @@ for general usage information.
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
+or a [`Google::Cloud::Logging::Logger`](https://cloud.google.com/ruby/docs/reference/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
@@ -88,7 +88,7 @@ support schedule.
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
-client library with a name such as `google-cloud-datastore`,
+client library with a name such as `google-cloud-datastore-admin`,
 and lower-level _versioned_ client libraries with names such as
 `google-cloud-datastore-admin-v1`.
 _In most cases, you should install the main client._
@@ -115,7 +115,7 @@ service version.
 
 We recommend that most users install the main client gem for a service. You can
 identify this gem as the one _without_ a version in its name, e.g.
-`google-cloud-datastore`.
+`google-cloud-datastore-admin`.
 The main client is recommended because it will embody the best practices for
 accessing the service, and may also provide more convenient interfaces or
 tighter integration into frameworks and third-party libraries. In addition, the

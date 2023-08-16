@@ -25,6 +25,7 @@ require "google/cloud/recommender/v1/version"
 require "google/cloud/recommender/v1/recommender/credentials"
 require "google/cloud/recommender/v1/recommender/paths"
 require "google/cloud/recommender/v1/recommender/client"
+require "google/cloud/recommender/v1/recommender/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # discovery, etc. Insights and recommendations are generated automatically
         # based on analysis of user resources, configuration and monitoring metrics.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recommender/v1/recommender"
         #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/recommender/v1/recommender/rest"
+        #     client = ::Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
         #
         module Recommender
         end

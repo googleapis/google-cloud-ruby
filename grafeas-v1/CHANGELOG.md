@@ -1,5 +1,41 @@
 # Release History
 
+### 0.12.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.12.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21681](https://github.com/googleapis/google-cloud-ruby/issues/21681)) 
+
+### 0.11.0 (2023-05-04)
+
+#### Features
+
+* Added support for bulk writer ([#21426](https://github.com/googleapis/google-cloud-ruby/issues/21426)) 
+
+### 0.10.0 (2023-04-16)
+
+#### Features
+
+* Update AttackComplexity and Authentication enums 
+
+### 0.9.0 (2023-03-15)
+
+#### Features
+
+* Add vulnerability assessment options ([#20892](https://github.com/googleapis/google-cloud-ruby/issues/20892)) 
+
+### 0.8.0 (2023-03-05)
+
+#### Features
+
+* Report the CVSS V2 score for a vulnerability ([#20597](https://github.com/googleapis/google-cloud-ruby/issues/20597)) 
+
 ### 0.7.0 (2022-10-03)
 
 #### Features

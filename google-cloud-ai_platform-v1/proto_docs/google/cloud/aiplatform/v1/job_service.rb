@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#create_custom_job JobService.CreateCustomJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_custom_job JobService.CreateCustomJob}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to create the CustomJob in.
@@ -34,7 +35,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#get_custom_job JobService.GetCustomJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_custom_job JobService.GetCustomJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the CustomJob resource.
@@ -45,7 +47,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to list the CustomJobs from.
@@ -79,8 +82,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListCustomJobsResponse#next_page_token ListCustomJobsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListCustomJobsResponse#next_page_token ListCustomJobsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -89,20 +94,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs}
         # @!attribute [rw] custom_jobs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::CustomJob>]
         #     List of CustomJobs in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest#page_token ListCustomJobsRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest#page_token ListCustomJobsRequest.page_token}
+        #     to obtain that page.
         class ListCustomJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_custom_job JobService.DeleteCustomJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_custom_job JobService.DeleteCustomJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the CustomJob resource to be deleted.
@@ -113,7 +122,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_custom_job JobService.CancelCustomJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_custom_job JobService.CancelCustomJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the CustomJob to cancel.
@@ -124,7 +134,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#create_data_labeling_job JobService.CreateDataLabelingJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_data_labeling_job JobService.CreateDataLabelingJob}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent of the DataLabelingJob.
@@ -137,7 +148,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#get_data_labeling_job JobService.GetDataLabelingJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_data_labeling_job JobService.GetDataLabelingJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the DataLabelingJob.
@@ -148,7 +160,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_data_labeling_jobs JobService.ListDataLabelingJobs}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_data_labeling_jobs JobService.ListDataLabelingJobs}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent of the DataLabelingJob.
@@ -197,7 +210,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_data_labeling_jobs JobService.ListDataLabelingJobs}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_data_labeling_jobs JobService.ListDataLabelingJobs}.
         # @!attribute [rw] data_labeling_jobs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::DataLabelingJob>]
         #     A list of DataLabelingJobs that matches the specified filter in the
@@ -210,7 +224,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_data_labeling_job JobService.DeleteDataLabelingJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_data_labeling_job JobService.DeleteDataLabelingJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the DataLabelingJob to be deleted.
@@ -221,7 +236,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_data_labeling_job JobService.CancelDataLabelingJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_data_labeling_job JobService.CancelDataLabelingJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the DataLabelingJob.
@@ -232,11 +248,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#create_hyperparameter_tuning_job JobService.CreateHyperparameterTuningJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_hyperparameter_tuning_job JobService.CreateHyperparameterTuningJob}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the Location to create the HyperparameterTuningJob in.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The resource name of the Location to create the
+        #     HyperparameterTuningJob in. Format:
+        #     `projects/{project}/locations/{location}`
         # @!attribute [rw] hyperparameter_tuning_job
         #   @return [::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob]
         #     Required. The HyperparameterTuningJob to create.
@@ -245,7 +263,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#get_hyperparameter_tuning_job JobService.GetHyperparameterTuningJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_hyperparameter_tuning_job JobService.GetHyperparameterTuningJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the HyperparameterTuningJob resource.
@@ -256,10 +275,127 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the Location to list the HyperparameterTuningJobs
+        #     Required. The resource name of the Location to list the
+        #     HyperparameterTuningJobs from. Format:
+        #     `projects/{project}/locations/{location}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The standard list filter.
+        #
+        #     Supported fields:
+        #
+        #       * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+        #       * `state` supports `=`, `!=` comparisons.
+        #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+        #         `create_time` must be in RFC 3339 format.
+        #       * `labels` supports general map functions that is:
+        #         `labels.key=value` - key:value equality
+        #         `labels.key:* - key existence
+        #
+        #     Some examples of using the filter are:
+        #
+        #       * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+        #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+        #       * `NOT display_name="my_job"`
+        #       * `create_time>"2021-05-18T00:00:00Z"`
+        #       * `labels.keyA=valueA`
+        #       * `labels.keyB:*`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The standard list page token.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsResponse#next_page_token ListHyperparameterTuningJobsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs}
+        #     call.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask specifying which fields to read.
+        class ListHyperparameterTuningJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs}
+        # @!attribute [rw] hyperparameter_tuning_jobs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob>]
+        #     List of HyperparameterTuningJobs in the requested page.
+        #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials}
+        #     of the jobs will be not be returned.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest#page_token ListHyperparameterTuningJobsRequest.page_token}
+        #     to obtain that page.
+        class ListHyperparameterTuningJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_hyperparameter_tuning_job JobService.DeleteHyperparameterTuningJob}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the HyperparameterTuningJob resource to be deleted.
+        #     Format:
+        #     `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+        class DeleteHyperparameterTuningJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_hyperparameter_tuning_job JobService.CancelHyperparameterTuningJob}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the HyperparameterTuningJob to cancel.
+        #     Format:
+        #     `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+        class CancelHyperparameterTuningJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_nas_job JobService.CreateNasJob}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location to create the NasJob in.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] nas_job
+        #   @return [::Google::Cloud::AIPlatform::V1::NasJob]
+        #     Required. The NasJob to create.
+        class CreateNasJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_job JobService.GetNasJob}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NasJob resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        class GetNasJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location to list the NasJobs
         #     from. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] filter
         #   @return [::String]
@@ -290,58 +426,117 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsResponse#next_page_token ListHyperparameterTuningJobsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListNasJobsResponse#next_page_token ListNasJobsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
-        class ListHyperparameterTuningJobsRequest
+        class ListNasJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs}
-        # @!attribute [rw] hyperparameter_tuning_jobs
-        #   @return [::Array<::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob>]
-        #     List of HyperparameterTuningJobs in the requested page.
-        #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials} of the jobs will be not be returned.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}
+        # @!attribute [rw] nas_jobs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NasJob>]
+        #     List of NasJobs in the requested page.
+        #     {::Google::Cloud::AIPlatform::V1::NasJob#nas_job_output NasJob.nas_job_output}
+        #     of the jobs will not be returned.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest#page_token ListHyperparameterTuningJobsRequest.page_token} to obtain that
-        #     page.
-        class ListHyperparameterTuningJobsResponse
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListNasJobsRequest#page_token ListNasJobsRequest.page_token}
+        #     to obtain that page.
+        class ListNasJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_hyperparameter_tuning_job JobService.DeleteHyperparameterTuningJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_nas_job JobService.DeleteNasJob}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the HyperparameterTuningJob resource to be deleted.
+        #     Required. The name of the NasJob resource to be deleted.
         #     Format:
-        #     `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
-        class DeleteHyperparameterTuningJobRequest
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        class DeleteNasJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_hyperparameter_tuning_job JobService.CancelHyperparameterTuningJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_nas_job JobService.CancelNasJob}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the HyperparameterTuningJob to cancel.
+        #     Required. The name of the NasJob to cancel.
         #     Format:
-        #     `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
-        class CancelHyperparameterTuningJobRequest
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        class CancelNasJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#create_batch_prediction_job JobService.CreateBatchPredictionJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_trial_detail JobService.GetNasTrialDetail}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NasTrialDetail resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
+        class GetNasTrialDetailRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the Location to create the BatchPredictionJob in.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The name of the NasJob resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The standard list page token.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsResponse#next_page_token ListNasTrialDetailsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}
+        #     call.
+        class ListNasTrialDetailsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}
+        # @!attribute [rw] nas_trial_details
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NasTrialDetail>]
+        #     List of top NasTrials in the requested page.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest#page_token ListNasTrialDetailsRequest.page_token}
+        #     to obtain that page.
+        class ListNasTrialDetailsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_batch_prediction_job JobService.CreateBatchPredictionJob}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location to create the
+        #     BatchPredictionJob in. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] batch_prediction_job
         #   @return [::Google::Cloud::AIPlatform::V1::BatchPredictionJob]
         #     Required. The BatchPredictionJob to create.
@@ -350,7 +545,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#get_batch_prediction_job JobService.GetBatchPredictionJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_batch_prediction_job JobService.GetBatchPredictionJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the BatchPredictionJob resource.
@@ -361,7 +557,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to list the BatchPredictionJobs
@@ -396,8 +593,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsResponse#next_page_token ListBatchPredictionJobsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsResponse#next_page_token ListBatchPredictionJobsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -406,21 +605,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs}
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs}
         # @!attribute [rw] batch_prediction_jobs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::BatchPredictionJob>]
         #     List of BatchPredictionJobs in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest#page_token ListBatchPredictionJobsRequest.page_token} to obtain that
-        #     page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest#page_token ListBatchPredictionJobsRequest.page_token}
+        #     to obtain that page.
         class ListBatchPredictionJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_batch_prediction_job JobService.DeleteBatchPredictionJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_batch_prediction_job JobService.DeleteBatchPredictionJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the BatchPredictionJob resource to be deleted.
@@ -431,7 +633,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_batch_prediction_job JobService.CancelBatchPredictionJob}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_batch_prediction_job JobService.CancelBatchPredictionJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the BatchPredictionJob to cancel.
@@ -502,11 +705,12 @@ module Google
           # @!attribute [rw] top_feature_count
           #   @return [::Integer]
           #     If set, all attribution scores between
-          #     {::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest#start_time SearchModelDeploymentMonitoringStatsAnomaliesRequest.start_time} and
-          #     {::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest#end_time SearchModelDeploymentMonitoringStatsAnomaliesRequest.end_time} are
-          #     fetched, and page token doesn't take affect in this case.
-          #     Only used to retrieve attribution score for the top Features which has
-          #     the highest attribution score in the latest monitoring run.
+          #     {::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest#start_time SearchModelDeploymentMonitoringStatsAnomaliesRequest.start_time}
+          #     and
+          #     {::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest#end_time SearchModelDeploymentMonitoringStatsAnomaliesRequest.end_time}
+          #     are fetched, and page token doesn't take effect in this case. Only used
+          #     to retrieve attribution score for the top Features which has the highest
+          #     attribution score in the latest monitoring run.
           class StatsAnomaliesObjective
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -603,18 +807,17 @@ module Google
         # {::Google::Cloud::AIPlatform::V1::JobService::Client#update_model_deployment_monitoring_job JobService.UpdateModelDeploymentMonitoringJob}.
         # @!attribute [rw] model_deployment_monitoring_job
         #   @return [::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob]
-        #     Required. The model monitoring configuration which replaces the resource on the
-        #     server.
+        #     Required. The model monitoring configuration which replaces the resource on
+        #     the server.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The update mask is used to specify the fields to be overwritten in the
-        #     ModelDeploymentMonitoringJob resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it is in the mask. If the
-        #     user does not provide a mask then only the non-empty fields present in the
-        #     request will be overwritten. Set the update_mask to `*` to override all
-        #     fields.
-        #     For the objective config, the user can either provide the update mask for
+        #     Required. The update mask is used to specify the fields to be overwritten
+        #     in the ModelDeploymentMonitoringJob resource by the update. The fields
+        #     specified in the update_mask are relative to the resource, not the full
+        #     request. A field will be overwritten if it is in the mask. If the user does
+        #     not provide a mask then only the non-empty fields present in the request
+        #     will be overwritten. Set the update_mask to `*` to override all fields. For
+        #     the objective config, the user can either provide the update mask for
         #     model_deployment_monitoring_objective_configs or any combination of its
         #     nested fields, such as:
         #     model_deployment_monitoring_objective_configs.objective_config.training_dataset.

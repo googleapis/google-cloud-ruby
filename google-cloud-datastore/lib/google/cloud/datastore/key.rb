@@ -70,6 +70,27 @@ module Google
         alias dataset_id= project=
 
         ##
+        # The database of the Key.
+        #
+        # @return [String]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new(
+        #     project: "my-todo-project",
+        #     database: "my-todo-database",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #   task.key.database #=> "my-todo-database"
+        #
+        attr_accessor :database
+        alias database_id database
+        alias database_id= database=
+
+        ##
         # The namespace of the Key.
         #
         # @return [String, nil]
@@ -281,9 +302,9 @@ module Google
             Google::Cloud::Datastore::V1::Key::PathElement.new path_args
           end
           grpc = Google::Cloud::Datastore::V1::Key.new path: grpc_path
-          if project || namespace
+          if project || database || namespace
             grpc.partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
-              project_id: project.to_s, namespace_id: namespace.to_s
+              project_id: project.to_s, database_id: database.to_s, namespace_id: namespace.to_s
             )
           end
           grpc
@@ -304,6 +325,7 @@ module Google
           end
           if key_grpc.partition_id
             key.project = key_grpc.partition_id.project_id
+            key.database = key_grpc.partition_id.database_id
             key.namespace = key_grpc.partition_id.namespace_id
           end
           key.parent = Key.from_grpc key_grpc if key_grpc.path.count.positive?

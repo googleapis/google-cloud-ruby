@@ -500,7 +500,7 @@ module Google
           #     authorization.
           # @!attribute [rw] issuance_config
           #   @return [::String]
-          #     The resource name for a
+          #     Immutable. The resource name for a
           #     {::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig CertificateIssuanceConfig}
           #     used to configure private PKI certificates in the format
           #     `projects/*/locations/*/certificateIssuanceConfigs/*`.
@@ -535,7 +535,9 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
+              # Reason for provisioning failures.
               module Reason
+                # Reason is unspecified.
                 REASON_UNSPECIFIED = 0
 
                 # Certificate provisioning failed due to an issue with one or more of
@@ -571,7 +573,9 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
+              # State of the domain for managed certificate issuance.
               module State
+                # State is unspecified.
                 STATE_UNSPECIFIED = 0
 
                 # Certificate provisioning for this domain is under way. GCP will
@@ -587,7 +591,9 @@ module Google
                 FAILED = 7
               end
 
+              # Reason for failure of the authorization attempt for the domain.
               module FailureReason
+                # FailureReason is unspecified.
                 FAILURE_REASON_UNSPECIFIED = 0
 
                 # There was a problem with the user's DNS or load balancer
@@ -604,7 +610,9 @@ module Google
               end
             end
 
+            # State of the managed certificate resource.
             module State
+              # State is unspecified.
               STATE_UNSPECIFIED = 0
 
               # Certificate Manager attempts to provision or renew the certificate.
@@ -665,14 +673,14 @@ module Google
         #     Set of labels associated with a Certificate Map.
         # @!attribute [r] gclb_targets
         #   @return [::Array<::Google::Cloud::CertificateManager::V1::CertificateMap::GclbTarget>]
-        #     Output only. A list of GCLB targets which use this Certificate Map.
+        #     Output only. A list of GCLB targets that use this Certificate Map.
         #     A Target Proxy is only present on this list if it's attached to a
         #     Forwarding Rule.
         class CertificateMap
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Describes a Target Proxy which uses this Certificate Map.
+          # Describes a Target Proxy that uses this Certificate Map.
           # @!attribute [r] target_https_proxy
           #   @return [::String]
           #     Output only. This field returns the resource name in the following
@@ -743,7 +751,7 @@ module Google
         # @!attribute [rw] certificates
         #   @return [::Array<::String>]
         #     A set of Certificates defines for the given `hostname`. There can be
-        #     defined up to fifteen certificates in each Certificate Map Entry. Each
+        #     defined up to four certificates in each Certificate Map Entry. Each
         #     certificate must match pattern `projects/*/locations/*/certificates/*`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::CertificateManager::V1::ServingState]
@@ -794,7 +802,7 @@ module Google
         #     One or more paragraphs of text description of a DnsAuthorization.
         # @!attribute [rw] domain
         #   @return [::String]
-        #     Required. Immutable. A domain which is being authorized. A DnsAuthorization
+        #     Required. Immutable. A domain that is being authorized. A DnsAuthorization
         #     resource covers a single domain and its wildcard, e.g. authorization for
         #     `example.com` can be used to issue certificates for `example.com` and
         #     `*.example.com`.

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bare_metal_solution-v2",
-    "version": "0.2.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListInstances_sync",
-      "title": "Snippet for list_instances in BareMetalSolution",
-      "description": "Basic snippet for list_instances in BareMetalSolution",
+      "title": "Snippet for the list_instances call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetInstance_sync",
-      "title": "Snippet for get_instance in BareMetalSolution",
-      "description": "Basic snippet for get_instance in BareMetalSolution",
+      "title": "Snippet for the get_instance call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateInstance_sync",
-      "title": "Snippet for update_instance in BareMetalSolution",
-      "description": "Basic snippet for update_instance in BareMetalSolution",
+      "title": "Snippet for the update_instance call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,55 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_RenameInstance_sync",
+      "title": "Snippet for the rename_instance call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_instance. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/rename_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rename_instance",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::Instance",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "RenameInstance",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameInstance",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ResetInstance_sync",
-      "title": "Snippet for reset_instance in BareMetalSolution",
-      "description": "Basic snippet for reset_instance in BareMetalSolution",
+      "title": "Snippet for the reset_instance call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#reset_instance. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/reset_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_StartInstance_sync",
-      "title": "Snippet for start_instance in BareMetalSolution",
-      "description": "Basic snippet for start_instance in BareMetalSolution",
+      "title": "Snippet for the start_instance call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#start_instance. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/start_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_StopInstance_sync",
-      "title": "Snippet for stop_instance in BareMetalSolution",
-      "description": "Basic snippet for stop_instance in BareMetalSolution",
+      "title": "Snippet for the stop_instance call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#stop_instance. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/stop_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +286,95 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_EnableInteractiveSerialConsole_sync",
+      "title": "Snippet for the enable_interactive_serial_console call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#enable_interactive_serial_console. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/enable_interactive_serial_console.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enable_interactive_serial_console",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#enable_interactive_serial_console",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "EnableInteractiveSerialConsole",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.EnableInteractiveSerialConsole",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_DisableInteractiveSerialConsole_sync",
+      "title": "Snippet for the disable_interactive_serial_console call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#disable_interactive_serial_console. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/disable_interactive_serial_console.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_interactive_serial_console",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#disable_interactive_serial_console",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "DisableInteractiveSerialConsole",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.DisableInteractiveSerialConsole",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_DetachLun_sync",
-      "title": "Snippet for detach_lun in BareMetalSolution",
-      "description": "Basic snippet for detach_lun in BareMetalSolution",
+      "title": "Snippet for the detach_lun call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#detach_lun. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/detach_lun.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +406,135 @@
       "segments": [
         {
           "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListSSHKeys_sync",
+      "title": "Snippet for the list_ssh_keys call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_ssh_keys. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/list_ssh_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_ssh_keys",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_ssh_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ListSSHKeysResponse",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "ListSSHKeys",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListSSHKeys",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
           "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_CreateSSHKey_sync",
+      "title": "Snippet for the create_ssh_key call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_ssh_key. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/create_ssh_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ssh_key",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_ssh_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::SSHKey",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "CreateSSHKey",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateSSHKey",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteSSHKey_sync",
+      "title": "Snippet for the delete_ssh_key call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#delete_ssh_key. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/delete_ssh_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_ssh_key",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#delete_ssh_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "DeleteSSHKey",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteSSHKey",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListVolumes_sync",
-      "title": "Snippet for list_volumes in BareMetalSolution",
-      "description": "Basic snippet for list_volumes in BareMetalSolution",
+      "title": "Snippet for the list_volumes call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_volumes. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/list_volumes.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetVolume_sync",
-      "title": "Snippet for get_volume in BareMetalSolution",
-      "description": "Basic snippet for get_volume in BareMetalSolution",
+      "title": "Snippet for the get_volume call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_volume. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/get_volume.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateVolume_sync",
-      "title": "Snippet for update_volume in BareMetalSolution",
-      "description": "Basic snippet for update_volume in BareMetalSolution",
+      "title": "Snippet for the update_volume call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_volume. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/update_volume.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +646,95 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_RenameVolume_sync",
+      "title": "Snippet for the rename_volume call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_volume. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/rename_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rename_volume",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::Volume",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "RenameVolume",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameVolume",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_EvictVolume_sync",
+      "title": "Snippet for the evict_volume call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#evict_volume. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/evict_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "evict_volume",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#evict_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "EvictVolume",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictVolume",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ResizeVolume_sync",
-      "title": "Snippet for resize_volume in BareMetalSolution",
-      "description": "Basic snippet for resize_volume in BareMetalSolution",
+      "title": "Snippet for the resize_volume call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#resize_volume. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/resize_volume.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListNetworks_sync",
-      "title": "Snippet for list_networks in BareMetalSolution",
-      "description": "Basic snippet for list_networks in BareMetalSolution",
+      "title": "Snippet for the list_networks call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_networks. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/list_networks.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListNetworkUsage_sync",
-      "title": "Snippet for list_network_usage in BareMetalSolution",
-      "description": "Basic snippet for list_network_usage in BareMetalSolution",
+      "title": "Snippet for the list_network_usage call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_network_usage. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/list_network_usage.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetNetwork_sync",
-      "title": "Snippet for get_network in BareMetalSolution",
-      "description": "Basic snippet for get_network in BareMetalSolution",
+      "title": "Snippet for the get_network call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_network. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/get_network.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_sync",
-      "title": "Snippet for update_network in BareMetalSolution",
-      "description": "Basic snippet for update_network in BareMetalSolution",
+      "title": "Snippet for the update_network call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_network. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/update_network.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,6 +926,206 @@
       "segments": [
         {
           "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_CreateVolumeSnapshot_sync",
+      "title": "Snippet for the create_volume_snapshot call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_volume_snapshot. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/create_volume_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_volume_snapshot",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_volume_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "CreateVolumeSnapshot",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateVolumeSnapshot",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_RestoreVolumeSnapshot_sync",
+      "title": "Snippet for the restore_volume_snapshot call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#restore_volume_snapshot. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/restore_volume_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_volume_snapshot",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#restore_volume_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "RestoreVolumeSnapshot",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.RestoreVolumeSnapshot",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteVolumeSnapshot_sync",
+      "title": "Snippet for the delete_volume_snapshot call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#delete_volume_snapshot. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/delete_volume_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_volume_snapshot",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#delete_volume_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "DeleteVolumeSnapshot",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteVolumeSnapshot",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetVolumeSnapshot_sync",
+      "title": "Snippet for the get_volume_snapshot call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_volume_snapshot. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/get_volume_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_volume_snapshot",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_volume_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "GetVolumeSnapshot",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolumeSnapshot",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListVolumeSnapshots_sync",
+      "title": "Snippet for the list_volume_snapshots call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_volume_snapshots. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/list_volume_snapshots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_volume_snapshots",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_volume_snapshots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsResponse",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "ListVolumeSnapshots",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumeSnapshots",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
           "end": 45,
           "type": "FULL"
         }
@@ -613,8 +1133,8 @@
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetLun_sync",
-      "title": "Snippet for get_lun in BareMetalSolution",
-      "description": "Basic snippet for get_lun in BareMetalSolution",
+      "title": "Snippet for the get_lun call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_lun. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/get_lun.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListLuns_sync",
-      "title": "Snippet for list_luns in BareMetalSolution",
-      "description": "Basic snippet for list_luns in BareMetalSolution",
+      "title": "Snippet for the list_luns call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_luns. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/list_luns.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +1206,55 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_EvictLun_sync",
+      "title": "Snippet for the evict_lun call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#evict_lun. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/evict_lun.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "evict_lun",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#evict_lun",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::EvictLunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "EvictLun",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictLun",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetNfsShare_sync",
-      "title": "Snippet for get_nfs_share in BareMetalSolution",
-      "description": "Basic snippet for get_nfs_share in BareMetalSolution",
+      "title": "Snippet for the get_nfs_share call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_nfs_share. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/get_nfs_share.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListNfsShares_sync",
-      "title": "Snippet for list_nfs_shares in BareMetalSolution",
-      "description": "Basic snippet for list_nfs_shares in BareMetalSolution",
+      "title": "Snippet for the list_nfs_shares call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_nfs_shares. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/list_nfs_shares.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_sync",
-      "title": "Snippet for update_nfs_share in BareMetalSolution",
-      "description": "Basic snippet for update_nfs_share in BareMetalSolution",
+      "title": "Snippet for the update_nfs_share call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_nfs_share. It may require modification in order to execute successfully.",
       "file": "bare_metal_solution/update_nfs_share.rb",
       "language": "RUBY",
       "client_method": {
@@ -795,6 +1355,406 @@
         "method": {
           "short_name": "UpdateNfsShare",
           "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNfsShare",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_CreateNfsShare_sync",
+      "title": "Snippet for the create_nfs_share call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_nfs_share. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/create_nfs_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_nfs_share",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_nfs_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "CreateNfsShare",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateNfsShare",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_RenameNfsShare_sync",
+      "title": "Snippet for the rename_nfs_share call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_nfs_share. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/rename_nfs_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rename_nfs_share",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_nfs_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::NfsShare",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "RenameNfsShare",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNfsShare",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteNfsShare_sync",
+      "title": "Snippet for the delete_nfs_share call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#delete_nfs_share. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/delete_nfs_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_nfs_share",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#delete_nfs_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "DeleteNfsShare",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteNfsShare",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListProvisioningQuotas_sync",
+      "title": "Snippet for the list_provisioning_quotas call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_provisioning_quotas. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/list_provisioning_quotas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_provisioning_quotas",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_provisioning_quotas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasResponse",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "ListProvisioningQuotas",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListProvisioningQuotas",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_SubmitProvisioningConfig_sync",
+      "title": "Snippet for the submit_provisioning_config call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#submit_provisioning_config. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/submit_provisioning_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_provisioning_config",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#submit_provisioning_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigResponse",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "SubmitProvisioningConfig",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.SubmitProvisioningConfig",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_GetProvisioningConfig_sync",
+      "title": "Snippet for the get_provisioning_config call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_provisioning_config. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/get_provisioning_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_provisioning_config",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_provisioning_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "GetProvisioningConfig",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetProvisioningConfig",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_CreateProvisioningConfig_sync",
+      "title": "Snippet for the create_provisioning_config call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_provisioning_config. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/create_provisioning_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_provisioning_config",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#create_provisioning_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "CreateProvisioningConfig",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateProvisioningConfig",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateProvisioningConfig_sync",
+      "title": "Snippet for the update_provisioning_config call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_provisioning_config. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/update_provisioning_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_provisioning_config",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_provisioning_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "UpdateProvisioningConfig",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateProvisioningConfig",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_RenameNetwork_sync",
+      "title": "Snippet for the rename_network call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_network. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/rename_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rename_network",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#rename_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::Network",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "RenameNetwork",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNetwork",
+          "service": {
+            "short_name": "BareMetalSolution",
+            "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "baremetalsolution_v2_generated_BareMetalSolution_ListOSImages_sync",
+      "title": "Snippet for the list_os_images call in the BareMetalSolution service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_os_images. It may require modification in order to execute successfully.",
+      "file": "bare_metal_solution/list_os_images.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_os_images",
+        "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_os_images",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BareMetalSolution::V2::ListOSImagesResponse",
+        "client": {
+          "short_name": "BareMetalSolution::Client",
+          "full_name": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client"
+        },
+        "method": {
+          "short_name": "ListOSImages",
+          "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListOSImages",
           "service": {
             "short_name": "BareMetalSolution",
             "full_name": "google.cloud.baremetalsolution.v2.BareMetalSolution"

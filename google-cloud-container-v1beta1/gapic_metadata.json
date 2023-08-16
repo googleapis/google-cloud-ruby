@@ -95,14 +95,14 @@
                 "get_server_config"
               ]
             },
-            "ListNodePools": {
-              "methods": [
-                "list_node_pools"
-              ]
-            },
             "GetJSONWebKeys": {
               "methods": [
                 "get_json_web_keys"
+              ]
+            },
+            "ListNodePools": {
+              "methods": [
+                "list_node_pools"
               ]
             },
             "GetNodePool": {
@@ -173,6 +173,11 @@
             "ListUsableSubnetworks": {
               "methods": [
                 "list_usable_subnetworks"
+              ]
+            },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "check_autopilot_compatibility"
               ]
             },
             "ListLocations": {

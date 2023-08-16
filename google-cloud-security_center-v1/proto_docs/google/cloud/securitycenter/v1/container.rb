@@ -24,16 +24,15 @@ module Google
         # Container associated with the finding.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Container name.
+        #     Name of the container.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Container image URI provided when configuring a pod/container.
-        #     May identify a container image version using mutable tags.
+        #     Container image URI provided when configuring a pod or container. This
+        #     string can identify a container image version using mutable tags.
         # @!attribute [rw] image_id
         #   @return [::String]
-        #     Optional container image id, when provided by the container runtime.
-        #     Uniquely identifies the container image launched using a container image
-        #     digest.
+        #     Optional container image ID, if provided by the container runtime. Uniquely
+        #     identifies the container image launched using a container image digest.
         # @!attribute [rw] labels
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Label>]
         #     Container labels, as provided by the container runtime.

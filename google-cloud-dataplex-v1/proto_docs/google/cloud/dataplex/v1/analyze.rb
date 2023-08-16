@@ -32,8 +32,9 @@ module Google
         #     Optional. User friendly display name.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. System generated globally unique ID for the environment. This ID will be
-        #     different if the environment is deleted and re-created with the same name.
+        #     Output only. System generated globally unique ID for the environment. This
+        #     ID will be different if the environment is deleted and re-created with the
+        #     same name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Environment creation time.
@@ -60,7 +61,8 @@ module Google
         #     Output only. Status of sessions created for this environment.
         # @!attribute [r] endpoints
         #   @return [::Google::Cloud::Dataplex::V1::Environment::Endpoints]
-        #     Output only. URI Endpoints to access sessions associated with the Environment.
+        #     Output only. URI Endpoints to access sessions associated with the
+        #     Environment.
         class Environment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -71,7 +73,8 @@ module Google
           #     Optional. Compute resources needed for analyze interactive workloads.
           # @!attribute [rw] os_image
           #   @return [::Google::Cloud::Dataplex::V1::Environment::InfrastructureSpec::OsImageRuntime]
-          #     Required. Software Runtime Configuration for analyze interactive workloads.
+          #     Required. Software Runtime Configuration for analyze interactive
+          #     workloads.
           class InfrastructureSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -82,7 +85,8 @@ module Google
             #     Optional. Size in GB of the disk. Default is 100 GB.
             # @!attribute [rw] node_count
             #   @return [::Integer]
-            #     Optional. Total number of nodes in the sessions created for this environment.
+            #     Optional. Total number of nodes in the sessions created for this
+            #     environment.
             # @!attribute [rw] max_node_count
             #   @return [::Integer]
             #     Optional. Max configurable nodes.
@@ -108,10 +112,10 @@ module Google
             #     For example, gs://bucket-name/my/path/to/lib.tar.gz
             # @!attribute [rw] properties
             #   @return [::Google::Protobuf::Map{::String => ::String}]
-            #     Optional. Spark properties to provide configuration for use in sessions created
-            #     for this environment. The properties to set on daemon config files.
-            #     Property keys are specified in `prefix:property` format.
-            #     The prefix must be "spark".
+            #     Optional. Spark properties to provide configuration for use in sessions
+            #     created for this environment. The properties to set on daemon config
+            #     files. Property keys are specified in `prefix:property` format. The
+            #     prefix must be "spark".
             class OsImageRuntime
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -127,31 +131,34 @@ module Google
             end
           end
 
+          # Configuration for sessions created for this environment.
           # @!attribute [rw] max_idle_duration
           #   @return [::Google::Protobuf::Duration]
           #     Optional. The idle time configuration of the session. The session will be
           #     auto-terminated at the end of this period.
           # @!attribute [rw] enable_fast_startup
           #   @return [::Boolean]
-          #     Optional. If True, this causes sessions to be pre-created and available for faster
-          #     startup to enable interactive exploration use-cases. This defaults to
-          #     False to avoid additional billed charges.
-          #     These can only be set to True for the environment with name set to
-          #     "default", and with default configuration.
+          #     Optional. If True, this causes sessions to be pre-created and available
+          #     for faster startup to enable interactive exploration use-cases. This
+          #     defaults to False to avoid additional billed charges. These can only be
+          #     set to True for the environment with name set to "default", and with
+          #     default configuration.
           class SessionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Status of sessions created for this environment.
           # @!attribute [r] active
           #   @return [::Boolean]
-          #     Output only. Queries over sessions to mark whether the environment is currently
-          #     active or not
+          #     Output only. Queries over sessions to mark whether the environment is
+          #     currently active or not
           class SessionStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # URI Endpoints to access sessions associated with the Environment.
           # @!attribute [r] notebooks
           #   @return [::String]
           #     Output only. URI to serve notebook APIs
@@ -180,13 +187,14 @@ module Google
         #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/content/\\{content_id}
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. System generated globally unique ID for the content. This ID will be
-        #     different if the content is deleted and re-created with the same name.
+        #     Output only. System generated globally unique ID for the content. This ID
+        #     will be different if the content is deleted and re-created with the same
+        #     name.
         # @!attribute [rw] path
         #   @return [::String]
-        #     Required. The path for the Content file, represented as directory structure.
-        #     Unique within a lake.
-        #     Limited to alphanumerics, hyphens, underscores, dots and slashes.
+        #     Required. The path for the Content file, represented as directory
+        #     structure. Unique within a lake. Limited to alphanumerics, hyphens,
+        #     underscores, dots and slashes.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Content creation time.
@@ -271,6 +279,7 @@ module Google
         #     Output only. Session start time.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dataplex::V1::State]
+        #     Output only. State of Session
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

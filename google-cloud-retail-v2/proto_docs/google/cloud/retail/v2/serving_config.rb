@@ -54,13 +54,13 @@ module Google
         #     click-through and conversion rates.
         #      Allowed values are:
         #
-        #     * 'no-price-reranking'
-        #     * 'low-price-raranking'
-        #     * 'medium-price-reranking'
-        #     * 'high-price-reranking'
+        #     * `no-price-reranking`
+        #     * `low-price-reranking`
+        #     * `medium-price-reranking`
+        #     * `high-price-reranking`
         #
         #     If not specified, we choose default based on model type. Default value:
-        #     'no-price-reranking'.
+        #     `no-price-reranking`.
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
@@ -178,29 +178,34 @@ module Google
         # @!attribute [rw] diversity_level
         #   @return [::String]
         #     How much diversity to use in recommendation model results e.g.
-        #     'medium-diversity' or 'high-diversity'. Currently supported values:
+        #     `medium-diversity` or `high-diversity`. Currently supported values:
         #
-        #     * 'no-diversity'
-        #     * 'low-diversity'
-        #     * 'medium-diversity'
-        #     * 'high-diversity'
-        #     * 'auto-diversity'
+        #     * `no-diversity`
+        #     * `low-diversity`
+        #     * `medium-diversity`
+        #     * `high-diversity`
+        #     * `auto-diversity`
         #
         #     If not specified, we choose default based on recommendation model
-        #     type. Default value: 'no-diversity'.
+        #     type. Default value: `no-diversity`.
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
         #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+        # @!attribute [rw] diversity_type
+        #   @return [::Google::Cloud::Retail::V2::ServingConfig::DiversityType]
+        #     What kind of diversity to use - data driven or rule based. If unset, the
+        #     server behavior defaults to
+        #     {::Google::Cloud::Retail::V2::ServingConfig::DiversityType::RULE_BASED_DIVERSITY RULE_BASED_DIVERSITY}.
         # @!attribute [rw] enable_category_filter_level
         #   @return [::String]
-        #     Whether to add additional category filters on the 'similar-items' model.
+        #     Whether to add additional category filters on the `similar-items` model.
         #     If not specified, we enable it by default.
         #      Allowed values are:
         #
-        #     * 'no-category-match': No additional filtering of original results from
+        #     * `no-category-match`: No additional filtering of original results from
         #       the model and the customer's filters.
-        #     * 'relaxed-category-match': Only keep results with categories that match
+        #     * `relaxed-category-match`: Only keep results with categories that match
         #       at least one item categories in the PredictRequests's context item.
         #       * If customer also sends filters in the PredictRequest, then the results
         #       will satisfy both conditions (user given and category match).
@@ -231,6 +236,18 @@ module Google
         class ServingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # What type of diversity - data or rule based.
+          module DiversityType
+            # Default value.
+            DIVERSITY_TYPE_UNSPECIFIED = 0
+
+            # Rule based diversity.
+            RULE_BASED_DIVERSITY = 2
+
+            # Data driven diversity.
+            DATA_DRIVEN_DIVERSITY = 3
+          end
         end
       end
     end

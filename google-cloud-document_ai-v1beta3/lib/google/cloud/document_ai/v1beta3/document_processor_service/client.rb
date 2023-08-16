@@ -28,7 +28,7 @@ module Google
           ##
           # Client for the DocumentProcessorService service.
           #
-          # Service to call Cloud DocumentAI to process documents according to the
+          # Service to call Document AI to process documents according to the
           # processor's definition. Processors are built using state-of-the-art Google
           # AI such as natural language, computer vision, and translation to extract
           # structured information from unstructured or semi-structured documents.
@@ -68,7 +68,7 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.process_document.timeout = 120.0
+                default_config.rpcs.process_document.timeout = 300.0
                 default_config.rpcs.process_document.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
@@ -142,7 +142,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -202,7 +202,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload process_document(inline_document: nil, raw_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil)
+            # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
             #   Pass arguments to `process_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -211,22 +211,34 @@ module Google
             #     An inline document proto.
             #   @param raw_document [::Google::Cloud::DocumentAI::V1beta3::RawDocument, ::Hash]
             #     A raw document content (bytes).
+            #   @param gcs_document [::Google::Cloud::DocumentAI::V1beta3::GcsDocument, ::Hash]
+            #     A raw document on Google Cloud Storage.
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
             #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}
-            #     to use for processing. If a {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} is specified, the server will use
-            #     its {::Google::Cloud::DocumentAI::V1beta3::Processor#default_processor_version default version}. Format:
-            #     `projects/{project}/locations/{location}/processors/{processor}`, or
+            #     to use for processing. If a
+            #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} is specified, the
+            #     server will use its [default
+            #     version][google.cloud.documentai.v1beta3.Processor.default_processor_version].
+            #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
+            #     or
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
-            #     The document payload, the [content] and [mime_type] fields must be set.
+            #     The document payload, the
+            #     {::Google::Cloud::DocumentAI::V1beta3::Document#content content} and
+            #     {::Google::Cloud::DocumentAI::V1beta3::Document#mime_type mime_type} fields must
+            #     be set.
             #   @param skip_human_review [::Boolean]
-            #     Whether Human Review feature should be skipped for this request. Default to
-            #     false.
+            #     Whether human review should be skipped for this request. Default to
+            #     `false`.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Specifies which fields to include in ProcessResponse's document.
-            #     Only supports top level document and pages field so it must be in the form
-            #     of `{document_field_name}` or `pages.{page_field_name}`.
+            #     Specifies which fields to include in the
+            #     {::Google::Cloud::DocumentAI::V1beta3::ProcessResponse#document ProcessResponse.document}
+            #     output. Only supports top-level document and pages field, so it must be in
+            #     the form of `{document_field_name}` or `pages.{page_field_name}`.
+            #   @param process_options [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions, ::Hash]
+            #     Inference-time options for the process API
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::ProcessResponse]
@@ -306,13 +318,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_process_documents(name: nil, input_configs: nil, output_config: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil)
+            # @overload batch_process_documents(name: nil, input_configs: nil, output_config: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil, process_options: nil)
             #   Pass arguments to `batch_process_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
+            #     Required. The resource name of
+            #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
             #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}.
             #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
             #     or
@@ -322,12 +335,18 @@ module Google
             #   @param output_config [::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig, ::Hash]
             #     The overall output config for batch process.
             #   @param input_documents [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig, ::Hash]
-            #     The input documents for batch process.
+            #     The input documents for the
+            #     {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
+            #     method.
             #   @param document_output_config [::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig, ::Hash]
-            #     The overall output config for batch process.
+            #     The output configuration for the
+            #     {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
+            #     method.
             #   @param skip_human_review [::Boolean]
-            #     Whether Human Review feature should be skipped for this request. Default to
-            #     false.
+            #     Whether human review should be skipped for this request. Default to
+            #     `false`.
+            #   @param process_options [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions, ::Hash]
+            #     Inference-time options for the process API
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -349,14 +368,14 @@ module Google
             #   # Call the batch_process_documents method.
             #   result = client.batch_process_documents request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_process_documents request, options = nil
@@ -402,8 +421,9 @@ module Google
             end
 
             ##
-            # Fetches processor types. Note that we do not use ListProcessorTypes here
-            # because it is not paginated.
+            # Fetches processor types. Note that we don't use
+            # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#list_processor_types ListProcessorTypes}
+            # here, because it isn't paginated.
             #
             # @overload fetch_processor_types(request, options = nil)
             #   Pass arguments to `fetch_processor_types` via a request object, either of type
@@ -421,9 +441,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project of processor type to list.
-            #     The available processor types may depend on the allow-listing on projects.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The location of processor types to list.
+            #     Format: `projects/{project}/locations/{location}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesResponse]
@@ -508,13 +527,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The location of processor type to list.
-            #     The available processor types may depend on the allow-listing on projects.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The location of processor types to list.
+            #     Format: `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     The maximum number of processor types to return.
-            #     If unspecified, at most 100 processor types will be returned.
-            #     The maximum value is 500; values above 500 will be coerced to 500.
+            #     If unspecified, at most `100` processor types will be returned.
+            #     The maximum value is `500`. Values above `500` will be coerced to `500`.
             #   @param page_token [::String]
             #     Used to retrieve the next page of results, empty if at the end of the list.
             #
@@ -538,13 +556,11 @@ module Google
             #   # Call the list_processor_types method.
             #   result = client.list_processor_types request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::ProcessorType.
-            #     p response
+            #     p item
             #   end
             #
             def list_processor_types request, options = nil
@@ -590,6 +606,91 @@ module Google
             end
 
             ##
+            # Gets a processor type detail.
+            #
+            # @overload get_processor_type(request, options = nil)
+            #   Pass arguments to `get_processor_type` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::GetProcessorTypeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::GetProcessorTypeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_processor_type(name: nil)
+            #   Pass arguments to `get_processor_type` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The processor type resource name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::ProcessorType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorType]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::GetProcessorTypeRequest.new
+            #
+            #   # Call the get_processor_type method.
+            #   result = client.get_processor_type request
+            #
+            #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::ProcessorType.
+            #   p result
+            #
+            def get_processor_type request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::GetProcessorTypeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_processor_type.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_processor_type.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_processor_type.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :get_processor_type, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists all processors which belong to this project.
             #
             # @overload list_processors(request, options = nil)
@@ -608,12 +709,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) which owns this collection of Processors.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The parent (project and location) which owns this collection of
+            #     Processors. Format: `projects/{project}/locations/{location}`
             #   @param page_size [::Integer]
             #     The maximum number of processors to return.
-            #     If unspecified, at most 50 processors will be returned.
-            #     The maximum value is 100; values above 100 will be coerced to 100.
+            #     If unspecified, at most `50` processors will be returned.
+            #     The maximum value is `100`. Values above `100` will be coerced to `100`.
             #   @param page_token [::String]
             #     We will return the processors sorted by creation time. The page token
             #     will point to the next processor.
@@ -638,13 +739,11 @@ module Google
             #   # Call the list_processors method.
             #   result = client.list_processors request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::Processor.
-            #     p response
+            #     p item
             #   end
             #
             def list_processors request, options = nil
@@ -777,7 +876,7 @@ module Google
             ##
             # Trains a new processor version.
             # Operation metadata is returned as
-            # cloud_documentai_core.TrainProcessorVersionMetadata.
+            # {::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionMetadata TrainProcessorVersionMetadata}.
             #
             # @overload train_processor_version(request, options = nil)
             #   Pass arguments to `train_processor_version` via a request object, either of type
@@ -789,23 +888,27 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload train_processor_version(parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
+            # @overload train_processor_version(custom_document_extraction_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
             #   Pass arguments to `train_processor_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param custom_document_extraction_options [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::CustomDocumentExtractionOptions, ::Hash]
+            #     Options to control Custom Document Extraction (CDE) Processor.
             #   @param parent [::String]
-            #     Required. The parent (project, location and processor) to create the new version for.
-            #     Format: `projects/{project}/locations/{location}/processors/{processor}`.
+            #     Required. The parent (project, location and processor) to create the new
+            #     version for. Format:
+            #     `projects/{project}/locations/{location}/processors/{processor}`.
             #   @param processor_version [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion, ::Hash]
             #     Required. The processor version to be created.
             #   @param document_schema [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema, ::Hash]
             #     Optional. The schema the processor version will be trained with.
             #   @param input_data [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::InputData, ::Hash]
-            #     Optional. The input data used to train the `ProcessorVersion`.
+            #     Optional. The input data used to train the
+            #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}.
             #   @param base_processor_version [::String]
-            #     Optional. The processor version to use as a base for training. This processor version
-            #     must be a child of `parent`. Format:
+            #     Optional. The processor version to use as a base for training. This
+            #     processor version must be a child of `parent`. Format:
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -828,14 +931,14 @@ module Google
             #   # Call the train_processor_version method.
             #   result = client.train_processor_version request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def train_processor_version request, options = nil
@@ -984,12 +1087,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project, location and processor) to list all versions.
-            #     Format: `projects/{project}/locations/{location}/processors/{processor}`
+            #     Required. The parent (project, location and processor) to list all
+            #     versions. Format:
+            #     `projects/{project}/locations/{location}/processors/{processor}`
             #   @param page_size [::Integer]
             #     The maximum number of processor versions to return.
-            #     If unspecified, at most 10 processor versions will be returned.
-            #     The maximum value is 20; values above 20 will be coerced to 20.
+            #     If unspecified, at most `10` processor versions will be returned.
+            #     The maximum value is `20`. Values above `20` will be coerced to `20`.
             #   @param page_token [::String]
             #     We will return the processor versions sorted by creation time. The page
             #     token will point to the next processor version.
@@ -1014,13 +1118,11 @@ module Google
             #   # Call the list_processor_versions method.
             #   result = client.list_processor_versions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion.
-            #     p response
+            #     p item
             #   end
             #
             def list_processor_versions request, options = nil
@@ -1107,14 +1209,14 @@ module Google
             #   # Call the delete_processor_version method.
             #   result = client.delete_processor_version request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_processor_version request, options = nil
@@ -1200,14 +1302,14 @@ module Google
             #   # Call the deploy_processor_version method.
             #   result = client.deploy_processor_version request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def deploy_processor_version request, options = nil
@@ -1293,14 +1395,14 @@ module Google
             #   # Call the undeploy_processor_version method.
             #   result = client.undeploy_processor_version request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def undeploy_processor_version request, options = nil
@@ -1346,8 +1448,9 @@ module Google
             end
 
             ##
-            # Creates a processor from the type processor that the user chose.
-            # The processor will be at "ENABLED" state by default after its creation.
+            # Creates a processor from the
+            # {::Google::Cloud::DocumentAI::V1beta3::ProcessorType ProcessorType} provided.
+            # The processor will be at `ENABLED` state by default after its creation.
             #
             # @overload create_processor(request, options = nil)
             #   Pass arguments to `create_processor` via a request object, either of type
@@ -1365,11 +1468,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) under which to create the processor.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The parent (project and location) under which to create the
+            #     processor. Format: `projects/{project}/locations/{location}`
             #   @param processor [::Google::Cloud::DocumentAI::V1beta3::Processor, ::Hash]
-            #     Required. The processor to be created, requires [processor_type] and [display_name]
-            #     to be set. Also, the processor is under CMEK if CMEK fields are set.
+            #     Required. The processor to be created, requires
+            #     {::Google::Cloud::DocumentAI::V1beta3::Processor#type Processor.type} and
+            #     [Processor.display_name]][] to be set. Also, the
+            #     {::Google::Cloud::DocumentAI::V1beta3::Processor#kms_key_name Processor.kms_key_name}
+            #     field must be set if the processor is under CMEK.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::Processor]
@@ -1477,14 +1583,14 @@ module Google
             #   # Call the delete_processor method.
             #   result = client.delete_processor request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_processor request, options = nil
@@ -1570,14 +1676,14 @@ module Google
             #   # Call the enable_processor method.
             #   result = client.enable_processor request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def enable_processor request, options = nil
@@ -1663,14 +1769,14 @@ module Google
             #   # Call the disable_processor method.
             #   result = client.disable_processor request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def disable_processor request, options = nil
@@ -1716,8 +1822,10 @@ module Google
             end
 
             ##
-            # Set the default (active) version of a {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} that will be used in
-            # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#process_document ProcessDocument} and
+            # Set the default (active) version of a
+            # {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} that will be used in
+            # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#process_document ProcessDocument}
+            # and
             # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}.
             #
             # @overload set_default_processor_version(request, options = nil)
@@ -1736,10 +1844,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param processor [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} to change default version.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} to change default
+            #     version.
             #   @param default_processor_version [::String]
-            #     Required. The resource name of child {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to use as default.
-            #     Format:
+            #     Required. The resource name of child
+            #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to use
+            #     as default. Format:
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1762,14 +1873,14 @@ module Google
             #   # Call the set_default_processor_version method.
             #   result = client.set_default_processor_version request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def set_default_processor_version request, options = nil
@@ -1836,8 +1947,9 @@ module Google
             #   @param inline_document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
             #     An inline document proto.
             #   @param human_review_config [::String]
-            #     Required. The resource name of the HumanReviewConfig that the document will be
-            #     reviewed with.
+            #     Required. The resource name of the
+            #     [HumanReviewConfig][google.cloud.documentai.v1beta3.HumanReviewConfig] that
+            #     the document will be reviewed with.
             #   @param document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
             #     The document that needs human review.
             #   @param enable_schema_validation [::Boolean]
@@ -1867,14 +1979,14 @@ module Google
             #   # Call the review_document method.
             #   result = client.review_document request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def review_document request, options = nil
@@ -1939,11 +2051,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param processor_version [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to evaluate.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to
+            #     evaluate.
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param evaluation_documents [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig, ::Hash]
-            #     Optional. The documents used in the evaluation. If unspecified, use the processor's
-            #     dataset as evaluation input.
+            #     Optional. The documents used in the evaluation. If unspecified, use the
+            #     processor's dataset as evaluation input.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1965,14 +2079,14 @@ module Google
             #   # Call the evaluate_processor_version method.
             #   result = client.evaluate_processor_version request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def evaluate_processor_version request, options = nil
@@ -2036,7 +2150,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::Evaluation Evaluation} to get.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1beta3::Evaluation Evaluation} to get.
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2122,12 +2237,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to list evaluations for.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to
+            #     list evaluations for.
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param page_size [::Integer]
             #     The standard list page size.
-            #     If unspecified, at most 5 evaluations will be returned.
-            #     The maximum value is 100; values above 100 will be coerced to 100.
+            #     If unspecified, at most `5` evaluations are returned.
+            #     The maximum value is `100`. Values above `100` are coerced to `100`.
             #   @param page_token [::String]
             #     A page token, received from a previous `ListEvaluations` call.
             #     Provide this to retrieve the subsequent page.
@@ -2152,13 +2269,11 @@ module Google
             #   # Call the list_evaluations method.
             #   result = client.list_evaluations request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::Evaluation.
-            #     p response
+            #     p item
             #   end
             #
             def list_evaluations request, options = nil
@@ -2204,6 +2319,107 @@ module Google
             end
 
             ##
+            # Imports a processor version from source processor version.
+            #
+            # @overload import_processor_version(request, options = nil)
+            #   Pass arguments to `import_processor_version` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_processor_version(processor_version_source: nil, external_processor_version_source: nil, parent: nil)
+            #   Pass arguments to `import_processor_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param processor_version_source [::String]
+            #     The source processor version to import from. The source processor version
+            #     and destination processor need to be in the same environment and region.
+            #   @param external_processor_version_source [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource, ::Hash]
+            #     The source processor version to import from, and can be from different
+            #     environment and region than the destination processor.
+            #   @param parent [::String]
+            #     Required. The destination processor name to create the processor version
+            #     in. Format:
+            #     `projects/{project}/locations/{location}/processors/{processor}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest.new
+            #
+            #   # Call the import_processor_version method.
+            #   result = client.import_processor_version request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def import_processor_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_processor_version.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_processor_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_processor_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :import_processor_version, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DocumentProcessorService API.
             #
             # This class represents the configuration for DocumentProcessorService,
@@ -2241,9 +2457,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2285,7 +2501,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "documentai.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "documentai.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2358,6 +2576,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_processor_types
+                ##
+                # RPC-specific configuration for `get_processor_type`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_processor_type
                 ##
                 # RPC-specific configuration for `list_processors`
                 # @return [::Gapic::Config::Method]
@@ -2443,6 +2666,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_evaluations
+                ##
+                # RPC-specific configuration for `import_processor_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_processor_version
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2454,6 +2682,8 @@ module Google
                   @fetch_processor_types = ::Gapic::Config::Method.new fetch_processor_types_config
                   list_processor_types_config = parent_rpcs.list_processor_types if parent_rpcs.respond_to? :list_processor_types
                   @list_processor_types = ::Gapic::Config::Method.new list_processor_types_config
+                  get_processor_type_config = parent_rpcs.get_processor_type if parent_rpcs.respond_to? :get_processor_type
+                  @get_processor_type = ::Gapic::Config::Method.new get_processor_type_config
                   list_processors_config = parent_rpcs.list_processors if parent_rpcs.respond_to? :list_processors
                   @list_processors = ::Gapic::Config::Method.new list_processors_config
                   get_processor_config = parent_rpcs.get_processor if parent_rpcs.respond_to? :get_processor
@@ -2488,6 +2718,8 @@ module Google
                   @get_evaluation = ::Gapic::Config::Method.new get_evaluation_config
                   list_evaluations_config = parent_rpcs.list_evaluations if parent_rpcs.respond_to? :list_evaluations
                   @list_evaluations = ::Gapic::Config::Method.new list_evaluations_config
+                  import_processor_version_config = parent_rpcs.import_processor_version if parent_rpcs.respond_to? :import_processor_version
+                  @import_processor_version = ::Gapic::Config::Method.new import_processor_version_config
 
                   yield self if block_given?
                 end

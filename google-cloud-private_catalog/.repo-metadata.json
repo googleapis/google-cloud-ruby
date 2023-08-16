@@ -14,5 +14,5 @@
     "ruby-cloud-description": "With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.",
     "ruby-cloud-env-prefix": "PRIVATE_CATALOG",
     "ruby-cloud-product-url": "https://cloud.google.com/private-catalog/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

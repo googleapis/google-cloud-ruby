@@ -24,6 +24,7 @@ require "google/cloud/firestore/v1/version"
 
 require "google/cloud/firestore/v1/firestore/credentials"
 require "google/cloud/firestore/v1/firestore/client"
+require "google/cloud/firestore/v1/firestore/rest"
 
 module Google
   module Cloud
@@ -36,13 +37,18 @@ module Google
         # document database that simplifies storing, syncing, and querying data for
         # your mobile, web, and IoT apps at global scale. Its client libraries provide
         # live synchronization and offline support, while its security features and
-        # integrations with Firebase and Google Cloud Platform (GCP) accelerate
-        # building truly serverless apps.
+        # integrations with Firebase and Google Cloud Platform accelerate building
+        # truly serverless apps.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/firestore/v1/firestore"
         #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/firestore/v1/firestore/rest"
+        #     client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
         #
         module Firestore
         end

@@ -20,8 +20,11 @@
 require "google/cloud/automl/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AutoML::V1beta1::AutoML::Client#update_table_spec
+# Snippet for the update_table_spec call in the AutoML service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#update_table_spec. It may
+# require modification in order to execute successfully.
 #
 def update_table_spec
   # Create a client object. The client can be reused for multiple calls.

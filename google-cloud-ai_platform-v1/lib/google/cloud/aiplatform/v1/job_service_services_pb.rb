@@ -45,12 +45,15 @@ module Google
             # Cancels a CustomJob.
             # Starts asynchronous cancellation on the CustomJob. The server
             # makes a best effort to cancel the job, but success is not
-            # guaranteed. Clients can use [JobService.GetCustomJob][google.cloud.aiplatform.v1.JobService.GetCustomJob] or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # [JobService.GetCustomJob][google.cloud.aiplatform.v1.JobService.GetCustomJob]
+            # or other methods to check whether the cancellation succeeded or whether the
             # job completed despite cancellation. On successful cancellation,
             # the CustomJob is not deleted; instead it becomes a job with
-            # a [CustomJob.error][google.cloud.aiplatform.v1.CustomJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
-            # corresponding to `Code.CANCELLED`, and [CustomJob.state][google.cloud.aiplatform.v1.CustomJob.state] is set to
+            # a [CustomJob.error][google.cloud.aiplatform.v1.CustomJob.error] value with
+            # a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to
+            # `Code.CANCELLED`, and
+            # [CustomJob.state][google.cloud.aiplatform.v1.CustomJob.state] is set to
             # `CANCELLED`.
             rpc :CancelCustomJob, ::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest, ::Google::Protobuf::Empty
             # Creates a DataLabelingJob.
@@ -74,14 +77,44 @@ module Google
             # Cancels a HyperparameterTuningJob.
             # Starts asynchronous cancellation on the HyperparameterTuningJob. The server
             # makes a best effort to cancel the job, but success is not
-            # guaranteed. Clients can use [JobService.GetHyperparameterTuningJob][google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob] or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # [JobService.GetHyperparameterTuningJob][google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob]
+            # or other methods to check whether the cancellation succeeded or whether the
             # job completed despite cancellation. On successful cancellation,
             # the HyperparameterTuningJob is not deleted; instead it becomes a job with
-            # a [HyperparameterTuningJob.error][google.cloud.aiplatform.v1.HyperparameterTuningJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code]
-            # of 1, corresponding to `Code.CANCELLED`, and
-            # [HyperparameterTuningJob.state][google.cloud.aiplatform.v1.HyperparameterTuningJob.state] is set to `CANCELLED`.
+            # a
+            # [HyperparameterTuningJob.error][google.cloud.aiplatform.v1.HyperparameterTuningJob.error]
+            # value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
+            # corresponding to `Code.CANCELLED`, and
+            # [HyperparameterTuningJob.state][google.cloud.aiplatform.v1.HyperparameterTuningJob.state]
+            # is set to `CANCELLED`.
             rpc :CancelHyperparameterTuningJob, ::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest, ::Google::Protobuf::Empty
+            # Creates a NasJob
+            rpc :CreateNasJob, ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest, ::Google::Cloud::AIPlatform::V1::NasJob
+            # Gets a NasJob
+            rpc :GetNasJob, ::Google::Cloud::AIPlatform::V1::GetNasJobRequest, ::Google::Cloud::AIPlatform::V1::NasJob
+            # Lists NasJobs in a Location.
+            rpc :ListNasJobs, ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest, ::Google::Cloud::AIPlatform::V1::ListNasJobsResponse
+            # Deletes a NasJob.
+            rpc :DeleteNasJob, ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest, ::Google::Longrunning::Operation
+            # Cancels a NasJob.
+            # Starts asynchronous cancellation on the NasJob. The server
+            # makes a best effort to cancel the job, but success is not
+            # guaranteed. Clients can use
+            # [JobService.GetNasJob][google.cloud.aiplatform.v1.JobService.GetNasJob] or
+            # other methods to check whether the cancellation succeeded or whether the
+            # job completed despite cancellation. On successful cancellation,
+            # the NasJob is not deleted; instead it becomes a job with
+            # a [NasJob.error][google.cloud.aiplatform.v1.NasJob.error] value with a
+            # [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to
+            # `Code.CANCELLED`, and
+            # [NasJob.state][google.cloud.aiplatform.v1.NasJob.state] is set to
+            # `CANCELLED`.
+            rpc :CancelNasJob, ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest, ::Google::Protobuf::Empty
+            # Gets a NasTrialDetail.
+            rpc :GetNasTrialDetail, ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest, ::Google::Cloud::AIPlatform::V1::NasTrialDetail
+            # List top NasTrialDetails of a NasJob.
+            rpc :ListNasTrialDetails, ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest, ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsResponse
             # Creates a BatchPredictionJob. A BatchPredictionJob once created will
             # right away be attempted to start.
             rpc :CreateBatchPredictionJob, ::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest, ::Google::Cloud::AIPlatform::V1::BatchPredictionJob
@@ -96,12 +129,14 @@ module Google
             #
             # Starts asynchronous cancellation on the BatchPredictionJob. The server
             # makes the best effort to cancel the job, but success is not
-            # guaranteed. Clients can use [JobService.GetBatchPredictionJob][google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob] or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # [JobService.GetBatchPredictionJob][google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob]
+            # or other methods to check whether the cancellation succeeded or whether the
             # job completed despite cancellation. On a successful cancellation,
             # the BatchPredictionJob is not deleted;instead its
-            # [BatchPredictionJob.state][google.cloud.aiplatform.v1.BatchPredictionJob.state] is set to `CANCELLED`. Any files already
-            # outputted by the job are not deleted.
+            # [BatchPredictionJob.state][google.cloud.aiplatform.v1.BatchPredictionJob.state]
+            # is set to `CANCELLED`. Any files already outputted by the job are not
+            # deleted.
             rpc :CancelBatchPredictionJob, ::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest, ::Google::Protobuf::Empty
             # Creates a ModelDeploymentMonitoringJob. It will run periodically on a
             # configured interval.
@@ -118,7 +153,8 @@ module Google
             rpc :DeleteModelDeploymentMonitoringJob, ::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest, ::Google::Longrunning::Operation
             # Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
             # makes a best effort to cancel the job. Will mark
-            # [ModelDeploymentMonitoringJob.state][google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state] to 'PAUSED'.
+            # [ModelDeploymentMonitoringJob.state][google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state]
+            # to 'PAUSED'.
             rpc :PauseModelDeploymentMonitoringJob, ::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest, ::Google::Protobuf::Empty
             # Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
             # next scheduled time. A deleted ModelDeploymentMonitoringJob can't be

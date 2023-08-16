@@ -31,9 +31,9 @@ module Google
         ##
         # The RegionInstanceGroups API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/region_instance_groups"
+        #     require "google/cloud/compute/v1/region_instance_groups/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client.new
         #
         module RegionInstanceGroups

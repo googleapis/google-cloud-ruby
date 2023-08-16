@@ -66,7 +66,8 @@ module Google
         #     Output only. The conversation transcript.
         # @!attribute [rw] medium
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
-        #     Immutable. The conversation medium, if unspecified will default to PHONE_CALL.
+        #     Immutable. The conversation medium, if unspecified will default to
+        #     PHONE_CALL.
         # @!attribute [r] duration
         #   @return [::Google::Protobuf::Duration]
         #     Output only. The duration of the conversation.
@@ -76,14 +77,17 @@ module Google
         # @!attribute [r] latest_analysis
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Analysis]
         #     Output only. The conversation's latest analysis, if one exists.
+        # @!attribute [r] latest_summary
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationSummarizationSuggestionData]
+        #     Output only. Latest summary of the conversation.
         # @!attribute [r] runtime_annotations
         #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::RuntimeAnnotation>]
-        #     Output only. The annotations that were generated during the customer and agent
-        #     interaction.
+        #     Output only. The annotations that were generated during the customer and
+        #     agent interaction.
         # @!attribute [r] dialogflow_intents
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ContactCenterInsights::V1::DialogflowIntent}]
-        #     Output only. All the matched Dialogflow intents in the call. The key corresponds to a
-        #     Dialogflow intent, format:
+        #     Output only. All the matched Dialogflow intents in the call. The key
+        #     corresponds to a Dialogflow intent, format:
         #     projects/\\{project}/agent/\\{agent}/intents/\\{intent}
         # @!attribute [rw] obfuscated_user_id
         #   @return [::String]
@@ -225,12 +229,16 @@ module Google
         #     Output only. The time at which the analysis was requested.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the analysis was created, which occurs when the
-        #     long-running operation completes.
+        #     Output only. The time at which the analysis was created, which occurs when
+        #     the long-running operation completes.
         # @!attribute [r] analysis_result
         #   @return [::Google::Cloud::ContactCenterInsights::V1::AnalysisResult]
-        #     Output only. The result of the analysis, which is populated when the analysis
-        #     finishes.
+        #     Output only. The result of the analysis, which is populated when the
+        #     analysis finishes.
+        # @!attribute [rw] annotator_selector
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+        #     To select the annotators to run and the phrase matchers to use
+        #     (if any). If not specified, all annotators will be run.
         class Analysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -255,8 +263,8 @@ module Google
         #     audio.
         # @!attribute [rw] transcript_uri
         #   @return [::String]
-        #     Immutable. Cloud Storage URI that points to a file that contains the conversation
-        #     transcript.
+        #     Immutable. Cloud Storage URI that points to a file that contains the
+        #     conversation transcript.
         class GcsSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -375,8 +383,8 @@ module Google
         #     currently bounded on [0,1].
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Immutable. Display name of the assigned issue. This field is set at time of analyis
-        #     and immutable since then.
+        #     Immutable. Display name of the assigned issue. This field is set at time of
+        #     analyis and immutable since then.
         class IssueAssignment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -404,6 +412,9 @@ module Google
         # @!attribute [rw] phrase_match_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatchData]
         #     Data specifying a phrase match.
+        # @!attribute [rw] issue_match_data
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueMatchData]
+        #     Data specifying an issue match.
         # @!attribute [rw] channel_tag
         #   @return [::Integer]
         #     The channel of the audio where the annotation occurs. For single-channel
@@ -662,6 +673,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The data for an issue match annotation.
+        # @!attribute [rw] issue_assignment
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueAssignment]
+        #     Information about the issue's assignment.
+        class IssueMatchData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The issue model resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -677,6 +697,9 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The most recent time at which the issue model was updated.
+        # @!attribute [r] issue_count
+        #   @return [::Integer]
+        #     Output only. Number of issues in this issue model.
         # @!attribute [r] state
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModel::State]
         #     Output only. State of the model.
@@ -685,7 +708,14 @@ module Google
         #     Configs for the input data that used to create the issue model.
         # @!attribute [r] training_stats
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats]
-        #     Output only. Immutable. The issue model's label statistics on its training data.
+        #     Output only. Immutable. The issue model's label statistics on its training
+        #     data.
+        # @!attribute [rw] model_type
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModel::ModelType]
+        #     Type of the model.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Language of the model.
         class IssueModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -729,6 +759,18 @@ module Google
             # Model is being deleted.
             DELETING = 5
           end
+
+          # Type of the model.
+          module ModelType
+            # Unspecified model type.
+            MODEL_TYPE_UNSPECIFIED = 0
+
+            # Type V1.
+            TYPE_V1 = 1
+
+            # Type V2.
+            TYPE_V2 = 2
+          end
         end
 
         # The issue resource.
@@ -746,6 +788,10 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The most recent time that this issue was updated.
+        # @!attribute [r] sample_utterances
+        #   @return [::Array<::String>]
+        #     Output only. Resource names of the sample representative utterances that
+        #     match to this issue.
         class Issue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -811,8 +857,8 @@ module Google
         #     it will default to `revision_id`.
         # @!attribute [r] revision_create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp of when the revision was created. It is also the create time
-        #     when a new matcher is added.
+        #     Output only. The timestamp of when the revision was created. It is also the
+        #     create time when a new matcher is added.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The human-readable name of the phrase matcher.
@@ -827,7 +873,8 @@ module Google
         #     A list of phase match rule groups that are included in this matcher.
         # @!attribute [r] activation_update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The most recent time at which the activation status was updated.
+        #     Output only. The most recent time at which the activation status was
+        #     updated.
         # @!attribute [rw] role_match
         #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant::Role]
         #     The role whose utterances the phrase matcher should be matched
@@ -860,7 +907,7 @@ module Google
         #     Required. The type of this phrase match rule group.
         # @!attribute [rw] phrase_match_rules
         #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::PhraseMatchRule>]
-        #     A list of phase match rules that are included in this group.
+        #     A list of phrase match rules that are included in this group.
         class PhraseMatchRuleGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -957,6 +1004,10 @@ module Google
         # @!attribute [rw] analysis_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Settings::AnalysisConfig]
         #     Default analysis settings.
+        # @!attribute [rw] redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Default DLP redaction resources to be applied while ingesting
+        #     conversations.
         class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -966,6 +1017,14 @@ module Google
           #   @return [::Float]
           #     Percentage of conversations created using Dialogflow runtime integration
           #     to analyze automatically, between [0, 100].
+          # @!attribute [rw] upload_conversation_analysis_percentage
+          #   @return [::Float]
+          #     Percentage of conversations created using the UploadConversation endpoint
+          #     to analyze automatically, between [0, 100].
+          # @!attribute [rw] annotator_selector
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+          #     To select the annotators to run and the phrase matchers to use
+          #     (if any). If not specified, all annotators will be run.
           class AnalysisConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -979,6 +1038,22 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # DLP resources used for redaction while ingesting conversations.
+        # @!attribute [rw] deidentify_template
+        #   @return [::String]
+        #     The fully-qualified DLP deidentify template resource name.
+        #     Format:
+        #     `projects/{project}/deidentifyTemplates/{template}`
+        # @!attribute [rw] inspect_template
+        #   @return [::String]
+        #     The fully-qualified DLP inspect template resource name.
+        #     Format:
+        #     `projects/{project}/locations/{location}/inspectTemplates/{template}`
+        class RedactionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An annotation that was generated during the customer and agent interaction.
@@ -997,6 +1072,9 @@ module Google
         # @!attribute [rw] dialogflow_interaction
         #   @return [::Google::Cloud::ContactCenterInsights::V1::DialogflowInteractionData]
         #     Dialogflow interaction data.
+        # @!attribute [rw] conversation_summarization_suggestion
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationSummarizationSuggestionData]
+        #     Conversation summarization suggestion data.
         # @!attribute [rw] annotation_id
         #   @return [::String]
         #     The unique identifier of the annotation.
@@ -1209,6 +1287,55 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Conversation summarization suggestion data.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     The summarization content that is concatenated into one string.
+        # @!attribute [rw] text_sections
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The summarization content that is divided into sections. The key is the
+        #     section's name and the value is the section's content. There is no
+        #     specific format for the key or value.
+        # @!attribute [rw] confidence
+        #   @return [::Float]
+        #     The confidence score of the summarization.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A map that contains metadata about the summarization and the document
+        #     from which it originates.
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     The name of the answer record.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/answerRecords/\\{answer_record}
+        # @!attribute [rw] conversation_model
+        #   @return [::String]
+        #     The name of the model that generates this summary.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/conversationModels/\\{conversation_model}
+        class ConversationSummarizationSuggestionData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TextSectionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # The call participant speaking for a given utterance.
         # @!attribute [rw] dialogflow_participant_name
         #   @return [::String]
@@ -1268,10 +1395,81 @@ module Google
         #     Output only. The most recent time at which the view was updated.
         # @!attribute [rw] value
         #   @return [::String]
-        #     String with specific view properties.
+        #     String with specific view properties, must be non-empty.
         class View
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Selector of all available annotators and phrase matchers to run.
+        # @!attribute [rw] run_interruption_annotator
+        #   @return [::Boolean]
+        #     Whether to run the interruption annotator.
+        # @!attribute [rw] run_silence_annotator
+        #   @return [::Boolean]
+        #     Whether to run the silence annotator.
+        # @!attribute [rw] run_phrase_matcher_annotator
+        #   @return [::Boolean]
+        #     Whether to run the active phrase matcher annotator(s).
+        # @!attribute [rw] phrase_matchers
+        #   @return [::Array<::String>]
+        #     The list of phrase matchers to run. If not provided, all active phrase
+        #     matchers will be used. If inactive phrase matchers are provided, they will
+        #     not be used. Phrase matchers will be run only if
+        #     run_phrase_matcher_annotator is set to true. Format:
+        #     projects/\\{project}/locations/\\{location}/phraseMatchers/\\{phrase_matcher}
+        # @!attribute [rw] run_sentiment_annotator
+        #   @return [::Boolean]
+        #     Whether to run the sentiment annotator.
+        # @!attribute [rw] run_entity_annotator
+        #   @return [::Boolean]
+        #     Whether to run the entity annotator.
+        # @!attribute [rw] run_intent_annotator
+        #   @return [::Boolean]
+        #     Whether to run the intent annotator.
+        # @!attribute [rw] run_issue_model_annotator
+        #   @return [::Boolean]
+        #     Whether to run the issue model annotator. A model should have already been
+        #     deployed for this to take effect.
+        # @!attribute [rw] issue_models
+        #   @return [::Array<::String>]
+        #     The issue model to run. If not provided, the most recently deployed topic
+        #     model will be used. The provided issue model will only be used for
+        #     inference if the issue model is deployed and if run_issue_model_annotator
+        #     is set to true. If more than one issue model is provided, only the first
+        #     provided issue model will be used for inference.
+        # @!attribute [rw] run_summarization_annotator
+        #   @return [::Boolean]
+        #     Whether to run the summarization annotator.
+        # @!attribute [rw] summarization_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::SummarizationConfig]
+        #     Configuration for the summarization annotator.
+        class AnnotatorSelector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for summarization.
+          # @!attribute [rw] conversation_profile
+          #   @return [::String]
+          #     Resource name of the Dialogflow conversation profile.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/conversationProfiles/\\{conversation_profile}
+          # @!attribute [rw] summarization_model
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::SummarizationConfig::SummarizationModel]
+          #     Default summarization model to be used.
+          class SummarizationConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Summarization model to use, if `conversation_profile` is not used.
+            module SummarizationModel
+              # Unspecified summarization model.
+              SUMMARIZATION_MODEL_UNSPECIFIED = 0
+
+              # The Insights baseline model.
+              BASELINE_MODEL = 1
+            end
+          end
         end
       end
     end

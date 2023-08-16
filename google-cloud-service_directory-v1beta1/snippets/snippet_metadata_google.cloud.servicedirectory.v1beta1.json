@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-service_directory-v1beta1",
-    "version": "0.9.0",
+    "version": "0.12.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "servicedirectory_v1beta1_generated_LookupService_ResolveService_sync",
-      "title": "Snippet for resolve_service in LookupService",
-      "description": "Basic snippet for resolve_service in LookupService",
+      "title": "Snippet for the resolve_service call in the LookupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service. It may require modification in order to execute successfully.",
       "file": "lookup_service/resolve_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_CreateNamespace_sync",
-      "title": "Snippet for create_namespace in RegistrationService",
-      "description": "Basic snippet for create_namespace in RegistrationService",
+      "title": "Snippet for the create_namespace call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_namespace. It may require modification in order to execute successfully.",
       "file": "registration_service/create_namespace.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_ListNamespaces_sync",
-      "title": "Snippet for list_namespaces in RegistrationService",
-      "description": "Basic snippet for list_namespaces in RegistrationService",
+      "title": "Snippet for the list_namespaces call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces. It may require modification in order to execute successfully.",
       "file": "registration_service/list_namespaces.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_GetNamespace_sync",
-      "title": "Snippet for get_namespace in RegistrationService",
-      "description": "Basic snippet for get_namespace in RegistrationService",
+      "title": "Snippet for the get_namespace call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_namespace. It may require modification in order to execute successfully.",
       "file": "registration_service/get_namespace.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_UpdateNamespace_sync",
-      "title": "Snippet for update_namespace in RegistrationService",
-      "description": "Basic snippet for update_namespace in RegistrationService",
+      "title": "Snippet for the update_namespace call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_namespace. It may require modification in order to execute successfully.",
       "file": "registration_service/update_namespace.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_DeleteNamespace_sync",
-      "title": "Snippet for delete_namespace in RegistrationService",
-      "description": "Basic snippet for delete_namespace in RegistrationService",
+      "title": "Snippet for the delete_namespace call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_namespace. It may require modification in order to execute successfully.",
       "file": "registration_service/delete_namespace.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_CreateService_sync",
-      "title": "Snippet for create_service in RegistrationService",
-      "description": "Basic snippet for create_service in RegistrationService",
+      "title": "Snippet for the create_service call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_service. It may require modification in order to execute successfully.",
       "file": "registration_service/create_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_ListServices_sync",
-      "title": "Snippet for list_services in RegistrationService",
-      "description": "Basic snippet for list_services in RegistrationService",
+      "title": "Snippet for the list_services call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services. It may require modification in order to execute successfully.",
       "file": "registration_service/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_GetService_sync",
-      "title": "Snippet for get_service in RegistrationService",
-      "description": "Basic snippet for get_service in RegistrationService",
+      "title": "Snippet for the get_service call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_service. It may require modification in order to execute successfully.",
       "file": "registration_service/get_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_UpdateService_sync",
-      "title": "Snippet for update_service in RegistrationService",
-      "description": "Basic snippet for update_service in RegistrationService",
+      "title": "Snippet for the update_service call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service. It may require modification in order to execute successfully.",
       "file": "registration_service/update_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_DeleteService_sync",
-      "title": "Snippet for delete_service in RegistrationService",
-      "description": "Basic snippet for delete_service in RegistrationService",
+      "title": "Snippet for the delete_service call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service. It may require modification in order to execute successfully.",
       "file": "registration_service/delete_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_CreateEndpoint_sync",
-      "title": "Snippet for create_endpoint in RegistrationService",
-      "description": "Basic snippet for create_endpoint in RegistrationService",
+      "title": "Snippet for the create_endpoint call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_endpoint. It may require modification in order to execute successfully.",
       "file": "registration_service/create_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_ListEndpoints_sync",
-      "title": "Snippet for list_endpoints in RegistrationService",
-      "description": "Basic snippet for list_endpoints in RegistrationService",
+      "title": "Snippet for the list_endpoints call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints. It may require modification in order to execute successfully.",
       "file": "registration_service/list_endpoints.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_GetEndpoint_sync",
-      "title": "Snippet for get_endpoint in RegistrationService",
-      "description": "Basic snippet for get_endpoint in RegistrationService",
+      "title": "Snippet for the get_endpoint call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint. It may require modification in order to execute successfully.",
       "file": "registration_service/get_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_UpdateEndpoint_sync",
-      "title": "Snippet for update_endpoint in RegistrationService",
-      "description": "Basic snippet for update_endpoint in RegistrationService",
+      "title": "Snippet for the update_endpoint call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_endpoint. It may require modification in order to execute successfully.",
       "file": "registration_service/update_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_DeleteEndpoint_sync",
-      "title": "Snippet for delete_endpoint in RegistrationService",
-      "description": "Basic snippet for delete_endpoint in RegistrationService",
+      "title": "Snippet for the delete_endpoint call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint. It may require modification in order to execute successfully.",
       "file": "registration_service/delete_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in RegistrationService",
-      "description": "Basic snippet for get_iam_policy in RegistrationService",
+      "title": "Snippet for the get_iam_policy call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "registration_service/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in RegistrationService",
-      "description": "Basic snippet for set_iam_policy in RegistrationService",
+      "title": "Snippet for the set_iam_policy call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "registration_service/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "servicedirectory_v1beta1_generated_RegistrationService_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in RegistrationService",
-      "description": "Basic snippet for test_iam_permissions in RegistrationService",
+      "title": "Snippet for the test_iam_permissions call in the RegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "registration_service/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

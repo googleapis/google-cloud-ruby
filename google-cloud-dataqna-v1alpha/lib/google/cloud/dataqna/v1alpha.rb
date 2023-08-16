@@ -24,9 +24,9 @@ module Google
   module Cloud
     module DataQnA
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/dataqna/v1alpha"
       #     client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new

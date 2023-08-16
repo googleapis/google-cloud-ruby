@@ -43,6 +43,10 @@ module Google
             rpc :ListTensorboards, ::Google::Cloud::AIPlatform::V1::ListTensorboardsRequest, ::Google::Cloud::AIPlatform::V1::ListTensorboardsResponse
             # Deletes a Tensorboard.
             rpc :DeleteTensorboard, ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest, ::Google::Longrunning::Operation
+            # Returns a list of monthly active users for a given TensorBoard instance.
+            rpc :ReadTensorboardUsage, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse
+            # Returns the storage size for a given TensorBoard instance.
+            rpc :ReadTensorboardSize, ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse
             # Creates a TensorboardExperiment.
             rpc :CreateTensorboardExperiment, ::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest, ::Google::Cloud::AIPlatform::V1::TensorboardExperiment
             # Gets a TensorboardExperiment.
@@ -79,13 +83,13 @@ module Google
             rpc :DeleteTensorboardTimeSeries, ::Google::Cloud::AIPlatform::V1::DeleteTensorboardTimeSeriesRequest, ::Google::Longrunning::Operation
             # Reads multiple TensorboardTimeSeries' data. The data point number limit is
             # 1000 for scalars, 100 for tensors and blob references. If the number of
-            # data points stored is less than the limit, all data will be returned.
-            # Otherwise, that limit number of data points will be randomly selected from
+            # data points stored is less than the limit, all data is returned.
+            # Otherwise, the number limit of data points is randomly selected from
             # this time series and returned.
             rpc :BatchReadTensorboardTimeSeriesData, ::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest, ::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataResponse
             # Reads a TensorboardTimeSeries' data. By default, if the number of data
-            # points stored is less than 1000, all data will be returned. Otherwise, 1000
-            # data points will be randomly selected from this time series and returned.
+            # points stored is less than 1000, all data is returned. Otherwise, 1000
+            # data points is randomly selected from this time series and returned.
             # This value can be changed by changing max_data_points, which can't be
             # greater than 10k.
             rpc :ReadTensorboardTimeSeriesData, ::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataResponse
@@ -95,12 +99,10 @@ module Google
             # permission.
             rpc :ReadTensorboardBlobData, ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest, stream(::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse)
             # Write time series data points of multiple TensorboardTimeSeries in multiple
-            # TensorboardRun's. If any data fail to be ingested, an error will be
-            # returned.
+            # TensorboardRun's. If any data fail to be ingested, an error is returned.
             rpc :WriteTensorboardExperimentData, ::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataRequest, ::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataResponse
             # Write time series data points into multiple TensorboardTimeSeries under
-            # a TensorboardRun. If any data fail to be ingested, an error will be
-            # returned.
+            # a TensorboardRun. If any data fail to be ingested, an error is returned.
             rpc :WriteTensorboardRunData, ::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataRequest, ::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataResponse
             # Exports a TensorboardTimeSeries' data. Data is returned in paginated
             # responses.

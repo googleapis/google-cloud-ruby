@@ -21,6 +21,24 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        # Metadata about a property.
+        # @!attribute [rw] inactive
+        #   @return [::Boolean]
+        #     Whether the property should be considered as "inactive".
+        class PropertyMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata about an entity type.
+        # @!attribute [rw] inactive
+        #   @return [::Boolean]
+        #     Whether the entity type should be considered inactive.
+        class EntityTypeMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The schema defines the output of the processed document by a processor.
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -54,16 +72,15 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Name of the type. It must be unique within the schema file and
-          #     cannot be a 'Common Type'.  Besides that we use the following naming
-          #     conventions:
+          #     cannot be a "Common Type".  The following naming conventions are used:
           #
-          #     - *use `snake_casing`*
-          #     - name matching is case-insensitive
+          #     - Use `snake_casing`.
+          #     - Name matching is case-sensitive.
           #     - Maximum 64 characters.
           #     - Must start with a letter.
           #     - Allowed characters: ASCII letters `[a-z0-9_-]`.  (For backward
           #       compatibility internal infrastructure and tooling can handle any ascii
-          #       character)
+          #       character.)
           #     - The `/` is sometimes used to denote a property of a type.  For example
           #       `line_item/amount`.  This convention is deprecated, but will still be
           #       honored for backward compatibility.
@@ -73,7 +90,10 @@ module Google
           #     one should be set.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::DocumentSchema::EntityType::Property>]
-          #     Describing the nested structure, or composition of an entity.
+          #     Description the nested structure, or composition of an entity.
+          # @!attribute [rw] entity_type_metadata
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::EntityTypeMetadata]
+          #     Metadata for the entity type.
           class EntityType
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,24 +120,35 @@ module Google
             #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema::EntityType::Property::OccurrenceType]
             #     Occurrence type limits the number of instances an entity type appears
             #     in the document.
+            # @!attribute [rw] property_metadata
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::PropertyMetadata]
+            #     Any additional metadata about the property can be added here.
             class Property
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
-              # Types of occurrences of the entity type in the document.  Note: this
-              # represents the number of instances of an entity types, not number of
-              # mentions of a given entity instance.
+              # Types of occurrences of the entity type in the document.  This
+              # represents the number of instances of instances of an entity, not
+              # number of mentions of an entity.  For example, a bank statement may
+              # only have one `account_number`, but this account number may be
+              # mentioned in several places on the document.  In this case the
+              # 'account_number' would be considered a `REQUIRED_ONCE` entity type. If,
+              # on the other hand, we expect a bank statement to contain the status of
+              # multiple different accounts for the customers, the occurrence type will
+              # be set to `REQUIRED_MULTIPLE`.
               module OccurrenceType
                 # Unspecified occurrence type.
                 OCCURRENCE_TYPE_UNSPECIFIED = 0
 
-                # There will be zero or one instance of this entity type.
+                # There will be zero or one instance of this entity type.  The same
+                # entity instance may be mentioned multiple times.
                 OPTIONAL_ONCE = 1
 
                 # The entity type will appear zero or multiple times.
                 OPTIONAL_MULTIPLE = 2
 
-                # The entity type will only appear exactly once.
+                # The entity type will only appear exactly once.  The same
+                # entity instance may be mentioned multiple times.
                 REQUIRED_ONCE = 3
 
                 # The entity type will appear once or more times.
@@ -129,8 +160,8 @@ module Google
           # Metadata for global schema behavior.
           # @!attribute [rw] document_splitter
           #   @return [::Boolean]
-          #     If true, a `document` entity type can be applied to subdocument (
-          #     splitting). Otherwise, it can only be applied to the entire document
+          #     If true, a `document` entity type can be applied to subdocument
+          #     (splitting). Otherwise, it can only be applied to the entire document
           #     (classification).
           # @!attribute [rw] document_allow_multiple_labels
           #   @return [::Boolean]

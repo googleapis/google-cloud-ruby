@@ -24,12 +24,17 @@ module Google
     module Eventarc
       module Publishing
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/eventarc/publishing/v1"
         #     client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new
+        #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/eventarc/publishing/v1"
+        #     client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new
         #
         module V1
         end

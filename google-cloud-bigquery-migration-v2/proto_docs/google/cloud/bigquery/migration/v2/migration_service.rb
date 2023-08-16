@@ -128,20 +128,20 @@ module Google
           #     Optional. The list of fields to be retrieved.
           # @!attribute [rw] page_size
           #   @return [::Integer]
-          #     Optional. The maximum number of migration tasks to return. The service may return
-          #     fewer than this number.
+          #     Optional. The maximum number of migration tasks to return. The service may
+          #     return fewer than this number.
           # @!attribute [rw] page_token
           #   @return [::String]
-          #     Optional. A page token, received from previous `ListMigrationSubtasks` call.
-          #     Provide this to retrieve the subsequent page.
+          #     Optional. A page token, received from previous `ListMigrationSubtasks`
+          #     call. Provide this to retrieve the subsequent page.
           #
           #     When paginating, all other parameters provided to `ListMigrationSubtasks`
           #     must match the call that provided the page token.
           # @!attribute [rw] filter
           #   @return [::String]
-          #     Optional. The filter to apply. This can be used to get the subtasks of a specific
-          #     tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the
-          #     task ID (not the name in the named map).
+          #     Optional. The filter to apply. This can be used to get the subtasks of a
+          #     specific tasks in a workflow, e.g. `migration_task = "ab012"` where
+          #     `"ab012"` is the task ID (not the name in the named map).
           class ListMigrationSubtasksRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

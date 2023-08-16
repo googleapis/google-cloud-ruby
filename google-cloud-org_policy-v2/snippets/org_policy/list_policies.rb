@@ -20,8 +20,11 @@
 require "google/cloud/org_policy/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies
+# Snippet for the list_policies call in the OrgPolicy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies. It may require
+# modification in order to execute successfully.
 #
 def list_policies
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_policies
   # Call the list_policies method.
   result = client.list_policies request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Policy.
-    p response
+    p item
   end
 end
 # [END orgpolicy_v2_generated_OrgPolicy_ListPolicies_sync]

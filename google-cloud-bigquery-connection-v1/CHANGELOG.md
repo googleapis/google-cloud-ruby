@@ -1,5 +1,45 @@
 # Release History
 
+### 0.15.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.15.0 (2023-07-10)
+
+#### Features
+
+* add support for Salesforce connections, which are usable only by allowlisted partners ([#22490](https://github.com/googleapis/google-cloud-ruby/issues/22490)) 
+
+### 0.14.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.13.0 (2023-03-23)
+
+#### Features
+
+* Add support for SparkProperties ([#20924](https://github.com/googleapis/google-cloud-ruby/issues/20924)) 
+
+### 0.12.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20624](https://github.com/googleapis/google-cloud-ruby/issues/20624)) 
+
+### 0.11.0 (2023-02-28)
+
+#### Features
+
+* Support for Serverless Analytics Service when reading from Cloud Spanner ([#20519](https://github.com/googleapis/google-cloud-ruby/issues/20519)) 
+* Support for setting the Cloud Spanner database role 
+
 ### 0.10.0 (2022-08-03)
 
 #### Features

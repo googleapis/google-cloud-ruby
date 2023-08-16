@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-v2",
-    "version": "0.19.0",
+    "version": "0.27.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "dialogflow_v2_generated_Agents_GetAgent_sync",
-      "title": "Snippet for get_agent in Agents",
-      "description": "Basic snippet for get_agent in Agents",
+      "title": "Snippet for the get_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#get_agent. It may require modification in order to execute successfully.",
       "file": "agents/get_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_SetAgent_sync",
-      "title": "Snippet for set_agent in Agents",
-      "description": "Basic snippet for set_agent in Agents",
+      "title": "Snippet for the set_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#set_agent. It may require modification in order to execute successfully.",
       "file": "agents/set_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_DeleteAgent_sync",
-      "title": "Snippet for delete_agent in Agents",
-      "description": "Basic snippet for delete_agent in Agents",
+      "title": "Snippet for the delete_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#delete_agent. It may require modification in order to execute successfully.",
       "file": "agents/delete_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_SearchAgents_sync",
-      "title": "Snippet for search_agents in Agents",
-      "description": "Basic snippet for search_agents in Agents",
+      "title": "Snippet for the search_agents call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#search_agents. It may require modification in order to execute successfully.",
       "file": "agents/search_agents.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_TrainAgent_sync",
-      "title": "Snippet for train_agent in Agents",
-      "description": "Basic snippet for train_agent in Agents",
+      "title": "Snippet for the train_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#train_agent. It may require modification in order to execute successfully.",
       "file": "agents/train_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_ExportAgent_sync",
-      "title": "Snippet for export_agent in Agents",
-      "description": "Basic snippet for export_agent in Agents",
+      "title": "Snippet for the export_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#export_agent. It may require modification in order to execute successfully.",
       "file": "agents/export_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_ImportAgent_sync",
-      "title": "Snippet for import_agent in Agents",
-      "description": "Basic snippet for import_agent in Agents",
+      "title": "Snippet for the import_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#import_agent. It may require modification in order to execute successfully.",
       "file": "agents/import_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_RestoreAgent_sync",
-      "title": "Snippet for restore_agent in Agents",
-      "description": "Basic snippet for restore_agent in Agents",
+      "title": "Snippet for the restore_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#restore_agent. It may require modification in order to execute successfully.",
       "file": "agents/restore_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Agents_GetValidationResult_sync",
-      "title": "Snippet for get_validation_result in Agents",
-      "description": "Basic snippet for get_validation_result in Agents",
+      "title": "Snippet for the get_validation_result call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result. It may require modification in order to execute successfully.",
       "file": "agents/get_validation_result.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Contexts_ListContexts_sync",
-      "title": "Snippet for list_contexts in Contexts",
-      "description": "Basic snippet for list_contexts in Contexts",
+      "title": "Snippet for the list_contexts call in the Contexts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts. It may require modification in order to execute successfully.",
       "file": "contexts/list_contexts.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Contexts_GetContext_sync",
-      "title": "Snippet for get_context in Contexts",
-      "description": "Basic snippet for get_context in Contexts",
+      "title": "Snippet for the get_context call in the Contexts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Contexts::Client#get_context. It may require modification in order to execute successfully.",
       "file": "contexts/get_context.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Contexts_CreateContext_sync",
-      "title": "Snippet for create_context in Contexts",
-      "description": "Basic snippet for create_context in Contexts",
+      "title": "Snippet for the create_context call in the Contexts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Contexts::Client#create_context. It may require modification in order to execute successfully.",
       "file": "contexts/create_context.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Contexts_UpdateContext_sync",
-      "title": "Snippet for update_context in Contexts",
-      "description": "Basic snippet for update_context in Contexts",
+      "title": "Snippet for the update_context call in the Contexts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Contexts::Client#update_context. It may require modification in order to execute successfully.",
       "file": "contexts/update_context.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Contexts_DeleteContext_sync",
-      "title": "Snippet for delete_context in Contexts",
-      "description": "Basic snippet for delete_context in Contexts",
+      "title": "Snippet for the delete_context call in the Contexts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Contexts::Client#delete_context. It may require modification in order to execute successfully.",
       "file": "contexts/delete_context.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Contexts_DeleteAllContexts_sync",
-      "title": "Snippet for delete_all_contexts in Contexts",
-      "description": "Basic snippet for delete_all_contexts in Contexts",
+      "title": "Snippet for the delete_all_contexts call in the Contexts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Contexts::Client#delete_all_contexts. It may require modification in order to execute successfully.",
       "file": "contexts/delete_all_contexts.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_ListIntents_sync",
-      "title": "Snippet for list_intents in Intents",
-      "description": "Basic snippet for list_intents in Intents",
+      "title": "Snippet for the list_intents call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#list_intents. It may require modification in order to execute successfully.",
       "file": "intents/list_intents.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_GetIntent_sync",
-      "title": "Snippet for get_intent in Intents",
-      "description": "Basic snippet for get_intent in Intents",
+      "title": "Snippet for the get_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#get_intent. It may require modification in order to execute successfully.",
       "file": "intents/get_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_CreateIntent_sync",
-      "title": "Snippet for create_intent in Intents",
-      "description": "Basic snippet for create_intent in Intents",
+      "title": "Snippet for the create_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#create_intent. It may require modification in order to execute successfully.",
       "file": "intents/create_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_UpdateIntent_sync",
-      "title": "Snippet for update_intent in Intents",
-      "description": "Basic snippet for update_intent in Intents",
+      "title": "Snippet for the update_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#update_intent. It may require modification in order to execute successfully.",
       "file": "intents/update_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_DeleteIntent_sync",
-      "title": "Snippet for delete_intent in Intents",
-      "description": "Basic snippet for delete_intent in Intents",
+      "title": "Snippet for the delete_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#delete_intent. It may require modification in order to execute successfully.",
       "file": "intents/delete_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_BatchUpdateIntents_sync",
-      "title": "Snippet for batch_update_intents in Intents",
-      "description": "Basic snippet for batch_update_intents in Intents",
+      "title": "Snippet for the batch_update_intents call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents. It may require modification in order to execute successfully.",
       "file": "intents/batch_update_intents.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Intents_BatchDeleteIntents_sync",
-      "title": "Snippet for batch_delete_intents in Intents",
-      "description": "Basic snippet for batch_delete_intents in Intents",
+      "title": "Snippet for the batch_delete_intents call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Intents::Client#batch_delete_intents. It may require modification in order to execute successfully.",
       "file": "intents/batch_delete_intents.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_ListEntityTypes_sync",
-      "title": "Snippet for list_entity_types in EntityTypes",
-      "description": "Basic snippet for list_entity_types in EntityTypes",
+      "title": "Snippet for the list_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#list_entity_types. It may require modification in order to execute successfully.",
       "file": "entity_types/list_entity_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_GetEntityType_sync",
-      "title": "Snippet for get_entity_type in EntityTypes",
-      "description": "Basic snippet for get_entity_type in EntityTypes",
+      "title": "Snippet for the get_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#get_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/get_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_CreateEntityType_sync",
-      "title": "Snippet for create_entity_type in EntityTypes",
-      "description": "Basic snippet for create_entity_type in EntityTypes",
+      "title": "Snippet for the create_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#create_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/create_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_UpdateEntityType_sync",
-      "title": "Snippet for update_entity_type in EntityTypes",
-      "description": "Basic snippet for update_entity_type in EntityTypes",
+      "title": "Snippet for the update_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#update_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/update_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_DeleteEntityType_sync",
-      "title": "Snippet for delete_entity_type in EntityTypes",
-      "description": "Basic snippet for delete_entity_type in EntityTypes",
+      "title": "Snippet for the delete_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#delete_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/delete_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_BatchUpdateEntityTypes_sync",
-      "title": "Snippet for batch_update_entity_types in EntityTypes",
-      "description": "Basic snippet for batch_update_entity_types in EntityTypes",
+      "title": "Snippet for the batch_update_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types. It may require modification in order to execute successfully.",
       "file": "entity_types/batch_update_entity_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_BatchDeleteEntityTypes_sync",
-      "title": "Snippet for batch_delete_entity_types in EntityTypes",
-      "description": "Basic snippet for batch_delete_entity_types in EntityTypes",
+      "title": "Snippet for the batch_delete_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_delete_entity_types. It may require modification in order to execute successfully.",
       "file": "entity_types/batch_delete_entity_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_BatchCreateEntities_sync",
-      "title": "Snippet for batch_create_entities in EntityTypes",
-      "description": "Basic snippet for batch_create_entities in EntityTypes",
+      "title": "Snippet for the batch_create_entities call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_create_entities. It may require modification in order to execute successfully.",
       "file": "entity_types/batch_create_entities.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_BatchUpdateEntities_sync",
-      "title": "Snippet for batch_update_entities in EntityTypes",
-      "description": "Basic snippet for batch_update_entities in EntityTypes",
+      "title": "Snippet for the batch_update_entities call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entities. It may require modification in order to execute successfully.",
       "file": "entity_types/batch_update_entities.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_EntityTypes_BatchDeleteEntities_sync",
-      "title": "Snippet for batch_delete_entities in EntityTypes",
-      "description": "Basic snippet for batch_delete_entities in EntityTypes",
+      "title": "Snippet for the batch_delete_entities call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_delete_entities. It may require modification in order to execute successfully.",
       "file": "entity_types/batch_delete_entities.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_SessionEntityTypes_ListSessionEntityTypes_sync",
-      "title": "Snippet for list_session_entity_types in SessionEntityTypes",
-      "description": "Basic snippet for list_session_entity_types in SessionEntityTypes",
+      "title": "Snippet for the list_session_entity_types call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#list_session_entity_types. It may require modification in order to execute successfully.",
       "file": "session_entity_types/list_session_entity_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_SessionEntityTypes_GetSessionEntityType_sync",
-      "title": "Snippet for get_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for get_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the get_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#get_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/get_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_SessionEntityTypes_CreateSessionEntityType_sync",
-      "title": "Snippet for create_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for create_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the create_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#create_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/create_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_SessionEntityTypes_UpdateSessionEntityType_sync",
-      "title": "Snippet for update_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for update_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the update_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#update_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/update_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_SessionEntityTypes_DeleteSessionEntityType_sync",
-      "title": "Snippet for delete_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for delete_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the delete_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#delete_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/delete_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Sessions_DetectIntent_sync",
-      "title": "Snippet for detect_intent in Sessions",
-      "description": "Basic snippet for detect_intent in Sessions",
+      "title": "Snippet for the detect_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent. It may require modification in order to execute successfully.",
       "file": "sessions/detect_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,15 +1526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Sessions_StreamingDetectIntent_sync",
-      "title": "Snippet for streaming_detect_intent in Sessions",
-      "description": "Basic snippet for streaming_detect_intent in Sessions",
+      "title": "Snippet for the streaming_detect_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent. It may require modification in order to execute successfully.",
       "file": "sessions/streaming_detect_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,15 +1566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_CreateParticipant_sync",
-      "title": "Snippet for create_participant in Participants",
-      "description": "Basic snippet for create_participant in Participants",
+      "title": "Snippet for the create_participant call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#create_participant. It may require modification in order to execute successfully.",
       "file": "participants/create_participant.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,15 +1606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_GetParticipant_sync",
-      "title": "Snippet for get_participant in Participants",
-      "description": "Basic snippet for get_participant in Participants",
+      "title": "Snippet for the get_participant call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#get_participant. It may require modification in order to execute successfully.",
       "file": "participants/get_participant.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,15 +1646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_ListParticipants_sync",
-      "title": "Snippet for list_participants in Participants",
-      "description": "Basic snippet for list_participants in Participants",
+      "title": "Snippet for the list_participants call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#list_participants. It may require modification in order to execute successfully.",
       "file": "participants/list_participants.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,15 +1686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_UpdateParticipant_sync",
-      "title": "Snippet for update_participant in Participants",
-      "description": "Basic snippet for update_participant in Participants",
+      "title": "Snippet for the update_participant call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#update_participant. It may require modification in order to execute successfully.",
       "file": "participants/update_participant.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,15 +1726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_AnalyzeContent_sync",
-      "title": "Snippet for analyze_content in Participants",
-      "description": "Basic snippet for analyze_content in Participants",
+      "title": "Snippet for the analyze_content call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content. It may require modification in order to execute successfully.",
       "file": "participants/analyze_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,15 +1766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_StreamingAnalyzeContent_sync",
-      "title": "Snippet for streaming_analyze_content in Participants",
-      "description": "Basic snippet for streaming_analyze_content in Participants",
+      "title": "Snippet for the streaming_analyze_content call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content. It may require modification in order to execute successfully.",
       "file": "participants/streaming_analyze_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,15 +1806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_SuggestArticles_sync",
-      "title": "Snippet for suggest_articles in Participants",
-      "description": "Basic snippet for suggest_articles in Participants",
+      "title": "Snippet for the suggest_articles call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#suggest_articles. It may require modification in order to execute successfully.",
       "file": "participants/suggest_articles.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,15 +1846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_SuggestFaqAnswers_sync",
-      "title": "Snippet for suggest_faq_answers in Participants",
-      "description": "Basic snippet for suggest_faq_answers in Participants",
+      "title": "Snippet for the suggest_faq_answers call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#suggest_faq_answers. It may require modification in order to execute successfully.",
       "file": "participants/suggest_faq_answers.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,15 +1886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Participants_SuggestSmartReplies_sync",
-      "title": "Snippet for suggest_smart_replies in Participants",
-      "description": "Basic snippet for suggest_smart_replies in Participants",
+      "title": "Snippet for the suggest_smart_replies call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#suggest_smart_replies. It may require modification in order to execute successfully.",
       "file": "participants/suggest_smart_replies.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,15 +1926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_AnswerRecords_ListAnswerRecords_sync",
-      "title": "Snippet for list_answer_records in AnswerRecords",
-      "description": "Basic snippet for list_answer_records in AnswerRecords",
+      "title": "Snippet for the list_answer_records call in the AnswerRecords service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records. It may require modification in order to execute successfully.",
       "file": "answer_records/list_answer_records.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,15 +1966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_AnswerRecords_UpdateAnswerRecord_sync",
-      "title": "Snippet for update_answer_record in AnswerRecords",
-      "description": "Basic snippet for update_answer_record in AnswerRecords",
+      "title": "Snippet for the update_answer_record call in the AnswerRecords service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record. It may require modification in order to execute successfully.",
       "file": "answer_records/update_answer_record.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,775 +2006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Conversations_CreateConversation_sync",
-      "title": "Snippet for create_conversation in Conversations",
-      "description": "Basic snippet for create_conversation in Conversations",
-      "file": "conversations/create_conversation.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_conversation",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#create_conversation",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::Conversation",
-        "client": {
-          "short_name": "Conversations::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
-        },
-        "method": {
-          "short_name": "CreateConversation",
-          "full_name": "google.cloud.dialogflow.v2.Conversations.CreateConversation",
-          "service": {
-            "short_name": "Conversations",
-            "full_name": "google.cloud.dialogflow.v2.Conversations"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Conversations_ListConversations_sync",
-      "title": "Snippet for list_conversations in Conversations",
-      "description": "Basic snippet for list_conversations in Conversations",
-      "file": "conversations/list_conversations.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_conversations",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#list_conversations",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ListConversationsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationsResponse",
-        "client": {
-          "short_name": "Conversations::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
-        },
-        "method": {
-          "short_name": "ListConversations",
-          "full_name": "google.cloud.dialogflow.v2.Conversations.ListConversations",
-          "service": {
-            "short_name": "Conversations",
-            "full_name": "google.cloud.dialogflow.v2.Conversations"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 44,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Conversations_GetConversation_sync",
-      "title": "Snippet for get_conversation in Conversations",
-      "description": "Basic snippet for get_conversation in Conversations",
-      "file": "conversations/get_conversation.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_conversation",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#get_conversation",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::GetConversationRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::Conversation",
-        "client": {
-          "short_name": "Conversations::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
-        },
-        "method": {
-          "short_name": "GetConversation",
-          "full_name": "google.cloud.dialogflow.v2.Conversations.GetConversation",
-          "service": {
-            "short_name": "Conversations",
-            "full_name": "google.cloud.dialogflow.v2.Conversations"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Conversations_CompleteConversation_sync",
-      "title": "Snippet for complete_conversation in Conversations",
-      "description": "Basic snippet for complete_conversation in Conversations",
-      "file": "conversations/complete_conversation.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "complete_conversation",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#complete_conversation",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::CompleteConversationRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::Conversation",
-        "client": {
-          "short_name": "Conversations::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
-        },
-        "method": {
-          "short_name": "CompleteConversation",
-          "full_name": "google.cloud.dialogflow.v2.Conversations.CompleteConversation",
-          "service": {
-            "short_name": "Conversations",
-            "full_name": "google.cloud.dialogflow.v2.Conversations"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Conversations_ListMessages_sync",
-      "title": "Snippet for list_messages in Conversations",
-      "description": "Basic snippet for list_messages in Conversations",
-      "file": "conversations/list_messages.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_messages",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ListMessagesRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ListMessagesResponse",
-        "client": {
-          "short_name": "Conversations::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
-        },
-        "method": {
-          "short_name": "ListMessages",
-          "full_name": "google.cloud.dialogflow.v2.Conversations.ListMessages",
-          "service": {
-            "short_name": "Conversations",
-            "full_name": "google.cloud.dialogflow.v2.Conversations"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 44,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationDatasets_CreateConversationDataset_sync",
-      "title": "Snippet for create_conversation_dataset in ConversationDatasets",
-      "description": "Basic snippet for create_conversation_dataset in ConversationDatasets",
-      "file": "conversation_datasets/create_conversation_dataset.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_conversation_dataset",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#create_conversation_dataset",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationDatasets::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
-        },
-        "method": {
-          "short_name": "CreateConversationDataset",
-          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.CreateConversationDataset",
-          "service": {
-            "short_name": "ConversationDatasets",
-            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationDatasets_GetConversationDataset_sync",
-      "title": "Snippet for get_conversation_dataset in ConversationDatasets",
-      "description": "Basic snippet for get_conversation_dataset in ConversationDatasets",
-      "file": "conversation_datasets/get_conversation_dataset.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_conversation_dataset",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#get_conversation_dataset",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ConversationDataset",
-        "client": {
-          "short_name": "ConversationDatasets::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
-        },
-        "method": {
-          "short_name": "GetConversationDataset",
-          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.GetConversationDataset",
-          "service": {
-            "short_name": "ConversationDatasets",
-            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationDatasets_ListConversationDatasets_sync",
-      "title": "Snippet for list_conversation_datasets in ConversationDatasets",
-      "description": "Basic snippet for list_conversation_datasets in ConversationDatasets",
-      "file": "conversation_datasets/list_conversation_datasets.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_conversation_datasets",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#list_conversation_datasets",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationDatasetsResponse",
-        "client": {
-          "short_name": "ConversationDatasets::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
-        },
-        "method": {
-          "short_name": "ListConversationDatasets",
-          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.ListConversationDatasets",
-          "service": {
-            "short_name": "ConversationDatasets",
-            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 44,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationDatasets_DeleteConversationDataset_sync",
-      "title": "Snippet for delete_conversation_dataset in ConversationDatasets",
-      "description": "Basic snippet for delete_conversation_dataset in ConversationDatasets",
-      "file": "conversation_datasets/delete_conversation_dataset.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_conversation_dataset",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#delete_conversation_dataset",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationDatasets::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
-        },
-        "method": {
-          "short_name": "DeleteConversationDataset",
-          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.DeleteConversationDataset",
-          "service": {
-            "short_name": "ConversationDatasets",
-            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationDatasets_ImportConversationData_sync",
-      "title": "Snippet for import_conversation_data in ConversationDatasets",
-      "description": "Basic snippet for import_conversation_data in ConversationDatasets",
-      "file": "conversation_datasets/import_conversation_data.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "import_conversation_data",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationDatasets::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
-        },
-        "method": {
-          "short_name": "ImportConversationData",
-          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.ImportConversationData",
-          "service": {
-            "short_name": "ConversationDatasets",
-            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_CreateConversationModel_sync",
-      "title": "Snippet for create_conversation_model in ConversationModels",
-      "description": "Basic snippet for create_conversation_model in ConversationModels",
-      "file": "conversation_models/create_conversation_model.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_conversation_model",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "CreateConversationModel",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModel",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_GetConversationModel_sync",
-      "title": "Snippet for get_conversation_model in ConversationModels",
-      "description": "Basic snippet for get_conversation_model in ConversationModels",
-      "file": "conversation_models/get_conversation_model.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_conversation_model",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::GetConversationModelRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ConversationModel",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "GetConversationModel",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModel",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_ListConversationModels_sync",
-      "title": "Snippet for list_conversation_models in ConversationModels",
-      "description": "Basic snippet for list_conversation_models in ConversationModels",
-      "file": "conversation_models/list_conversation_models.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_conversation_models",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#list_conversation_models",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationModelsResponse",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "ListConversationModels",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModels",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 44,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_DeleteConversationModel_sync",
-      "title": "Snippet for delete_conversation_model in ConversationModels",
-      "description": "Basic snippet for delete_conversation_model in ConversationModels",
-      "file": "conversation_models/delete_conversation_model.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_conversation_model",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#delete_conversation_model",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "DeleteConversationModel",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.DeleteConversationModel",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_DeployConversationModel_sync",
-      "title": "Snippet for deploy_conversation_model in ConversationModels",
-      "description": "Basic snippet for deploy_conversation_model in ConversationModels",
-      "file": "conversation_models/deploy_conversation_model.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "deploy_conversation_model",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#deploy_conversation_model",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "DeployConversationModel",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.DeployConversationModel",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_UndeployConversationModel_sync",
-      "title": "Snippet for undeploy_conversation_model in ConversationModels",
-      "description": "Basic snippet for undeploy_conversation_model in ConversationModels",
-      "file": "conversation_models/undeploy_conversation_model.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "undeploy_conversation_model",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#undeploy_conversation_model",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "UndeployConversationModel",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.UndeployConversationModel",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_GetConversationModelEvaluation_sync",
-      "title": "Snippet for get_conversation_model_evaluation in ConversationModels",
-      "description": "Basic snippet for get_conversation_model_evaluation in ConversationModels",
-      "file": "conversation_models/get_conversation_model_evaluation.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_conversation_model_evaluation",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model_evaluation",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ConversationModelEvaluation",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "GetConversationModelEvaluation",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModelEvaluation",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_ListConversationModelEvaluations_sync",
-      "title": "Snippet for list_conversation_model_evaluations in ConversationModels",
-      "description": "Basic snippet for list_conversation_model_evaluations in ConversationModels",
-      "file": "conversation_models/list_conversation_model_evaluations.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_conversation_model_evaluations",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#list_conversation_model_evaluations",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsResponse",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "ListConversationModelEvaluations",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModelEvaluations",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 44,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_ConversationModels_CreateConversationModelEvaluation_sync",
-      "title": "Snippet for create_conversation_model_evaluation in ConversationModels",
-      "description": "Basic snippet for create_conversation_model_evaluation in ConversationModels",
-      "file": "conversation_models/create_conversation_model_evaluation.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_conversation_model_evaluation",
-        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model_evaluation",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "ConversationModels::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
-        },
-        "method": {
-          "short_name": "CreateConversationModelEvaluation",
-          "full_name": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModelEvaluation",
-          "service": {
-            "short_name": "ConversationModels",
-            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_ListConversationProfiles_sync",
-      "title": "Snippet for list_conversation_profiles in ConversationProfiles",
-      "description": "Basic snippet for list_conversation_profiles in ConversationProfiles",
+      "title": "Snippet for the list_conversation_profiles call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#list_conversation_profiles. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/list_conversation_profiles.rb",
       "language": "RUBY",
       "client_method": {
@@ -2806,15 +2046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_GetConversationProfile_sync",
-      "title": "Snippet for get_conversation_profile in ConversationProfiles",
-      "description": "Basic snippet for get_conversation_profile in ConversationProfiles",
+      "title": "Snippet for the get_conversation_profile call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/get_conversation_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -2846,15 +2086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_CreateConversationProfile_sync",
-      "title": "Snippet for create_conversation_profile in ConversationProfiles",
-      "description": "Basic snippet for create_conversation_profile in ConversationProfiles",
+      "title": "Snippet for the create_conversation_profile call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#create_conversation_profile. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/create_conversation_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -2886,15 +2126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_UpdateConversationProfile_sync",
-      "title": "Snippet for update_conversation_profile in ConversationProfiles",
-      "description": "Basic snippet for update_conversation_profile in ConversationProfiles",
+      "title": "Snippet for the update_conversation_profile call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#update_conversation_profile. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/update_conversation_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -2926,15 +2166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_DeleteConversationProfile_sync",
-      "title": "Snippet for delete_conversation_profile in ConversationProfiles",
-      "description": "Basic snippet for delete_conversation_profile in ConversationProfiles",
+      "title": "Snippet for the delete_conversation_profile call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#delete_conversation_profile. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/delete_conversation_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -2966,15 +2206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_SetSuggestionFeatureConfig_sync",
-      "title": "Snippet for set_suggestion_feature_config in ConversationProfiles",
-      "description": "Basic snippet for set_suggestion_feature_config in ConversationProfiles",
+      "title": "Snippet for the set_suggestion_feature_config call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#set_suggestion_feature_config. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/set_suggestion_feature_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -3006,15 +2246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_ConversationProfiles_ClearSuggestionFeatureConfig_sync",
-      "title": "Snippet for clear_suggestion_feature_config in ConversationProfiles",
-      "description": "Basic snippet for clear_suggestion_feature_config in ConversationProfiles",
+      "title": "Snippet for the clear_suggestion_feature_config call in the ConversationProfiles service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#clear_suggestion_feature_config. It may require modification in order to execute successfully.",
       "file": "conversation_profiles/clear_suggestion_feature_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -3046,15 +2286,855 @@
       "segments": [
         {
           "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_CreateConversation_sync",
+      "title": "Snippet for the create_conversation call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#create_conversation. It may require modification in order to execute successfully.",
+      "file": "conversations/create_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#create_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Conversation",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "CreateConversation",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.CreateConversation",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_ListConversations_sync",
+      "title": "Snippet for the list_conversations call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#list_conversations. It may require modification in order to execute successfully.",
+      "file": "conversations/list_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversations",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#list_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationsResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "ListConversations",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.ListConversations",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
           "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
+      "region_tag": "dialogflow_v2_generated_Conversations_GetConversation_sync",
+      "title": "Snippet for the get_conversation call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#get_conversation. It may require modification in order to execute successfully.",
+      "file": "conversations/get_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#get_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Conversation",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "GetConversation",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.GetConversation",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_CompleteConversation_sync",
+      "title": "Snippet for the complete_conversation call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#complete_conversation. It may require modification in order to execute successfully.",
+      "file": "conversations/complete_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "complete_conversation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#complete_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CompleteConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Conversation",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "CompleteConversation",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.CompleteConversation",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_ListMessages_sync",
+      "title": "Snippet for the list_messages call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages. It may require modification in order to execute successfully.",
+      "file": "conversations/list_messages.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_messages",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListMessagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListMessagesResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "ListMessages",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.ListMessages",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_SuggestConversationSummary_sync",
+      "title": "Snippet for the suggest_conversation_summary call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#suggest_conversation_summary. It may require modification in order to execute successfully.",
+      "file": "conversations/suggest_conversation_summary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "suggest_conversation_summary",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#suggest_conversation_summary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "SuggestConversationSummary",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.SuggestConversationSummary",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_GenerateStatelessSummary_sync",
+      "title": "Snippet for the generate_stateless_summary call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_summary. It may require modification in order to execute successfully.",
+      "file": "conversations/generate_stateless_summary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_stateless_summary",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_summary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "GenerateStatelessSummary",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.GenerateStatelessSummary",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationDatasets_CreateConversationDataset_sync",
+      "title": "Snippet for the create_conversation_dataset call in the ConversationDatasets service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#create_conversation_dataset. It may require modification in order to execute successfully.",
+      "file": "conversation_datasets/create_conversation_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation_dataset",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#create_conversation_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationDatasets::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
+        },
+        "method": {
+          "short_name": "CreateConversationDataset",
+          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.CreateConversationDataset",
+          "service": {
+            "short_name": "ConversationDatasets",
+            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationDatasets_GetConversationDataset_sync",
+      "title": "Snippet for the get_conversation_dataset call in the ConversationDatasets service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#get_conversation_dataset. It may require modification in order to execute successfully.",
+      "file": "conversation_datasets/get_conversation_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation_dataset",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#get_conversation_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ConversationDataset",
+        "client": {
+          "short_name": "ConversationDatasets::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
+        },
+        "method": {
+          "short_name": "GetConversationDataset",
+          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.GetConversationDataset",
+          "service": {
+            "short_name": "ConversationDatasets",
+            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationDatasets_ListConversationDatasets_sync",
+      "title": "Snippet for the list_conversation_datasets call in the ConversationDatasets service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#list_conversation_datasets. It may require modification in order to execute successfully.",
+      "file": "conversation_datasets/list_conversation_datasets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversation_datasets",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#list_conversation_datasets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationDatasetsResponse",
+        "client": {
+          "short_name": "ConversationDatasets::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
+        },
+        "method": {
+          "short_name": "ListConversationDatasets",
+          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.ListConversationDatasets",
+          "service": {
+            "short_name": "ConversationDatasets",
+            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationDatasets_DeleteConversationDataset_sync",
+      "title": "Snippet for the delete_conversation_dataset call in the ConversationDatasets service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#delete_conversation_dataset. It may require modification in order to execute successfully.",
+      "file": "conversation_datasets/delete_conversation_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversation_dataset",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#delete_conversation_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationDatasets::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversationDataset",
+          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.DeleteConversationDataset",
+          "service": {
+            "short_name": "ConversationDatasets",
+            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationDatasets_ImportConversationData_sync",
+      "title": "Snippet for the import_conversation_data call in the ConversationDatasets service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data. It may require modification in order to execute successfully.",
+      "file": "conversation_datasets/import_conversation_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_conversation_data",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationDatasets::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client"
+        },
+        "method": {
+          "short_name": "ImportConversationData",
+          "full_name": "google.cloud.dialogflow.v2.ConversationDatasets.ImportConversationData",
+          "service": {
+            "short_name": "ConversationDatasets",
+            "full_name": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_CreateConversationModel_sync",
+      "title": "Snippet for the create_conversation_model call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model. It may require modification in order to execute successfully.",
+      "file": "conversation_models/create_conversation_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation_model",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "CreateConversationModel",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModel",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_GetConversationModel_sync",
+      "title": "Snippet for the get_conversation_model call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model. It may require modification in order to execute successfully.",
+      "file": "conversation_models/get_conversation_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation_model",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetConversationModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ConversationModel",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "GetConversationModel",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModel",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_ListConversationModels_sync",
+      "title": "Snippet for the list_conversation_models call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#list_conversation_models. It may require modification in order to execute successfully.",
+      "file": "conversation_models/list_conversation_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversation_models",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#list_conversation_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationModelsResponse",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "ListConversationModels",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModels",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_DeleteConversationModel_sync",
+      "title": "Snippet for the delete_conversation_model call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#delete_conversation_model. It may require modification in order to execute successfully.",
+      "file": "conversation_models/delete_conversation_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversation_model",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#delete_conversation_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversationModel",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.DeleteConversationModel",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_DeployConversationModel_sync",
+      "title": "Snippet for the deploy_conversation_model call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#deploy_conversation_model. It may require modification in order to execute successfully.",
+      "file": "conversation_models/deploy_conversation_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deploy_conversation_model",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#deploy_conversation_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "DeployConversationModel",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.DeployConversationModel",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_UndeployConversationModel_sync",
+      "title": "Snippet for the undeploy_conversation_model call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#undeploy_conversation_model. It may require modification in order to execute successfully.",
+      "file": "conversation_models/undeploy_conversation_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undeploy_conversation_model",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#undeploy_conversation_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "UndeployConversationModel",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.UndeployConversationModel",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_GetConversationModelEvaluation_sync",
+      "title": "Snippet for the get_conversation_model_evaluation call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model_evaluation. It may require modification in order to execute successfully.",
+      "file": "conversation_models/get_conversation_model_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation_model_evaluation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ConversationModelEvaluation",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "GetConversationModelEvaluation",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModelEvaluation",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_ListConversationModelEvaluations_sync",
+      "title": "Snippet for the list_conversation_model_evaluations call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#list_conversation_model_evaluations. It may require modification in order to execute successfully.",
+      "file": "conversation_models/list_conversation_model_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversation_model_evaluations",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#list_conversation_model_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsResponse",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "ListConversationModelEvaluations",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModelEvaluations",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_ConversationModels_CreateConversationModelEvaluation_sync",
+      "title": "Snippet for the create_conversation_model_evaluation call in the ConversationModels service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model_evaluation. It may require modification in order to execute successfully.",
+      "file": "conversation_models/create_conversation_model_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation_model_evaluation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client#create_conversation_model_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConversationModels::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client"
+        },
+        "method": {
+          "short_name": "CreateConversationModelEvaluation",
+          "full_name": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModelEvaluation",
+          "service": {
+            "short_name": "ConversationModels",
+            "full_name": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v2_generated_Documents_ListDocuments_sync",
-      "title": "Snippet for list_documents in Documents",
-      "description": "Basic snippet for list_documents in Documents",
+      "title": "Snippet for the list_documents call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#list_documents. It may require modification in order to execute successfully.",
       "file": "documents/list_documents.rb",
       "language": "RUBY",
       "client_method": {
@@ -3086,15 +3166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_GetDocument_sync",
-      "title": "Snippet for get_document in Documents",
-      "description": "Basic snippet for get_document in Documents",
+      "title": "Snippet for the get_document call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#get_document. It may require modification in order to execute successfully.",
       "file": "documents/get_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -3126,15 +3206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_CreateDocument_sync",
-      "title": "Snippet for create_document in Documents",
-      "description": "Basic snippet for create_document in Documents",
+      "title": "Snippet for the create_document call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#create_document. It may require modification in order to execute successfully.",
       "file": "documents/create_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -3166,15 +3246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_ImportDocuments_sync",
-      "title": "Snippet for import_documents in Documents",
-      "description": "Basic snippet for import_documents in Documents",
+      "title": "Snippet for the import_documents call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#import_documents. It may require modification in order to execute successfully.",
       "file": "documents/import_documents.rb",
       "language": "RUBY",
       "client_method": {
@@ -3206,15 +3286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_DeleteDocument_sync",
-      "title": "Snippet for delete_document in Documents",
-      "description": "Basic snippet for delete_document in Documents",
+      "title": "Snippet for the delete_document call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#delete_document. It may require modification in order to execute successfully.",
       "file": "documents/delete_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -3246,15 +3326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_UpdateDocument_sync",
-      "title": "Snippet for update_document in Documents",
-      "description": "Basic snippet for update_document in Documents",
+      "title": "Snippet for the update_document call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#update_document. It may require modification in order to execute successfully.",
       "file": "documents/update_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -3286,15 +3366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_ReloadDocument_sync",
-      "title": "Snippet for reload_document in Documents",
-      "description": "Basic snippet for reload_document in Documents",
+      "title": "Snippet for the reload_document call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#reload_document. It may require modification in order to execute successfully.",
       "file": "documents/reload_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -3326,15 +3406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Documents_ExportDocument_sync",
-      "title": "Snippet for export_document in Documents",
-      "description": "Basic snippet for export_document in Documents",
+      "title": "Snippet for the export_document call in the Documents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Documents::Client#export_document. It may require modification in order to execute successfully.",
       "file": "documents/export_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -3366,15 +3446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Fulfillments_GetFulfillment_sync",
-      "title": "Snippet for get_fulfillment in Fulfillments",
-      "description": "Basic snippet for get_fulfillment in Fulfillments",
+      "title": "Snippet for the get_fulfillment call in the Fulfillments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Fulfillments::Client#get_fulfillment. It may require modification in order to execute successfully.",
       "file": "fulfillments/get_fulfillment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3406,15 +3486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Fulfillments_UpdateFulfillment_sync",
-      "title": "Snippet for update_fulfillment in Fulfillments",
-      "description": "Basic snippet for update_fulfillment in Fulfillments",
+      "title": "Snippet for the update_fulfillment call in the Fulfillments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Fulfillments::Client#update_fulfillment. It may require modification in order to execute successfully.",
       "file": "fulfillments/update_fulfillment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3446,15 +3526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Environments_ListEnvironments_sync",
-      "title": "Snippet for list_environments in Environments",
-      "description": "Basic snippet for list_environments in Environments",
+      "title": "Snippet for the list_environments call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Environments::Client#list_environments. It may require modification in order to execute successfully.",
       "file": "environments/list_environments.rb",
       "language": "RUBY",
       "client_method": {
@@ -3486,15 +3566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Environments_GetEnvironment_sync",
-      "title": "Snippet for get_environment in Environments",
-      "description": "Basic snippet for get_environment in Environments",
+      "title": "Snippet for the get_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Environments::Client#get_environment. It may require modification in order to execute successfully.",
       "file": "environments/get_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3526,15 +3606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Environments_CreateEnvironment_sync",
-      "title": "Snippet for create_environment in Environments",
-      "description": "Basic snippet for create_environment in Environments",
+      "title": "Snippet for the create_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Environments::Client#create_environment. It may require modification in order to execute successfully.",
       "file": "environments/create_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3566,15 +3646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Environments_UpdateEnvironment_sync",
-      "title": "Snippet for update_environment in Environments",
-      "description": "Basic snippet for update_environment in Environments",
+      "title": "Snippet for the update_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Environments::Client#update_environment. It may require modification in order to execute successfully.",
       "file": "environments/update_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3606,15 +3686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Environments_DeleteEnvironment_sync",
-      "title": "Snippet for delete_environment in Environments",
-      "description": "Basic snippet for delete_environment in Environments",
+      "title": "Snippet for the delete_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Environments::Client#delete_environment. It may require modification in order to execute successfully.",
       "file": "environments/delete_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3646,15 +3726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Environments_GetEnvironmentHistory_sync",
-      "title": "Snippet for get_environment_history in Environments",
-      "description": "Basic snippet for get_environment_history in Environments",
+      "title": "Snippet for the get_environment_history call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Environments::Client#get_environment_history. It may require modification in order to execute successfully.",
       "file": "environments/get_environment_history.rb",
       "language": "RUBY",
       "client_method": {
@@ -3686,15 +3766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_KnowledgeBases_ListKnowledgeBases_sync",
-      "title": "Snippet for list_knowledge_bases in KnowledgeBases",
-      "description": "Basic snippet for list_knowledge_bases in KnowledgeBases",
+      "title": "Snippet for the list_knowledge_bases call in the KnowledgeBases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#list_knowledge_bases. It may require modification in order to execute successfully.",
       "file": "knowledge_bases/list_knowledge_bases.rb",
       "language": "RUBY",
       "client_method": {
@@ -3726,15 +3806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_KnowledgeBases_GetKnowledgeBase_sync",
-      "title": "Snippet for get_knowledge_base in KnowledgeBases",
-      "description": "Basic snippet for get_knowledge_base in KnowledgeBases",
+      "title": "Snippet for the get_knowledge_base call in the KnowledgeBases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#get_knowledge_base. It may require modification in order to execute successfully.",
       "file": "knowledge_bases/get_knowledge_base.rb",
       "language": "RUBY",
       "client_method": {
@@ -3766,15 +3846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_KnowledgeBases_CreateKnowledgeBase_sync",
-      "title": "Snippet for create_knowledge_base in KnowledgeBases",
-      "description": "Basic snippet for create_knowledge_base in KnowledgeBases",
+      "title": "Snippet for the create_knowledge_base call in the KnowledgeBases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#create_knowledge_base. It may require modification in order to execute successfully.",
       "file": "knowledge_bases/create_knowledge_base.rb",
       "language": "RUBY",
       "client_method": {
@@ -3806,15 +3886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_KnowledgeBases_DeleteKnowledgeBase_sync",
-      "title": "Snippet for delete_knowledge_base in KnowledgeBases",
-      "description": "Basic snippet for delete_knowledge_base in KnowledgeBases",
+      "title": "Snippet for the delete_knowledge_base call in the KnowledgeBases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#delete_knowledge_base. It may require modification in order to execute successfully.",
       "file": "knowledge_bases/delete_knowledge_base.rb",
       "language": "RUBY",
       "client_method": {
@@ -3846,15 +3926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_KnowledgeBases_UpdateKnowledgeBase_sync",
-      "title": "Snippet for update_knowledge_base in KnowledgeBases",
-      "description": "Basic snippet for update_knowledge_base in KnowledgeBases",
+      "title": "Snippet for the update_knowledge_base call in the KnowledgeBases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#update_knowledge_base. It may require modification in order to execute successfully.",
       "file": "knowledge_bases/update_knowledge_base.rb",
       "language": "RUBY",
       "client_method": {
@@ -3886,15 +3966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Versions_ListVersions_sync",
-      "title": "Snippet for list_versions in Versions",
-      "description": "Basic snippet for list_versions in Versions",
+      "title": "Snippet for the list_versions call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Versions::Client#list_versions. It may require modification in order to execute successfully.",
       "file": "versions/list_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -3926,15 +4006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Versions_GetVersion_sync",
-      "title": "Snippet for get_version in Versions",
-      "description": "Basic snippet for get_version in Versions",
+      "title": "Snippet for the get_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Versions::Client#get_version. It may require modification in order to execute successfully.",
       "file": "versions/get_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -3966,15 +4046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Versions_CreateVersion_sync",
-      "title": "Snippet for create_version in Versions",
-      "description": "Basic snippet for create_version in Versions",
+      "title": "Snippet for the create_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Versions::Client#create_version. It may require modification in order to execute successfully.",
       "file": "versions/create_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -4006,15 +4086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Versions_UpdateVersion_sync",
-      "title": "Snippet for update_version in Versions",
-      "description": "Basic snippet for update_version in Versions",
+      "title": "Snippet for the update_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Versions::Client#update_version. It may require modification in order to execute successfully.",
       "file": "versions/update_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -4046,15 +4126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v2_generated_Versions_DeleteVersion_sync",
-      "title": "Snippet for delete_version in Versions",
-      "description": "Basic snippet for delete_version in Versions",
+      "title": "Snippet for the delete_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Versions::Client#delete_version. It may require modification in order to execute successfully.",
       "file": "versions/delete_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -4086,7 +4166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

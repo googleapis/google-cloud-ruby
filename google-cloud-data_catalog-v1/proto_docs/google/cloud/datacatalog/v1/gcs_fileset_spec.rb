@@ -68,7 +68,8 @@ module Google
         #     Required. Full file path. Example: `gs://bucket_name/a/b.txt`.
         # @!attribute [r] gcs_timestamps
         #   @return [::Google::Cloud::DataCatalog::V1::SystemTimestamps]
-        #     Output only. Creation, modification, and expiration timestamps of a Cloud Storage file.
+        #     Output only. Creation, modification, and expiration timestamps of a Cloud
+        #     Storage file.
         # @!attribute [r] size_bytes
         #   @return [::Integer]
         #     Output only. File size in bytes.

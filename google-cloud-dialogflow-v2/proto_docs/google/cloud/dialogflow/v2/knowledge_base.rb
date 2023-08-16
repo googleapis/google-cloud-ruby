@@ -51,7 +51,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#list_knowledge_bases KnowledgeBases.ListKnowledgeBases}.
+        # Request message for
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#list_knowledge_bases KnowledgeBases.ListKnowledgeBases}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project to list of knowledge bases for.
@@ -96,7 +97,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#list_knowledge_bases KnowledgeBases.ListKnowledgeBases}.
+        # Response message for
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#list_knowledge_bases KnowledgeBases.ListKnowledgeBases}.
         # @!attribute [rw] knowledge_bases
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::KnowledgeBase>]
         #     The list of knowledge bases.
@@ -109,7 +111,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#get_knowledge_base KnowledgeBases.GetKnowledgeBase}.
+        # Request message for
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#get_knowledge_base KnowledgeBases.GetKnowledgeBase}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the knowledge base to retrieve.
@@ -120,7 +123,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#create_knowledge_base KnowledgeBases.CreateKnowledgeBase}.
+        # Request message for
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#create_knowledge_base KnowledgeBases.CreateKnowledgeBase}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project to create a knowledge base for.
@@ -133,7 +137,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#delete_knowledge_base KnowledgeBases.DeleteKnowledgeBase}.
+        # Request message for
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#delete_knowledge_base KnowledgeBases.DeleteKnowledgeBase}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the knowledge base to delete.
@@ -148,7 +153,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#update_knowledge_base KnowledgeBases.UpdateKnowledgeBase}.
+        # Request message for
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#update_knowledge_base KnowledgeBases.UpdateKnowledgeBase}.
         # @!attribute [rw] knowledge_base
         #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeBase]
         #     Required. The knowledge base to update.

@@ -1,7 +1,7 @@
 {
     "api_id": "analyticsdata.googleapis.com",
     "api_shortname": "analyticsdata",
-    "client_documentation": "https://googleapis.dev/ruby/google-analytics-data/latest",
+    "client_documentation": "https://rubydoc.info/gems/google-analytics-data",
     "distribution_name": "google-analytics-data",
     "is_cloud": false,
     "language": "ruby",
@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "ANALYTICS_DATA",
     "ruby-cloud-product-url": "https://developers.google.com/analytics/devguides/reporting/data/v1",
     "ruby-cloud-service-override": "BetaAnalyticsData=AnalyticsData",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

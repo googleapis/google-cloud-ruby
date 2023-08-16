@@ -22,7 +22,8 @@ describe "#list_vod_ad_tag_details", :stitcher_snippet do
     @session_id = vod_session.name.split("/").last
 
     assert_output %r{VOD ad tag details:\n#{vod_session.name}/vodAdTagDetails/\S+} do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     end
   end
 end

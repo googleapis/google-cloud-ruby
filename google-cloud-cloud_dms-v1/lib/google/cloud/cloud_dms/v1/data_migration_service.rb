@@ -34,7 +34,7 @@ module Google
         ##
         # Database Migration service
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/cloud_dms/v1/data_migration_service"
         #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new

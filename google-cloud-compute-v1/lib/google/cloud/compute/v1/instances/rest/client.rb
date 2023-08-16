@@ -155,6 +155,8 @@ module Google
 
                   default_config.rpcs.set_min_cpu_platform.timeout = 600.0
 
+                  default_config.rpcs.set_name.timeout = 600.0
+
                   default_config.rpcs.set_scheduling.timeout = 600.0
 
                   default_config.rpcs.set_service_account.timeout = 600.0
@@ -236,13 +238,22 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                credentials ||= Credentials.default scope: @config.scope
+                # Use self-signed JWT if the endpoint is unchanged from default,
+                # but only if the default endpoint does not have a region prefix.
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-")
+                credentials ||= Credentials.default scope: @config.scope,
+                                                    enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
+                @quota_project_id = @config.quota_project
+                @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
                 @zone_operations = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new do |config|
                   config.credentials = credentials
+                  config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
                 end
 
@@ -270,8 +281,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload add_access_config(access_config_resource: nil, instance: nil, network_interface: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `add_access_config` via keyword arguments. Note that at
@@ -290,9 +299,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -308,17 +317,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.add_access_config.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.add_access_config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_access_config.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.add_access_config request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -333,12 +346,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -353,8 +362,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload add_resource_policies(instance: nil, instances_add_resource_policies_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `add_resource_policies` via keyword arguments. Note that at
@@ -371,9 +378,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -389,17 +396,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.add_resource_policies.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.add_resource_policies.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_resource_policies.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.add_resource_policies request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -414,12 +425,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -434,8 +441,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
               #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
@@ -456,9 +461,9 @@ module Google
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstancesScopedList>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstancesScopedList>]
               #
@@ -474,29 +479,29 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.aggregated_list.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.aggregated_list.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.aggregated_list request, options do |result, response|
+                @instances_stub.aggregated_list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :aggregated_list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -511,8 +516,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload attach_disk(attached_disk_resource: nil, force_attach: nil, instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `attach_disk` via keyword arguments. Note that at
@@ -531,9 +534,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -549,17 +552,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.attach_disk.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.attach_disk.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.attach_disk.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.attach_disk request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -574,12 +581,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -594,8 +597,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload bulk_insert(bulk_insert_instance_resource_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `bulk_insert` via keyword arguments. Note that at
@@ -610,9 +611,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -628,17 +629,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.bulk_insert.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.bulk_insert.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.bulk_insert.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.bulk_insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -653,12 +658,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -673,8 +674,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload delete(instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
@@ -689,9 +688,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -707,17 +706,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.delete.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.delete.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -732,12 +735,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -752,8 +751,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload delete_access_config(access_config: nil, instance: nil, network_interface: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `delete_access_config` via keyword arguments. Note that at
@@ -772,9 +769,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -790,17 +787,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.delete_access_config.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.delete_access_config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_access_config.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.delete_access_config request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -815,12 +816,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -835,8 +832,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload detach_disk(device_name: nil, instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `detach_disk` via keyword arguments. Note that at
@@ -853,9 +848,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -871,17 +866,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.detach_disk.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.detach_disk.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.detach_disk.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.detach_disk request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -896,16 +895,12 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
-              # Returns the specified Instance resource. Gets a list of available instances by making a list() request.
+              # Returns the specified Instance resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -916,8 +911,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get(instance: nil, project: nil, zone: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
@@ -930,9 +923,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Instance]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Instance]
               #
@@ -948,28 +941,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -984,8 +977,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_effective_firewalls(instance: nil, network_interface: nil, project: nil, zone: nil)
               #   Pass arguments to `get_effective_firewalls` via keyword arguments. Note that at
@@ -1000,9 +991,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
               #
@@ -1018,28 +1009,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_effective_firewalls.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get_effective_firewalls.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_effective_firewalls.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get_effective_firewalls request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_effective_firewalls request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1054,8 +1045,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_guest_attributes(instance: nil, project: nil, query_path: nil, variable_key: nil, zone: nil)
               #   Pass arguments to `get_guest_attributes` via keyword arguments. Note that at
@@ -1072,9 +1061,9 @@ module Google
               #     Specifies the key for the guest attributes entry.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::GuestAttributes]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::GuestAttributes]
               #
@@ -1090,28 +1079,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_guest_attributes.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get_guest_attributes.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_guest_attributes.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get_guest_attributes request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_guest_attributes request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1126,8 +1115,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, resource: nil, zone: nil)
               #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
@@ -1142,9 +1129,9 @@ module Google
               #     Name or id of the resource for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
@@ -1160,28 +1147,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get_iam_policy request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1196,8 +1183,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_screenshot(instance: nil, project: nil, zone: nil)
               #   Pass arguments to `get_screenshot` via keyword arguments. Note that at
@@ -1210,9 +1195,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Screenshot]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Screenshot]
               #
@@ -1228,28 +1213,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_screenshot.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get_screenshot.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_screenshot.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get_screenshot request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_screenshot request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1264,8 +1249,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_serial_port_output(instance: nil, port: nil, project: nil, start: nil, zone: nil)
               #   Pass arguments to `get_serial_port_output` via keyword arguments. Note that at
@@ -1282,9 +1265,9 @@ module Google
               #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::SerialPortOutput]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::SerialPortOutput]
               #
@@ -1300,28 +1283,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_serial_port_output.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get_serial_port_output.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_serial_port_output.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get_serial_port_output request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_serial_port_output request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1336,8 +1319,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_shielded_instance_identity(instance: nil, project: nil, zone: nil)
               #   Pass arguments to `get_shielded_instance_identity` via keyword arguments. Note that at
@@ -1350,9 +1331,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::ShieldedInstanceIdentity]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::ShieldedInstanceIdentity]
               #
@@ -1368,28 +1349,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_shielded_instance_identity.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get_shielded_instance_identity.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_shielded_instance_identity.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.get_shielded_instance_identity request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_shielded_instance_identity request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1404,8 +1385,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload insert(instance_resource: nil, project: nil, request_id: nil, source_instance_template: nil, source_machine_image: nil, zone: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
@@ -1424,9 +1403,9 @@ module Google
               #     Specifies the machine image to use to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image: - https://www.googleapis.com/compute/v1/projects/project/global/global /machineImages/machineImage - projects/project/global/global/machineImages/machineImage - global/machineImages/machineImage
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1442,17 +1421,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.insert.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.insert.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.insert.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -1467,12 +1450,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1487,8 +1466,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, zone: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
@@ -1509,9 +1486,9 @@ module Google
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Instance>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Instance>]
               #
@@ -1527,29 +1504,29 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.list.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.list request, options do |result, response|
+                @instances_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1564,8 +1541,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload list_referrers(filter: nil, instance: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, zone: nil)
               #   Pass arguments to `list_referrers` via keyword arguments. Note that at
@@ -1588,9 +1563,9 @@ module Google
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Reference>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Reference>]
               #
@@ -1606,29 +1581,29 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_referrers.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.list_referrers.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_referrers.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.list_referrers request, options do |result, response|
+                @instances_stub.list_referrers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list_referrers, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1643,8 +1618,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload remove_resource_policies(instance: nil, instances_remove_resource_policies_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `remove_resource_policies` via keyword arguments. Note that at
@@ -1661,9 +1634,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1679,17 +1652,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.remove_resource_policies.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.remove_resource_policies.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.remove_resource_policies.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.remove_resource_policies request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -1704,12 +1681,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1724,8 +1697,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload reset(instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `reset` via keyword arguments. Note that at
@@ -1740,9 +1711,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1758,17 +1729,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.reset.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.reset.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.reset.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.reset request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -1783,12 +1758,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1803,8 +1774,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload resume(instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `resume` via keyword arguments. Note that at
@@ -1819,9 +1788,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1837,17 +1806,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.resume.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.resume.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.resume.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.resume request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -1862,12 +1835,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1882,8 +1851,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload send_diagnostic_interrupt(instance: nil, project: nil, zone: nil)
               #   Pass arguments to `send_diagnostic_interrupt` via keyword arguments. Note that at
@@ -1896,9 +1863,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
               #
@@ -1914,28 +1881,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.send_diagnostic_interrupt.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.send_diagnostic_interrupt.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.send_diagnostic_interrupt.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.send_diagnostic_interrupt request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.send_diagnostic_interrupt request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -1950,8 +1917,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_deletion_protection(deletion_protection: nil, project: nil, request_id: nil, resource: nil, zone: nil)
               #   Pass arguments to `set_deletion_protection` via keyword arguments. Note that at
@@ -1968,9 +1933,9 @@ module Google
               #     Name or id of the resource for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1986,17 +1951,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_deletion_protection.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_deletion_protection.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_deletion_protection.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_deletion_protection request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2011,12 +1980,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2031,8 +1996,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_disk_auto_delete(auto_delete: nil, device_name: nil, instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_disk_auto_delete` via keyword arguments. Note that at
@@ -2051,9 +2014,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2069,17 +2032,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_disk_auto_delete.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_disk_auto_delete.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_disk_auto_delete.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_disk_auto_delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2094,12 +2061,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2114,8 +2077,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_iam_policy(project: nil, resource: nil, zone: nil, zone_set_policy_request_resource: nil)
               #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
@@ -2130,9 +2091,9 @@ module Google
               #     The name of the zone for this request.
               #   @param zone_set_policy_request_resource [::Google::Cloud::Compute::V1::ZoneSetPolicyRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
@@ -2148,28 +2109,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.set_iam_policy request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.set_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2184,8 +2145,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_labels(instance: nil, instances_set_labels_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_labels` via keyword arguments. Note that at
@@ -2202,9 +2161,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2220,17 +2179,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_labels.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_labels.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_labels request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2245,12 +2208,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2265,8 +2224,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_machine_resources(instance: nil, instances_set_machine_resources_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_machine_resources` via keyword arguments. Note that at
@@ -2283,9 +2240,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2301,17 +2258,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_machine_resources.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_machine_resources.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_machine_resources.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_machine_resources request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2326,12 +2287,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2346,8 +2303,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_machine_type(instance: nil, instances_set_machine_type_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_machine_type` via keyword arguments. Note that at
@@ -2364,9 +2319,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2382,17 +2337,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_machine_type.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_machine_type.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_machine_type.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_machine_type request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2407,12 +2366,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2427,8 +2382,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_metadata(instance: nil, metadata_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_metadata` via keyword arguments. Note that at
@@ -2445,9 +2398,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2463,17 +2416,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_metadata.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_metadata.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_metadata.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_metadata request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2488,12 +2445,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2508,8 +2461,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_min_cpu_platform(instance: nil, instances_set_min_cpu_platform_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_min_cpu_platform` via keyword arguments. Note that at
@@ -2526,9 +2477,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2544,17 +2495,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_min_cpu_platform.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_min_cpu_platform.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_min_cpu_platform.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_min_cpu_platform request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2569,12 +2524,87 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Sets name of an instance.
+              #
+              # @overload set_name(request, options = nil)
+              #   Pass arguments to `set_name` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetNameInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetNameInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_name(instance: nil, instances_set_name_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `set_name` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     The instance name for this request.
+              #   @param instances_set_name_request_resource [::Google::Cloud::Compute::V1::InstancesSetNameRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def set_name request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetNameInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_name.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_name.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_name.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.set_name request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
                 end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2589,8 +2619,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_scheduling(instance: nil, project: nil, request_id: nil, scheduling_resource: nil, zone: nil)
               #   Pass arguments to `set_scheduling` via keyword arguments. Note that at
@@ -2607,9 +2635,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2625,17 +2653,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_scheduling.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_scheduling.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_scheduling.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_scheduling request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2650,12 +2682,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2670,8 +2698,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_service_account(instance: nil, instances_set_service_account_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `set_service_account` via keyword arguments. Note that at
@@ -2688,9 +2714,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2706,17 +2732,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_service_account.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_service_account.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_service_account.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_service_account request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2731,12 +2761,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2751,8 +2777,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_shielded_instance_integrity_policy(instance: nil, project: nil, request_id: nil, shielded_instance_integrity_policy_resource: nil, zone: nil)
               #   Pass arguments to `set_shielded_instance_integrity_policy` via keyword arguments. Note that at
@@ -2769,9 +2793,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2787,17 +2811,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_shielded_instance_integrity_policy.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_shielded_instance_integrity_policy.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_shielded_instance_integrity_policy.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_shielded_instance_integrity_policy request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2812,12 +2840,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2832,8 +2856,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_tags(instance: nil, project: nil, request_id: nil, tags_resource: nil, zone: nil)
               #   Pass arguments to `set_tags` via keyword arguments. Note that at
@@ -2850,9 +2872,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2868,17 +2890,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.set_tags.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.set_tags.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_tags.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.set_tags request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2893,12 +2919,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2913,10 +2935,8 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload simulate_maintenance_event(instance: nil, project: nil, zone: nil)
+              # @overload simulate_maintenance_event(instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `simulate_maintenance_event` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2925,11 +2945,13 @@ module Google
               #     Name of the instance scoping this request.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2945,17 +2967,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.simulate_maintenance_event.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.simulate_maintenance_event.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.simulate_maintenance_event.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.simulate_maintenance_event request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -2970,12 +2996,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -2990,8 +3012,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload start(instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `start` via keyword arguments. Note that at
@@ -3006,9 +3026,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3024,17 +3044,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.start.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.start.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.start request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3049,12 +3073,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3069,8 +3089,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload start_with_encryption_key(instance: nil, instances_start_with_encryption_key_request_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `start_with_encryption_key` via keyword arguments. Note that at
@@ -3087,9 +3105,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3105,17 +3123,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.start_with_encryption_key.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.start_with_encryption_key.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start_with_encryption_key.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.start_with_encryption_key request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3130,12 +3152,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3150,14 +3168,14 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload stop(instance: nil, project: nil, request_id: nil, zone: nil)
+              # @overload stop(discard_local_ssd: nil, instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `stop` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param discard_local_ssd [::Boolean]
+              #     If true, discard the contents of any attached localSSD partitions. Default value is false.
               #   @param instance [::String]
               #     Name of the instance resource to stop.
               #   @param project [::String]
@@ -3166,9 +3184,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3184,17 +3202,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.stop.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.stop.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stop.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.stop request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3209,12 +3231,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3229,14 +3247,14 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload suspend(instance: nil, project: nil, request_id: nil, zone: nil)
+              # @overload suspend(discard_local_ssd: nil, instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `suspend` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param discard_local_ssd [::Boolean]
+              #     If true, discard the contents of any attached localSSD partitions. Default value is false.
               #   @param instance [::String]
               #     Name of the instance resource to suspend.
               #   @param project [::String]
@@ -3245,9 +3263,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3263,17 +3281,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.suspend.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.suspend.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.suspend.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.suspend request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3288,12 +3310,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3308,8 +3326,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload test_iam_permissions(project: nil, resource: nil, test_permissions_request_resource: nil, zone: nil)
               #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
@@ -3324,9 +3340,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
@@ -3342,28 +3358,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                @instances_stub.test_iam_permissions request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3378,8 +3394,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload update(instance: nil, instance_resource: nil, minimal_action: nil, most_disruptive_allowed_action: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `update` via keyword arguments. Note that at
@@ -3402,9 +3416,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3420,17 +3434,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.update.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.update.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.update request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3445,12 +3463,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3465,8 +3479,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload update_access_config(access_config_resource: nil, instance: nil, network_interface: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `update_access_config` via keyword arguments. Note that at
@@ -3485,9 +3497,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3503,17 +3515,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.update_access_config.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.update_access_config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_access_config.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.update_access_config request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3528,12 +3544,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3548,8 +3560,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload update_display_device(display_device_resource: nil, instance: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `update_display_device` via keyword arguments. Note that at
@@ -3566,9 +3576,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3584,17 +3594,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.update_display_device.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.update_display_device.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_display_device.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.update_display_device request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3609,12 +3623,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3629,8 +3639,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload update_network_interface(instance: nil, network_interface: nil, network_interface_resource: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `update_network_interface` via keyword arguments. Note that at
@@ -3649,9 +3657,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3667,17 +3675,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.update_network_interface.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.update_network_interface.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_network_interface.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.update_network_interface request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3692,12 +3704,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -3712,8 +3720,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload update_shielded_instance_config(instance: nil, project: nil, request_id: nil, shielded_instance_config_resource: nil, zone: nil)
               #   Pass arguments to `update_shielded_instance_config` via keyword arguments. Note that at
@@ -3730,9 +3736,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3748,17 +3754,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.update_shielded_instance_config.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.update_shielded_instance_config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_shielded_instance_config.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @instances_stub.update_shielded_instance_config request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
@@ -3773,36 +3783,38 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
               # Configuration class for the Instances REST API.
               #
               # This class represents the configuration for Instances REST,
-              # providing control over credentials, timeouts, retry behavior, logging.
+              # providing control over timeouts, retry behavior, logging, transport
+              # parameters, and other low-level controls. Certain parameters can also be
+              # applied individually to specific RPCs. See
+              # {::Google::Cloud::Compute::V1::Instances::Rest::Client::Configuration::Rpcs}
+              # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for all calls to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # add_access_config to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Compute::V1::Instances::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.add_access_config.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Compute::V1::Instances::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Compute::V1::Instances::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.add_access_config.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
@@ -3813,9 +3825,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
               #   @return [::Object]
               # @!attribute [rw] scope
@@ -3831,13 +3843,26 @@ module Google
               #   The call timeout in seconds.
               #   @return [::Numeric]
               # @!attribute [rw] metadata
-              #   Additional REST headers to be sent with the call.
+              #   Additional headers to be sent with the call.
               #   @return [::Hash{::Symbol=>::String}]
+              # @!attribute [rw] retry_policy
+              #   The retry policy. The value is a hash with the following keys:
+              #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+              #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+              #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+              #       trigger a retry.
+              #   @return [::Hash]
+              # @!attribute [rw] quota_project
+              #   A separate project against which to charge quota.
+              #   @return [::String]
               #
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "compute.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "compute.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -3847,6 +3872,8 @@ module Google
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
+                config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+                config_attr :quota_project, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -3875,9 +3902,14 @@ module Google
                 # the following configuration fields:
                 #
                 #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
-                #
-                # there is one other field (`retry_policy`) that can be set
-                # but is currently not supported for REST Gapic libraries.
+                #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional headers
+                #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
+                #     include the following keys:
+                #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+                #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+                #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+                #         trigger a retry.
                 #
                 class Rpcs
                   ##
@@ -4031,6 +4063,11 @@ module Google
                   #
                   attr_reader :set_min_cpu_platform
                   ##
+                  # RPC-specific configuration for `set_name`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_name
+                  ##
                   # RPC-specific configuration for `set_scheduling`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4168,6 +4205,8 @@ module Google
                     @set_metadata = ::Gapic::Config::Method.new set_metadata_config
                     set_min_cpu_platform_config = parent_rpcs.set_min_cpu_platform if parent_rpcs.respond_to? :set_min_cpu_platform
                     @set_min_cpu_platform = ::Gapic::Config::Method.new set_min_cpu_platform_config
+                    set_name_config = parent_rpcs.set_name if parent_rpcs.respond_to? :set_name
+                    @set_name = ::Gapic::Config::Method.new set_name_config
                     set_scheduling_config = parent_rpcs.set_scheduling if parent_rpcs.respond_to? :set_scheduling
                     @set_scheduling = ::Gapic::Config::Method.new set_scheduling_config
                     set_service_account_config = parent_rpcs.set_service_account if parent_rpcs.respond_to? :set_service_account

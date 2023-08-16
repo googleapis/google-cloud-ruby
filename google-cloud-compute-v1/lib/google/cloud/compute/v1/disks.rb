@@ -31,9 +31,9 @@ module Google
         ##
         # The Disks API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/disks"
+        #     require "google/cloud/compute/v1/disks/rest"
         #     client = ::Google::Cloud::Compute::V1::Disks::Rest::Client.new
         #
         module Disks

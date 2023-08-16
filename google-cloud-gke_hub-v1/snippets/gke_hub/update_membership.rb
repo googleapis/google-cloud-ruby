@@ -20,8 +20,11 @@
 require "google/cloud/gke_hub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeHub::V1::GkeHub::Client#update_membership
+# Snippet for the update_membership call in the GkeHub service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1::GkeHub::Client#update_membership. It may require
+# modification in order to execute successfully.
 #
 def update_membership
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_membership
   # Call the update_membership method.
   result = client.update_membership request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END gkehub_v1_generated_GkeHub_UpdateMembership_sync]

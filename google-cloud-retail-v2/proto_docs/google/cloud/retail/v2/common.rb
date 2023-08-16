@@ -48,8 +48,8 @@ module Google
           #     Value cannot be empty.
           #     Value can have at most 3 terms if specified as a partial match. Each
           #     space separated string is considered as one term.
-          #     Example) "a b c" is 3 terms and allowed, " a b c d" is 4 terms and not
-          #     allowed for partial match.
+          #     For example, "a b c" is 3 terms and allowed, but " a b c d" is 4 terms
+          #     and not allowed for a partial match.
           # @!attribute [rw] full_match
           #   @return [::Boolean]
           #     Whether this is supposed to be a full or partial match.
@@ -73,6 +73,7 @@ module Google
         end
 
         # A rule is a condition-action pair
+        #
         # * A condition defines when a rule is to be triggered.
         # * An action specifies what occurs on that trigger.
         # Currently rules only work for {::Google::Cloud::Retail::V2::Control controls} with
@@ -202,7 +203,8 @@ module Google
           end
 
           # Creates a set of terms that will be treated as synonyms of each other.
-          # Example: synonyms of "sneakers" and "shoes".
+          # Example: synonyms of "sneakers" and "shoes":
+          #
           #  * "sneakers" will use a synonym of "shoes".
           #  * "shoes" will use a synonym of "sneakers".
           # @!attribute [rw] synonyms
@@ -348,7 +350,7 @@ module Google
         #     it is expected to have only 1 color. May consider using single "Mixed"
         #     instead of multiple values.
         #
-        #     A maximum of 25 colors are allowed. Each value must be a UTF-8 encoded
+        #     A maximum of 75 colors are allowed. Each value must be a UTF-8 encoded
         #     string with a length limit of 128 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
@@ -801,6 +803,20 @@ module Google
 
           # Used for Retail Search.
           SOLUTION_TYPE_SEARCH = 2
+        end
+
+        # If filtering for recommendations is enabled.
+        module RecommendationsFilteringOption
+          # Value used when unset.
+          # In this case, server behavior defaults to
+          # {::Google::Cloud::Retail::V2::RecommendationsFilteringOption::RECOMMENDATIONS_FILTERING_DISABLED RECOMMENDATIONS_FILTERING_DISABLED}.
+          RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED = 0
+
+          # Recommendation filtering is disabled.
+          RECOMMENDATIONS_FILTERING_DISABLED = 1
+
+          # Recommendation filtering is enabled.
+          RECOMMENDATIONS_FILTERING_ENABLED = 3
         end
 
         # The use case of Cloud Retail Search.

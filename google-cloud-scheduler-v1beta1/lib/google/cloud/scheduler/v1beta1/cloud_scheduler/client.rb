@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/scheduler/v1beta1/cloudscheduler_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -155,7 +156,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -165,6 +166,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @cloud_scheduler_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Stub,
                 credentials:  credentials,
@@ -173,6 +180,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -189,7 +203,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_jobs(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil, legacy_app_engine_cron: nil)
             #   Pass arguments to `list_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -197,6 +211,15 @@ module Google
             #   @param parent [::String]
             #     Required. The location name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID`.
+            #   @param filter [::String]
+            #     `filter` can be used to specify a subset of jobs.
+            #
+            #     If `filter` equals `target_config="HttpConfig"`, then the http
+            #     target jobs are retrieved. If `filter` equals
+            #     `target_config="PubSubConfig"`, then the Pub/Sub target jobs are
+            #     retrieved. If `filter` equals `labels.foo=value1
+            #     labels.foo=value2` then only jobs which are labeled with
+            #     foo=value1 AND foo=value2 will be returned.
             #   @param page_size [::Integer]
             #     Requested page size.
             #
@@ -208,10 +231,17 @@ module Google
             #     A token identifying a page of results the server will return. To
             #     request the first page results, page_token must be empty. To
             #     request the next page of results, page_token must be the value of
-            #     {::Google::Cloud::Scheduler::V1beta1::ListJobsResponse#next_page_token next_page_token} returned from
-            #     the previous call to {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}. It is an error to
-            #     switch the value of [filter][google.cloud.scheduler.v1beta1.ListJobsRequest.filter] or
-            #     [order_by][google.cloud.scheduler.v1beta1.ListJobsRequest.order_by] while iterating through pages.
+            #     {::Google::Cloud::Scheduler::V1beta1::ListJobsResponse#next_page_token next_page_token}
+            #     returned from the previous call to
+            #     {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}. It is
+            #     an error to switch the value of
+            #     {::Google::Cloud::Scheduler::V1beta1::ListJobsRequest#filter filter} or
+            #     [order_by][google.cloud.scheduler.v1beta1.ListJobsRequest.order_by] while
+            #     iterating through pages.
+            #   @param legacy_app_engine_cron [::Boolean]
+            #     This field is used to manage the legacy App Engine Cron jobs using the
+            #     Cloud Scheduler API. If the field is set to true, the jobs in the __cron
+            #     queue will be listed instead.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Scheduler::V1beta1::Job>]
@@ -233,13 +263,11 @@ module Google
             #   # Call the list_jobs method.
             #   result = client.list_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Scheduler::V1beta1::Job.
-            #     p response
+            #     p item
             #   end
             #
             def list_jobs request, options = nil
@@ -393,7 +421,8 @@ module Google
             #     `projects/PROJECT_ID/locations/LOCATION_ID`.
             #   @param job [::Google::Cloud::Scheduler::V1beta1::Job, ::Hash]
             #     Required. The job to add. The user can optionally specify a name for the
-            #     job in {::Google::Cloud::Scheduler::V1beta1::Job#name name}. {::Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
+            #     job in {::Google::Cloud::Scheduler::V1beta1::Job#name name}.
+            #     {::Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
             #     existing job. If a name is not specified then the system will
             #     generate a random unique name that will be returned
             #     ({::Google::Cloud::Scheduler::V1beta1::Job#name name}) in the response.
@@ -465,13 +494,14 @@ module Google
             ##
             # Updates a job.
             #
-            # If successful, the updated {::Google::Cloud::Scheduler::V1beta1::Job Job} is returned. If the job does
-            # not exist, `NOT_FOUND` is returned.
+            # If successful, the updated {::Google::Cloud::Scheduler::V1beta1::Job Job} is
+            # returned. If the job does not exist, `NOT_FOUND` is returned.
             #
             # If UpdateJob does not successfully return, it is possible for the
-            # job to be in an {::Google::Cloud::Scheduler::V1beta1::Job::State::UPDATE_FAILED Job.State.UPDATE_FAILED} state. A job in this state may
-            # not be executed. If this happens, retry the UpdateJob request
-            # until a successful response is received.
+            # job to be in an
+            # {::Google::Cloud::Scheduler::V1beta1::Job::State::UPDATE_FAILED Job.State.UPDATE_FAILED}
+            # state. A job in this state may not be executed. If this happens, retry the
+            # UpdateJob request until a successful response is received.
             #
             # @overload update_job(request, options = nil)
             #   Pass arguments to `update_job` via a request object, either of type
@@ -489,7 +519,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param job [::Google::Cloud::Scheduler::V1beta1::Job, ::Hash]
-            #     Required. The new job properties. {::Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
+            #     Required. The new job properties.
+            #     {::Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
             #
             #     Output only fields cannot be modified using UpdateJob.
             #     Any value specified for an output only field will be ignored.
@@ -573,7 +604,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_job(name: nil)
+            # @overload delete_job(name: nil, legacy_app_engine_cron: nil)
             #   Pass arguments to `delete_job` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -581,6 +612,10 @@ module Google
             #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
+            #   @param legacy_app_engine_cron [::Boolean]
+            #     This field is used to manage the legacy App Engine Cron jobs using the
+            #     Cloud Scheduler API. If the field is set to true, the job in the __cron
+            #     queue with the corresponding name will be deleted instead.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -650,10 +685,14 @@ module Google
             # Pauses a job.
             #
             # If a job is paused then the system will stop executing the job
-            # until it is re-enabled via {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job ResumeJob}. The
-            # state of the job is stored in {::Google::Cloud::Scheduler::V1beta1::Job#state state}; if paused it
-            # will be set to {::Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job.State.PAUSED}. A job must be in {::Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job.State.ENABLED}
-            # to be paused.
+            # until it is re-enabled via
+            # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job ResumeJob}. The
+            # state of the job is stored in
+            # {::Google::Cloud::Scheduler::V1beta1::Job#state state}; if paused it will be set
+            # to {::Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job.State.PAUSED}. A
+            # job must be in
+            # {::Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job.State.ENABLED} to be
+            # paused.
             #
             # @overload pause_job(request, options = nil)
             #   Pass arguments to `pause_job` via a request object, either of type
@@ -741,10 +780,15 @@ module Google
             ##
             # Resume a job.
             #
-            # This method reenables a job after it has been {::Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job.State.PAUSED}. The
-            # state of a job is stored in {::Google::Cloud::Scheduler::V1beta1::Job#state Job.state}; after calling this method it
-            # will be set to {::Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job.State.ENABLED}. A job must be in
-            # {::Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job.State.PAUSED} to be resumed.
+            # This method reenables a job after it has been
+            # {::Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job.State.PAUSED}. The
+            # state of a job is stored in
+            # {::Google::Cloud::Scheduler::V1beta1::Job#state Job.state}; after calling this
+            # method it will be set to
+            # {::Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job.State.ENABLED}. A
+            # job must be in
+            # {::Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job.State.PAUSED} to be
+            # resumed.
             #
             # @overload resume_job(request, options = nil)
             #   Pass arguments to `resume_job` via a request object, either of type
@@ -845,7 +889,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_job(name: nil)
+            # @overload run_job(name: nil, legacy_app_engine_cron: nil)
             #   Pass arguments to `run_job` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -853,6 +897,10 @@ module Google
             #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
+            #   @param legacy_app_engine_cron [::Boolean]
+            #     This field is used to manage the legacy App Engine Cron jobs using the
+            #     Cloud Scheduler API. If the field is set to true, the job in the __cron
+            #     queue with the corresponding name will be forced to run instead.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Scheduler::V1beta1::Job]
@@ -956,9 +1004,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1000,7 +1048,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudscheduler.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudscheduler.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

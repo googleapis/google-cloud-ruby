@@ -20,8 +20,11 @@
 require "google/cloud/data_catalog/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy
+# Snippet for the create_taxonomy call in the PolicyTagManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy. It
+# may require modification in order to execute successfully.
 #
 def create_taxonomy
   # Create a client object. The client can be reused for multiple calls.

@@ -31,9 +31,9 @@ module Google
         ##
         # The DiskTypes API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/disk_types"
+        #     require "google/cloud/compute/v1/disk_types/rest"
         #     client = ::Google::Cloud::Compute::V1::DiskTypes::Rest::Client.new
         #
         module DiskTypes

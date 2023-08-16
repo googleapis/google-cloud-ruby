@@ -371,6 +371,122 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
     end
   end
 
+  def test_read_tensorboard_usage
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    tensorboard = "hello world"
+
+    read_tensorboard_usage_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :read_tensorboard_usage, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest, request
+      assert_equal "hello world", request["tensorboard"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, read_tensorboard_usage_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.read_tensorboard_usage({ tensorboard: tensorboard }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.read_tensorboard_usage tensorboard: tensorboard do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.read_tensorboard_usage ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new(tensorboard: tensorboard) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.read_tensorboard_usage({ tensorboard: tensorboard }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.read_tensorboard_usage(::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new(tensorboard: tensorboard), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, read_tensorboard_usage_client_stub.call_rpc_count
+    end
+  end
+
+  def test_read_tensorboard_size
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    tensorboard = "hello world"
+
+    read_tensorboard_size_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :read_tensorboard_size, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest, request
+      assert_equal "hello world", request["tensorboard"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, read_tensorboard_size_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.read_tensorboard_size({ tensorboard: tensorboard }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.read_tensorboard_size tensorboard: tensorboard do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.read_tensorboard_size ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new(tensorboard: tensorboard) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.read_tensorboard_size({ tensorboard: tensorboard }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.read_tensorboard_size(::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new(tensorboard: tensorboard), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, read_tensorboard_size_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_tensorboard_experiment
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::TensorboardExperiment.new

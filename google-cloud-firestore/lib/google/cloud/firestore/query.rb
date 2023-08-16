@@ -17,6 +17,8 @@ require "google/cloud/firestore/v1"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query_listener"
 require "google/cloud/firestore/convert"
+require "google/cloud/firestore/aggregate_query"
+require "google/cloud/firestore/filter"
 require "json"
 
 module Google
@@ -209,29 +211,48 @@ module Google
         end
 
         ##
-        # Filters the query on a field.
+        # Adds filter to the where clause
         #
-        # @param [FieldPath, String, Symbol] field A field path to filter
-        #   results with.
+        # @overload where(filter)
+        #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
-        #   If a {FieldPath} object is not provided then the field will be
-        #   treated as a dotted string, meaning the string represents individual
-        #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
-        #   `.` cannot be in a dotted string, and should provided using a
-        #   {FieldPath} object instead.
-        # @param [String, Symbol] operator The operation to compare the field
-        #   to. Acceptable values include:
+        #  @param filter [::Google::Cloud::Firestore::Filter]
         #
-        #   * less than: `<`, `lt`
-        #   * less than or equal: `<=`, `lte`
-        #   * greater than: `>`, `gt`
-        #   * greater than or equal: `>=`, `gte`
-        #   * equal: `=`, `==`, `eq`, `eql`, `is`
-        #   * not equal: `!=`
-        #   * in: `in`
-        #   * not in: `not-in`, `not_in`
-        #   * array contains: `array-contains`, `array_contains`
-        # @param [Object] value A value the field is compared to.
+        # @overload where(field, operator, value)
+        #   Pass arguments to `where` via positional arguments.
+        #
+        #   @param field [FieldPath, String, Symbol] A field path to filter
+        #     results with.
+        #     If a {FieldPath} object is not provided then the field will be
+        #     treated as a dotted string, meaning the string represents individual
+        #     fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #     `.` cannot be in a dotted string, and should provided using a
+        #     {FieldPath} object instead.
+        #
+        #   @param operator [String, Symbol] The operation to compare the field
+        #     to. Acceptable values include:
+        #     * less than: `<`, `lt`
+        #     * less than or equal: `<=`, `lte`
+        #     * greater than: `>`, `gt`
+        #     * greater than or equal: `>=`, `gte`
+        #     * equal: `=`, `==`, `eq`, `eql`, `is`
+        #     * not equal: `!=`
+        #     * in: `in`
+        #     * not in: `not-in`, `not_in`
+        #     * array contains: `array-contains`, `array_contains`
+        #
+        #   @param value [Object] The value to compare the property to. Defaults to nil.
+        #     Possible values are:
+        #     * Integer
+        #     * Float/BigDecimal
+        #     * String
+        #     * Boolean
+        #     * Array
+        #     * Date/Time
+        #     * StringIO
+        #     * Google::Cloud::Datastore::Key
+        #     * Google::Cloud::Datastore::Entity
+        #     * nil
         #
         # @return [Query] New query with `where` called on it.
         #
@@ -250,7 +271,25 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def where field, operator, value
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Create a filter
+        #   filter = Filter.create(:population, :>=, 1000000)
+        #
+        #   # Add filter to where clause
+        #   query = query.where filter
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def where filter_or_field = nil, operator = nil, value = nil
           if query_has_cursors?
             raise "cannot call where after calling " \
                   "start_at, start_after, end_before, or end_at"
@@ -259,10 +298,12 @@ module Google
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          field = FieldPath.parse field unless field.is_a? FieldPath
-
-          new_filter = filter field.formatted_string, operator, value
-          add_filters_to_query new_query, new_filter
+          if filter_or_field.is_a? Google::Cloud::Firestore::Filter
+            new_query.where = filter_or_field.filter
+          else
+            new_filter = Google::Cloud::Firestore::Filter.new filter_or_field, operator, value
+            add_filters_to_query new_query, new_filter.filter
+          end
 
           Query.start new_query, parent_path, client, limit_type: limit_type
         end
@@ -903,6 +944,9 @@ module Google
         ##
         # Retrieves document snapshots for the query.
         #
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
@@ -923,12 +967,29 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get
+        # @example Get query with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Create a query
+        #   query = cities_col.select(:population)
+        #
+        #   read_time = Time.now
+        #
+        #   query.get(read_time: read_time) do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def get read_time: nil
           ensure_service!
 
-          return enum_for :get unless block_given?
+          return enum_for :get, read_time: read_time unless block_given?
 
-          results = service.run_query parent_path, @query
+          results = service.run_query parent_path, @query, read_time: read_time
 
           # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
           results = results.to_a.reverse if limit_type == :last
@@ -939,6 +1000,26 @@ module Google
           end
         end
         alias run get
+
+        ##
+        # Creates an AggregateQuery object for the query.
+        #
+        # @return [AggregateQuery] New empty aggregate query.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #
+        def aggregate_query
+          AggregateQuery.new query, parent_path, client
+        end
 
         ##
         # Listen to this query for changes.
@@ -1048,34 +1129,6 @@ module Google
 
         ##
         # @private
-        FILTER_OPS = {
-          "<"                  => :LESS_THAN,
-          "lt"                 => :LESS_THAN,
-          "<="                 => :LESS_THAN_OR_EQUAL,
-          "lte"                => :LESS_THAN_OR_EQUAL,
-          ">"                  => :GREATER_THAN,
-          "gt"                 => :GREATER_THAN,
-          ">="                 => :GREATER_THAN_OR_EQUAL,
-          "gte"                => :GREATER_THAN_OR_EQUAL,
-          "="                  => :EQUAL,
-          "=="                 => :EQUAL,
-          "eq"                 => :EQUAL,
-          "eql"                => :EQUAL,
-          "is"                 => :EQUAL,
-          "!="                 => :NOT_EQUAL,
-          "array_contains"     => :ARRAY_CONTAINS,
-          "array-contains"     => :ARRAY_CONTAINS,
-          "include"            => :ARRAY_CONTAINS,
-          "include?"           => :ARRAY_CONTAINS,
-          "has"                => :ARRAY_CONTAINS,
-          "in"                 => :IN,
-          "not_in"             => :NOT_IN,
-          "not-in"             => :NOT_IN,
-          "array_contains_any" => :ARRAY_CONTAINS_ANY,
-          "array-contains-any" => :ARRAY_CONTAINS_ANY
-        }.freeze
-        ##
-        # @private
         INEQUALITY_FILTERS = [
           :LESS_THAN,
           :LESS_THAN_OR_EQUAL,
@@ -1095,36 +1148,6 @@ module Google
 
         def value_unary? value
           value_nil?(value) || value_nan?(value)
-        end
-
-        def filter name, op_key, value
-          field = StructuredQuery::FieldReference.new field_path: name.to_s
-          operator = FILTER_OPS[op_key.to_s.downcase]
-          raise ArgumentError, "unknown operator #{op_key}" if operator.nil?
-
-          if value_unary? value
-            operator = case operator
-                       when :EQUAL
-                         value_nan?(value) ? :IS_NAN : :IS_NULL
-                       when :NOT_EQUAL
-                         value_nan?(value) ? :IS_NOT_NAN : :IS_NOT_NULL
-                       else
-                         raise ArgumentError, "can only perform '==' and '!=' comparisons on #{value} values"
-                       end
-
-            return StructuredQuery::Filter.new(
-              unary_filter: StructuredQuery::UnaryFilter.new(
-                field: field, op: operator
-              )
-            )
-          end
-
-          value = Convert.raw_to_value value
-          StructuredQuery::Filter.new(
-            field_filter: StructuredQuery::FieldFilter.new(
-              field: field, op: operator, value: value
-            )
-          )
         end
 
         def composite_filter

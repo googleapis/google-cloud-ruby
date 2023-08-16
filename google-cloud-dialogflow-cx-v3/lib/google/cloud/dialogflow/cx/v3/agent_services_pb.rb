@@ -60,7 +60,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: [ExportAgentResponse][google.cloud.dialogflow.cx.v3.ExportAgentResponse]
+              # - `response`:
+              # [ExportAgentResponse][google.cloud.dialogflow.cx.v3.ExportAgentResponse]
               rpc :ExportAgent, ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest, ::Google::Longrunning::Operation
               # Restores the specified agent from a binary file.
               #

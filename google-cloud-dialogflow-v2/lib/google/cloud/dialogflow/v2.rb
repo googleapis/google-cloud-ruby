@@ -24,10 +24,10 @@ require "google/cloud/dialogflow/v2/session_entity_types"
 require "google/cloud/dialogflow/v2/sessions"
 require "google/cloud/dialogflow/v2/participants"
 require "google/cloud/dialogflow/v2/answer_records"
+require "google/cloud/dialogflow/v2/conversation_profiles"
 require "google/cloud/dialogflow/v2/conversations"
 require "google/cloud/dialogflow/v2/conversation_datasets"
 require "google/cloud/dialogflow/v2/conversation_models"
-require "google/cloud/dialogflow/v2/conversation_profiles"
 require "google/cloud/dialogflow/v2/documents"
 require "google/cloud/dialogflow/v2/fulfillments"
 require "google/cloud/dialogflow/v2/environments"
@@ -39,12 +39,17 @@ module Google
   module Cloud
     module Dialogflow
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/dialogflow/v2"
       #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/dialogflow/v2"
+      #     client = ::Google::Cloud::Dialogflow::V2::Agents::Rest::Client.new
       #
       module V2
       end

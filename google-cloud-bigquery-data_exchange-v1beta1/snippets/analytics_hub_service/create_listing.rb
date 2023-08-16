@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/data_exchange/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_listing
+# Snippet for the create_listing call in the AnalyticsHubService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_listing.
+# It may require modification in order to execute successfully.
 #
 def create_listing
   # Create a client object. The client can be reused for multiple calls.

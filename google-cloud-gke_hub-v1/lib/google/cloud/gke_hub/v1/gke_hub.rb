@@ -26,6 +26,7 @@ require "google/cloud/gke_hub/v1/gke_hub/credentials"
 require "google/cloud/gke_hub/v1/gke_hub/paths"
 require "google/cloud/gke_hub/v1/gke_hub/operations"
 require "google/cloud/gke_hub/v1/gke_hub/client"
+require "google/cloud/gke_hub/v1/gke_hub/rest"
 
 module Google
   module Cloud
@@ -41,16 +42,24 @@ module Google
         # * {::Google::Cloud::GkeHub::V1::Membership Membership}
         # * {::Google::Cloud::GkeHub::V1::Feature Feature}
         #
-        # GKE Hub is currently only available in the global region.
+        # GKE Hub is currently available in the global region and all regions in
+        # https://cloud.google.com/compute/docs/regions-zones. Feature is only
+        # available in global region while membership is global region and all the
+        # regions.
         #
         # **Membership management may be non-trivial:** it is recommended to use one
         # of the Google-provided client libraries or tools where possible when working
         # with Membership resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gke_hub/v1/gke_hub"
         #     client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gke_hub/v1/gke_hub/rest"
+        #     client = ::Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
         #
         module GkeHub
         end

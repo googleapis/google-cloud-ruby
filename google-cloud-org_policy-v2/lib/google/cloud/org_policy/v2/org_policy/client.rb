@@ -177,7 +177,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -217,8 +217,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The Cloud resource that parents the constraint. Must be in one of the
-            #     following forms:
+            #     Required. The Cloud resource that parents the constraint. Must be in one of
+            #     the following forms:
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
             #     * `folders/{folder_id}`
@@ -251,13 +251,11 @@ module Google
             #   # Call the list_constraints method.
             #   result = client.list_constraints request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Constraint.
-            #     p response
+            #     p item
             #   end
             #
             def list_constraints request, options = nil
@@ -321,9 +319,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The target Cloud resource that parents the set of constraints and policies
-            #     that will be returned from this call. Must be in one of the following
-            #     forms:
+            #     Required. The target Cloud resource that parents the set of constraints and
+            #     policies that will be returned from this call. Must be in one of the
+            #     following forms:
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
             #     * `folders/{folder_id}`
@@ -356,13 +354,11 @@ module Google
             #   # Call the list_policies method.
             #   result = client.list_policies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Policy.
-            #     p response
+            #     p item
             #   end
             #
             def list_policies request, options = nil
@@ -430,7 +426,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the policy. See `Policy` for naming requirements.
+            #     Required. Resource name of the policy. See `Policy` for naming
+            #     requirements.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OrgPolicy::V2::Policy]
@@ -610,8 +607,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The Cloud resource that will parent the new Policy. Must be in one of the
-            #     following forms:
+            #     Required. The Cloud resource that will parent the new Policy. Must be in
+            #     one of the following forms:
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
             #     * `folders/{folder_id}`
@@ -704,13 +701,17 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_policy(policy: nil)
+            # @overload update_policy(policy: nil, update_mask: nil)
             #   Pass arguments to `update_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param policy [::Google::Cloud::OrgPolicy::V2::Policy, ::Hash]
             #     Required. `Policy` to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Field mask used to specify the fields to be overwritten in the policy
+            #     by the set. The fields specified in the update_mask are relative to the
+            #     policy, not the full request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OrgPolicy::V2::Policy]
@@ -903,9 +904,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -947,7 +948,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "orgpolicy.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "orgpolicy.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/cx/v3/environments/credentials"
 require "google/cloud/dialogflow/cx/v3/environments/paths"
 require "google/cloud/dialogflow/cx/v3/environments/operations"
 require "google/cloud/dialogflow/cx/v3/environments/client"
+require "google/cloud/dialogflow/cx/v3/environments/rest"
 
 module Google
   module Cloud
@@ -33,12 +34,18 @@ module Google
       module CX
         module V3
           ##
-          # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/environments"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/environments/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Rest::Client.new
           #
           module Environments
           end

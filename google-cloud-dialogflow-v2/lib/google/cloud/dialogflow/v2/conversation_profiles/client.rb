@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the ConversationProfiles service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
           #
           class Client
             include Paths
@@ -129,7 +130,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -223,13 +224,11 @@ module Google
             #   # Call the list_conversation_profiles method.
             #   result = client.list_conversation_profiles request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dialogflow::V2::ConversationProfile.
-            #     p response
+            #     p item
             #   end
             #
             def list_conversation_profiles request, options = nil
@@ -366,7 +365,8 @@ module Google
             #
             # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
             # aren't populated in the response. You can retrieve them via
-            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile} API.
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile}
+            # API.
             #
             # @overload create_conversation_profile(request, options = nil)
             #   Pass arguments to `create_conversation_profile` via a request object, either of type
@@ -458,7 +458,8 @@ module Google
             #
             # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
             # aren't populated in the response. You can retrieve them via
-            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile} API.
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile}
+            # API.
             #
             # @overload update_conversation_profile(request, options = nil)
             #   Pass arguments to `update_conversation_profile` via a request object, either of type
@@ -641,8 +642,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigOperationMetadata SetSuggestionFeatureConfigOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigOperationMetadata SetSuggestionFeatureConfigOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
             #
             # If a long running operation to add or update suggestion feature
             # config for the same conversation profile, participant role and suggestion
@@ -694,14 +697,14 @@ module Google
             #   # Call the set_suggestion_feature_config method.
             #   result = client.set_suggestion_feature_config request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def set_suggestion_feature_config request, options = nil
@@ -754,8 +757,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigOperationMetadata ClearSuggestionFeatureConfigOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigOperationMetadata ClearSuggestionFeatureConfigOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
             #
             # @overload clear_suggestion_feature_config(request, options = nil)
             #   Pass arguments to `clear_suggestion_feature_config` via a request object, either of type
@@ -802,14 +807,14 @@ module Google
             #   # Call the clear_suggestion_feature_config method.
             #   result = client.clear_suggestion_feature_config request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def clear_suggestion_feature_config request, options = nil
@@ -892,9 +897,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -936,7 +941,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

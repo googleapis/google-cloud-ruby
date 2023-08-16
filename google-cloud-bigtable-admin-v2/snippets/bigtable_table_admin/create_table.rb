@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/admin/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table
+# Snippet for the create_table call in the BigtableTableAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table.
+# It may require modification in order to execute successfully.
 #
 def create_table
   # Create a client object. The client can be reused for multiple calls.

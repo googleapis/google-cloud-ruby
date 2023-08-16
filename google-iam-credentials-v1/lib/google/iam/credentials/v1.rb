@@ -23,12 +23,17 @@ module Google
   module Iam
     module Credentials
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/iam/credentials/v1"
       #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/iam/credentials/v1"
+      #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new
       #
       module V1
       end

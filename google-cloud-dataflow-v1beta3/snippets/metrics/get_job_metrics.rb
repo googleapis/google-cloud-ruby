@@ -20,8 +20,11 @@
 require "google/cloud/dataflow/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_metrics
+# Snippet for the get_job_metrics call in the Metrics service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_metrics. It may
+# require modification in order to execute successfully.
 #
 def get_job_metrics
   # Create a client object. The client can be reused for multiple calls.

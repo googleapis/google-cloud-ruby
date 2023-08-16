@@ -27,23 +27,23 @@ module Google
           ##
           # Client for the CloudFilestoreManager service.
           #
-          # Configures and manages Cloud Filestore resources.
+          # Configures and manages Filestore resources.
           #
-          # Cloud Filestore Manager v1.
+          # Filestore Manager v1.
           #
-          # The `file.googleapis.com` service implements the Cloud Filestore API and
+          # The `file.googleapis.com` service implements the Filestore API and
           # defines the following resource model for managing instances:
           # * The service works with a collection of cloud projects, named: `/projects/*`
           # * Each project has a collection of available locations, named: `/locations/*`
           # * Each location has a collection of instances and backups, named:
           # `/instances/*` and `/backups/*` respectively.
-          # * As such, Cloud Filestore instances are resources of the form:
+          # * As such, Filestore instances are resources of the form:
           #   `/projects/{project_number}/locations/{location_id}/instances/{instance_id}`
           #   and backups are resources of the form:
           #   `/projects/{project_number}/locations/{location_id}/backup/{backup_id}`
           #
-          # Note that location_id must be a GCP `zone` for instances and but to a GCP
-          # `region` for backups; for example:
+          # Note that location_id must be a Google Cloud `zone` for instances, but
+          # a Google Cloud `region` for backups; for example:
           # * `projects/12345/locations/us-central1-c/instances/my-filestore`
           # * `projects/12345/locations/us-central1/backups/my-backup`
           #
@@ -175,7 +175,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -231,8 +231,9 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location for which to retrieve instance
             #     information, in the format `projects/{project_id}/locations/{location}`. In
-            #     Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To
-            #     retrieve instance information for all locations, use "-" for the
+            #     Cloud Filestore, locations map to Google Cloud zones, for example
+            #     **us-west1-b**. To retrieve instance information for all locations, use "-"
+            #     for the
             #     `{location}` value.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
@@ -264,13 +265,11 @@ module Google
             #   # Call the list_instances method.
             #   result = client.list_instances request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Filestore::V1::Instance.
-            #     p response
+            #     p item
             #   end
             #
             def list_instances request, options = nil
@@ -424,8 +423,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The instance's project and location, in the format
-            #     `projects/{project_id}/locations/{location}`. In Cloud Filestore,
-            #     locations map to GCP zones, for example **us-west1-b**.
+            #     `projects/{project_id}/locations/{location}`. In Filestore,
+            #     locations map to Google Cloud zones, for example **us-west1-b**.
             #   @param instance_id [::String]
             #     Required. The name of the instance to create.
             #     The name must be unique for the specified project and location.
@@ -452,14 +451,14 @@ module Google
             #   # Call the create_instance method.
             #   result = client.create_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_instance request, options = nil
@@ -553,14 +552,14 @@ module Google
             #   # Call the update_instance method.
             #   result = client.update_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_instance request, options = nil
@@ -631,8 +630,8 @@ module Google
             #     Required. The resource name of the instance, in the format
             #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
             #   @param file_share [::String]
-            #     Required. Name of the file share in the Cloud Filestore instance that the
-            #     backup is being restored to.
+            #     Required. Name of the file share in the Filestore instance that the backup
+            #     is being restored to.
             #   @param source_backup [::String]
             #     The resource name of the backup, in the format
             #     `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
@@ -657,14 +656,14 @@ module Google
             #   # Call the restore_instance method.
             #   result = client.restore_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def restore_instance request, options = nil
@@ -722,7 +721,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_instance(name: nil)
+            # @overload delete_instance(name: nil, force: nil)
             #   Pass arguments to `delete_instance` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -730,6 +729,9 @@ module Google
             #   @param name [::String]
             #     Required. The instance resource name, in the format
             #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+            #   @param force [::Boolean]
+            #     If set to true, all snapshots of the instance will also be deleted.
+            #     (Otherwise, the request will only work if the instance has no snapshots.)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -751,14 +753,14 @@ module Google
             #   # Call the delete_instance method.
             #   result = client.delete_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_instance request, options = nil
@@ -804,6 +806,486 @@ module Google
             end
 
             ##
+            # Lists all snapshots in a project for either a specified location
+            # or for all locations.
+            #
+            # @overload list_snapshots(request, options = nil)
+            #   Pass arguments to `list_snapshots` via a request object, either of type
+            #   {::Google::Cloud::Filestore::V1::ListSnapshotsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Filestore::V1::ListSnapshotsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_snapshots(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_snapshots` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The instance for which to retrieve snapshot information,
+            #     in the format
+            #     `projects/{project_id}/locations/{location}/instances/{instance_id}`.
+            #   @param page_size [::Integer]
+            #     The maximum number of items to return.
+            #   @param page_token [::String]
+            #     The next_page_token value to use if there are additional
+            #     results to retrieve for this list request.
+            #   @param order_by [::String]
+            #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
+            #   @param filter [::String]
+            #     List filter.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Filestore::V1::Snapshot>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Filestore::V1::Snapshot>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::ListSnapshotsRequest.new
+            #
+            #   # Call the list_snapshots method.
+            #   result = client.list_snapshots request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Filestore::V1::Snapshot.
+            #     p item
+            #   end
+            #
+            def list_snapshots request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::ListSnapshotsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_snapshots.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Filestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_snapshots.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_snapshots.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_filestore_manager_stub.call_rpc :list_snapshots, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_filestore_manager_stub, :list_snapshots, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the details of a specific snapshot.
+            #
+            # @overload get_snapshot(request, options = nil)
+            #   Pass arguments to `get_snapshot` via a request object, either of type
+            #   {::Google::Cloud::Filestore::V1::GetSnapshotRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Filestore::V1::GetSnapshotRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_snapshot(name: nil)
+            #   Pass arguments to `get_snapshot` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The snapshot resource name, in the format
+            #     `projects/{project_id}/locations/{location}/instances/{instance_id}/snapshots/{snapshot_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Filestore::V1::Snapshot]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Filestore::V1::Snapshot]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::GetSnapshotRequest.new
+            #
+            #   # Call the get_snapshot method.
+            #   result = client.get_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::Filestore::V1::Snapshot.
+            #   p result
+            #
+            def get_snapshot request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::GetSnapshotRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_snapshot.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Filestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_snapshot.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_snapshot.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_filestore_manager_stub.call_rpc :get_snapshot, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a snapshot.
+            #
+            # @overload create_snapshot(request, options = nil)
+            #   Pass arguments to `create_snapshot` via a request object, either of type
+            #   {::Google::Cloud::Filestore::V1::CreateSnapshotRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Filestore::V1::CreateSnapshotRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_snapshot(parent: nil, snapshot_id: nil, snapshot: nil)
+            #   Pass arguments to `create_snapshot` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The Filestore Instance to create the snapshots of, in the format
+            #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+            #   @param snapshot_id [::String]
+            #     Required. The ID to use for the snapshot.
+            #     The ID must be unique within the specified instance.
+            #
+            #     This value must start with a lowercase letter followed by up to 62
+            #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+            #   @param snapshot [::Google::Cloud::Filestore::V1::Snapshot, ::Hash]
+            #     Required. A snapshot resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::CreateSnapshotRequest.new
+            #
+            #   # Call the create_snapshot method.
+            #   result = client.create_snapshot request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_snapshot request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::CreateSnapshotRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_snapshot.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Filestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_snapshot.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_snapshot.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_filestore_manager_stub.call_rpc :create_snapshot, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a snapshot.
+            #
+            # @overload delete_snapshot(request, options = nil)
+            #   Pass arguments to `delete_snapshot` via a request object, either of type
+            #   {::Google::Cloud::Filestore::V1::DeleteSnapshotRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Filestore::V1::DeleteSnapshotRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_snapshot(name: nil)
+            #   Pass arguments to `delete_snapshot` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The snapshot resource name, in the format
+            #     `projects/{project_id}/locations/{location}/instances/{instance_id}/snapshots/{snapshot_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new
+            #
+            #   # Call the delete_snapshot method.
+            #   result = client.delete_snapshot request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_snapshot request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::DeleteSnapshotRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_snapshot.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Filestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_snapshot.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_snapshot.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_filestore_manager_stub.call_rpc :delete_snapshot, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the settings of a specific snapshot.
+            #
+            # @overload update_snapshot(request, options = nil)
+            #   Pass arguments to `update_snapshot` via a request object, either of type
+            #   {::Google::Cloud::Filestore::V1::UpdateSnapshotRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Filestore::V1::UpdateSnapshotRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_snapshot(update_mask: nil, snapshot: nil)
+            #   Pass arguments to `update_snapshot` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Mask of fields to update. At least one path must be supplied in
+            #     this field.
+            #   @param snapshot [::Google::Cloud::Filestore::V1::Snapshot, ::Hash]
+            #     Required. A snapshot resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new
+            #
+            #   # Call the update_snapshot method.
+            #   result = client.update_snapshot request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_snapshot request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::UpdateSnapshotRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_snapshot.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Filestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.snapshot&.name
+                header_params["snapshot.name"] = request.snapshot.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_snapshot.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_snapshot.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_filestore_manager_stub.call_rpc :update_snapshot, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists all backups in a project for either a specified location or for all
             # locations.
             #
@@ -825,9 +1307,9 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location for which to retrieve backup
             #     information, in the format
-            #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
-            #     backup locations map to GCP regions, for example **us-west1**. To retrieve
-            #     backup information for all locations, use "-" for the
+            #     `projects/{project_number}/locations/{location}`. In Filestore, backup
+            #     locations map to Google Cloud regions, for example **us-west1**. To
+            #     retrieve backup information for all locations, use "-" for the
             #     `{location}` value.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
@@ -859,13 +1341,11 @@ module Google
             #   # Call the list_backups method.
             #   result = client.list_backups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Filestore::V1::Backup.
-            #     p response
+            #     p item
             #   end
             #
             def list_backups request, options = nil
@@ -1016,8 +1496,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The backup's project and location, in the format
-            #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
-            #     backup locations map to GCP regions, for example **us-west1**.
+            #     `projects/{project_number}/locations/{location}`. In Filestore,
+            #     backup locations map to Google Cloud regions, for example **us-west1**.
             #   @param backup [::Google::Cloud::Filestore::V1::Backup, ::Hash]
             #     Required. A {::Google::Cloud::Filestore::V1::Backup backup resource}
             #   @param backup_id [::String]
@@ -1049,14 +1529,14 @@ module Google
             #   # Call the create_backup method.
             #   result = client.create_backup request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_backup request, options = nil
@@ -1143,14 +1623,14 @@ module Google
             #   # Call the delete_backup method.
             #   result = client.delete_backup request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_backup request, options = nil
@@ -1239,14 +1719,14 @@ module Google
             #   # Call the update_backup method.
             #   result = client.update_backup request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_backup request, options = nil
@@ -1329,9 +1809,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1373,7 +1853,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "file.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "file.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1457,6 +1939,31 @@ module Google
                 #
                 attr_reader :delete_instance
                 ##
+                # RPC-specific configuration for `list_snapshots`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_snapshots
+                ##
+                # RPC-specific configuration for `get_snapshot`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_snapshot
+                ##
+                # RPC-specific configuration for `create_snapshot`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_snapshot
+                ##
+                # RPC-specific configuration for `delete_snapshot`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_snapshot
+                ##
+                # RPC-specific configuration for `update_snapshot`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_snapshot
+                ##
                 # RPC-specific configuration for `list_backups`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1496,6 +2003,16 @@ module Google
                   @restore_instance = ::Gapic::Config::Method.new restore_instance_config
                   delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
+                  list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots
+                  @list_snapshots = ::Gapic::Config::Method.new list_snapshots_config
+                  get_snapshot_config = parent_rpcs.get_snapshot if parent_rpcs.respond_to? :get_snapshot
+                  @get_snapshot = ::Gapic::Config::Method.new get_snapshot_config
+                  create_snapshot_config = parent_rpcs.create_snapshot if parent_rpcs.respond_to? :create_snapshot
+                  @create_snapshot = ::Gapic::Config::Method.new create_snapshot_config
+                  delete_snapshot_config = parent_rpcs.delete_snapshot if parent_rpcs.respond_to? :delete_snapshot
+                  @delete_snapshot = ::Gapic::Config::Method.new delete_snapshot_config
+                  update_snapshot_config = parent_rpcs.update_snapshot if parent_rpcs.respond_to? :update_snapshot
+                  @update_snapshot = ::Gapic::Config::Method.new update_snapshot_config
                   list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
                   @list_backups = ::Gapic::Config::Method.new list_backups_config
                   get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup

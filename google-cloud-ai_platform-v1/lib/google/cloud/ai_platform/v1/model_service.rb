@@ -34,7 +34,7 @@ module Google
         ##
         # A service for managing Vertex AI's machine learning Models.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/model_service"
         #     client = ::Google::Cloud::AIPlatform::V1::ModelService::Client.new

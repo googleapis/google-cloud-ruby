@@ -30,7 +30,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/awsClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A human readable description of this cluster.
@@ -96,10 +96,16 @@ module Google
         #     Output only. PEM encoded x509 certificate of the cluster root of trust.
         # @!attribute [rw] fleet
         #   @return [::Google::Cloud::GkeMultiCloud::V1::Fleet]
-        #     Optional. Fleet configuration.
+        #     Required. Fleet configuration.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::LoggingConfig]
         #     Optional. Logging configuration for this cluster.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsClusterError>]
+        #     Output only. A set of errors found in the cluster.
+        # @!attribute [rw] monitoring_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::MonitoringConfig]
+        #     Optional. Monitoring configuration for this cluster.
         class AwsCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -173,8 +179,8 @@ module Google
         #     security groups with the minimum rules needed for a functioning cluster.
         # @!attribute [rw] iam_instance_profile
         #   @return [::String]
-        #     Required. The name or ARN of the AWS IAM instance profile to assign to each control
-        #     plane replica.
+        #     Required. The name or ARN of the AWS IAM instance profile to assign to each
+        #     control plane replica.
         # @!attribute [rw] root_volume
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsVolumeTemplate]
         #     Optional. Configuration related to the root volume provisioned for each
@@ -199,8 +205,8 @@ module Google
         #     Required. The ARN of the AWS KMS key used to encrypt cluster secrets.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. A set of AWS resource tags to propagate to all underlying managed AWS
-        #     resources.
+        #     Optional. A set of AWS resource tags to propagate to all underlying managed
+        #     AWS resources.
         #
         #     Specify at most 50 pairs containing alphanumerics, spaces, and symbols
         #     (.+-=_:@/). Keys can be up to 127 Unicode characters. Values can be up to
@@ -235,8 +241,8 @@ module Google
         # Authentication configuration for the management of AWS resources.
         # @!attribute [rw] role_arn
         #   @return [::String]
-        #     Required. The Amazon Resource Name (ARN) of the role that the Anthos Multi-Cloud API
-        #     will assume when managing AWS resources on your account.
+        #     Required. The Amazon Resource Name (ARN) of the role that the Anthos
+        #     Multi-Cloud API will assume when managing AWS resources on your account.
         # @!attribute [rw] role_session_name
         #   @return [::String]
         #     Optional. An identifier for the assumed role session.
@@ -293,11 +299,12 @@ module Google
         #     When unspecified, it defaults to GP2 volume.
         # @!attribute [rw] iops
         #   @return [::Integer]
-        #     Optional. The number of I/O operations per second (IOPS) to provision for GP3 volume.
+        #     Optional. The number of I/O operations per second (IOPS) to provision for
+        #     GP3 volume.
         # @!attribute [rw] kms_key_arn
         #   @return [::String]
-        #     Optional. The Amazon Resource Name (ARN) of the Customer Managed Key (CMK) used to
-        #     encrypt AWS EBS volumes.
+        #     Optional. The Amazon Resource Name (ARN) of the Customer Managed Key (CMK)
+        #     used to encrypt AWS EBS volumes.
         #
         #     If not specified, the default Amazon managed key associated to
         #     the AWS region where this cluster runs will be used.
@@ -333,14 +340,14 @@ module Google
         #     This field cannot be changed after creation.
         # @!attribute [rw] pod_address_cidr_blocks
         #   @return [::Array<::String>]
-        #     Required. All pods in the cluster are assigned an IPv4 address from these ranges.
-        #     Only a single range is supported.
-        #     This field cannot be changed after creation.
+        #     Required. All pods in the cluster are assigned an IPv4 address from these
+        #     ranges. Only a single range is supported. This field cannot be changed
+        #     after creation.
         # @!attribute [rw] service_address_cidr_blocks
         #   @return [::Array<::String>]
-        #     Required. All services in the cluster are assigned an IPv4 address from these ranges.
-        #     Only a single range is supported.
-        #     This field cannot be changed after creation.
+        #     Required. All services in the cluster are assigned an IPv4 address from
+        #     these ranges. Only a single range is supported. This field cannot be
+        #     changed after creation.
         class AwsClusterNetworking
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -358,7 +365,8 @@ module Google
         #     see [Resource Names](https://cloud.google.com/apis/design/resource_names)
         # @!attribute [rw] version
         #   @return [::String]
-        #     Required. The Kubernetes version to run on this node pool (e.g. `1.19.10-gke.1000`).
+        #     Required. The Kubernetes version to run on this node pool (e.g.
+        #     `1.19.10-gke.1000`).
         #
         #     You can list all supported versions on a given Google Cloud region by
         #     calling
@@ -410,6 +418,9 @@ module Google
         #   @return [::Google::Cloud::GkeMultiCloud::V1::MaxPodsConstraint]
         #     Required. The constraint on the maximum number of pods that can be run
         #     simultaneously on a node in the node pool.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsNodePoolError>]
+        #     Output only. A set of errors found in the node pool.
         class AwsNodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -474,13 +485,14 @@ module Google
         #     "mass": "1.3kg", "count": "3" }.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Key/value metadata to assign to each underlying AWS resource. Specify at
-        #     most 50 pairs containing alphanumerics, spaces, and symbols (.+-=_:@/).
-        #     Keys can be up to 127 Unicode characters.
-        #     Values can be up to 255 Unicode characters.
+        #     Optional. Key/value metadata to assign to each underlying AWS resource.
+        #     Specify at most 50 pairs containing alphanumerics, spaces, and symbols
+        #     (.+-=_:@/). Keys can be up to 127 Unicode characters. Values can be up to
+        #     255 Unicode characters.
         # @!attribute [rw] iam_instance_profile
         #   @return [::String]
-        #     Required. The name or ARN of the AWS IAM role assigned to nodes in the pool.
+        #     Required. The name or ARN of the AWS IAM role assigned to nodes in the
+        #     pool.
         # @!attribute [rw] image_type
         #   @return [::String]
         #     Optional. The OS image type to use on node pool instances.
@@ -493,9 +505,9 @@ module Google
         #     Optional. The SSH configuration.
         # @!attribute [rw] security_group_ids
         #   @return [::Array<::String>]
-        #     Optional. The IDs of additional security groups to add to nodes in this pool. The
-        #     manager will automatically create security groups with minimum rules
-        #     needed for a functioning cluster.
+        #     Optional. The IDs of additional security groups to add to nodes in this
+        #     pool. The manager will automatically create security groups with minimum
+        #     rules needed for a functioning cluster.
         # @!attribute [rw] proxy_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsProxyConfig]
         #     Optional. Proxy configuration for outbound HTTP(S) traffic.
@@ -506,6 +518,12 @@ module Google
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsInstancePlacement]
         #     Optional. Placement related info for this node.
         #     When unspecified, the VPC's default tenancy will be used.
+        # @!attribute [rw] autoscaling_metrics_collection
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsAutoscalingGroupMetricsCollection]
+        #     Optional. Configuration related to CloudWatch metrics collection on the
+        #     Auto Scaling group of the node pool.
+        #
+        #     When unspecified, metrics collection is disabled.
         class AwsNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -533,12 +551,12 @@ module Google
         # to adjust the size of the node pool to the current cluster usage.
         # @!attribute [rw] min_node_count
         #   @return [::Integer]
-        #     Required. Minimum number of nodes in the node pool. Must be greater than or equal to
-        #     1 and less than or equal to max_node_count.
+        #     Required. Minimum number of nodes in the node pool. Must be greater than or
+        #     equal to 1 and less than or equal to max_node_count.
         # @!attribute [rw] max_node_count
         #   @return [::Integer]
-        #     Required. Maximum number of nodes in the node pool. Must be greater than or equal to
-        #     min_node_count and less than or equal to 50.
+        #     Required. Maximum number of nodes in the node pool. Must be greater than or
+        #     equal to min_node_count and less than or equal to 50.
         class AwsNodePoolAutoscaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -582,6 +600,10 @@ module Google
         #   @return [::String]
         #     The ARN of the AWS Secret Manager secret that contains the HTTP(S) proxy
         #     configuration.
+        #
+        #     The secret must be a JSON encoded proxy configuration
+        #     as described in
+        #     https://cloud.google.com/anthos/clusters/docs/multi-cloud/aws/how-to/use-a-proxy#create_a_proxy_configuration_file
         # @!attribute [rw] secret_version
         #   @return [::String]
         #     The version string of the AWS Secret Manager secret that contains the
@@ -626,6 +648,41 @@ module Google
             # Launch this instance to a dedicated host.
             HOST = 3
           end
+        end
+
+        # Configuration related to CloudWatch metrics collection in an AWS
+        # Auto Scaling group.
+        # @!attribute [rw] granularity
+        #   @return [::String]
+        #     Required. The frequency at which EC2 Auto Scaling sends aggregated data to
+        #     AWS CloudWatch. The only valid value is "1Minute".
+        # @!attribute [rw] metrics
+        #   @return [::Array<::String>]
+        #     Optional. The metrics to enable. For a list of valid metrics, see
+        #     https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_EnableMetricsCollection.html.
+        #     If you specify Granularity and don't specify any metrics, all metrics are
+        #     enabled.
+        class AwsAutoscalingGroupMetricsCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AwsClusterError describes errors found on AWS clusters.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Human-friendly description of the error.
+        class AwsClusterError
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AwsNodePoolError describes errors found on AWS node pools.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Human-friendly description of the error.
+        class AwsNodePoolError
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

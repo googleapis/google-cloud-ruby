@@ -25,6 +25,7 @@ require "google/cloud/data_catalog/v1/version"
 require "google/cloud/data_catalog/v1/policy_tag_manager/credentials"
 require "google/cloud/data_catalog/v1/policy_tag_manager/paths"
 require "google/cloud/data_catalog/v1/policy_tag_manager/client"
+require "google/cloud/data_catalog/v1/policy_tag_manager/rest"
 
 module Google
   module Cloud
@@ -38,10 +39,15 @@ module Google
         # control policies. A taxonomy is a hierarchical grouping of policy tags that
         # classify data along a common axis.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_catalog/v1/policy_tag_manager"
         #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/data_catalog/v1/policy_tag_manager/rest"
+        #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManager::Rest::Client.new
         #
         module PolicyTagManager
         end

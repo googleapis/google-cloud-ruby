@@ -46,6 +46,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
   let(:bad_value) { { "BAD_VALUE" => nil } }
 
   it "should validate, create, list, get, validate message, create topic, publish binary message, receive binary message, and delete a schema" do
+    skip("https://github.com/googleapis/google-cloud-ruby/issues/20925")
     # validate schema
     _(pubsub.valid_schema? :avro, definition).must_equal true
     _(pubsub.valid_schema? :TYPE_UNSPECIFIED, definition).must_equal false

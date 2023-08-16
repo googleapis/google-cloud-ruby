@@ -8,10 +8,10 @@
     "name": "livestream",
     "name_pretty": "Live Stream API",
     "product_documentation": "https://cloud.google.com/livestream/",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Live Stream API transcodes mezzanine live signals into direct-to-consumer streaming formats, including Dynamic Adaptive Streaming over HTTP (DASH/MPEG-DASH), and HTTP Live Streaming (HLS), for multiple device platforms.",
     "ruby-cloud-product-url": "https://cloud.google.com/livestream/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

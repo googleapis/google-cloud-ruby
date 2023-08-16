@@ -48,6 +48,10 @@ module Google
           #   @return [::Array<::Google::Cloud::Billing::Budgets::V1::ThresholdRule>]
           #     Optional. Rules that trigger alerts (notifications of thresholds
           #     being crossed) when spend exceeds the specified percentages of the budget.
+          #
+          #     Optional for `pubsubTopic` notifications.
+          #
+          #     Required if using email notifications.
           # @!attribute [rw] notifications_rule
           #   @return [::Google::Cloud::Billing::Budgets::V1::NotificationsRule]
           #     Optional. Rules to apply to notifications sent based on budget spend and
@@ -56,7 +60,7 @@ module Google
           #   @return [::String]
           #     Optional. Etag to validate that the object is unchanged for a
           #     read-modify-write operation.
-          #     An empty etag will cause an update to overwrite other changes.
+          #     An empty etag causes an update to overwrite other changes.
           class Budget
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,8 +90,6 @@ module Google
           # {::Google::Cloud::Billing::Budgets::V1::Filter#calendar_period Filter.calendar_period}
           # spend. At this time, the amount is automatically 100% of the last calendar
           # period's spend; that is, there are no other options yet.
-          # Future configuration options will be described here (for example, configuring
-          # a percentage of last period's spend).
           # LastPeriodAmount cannot be set for a budget configured with
           # a
           # {::Google::Cloud::Billing::Budgets::V1::Filter#custom_period Filter.custom_period}.
@@ -96,13 +98,28 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # ThresholdRule contains a definition of a threshold which triggers
-          # an alert (a notification of a threshold being crossed) to be sent when
-          # spend goes above the specified amount.
-          # Alerts are automatically e-mailed to users with the Billing Account
-          # Administrator role or the Billing Account User role.
-          # The thresholds here have no effect on notifications sent to anything
-          # configured under `Budget.all_updates_rule`.
+          # ThresholdRule contains the definition of a threshold. Threshold rules define
+          # the triggering events used to generate a budget notification email. When a
+          # threshold is crossed (spend exceeds the specified percentages of the
+          # budget), budget alert emails are sent to the email recipients you specify
+          # in the
+          # [NotificationsRule](#notificationsrule).
+          #
+          # Threshold rules also affect the fields included in the
+          # [JSON data
+          # object](https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format)
+          # sent to a Pub/Sub topic.
+          #
+          # Threshold rules are _required_ if using email notifications.
+          #
+          # Threshold rules are _optional_ if only setting a
+          # [`pubsubTopic` NotificationsRule](#NotificationsRule),
+          # unless you want your JSON data object to include data about the thresholds
+          # you set.
+          #
+          # For more information, see
+          # [set budget threshold rules and
+          # actions](https://cloud.google.com/billing/docs/how-to/budgets#budget-actions).
           # @!attribute [rw] threshold_percent
           #   @return [::Float]
           #     Required. Send an alert when this threshold is exceeded.
@@ -138,17 +155,32 @@ module Google
           # and thresholds.
           # @!attribute [rw] pubsub_topic
           #   @return [::String]
-          #     Optional. The name of the Pub/Sub topic where budget related messages will
-          #     be published, in the form `projects/{project_id}/topics/{topic_id}`.
-          #     Updates are sent at regular intervals to the topic. The topic needs to be
-          #     created before the budget is created; see
-          #     https://cloud.google.com/billing/docs/how-to/budgets#manage-notifications
-          #     for more details.
-          #     Caller is expected to have
-          #     `pubsub.topics.setIamPolicy` permission on the topic when it's set for a
-          #     budget, otherwise, the API call will fail with PERMISSION_DENIED. See
-          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications
-          #     for more details on Pub/Sub roles and permissions.
+          #     Optional. The name of the Pub/Sub topic where budget-related messages are
+          #     published, in the form `projects/{project_id}/topics/{topic_id}`. Updates
+          #     are sent to the topic at regular intervals; the timing of the updates is
+          #     not dependent on the [threshold rules](#thresholdrule) you've set.
+          #
+          #     Note that if you want your
+          #     [Pub/Sub JSON
+          #     object](https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format)
+          #     to contain data for `alertThresholdExceeded`, you need at least one
+          #     [alert threshold rule](#thresholdrule). When you set threshold rules, you
+          #     must also enable at least one of the email notification options, either
+          #     using the default IAM recipients or Cloud Monitoring email notification
+          #     channels.
+          #
+          #     To use Pub/Sub topics with budgets, you must do the following:
+          #
+          #     1. Create the Pub/Sub topic
+          #     before connecting it to your budget. For guidance, see
+          #     [Manage programmatic budget alert
+          #     notifications](https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications).
+          #
+          #     2. Grant the API caller the `pubsub.topics.setIamPolicy` permission on
+          #     the Pub/Sub topic. If not set, the API call fails with PERMISSION_DENIED.
+          #     For additional details on Pub/Sub roles and permissions, see
+          #     [Permissions required for this
+          #     task](https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#permissions_required_for_this_task).
           # @!attribute [rw] schema_version
           #   @return [::String]
           #     Optional. Required when
@@ -159,14 +191,28 @@ module Google
           #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format.
           # @!attribute [rw] monitoring_notification_channels
           #   @return [::Array<::String>]
-          #     Optional. Targets to send notifications to when a threshold is exceeded.
-          #     This is in addition to default recipients who have billing account IAM
-          #     roles. The value is the full REST resource name of a monitoring
-          #     notification channel with the form
-          #     `projects/{project_id}/notificationChannels/{channel_id}`. A maximum of 5
-          #     channels are allowed. See
-          #     https://cloud.google.com/billing/docs/how-to/budgets-notification-recipients
-          #     for more details.
+          #     Optional. Email targets to send notifications to when a threshold is
+          #     exceeded. This is in addition to the `DefaultIamRecipients` who receive
+          #     alert emails based on their billing account IAM role. The value is the full
+          #     REST resource name of a Cloud Monitoring email notification channel with
+          #     the form `projects/{project_id}/notificationChannels/{channel_id}`. A
+          #     maximum of 5 email notifications are allowed.
+          #
+          #     To customize budget alert email recipients with monitoring notification
+          #     channels, you _must create the monitoring notification channels before
+          #     you link them to a budget_. For guidance on setting up notification
+          #     channels to use with budgets, see
+          #     [Customize budget alert email
+          #     recipients](https://cloud.google.com/billing/docs/how-to/budgets-notification-recipients).
+          #
+          #     For Cloud Billing budget alerts, you _must use email notification
+          #     channels_. The other types of notification channels are _not_
+          #     supported, such as Slack, SMS, or PagerDuty. If you want to
+          #     [send budget notifications to
+          #     Slack](https://cloud.google.com/billing/docs/how-to/notify#send_notifications_to_slack),
+          #     use a pubsubTopic and configure
+          #     [programmatic
+          #     notifications](https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications).
           # @!attribute [rw] disable_default_iam_recipients
           #   @return [::Boolean]
           #     Optional. When set to true, disables default notifications sent when a
@@ -183,9 +229,15 @@ module Google
           #   @return [::Array<::String>]
           #     Optional. A set of projects of the form `projects/{project}`,
           #     specifying that usage from only this set of projects should be
-          #     included in the budget. If omitted, the report will include all usage for
+          #     included in the budget. If omitted, the report includes all usage for
           #     the billing account, regardless of which project the usage occurred on.
-          #     Only zero or one project can be specified currently.
+          # @!attribute [rw] resource_ancestors
+          #   @return [::Array<::String>]
+          #     Optional. A set of folder and organization names of the form
+          #     `folders/{folderId}` or `organizations/{organizationId}`, specifying that
+          #     usage from only this set of folders and organizations should be included in
+          #     the budget. If omitted, the report includes all usage for all
+          #     organizations, regardless of which organization the usage occurred on.
           # @!attribute [rw] credit_types
           #   @return [::Array<::String>]
           #     Optional. If
@@ -205,7 +257,7 @@ module Google
           #   @return [::Array<::String>]
           #     Optional. A set of services of the form `services/{service_id}`,
           #     specifying that usage from only this set of services should be
-          #     included in the budget. If omitted, the report will include usage for
+          #     included in the budget. If omitted, the report includes usage for
           #     all the services.
           #     The service names are available through the Catalog API:
           #     https://cloud.google.com/billing/v1/how-tos/catalog-api.
@@ -214,21 +266,26 @@ module Google
           #     Optional. A set of subaccounts of the form `billingAccounts/{account_id}`,
           #     specifying that usage from only this set of subaccounts should be included
           #     in the budget. If a subaccount is set to the name of the parent account,
-          #     usage from the parent account will be included. If the field is omitted,
-          #     the report will include usage from the parent account and all subaccounts,
+          #     usage from the parent account is included. If the field is omitted,
+          #     the report includes usage from the parent account and all subaccounts,
           #     if they exist.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::ListValue}]
           #     Optional. A single label and value pair specifying that usage from only
-          #     this set of labeled resources should be included in the budget. Currently,
-          #     multiple entries or multiple values per entry are not allowed. If omitted,
-          #     the report will include all labeled and unlabeled usage.
+          #     this set of labeled resources should be included in the budget. If omitted,
+          #     the report includes all labeled and unlabeled usage.
+          #
+          #     An object containing a single `"key": value` pair. Example: `{ "name":
+          #     "wrench" }`.
+          #
+          #      _Currently, multiple entries or multiple values per entry are not
+          #      allowed._
           # @!attribute [rw] calendar_period
           #   @return [::Google::Cloud::Billing::Budgets::V1::CalendarPeriod]
           #     Optional. Specifies to track usage for recurring calendar period.
-          #     For example, assume that CalendarPeriod.QUARTER is set. The budget will
-          #     track usage from April 1 to June 30, when the current calendar month is
-          #     April, May, June. After that, it will track usage from July 1 to
+          #     For example, assume that CalendarPeriod.QUARTER is set. The budget
+          #     tracks usage from April 1 to June 30, when the current calendar month is
+          #     April, May, June. After that, it tracks usage from July 1 to
           #     September 30 when the current calendar month is July, August, September,
           #     so on.
           # @!attribute [rw] custom_period
@@ -291,6 +348,8 @@ module Google
           # `CalendarPeriod`". All calendar times begin at 12 AM US and Canadian
           # Pacific Time (UTC-8).
           module CalendarPeriod
+            # Calendar period is unset. This is the default if the budget is for a
+            # custom time period (CustomPeriod).
             CALENDAR_PERIOD_UNSPECIFIED = 0
 
             # A month. Month starts on the first day of each month, such as January 1,

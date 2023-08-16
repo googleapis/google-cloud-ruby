@@ -229,6 +229,11 @@
                 "restore_table"
               ]
             },
+            "CopyBackup": {
+              "methods": [
+                "copy_backup"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "get_iam_policy"
