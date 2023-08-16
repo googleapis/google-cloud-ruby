@@ -22,9 +22,11 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:instance_2) { bigtable_instance_2 }
   let(:cluster) { instance.clusters.first }
   let(:table) { bigtable_read_table }
+  let(:copy_backup_id_1) { "test-backup-#{random_str}" }
+  let(:copy_backup_id_2) { "test-backup-#{random_str}" }
   let(:backup_id) { "test-backup-#{Time.now.to_i}-#{random_str}" }
   let(:now) { Time.now.round 0 }
-  let(:expire_time) { now + 60 * 60 * 7 }
+  let(:expire_time) { now + 60 * 60 * 720 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
   let(:restore_table_id) { "test-table-#{Time.now.to_i}-#{random_str}" }
   let(:restore_table_id_2) { "test-table-#{Time.now.to_i}-#{random_str}" }
@@ -32,6 +34,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:roles) { ["bigtable.backups.delete", "bigtable.backups.get"] }
   let(:role) { "roles/bigtable.user" }
   let(:member) { "serviceAccount:#{service_account}" }
+  let(:source_backup) { "projects/#{bigtable.project_id}/instances/#{instance.instance_id}/clusters/#{cluster.cluster_id}/backups/#{backup_id}" }
 
   it "creates a backup" do
     backup = nil
@@ -145,5 +148,84 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       restore_table.delete if restore_table
       restore_table_2.delete if restore_table_2
     end
+  end
+
+  it "creates a copy of the backup using backup class" do
+    backup = nil
+    backup_1 = nil
+    backup_2 = nil
+    begin
+      # create
+      job = cluster.create_backup table, backup_id, expire_time
+      _(job).must_be_kind_of Google::Cloud::Bigtable::Backup::Job
+      job.wait_until_done!
+      _(job.error).must_be :nil?
+
+      backup = job.backup
+      _(backup).must_be_kind_of Google::Cloud::Bigtable::Backup
+      _(backup.backup_id).must_equal backup_id
+      _(backup.expire_time).must_equal expire_time
+      _(backup.start_time).must_be_kind_of Time
+      _(backup.end_time).must_be_kind_of Time
+      _(backup.size_bytes).must_be_kind_of Integer
+      _(backup.state).must_equal :READY
+      _(backup.creating?).must_equal false
+      _(backup.ready?).must_equal true
+      encryption_info = backup.encryption_info
+      _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
+      _(encryption_info.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
+      _(encryption_info.encryption_status).must_be :nil?
+      _(encryption_info.kms_key_version).must_be :nil?
+
+      source_table = backup.source_table
+      _(source_table).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(source_table.path).must_equal table.path
+
+      source_table_full = backup.source_table perform_lookup: true
+      _(source_table_full).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(source_table_full.path).must_equal table.path
+
+      # copy the backup using backup class
+      job = backup.copy dest_project_id: bigtable.project_id,
+                        dest_instance_id: instance.instance_id,
+                        dest_cluster_id: cluster.cluster_id,
+                        new_backup_id: copy_backup_id_1,
+                        expire_time: expire_time
+      _(job).must_be_kind_of Google::Cloud::Bigtable::Backup::Job
+      job.wait_until_done!
+      _(job.error).must_be :nil?
+
+      backup_1 = job.backup
+      _(backup_1).must_be_kind_of Google::Cloud::Bigtable::Backup
+      _(backup_1.backup_id).must_equal copy_backup_id_1
+      _(backup_1.expire_time).must_equal expire_time
+      _(backup_1.source_backup).must_equal source_backup
+
+      # copy the backup using client class
+      job = bigtable.copy_backup dest_project_id: cluster.project_id,
+                                 dest_instance_id: cluster.instance_id,
+                                 dest_cluster_id: cluster.cluster_id,
+                                 new_backup_id: copy_backup_id_2,
+                                 source_instance_id: instance.instance_id,
+                                 source_cluster_id: cluster.cluster_id,
+                                 source_backup_id: backup_id,
+                                 expire_time: expire_time
+      _(job).must_be_kind_of Google::Cloud::Bigtable::Backup::Job
+      job.wait_until_done!
+      _(job.error).must_be :nil?
+
+      backup_2 = job.backup
+      _(backup_2).must_be_kind_of Google::Cloud::Bigtable::Backup
+      _(backup_2.backup_id).must_equal copy_backup_id_2
+      _(backup_2.expire_time).must_equal expire_time
+      _(backup_2.source_backup).must_equal source_backup
+
+    ensure
+      # delete
+      backup.delete if backup
+      backup_1.delete if backup_1
+      backup_2.delete if backup_2
+    end
+
   end
 end
