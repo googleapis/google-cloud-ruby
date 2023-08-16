@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 # Copyright 2018 Google LLC
@@ -34,14 +33,6 @@ end
 # Create shared bigtable object so we don't create new for each test
 $bigtable = Google::Cloud.new.bigtable
 
-# Create second bigtable object for tests requiring one, such as copy-backup.
-if (proj = ENV["GCLOUD_SEC_TEST_PROJECT"]) &&
-  (keyfile = ENV["GCLOUD_SEC_TEST_KEYFILE"] ||
-    (ENV["GCLOUD_SEC_TEST_KEYFILE_JSON"] &&
-      JSON.parse(ENV["GCLOUD_SEC_TEST_KEYFILE_JSON"])))
-  $bigtable_2 = Google::Cloud.bigtable project_id: proj, credentials: keyfile
-end
-
 module Acceptance
   # Test class for running against a Bigtable instance.
   # Ensures that there is an active connection for the tests to use.
@@ -57,12 +48,10 @@ module Acceptance
   #
   class BigtableTest < Minitest::Test
     attr_accessor :bigtable
-    attr_accessor :bigtable_2
 
     # Setup project based on available ENV variables
     def setup
       @bigtable = $bigtable
-      @bigtable_2 = $bigtable_2
       refute_nil @bigtable, "You do not have an active bigtable to run the tests."
       super
     end
@@ -73,10 +62,6 @@ module Acceptance
 
     def bigtable_instance_2
       @instance_2 ||= @bigtable.instance(bigtable_instance_id_2)
-    end
-
-    def bigtable_2_instance
-      @bigtable_2.instance(bigtable_instance_id)
     end
 
     def bigtable_read_table
@@ -102,7 +87,7 @@ module Acceptance
     # Add spec DSL
     extend Minitest::Spec::DSL
 
-    # Register this spec type for when client instances are used.
+    # Register this spec type for when client instance is used.
     register_spec_type(self) do |_desc, *addl|
       addl.include? :bigtable
     end
@@ -110,13 +95,13 @@ module Acceptance
 end
 
 # Find or create instance
-def create_test_instance bigtable_client, instance_id, cluster_id, cluster_location
-  instance = bigtable_client.instance(instance_id)
+def create_test_instance instance_id, cluster_id, cluster_location
+  instance = $bigtable.instance(instance_id)
 
   if instance.nil?
     p "=> Creating instance #{instance_id} in zone #{cluster_location}."
 
-    job = bigtable_client.create_instance(
+    job = $bigtable.create_instance(
       instance_id,
       display_name: "Ruby Acceptance Test",
       labels: { env: "test" }
@@ -247,34 +232,16 @@ def bigtable_kms_key
 end
 
 create_test_instance(
-  $bigtable,
   bigtable_instance_id,
   bigtable_cluster_id,
   bigtable_cluster_location
 )
 
 create_test_instance(
-  $bigtable,
   bigtable_instance_id_2,
   bigtable_cluster_id_2,
   bigtable_cluster_location
 )
-
-if $bigtable_2
-  create_test_instance(
-    $bigtable_2,
-    bigtable_instance_id,
-    bigtable_cluster_id,
-    bigtable_cluster_location
-  )
-
-  create_test_instance(
-    $bigtable_2,
-    bigtable_instance_id_2,
-    bigtable_cluster_id_2,
-    bigtable_cluster_location
-  )
-end
 
 $bigtable_read_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 $bigtable_mutation_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"

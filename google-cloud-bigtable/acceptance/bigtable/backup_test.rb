@@ -21,7 +21,6 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:instance) { bigtable_instance }
   let(:instance_2) { bigtable_instance_2 }
   let(:cluster) { instance.clusters.first }
-  let(:cluster_2) { bigtable_2_instance.clusters.first }
   let(:table) { bigtable_read_table }
   let(:copy_backup_id_1) { "test-backup-#{random_str}" }
   let(:copy_backup_id_2) { "test-backup-#{random_str}" }
@@ -203,9 +202,9 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(backup_1.source_backup).must_equal source_backup
 
       # copy the backup using client class
-      job = bigtable.copy_backup dest_project_id: cluster_2.project_id,
-                                 dest_instance_id: cluster_2.instance_id,
-                                 dest_cluster_id: cluster_2.cluster_id,
+      job = bigtable.copy_backup dest_project_id: cluster.project_id,
+                                 dest_instance_id: cluster.instance_id,
+                                 dest_cluster_id: cluster.cluster_id,
                                  new_backup_id: copy_backup_id_2,
                                  source_instance_id: instance.instance_id,
                                  source_cluster_id: cluster.cluster_id,
