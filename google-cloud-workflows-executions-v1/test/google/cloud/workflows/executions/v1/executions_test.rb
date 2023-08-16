@@ -59,6 +59,8 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::ClientTest < Minit
     page_size = 42
     page_token = "hello world"
     view = :EXECUTION_VIEW_UNSPECIFIED
+    filter = "hello world"
+    order_by = "hello world"
 
     list_executions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_executions, name
@@ -67,6 +69,8 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::ClientTest < Minit
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal :EXECUTION_VIEW_UNSPECIFIED, request["view"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -77,35 +81,35 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::ClientTest < Minit
       end
 
       # Use hash object
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
+      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_executions parent: parent, page_size: page_size, page_token: page_token, view: view do |response, operation|
+      client.list_executions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_executions ::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |response, operation|
+      client.list_executions ::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
+      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_executions(::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
+      client.list_executions(::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
