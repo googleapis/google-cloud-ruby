@@ -2390,10 +2390,12 @@ module Google
         # @!attribute [rw] total_duration
         #   @return [::Google::Protobuf::Duration]
         #     The total duration should be equal to the sum of all durations above.
-        #     For routes, it also corresponds to
+        #     For routes, it also corresponds to:
+        #     ```
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_end_time ShipmentRoute.vehicle_end_time}
         #     -
-        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_start_time ShipmentRoute.vehicle_start_time}.
+        #     {::Google::Cloud::Optimization::V1::ShipmentRoute#vehicle_start_time ShipmentRoute.vehicle_start_time}
+        #     ```
         # @!attribute [rw] travel_distance_meters
         #   @return [::Float]
         #     Total travel distance for a route or a solution.
