@@ -43,6 +43,7 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/baremetalsolution/v2/baremetalsolution.rb",
     "proto_docs/google/cloud/baremetalsolution/v2/common.rb",
     "proto_docs/google/cloud/baremetalsolution/v2/instance.rb",
     "proto_docs/google/cloud/baremetalsolution/v2/lun.rb",

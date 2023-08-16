@@ -224,12 +224,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message from resetting a server.
-        class ResetInstanceResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Message requesting to start a server.
         # @!attribute [rw] name
         #   @return [::String]
@@ -303,6 +297,56 @@ module Google
         class DetachLunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Network template.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Template's unique name. The full resource name follows the
+        #     pattern:
+        #     `projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}`
+        #     Generally, the \\{server_network_template} follows the syntax of
+        #     "bond<interface_type_index><bond_mode>" or "nic<interface_type_index>".
+        # @!attribute [rw] applicable_instance_types
+        #   @return [::Array<::String>]
+        #     Instance types this template is applicable to.
+        # @!attribute [rw] logical_interfaces
+        #   @return [::Array<::Google::Cloud::BareMetalSolution::V2::ServerNetworkTemplate::LogicalInterface>]
+        #     Logical interfaces.
+        class ServerNetworkTemplate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Logical interface.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Interface name.
+          #     This is not a globally unique identifier.
+          #     Name is unique only inside the ServerNetworkTemplate. This is of syntax
+          #     <bond><interface_type_index><bond_mode> or <nic><interface_type_index>
+          #     and forms part of the network template name.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::BareMetalSolution::V2::ServerNetworkTemplate::LogicalInterface::InterfaceType]
+          #     Interface type.
+          # @!attribute [rw] required
+          #   @return [::Boolean]
+          #     If true, interface must have network connected.
+          class LogicalInterface
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Interface type.
+            module InterfaceType
+              # Unspecified value.
+              INTERFACE_TYPE_UNSPECIFIED = 0
+
+              # Bond interface type.
+              BOND = 1
+
+              # NIC interface type.
+              NIC = 2
+            end
+          end
         end
       end
     end
