@@ -21,37 +21,6 @@ module Google
   module Cloud
     module BareMetalSolution
       module V2
-        # Represents the metadata from a long-running operation.
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the operation was created.
-        # @!attribute [r] end_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the operation finished running.
-        # @!attribute [r] target
-        #   @return [::String]
-        #     Output only. Server-defined resource path for the target of the operation.
-        # @!attribute [r] verb
-        #   @return [::String]
-        #     Output only. Name of the action executed by the operation.
-        # @!attribute [r] status_message
-        #   @return [::String]
-        #     Output only. Human-readable status of the operation, if any.
-        # @!attribute [r] requested_cancellation
-        #   @return [::Boolean]
-        #     Output only. Identifies whether the user requested the cancellation
-        #     of the operation. Operations that have been successfully cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
-        # @!attribute [r] api_version
-        #   @return [::String]
-        #     Output only. API version used with the operation.
-        class OperationMetadata
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Performance tier of the Volume.
         module VolumePerformanceTier
           # Value is not specified.
