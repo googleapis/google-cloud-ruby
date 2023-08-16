@@ -26,7 +26,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:copy_backup_id_2) { "test-backup-#{random_str}" }
   let(:backup_id) { "test-backup-#{Time.now.to_i}-#{random_str}" }
   let(:now) { Time.now.round 0 }
-  let(:expire_time) { now + 60 * 60 * 7 }
+  let(:expire_time) { now + 60 * 60 * 720 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
   let(:restore_table_id) { "test-table-#{Time.now.to_i}-#{random_str}" }
   let(:restore_table_id_2) { "test-table-#{Time.now.to_i}-#{random_str}" }
