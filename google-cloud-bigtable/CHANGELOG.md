@@ -1,5 +1,11 @@
 # Release History
 
+### 2.8.0 (2023-08-17)
+
+#### Features
+
+* Added support for copybackup ([#19341](https://github.com/googleapis/google-cloud-ruby/issues/19341)) 
+
 ### 2.7.1 (2023-06-16)
 
 #### Documentation
