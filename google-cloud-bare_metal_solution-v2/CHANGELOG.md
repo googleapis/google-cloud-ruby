@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.1 (2023-08-17)
+
+#### Bug Fixes
+
+* Restore the locations of proto message classes that were moved in 0.5.0 ([#22793](https://github.com/googleapis/google-cloud-ruby/issues/22793)) 
+
 ### 0.5.0 (2023-08-15)
 
 #### Features
