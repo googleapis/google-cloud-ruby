@@ -288,8 +288,13 @@ module Google
         # A reference to a property relative to the kind expressions.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the property.
-        #     If name includes "."s, it may be interpreted as a property name path.
+        #     A reference to a property.
+        #
+        #     Requires:
+        #
+        #     * MUST be a dot-delimited (`.`) string of segments, where each segment
+        #     conforms to {::Google::Cloud::Datastore::V1::Entity#properties entity property name}
+        #     limitations.
         class PropertyReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
