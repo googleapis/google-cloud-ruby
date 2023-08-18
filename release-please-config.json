@@ -759,6 +759,10 @@
       "component": "google-cloud-language-v1beta2",
       "version_file": "lib/google/cloud/language/v1beta2/version.rb"
     },
+    "google-cloud-language-v2": {
+      "component": "google-cloud-language-v2",
+      "version_file": "lib/google/cloud/language/v2/version.rb"
+    },
     "google-cloud-life_sciences": {
       "component": "google-cloud-life_sciences",
       "version_file": "lib/google/cloud/life_sciences/version.rb"
