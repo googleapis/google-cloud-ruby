@@ -128,7 +128,7 @@ module Google
         # @param name [String] The property to sum by.
         # @param aggregate_alias [String] Alias to refer to the aggregate. Optional
         #
-        # @return [AggregateQuery] The modified aggregate query object with the added count aggregate.
+        # @return [AggregateQuery] The modified aggregate query object with the added SUM aggregate.
         #
         # @example
         #   require "google/cloud/datastore"
@@ -145,6 +145,22 @@ module Google
         #
         #   aggregate_query_results = dataset.run_aggregation aggregate_query
         #   puts aggregate_query_results.get
+        #
+        # @example Alias an aggregate SUM query
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where("done", "=", false)
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_sum("score", aggregate_alias: 'total_score')
+        #
+        #   aggregate_query_results = dataset.run_aggregation aggregate_query
+        #   puts aggregate_query_results.get('total_score')
         #
         def add_sum name, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:sum]
@@ -166,7 +182,7 @@ module Google
         # @param name [String] The property to apply average on.
         # @param aggregate_alias [String] Alias to refer to the aggregate. Optional
         #
-        # @return [AggregateQuery] The modified aggregate query object with the added count aggregate.
+        # @return [AggregateQuery] The modified aggregate query object with the added AVG aggregate.
         #
         # @example
         #   require "google/cloud/datastore"
@@ -183,6 +199,22 @@ module Google
         #
         #   aggregate_query_results = dataset.run_aggregation aggregate_query
         #   puts aggregate_query_results.get
+        #
+        # @example Alias an aggregate AVG query
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where("done", "=", false)
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_avg("score", aggregate_alias: 'avg_score')
+        #
+        #   aggregate_query_results = dataset.run_aggregation aggregate_query
+        #   puts aggregate_query_results.get('avg_score')
         #
         def add_avg name, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:avg]
