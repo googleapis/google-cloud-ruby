@@ -131,7 +131,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -186,7 +186,8 @@ module Google
               #   @param parent [::String]
               #     Required. The flow to list all transition route groups for.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     ID>/flows/<Flow ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 100 and
               #     at most 1000.
@@ -299,7 +300,9 @@ module Google
               #     Required. The name of the
               #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param language_code [::String]
               #     The language to retrieve the transition route group for. The following
               #     fields are language dependent:
@@ -406,7 +409,9 @@ module Google
               #     Required. The flow to create an
               #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
               #     for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     ID>/flows/<Flow ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+              #     for agent-level groups.
               #   @param transition_route_group [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup, ::Hash]
               #     Required. The transition route group to create.
               #   @param language_code [::String]
@@ -618,7 +623,8 @@ module Google
               #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
               #     to delete. Format: `projects/<Project ID>/locations/<Location
               #     ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
-              #     Route Group ID>`.
+              #     Route Group ID>` or `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param force [::Boolean]
               #     This field has no effect for transition route group that no page is using.
               #     If the transition route group is referenced by any page:
@@ -774,7 +780,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

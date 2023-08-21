@@ -19,6 +19,12 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/data/invoice.pdf",
+    "samples/acceptance/quickstart_test.rb",
+    "samples/quickstart.rb"
   ]
 }

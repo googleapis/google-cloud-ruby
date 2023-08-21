@@ -63,6 +63,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Options for a transaction that can be used to read and write documents.
+          #
+          # Firestore does not allow 3rd party auth requests to create read-write.
+          # transactions.
           # @!attribute [rw] retry_transaction
           #   @return [::String]
           #     An optional transaction to retry.
@@ -75,7 +78,10 @@ module Google
           # @!attribute [rw] read_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Reads documents at the given time.
-          #     This may not be older than 60 seconds.
+          #
+          #     This must be a microsecond precision timestamp within the past one
+          #     hour, or if Point-in-Time Recovery is enabled, can additionally be a
+          #     whole minute timestamp within the past 7 days.
           class ReadOnly
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

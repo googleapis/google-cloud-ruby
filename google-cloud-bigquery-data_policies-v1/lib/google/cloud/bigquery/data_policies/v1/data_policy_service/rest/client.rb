@@ -165,7 +165,7 @@ module Google
                   credentials = @config.credentials
                   # Use self-signed JWT if the endpoint is unchanged from default,
                   # but only if the default endpoint does not have a region prefix.
-                  enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                  enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                            !@config.endpoint.split(".").first.include?("-")
                   credentials ||= Credentials.default scope: @config.scope,
                                                       enable_self_signed_jwt: enable_self_signed_jwt
@@ -545,9 +545,10 @@ module Google
                 #     are associated with. Currently filter only supports
                 #     "policy<span></span>_tag" based filtering and OR based predicates. Sample
                 #     filter can be "policy<span></span>_tag:
-                #     `'projects/1/locations/us/taxonomies/2/policyTags/3'`". You may use
-                #     wildcard such as "policy<span></span>_tag:
-                #     `'projects/1/locations/us/taxonomies/2/*'`".
+                #     projects/1/locations/us/taxonomies/2/policyTags/3".
+                #     You may also use wildcard such as "policy<span></span>_tag:
+                #     projects/1/locations/us/taxonomies/2*". Please note that OR predicates
+                #     cannot be used with wildcard filters.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -872,7 +873,9 @@ module Google
                 class Configuration
                   extend ::Gapic::Config
 
-                  config_attr :endpoint,      "bigquerydatapolicy.googleapis.com", ::String
+                  DEFAULT_ENDPOINT = "bigquerydatapolicy.googleapis.com"
+
+                  config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                   config_attr :credentials,   nil do |value|
                     allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                     allowed.any? { |klass| klass === value }

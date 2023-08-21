@@ -158,6 +158,46 @@ module Google
             end
 
             ##
+            # Create a fully-qualified PrivateConnection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateConnections/{private_connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_connection [String]
+            #
+            # @return [::String]
+            def private_connection_path project:, location:, private_connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateConnections/#{private_connection}"
+            end
+
+            ##
+            # Create a fully-qualified Subnet resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateClouds/{private_cloud}/subnets/{subnet}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_cloud [String]
+            # @param subnet [String]
+            #
+            # @return [::String]
+            def subnet_path project:, location:, private_cloud:, subnet:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "private_cloud cannot contain /" if private_cloud.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateClouds/#{private_cloud}/subnets/#{subnet}"
+            end
+
+            ##
             # Create a fully-qualified VmwareEngineNetwork resource string.
             #
             # The resource will be in the following format:

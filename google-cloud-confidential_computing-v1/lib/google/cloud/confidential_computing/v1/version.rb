@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ConfidentialComputing
       module V1
-        VERSION = "0.0.1"
+        VERSION = "0.4.0"
       end
     end
   end

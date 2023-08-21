@@ -280,6 +280,56 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#mutate_deployed_model EndpointService.MutateDeployedModel}.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint resource into which to mutate a
+        #     DeployedModel. Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] deployed_model
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployedModel]
+        #     Required. The DeployedModel to be mutated within the Endpoint. Only the
+        #     following fields can be mutated:
+        #
+        #     * `min_replica_count` in either
+        #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources} or
+        #     {::Google::Cloud::AIPlatform::V1::AutomaticResources AutomaticResources}
+        #     * `max_replica_count` in either
+        #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources} or
+        #     {::Google::Cloud::AIPlatform::V1::AutomaticResources AutomaticResources}
+        #     * {::Google::Cloud::AIPlatform::V1::DedicatedResources#autoscaling_metric_specs autoscaling_metric_specs}
+        #     * `disable_container_logging` (v1 only)
+        #     * `enable_container_logging` (v1beta1 only)
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The update mask applies to the resource. See
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        class MutateDeployedModelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#mutate_deployed_model EndpointService.MutateDeployedModel}.
+        # @!attribute [rw] deployed_model
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployedModel]
+        #     The DeployedModel that's being mutated.
+        class MutateDeployedModelResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#mutate_deployed_model EndpointService.MutateDeployedModel}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        class MutateDeployedModelOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

@@ -28,10 +28,9 @@ module Google
         # @!attribute [rw] uri
         #   @return [::String]
         #     Optional. Currently supports Google Cloud Storage URI of the form
-        #        `gs://bucket_name/object_name`. Object versioning is not supported.
-        #        See [Google Cloud Storage Request
-        #        URIs](https://cloud.google.com/storage/docs/reference-uris) for more
-        #        info.
+        #     `gs://bucket_name/object_name`. Object versioning is not supported.
+        #     For more information, refer to [Google Cloud Storage Request
+        #     URIs](https://cloud.google.com/storage/docs/reference-uris).
         # @!attribute [rw] content
         #   @return [::String]
         #     Optional. Inline document content, represented as a stream of bytes.
@@ -39,9 +38,8 @@ module Google
         #     representation, whereas JSON representations use base64.
         # @!attribute [rw] mime_type
         #   @return [::String]
-        #     An IANA published MIME type (also referred to as media type). For more
-        #     information, see
-        #     https://www.iana.org/assignments/media-types/media-types.xhtml.
+        #     An IANA published [media type (MIME
+        #     type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
         # @!attribute [rw] text
         #   @return [::String]
         #     Optional. UTF-8 encoded text in reading order from the document.
@@ -115,17 +113,18 @@ module Google
           #     Text background color.
           # @!attribute [rw] font_weight
           #   @return [::String]
-          #     Font weight. Possible values are normal, bold, bolder, and lighter.
-          #     https://www.w3schools.com/cssref/pr_font_weight.asp
+          #     [Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp).
+          #     Possible values are `normal`, `bold`, `bolder`, and `lighter`.
           # @!attribute [rw] text_style
           #   @return [::String]
-          #     Text style. Possible values are normal, italic, and oblique.
-          #     https://www.w3schools.com/cssref/pr_font_font-style.asp
+          #     [Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp).
+          #     Possible values are `normal`, `italic`, and `oblique`.
           # @!attribute [rw] text_decoration
           #   @return [::String]
-          #     Text decoration. Follows CSS standard.
-          #     <text-decoration-line> <text-decoration-color> <text-decoration-style>
-          #     https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          #     [Text
+          #     decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp).
+          #     Follows CSS standard. <text-decoration-line> <text-decoration-color>
+          #     <text-decoration-style>
           # @!attribute [rw] font_size
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Style::FontSize]
           #     Font size.
@@ -143,7 +142,8 @@ module Google
             #     Font size for the text.
             # @!attribute [rw] unit
             #   @return [::String]
-            #     Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+            #     Unit for the font size. Follows CSS naming (such as `in`, `px`, and
+            #     `pt`).
             class FontSize
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -212,7 +212,7 @@ module Google
           #     A list of detected barcodes.
           # @!attribute [rw] image_quality_scores
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::ImageQualityScores]
-          #     Image Quality Scores.
+          #     Image quality scores.
           # @!attribute [rw] provenance
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
           #     The history of this page.
@@ -241,7 +241,9 @@ module Google
             #     Raw byte content of the image.
             # @!attribute [rw] mime_type
             #   @return [::String]
-            #     Encoding mime type for the image.
+            #     Encoding [media type (MIME
+            #     type)](https://www.iana.org/assignments/media-types/media-types.xhtml)
+            #     for the image.
             # @!attribute [rw] width
             #   @return [::Integer]
             #     Width of the image in pixels.
@@ -386,6 +388,9 @@ module Google
             # @!attribute [rw] provenance
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
             #     The history of this annotation.
+            # @!attribute [rw] style_info
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::Token::StyleInfo]
+            #     Text style attributes.
             class Token
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -413,6 +418,62 @@ module Google
                   # A hyphen that indicates that a token has been split across lines.
                   HYPHEN = 3
                 end
+              end
+
+              # Font and other text style attributes.
+              # @!attribute [rw] font_size
+              #   @return [::Integer]
+              #     Font size in points (`1` point is `¹⁄₇₂` inches).
+              # @!attribute [rw] pixel_font_size
+              #   @return [::Float]
+              #     Font size in pixels, equal to _unrounded
+              #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Token::StyleInfo#font_size font_size}_
+              #     * _resolution_ ÷ `72.0`.
+              # @!attribute [rw] letter_spacing
+              #   @return [::Float]
+              #     Letter spacing in points.
+              # @!attribute [rw] font_type
+              #   @return [::String]
+              #     Name or style of the font.
+              # @!attribute [rw] bold
+              #   @return [::Boolean]
+              #     Whether the text is bold (equivalent to
+              #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Token::StyleInfo#font_weight font_weight}
+              #     is at least `700`).
+              # @!attribute [rw] italic
+              #   @return [::Boolean]
+              #     Whether the text is italic.
+              # @!attribute [rw] underlined
+              #   @return [::Boolean]
+              #     Whether the text is underlined.
+              # @!attribute [rw] strikeout
+              #   @return [::Boolean]
+              #     Whether the text is strikethrough.
+              # @!attribute [rw] subscript
+              #   @return [::Boolean]
+              #     Whether the text is a subscript.
+              # @!attribute [rw] superscript
+              #   @return [::Boolean]
+              #     Whether the text is a superscript.
+              # @!attribute [rw] smallcaps
+              #   @return [::Boolean]
+              #     Whether the text is in small caps.
+              # @!attribute [rw] font_weight
+              #   @return [::Integer]
+              #     TrueType weight on a scale `100` (thin) to `1000` (ultra-heavy).
+              #     Normal is `400`, bold is `700`.
+              # @!attribute [rw] handwritten
+              #   @return [::Boolean]
+              #     Whether the text is handwritten.
+              # @!attribute [rw] text_color
+              #   @return [::Google::Type::Color]
+              #     Color of the text.
+              # @!attribute [rw] background_color
+              #   @return [::Google::Type::Color]
+              #     Color of the background.
+              class StyleInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
 
@@ -557,9 +618,9 @@ module Google
             # Detected language for a structural component.
             # @!attribute [rw] language_code
             #   @return [::String]
-            #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
-            #     information, see
-            #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            #     The [BCP-47 language
+            #     code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier),
+            #     such as `en-US` or `sr-Latn`.
             # @!attribute [rw] confidence
             #   @return [::Float]
             #     Confidence of detected language. Range `[0, 1]`.
@@ -568,10 +629,10 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Image Quality Scores for the page image
+            # Image quality scores for the page image.
             # @!attribute [rw] quality_score
             #   @return [::Float]
-            #     The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+            #     The overall quality score. Range `[0, 1]` where `1` is perfect quality.
             # @!attribute [rw] detected_defects
             #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::ImageQualityScores::DetectedDefect>]
             #     A list of detected defects.
@@ -594,8 +655,8 @@ module Google
               #     - `quality/defect_glare`
               # @!attribute [rw] confidence
               #   @return [::Float]
-              #     Confidence of detected defect. Range `[0, 1]` where 1 indicates
-              #     strong confidence of that the defect exists.
+              #     Confidence of detected defect. Range `[0, 1]` where `1` indicates
+              #     strong confidence that the defect exists.
               class DetectedDefect
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -883,9 +944,9 @@ module Google
               REMOVE = 2
 
               # Updates any fields within the given provenance scope of the message. It
-              # 'overwrites'  the fields rather than replacing them.  This is
-              # especially relevant when we just want to update a field value of an
-              # entity without also affecting all the child properties.
+              # overwrites the fields rather than replacing them.  Use this when you
+              # want to update a field value of an entity without also updating all the
+              # child properties.
               UPDATE = 7
 
               # Currently unused. Replace an element identified by `parent`.
@@ -970,6 +1031,38 @@ module Google
           class TextChange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The revision reference specifies which revision on the document to read.
+        # @!attribute [rw] revision_case
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::RevisionRef::RevisionCase]
+        #     Reads the revision by the predefined case.
+        # @!attribute [rw] revision_id
+        #   @return [::String]
+        #     Reads the revision given by the id.
+        # @!attribute [rw] latest_processor_version
+        #   @return [::String]
+        #     Reads the revision generated by the processor version.
+        #     The format takes the full resource name of processor version.
+        #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+        class RevisionRef
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Some predefined revision cases.
+          module RevisionCase
+            # Unspecified case, fallback to read the LATEST_HUMAN_REVIEW.
+            REVISION_CASE_UNSPECIFIED = 0
+
+            # The latest revision made by a human.
+            LATEST_HUMAN_REVIEW = 1
+
+            # The latest revision based on timestamp.
+            LATEST_TIMESTAMP = 2
+
+            # The first (OCR) revision.
+            BASE_OCR_REVISION = 3
           end
         end
       end

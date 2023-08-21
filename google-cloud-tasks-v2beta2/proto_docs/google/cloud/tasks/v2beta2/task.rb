@@ -39,7 +39,7 @@ module Google
         #        projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
         #     * `LOCATION_ID` is the canonical ID for the task's location.
         #        The list of available locations can be obtained by calling
-        #        [ListLocations][google.cloud.location.Locations.ListLocations].
+        #        `::Google::Cloud::Location::Locations::Client#list_locations`.
         #        For more information, see https://cloud.google.com/about/locations/.
         #     * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
         #       hyphens (-). The maximum length is 100 characters.
@@ -64,6 +64,12 @@ module Google
         #
         #     A pull task is a task that has
         #     {::Google::Cloud::Tasks::V2beta2::PullMessage PullMessage} set.
+        # @!attribute [rw] http_request
+        #   @return [::Google::Cloud::Tasks::V2beta2::HttpRequest]
+        #     HTTP request that is sent to the task's target.
+        #
+        #     An HTTP task is a task that has
+        #     {::Google::Cloud::Tasks::V2beta2::HttpRequest HttpRequest} set.
         # @!attribute [rw] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted.

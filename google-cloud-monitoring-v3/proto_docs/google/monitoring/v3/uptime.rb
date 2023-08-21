@@ -29,13 +29,13 @@ module Google
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/internalCheckers/[INTERNAL_CHECKER_ID]
         #
-        #     `[PROJECT_ID_OR_NUMBER]` is the Stackdriver Workspace project for the
-        #     Uptime check config associated with the internal checker.
+        #     `[PROJECT_ID_OR_NUMBER]` is the Cloud Monitoring Metrics Scope project for
+        #     the Uptime check config associated with the internal checker.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The checker's human-readable name. The display name
-        #     should be unique within a Stackdriver Workspace in order to make it easier
-        #     to identify; however, uniqueness is not enforced.
+        #     should be unique within a Cloud Monitoring Metrics Scope in order to make
+        #     it easier to identify; however, uniqueness is not enforced.
         # @!attribute [rw] network
         #   @return [::String]
         #     The [GCP VPC network](https://cloud.google.com/vpc/docs/vpc) where the
@@ -47,7 +47,7 @@ module Google
         # @!attribute [rw] peer_project_id
         #   @return [::String]
         #     The GCP project ID where the internal checker lives. Not necessary
-        #     the same as the Workspace project.
+        #     the same as the Metrics Scope project.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Monitoring::V3::InternalChecker::State]
         #     The current operational state of the internal checker.
@@ -95,8 +95,8 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     A human-friendly name for the Uptime check configuration. The display name
-        #     should be unique within a Stackdriver Workspace in order to make it easier
-        #     to identify; however, uniqueness is not enforced. Required.
+        #     should be unique within a Cloud Monitoring Workspace in order to make it
+        #     easier to identify; however, uniqueness is not enforced. Required.
         # @!attribute [rw] monitored_resource
         #   @return [::Google::Api::MonitoredResource]
         #     The [monitored
@@ -109,6 +109,8 @@ module Google
         #       `aws_ec2_instance`,
         #       `aws_elb_load_balancer`
         #       `k8s_service`
+        #       `servicedirectory_service`
+        #       `cloud_run_revision`
         # @!attribute [rw] resource_group
         #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::ResourceGroup]
         #     The group resource associated with the configuration.
@@ -135,6 +137,9 @@ module Google
         #     in the `content_matchers` list is supported, and additional entries will
         #     be ignored. This field is optional and should only be specified if a
         #     content match is required as part of the/ Uptime check.
+        # @!attribute [rw] checker_type
+        #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::CheckerType]
+        #     The type of checkers to use to execute the Uptime check.
         # @!attribute [rw] selected_regions
         #   @return [::Array<::Google::Cloud::Monitoring::V3::UptimeCheckRegion>]
         #     The list of regions from which the check will be run.
@@ -154,6 +159,15 @@ module Google
         #     `true` and this list is empty, the check will egress from all the
         #     InternalCheckers configured for the project that owns this
         #     `UptimeCheckConfig`.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     User-supplied key/value data to be used for organizing and
+        #     identifying the `UptimeCheckConfig` objects.
+        #
+        #     The field can contain up to 64 entries. Each key and value is limited to
+        #     63 Unicode characters or 128 bytes, whichever is smaller. Labels and
+        #     values can contain only lowercase letters, numerals, underscores, and
+        #     dashes. Keys must begin with a letter.
         class UptimeCheckConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -169,6 +183,17 @@ module Google
           #   @return [::Google::Cloud::Monitoring::V3::GroupResourceType]
           #     The resource type of the group members.
           class ResourceGroup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information involved in sending ICMP pings alongside public HTTP/TCP
+          # checks. For HTTP, the pings are performed for each part of the redirect
+          # chain.
+          # @!attribute [rw] pings_count
+          #   @return [::Integer]
+          #     Number of ICMP pings. A maximum of 3 ICMP pings is currently supported.
+          class PingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -226,6 +251,14 @@ module Google
           #     3. Request method is `POST` and `content_type` is `TYPE_UNSPECIFIED`.
           #     4. Request method is `POST` and a "Content-Type" header is provided via
           #     `headers` field. The `content_type` field should be used instead.
+          # @!attribute [rw] custom_content_type
+          #   @return [::String]
+          #     A user provided content type header to use for the check. The invalid
+          #     configurations outlined in the `content_type` field apply to
+          #     `custom_content_type`, as well as the following:
+          #     1. `content_type` is `URL_ENCODED` and `custom_content_type` is set.
+          #     2. `content_type` is `USER_PROVIDED` and `custom_content_type` is not
+          #     set.
           # @!attribute [rw] validate_ssl
           #   @return [::Boolean]
           #     Boolean specifying whether to include SSL certificate validation as a
@@ -238,10 +271,19 @@ module Google
           #     is `URL_ENCODED`, the body passed in must be URL-encoded. Users can
           #     provide a `Content-Length` header via the `headers` field or the API will
           #     do so. If the `request_method` is `GET` and `body` is not empty, the API
-          #     will return an error. The maximum byte size is 1 megabyte. Note: As with
-          #     all `bytes` fields, JSON representations are base64 encoded. e.g.:
-          #     "foo=bar" in URL-encoded form is "foo%3Dbar" and in base64 encoding is
-          #     "Zm9vJTI1M0RiYXI=".
+          #     will return an error. The maximum byte size is 1 megabyte.
+          #
+          #     Note: If client libraries aren't used (which performs the conversion
+          #     automatically) base64 encode your `body` data since the field is of
+          #     `bytes` type.
+          # @!attribute [rw] accepted_response_status_codes
+          #   @return [::Array<::Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck::ResponseStatusCode>]
+          #     If present, the check will only pass if the HTTP response status code is
+          #     in this set of status codes. If empty, the HTTP status code will only
+          #     pass if the HTTP status code is 200-299.
+          # @!attribute [rw] ping_config
+          #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::PingConfig]
+          #     Contains information needed to add pings to an HTTP check.
           class HttpCheck
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -259,6 +301,43 @@ module Google
             class BasicAuthentication
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A status to accept. Either a status code class like "2xx", or an integer
+            # status code like "200".
+            # @!attribute [rw] status_value
+            #   @return [::Integer]
+            #     A status code to accept.
+            # @!attribute [rw] status_class
+            #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck::ResponseStatusCode::StatusClass]
+            #     A class of status codes to accept.
+            class ResponseStatusCode
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # An HTTP status code class.
+              module StatusClass
+                # Default value that matches no status codes.
+                STATUS_CLASS_UNSPECIFIED = 0
+
+                # The class of status codes between 100 and 199.
+                STATUS_CLASS_1XX = 100
+
+                # The class of status codes between 200 and 299.
+                STATUS_CLASS_2XX = 200
+
+                # The class of status codes between 300 and 399.
+                STATUS_CLASS_3XX = 300
+
+                # The class of status codes between 400 and 499.
+                STATUS_CLASS_4XX = 400
+
+                # The class of status codes between 500 and 599.
+                STATUS_CLASS_5XX = 500
+
+                # The class of all status codes.
+                STATUS_CLASS_ANY = 1000
+              end
             end
 
             # @!attribute [rw] key
@@ -290,6 +369,11 @@ module Google
               # `body` is in URL-encoded form. Equivalent to setting the `Content-Type`
               # to `application/x-www-form-urlencoded` in the HTTP request.
               URL_ENCODED = 1
+
+              # `body` is in `custom_content_type` form. Equivalent to setting the
+              # `Content-Type` to the contents of `custom_content_type` in the HTTP
+              # request.
+              USER_PROVIDED = 2
             end
           end
 
@@ -299,6 +383,9 @@ module Google
           #     The TCP port on the server against which to run the check. Will be
           #     combined with host (specified within the `monitored_resource`) to
           #     construct the full URL. Required.
+          # @!attribute [rw] ping_config
+          #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::PingConfig]
+          #     Contains information needed to add pings to a TCP check.
           class TcpCheck
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -311,15 +398,50 @@ module Google
           # matching.
           # @!attribute [rw] content
           #   @return [::String]
-          #     String or regex content to match. Maximum 1024 bytes. An empty `content`
-          #     string indicates no content matching is to be performed.
+          #     String, regex or JSON content to match. Maximum 1024 bytes. An empty
+          #     `content` string indicates no content matching is to be performed.
           # @!attribute [rw] matcher
           #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::ContentMatcher::ContentMatcherOption]
           #     The type of content matcher that will be applied to the server output,
           #     compared to the `content` string when the check is run.
+          # @!attribute [rw] json_path_matcher
+          #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::ContentMatcher::JsonPathMatcher]
+          #     Matcher information for `MATCHES_JSON_PATH` and `NOT_MATCHES_JSON_PATH`
           class ContentMatcher
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information needed to perform a JSONPath content match.
+            # Used for `ContentMatcherOption::MATCHES_JSON_PATH` and
+            # `ContentMatcherOption::NOT_MATCHES_JSON_PATH`.
+            # @!attribute [rw] json_path
+            #   @return [::String]
+            #     JSONPath within the response output pointing to the expected
+            #     `ContentMatcher::content` to match against.
+            # @!attribute [rw] json_matcher
+            #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::ContentMatcher::JsonPathMatcher::JsonPathMatcherOption]
+            #     The type of JSONPath match that will be applied to the JSON output
+            #     (`ContentMatcher.content`)
+            class JsonPathMatcher
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Options to perform JSONPath content matching.
+              module JsonPathMatcherOption
+                # No JSONPath matcher type specified (not valid).
+                JSON_PATH_MATCHER_OPTION_UNSPECIFIED = 0
+
+                # Selects 'exact string' matching. The match succeeds if the content at
+                # the `json_path` within the output is exactly the same as the
+                # `content` string.
+                EXACT_MATCH = 1
+
+                # Selects regular-expression matching. The match succeeds if the
+                # content at the `json_path` within the output matches the regular
+                # expression specified in the `content` string.
+                REGEX_MATCH = 2
+              end
+            end
 
             # Options to perform content matching.
             module ContentMatcherOption
@@ -338,7 +460,7 @@ module Google
               # output does _NOT_ contain the `content` string.
               NOT_CONTAINS_STRING = 2
 
-              # Selects regular-expression matching. The match succeeds of the output
+              # Selects regular-expression matching. The match succeeds if the output
               # matches the regular expression specified in the `content` string.
               # Regex matching is only supported for HTTP/HTTPS checks.
               MATCHES_REGEX = 3
@@ -348,7 +470,43 @@ module Google
               # `content` string. Regex matching is only supported for HTTP/HTTPS
               # checks.
               NOT_MATCHES_REGEX = 4
+
+              # Selects JSONPath matching. See `JsonPathMatcher` for details on when
+              # the match succeeds. JSONPath matching is only supported for HTTP/HTTPS
+              # checks.
+              MATCHES_JSON_PATH = 5
+
+              # Selects JSONPath matching. See `JsonPathMatcher` for details on when
+              # the match succeeds. Succeeds when output does _NOT_ match as specified.
+              # JSONPath is only supported for HTTP/HTTPS checks.
+              NOT_MATCHES_JSON_PATH = 6
             end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # What kind of checkers are available to be used by the check.
+          module CheckerType
+            # The default checker type. Currently converted to `STATIC_IP_CHECKERS`
+            # on creation, the default conversion behavior may change in the future.
+            CHECKER_TYPE_UNSPECIFIED = 0
+
+            # `STATIC_IP_CHECKERS` are used for uptime checks that perform egress
+            # across the public internet. `STATIC_IP_CHECKERS` use the static IP
+            # addresses returned by `ListUptimeCheckIps`.
+            STATIC_IP_CHECKERS = 1
+
+            # `VPC_CHECKERS` are used for uptime checks that perform egress using
+            # Service Directory and private network access. When using `VPC_CHECKERS`,
+            # the monitored resource type must be `servicedirectory_service`.
+            VPC_CHECKERS = 3
           end
         end
 
@@ -393,6 +551,18 @@ module Google
           # Allows checks to run from locations within the Asia Pacific area (ex:
           # Singapore).
           ASIA_PACIFIC = 4
+
+          # Allows checks to run from locations within the western United States of
+          # America
+          USA_OREGON = 5
+
+          # Allows checks to run from locations within the central United States of
+          # America
+          USA_IOWA = 6
+
+          # Allows checks to run from locations within the eastern United States of
+          # America
+          USA_VIRGINIA = 7
         end
 
         # The supported resource types that can be used as values of

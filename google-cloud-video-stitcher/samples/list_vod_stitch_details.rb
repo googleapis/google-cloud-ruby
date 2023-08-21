@@ -27,7 +27,8 @@ def list_vod_stitch_details project_id:, location:, session_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
-  parent = client.vod_session_path project: project_id, location: location, vod_session: session_id
+  parent = client.vod_session_path project: project_id, location: location,
+                                   vod_session: session_id
 
   # List all stitch details for the VOD session.
   response = client.list_vod_stitch_details parent: parent

@@ -27,7 +27,8 @@ def get_slate project_id:, location:, slate_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the slate.
-  name = client.slate_path project: project_id, location: location, slate: slate_id
+  name = client.slate_path project: project_id, location: location,
+                           slate: slate_id
 
   # Get the slate.
   slate = client.get_slate name: name

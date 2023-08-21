@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.5.0 (2023-08-15)
+
+#### Features
+
+* Added crypto_key_name, state_error, call_log_level, and user_env_vars to the Workflow resource 
+* get_workflow supports retrieving a specific revision ID 
+* Support for location calls ([#22777](https://github.com/googleapis/google-cloud-ruby/issues/22777)) 
+* Support for the UNAVAILABLE workflow state 
+
+### 0.4.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.4.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21680](https://github.com/googleapis/google-cloud-ruby/issues/21680)) 
+
 ### 0.3.0 (2023-03-08)
 
 #### Features

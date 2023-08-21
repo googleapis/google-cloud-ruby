@@ -1,5 +1,24 @@
 # Release History
 
+### 0.10.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+* Add three per company option to diversification levels ([#21904](https://github.com/googleapis/google-cloud-ruby/issues/21904)) 
+
+### 0.9.1 (2023-05-04)
+
+#### Bug Fixes
+
+* Fixed timeout settings for search_jobs_for_alert 
+
 ### 0.9.0 (2023-03-08)
 
 #### Features

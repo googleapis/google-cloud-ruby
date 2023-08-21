@@ -74,6 +74,11 @@
               "methods": [
                 "fetch_linkable_repositories"
               ]
+            },
+            "FetchGitRefs": {
+              "methods": [
+                "fetch_git_refs"
+              ]
             }
           }
         }

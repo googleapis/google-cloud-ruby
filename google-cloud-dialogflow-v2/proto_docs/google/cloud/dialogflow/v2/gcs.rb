@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] uris
         #   @return [::Array<::String>]
         #     Required. Google Cloud Storage URIs for the inputs. A URI is of the form:
-        #       gs://bucket/object-prefix-or-name
+        #     `gs://bucket/object-prefix-or-name`
         #     Whether a prefix or name is used depends on the use case.
         class GcsSources
           include ::Google::Protobuf::MessageExts
@@ -37,7 +37,7 @@ module Google
         #   @return [::String]
         #     The Google Cloud Storage URIs for the output. A URI is of the
         #     form:
-        #       gs://bucket/object-prefix-or-name
+        #     `gs://bucket/object-prefix-or-name`
         #     Whether a prefix or name is used depends on the use case. The requesting
         #     user must have "write-permission" to the bucket.
         class GcsDestination

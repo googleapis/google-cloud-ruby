@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The max number of items to include in the response list. Page size is 50
-        #     if not specified. Maximum value is 100.
+        #     if not specified. Maximum value is 500.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Token identifying which result to start with; returned by a previous list
@@ -80,8 +80,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         class DeleteServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,8 +91,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service. See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements. For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements. For example: `example.googleapis.com`.
         class UndeleteServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -111,8 +111,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] config_id
         #   @return [::String]
         #     Required. The id of the service configuration resource.
@@ -143,8 +143,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The token of the page to retrieve.
@@ -173,8 +173,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] service_config
         #   @return [::Google::Api::Service]
         #     Required. The service configuration resource.
@@ -187,8 +187,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] config_source
         #   @return [::Google::Cloud::ServiceManagement::V1::ConfigSource]
         #     Required. The source configuration for the service.
@@ -215,8 +215,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] rollout
         #   @return [::Google::Cloud::ServiceManagement::V1::Rollout]
         #     Required. The rollout resource. The `service_name` field is output only.
@@ -229,8 +229,8 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The token of the page to retrieve.
@@ -242,12 +242,14 @@ module Google
         #   @return [::String]
         #     Required. Use `filter` to return subset of rollouts.
         #     The following filters are supported:
-        #       -- To limit the results to only those in
-        #          status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
-        #          use filter='status=SUCCESS'
-        #       -- To limit the results to those in
-        #          status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
-        #          or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+        #
+        #      -- By [status]
+        #      [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
+        #      `filter='status=SUCCESS'`
+        #
+        #      -- By [strategy]
+        #      [google.api.servicemanagement.v1.Rollout.strategy]. For example,
+        #      `filter='strategy=TrafficPercentStrategy'`
         class ListServiceRolloutsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -269,12 +271,18 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-        #     example: `example.googleapis.com`.
+        #     [overview](https://cloud.google.com/service-management/overview) for naming
+        #     requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] rollout_id
         #   @return [::String]
         #     Required. The id of the rollout resource.
         class GetServiceRolloutRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Operation payload for EnableService method.
+        class EnableServiceResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

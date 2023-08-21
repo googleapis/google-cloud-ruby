@@ -223,6 +223,143 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # Execute Airflow Command request.
+            # @!attribute [rw] environment
+            #   @return [::String]
+            #     The resource name of the environment in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}".
+            # @!attribute [rw] command
+            #   @return [::String]
+            #     Airflow command.
+            # @!attribute [rw] subcommand
+            #   @return [::String]
+            #     Airflow subcommand.
+            # @!attribute [rw] parameters
+            #   @return [::Array<::String>]
+            #     Parameters for the Airflow command/subcommand as an array of arguments.
+            #     It may contain positional arguments like `["my-dag-id"]`, key-value
+            #     parameters like `["--foo=bar"]` or `["--foo","bar"]`,
+            #     or other flags like `["-f"]`.
+            class ExecuteAirflowCommandRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Response to ExecuteAirflowCommandRequest.
+            # @!attribute [rw] execution_id
+            #   @return [::String]
+            #     The unique ID of the command execution for polling.
+            # @!attribute [rw] pod
+            #   @return [::String]
+            #     The name of the pod where the command is executed.
+            # @!attribute [rw] pod_namespace
+            #   @return [::String]
+            #     The namespace of the pod where the command is executed.
+            # @!attribute [rw] error
+            #   @return [::String]
+            #     Error message. Empty if there was no error.
+            class ExecuteAirflowCommandResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Stop Airflow Command request.
+            # @!attribute [rw] environment
+            #   @return [::String]
+            #     The resource name of the environment in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}".
+            # @!attribute [rw] execution_id
+            #   @return [::String]
+            #     The unique ID of the command execution.
+            # @!attribute [rw] pod
+            #   @return [::String]
+            #     The name of the pod where the command is executed.
+            # @!attribute [rw] pod_namespace
+            #   @return [::String]
+            #     The namespace of the pod where the command is executed.
+            # @!attribute [rw] force
+            #   @return [::Boolean]
+            #     If true, the execution is terminated forcefully (SIGKILL). If false, the
+            #     execution is stopped gracefully, giving it time for cleanup.
+            class StopAirflowCommandRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Response to StopAirflowCommandRequest.
+            # @!attribute [rw] is_done
+            #   @return [::Boolean]
+            #     Whether the execution is still running.
+            # @!attribute [rw] output
+            #   @return [::Array<::String>]
+            #     Output message from stopping execution request.
+            class StopAirflowCommandResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Poll Airflow Command request.
+            # @!attribute [rw] environment
+            #   @return [::String]
+            #     The resource name of the environment in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] execution_id
+            #   @return [::String]
+            #     The unique ID of the command execution.
+            # @!attribute [rw] pod
+            #   @return [::String]
+            #     The name of the pod where the command is executed.
+            # @!attribute [rw] pod_namespace
+            #   @return [::String]
+            #     The namespace of the pod where the command is executed.
+            # @!attribute [rw] next_line_number
+            #   @return [::Integer]
+            #     Line number from which new logs should be fetched.
+            class PollAirflowCommandRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Response to PollAirflowCommandRequest.
+            # @!attribute [rw] output
+            #   @return [::Array<::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse::Line>]
+            #     Output from the command execution. It may not contain the full output
+            #     and the caller may need to poll for more lines.
+            # @!attribute [rw] output_end
+            #   @return [::Boolean]
+            #     Whether the command execution has finished and there is no more output.
+            # @!attribute [rw] exit_info
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse::ExitInfo]
+            #     The result exit status of the command.
+            class PollAirflowCommandResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Contains information about a single line from logs.
+              # @!attribute [rw] line_number
+              #   @return [::Integer]
+              #     Number of the line.
+              # @!attribute [rw] content
+              #   @return [::String]
+              #     Text content of the log line.
+              class Line
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Information about how a command ended.
+              # @!attribute [rw] exit_code
+              #   @return [::Integer]
+              #     The exit code from the command execution.
+              # @!attribute [rw] error
+              #   @return [::String]
+              #     Error message. Empty if there was no error.
+              class ExitInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
             # Request to create a snapshot of a Cloud Composer environment.
             # @!attribute [rw] environment
             #   @return [::String]
@@ -281,6 +418,51 @@ module Google
 
             # Response to LoadSnapshotRequest.
             class LoadSnapshotResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Request to trigger database failover (only for highly resilient
+            # environments).
+            # @!attribute [rw] environment
+            #   @return [::String]
+            #     Target environment:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            class DatabaseFailoverRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Response for DatabaseFailoverRequest.
+            class DatabaseFailoverResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Request to fetch properties of environment's database.
+            # @!attribute [rw] environment
+            #   @return [::String]
+            #     Required. The resource name of the environment, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            class FetchDatabasePropertiesRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Response for FetchDatabasePropertiesRequest.
+            # @!attribute [rw] primary_gce_zone
+            #   @return [::String]
+            #     The Compute Engine zone that the instance is currently serving from.
+            # @!attribute [rw] secondary_gce_zone
+            #   @return [::String]
+            #     The Compute Engine zone that the failover instance is currently serving
+            #     from for a regional Cloud SQL instance.
+            # @!attribute [rw] is_failover_replica_available
+            #   @return [::Boolean]
+            #     The availability status of the failover replica. A false status indicates
+            #     that the failover replica is out of sync. The primary instance can only
+            #     fail over to the failover replica when the status is true.
+            class FetchDatabasePropertiesResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -364,6 +546,13 @@ module Google
             #     Output only. The URI of the Apache Airflow Web UI hosted within this
             #     environment (see [Airflow web
             #     interface](/composer/docs/how-to/accessing/airflow-web-interface)).
+            # @!attribute [r] airflow_byoid_uri
+            #   @return [::String]
+            #     Output only. The 'bring your own identity' variant of the URI of the Apache
+            #     Airflow Web UI hosted within this environment, to be accessed with external
+            #     identities using workforce identity federation (see [Access environments
+            #     with workforce identity
+            #     federation](/composer/docs/composer-2/access-environments-with-workforce-identity-federation)).
             # @!attribute [rw] master_authorized_networks_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::MasterAuthorizedNetworksConfig]
             #     Optional. The configuration options for GKE cluster master authorized
@@ -377,6 +566,12 @@ module Google
             #
             #     This field is supported for Cloud Composer environments in versions
             #     composer-2.*.*-airflow-*.*.* and newer.
+            # @!attribute [rw] resilience_mode
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::EnvironmentConfig::ResilienceMode]
+            #     Optional. Resilience mode of the Cloud Composer Environment.
+            #
+            #     This field is supported for Cloud Composer environments in versions
+            #     composer-2.2.0-airflow-*.*.* and newer.
             class EnvironmentConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -394,6 +589,15 @@ module Google
 
                 # The environment size is large.
                 ENVIRONMENT_SIZE_LARGE = 3
+              end
+
+              # Resilience mode of the Cloud Composer Environment.
+              module ResilienceMode
+                # Default mode doesn't change environment parameters.
+                RESILIENCE_MODE_UNSPECIFIED = 0
+
+                # Enabled High Resilience mode, including Cloud SQL HA.
+                HIGH_RESILIENCE = 1
               end
             end
 

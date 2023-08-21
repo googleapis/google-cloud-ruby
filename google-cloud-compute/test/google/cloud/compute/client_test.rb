@@ -256,6 +256,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_interconnect_remote_locations_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Compute.interconnect_remote_locations do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InterconnectRemoteLocations::Rest::Client, client
+    end
+  end
+
   def test_interconnects_rest
     Gapic::Rest::ClientStub.stub :new, :stub do
       client = Google::Cloud::Compute.interconnects do |config|

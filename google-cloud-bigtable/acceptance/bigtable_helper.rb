@@ -178,6 +178,27 @@ def clean_up_bigtable_objects instance_id, table_ids = []
   end
 end
 
+def clean_up_old_objects instance_id
+  cur_timestamp = Time.now.to_i
+  instance = $bigtable.instance instance_id
+  instance.tables.each do |table|
+    if table.table_id =~ /^test-table-(\d+)-\w+$/
+      table_timestamp = Regexp.last_match[1].to_i
+      table.delete if cur_timestamp - table_timestamp > 86_400 # 1 day in seconds
+    elsif table.table_id =~ /^test-table-\w+$/
+      table.delete
+    end
+  end
+  instance.clusters.each do |cluster|
+    cluster.backups.each do |backup|
+      if backup.backup_id =~ /^test-backup-(\d+)-\w+$/
+        backup_timestamp = Regexp.last_match[1].to_i
+        backup.delete if cur_timestamp - backup_timestamp > 86_400 # 1 day in seconds
+      end
+    end
+  end
+end
+
 require "date"
 require "securerandom"
 
@@ -230,5 +251,7 @@ create_test_table(bigtable_instance_id, $bigtable_read_table_id, row_count: 5)
 create_test_table(bigtable_instance_id, $bigtable_mutation_table_id)
 
 Minitest.after_run do
-  clean_up_bigtable_objects(bigtable_instance_id, $table_list_for_cleanup)
+  clean_up_bigtable_objects bigtable_instance_id, $table_list_for_cleanup
+  clean_up_old_objects bigtable_instance_id
+  clean_up_old_objects bigtable_instance_id_2
 end

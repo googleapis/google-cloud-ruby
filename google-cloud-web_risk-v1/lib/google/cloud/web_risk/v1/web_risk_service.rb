@@ -24,6 +24,7 @@ require "google/cloud/web_risk/v1/version"
 
 require "google/cloud/web_risk/v1/web_risk_service/credentials"
 require "google/cloud/web_risk/v1/web_risk_service/paths"
+require "google/cloud/web_risk/v1/web_risk_service/operations"
 require "google/cloud/web_risk/v1/web_risk_service/client"
 require "google/cloud/web_risk/v1/web_risk_service/rest"
 

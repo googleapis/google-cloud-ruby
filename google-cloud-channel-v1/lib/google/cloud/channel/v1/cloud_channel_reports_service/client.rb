@@ -29,8 +29,7 @@ module Google
           #
           # CloudChannelReportsService lets Google Cloud resellers and
           # distributors retrieve and combine a variety of data in Cloud Channel for
-          # multiple products (Google Cloud Platform (GCP), Google Voice, and
-          # Google Workspace.)
+          # multiple products (Google Cloud, Google Voice, and Google Workspace.)
           #
           class Client
             include Paths
@@ -126,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -313,7 +312,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload fetch_report_results(report_job: nil, page_size: nil, page_token: nil)
+            # @overload fetch_report_results(report_job: nil, page_size: nil, page_token: nil, partition_keys: nil)
             #   Pass arguments to `fetch_report_results` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -337,6 +336,9 @@ module Google
             #     of the previous
             #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}
             #     call.
+            #   @param partition_keys [::Array<::String>]
+            #     Optional. List of keys specifying which report partitions to return.
+            #     If empty, returns all partitions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::Row>]
@@ -597,7 +599,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudchannel.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudchannel.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

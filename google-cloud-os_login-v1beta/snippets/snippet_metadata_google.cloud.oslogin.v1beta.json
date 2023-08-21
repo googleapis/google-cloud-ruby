@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-os_login-v1beta",
-    "version": "0.7.0",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
@@ -275,6 +275,46 @@
         "method": {
           "short_name": "UpdateSshPublicKey",
           "full_name": "google.cloud.oslogin.v1beta.OsLoginService.UpdateSshPublicKey",
+          "service": {
+            "short_name": "OsLoginService",
+            "full_name": "google.cloud.oslogin.v1beta.OsLoginService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "oslogin_v1beta_generated_OsLoginService_SignSshPublicKey_sync",
+      "title": "Snippet for the sign_ssh_public_key call in the OsLoginService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsLogin::V1beta::OsLoginService::Client#sign_ssh_public_key. It may require modification in order to execute successfully.",
+      "file": "os_login_service/sign_ssh_public_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sign_ssh_public_key",
+        "full_name": "::Google::Cloud::OsLogin::V1beta::OsLoginService::Client#sign_ssh_public_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse",
+        "client": {
+          "short_name": "OsLoginService::Client",
+          "full_name": "::Google::Cloud::OsLogin::V1beta::OsLoginService::Client"
+        },
+        "method": {
+          "short_name": "SignSshPublicKey",
+          "full_name": "google.cloud.oslogin.v1beta.OsLoginService.SignSshPublicKey",
           "service": {
             "short_name": "OsLoginService",
             "full_name": "google.cloud.oslogin.v1beta.OsLoginService"

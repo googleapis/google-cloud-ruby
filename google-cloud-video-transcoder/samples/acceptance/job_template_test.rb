@@ -78,7 +78,7 @@ describe "Transcoder Snippets" do
 
     it "lists the job templates" do
       expect {
-        list_job_templates(project_id: project_id, location: location_id)
+        list_job_templates project_id: project_id, location: location_id
       }.must_output(%r{Job templates:(.*\s)*projects/#{project_number}/locations/#{location_id}/jobTemplates/#{template_id}})
     end
 

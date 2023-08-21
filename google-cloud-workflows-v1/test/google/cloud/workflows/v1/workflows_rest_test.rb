@@ -129,6 +129,7 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
 
     # Create request parameters for a unary method.
     name = "hello world"
+    revision_id = "hello world"
 
     get_workflow_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -144,27 +145,27 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.get_workflow({ name: name }) do |_result, response|
+        client.get_workflow({ name: name, revision_id: revision_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workflow name: name do |_result, response|
+        client.get_workflow name: name, revision_id: revision_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workflow ::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name) do |_result, response|
+        client.get_workflow ::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workflow({ name: name }, call_options) do |_result, response|
+        client.get_workflow({ name: name, revision_id: revision_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workflow(::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name), call_options) do |_result, response|
+        client.get_workflow(::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

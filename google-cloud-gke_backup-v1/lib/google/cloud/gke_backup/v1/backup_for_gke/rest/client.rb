@@ -19,6 +19,8 @@
 require "google/cloud/errors"
 require "google/cloud/gkebackup/v1/gkebackup_pb"
 require "google/cloud/gke_backup/v1/backup_for_gke/rest/service_stub"
+require "google/cloud/location/rest"
+require "google/iam/v1/rest"
 
 module Google
   module Cloud
@@ -204,7 +206,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -221,6 +223,20 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
                 @backup_for_gke_stub = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -230,6 +246,20 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
+
+              ##
+              # Get the associated client for mix-in of the IAMPolicy.
+              #
+              # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
+              #
+              attr_reader :iam_policy_client
 
               # Service calls
 
@@ -253,7 +283,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The location within which to create the BackupPlan.
-              #     Format: projects/*/locations/*
+              #     Format: `projects/*/locations/*`
               #   @param backup_plan [::Google::Cloud::GkeBackup::V1::BackupPlan, ::Hash]
               #     Required. The BackupPlan resource object to create.
               #   @param backup_plan_id [::String]
@@ -328,7 +358,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The location that contains the BackupPlans to list.
-              #     Format: projects/*/locations/*
+              #     Format: `projects/*/locations/*`
               #   @param page_size [::Integer]
               #     The target number of results to return in a single response.
               #     If not specified, a default value will be chosen by the service.
@@ -409,7 +439,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Fully qualified BackupPlan name.
-              #     Format: projects/*/locations/*/backupPlans/*
+              #     Format: `projects/*/locations/*/backupPlans/*`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeBackup::V1::BackupPlan]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -471,8 +501,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param backup_plan [::Google::Cloud::GkeBackup::V1::BackupPlan, ::Hash]
-              #     Required. A new version of the BackupPlan resource that contains updated fields.
-              #     This may be sparsely populated if an `update_mask` is provided.
+              #     Required. A new version of the BackupPlan resource that contains updated
+              #     fields. This may be sparsely populated if an `update_mask` is provided.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     This is used to specify the fields to be overwritten in the
               #     BackupPlan targeted for update. The values for each of these
@@ -546,11 +576,11 @@ module Google
               #
               #   @param name [::String]
               #     Required. Fully qualified BackupPlan name.
-              #     Format: projects/*/locations/*/backupPlans/*
+              #     Format: `projects/*/locations/*/backupPlans/*`
               #   @param etag [::String]
               #     If provided, this value must match the current value of the
-              #     target BackupPlan's {::Google::Cloud::GkeBackup::V1::BackupPlan#etag etag} field or the request is
-              #     rejected.
+              #     target BackupPlan's {::Google::Cloud::GkeBackup::V1::BackupPlan#etag etag} field
+              #     or the request is rejected.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -614,18 +644,18 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The BackupPlan within which to create the Backup.
-              #     Format: projects/*/locations/*/backupPlans/*
+              #     Format: `projects/*/locations/*/backupPlans/*`
               #   @param backup [::Google::Cloud::GkeBackup::V1::Backup, ::Hash]
               #     The Backup resource to create.
               #   @param backup_id [::String]
               #     The client-provided short name for the Backup resource.
               #     This name must:
               #
-              #      - be between 1 and 63 characters long (inclusive)
-              #      - consist of only lower-case ASCII letters, numbers, and dashes
-              #      - start with a lower-case letter
-              #      - end with a lower-case letter or number
-              #      - be unique within the set of Backups in this BackupPlan
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of Backups in this BackupPlan
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -689,7 +719,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The BackupPlan that contains the Backups to list.
-              #     Format: projects/*/locations/*/backupPlans/*
+              #     Format: `projects/*/locations/*/backupPlans/*`
               #   @param page_size [::Integer]
               #     The target number of results to return in a single response.
               #     If not specified, a default value will be chosen by the service.
@@ -771,7 +801,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Full name of the Backup resource.
-              #     Format: projects/*/locations/*/backupPlans/*/backups/*
+              #     Format: `projects/*/locations/*/backupPlans/*/backups/*`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeBackup::V1::Backup]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -833,8 +863,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param backup [::Google::Cloud::GkeBackup::V1::Backup, ::Hash]
-              #     Required. A new version of the Backup resource that contains updated fields.
-              #     This may be sparsely populated if an `update_mask` is provided.
+              #     Required. A new version of the Backup resource that contains updated
+              #     fields. This may be sparsely populated if an `update_mask` is provided.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     This is used to specify the fields to be overwritten in the
               #     Backup targeted for update. The values for each of these
@@ -907,11 +937,11 @@ module Google
               #
               #   @param name [::String]
               #     Required. Name of the Backup resource.
-              #     Format: projects/*/locations/*/backupPlans/*/backups/*
+              #     Format: `projects/*/locations/*/backupPlans/*/backups/*`
               #   @param etag [::String]
               #     If provided, this value must match the current value of the
-              #     target Backup's {::Google::Cloud::GkeBackup::V1::Backup#etag etag} field or the request is
-              #     rejected.
+              #     target Backup's {::Google::Cloud::GkeBackup::V1::Backup#etag etag} field or the
+              #     request is rejected.
               #   @param force [::Boolean]
               #     If set to true, any VolumeBackups below this Backup will also be deleted.
               #     Otherwise, the request will only succeed if the Backup has no
@@ -979,7 +1009,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The Backup that contains the VolumeBackups to list.
-              #     Format: projects/*/locations/*/backupPlans/*/backups/*
+              #     Format: `projects/*/locations/*/backupPlans/*/backups/*`
               #   @param page_size [::Integer]
               #     The target number of results to return in a single response.
               #     If not specified, a default value will be chosen by the service.
@@ -1061,7 +1091,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Full name of the VolumeBackup resource.
-              #     Format: projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*
+              #     Format: `projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeBackup::V1::VolumeBackup]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1124,18 +1154,18 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The location within which to create the RestorePlan.
-              #     Format: projects/*/locations/*
+              #     Format: `projects/*/locations/*`
               #   @param restore_plan [::Google::Cloud::GkeBackup::V1::RestorePlan, ::Hash]
               #     Required. The RestorePlan resource object to create.
               #   @param restore_plan_id [::String]
               #     Required. The client-provided short name for the RestorePlan resource.
               #     This name must:
               #
-              #      - be between 1 and 63 characters long (inclusive)
-              #      - consist of only lower-case ASCII letters, numbers, and dashes
-              #      - start with a lower-case letter
-              #      - end with a lower-case letter or number
-              #      - be unique within the set of RestorePlans in this location
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of RestorePlans in this location
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1199,7 +1229,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The location that contains the RestorePlans to list.
-              #     Format: projects/*/locations/*
+              #     Format: `projects/*/locations/*`
               #   @param page_size [::Integer]
               #     The target number of results to return in a single response.
               #     If not specified, a default value will be chosen by the service.
@@ -1280,7 +1310,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Fully qualified RestorePlan name.
-              #     Format: projects/*/locations/*/restorePlans/*
+              #     Format: `projects/*/locations/*/restorePlans/*`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeBackup::V1::RestorePlan]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1342,8 +1372,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param restore_plan [::Google::Cloud::GkeBackup::V1::RestorePlan, ::Hash]
-              #     Required. A new version of the RestorePlan resource that contains updated fields.
-              #     This may be sparsely populated if an `update_mask` is provided.
+              #     Required. A new version of the RestorePlan resource that contains updated
+              #     fields. This may be sparsely populated if an `update_mask` is provided.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     This is used to specify the fields to be overwritten in the
               #     RestorePlan targeted for update. The values for each of these
@@ -1416,11 +1446,11 @@ module Google
               #
               #   @param name [::String]
               #     Required. Fully qualified RestorePlan name.
-              #     Format: projects/*/locations/*/restorePlans/*
+              #     Format: `projects/*/locations/*/restorePlans/*`
               #   @param etag [::String]
               #     If provided, this value must match the current value of the
-              #     target RestorePlan's {::Google::Cloud::GkeBackup::V1::RestorePlan#etag etag} field or the request is
-              #     rejected.
+              #     target RestorePlan's {::Google::Cloud::GkeBackup::V1::RestorePlan#etag etag}
+              #     field or the request is rejected.
               #   @param force [::Boolean]
               #     If set to true, any Restores below this RestorePlan will also be deleted.
               #     Otherwise, the request will only succeed if the RestorePlan has no
@@ -1488,18 +1518,18 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The RestorePlan within which to create the Restore.
-              #     Format: projects/*/locations/*/restorePlans/*
+              #     Format: `projects/*/locations/*/restorePlans/*`
               #   @param restore [::Google::Cloud::GkeBackup::V1::Restore, ::Hash]
               #     Required. The restore resource to create.
               #   @param restore_id [::String]
               #     Required. The client-provided short name for the Restore resource.
               #     This name must:
               #
-              #      - be between 1 and 63 characters long (inclusive)
-              #      - consist of only lower-case ASCII letters, numbers, and dashes
-              #      - start with a lower-case letter
-              #      - end with a lower-case letter or number
-              #      - be unique within the set of Restores in this RestorePlan.
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of Restores in this RestorePlan.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1563,7 +1593,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The RestorePlan that contains the Restores to list.
-              #     Format: projects/*/locations/*/restorePlans/*
+              #     Format: `projects/*/locations/*/restorePlans/*`
               #   @param page_size [::Integer]
               #     The target number of results to return in a single response.
               #     If not specified, a default value will be chosen by the service.
@@ -1644,7 +1674,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Name of the restore resource.
-              #     Format: projects/*/locations/*/restorePlans/*/restores/*
+              #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeBackup::V1::Restore]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1706,8 +1736,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param restore [::Google::Cloud::GkeBackup::V1::Restore, ::Hash]
-              #     Required. A new version of the Restore resource that contains updated fields.
-              #     This may be sparsely populated if an `update_mask` is provided.
+              #     Required. A new version of the Restore resource that contains updated
+              #     fields. This may be sparsely populated if an `update_mask` is provided.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     This is used to specify the fields to be overwritten in the
               #     Restore targeted for update. The values for each of these
@@ -1780,11 +1810,11 @@ module Google
               #
               #   @param name [::String]
               #     Required. Full name of the Restore
-              #     Format: projects/*/locations/*/restorePlans/*/restores/*
+              #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
               #   @param etag [::String]
               #     If provided, this value must match the current value of the
-              #     target Restore's {::Google::Cloud::GkeBackup::V1::Restore#etag etag} field or the request is
-              #     rejected.
+              #     target Restore's {::Google::Cloud::GkeBackup::V1::Restore#etag etag} field or
+              #     the request is rejected.
               #   @param force [::Boolean]
               #     If set to true, any VolumeRestores below this restore will also be deleted.
               #     Otherwise, the request will only succeed if the restore has no
@@ -1852,7 +1882,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The Restore that contains the VolumeRestores to list.
-              #     Format: projects/*/locations/*/restorePlans/*/restores/*
+              #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
               #   @param page_size [::Integer]
               #     The target number of results to return in a single response.
               #     If not specified, a default value will be chosen by the service.
@@ -1934,7 +1964,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Full name of the VolumeRestore resource.
-              #     Format: projects/*/locations/*/restorePlans/*/restores/*/volumeRestores/*
+              #     Format: `projects/*/locations/*/restorePlans/*/restores/*/volumeRestores/*`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeBackup::V1::VolumeRestore]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2050,7 +2080,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "gkebackup.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "gkebackup.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -2062,6 +2094,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil

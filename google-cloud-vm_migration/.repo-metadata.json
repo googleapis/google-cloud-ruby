@@ -8,7 +8,7 @@
     "name": "vmmigration",
     "name_pretty": "Migrate for Compute Engine API",
     "product_documentation": "https://cloud.google.com/migrate/compute-engine/",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Migrate for Compute Engine enables you to migrate (Lift and Shift) your virtual machines (VMs), with minor automatic modifications, from your source environment to Google Compute Engine.",

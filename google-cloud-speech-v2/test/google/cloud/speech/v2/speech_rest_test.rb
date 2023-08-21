@@ -469,6 +469,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     config_mask = {}
     files = [{}]
     recognition_output_config = {}
+    processing_strategy = :PROCESSING_STRATEGY_UNSPECIFIED
 
     batch_recognize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -484,27 +485,27 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config }) do |_result, response|
+        client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_recognize recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config do |_result, response|
+        client.batch_recognize recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_recognize ::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config) do |_result, response|
+        client.batch_recognize ::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config }, call_options) do |_result, response|
+        client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_recognize(::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config), call_options) do |_result, response|
+        client.batch_recognize(::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

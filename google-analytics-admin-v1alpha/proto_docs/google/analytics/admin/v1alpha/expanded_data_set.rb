@@ -91,7 +91,7 @@ module Google
         #     ExpandedDataSetFilterExpression.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSetFilterExpression]
-        #     A filter expression to be NOT'ed (i.e., inverted, complemented). It
+        #     A filter expression to be NOT'ed (that is, inverted, complemented). It
         #     must include a dimension_filter. This cannot be set on the
         #     top level ExpandedDataSetFilterExpression.
         # @!attribute [rw] filter
@@ -141,7 +141,7 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSetFilterExpression]
         #     Immutable. A logical expression of ExpandedDataSet filters applied to
         #     dimension included in the ExpandedDataSet. This filter is used to reduce
-        #     the number of rows and thus the change of encountering `other row`.
+        #     the number of rows and thus the chance of encountering `other` row.
         # @!attribute [r] data_collection_start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when expanded data set began (or will begin) collecing

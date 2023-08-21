@@ -78,7 +78,7 @@ module Google
             #
             # For builds that specify `StorageSource`:
             #
-            # * If the original build pulled source from Google Cloud Storage without
+            # * If the original build pulled source from Cloud Storage without
             # specifying the generation of the object, the new build will use the current
             # object, which may be different from the original build source.
             # * If the original build pulled source from Cloud Storage and specified the
@@ -114,6 +114,12 @@ module Google
             # This API is experimental.
             rpc :UpdateBuildTrigger, ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest, ::Google::Cloud::Build::V1::BuildTrigger
             # Runs a `BuildTrigger` at a particular source revision.
+            #
+            # To run a regional or global trigger, use the POST request
+            # that includes the location endpoint in the path (ex.
+            # v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The
+            # POST request that does not include the location endpoint in the path can
+            # only be used when running global triggers.
             rpc :RunBuildTrigger, ::Google::Cloud::Build::V1::RunBuildTriggerRequest, ::Google::Longrunning::Operation
             # ReceiveTriggerWebhook [Experimental] is called when the API receives a
             # webhook request targeted at a specific trigger.

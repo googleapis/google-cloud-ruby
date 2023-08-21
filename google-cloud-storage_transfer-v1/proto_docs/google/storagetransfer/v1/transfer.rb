@@ -50,15 +50,17 @@ module Google
         #     job.
         # @!attribute [rw] transfer_job
         #   @return [::Google::Cloud::StorageTransfer::V1::TransferJob]
-        #     Required. The job to update. `transferJob` is expected to specify one or more of
-        #     five fields: {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
+        #     Required. The job to update. `transferJob` is expected to specify one or
+        #     more of five fields:
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#transfer_spec transfer_spec},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#notification_config notification_config},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#logging_config logging_config}, and
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  An `UpdateTransferJobRequest` that specifies
-        #     other fields are rejected with the error
-        #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a job status
-        #     to {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  An
+        #     `UpdateTransferJobRequest` that specifies other fields are rejected with
+        #     the error {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a
+        #     job status to
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
         #     `storagetransfer.jobs.delete` permission.
         # @!attribute [rw] update_transfer_job_field_mask
         #   @return [::Google::Protobuf::FieldMask]
@@ -68,9 +70,10 @@ module Google
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#transfer_spec transfer_spec},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#notification_config notification_config},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#logging_config logging_config}, and
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  To update the `transfer_spec` of the job, a
-        #     complete transfer specification must be provided. An incomplete
-        #     specification missing any required fields is rejected with the error
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  To update the
+        #     `transfer_spec` of the job, a complete transfer specification must be
+        #     provided. An incomplete specification missing any required fields is
+        #     rejected with the error
         #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}.
         class UpdateTransferJobRequest
           include ::Google::Protobuf::MessageExts
@@ -204,8 +207,8 @@ module Google
         # Specifies the request passed to UpdateAgentPool.
         # @!attribute [rw] agent_pool
         #   @return [::Google::Cloud::StorageTransfer::V1::AgentPool]
-        #     Required. The agent pool to update. `agent_pool` is expected to specify following
-        #     fields:
+        #     Required. The agent pool to update. `agent_pool` is expected to specify
+        #     following fields:
         #
         #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#name name}
         #

@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.3.0 (2023-06-19)
+
+#### Features
+
+* Support ALLOW_UNENCRYPTED_AND_ENCRYPTED and ENCRYPTED_ONLY ssl modes 
+* Support for continuous backups 
+* Support for managing users ([#22383](https://github.com/googleapis/google-cloud-ruby/issues/22383)) 
+* Support for the create_secondary_cluster RPC 
+* Support for the create_secondary_instance RPC 
+* Support for the inject_fault RPC 
+* Support for the promote_cluster RPC 
+* Support for views of a cluster 
+
+### 0.2.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21671](https://github.com/googleapis/google-cloud-ruby/issues/21671)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.1.0 (2023-03-21)
 
 #### Features

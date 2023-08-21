@@ -1,0 +1,7 @@
+bumpMinorPreMajor: true
+handleGHRelease: true
+manifest: true
+monorepoTags: true
+onDemand: true
+primaryBranch: main
+releaseType: ruby-yoshi

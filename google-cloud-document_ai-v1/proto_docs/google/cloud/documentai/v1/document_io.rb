@@ -114,6 +114,53 @@ module Google
             end
           end
         end
+
+        # Config for Document OCR.
+        # @!attribute [rw] hints
+        #   @return [::Google::Cloud::DocumentAI::V1::OcrConfig::Hints]
+        #     Hints for the OCR model.
+        # @!attribute [rw] enable_native_pdf_parsing
+        #   @return [::Boolean]
+        #     Enables special handling for PDFs with existing text information. Results
+        #     in better text extraction quality in such PDF inputs.
+        # @!attribute [rw] enable_image_quality_scores
+        #   @return [::Boolean]
+        #     Enables intelligent document quality scores after OCR. Can help with
+        #     diagnosing why OCR responses are of poor quality for a given input.
+        #     Adds additional latency comparable to regular OCR to the process call.
+        # @!attribute [rw] advanced_ocr_options
+        #   @return [::Array<::String>]
+        #     A list of advanced OCR options to further fine-tune OCR behavior. Current
+        #     valid values are:
+        #
+        #     - `legacy_layout`: a heuristics layout detection algorithm, which serves as
+        #     an alternative to the current ML-based layout detection algorithm.
+        #     Customers can choose the best suitable layout algorithm based on their
+        #     situation.
+        # @!attribute [rw] enable_symbol
+        #   @return [::Boolean]
+        #     Includes symbol level OCR information if set to true.
+        # @!attribute [rw] compute_style_info
+        #   @return [::Boolean]
+        #     Turn on font id model and returns font style information.
+        class OcrConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Hints for OCR Engine
+          # @!attribute [rw] language_hints
+          #   @return [::Array<::String>]
+          #     List of BCP-47 language codes to use for OCR. In most cases, not
+          #     specifying it yields the best results since it enables automatic language
+          #     detection. For languages based on the Latin alphabet, setting hints is
+          #     not needed. In rare cases, when the language of the text in the
+          #     image is known, setting a hint will help get better results (although it
+          #     will be a significant hindrance if the hint is wrong).
+          class Hints
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
       end
     end
   end

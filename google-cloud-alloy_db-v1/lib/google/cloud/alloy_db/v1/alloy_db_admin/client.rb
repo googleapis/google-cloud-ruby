@@ -162,7 +162,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -337,7 +337,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_cluster(name: nil)
+            # @overload get_cluster(name: nil, view: nil)
             #   Pass arguments to `get_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -345,6 +345,9 @@ module Google
             #   @param name [::String]
             #     Required. The name of the resource. For the required format, see the
             #     comment on the Cluster.name field.
+            #   @param view [::Google::Cloud::AlloyDB::V1::ClusterView]
+            #     Optional. The view of the cluster to return. Returns all default fields if
+            #     not set.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AlloyDB::V1::Cluster]
@@ -429,7 +432,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the parent resource. For the required format, see the
+            #     Required. The location of the new cluster. For the required format, see the
             #     comment on the Cluster.name field.
             #   @param cluster_id [::String]
             #     Required. ID of the requesting object.
@@ -764,6 +767,124 @@ module Google
             end
 
             ##
+            # Promotes a SECONDARY cluster. This turns down replication
+            # from the PRIMARY cluster and promotes a secondary cluster
+            # into its own standalone cluster.
+            # Imperative only.
+            #
+            # @overload promote_cluster(request, options = nil)
+            #   Pass arguments to `promote_cluster` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::PromoteClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::PromoteClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload promote_cluster(name: nil, request_id: nil, etag: nil, validate_only: nil)
+            #   Pass arguments to `promote_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the resource. For the required format, see the
+            #     comment on the Cluster.name field
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param etag [::String]
+            #     Optional. The current etag of the Cluster.
+            #     If an etag is provided and does not match the current etag of the Cluster,
+            #     deletion will be blocked and an ABORTED error will be returned.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, performs request validation (e.g. permission checks and
+            #     any other type of validation), but do not actually execute the delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new
+            #
+            #   # Call the promote_cluster method.
+            #   result = client.promote_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def promote_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::PromoteClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.promote_cluster.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.promote_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.promote_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :promote_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a new Cluster in a given project and location, with a volume
             # restored from the provided source, either a backup ID or a point-in-time
             # and a source cluster.
@@ -778,13 +899,16 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload restore_cluster(backup_source: nil, parent: nil, cluster_id: nil, cluster: nil, request_id: nil, validate_only: nil)
+            # @overload restore_cluster(backup_source: nil, continuous_backup_source: nil, parent: nil, cluster_id: nil, cluster: nil, request_id: nil, validate_only: nil)
             #   Pass arguments to `restore_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param backup_source [::Google::Cloud::AlloyDB::V1::BackupSource, ::Hash]
             #     Backup source.
+            #   @param continuous_backup_source [::Google::Cloud::AlloyDB::V1::ContinuousBackupSource, ::Hash]
+            #     ContinuousBackup source. Continuous backup needs to be enabled in the
+            #     source cluster for this operation to succeed.
             #   @param parent [::String]
             #     Required. The name of the parent resource. For the required format, see the
             #     comment on the Cluster.name field.
@@ -875,6 +999,123 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @alloy_db_admin_stub.call_rpc :restore_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a cluster of type SECONDARY in the given location using
+            # the primary cluster as the source.
+            #
+            # @overload create_secondary_cluster(request, options = nil)
+            #   Pass arguments to `create_secondary_cluster` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_secondary_cluster(parent: nil, cluster_id: nil, cluster: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `create_secondary_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The location of the new cluster. For the required
+            #     format, see the comment on the Cluster.name field.
+            #   @param cluster_id [::String]
+            #     Required. ID of the requesting object (the secondary cluster).
+            #   @param cluster [::Google::Cloud::AlloyDB::V1::Cluster, ::Hash]
+            #     Required. Configuration of the requesting object (the secondary cluster).
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, performs request validation (e.g. permission checks and
+            #     any other type of validation), but do not actually execute the create
+            #     request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new
+            #
+            #   # Call the create_secondary_cluster method.
+            #   result = client.create_secondary_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_secondary_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_secondary_cluster.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_secondary_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_secondary_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :create_secondary_cluster, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -1183,6 +1424,122 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @alloy_db_admin_stub.call_rpc :create_instance, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new SECONDARY Instance in a given project and location.
+            #
+            # @overload create_secondary_instance(request, options = nil)
+            #   Pass arguments to `create_secondary_instance` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_secondary_instance(parent: nil, instance_id: nil, instance: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `create_secondary_instance` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the parent resource. For the required format, see the
+            #     comment on the Instance.name field.
+            #   @param instance_id [::String]
+            #     Required. ID of the requesting object.
+            #   @param instance [::Google::Cloud::AlloyDB::V1::Instance, ::Hash]
+            #     Required. The resource being created
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, performs request validation (e.g. permission checks and
+            #     any other type of validation), but do not actually execute the create
+            #     request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new
+            #
+            #   # Call the create_secondary_instance method.
+            #   result = client.create_secondary_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_secondary_instance request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_secondary_instance.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_secondary_instance.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_secondary_instance.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :create_secondary_instance, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -1649,6 +2006,121 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @alloy_db_admin_stub.call_rpc :failover_instance, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Injects fault in an instance.
+            # Imperative only.
+            #
+            # @overload inject_fault(request, options = nil)
+            #   Pass arguments to `inject_fault` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::InjectFaultRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::InjectFaultRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload inject_fault(fault_type: nil, name: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `inject_fault` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param fault_type [::Google::Cloud::AlloyDB::V1::InjectFaultRequest::FaultType]
+            #     Required. The type of fault to be injected in an instance.
+            #   @param name [::String]
+            #     Required. The name of the resource. For the required format, see the
+            #     comment on the Instance.name field.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, performs request validation (e.g. permission checks and
+            #     any other type of validation), but do not actually execute the fault
+            #     injection.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::InjectFaultRequest.new
+            #
+            #   # Call the inject_fault method.
+            #   result = client.inject_fault request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def inject_fault request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::InjectFaultRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.inject_fault.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.inject_fault.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.inject_fault.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :inject_fault, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -2403,6 +2875,510 @@ module Google
             end
 
             ##
+            # Lists Users in a given project and location.
+            #
+            # @overload list_users(request, options = nil)
+            #   Pass arguments to `list_users` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::ListUsersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::ListUsersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_users` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListUsersRequest
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. Filtering results
+            #   @param order_by [::String]
+            #     Optional. Hint for how to order the results
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AlloyDB::V1::User>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AlloyDB::V1::User>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::ListUsersRequest.new
+            #
+            #   # Call the list_users method.
+            #   result = client.list_users request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AlloyDB::V1::User.
+            #     p item
+            #   end
+            #
+            def list_users request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::ListUsersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_users.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_users.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_users.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :list_users, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @alloy_db_admin_stub, :list_users, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single User.
+            #
+            # @overload get_user(request, options = nil)
+            #   Pass arguments to `get_user` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::GetUserRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::GetUserRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_user(name: nil)
+            #   Pass arguments to `get_user` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the resource. For the required format, see the
+            #     comment on the User.name field.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AlloyDB::V1::User]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AlloyDB::V1::User]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::GetUserRequest.new
+            #
+            #   # Call the get_user method.
+            #   result = client.get_user request
+            #
+            #   # The returned object is of type Google::Cloud::AlloyDB::V1::User.
+            #   p result
+            #
+            def get_user request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::GetUserRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_user.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_user.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_user.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :get_user, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new User in a given project, location, and cluster.
+            #
+            # @overload create_user(request, options = nil)
+            #   Pass arguments to `create_user` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::CreateUserRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::CreateUserRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_user(parent: nil, user_id: nil, user: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `create_user` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Value for parent.
+            #   @param user_id [::String]
+            #     Required. ID of the requesting object.
+            #   @param user [::Google::Cloud::AlloyDB::V1::User, ::Hash]
+            #     Required. The resource being created
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, the backend validates the request, but doesn't actually
+            #     execute it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AlloyDB::V1::User]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AlloyDB::V1::User]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::CreateUserRequest.new
+            #
+            #   # Call the create_user method.
+            #   result = client.create_user request
+            #
+            #   # The returned object is of type Google::Cloud::AlloyDB::V1::User.
+            #   p result
+            #
+            def create_user request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::CreateUserRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_user.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_user.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_user.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :create_user, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single User.
+            #
+            # @overload update_user(request, options = nil)
+            #   Pass arguments to `update_user` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::UpdateUserRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::UpdateUserRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_user(update_mask: nil, user: nil, request_id: nil, validate_only: nil, allow_missing: nil)
+            #   Pass arguments to `update_user` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     User resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param user [::Google::Cloud::AlloyDB::V1::User, ::Hash]
+            #     Required. The resource being updated
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, the backend validates the request, but doesn't actually
+            #     execute it.
+            #   @param allow_missing [::Boolean]
+            #     Optional. Allow missing fields in the update mask.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AlloyDB::V1::User]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AlloyDB::V1::User]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::UpdateUserRequest.new
+            #
+            #   # Call the update_user method.
+            #   result = client.update_user request
+            #
+            #   # The returned object is of type Google::Cloud::AlloyDB::V1::User.
+            #   p result
+            #
+            def update_user request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::UpdateUserRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_user.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.user&.name
+                header_params["user.name"] = request.user.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_user.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_user.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :update_user, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single User.
+            #
+            # @overload delete_user(request, options = nil)
+            #   Pass arguments to `delete_user` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::DeleteUserRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::DeleteUserRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_user(name: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `delete_user` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the resource. For the required format, see the
+            #     comment on the User.name field.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, the backend validates the request, but doesn't actually
+            #     execute it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::DeleteUserRequest.new
+            #
+            #   # Call the delete_user method.
+            #   result = client.delete_user request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_user request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::DeleteUserRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_user.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_user.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_user.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :delete_user, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AlloyDBAdmin API.
             #
             # This class represents the configuration for AlloyDBAdmin,
@@ -2484,7 +3460,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "alloydb.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "alloydb.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2563,10 +3541,20 @@ module Google
                 #
                 attr_reader :delete_cluster
                 ##
+                # RPC-specific configuration for `promote_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :promote_cluster
+                ##
                 # RPC-specific configuration for `restore_cluster`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :restore_cluster
+                ##
+                # RPC-specific configuration for `create_secondary_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_secondary_cluster
                 ##
                 # RPC-specific configuration for `list_instances`
                 # @return [::Gapic::Config::Method]
@@ -2582,6 +3570,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_instance
+                ##
+                # RPC-specific configuration for `create_secondary_instance`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_secondary_instance
                 ##
                 # RPC-specific configuration for `batch_create_instances`
                 # @return [::Gapic::Config::Method]
@@ -2602,6 +3595,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :failover_instance
+                ##
+                # RPC-specific configuration for `inject_fault`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :inject_fault
                 ##
                 # RPC-specific configuration for `restart_instance`
                 # @return [::Gapic::Config::Method]
@@ -2637,6 +3635,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_supported_database_flags
+                ##
+                # RPC-specific configuration for `list_users`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_users
+                ##
+                # RPC-specific configuration for `get_user`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_user
+                ##
+                # RPC-specific configuration for `create_user`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_user
+                ##
+                # RPC-specific configuration for `update_user`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_user
+                ##
+                # RPC-specific configuration for `delete_user`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_user
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2650,14 +3673,20 @@ module Google
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
                   delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
+                  promote_cluster_config = parent_rpcs.promote_cluster if parent_rpcs.respond_to? :promote_cluster
+                  @promote_cluster = ::Gapic::Config::Method.new promote_cluster_config
                   restore_cluster_config = parent_rpcs.restore_cluster if parent_rpcs.respond_to? :restore_cluster
                   @restore_cluster = ::Gapic::Config::Method.new restore_cluster_config
+                  create_secondary_cluster_config = parent_rpcs.create_secondary_cluster if parent_rpcs.respond_to? :create_secondary_cluster
+                  @create_secondary_cluster = ::Gapic::Config::Method.new create_secondary_cluster_config
                   list_instances_config = parent_rpcs.list_instances if parent_rpcs.respond_to? :list_instances
                   @list_instances = ::Gapic::Config::Method.new list_instances_config
                   get_instance_config = parent_rpcs.get_instance if parent_rpcs.respond_to? :get_instance
                   @get_instance = ::Gapic::Config::Method.new get_instance_config
                   create_instance_config = parent_rpcs.create_instance if parent_rpcs.respond_to? :create_instance
                   @create_instance = ::Gapic::Config::Method.new create_instance_config
+                  create_secondary_instance_config = parent_rpcs.create_secondary_instance if parent_rpcs.respond_to? :create_secondary_instance
+                  @create_secondary_instance = ::Gapic::Config::Method.new create_secondary_instance_config
                   batch_create_instances_config = parent_rpcs.batch_create_instances if parent_rpcs.respond_to? :batch_create_instances
                   @batch_create_instances = ::Gapic::Config::Method.new batch_create_instances_config
                   update_instance_config = parent_rpcs.update_instance if parent_rpcs.respond_to? :update_instance
@@ -2666,6 +3695,8 @@ module Google
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                   failover_instance_config = parent_rpcs.failover_instance if parent_rpcs.respond_to? :failover_instance
                   @failover_instance = ::Gapic::Config::Method.new failover_instance_config
+                  inject_fault_config = parent_rpcs.inject_fault if parent_rpcs.respond_to? :inject_fault
+                  @inject_fault = ::Gapic::Config::Method.new inject_fault_config
                   restart_instance_config = parent_rpcs.restart_instance if parent_rpcs.respond_to? :restart_instance
                   @restart_instance = ::Gapic::Config::Method.new restart_instance_config
                   list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
@@ -2680,6 +3711,16 @@ module Google
                   @delete_backup = ::Gapic::Config::Method.new delete_backup_config
                   list_supported_database_flags_config = parent_rpcs.list_supported_database_flags if parent_rpcs.respond_to? :list_supported_database_flags
                   @list_supported_database_flags = ::Gapic::Config::Method.new list_supported_database_flags_config
+                  list_users_config = parent_rpcs.list_users if parent_rpcs.respond_to? :list_users
+                  @list_users = ::Gapic::Config::Method.new list_users_config
+                  get_user_config = parent_rpcs.get_user if parent_rpcs.respond_to? :get_user
+                  @get_user = ::Gapic::Config::Method.new get_user_config
+                  create_user_config = parent_rpcs.create_user if parent_rpcs.respond_to? :create_user
+                  @create_user = ::Gapic::Config::Method.new create_user_config
+                  update_user_config = parent_rpcs.update_user if parent_rpcs.respond_to? :update_user
+                  @update_user = ::Gapic::Config::Method.new update_user_config
+                  delete_user_config = parent_rpcs.delete_user if parent_rpcs.respond_to? :delete_user
+                  @delete_user = ::Gapic::Config::Method.new delete_user_config
 
                   yield self if block_given?
                 end

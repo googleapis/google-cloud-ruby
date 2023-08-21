@@ -67,6 +67,8 @@ module Google
 
                   default_config.rpcs.add_resource_policies.timeout = 600.0
 
+                  default_config.rpcs.bulk_insert.timeout = 600.0
+
                   default_config.rpcs.create_snapshot.timeout = 600.0
 
                   default_config.rpcs.delete.timeout = 600.0
@@ -95,6 +97,12 @@ module Google
                   default_config.rpcs.set_iam_policy.timeout = 600.0
 
                   default_config.rpcs.set_labels.timeout = 600.0
+
+                  default_config.rpcs.start_async_replication.timeout = 600.0
+
+                  default_config.rpcs.stop_async_replication.timeout = 600.0
+
+                  default_config.rpcs.stop_group_async_replication.timeout = 600.0
 
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
 
@@ -153,7 +161,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -245,6 +253,83 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @region_disks_stub.add_resource_policies request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Bulk create a set of disks.
+              #
+              # @overload bulk_insert(request, options = nil)
+              #   Pass arguments to `bulk_insert` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::BulkInsertRegionDiskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::BulkInsertRegionDiskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload bulk_insert(bulk_insert_disk_resource_resource: nil, project: nil, region: nil, request_id: nil)
+              #   Pass arguments to `bulk_insert` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param bulk_insert_disk_resource_resource [::Google::Cloud::Compute::V1::BulkInsertDiskResource, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def bulk_insert request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::BulkInsertRegionDiskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.bulk_insert.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.bulk_insert.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.bulk_insert.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_disks_stub.bulk_insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -1011,6 +1096,239 @@ module Google
               end
 
               ##
+              # Starts asynchronous replication. Must be invoked on the primary disk.
+              #
+              # @overload start_async_replication(request, options = nil)
+              #   Pass arguments to `start_async_replication` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::StartAsyncReplicationRegionDiskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::StartAsyncReplicationRegionDiskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload start_async_replication(disk: nil, project: nil, region: nil, region_disks_start_async_replication_request_resource: nil, request_id: nil)
+              #   Pass arguments to `start_async_replication` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param disk [::String]
+              #     The name of the persistent disk.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param region_disks_start_async_replication_request_resource [::Google::Cloud::Compute::V1::RegionDisksStartAsyncReplicationRequest, ::Hash]
+              #     The body resource for this request
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def start_async_replication request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::StartAsyncReplicationRegionDiskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.start_async_replication.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.start_async_replication.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start_async_replication.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_disks_stub.start_async_replication request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Stops asynchronous replication. Can be invoked either on the primary or on the secondary disk.
+              #
+              # @overload stop_async_replication(request, options = nil)
+              #   Pass arguments to `stop_async_replication` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::StopAsyncReplicationRegionDiskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::StopAsyncReplicationRegionDiskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload stop_async_replication(disk: nil, project: nil, region: nil, request_id: nil)
+              #   Pass arguments to `stop_async_replication` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param disk [::String]
+              #     The name of the persistent disk.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def stop_async_replication request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::StopAsyncReplicationRegionDiskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.stop_async_replication.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.stop_async_replication.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stop_async_replication.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_disks_stub.stop_async_replication request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Stops asynchronous replication for a consistency group of disks. Can be invoked either in the primary or secondary scope.
+              #
+              # @overload stop_group_async_replication(request, options = nil)
+              #   Pass arguments to `stop_group_async_replication` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::StopGroupAsyncReplicationRegionDiskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::StopGroupAsyncReplicationRegionDiskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload stop_group_async_replication(disks_stop_group_async_replication_resource_resource: nil, project: nil, region: nil, request_id: nil)
+              #   Pass arguments to `stop_group_async_replication` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param disks_stop_group_async_replication_resource_resource [::Google::Cloud::Compute::V1::DisksStopGroupAsyncReplicationResource, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request. This must be the region of the primary or secondary disks in the consistency group.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def stop_group_async_replication request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::StopGroupAsyncReplicationRegionDiskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.stop_group_async_replication.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.stop_group_async_replication.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stop_group_async_replication.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_disks_stub.stop_group_async_replication request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns permissions that a caller has on the specified resource.
               #
               # @overload test_iam_permissions(request, options = nil)
@@ -1233,7 +1551,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "compute.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "compute.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -1289,6 +1609,11 @@ module Google
                   #
                   attr_reader :add_resource_policies
                   ##
+                  # RPC-specific configuration for `bulk_insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :bulk_insert
+                  ##
                   # RPC-specific configuration for `create_snapshot`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1339,6 +1664,21 @@ module Google
                   #
                   attr_reader :set_labels
                   ##
+                  # RPC-specific configuration for `start_async_replication`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :start_async_replication
+                  ##
+                  # RPC-specific configuration for `stop_async_replication`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :stop_async_replication
+                  ##
+                  # RPC-specific configuration for `stop_group_async_replication`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :stop_group_async_replication
+                  ##
                   # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1353,6 +1693,8 @@ module Google
                   def initialize parent_rpcs = nil
                     add_resource_policies_config = parent_rpcs.add_resource_policies if parent_rpcs.respond_to? :add_resource_policies
                     @add_resource_policies = ::Gapic::Config::Method.new add_resource_policies_config
+                    bulk_insert_config = parent_rpcs.bulk_insert if parent_rpcs.respond_to? :bulk_insert
+                    @bulk_insert = ::Gapic::Config::Method.new bulk_insert_config
                     create_snapshot_config = parent_rpcs.create_snapshot if parent_rpcs.respond_to? :create_snapshot
                     @create_snapshot = ::Gapic::Config::Method.new create_snapshot_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
@@ -1373,6 +1715,12 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
                     @set_labels = ::Gapic::Config::Method.new set_labels_config
+                    start_async_replication_config = parent_rpcs.start_async_replication if parent_rpcs.respond_to? :start_async_replication
+                    @start_async_replication = ::Gapic::Config::Method.new start_async_replication_config
+                    stop_async_replication_config = parent_rpcs.stop_async_replication if parent_rpcs.respond_to? :stop_async_replication
+                    @stop_async_replication = ::Gapic::Config::Method.new stop_async_replication_config
+                    stop_group_async_replication_config = parent_rpcs.stop_group_async_replication if parent_rpcs.respond_to? :stop_group_async_replication
+                    @stop_group_async_replication = ::Gapic::Config::Method.new stop_group_async_replication_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                     update_config = parent_rpcs.update if parent_rpcs.respond_to? :update

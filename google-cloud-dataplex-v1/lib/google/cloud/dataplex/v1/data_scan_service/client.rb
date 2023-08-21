@@ -127,7 +127,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -200,7 +200,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_data_scan(parent: nil, data_scan: nil, data_scan_id: nil)
+            # @overload create_data_scan(parent: nil, data_scan: nil, data_scan_id: nil, validate_only: nil)
             #   Pass arguments to `create_data_scan` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -220,6 +220,9 @@ module Google
             #     * Must end with a number or a letter.
             #     * Must be between 1-63 characters.
             #     * Must be unique within the customer project / location.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is `false`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -306,7 +309,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_data_scan(data_scan: nil, update_mask: nil)
+            # @overload update_data_scan(data_scan: nil, update_mask: nil, validate_only: nil)
             #   Pass arguments to `update_data_scan` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -317,6 +320,9 @@ module Google
             #     Only fields specified in `update_mask` are updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is `false`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -601,7 +607,7 @@ module Google
             #     `location_id` refers to a GCP region.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of dataScans to return. The service may return
-            #     fewer than this value. If unspecified, at most 10 scans will be returned.
+            #     fewer than this value. If unspecified, at most 500 scans will be returned.
             #     The maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
             #     Optional. Page token received from a previous `ListDataScans` call. Provide
@@ -793,7 +799,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the DataScanJob:
-            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
             #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param view [::Google::Cloud::Dataplex::V1::GetDataScanJobRequest::DataScanJobView]
@@ -876,7 +882,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_data_scan_jobs(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_data_scan_jobs(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_data_scan_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -896,6 +902,24 @@ module Google
             #     Provide this to retrieve the subsequent page. When paginating, all other
             #     parameters provided to `ListDataScanJobs` must match the call that provided
             #     the page token.
+            #   @param filter [::String]
+            #     Optional. An expression for filtering the results of the ListDataScanJobs
+            #     request.
+            #
+            #     If unspecified, all datascan jobs will be returned. Multiple filters can be
+            #     applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+            #
+            #     Allowed fields are:
+            #
+            #     - `start_time`
+            #     - `end_time`
+            #
+            #     `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+            #     2018-10-08T18:30:00-07:00).
+            #
+            #     For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+            #     2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+            #     specified start and end times.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataScanJob>]
@@ -1048,7 +1072,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dataplex.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dataplex.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -76,6 +76,10 @@ module Google
         #     Output only. The [display
         #     name][google.cloud.aiplatform.v1.Model.display_name] of the Model which is
         #     deployed as the DeployedModel that this prediction hits.
+        # @!attribute [r] metadata
+        #   @return [::Google::Protobuf::Value]
+        #     Output only. Request-level metadata returned by the model. The metadata
+        #     type will be dependent upon the model implementation.
         class PredictResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -106,6 +110,41 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} and use the `RawPredict`
         #     method.
         class RawPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # [PredictionService.StreamingPredict][google.cloud.aiplatform.v1.PredictionService.StreamingPredict].
+        #
+        # The first message must contain
+        # {::Google::Cloud::AIPlatform::V1::StreamingPredictRequest#endpoint endpoint} field
+        # and optionally [input][]. The subsequent messages must contain [input][].
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] inputs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
+        #     The prediction input.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
+        #     The parameters that govern the prediction.
+        class StreamingPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # [PredictionService.StreamingPredict][google.cloud.aiplatform.v1.PredictionService.StreamingPredict].
+        # @!attribute [rw] outputs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
+        #     The prediction output.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
+        #     The parameters that govern the prediction.
+        class StreamingPredictResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

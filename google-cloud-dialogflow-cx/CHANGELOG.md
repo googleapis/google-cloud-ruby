@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.1.0 (2023-07-19)
+
+* Bump version to 1.0
+
 ### 0.4.0 (2023-03-09)
 
 #### Features

@@ -41,8 +41,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -55,7 +56,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location within which to create the BackupPlan.
-        #     Format: projects/*/locations/*
+        #     Format: `projects/*/locations/*`
         # @!attribute [rw] backup_plan
         #   @return [::Google::Cloud::GkeBackup::V1::BackupPlan]
         #     Required. The BackupPlan resource object to create.
@@ -78,7 +79,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location that contains the BackupPlans to list.
-        #     Format: projects/*/locations/*
+        #     Format: `projects/*/locations/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The target number of results to return in a single response.
@@ -113,10 +114,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token which may be sent as
-        #     {::Google::Cloud::GkeBackup::V1::ListBackupPlansRequest#page_token page_token} in a subsequent
-        #     `ListBackupPlans` call to retrieve the next page of results.
-        #     If this field is omitted or empty, then there are no more results to
-        #     return.
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupPlansRequest#page_token page_token}
+        #     in a subsequent `ListBackupPlans` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
@@ -129,7 +130,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Fully qualified BackupPlan name.
-        #     Format: projects/*/locations/*/backupPlans/*
+        #     Format: `projects/*/locations/*/backupPlans/*`
         class GetBackupPlanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,8 +139,8 @@ module Google
         # Request message for UpdateBackupPlan.
         # @!attribute [rw] backup_plan
         #   @return [::Google::Cloud::GkeBackup::V1::BackupPlan]
-        #     Required. A new version of the BackupPlan resource that contains updated fields.
-        #     This may be sparsely populated if an `update_mask` is provided.
+        #     Required. A new version of the BackupPlan resource that contains updated
+        #     fields. This may be sparsely populated if an `update_mask` is provided.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     This is used to specify the fields to be overwritten in the
@@ -160,12 +161,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Fully qualified BackupPlan name.
-        #     Format: projects/*/locations/*/backupPlans/*
+        #     Format: `projects/*/locations/*/backupPlans/*`
         # @!attribute [rw] etag
         #   @return [::String]
         #     If provided, this value must match the current value of the
-        #     target BackupPlan's {::Google::Cloud::GkeBackup::V1::BackupPlan#etag etag} field or the request is
-        #     rejected.
+        #     target BackupPlan's {::Google::Cloud::GkeBackup::V1::BackupPlan#etag etag} field
+        #     or the request is rejected.
         class DeleteBackupPlanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -175,7 +176,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The BackupPlan within which to create the Backup.
-        #     Format: projects/*/locations/*/backupPlans/*
+        #     Format: `projects/*/locations/*/backupPlans/*`
         # @!attribute [rw] backup
         #   @return [::Google::Cloud::GkeBackup::V1::Backup]
         #     The Backup resource to create.
@@ -184,11 +185,11 @@ module Google
         #     The client-provided short name for the Backup resource.
         #     This name must:
         #
-        #      - be between 1 and 63 characters long (inclusive)
-        #      - consist of only lower-case ASCII letters, numbers, and dashes
-        #      - start with a lower-case letter
-        #      - end with a lower-case letter or number
-        #      - be unique within the set of Backups in this BackupPlan
+        #     - be between 1 and 63 characters long (inclusive)
+        #     - consist of only lower-case ASCII letters, numbers, and dashes
+        #     - start with a lower-case letter
+        #     - end with a lower-case letter or number
+        #     - be unique within the set of Backups in this BackupPlan
         class CreateBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,7 +199,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The BackupPlan that contains the Backups to list.
-        #     Format: projects/*/locations/*/backupPlans/*
+        #     Format: `projects/*/locations/*/backupPlans/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The target number of results to return in a single response.
@@ -232,9 +233,10 @@ module Google
         #     The list of Backups matching the given criteria.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token which may be sent as {::Google::Cloud::GkeBackup::V1::ListBackupsRequest#page_token page_token} in
-        #     a subsequent `ListBackups` call to retrieve the next page of results. If
-        #     this field is omitted or empty, then there are no more results to return.
+        #     A token which may be sent as
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupsRequest#page_token page_token} in a
+        #     subsequent `ListBackups` call to retrieve the next page of results. If this
+        #     field is omitted or empty, then there are no more results to return.
         class ListBackupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -244,7 +246,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full name of the Backup resource.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*
+        #     Format: `projects/*/locations/*/backupPlans/*/backups/*`
         class GetBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -253,8 +255,8 @@ module Google
         # Request message for UpdateBackup.
         # @!attribute [rw] backup
         #   @return [::Google::Cloud::GkeBackup::V1::Backup]
-        #     Required. A new version of the Backup resource that contains updated fields.
-        #     This may be sparsely populated if an `update_mask` is provided.
+        #     Required. A new version of the Backup resource that contains updated
+        #     fields. This may be sparsely populated if an `update_mask` is provided.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     This is used to specify the fields to be overwritten in the
@@ -274,12 +276,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the Backup resource.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*
+        #     Format: `projects/*/locations/*/backupPlans/*/backups/*`
         # @!attribute [rw] etag
         #   @return [::String]
         #     If provided, this value must match the current value of the
-        #     target Backup's {::Google::Cloud::GkeBackup::V1::Backup#etag etag} field or the request is
-        #     rejected.
+        #     target Backup's {::Google::Cloud::GkeBackup::V1::Backup#etag etag} field or the
+        #     request is rejected.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     If set to true, any VolumeBackups below this Backup will also be deleted.
@@ -294,7 +296,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The Backup that contains the VolumeBackups to list.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*
+        #     Format: `projects/*/locations/*/backupPlans/*/backups/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The target number of results to return in a single response.
@@ -329,10 +331,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token which may be sent as
-        #     {::Google::Cloud::GkeBackup::V1::ListVolumeBackupsRequest#page_token page_token} in a subsequent
-        #     `ListVolumeBackups` call to retrieve the next page of results.
-        #     If this field is omitted or empty, then there are no more results to
-        #     return.
+        #     {::Google::Cloud::GkeBackup::V1::ListVolumeBackupsRequest#page_token page_token}
+        #     in a subsequent `ListVolumeBackups` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
         class ListVolumeBackupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -342,7 +344,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full name of the VolumeBackup resource.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*
+        #     Format: `projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*`
         class GetVolumeBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -352,7 +354,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location within which to create the RestorePlan.
-        #     Format: projects/*/locations/*
+        #     Format: `projects/*/locations/*`
         # @!attribute [rw] restore_plan
         #   @return [::Google::Cloud::GkeBackup::V1::RestorePlan]
         #     Required. The RestorePlan resource object to create.
@@ -361,11 +363,11 @@ module Google
         #     Required. The client-provided short name for the RestorePlan resource.
         #     This name must:
         #
-        #      - be between 1 and 63 characters long (inclusive)
-        #      - consist of only lower-case ASCII letters, numbers, and dashes
-        #      - start with a lower-case letter
-        #      - end with a lower-case letter or number
-        #      - be unique within the set of RestorePlans in this location
+        #     - be between 1 and 63 characters long (inclusive)
+        #     - consist of only lower-case ASCII letters, numbers, and dashes
+        #     - start with a lower-case letter
+        #     - end with a lower-case letter or number
+        #     - be unique within the set of RestorePlans in this location
         class CreateRestorePlanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -375,7 +377,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location that contains the RestorePlans to list.
-        #     Format: projects/*/locations/*
+        #     Format: `projects/*/locations/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The target number of results to return in a single response.
@@ -410,10 +412,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token which may be sent as
-        #     {::Google::Cloud::GkeBackup::V1::ListRestorePlansRequest#page_token page_token} in a subsequent
-        #     `ListRestorePlans` call to retrieve the next page of results.
-        #     If this field is omitted or empty, then there are no more results to
-        #     return.
+        #     {::Google::Cloud::GkeBackup::V1::ListRestorePlansRequest#page_token page_token}
+        #     in a subsequent `ListRestorePlans` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
@@ -426,7 +428,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Fully qualified RestorePlan name.
-        #     Format: projects/*/locations/*/restorePlans/*
+        #     Format: `projects/*/locations/*/restorePlans/*`
         class GetRestorePlanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -435,8 +437,8 @@ module Google
         # Request message for UpdateRestorePlan.
         # @!attribute [rw] restore_plan
         #   @return [::Google::Cloud::GkeBackup::V1::RestorePlan]
-        #     Required. A new version of the RestorePlan resource that contains updated fields.
-        #     This may be sparsely populated if an `update_mask` is provided.
+        #     Required. A new version of the RestorePlan resource that contains updated
+        #     fields. This may be sparsely populated if an `update_mask` is provided.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     This is used to specify the fields to be overwritten in the
@@ -456,12 +458,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Fully qualified RestorePlan name.
-        #     Format: projects/*/locations/*/restorePlans/*
+        #     Format: `projects/*/locations/*/restorePlans/*`
         # @!attribute [rw] etag
         #   @return [::String]
         #     If provided, this value must match the current value of the
-        #     target RestorePlan's {::Google::Cloud::GkeBackup::V1::RestorePlan#etag etag} field or the request is
-        #     rejected.
+        #     target RestorePlan's {::Google::Cloud::GkeBackup::V1::RestorePlan#etag etag}
+        #     field or the request is rejected.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     If set to true, any Restores below this RestorePlan will also be deleted.
@@ -476,7 +478,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The RestorePlan within which to create the Restore.
-        #     Format: projects/*/locations/*/restorePlans/*
+        #     Format: `projects/*/locations/*/restorePlans/*`
         # @!attribute [rw] restore
         #   @return [::Google::Cloud::GkeBackup::V1::Restore]
         #     Required. The restore resource to create.
@@ -485,11 +487,11 @@ module Google
         #     Required. The client-provided short name for the Restore resource.
         #     This name must:
         #
-        #      - be between 1 and 63 characters long (inclusive)
-        #      - consist of only lower-case ASCII letters, numbers, and dashes
-        #      - start with a lower-case letter
-        #      - end with a lower-case letter or number
-        #      - be unique within the set of Restores in this RestorePlan.
+        #     - be between 1 and 63 characters long (inclusive)
+        #     - consist of only lower-case ASCII letters, numbers, and dashes
+        #     - start with a lower-case letter
+        #     - end with a lower-case letter or number
+        #     - be unique within the set of Restores in this RestorePlan.
         class CreateRestoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -499,7 +501,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The RestorePlan that contains the Restores to list.
-        #     Format: projects/*/locations/*/restorePlans/*
+        #     Format: `projects/*/locations/*/restorePlans/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The target number of results to return in a single response.
@@ -533,10 +535,10 @@ module Google
         #     The list of Restores matching the given criteria.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token which may be sent as {::Google::Cloud::GkeBackup::V1::ListRestoresRequest#page_token page_token}
-        #     in a subsequent `ListRestores` call to retrieve the next page of results.
-        #     If this field is omitted or empty, then there are no more results to
-        #     return.
+        #     A token which may be sent as
+        #     {::Google::Cloud::GkeBackup::V1::ListRestoresRequest#page_token page_token} in a
+        #     subsequent `ListRestores` call to retrieve the next page of results. If
+        #     this field is omitted or empty, then there are no more results to return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
@@ -549,7 +551,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the restore resource.
-        #     Format: projects/*/locations/*/restorePlans/*/restores/*
+        #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
         class GetRestoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -558,8 +560,8 @@ module Google
         # Request message for UpdateRestore.
         # @!attribute [rw] restore
         #   @return [::Google::Cloud::GkeBackup::V1::Restore]
-        #     Required. A new version of the Restore resource that contains updated fields.
-        #     This may be sparsely populated if an `update_mask` is provided.
+        #     Required. A new version of the Restore resource that contains updated
+        #     fields. This may be sparsely populated if an `update_mask` is provided.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     This is used to specify the fields to be overwritten in the
@@ -579,12 +581,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full name of the Restore
-        #     Format: projects/*/locations/*/restorePlans/*/restores/*
+        #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
         # @!attribute [rw] etag
         #   @return [::String]
         #     If provided, this value must match the current value of the
-        #     target Restore's {::Google::Cloud::GkeBackup::V1::Restore#etag etag} field or the request is
-        #     rejected.
+        #     target Restore's {::Google::Cloud::GkeBackup::V1::Restore#etag etag} field or
+        #     the request is rejected.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     If set to true, any VolumeRestores below this restore will also be deleted.
@@ -599,7 +601,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The Restore that contains the VolumeRestores to list.
-        #     Format: projects/*/locations/*/restorePlans/*/restores/*
+        #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The target number of results to return in a single response.
@@ -634,10 +636,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token which may be sent as
-        #     {::Google::Cloud::GkeBackup::V1::ListVolumeRestoresRequest#page_token page_token} in a subsequent
-        #     `ListVolumeRestores` call to retrieve the next page of results.
-        #     If this field is omitted or empty, then there are no more results to
-        #     return.
+        #     {::Google::Cloud::GkeBackup::V1::ListVolumeRestoresRequest#page_token page_token}
+        #     in a subsequent `ListVolumeRestores` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
         class ListVolumeRestoresResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -647,7 +649,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full name of the VolumeRestore resource.
-        #     Format: projects/*/locations/*/restorePlans/*/restores/*/volumeRestores/*
+        #     Format: `projects/*/locations/*/restorePlans/*/restores/*/volumeRestores/*`
         class GetVolumeRestoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

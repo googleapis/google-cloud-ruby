@@ -23,12 +23,15 @@ require "google/cloud/video/stitcher"
 # @param session_id [String] The live session ID (e.g. "my-live-session-id")
 # @param ad_tag_detail_id [String] The ad tag detail ID (e.g. "my-ad-tag-id")
 #
-def get_live_ad_tag_detail project_id:, location:, session_id:, ad_tag_detail_id:
+def get_live_ad_tag_detail project_id:, location:, session_id:,
+                           ad_tag_detail_id:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the live ad tag detail.
-  name = client.live_ad_tag_detail_path project: project_id, location: location, live_session: session_id, live_ad_tag_detail: ad_tag_detail_id
+  name = client.live_ad_tag_detail_path project: project_id, location: location,
+                                        live_session: session_id,
+                                        live_ad_tag_detail: ad_tag_detail_id
 
   # Get the live ad tag detail.
   ad_tag_detail = client.get_live_ad_tag_detail name: name

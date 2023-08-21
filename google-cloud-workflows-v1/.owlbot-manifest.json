@@ -14,6 +14,7 @@
     "google-cloud-workflows-v1.gemspec",
     "lib/google-cloud-workflows-v1.rb",
     "lib/google/cloud/workflows/v1.rb",
+    "lib/google/cloud/workflows/v1/bindings_override.rb",
     "lib/google/cloud/workflows/v1/rest.rb",
     "lib/google/cloud/workflows/v1/version.rb",
     "lib/google/cloud/workflows/v1/workflows.rb",
@@ -54,6 +55,7 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }

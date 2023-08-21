@@ -2099,6 +2099,7 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     instance = "hello world"
     project = "hello world"
+    request_id = "hello world"
     zone = "hello world"
 
     simulate_maintenance_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -2115,27 +2116,27 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.simulate_maintenance_event({ instance: instance, project: project, zone: zone }) do |_result, response|
+        client.simulate_maintenance_event({ instance: instance, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.simulate_maintenance_event instance: instance, project: project, zone: zone do |_result, response|
+        client.simulate_maintenance_event instance: instance, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.simulate_maintenance_event ::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, zone: zone) do |_result, response|
+        client.simulate_maintenance_event ::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.simulate_maintenance_event({ instance: instance, project: project, zone: zone }, call_options) do |_result, response|
+        client.simulate_maintenance_event({ instance: instance, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.simulate_maintenance_event(::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, zone: zone), call_options) do |_result, response|
+        client.simulate_maintenance_event(::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

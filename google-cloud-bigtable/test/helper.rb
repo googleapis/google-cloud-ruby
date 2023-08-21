@@ -203,7 +203,8 @@ class MockBigtable < Minitest::Spec
                   state: :READY,
                   encryption_type: nil,
                   encryption_status: nil,
-                  kms_key_version: nil
+                  kms_key_version: nil,
+                  source_backup: nil
 
     now = Time.now.round 0
     start_time ||= now + 60
@@ -220,7 +221,8 @@ class MockBigtable < Minitest::Spec
       end_time: end_time,
       size_bytes: size_bytes,
       state: state,
-      encryption_info: encryption_info
+      encryption_info: encryption_info,
+      source_backup: source_backup
     )
   end
 

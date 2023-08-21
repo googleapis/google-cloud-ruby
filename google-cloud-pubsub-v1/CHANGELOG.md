@@ -1,5 +1,36 @@
 # Release History
 
+### 0.17.3 (2023-07-28)
+
+#### Documentation
+
+* clarified where ordering_key will be written if write_metadata is set ([#22601](https://github.com/googleapis/google-cloud-ruby/issues/22601)) 
+
+### 0.17.2 (2023-06-27)
+
+#### Documentation
+
+* Clarify naming pattern for Storage's filename suffix ([#22451](https://github.com/googleapis/google-cloud-ruby/issues/22451)) 
+
+### 0.17.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.17.0 (2023-05-31)
+
+#### Features
+
+* Support for pushing JSON representations of a PubsubMessage to a push endpoint ([#21687](https://github.com/googleapis/google-cloud-ruby/issues/21687)) 
+* Uses binary protobuf definitions for better forward compatibility 
+
+### 0.16.0 (2023-05-18)
+
+#### Features
+
+* add cloud storage subscription fields ([#21576](https://github.com/googleapis/google-cloud-ruby/issues/21576)) 
+
 ### 0.15.1 (2023-02-23)
 
 #### Documentation

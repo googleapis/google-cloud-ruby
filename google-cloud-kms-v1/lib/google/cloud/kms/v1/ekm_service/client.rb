@@ -149,7 +149,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -754,6 +754,96 @@ module Google
             end
 
             ##
+            # Verifies that Cloud KMS can successfully connect to the external key
+            # manager specified by an {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}.
+            # If there is an error connecting to the EKM, this method returns a
+            # FAILED_PRECONDITION status containing structured information as described
+            # at https://cloud.google.com/kms/docs/reference/ekm_errors.
+            #
+            # @overload verify_connectivity(request, options = nil)
+            #   Pass arguments to `verify_connectivity` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::VerifyConnectivityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::VerifyConnectivityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload verify_connectivity(name: nil)
+            #   Pass arguments to `verify_connectivity` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::EkmConnection#name name} of the
+            #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} to verify.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::VerifyConnectivityResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::VerifyConnectivityResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::EkmService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::VerifyConnectivityRequest.new
+            #
+            #   # Call the verify_connectivity method.
+            #   result = client.verify_connectivity request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::VerifyConnectivityResponse.
+            #   p result
+            #
+            def verify_connectivity request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::VerifyConnectivityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.verify_connectivity.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.verify_connectivity.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.verify_connectivity.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @ekm_service_stub.call_rpc :verify_connectivity, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the EkmService API.
             #
             # This class represents the configuration for EkmService,
@@ -835,7 +925,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudkms.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudkms.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -918,6 +1010,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_ekm_config
+                ##
+                # RPC-specific configuration for `verify_connectivity`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :verify_connectivity
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -933,6 +1030,8 @@ module Google
                   @get_ekm_config = ::Gapic::Config::Method.new get_ekm_config_config
                   update_ekm_config_config = parent_rpcs.update_ekm_config if parent_rpcs.respond_to? :update_ekm_config
                   @update_ekm_config = ::Gapic::Config::Method.new update_ekm_config_config
+                  verify_connectivity_config = parent_rpcs.verify_connectivity if parent_rpcs.respond_to? :verify_connectivity
+                  @verify_connectivity = ::Gapic::Config::Method.new verify_connectivity_config
 
                   yield self if block_given?
                 end

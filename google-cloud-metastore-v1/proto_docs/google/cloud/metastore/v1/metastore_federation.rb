@@ -131,6 +131,9 @@ module Google
             # The metastore type is not set.
             METASTORE_TYPE_UNSPECIFIED = 0
 
+            # The backend metastore is BigQuery.
+            BIGQUERY = 2
+
             # The backend metastore is Dataproc Metastore.
             DATAPROC_METASTORE = 3
           end

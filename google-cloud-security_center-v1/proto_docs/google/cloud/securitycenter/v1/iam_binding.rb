@@ -32,8 +32,8 @@ module Google
         #     For example, "roles/viewer", "roles/editor", or "roles/owner".
         # @!attribute [rw] member
         #   @return [::String]
-        #     A single identity requesting access for a Cloud Platform resource,
-        #     e.g. "foo@google.com".
+        #     A single identity requesting access for a Cloud Platform resource, for
+        #     example, "foo@google.com".
         class IamBinding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -90,6 +90,12 @@ module Google
           #     [Cloud Speech API
           #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
           #     for more details.
+          #     If you specify a model, the following models typically have the best
+          #     performance:
+          #
+          #     - phone_call (best for Agent Assist and telephony)
+          #     - latest_short (best for Dialogflow non-telephony)
+          #     - command_and_search (best for very short utterances and commands)
           # @!attribute [rw] model_variant
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SpeechModelVariant]
           #     Optional. Which variant of the [Speech
@@ -180,17 +186,34 @@ module Google
           # @!attribute [rw] synthesize_speech_config
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig]
           #     Optional. Configuration of how speech should be synthesized.
+          #     If not specified,
+          #     {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}
+          #     is applied.
           class OutputAudioConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Settings related to speech generating.
+          # Settings related to speech synthesizing.
           # @!attribute [rw] synthesize_speech_configs
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig}]
-          #     Configuration of how speech should be synthesized, mapping from
-          #     language (https://dialogflow.com/docs/reference/language) to
+          #     Configuration of how speech should be synthesized, mapping from language
+          #     (https://cloud.google.com/dialogflow/cx/docs/reference/language) to
           #     SynthesizeSpeechConfig.
+          #
+          #     These settings affect:
+          #
+          #      - The [phone
+          #      gateway](https://cloud.google.com/dialogflow/cx/docs/concept/integration/phone-gateway)
+          #        synthesize configuration set via
+          #        {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}.
+          #
+          #      - How speech is synthesized when invoking
+          #      {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client session} APIs.
+          #        {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}
+          #        only applies if
+          #        {::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig#synthesize_speech_config OutputAudioConfig.synthesize_speech_config}
+          #        is not specified.
           class TextToSpeechSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

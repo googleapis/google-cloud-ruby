@@ -1,5 +1,32 @@
 # Release History
 
+### 0.26.0 (2023-07-27)
+
+#### Features
+
+* support external_processor_version_source 
+
+### 0.25.0 (2023-07-18)
+
+#### Features
+
+* added ImportDocuments, GetDocument and BatchDeleteDocuments RPCs for v1beta3 ([#22536](https://github.com/googleapis/google-cloud-ruby/issues/22536)) 
+
+### 0.24.0 (2023-06-20)
+
+#### Features
+
+* support document service with dataset and datasetSchema resources 
+
+### 0.23.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.22.0 (2023-03-23)
 
 #### Features

@@ -1,5 +1,35 @@
 # Release History
 
+### 0.31.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.31.0 (2023-06-27)
+
+#### Features
+
+* Mark the Asset APIs as deprecated in client libraries ([#22448](https://github.com/googleapis/google-cloud-ruby/issues/22448)) 
+
+### 0.30.0 (2023-06-16)
+
+#### Features
+
+* Add user agent and DLP parent type fields to finding's list of attributes ([#22380](https://github.com/googleapis/google-cloud-ruby/issues/22380)) 
+
+### 0.29.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.29.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
 ### 0.28.0 (2023-04-23)
 
 #### Features

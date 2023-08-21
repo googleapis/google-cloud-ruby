@@ -125,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -206,7 +206,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the Location to create Featurestores.
             #     Format:
-            #     `projects/{project}/locations/{location}'`
+            #     `projects/{project}/locations/{location}`
             #   @param featurestore [::Google::Cloud::AIPlatform::V1::Featurestore, ::Hash]
             #     Required. The Featurestore to create.
             #   @param featurestore_id [::String]
@@ -546,7 +546,7 @@ module Google
             #       * `labels`
             #       * `online_serving_config.fixed_node_count`
             #       * `online_serving_config.scaling`
-            #       * `online_storage_ttl_days` (available in Preview)
+            #       * `online_storage_ttl_days`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1089,7 +1089,7 @@ module Google
             #       * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
             #       * `monitoring_config.numerical_threshold_config.value`
             #       * `monitoring_config.categorical_threshold_config.value`
-            #       * `offline_storage_ttl_days` (available in Preview)
+            #       * `offline_storage_ttl_days`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::EntityType]
@@ -1940,7 +1940,7 @@ module Google
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
             #   @param entity_id_field [::String]
             #     Source column that holds entity IDs. If not provided, entity IDs are
-            #     extracted from the column named `entity_id`.
+            #     extracted from the column named entity_id.
             #   @param feature_specs [::Array<::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest::FeatureSpec, ::Hash>]
             #     Required. Specifications defining which Feature values to import from the
             #     entity. The request fails if no feature_specs are provided, and having
@@ -2466,6 +2466,7 @@ module Google
             #     * `featurestore_id`: Supports = comparisons.
             #
             #     Examples:
+            #
             #     * `description = "foo bar"` --> Any Feature with description exactly equal
             #     to `foo bar`
             #     * `value_type = DOUBLE` --> Features whose type is DOUBLE.
@@ -2638,7 +2639,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

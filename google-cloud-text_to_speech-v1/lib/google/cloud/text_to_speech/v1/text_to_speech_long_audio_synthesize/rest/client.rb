@@ -121,7 +121,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -170,17 +170,18 @@ module Google
               #
               #   @param parent [::String]
               #     The resource states of the request in the form of
-              #     `projects/*/locations/*/voices/*`.
+              #     `projects/*/locations/*`.
               #   @param input [::Google::Cloud::TextToSpeech::V1::SynthesisInput, ::Hash]
               #     Required. The Synthesizer requires either plain text or SSML as input.
+              #     While Long Audio is in preview, SSML is temporarily unsupported.
               #   @param audio_config [::Google::Cloud::TextToSpeech::V1::AudioConfig, ::Hash]
               #     Required. The configuration of the synthesized audio.
               #   @param output_gcs_uri [::String]
-              #     Specifies a Cloud Storage URI for the synthesis results. Must be
+              #     Required. Specifies a Cloud Storage URI for the synthesis results. Must be
               #     specified in the format: `gs://bucket_name/object_name`, and the bucket
               #     must already exist.
               #   @param voice [::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams, ::Hash]
-              #     The desired voice of the synthesized audio.
+              #     Required. The desired voice of the synthesized audio.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -297,7 +298,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "texttospeech.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "texttospeech.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

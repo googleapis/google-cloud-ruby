@@ -164,15 +164,16 @@ module Google
           # Data specific to web streams.
           # @!attribute [r] measurement_id
           #   @return [::String]
-          #     Output only. Analytics "Measurement ID", without the "G-" prefix.
-          #     Example: "G-1A2BCD345E" would just be "1A2BCD345E"
+          #     Output only. Analytics Measurement ID.
+          #
+          #     Example: "G-1A2BCD345E"
           # @!attribute [r] firebase_app_id
           #   @return [::String]
           #     Output only. ID of the corresponding web app in Firebase, if any.
           #     This ID can change if the web app is deleted and recreated.
           # @!attribute [rw] default_uri
           #   @return [::String]
-          #     Immutable. Domain name of the web app being measured, or empty.
+          #     Domain name of the web app being measured, or empty.
           #     Example: "http://www.google.com", "https://www.google.com"
           class WebStreamData
             include ::Google::Protobuf::MessageExts
@@ -549,12 +550,24 @@ module Google
           # @!attribute [rw] expanded_data_set
           #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
           #     A snapshot of an ExpandedDataSet resource in change history.
+          # @!attribute [rw] channel_group
+          #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+          #     A snapshot of a ChannelGroup resource in change history.
           # @!attribute [rw] bigquery_link
           #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
           #     A snapshot of a BigQuery link resource in change history.
           # @!attribute [rw] enhanced_measurement_settings
           #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
           #     A snapshot of EnhancedMeasurementSettings resource in change history.
+          # @!attribute [rw] adsense_link
+          #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+          #     A snapshot of an AdSenseLink resource in change history.
+          # @!attribute [rw] audience
+          #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+          #     A snapshot of an Audience resource in change history.
+          # @!attribute [rw] event_create_rule
+          #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+          #     A snapshot of an EventCreateRule resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -726,9 +739,28 @@ module Google
         #     usually created for you by the GA system, but in some cases can be created
         #     by property admins. Custom events count towards the maximum number of
         #     custom conversion events that may be created per property.
+        # @!attribute [rw] counting_method
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent::ConversionCountingMethod]
+        #     Optional. The method by which conversions will be counted across multiple
+        #     events within a session. If this value is not provided, it will be set to
+        #     `ONCE_PER_EVENT`.
         class ConversionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The method by which conversions will be counted across multiple events
+          # within a session.
+          module ConversionCountingMethod
+            # Counting method not specified.
+            CONVERSION_COUNTING_METHOD_UNSPECIFIED = 0
+
+            # Each Event instance is considered a Conversion.
+            ONCE_PER_EVENT = 1
+
+            # An Event instance is considered a Conversion at most once per session per
+            # user.
+            ONCE_PER_SESSION = 2
+          end
         end
 
         # Settings values for Google Signals.  This is a singleton resource.
@@ -760,6 +792,9 @@ module Google
         #     If this is a user-scoped dimension, then this is the user property name.
         #     If this is an event-scoped dimension, then this is the event parameter
         #     name.
+        #
+        #     If this is an item-scoped dimension, then this is the parameter
+        #     name found in the eCommerce items array.
         #
         #     May only contain alphanumeric and underscore characters, starting with a
         #     letter. Max length of 24 characters for user-scoped dimensions, 40
@@ -798,6 +833,9 @@ module Google
 
             # Dimension scoped to a user.
             USER = 2
+
+            # Dimension scoped to eCommerce items
+            ITEM = 3
           end
         end
 
@@ -967,6 +1005,10 @@ module Google
         #     Changing the attribution model will apply to both historical and future
         #     data. These changes will be reflected in reports with conversion and
         #     revenue data. User and session data will be unaffected.
+        # @!attribute [rw] ads_web_conversion_data_export_scope
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::AdsWebConversionDataExportScope]
+        #     Required. The Conversion Export Scope for data exported to linked Ads
+        #     Accounts.
         class AttributionSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1011,33 +1053,89 @@ module Google
             # Data-driven attribution distributes credit for the conversion based on
             # data for each conversion event. Each Data-driven model is specific to
             # each advertiser and each conversion event.
-            CROSS_CHANNEL_DATA_DRIVEN = 1
+            # Previously CROSS_CHANNEL_DATA_DRIVEN
+            PAID_AND_ORGANIC_CHANNELS_DATA_DRIVEN = 1
 
             # Ignores direct traffic and attributes 100% of the conversion value to the
             # last channel that the customer clicked through (or engaged view through
             # for YouTube) before converting.
-            CROSS_CHANNEL_LAST_CLICK = 2
+            # Previously CROSS_CHANNEL_LAST_CLICK
+            PAID_AND_ORGANIC_CHANNELS_LAST_CLICK = 2
 
+            # Starting in June 2023, new properties can no longer use this model.
+            # See
+            # [Analytics
+            # Help](https://support.google.com/analytics/answer/9164320#040623)
+            # for more details.
+            # Starting in September 2023, we will sunset this model for all properties.
+            #
             # Gives all credit for the conversion to the first channel that a customer
             # clicked (or engaged view through for YouTube) before converting.
-            CROSS_CHANNEL_FIRST_CLICK = 3
+            # Previously CROSS_CHANNEL_FIRST_CLICK
+            PAID_AND_ORGANIC_CHANNELS_FIRST_CLICK = 3
 
+            # Starting in June 2023, new properties can no longer use this model.
+            # See
+            # [Analytics
+            # Help](https://support.google.com/analytics/answer/9164320#040623)
+            # for more details.
+            # Starting in September 2023, we will sunset this model for all properties.
+            #
             # Distributes the credit for the conversion equally across all the channels
             # a customer clicked (or engaged view through for YouTube) before
             # converting.
-            CROSS_CHANNEL_LINEAR = 4
+            # Previously CROSS_CHANNEL_LINEAR
+            PAID_AND_ORGANIC_CHANNELS_LINEAR = 4
 
+            # Starting in June 2023, new properties can no longer use this model.
+            # See
+            # [Analytics
+            # Help](https://support.google.com/analytics/answer/9164320#040623)
+            # for more details.
+            # Starting in September 2023, we will sunset this model for all properties.
+            #
             # Attributes 40% credit to the first and last interaction, and the
             # remaining 20% credit is distributed evenly to the middle interactions.
-            CROSS_CHANNEL_POSITION_BASED = 5
+            # Previously CROSS_CHANNEL_POSITION_BASED
+            PAID_AND_ORGANIC_CHANNELS_POSITION_BASED = 5
 
+            # Starting in June 2023, new properties can no longer use this model.
+            # See
+            # [Analytics
+            # Help](https://support.google.com/analytics/answer/9164320#040623)
+            # for more details.
+            # Starting in September 2023, we will sunset this model for all properties.
+            #
             # Gives more credit to the touchpoints that happened closer in time to
             # the conversion.
-            CROSS_CHANNEL_TIME_DECAY = 6
+            # Previously CROSS_CHANNEL_TIME_DECAY
+            PAID_AND_ORGANIC_CHANNELS_TIME_DECAY = 6
 
-            # Attributes 100% of the conversion value to the last Google Ads channel
+            # Attributes 100% of the conversion value to the last Google Paid channel
             # that the customer clicked through before converting.
-            ADS_PREFERRED_LAST_CLICK = 7
+            # Previously ADS_PREFERRED_LAST_CLICK
+            GOOGLE_PAID_CHANNELS_LAST_CLICK = 7
+          end
+
+          # The Conversion Export Scope for data exported to linked Ads Accounts.
+          module AdsWebConversionDataExportScope
+            # Default value. This value is unused.
+            ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED = 0
+
+            # No data export scope selected yet.
+            # Export scope can never be changed back to this value.
+            NOT_SELECTED_YET = 1
+
+            # Paid and organic channels are eligible to receive conversion credit, but
+            # only credit assigned to Google Ads channels will appear in your Ads
+            # accounts. To learn more, see [Paid and Organic
+            # channels](https://support.google.com/analytics/answer/10632359).
+            PAID_AND_ORGANIC_CHANNELS = 2
+
+            # Only Google Ads paid channels are eligible to receive conversion credit.
+            # To learn more, see [Google Paid
+            # channels](https://support.google.com/analytics/answer/10632359).
+            GOOGLE_PAID_CHANNELS = 3
           end
         end
 
@@ -1097,9 +1195,9 @@ module Google
         # @!attribute [rw] streaming_export_enabled
         #   @return [::Boolean]
         #     If set true, enables streaming export to the linked Google Cloud project.
-        # @!attribute [rw] intraday_export_enabled
+        # @!attribute [rw] enterprise_export_enabled
         #   @return [::Boolean]
-        #     If set true, enables intraday export to the linked Google Cloud project.
+        #     If set true, enables enterprise export to the linked Google Cloud project.
         # @!attribute [rw] include_advertising_id
         #   @return [::Boolean]
         #     If set true, exported data will include advertising identifiers for mobile
@@ -1118,7 +1216,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Singleton resource under a WebDataStream, configuring measurement of
+        # Singleton resource under a web DataStream, configuring measurement of
         # additional site interactions and content.
         # @!attribute [r] name
         #   @return [::String]
@@ -1185,6 +1283,21 @@ module Google
         #     Required. "Tag ID to forward events to. Also known as the Measurement ID,
         #     or the "G-ID"  (For example: G-12345).
         class ConnectedSiteTag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A link between a GA4 Property and an AdSense for Content ad client.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this AdSense Link resource.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/6789
+        # @!attribute [rw] ad_client_code
+        #   @return [::String]
+        #     Immutable. The AdSense ad client code that the GA4 property is linked to.
+        #     Example format: "ca-pub-1234567890"
+        class AdSenseLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1374,6 +1487,15 @@ module Google
 
           # EnhancedMeasurementSettings resource
           ENHANCED_MEASUREMENT_SETTINGS = 24
+
+          # AdSenseLink resource
+          ADSENSE_LINK = 27
+
+          # Audience resource
+          AUDIENCE = 28
+
+          # EventCreateRule resource
+          EVENT_CREATE_RULE = 29
         end
 
         # Status of the Google Signals settings.

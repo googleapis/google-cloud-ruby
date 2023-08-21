@@ -47,57 +47,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [TensorboardService.GetTensorboardUsage][].
-        # @!attribute [rw] tensorboard
-        #   @return [::String]
-        #     Required. The name of the Tensorboard resource.
-        #     Format:
-        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
-        class ReadTensorboardUsageRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for
-        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
-        # @!attribute [rw] monthly_usage_data
-        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData}]
-        #     Maps year-month (YYYYMM) string to per month usage data.
-        class ReadTensorboardUsageResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Per user usage data.
-          # @!attribute [rw] username
-          #   @return [::String]
-          #     User's username
-          # @!attribute [rw] view_count
-          #   @return [::Integer]
-          #     Number of times the user has read data within the Tensorboard.
-          class PerUserUsageData
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Per month usage data
-          # @!attribute [rw] user_usage_data
-          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerUserUsageData>]
-          #     Usage data for each user in the given month.
-          class PerMonthUsageData
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData]
-          class MonthlyUsageDataEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-        end
-
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards TensorboardService.ListTensorboards}.
         # @!attribute [rw] parent
@@ -178,6 +127,80 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
         class DeleteTensorboardRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
+        # @!attribute [rw] tensorboard
+        #   @return [::String]
+        #     Required. The name of the Tensorboard resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+        class ReadTensorboardUsageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
+        # @!attribute [rw] monthly_usage_data
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData}]
+        #     Maps year-month (YYYYMM) string to per month usage data.
+        class ReadTensorboardUsageResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Per user usage data.
+          # @!attribute [rw] username
+          #   @return [::String]
+          #     User's username
+          # @!attribute [rw] view_count
+          #   @return [::Integer]
+          #     Number of times the user has read data within the Tensorboard.
+          class PerUserUsageData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Per month usage data
+          # @!attribute [rw] user_usage_data
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerUserUsageData>]
+          #     Usage data for each user in the given month.
+          class PerMonthUsageData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData]
+          class MonthlyUsageDataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_size TensorboardService.ReadTensorboardSize}.
+        # @!attribute [rw] tensorboard
+        #   @return [::String]
+        #     Required. The name of the Tensorboard resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+        class ReadTensorboardSizeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_size TensorboardService.ReadTensorboardSize}.
+        # @!attribute [rw] storage_size_byte
+        #   @return [::Integer]
+        #     Payload storage size for the TensorBoard
+        class ReadTensorboardSizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -747,12 +770,12 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
-        #     [TensorboardService.ExportTensorboardTimeSeries][] call.
-        #     Provide this to retrieve the subsequent page.
+        #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     [TensorboardService.ExportTensorboardTimeSeries][] must
-        #     match the call that provided the page token.
+        #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+        #     must match the call that provided the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Field to use to sort the TensorboardTimeSeries' data.
@@ -771,8 +794,9 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as
-        #     [ExportTensorboardTimeSeriesRequest.page_token][] to retrieve the next
-        #     page. If this field is omitted, there are no subsequent pages.
+        #     {::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataRequest#page_token page_token}
+        #     to retrieve the next page. If this field is omitted, there are no
+        #     subsequent pages.
         class ExportTensorboardTimeSeriesDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -246,6 +246,7 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     parent = "hello world"
     filter = "hello world"
+    order_by = "hello world"
     page_size = 42
     page_token = "hello world"
 
@@ -254,6 +255,7 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Batch::V1::ListJobsRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       refute_nil options
@@ -266,35 +268,35 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_jobs parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_jobs ::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_jobs ::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_jobs(::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_jobs(::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

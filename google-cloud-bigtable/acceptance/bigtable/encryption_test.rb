@@ -22,24 +22,26 @@ describe Google::Cloud::Bigtable::Project, :encryption, :bigtable do
   let(:cluster_id_cmek) { "ruby-clstr-kms" }
   let(:cluster_location) { "us-east1-b" }
   let(:kms_key_name) { bigtable_kms_key }
-  let(:table_id) { "test-table-#{random_str}" }
-  let(:backup_id) { "test-backup-#{random_str}" }
+  let(:table_id) { "test-table-#{Time.now.to_i}-#{random_str}" }
+  let(:backup_id) { "test-backup-#{Time.now.to_i}-#{random_str}" }
 
   after do
     @backup.delete if @backup
     @table.delete if @table
-    @instance.delete if @instance
+    clean_up_old_objects instance_id_cmek
   end
 
   it "creates an instance, cluster, table and backup with CMEK" do
-    job = bigtable.create_instance instance_id_cmek, display_name: "Ruby Test with KMS key", type: :DEVELOPMENT do |clusters|
-      # "Need to have at least one cluster map element in CreateInstanceRequest."
-      clusters.add cluster_id_cmek, cluster_location, kms_key: kms_key_name # nodes not allowed
+    @instance = bigtable.instance instance_id_cmek
+    unless @instance
+      job = bigtable.create_instance instance_id_cmek, display_name: "Ruby Test with KMS key", type: :DEVELOPMENT do |clusters|
+        # "Need to have at least one cluster map element in CreateInstanceRequest."
+        clusters.add cluster_id_cmek, cluster_location, kms_key: kms_key_name # nodes not allowed
+      end
+      job.wait_until_done!
+      _(job.error).must_be :nil?
+      @instance = job.instance
     end
-    job.wait_until_done!
-    _(job.error).must_be :nil?
-
-    @instance = job.instance
     _(@instance).must_be_kind_of Google::Cloud::Bigtable::Instance
     _(@instance.clusters.count).must_equal 1
 

@@ -179,6 +179,13 @@ module Google
             ASYMMETRIC_DECRYPT = 6
 
             # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # with {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt RawEncrypt}
+            # and {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt RawDecrypt}.
+            # This purpose is meant to be used for interoperable symmetric
+            # encryption and does not support automatic CryptoKey rotation.
+            RAW_ENCRYPT_DECRYPT = 7
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
             # with {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign MacSign}.
             MAC = 9
           end
@@ -379,11 +386,11 @@ module Google
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
           #
-          # Algorithms beginning with "RSA_SIGN_" are usable with
+          # Algorithms beginning with `RSA_SIGN_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
           #
-          # The fields in the name after "RSA_SIGN_" correspond to the following
+          # The fields in the name after `RSA_SIGN_` correspond to the following
           # parameters: padding algorithm, modulus bit length, and digest algorithm.
           #
           # For PSS, the salt length used is equal to the length of digest
@@ -391,25 +398,25 @@ module Google
           # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::RSA_SIGN_PSS_2048_SHA256 RSA_SIGN_PSS_2048_SHA256}
           # will use PSS with a salt length of 256 bits or 32 bytes.
           #
-          # Algorithms beginning with "RSA_DECRYPT_" are usable with
+          # Algorithms beginning with `RSA_DECRYPT_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
           #
-          # The fields in the name after "RSA_DECRYPT_" correspond to the following
+          # The fields in the name after `RSA_DECRYPT_` correspond to the following
           # parameters: padding algorithm, modulus bit length, and digest algorithm.
           #
-          # Algorithms beginning with "EC_SIGN_" are usable with
+          # Algorithms beginning with `EC_SIGN_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
           #
-          # The fields in the name after "EC_SIGN_" correspond to the following
+          # The fields in the name after `EC_SIGN_` correspond to the following
           # parameters: elliptic curve, digest algorithm.
           #
-          # Algorithms beginning with "HMAC_" are usable with
+          # Algorithms beginning with `HMAC_` are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::MAC MAC}.
           #
-          # The suffix following "HMAC_" corresponds to the hash algorithm being used
+          # The suffix following `HMAC_` corresponds to the hash algorithm being used
           # (eg. SHA256).
           #
           # For more information, see [Key purposes and algorithms]
@@ -420,6 +427,24 @@ module Google
 
             # Creates symmetric encryption keys.
             GOOGLE_SYMMETRIC_ENCRYPTION = 1
+
+            # AES-GCM (Galois Counter Mode) using 128-bit keys.
+            AES_128_GCM = 41
+
+            # AES-GCM (Galois Counter Mode) using 256-bit keys.
+            AES_256_GCM = 19
+
+            # AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.
+            AES_128_CBC = 42
+
+            # AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.
+            AES_256_CBC = 43
+
+            # AES-CTR (Counter Mode) using 128-bit keys.
+            AES_128_CTR = 44
+
+            # AES-CTR (Counter Mode) using 256-bit keys.
+            AES_256_CTR = 45
 
             # RSASSA-PSS 2048 bit key with a SHA256 digest.
             RSA_SIGN_PSS_2048_SHA256 = 2

@@ -32,6 +32,9 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientPathsTest < Minitest:
 
       path = client.endpoint_path project: "value0", location: "value1", endpoint: "value2"
       assert_equal "projects/value0/locations/value1/endpoints/value2", path
+
+      path = client.endpoint_path project: "value0", location: "value1", publisher: "value2", model: "value3"
+      assert_equal "projects/value0/locations/value1/publishers/value2/models/value3", path
     end
   end
 
@@ -80,6 +83,18 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientPathsTest < Minitest:
 
       path = client.model_evaluation_slice_path project: "value0", location: "value1", model: "value2", evaluation: "value3", slice: "value4"
       assert_equal "projects/value0/locations/value1/models/value2/evaluations/value3/slices/value4", path
+    end
+  end
+
+  def test_pipeline_job_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AIPlatform::V1::ModelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.pipeline_job_path project: "value0", location: "value1", pipeline_job: "value2"
+      assert_equal "projects/value0/locations/value1/pipelineJobs/value2", path
     end
   end
 

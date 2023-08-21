@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/service_management/v1/version"
+require "google/cloud/service_management/v1/bindings_override"
 
 require "google/cloud/service_management/v1/service_manager/credentials"
 require "google/cloud/service_management/v1/service_manager/rest/operations"

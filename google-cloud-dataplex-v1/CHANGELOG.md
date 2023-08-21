@@ -1,5 +1,37 @@
 # Changelog
 
+### 0.10.1 (2023-08-15)
+
+#### Bug Fixes
+
+* remove unused annotation in results_table ([#22746](https://github.com/googleapis/google-cloud-ruby/issues/22746)) 
+
+### 0.10.0 (2023-08-01)
+
+#### Features
+
+* support DataTaxonomyService ([#22585](https://github.com/googleapis/google-cloud-ruby/issues/22585)) 
+
+### 0.9.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.0 (2023-05-04)
+
+#### Features
+
+* Added DataSource#resource 
+* Added Entity#access and Entity#uid 
+* Added ResourceSpec#read_access_mode 
+* Added ResourceStatus#managed_access_identity 
+* Support for the run_task call 
+* The create_data_scan and update_data_scan support the validate_only flag 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features

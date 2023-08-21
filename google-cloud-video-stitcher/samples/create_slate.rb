@@ -21,8 +21,8 @@ require "google/cloud/video/stitcher"
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
 # @param slate_id [String] Your slate name (e.g. "my-slate")
-# @param slate_uri [String] The URI of an MP4 video with at least one audio track
-#                           (e.g. "https://my-slate-uri/test.mp4")
+# @param slate_uri [String] The URI of an MP4 video with at least one audio
+#   track (e.g. "https://my-slate-uri/test.mp4")
 #
 def create_slate project_id:, location:, slate_id:, slate_uri:
   # Create a Video Stitcher client.
@@ -36,9 +36,15 @@ def create_slate project_id:, location:, slate_id:, slate_uri:
     uri: slate_uri
   }
 
-  response = client.create_slate parent: parent, slate_id: slate_id, slate: new_slate
+  operation = client.create_slate parent: parent, slate_id: slate_id,
+                                  slate: new_slate
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print the slate name.
-  puts "Slate: #{response.name}"
+  puts "Slate: #{operation.response.name}"
 end
 # [END videostitcher_create_slate]

@@ -109,6 +109,26 @@
               "methods": [
                 "get_live_session"
               ]
+            },
+            "CreateLiveConfig": {
+              "methods": [
+                "create_live_config"
+              ]
+            },
+            "ListLiveConfigs": {
+              "methods": [
+                "list_live_configs"
+              ]
+            },
+            "GetLiveConfig": {
+              "methods": [
+                "get_live_config"
+              ]
+            },
+            "DeleteLiveConfig": {
+              "methods": [
+                "delete_live_config"
+              ]
             }
           }
         }

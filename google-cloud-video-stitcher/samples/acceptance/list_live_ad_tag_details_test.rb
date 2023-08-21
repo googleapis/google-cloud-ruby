@@ -21,6 +21,9 @@ describe "#list_live_ad_tag_details", :stitcher_snippet do
     refute_nil slate
     @slate_created = true
 
+    refute_nil live_config
+    @live_config_created = true
+
     refute_nil live_session
     @session_id = live_session.name.split("/").last
 
@@ -30,7 +33,8 @@ describe "#list_live_ad_tag_details", :stitcher_snippet do
     get_renditions live_session.play_uri
 
     assert_output %r{Live ad tag details:\n#{live_session.name}/liveAdTagDetails/\S+} do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     end
   end
 end

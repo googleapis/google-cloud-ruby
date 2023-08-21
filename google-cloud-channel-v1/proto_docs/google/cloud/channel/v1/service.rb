@@ -701,6 +701,118 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for ListSkuGroups.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the account from which to list SKU groups.
+        #     Parent uses the format: accounts/\\{account}.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of SKU groups to return. The service may
+        #     return fewer than this value. If unspecified, returns a maximum of 1000 SKU
+        #     groups. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results beyond the first page.
+        #     Obtained through
+        #     [ListSkuGroups.next_page_token][] of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups CloudChannelService.ListSkuGroups}
+        #     call.
+        class ListSkuGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListSkuGroupBillableSkus.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the SKU group.
+        #     Format: accounts/\\{account}/skuGroups/\\{sku_group}.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of SKUs to return. The service may return
+        #     fewer than this value. If unspecified, returns a maximum of 100000 SKUs.
+        #     The maximum value is 100000; values above 100000 will be coerced to 100000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results beyond the first page.
+        #     Obtained through
+        #     [ListSkuGroupBillableSkus.next_page_token][] of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus CloudChannelService.ListSkuGroupBillableSkus}
+        #     call.
+        class ListSkuGroupBillableSkusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListSkuGroups.
+        # @!attribute [rw] sku_groups
+        #   @return [::Array<::Google::Cloud::Channel::V1::SkuGroup>]
+        #     The list of SKU groups requested.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to [ListSkuGroups.page_token][] to obtain that
+        #     page.
+        class ListSkuGroupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListSkuGroupBillableSkus.
+        # @!attribute [rw] billable_skus
+        #   @return [::Array<::Google::Cloud::Channel::V1::BillableSku>]
+        #     The list of billable SKUs in the requested SKU group.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to [ListSkuGroupBillableSkus.page_token][] to obtain that
+        #     page.
+        class ListSkuGroupBillableSkusResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the SKU group information.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Resource name of SKU group. Format:
+        #     accounts/\\{account}/skuGroups/\\{sku_group}.
+        #     Example:
+        #     "accounts/C01234/skuGroups/3d50fd57-3157-4577-a5a9-a219b8490041".
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Unique human readable identifier for the SKU group.
+        class SkuGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the Billable SKU information.
+        # @!attribute [rw] sku
+        #   @return [::String]
+        #     Resource name of Billable SKU. Format:
+        #     billableSkus/\\{sku}.
+        #     Example:
+        #     billableSkus/6E1B-6634-470F".
+        # @!attribute [rw] sku_display_name
+        #   @return [::String]
+        #     Unique human readable name for the SKU.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Resource name of Service which contains Repricing SKU. Format:
+        #     services/\\{service}.
+        #     Example:
+        #     "services/B7D9-FDCB-15D8".
+        # @!attribute [rw] service_display_name
+        #   @return [::String]
+        #     Unique human readable name for the Service.
+        class BillableSku
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement CloudChannelService.CreateEntitlement}
         # @!attribute [rw] parent

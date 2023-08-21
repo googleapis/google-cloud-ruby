@@ -1,8 +1,8 @@
 # Ruby Client for the Confidential Computing V1 API
 
-API Client library for the Confidential Computing V1 API
+Attestation verifier for Confidential Space.
 
-google-cloud-confidential_computing-v1 is the official client library for the Confidential Computing V1 API.
+Attestation verifier for Confidential Space.
 
 https://github.com/googleapis/google-cloud-ruby
 

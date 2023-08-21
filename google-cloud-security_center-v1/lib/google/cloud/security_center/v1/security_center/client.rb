@@ -233,7 +233,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -692,9 +692,9 @@ module Google
             #     Required. The mute config being created.
             #   @param mute_config_id [::String]
             #     Required. Unique identifier provided by the client within the parent scope.
-            #     It must consist of lower case letters, numbers, and hyphen, with the first
-            #     character a letter, the last a letter or a number, and a 63 character
-            #     maximum.
+            #     It must consist of only lowercase letters, numbers, and hyphens, must start
+            #     with a letter, must end with either a letter or a number, and must be 63
+            #     characters or less.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::MuteConfig]
@@ -1830,6 +1830,8 @@ module Google
             # Filters an organization's assets and  groups them by their specified
             # properties.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload group_assets(request, options = nil)
             #   Pass arguments to `group_assets` via a request object, either of type
             #   {::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest} or an equivalent Hash.
@@ -2266,6 +2268,8 @@ module Google
 
             ##
             # Lists an organization's assets.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_assets(request, options = nil)
             #   Pass arguments to `list_assets` via a request object, either of type
@@ -3317,6 +3321,8 @@ module Google
             # This API can only be called with limited frequency for an organization. If
             # it is called too frequently the caller will receive a TOO_MANY_REQUESTS
             # error.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload run_asset_discovery(request, options = nil)
             #   Pass arguments to `run_asset_discovery` via a request object, either of type
@@ -4540,9 +4546,9 @@ module Google
             #     Required. The BigQuery export being created.
             #   @param big_query_export_id [::String]
             #     Required. Unique identifier provided by the client within the parent scope.
-            #     It must consist of lower case letters, numbers, and hyphen, with the first
-            #     character a letter, the last a letter or a number, and a 63 character
-            #     maximum.
+            #     It must consist of only lowercase letters, numbers, and hyphens, must start
+            #     with a letter, must end with either a letter or a number, and must be 63
+            #     characters or less.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
@@ -4972,7 +4978,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "securitycenter.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "securitycenter.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

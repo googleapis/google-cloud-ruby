@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"]
-ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"]
+TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"].freeze
+ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"].freeze
 FAILURES_REPORT_PATH = "tmp/ci-failures.json"
 
 desc "Run CI tasks."
@@ -65,9 +65,10 @@ flag :bundle_retry, "--bundle-retry=RETRIES", accept: Integer, default: 3 do |f|
 end
 
 at_least_one_required desc: "Tasks" do
+  flag :task_rubocop_toplevel, "--[no-]rubocop-toplevel", desc: "Run the toplevel rubocop task"
   flag :do_bundle, "--[no-]bundle" do |f|
-    f.desc "Normally bundle install is performed prior to any other task. Use --no-bundle to disable this, or" \
-           " use --bundle to force a bundle install even if no other tasks are run."
+    f.desc "Normally bundle install is performed prior to any other task. Use --no-bundle to disable this, or " \
+           "use --bundle to force a bundle install even if no other tasks are run."
   end
   flag :bundle_update do |f|
     f.desc "Update rather than install gem bundles."
@@ -89,6 +90,11 @@ def run
   require "json"
   require "set"
 
+  # Temporary hack to allow minitest-rg 5.2.0 to work in minitest 5.19 or
+  # later. This should be removed if we have a better solution or decide to
+  # drop rg.
+  ENV["MT_COMPAT"] = "true"
+
   set :failures_report, true if github_event_name == "schedule"
   set :failures_report, FAILURES_REPORT_PATH if failures_report == true
 
@@ -105,7 +111,8 @@ def run
   Dir.chdir context_directory
   dirs = determine_dirs
 
-  if max_gem_count > 0 && dirs.size > max_gem_count
+  run_toplevel
+  if max_gem_count.positive? && dirs.size > max_gem_count
     puts "CI skipped because the limit of #{max_gem_count} libraries was exceeded.", :bold, :yellow
     puts "Modified libraries found:"
     dirs.each { |dir| puts "  #{dir}" }
@@ -126,7 +133,7 @@ def setup_auth_env
     "GCLOUD_TEST_PROJECT" => final_project,
     "GOOGLE_CLOUD_PROJECT" => final_project,
     "GCLOUD_TEST_KEYFILE" => final_keyfile,
-    "GOOGLE_APPLICATION_CREDENTIALS" => ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+    "GOOGLE_APPLICATION_CREDENTIALS" => ENV["GOOGLE_APPLICATION_CREDENTIALS"],
   }
 end
 
@@ -136,16 +143,17 @@ def determine_tasks
     do_task = get "task_#{task_underscore}"
     do_task.nil? ? all_tasks : do_task
   end
-  bundle_task = if bundle_update
-    logger.info "Will update bundles for tested libraries"
-    "update"
-  elsif do_bundle == false
-    logger.info "Will not install bundles for tested libraries"
-    nil
-  else
-    logger.info "Will install bundles for tested libraries"
-    "install"
-  end
+  bundle_task =
+    if bundle_update
+      logger.info "Will update bundles for tested libraries"
+      "update"
+    elsif do_bundle == false
+      logger.info "Will not install bundles for tested libraries"
+      nil
+    else
+      logger.info "Will install bundles for tested libraries"
+      "install"
+    end
   logger.info "Running the following tasks: #{run_tasks.inspect}"
   [run_tasks, bundle_task]
 end
@@ -158,7 +166,7 @@ end
 
 def all_gem_dirs which_files
   dirs = Dir.glob("*/*.gemspec").map { |file| File.dirname file }
-  if which_files == true || which_files == ""
+  if [true, ""].include? which_files
     puts "Running for all gems", :bold
   else
     puts "Running for all gems with the following files: #{which_files}", :bold
@@ -207,7 +215,7 @@ def gem_dirs_from_changes
 end
 
 def interpret_github_event
-  payload = JSON.load File.read github_event_payload unless github_event_payload.empty?
+  payload = JSON.parse File.read github_event_payload unless github_event_payload.empty?
   base_ref, head_ref =
     case github_event_name
     when "pull_request"
@@ -236,7 +244,7 @@ def ensure_checkout head_ref
     logger.info "Already at head SHA: #{head_sha}"
   else
     logger.info "Checking out head SHA: #{head_sha}"
-    exec(["git", "checkout", head_sha], e: true)
+    exec ["git", "checkout", head_sha], e: true
   end
 end
 
@@ -252,17 +260,17 @@ def find_changed_files base_ref
 end
 
 def ensure_fetched ref
-  result = exec(["git", "show", "--no-patch", "--format=%H", ref], out: :capture, err: :capture)
+  result = exec ["git", "show", "--no-patch", "--format=%H", ref], out: :capture, err: :capture
   if result.success?
     result.captured_out.strip
   elsif ref == "HEAD^"
     # Common special case
     current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
-    exec(["git", "fetch", "--depth=2", "origin", current_sha], e: true)
+    exec ["git", "fetch", "--depth=2", "origin", current_sha], e: true
     capture(["git", "rev-parse", "HEAD^"], e: true).strip
   else
     logger.info "Fetching ref: #{ref}"
-    exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/temp/#{ref}"], e: true)
+    exec ["git", "fetch", "--depth=1", "origin", "#{ref}:refs/temp/#{ref}"], e: true
     capture(["git", "show", "--no-patch", "--format=%H", "refs/temp/#{ref}"], e: true).strip
   end
 end
@@ -270,24 +278,21 @@ end
 def find_changed_directories files
   dirs = Set.new
   files.each do |file|
-    if file =~ %r{^([^/]+)/.+$}
-      dir = Regexp.last_match[1]
-      dirs << dir
-      if dir =~ %r{^(.+)-v\d[^-]*$}
-        wrapper_dir = Regexp.last_match[1]
-        if Dir.exist? wrapper_dir
-          dirs << wrapper_dir
-        end
-      end
-    end
+    next unless file =~ %r{^([^/]+)/.+$}
+    dir = Regexp.last_match[1]
+    dirs << dir
+    next unless dir =~ %r{^(.+)-v\d[^-]*$}
+    wrapper_dir = Regexp.last_match[1]
+    next unless Dir.exist? wrapper_dir
+    dirs << wrapper_dir
   end
   filter_gem_dirs dirs.to_a
 end
 
 def filter_gem_dirs dirs
   dirs.find_all do |dir|
-    if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file?(File.join(dir, file)) }
-      result = capture_ruby([], in: :controller) do |controller|
+    if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file? File.join(dir, file) }
+      result = capture_ruby [], in: :controller do |controller|
         controller.in.puts "spec = Gem::Specification.load '#{dir}/#{dir}.gemspec'"
         controller.in.puts "puts spec.required_ruby_version.satisfied_by? Gem::Version.new(#{RUBY_VERSION.inspect})"
       end
@@ -296,6 +301,24 @@ def filter_gem_dirs dirs
       false
     end
   end.sort
+end
+
+def run_toplevel
+  if @bundle_task
+    puts
+    puts "toplevel: bundle ...", :bold, :cyan
+    result = exec ["bundle", @bundle_task, "--retry=#{bundle_retry}"]
+    unless result.success?
+      @errors << [dir, "bundle"]
+      return
+    end
+  end
+  if task_rubocop_toplevel
+    puts
+    puts "toplevel: rubocop ...", :bold, :cyan
+    result = exec ["bundle", "exec", "rubocop", "-c", ".rubocop_root.yml"]
+    @errors << ["toplevel", "rubocop"] unless result.success?
+  end
 end
 
 def run_in_dir dir
@@ -312,11 +335,12 @@ def run_in_dir dir
     @run_tasks.each do |task|
       puts
       puts "#{dir}: #{task} ...", :bold, :cyan
-      success = if task == "linkinator"
-        run_linkinator dir
-      else
-        exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
-      end
+      success =
+        if task == "linkinator"
+          run_linkinator dir
+        else
+          exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
+        end
       @errors << [dir, task] unless success
     end
   end
@@ -328,10 +352,12 @@ def run_linkinator dir
   skip_regexes = [
     "\\w+\\.md$",
     "^https://rubygems\\.org/gems/#{dir_without_version}",
-    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$"
+    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
+    "^https://rubydoc\\.info/gems/#{dir}",
   ]
   if dir == dir_without_version
     skip_regexes << "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}-v\\d\\w*/latest$"
+    skip_regexes << "^https://rubydoc\\.info/gems/#{dir}-v\\d\\w*"
   end
   linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
@@ -407,7 +433,7 @@ tool "report-failures" do
     result = JSON.parse result rescue []
     result.first["number"] unless result.empty?
   end
-  
+
   def update_issue issue_id, dir, tasks
     body = create_body dir, tasks
     exec [
@@ -417,7 +443,7 @@ tool "report-failures" do
     ]
     puts "Added to issue #{issue_id}: reported #{dir}: #{tasks.join ', '}", :yellow
   end
-  
+
   def create_new_issue dir, tasks
     body = "#{create_body dir, tasks}\n\n#{encode_str dir}"
     exec [
@@ -425,15 +451,15 @@ tool "report-failures" do
       "--repo", "googleapis/google-cloud-ruby",
       "--title", "[Nightly CI Failures] Failures detected for #{dir}",
       "--label", "type: bug,priority: p1,nightly failure",
-      "--body", body,
+      "--body", body
     ]
     puts "Created new issue for #{dir}: #{tasks.join ', '}", :yellow
   end
-  
+
   def encode_str str
     "report_key_#{Digest::MD5.hexdigest str}"
   end
-  
+
   def create_body dir, tasks
     now = Time.now.utc.strftime "%Y-%m-%d %H:%M:%S"
     messages = []

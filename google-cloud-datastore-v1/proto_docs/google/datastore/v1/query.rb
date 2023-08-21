@@ -148,6 +148,12 @@ module Google
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count]
           #     Count aggregator.
+          # @!attribute [rw] sum
+          #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Sum]
+          #     Sum aggregator.
+          # @!attribute [rw] avg
+          #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Avg]
+          #     Average aggregator.
           # @!attribute [rw] alias
           #   @return [::String]
           #     Optional. Optional name of the property to store the result of the
@@ -216,6 +222,54 @@ module Google
             #
             #     * Must be non-negative when present.
             class Count
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Sum of the values of the requested property.
+            #
+            # * Only numeric values will be aggregated. All non-numeric values
+            # including `NULL` are skipped.
+            #
+            # * If the aggregated values contain `NaN`, returns `NaN`. Infinity math
+            # follows IEEE-754 standards.
+            #
+            # * If the aggregated value set is empty, returns 0.
+            #
+            # * Returns a 64-bit integer if all aggregated numbers are integers and the
+            # sum result does not overflow. Otherwise, the result is returned as a
+            # double. Note that even if all the aggregated values are integers, the
+            # result is returned as a double if it cannot fit within a 64-bit signed
+            # integer. When this occurs, the returned value will lose precision.
+            #
+            # * When underflow occurs, floating-point aggregation is non-deterministic.
+            # This means that running the same query repeatedly without any changes to
+            # the underlying values could produce slightly different results each
+            # time. In those cases, values should be stored as integers over
+            # floating-point numbers.
+            # @!attribute [rw] property
+            #   @return [::Google::Cloud::Datastore::V1::PropertyReference]
+            #     The property to aggregate on.
+            class Sum
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Average of the values of the requested property.
+            #
+            # * Only numeric values will be aggregated. All non-numeric values
+            # including `NULL` are skipped.
+            #
+            # * If the aggregated values contain `NaN`, returns `NaN`. Infinity math
+            # follows IEEE-754 standards.
+            #
+            # * If the aggregated value set is empty, returns `NULL`.
+            #
+            # * Always returns the result as a double.
+            # @!attribute [rw] property
+            #   @return [::Google::Cloud::Datastore::V1::PropertyReference]
+            #     The property to aggregate on.
+            class Avg
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -368,8 +422,9 @@ module Google
             #
             # Requires:
             #
-            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
-            # * No other `IN` or `NOT_IN` is in the same query.
+            # * That `value` is a non-empty `ArrayValue`, subject to disjunction
+            #   limits.
+            # * No `NOT_IN` is in the same query.
             IN = 6
 
             # The given `property` is not equal to the given `value`.
@@ -385,7 +440,7 @@ module Google
             # Requires:
             #
             # * That `value` is an entity key.
-            # * No other `HAS_ANCESTOR` is in the same query.
+            # * All evaluated disjunctions must have the same `HAS_ANCESTOR` filter.
             HAS_ANCESTOR = 11
 
             # The value of the `property` is not in the given array.
@@ -393,7 +448,7 @@ module Google
             # Requires:
             #
             # * That `value` is a non-empty `ArrayValue` with at most 10 values.
-            # * No other `IN`, `NOT_IN`, `NOT_EQUAL` is in the same query.
+            # * No other `OR`, `IN`, `NOT_IN`, `NOT_EQUAL` is in the same query.
             # * That `field` comes first in the `order_by`.
             NOT_IN = 13
           end

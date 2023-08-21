@@ -80,17 +80,20 @@ module Google
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
         #     modifies the desired state.
-        # @!attribute [rw] labels
+        # @!attribute [r] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style labels for the resource.
-        #     User-provided labels are shared with Google's billing system, so they can
-        #     be used to filter, or break down billing charges by team, component,
-        #     environment, state, etc. For more information, visit
+        #     Output only. Unstructured key value map that can be used to organize and
+        #     categorize objects. User-provided labels are shared with Google's billing
+        #     system, so they can be used to filter, or break down billing charges by
+        #     team, component, environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
         #     https://cloud.google.com/run/docs/configuring/labels
-        # @!attribute [rw] annotations
+        # @!attribute [r] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style annotations for the resource.
+        #     Output only. Unstructured key value map that may
+        #     be set by external tools to store and arbitrary metadata.
+        #     They are not queryable and should be preserved
+        #     when modifying objects.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Represents time when the task was created by the job
@@ -184,6 +187,9 @@ module Google
         #   @return [::String]
         #     Output only. URI where logs for this execution can be found in Cloud
         #     Console.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

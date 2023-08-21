@@ -21,7 +21,7 @@ module Google
   module Identity
     module AccessContextManager
       module V1
-        VERSION = "0.4.0"
+        VERSION = "0.5.2"
       end
     end
   end

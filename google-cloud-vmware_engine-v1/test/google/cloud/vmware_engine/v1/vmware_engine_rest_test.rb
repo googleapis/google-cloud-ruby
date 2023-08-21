@@ -738,6 +738,115 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     end
   end
 
+  def test_get_subnet
+    # Create test objects.
+    client_result = ::Google::Cloud::VmwareEngine::V1::Subnet.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_get_subnet_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_subnet_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_subnet({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_subnet name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_subnet ::Google::Cloud::VmwareEngine::V1::GetSubnetRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_subnet({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_subnet(::Google::Cloud::VmwareEngine::V1::GetSubnetRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_subnet_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_subnet
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    subnet = {}
+
+    update_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_update_subnet_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_subnet_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_subnet({ update_mask: update_mask, subnet: subnet }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_subnet update_mask: update_mask, subnet: subnet do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_subnet ::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest.new(update_mask: update_mask, subnet: subnet) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_subnet({ update_mask: update_mask, subnet: subnet }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_subnet(::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest.new(update_mask: update_mask, subnet: subnet), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_subnet_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_node_types
     # Create test objects.
     client_result = ::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse.new
@@ -1791,6 +1900,342 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
 
         # Verify method calls
         assert_equal 5, list_vmware_engine_networks_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_private_connection
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    private_connection_id = "hello world"
+    private_connection = {}
+    request_id = "hello world"
+
+    create_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_create_private_connection_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_private_connection_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_private_connection ::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_private_connection(::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_private_connection_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_private_connection
+    # Create test objects.
+    client_result = ::Google::Cloud::VmwareEngine::V1::PrivateConnection.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_get_private_connection_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_private_connection_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_private_connection({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_private_connection name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_private_connection ::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_private_connection({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_private_connection(::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_private_connection_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_private_connections
+    # Create test objects.
+    client_result = ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_private_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_list_private_connections_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_private_connections_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_private_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_private_connections ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_private_connections(::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_private_connections_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_private_connection
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    private_connection = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_update_private_connection_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_private_connection_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_private_connection({ private_connection: private_connection, update_mask: update_mask, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_private_connection private_connection: private_connection, update_mask: update_mask, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_private_connection ::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest.new(private_connection: private_connection, update_mask: update_mask, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_private_connection({ private_connection: private_connection, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_private_connection(::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest.new(private_connection: private_connection, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_private_connection_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_private_connection
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_delete_private_connection_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_private_connection_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_private_connection({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_private_connection name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_private_connection ::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_private_connection({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_private_connection(::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_private_connection_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_private_connection_peering_routes
+    # Create test objects.
+    client_result = ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_private_connection_peering_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.stub :transcode_list_private_connection_peering_routes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_private_connection_peering_routes_client_stub do
+        # Create client
+        client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_private_connection_peering_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_private_connection_peering_routes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_private_connection_peering_routes ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_private_connection_peering_routes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_private_connection_peering_routes(::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_private_connection_peering_routes_client_stub.call_count
       end
     end
   end

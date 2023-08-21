@@ -100,7 +100,7 @@ module Google
           end
         end
 
-        # SSL configuration for an AlloyDB Cluster.
+        # SSL configuration.
         # @!attribute [rw] ssl_mode
         #   @return [::Google::Cloud::AlloyDB::V1beta::SslConfig::SslMode]
         #     Optional. SSL mode. Specifies client-server SSL/TLS connection behavior.
@@ -114,7 +114,7 @@ module Google
 
           # SSL mode options.
           module SslMode
-            # SSL mode not specified. Defaults to SSL_MODE_ALLOW.
+            # SSL mode not specified. Defaults to ENCRYPTED_ONLY.
             SSL_MODE_UNSPECIFIED = 0
 
             # SSL connections are optional. CA verification not enforced.
@@ -129,6 +129,12 @@ module Google
             # Clients must have certificates signed by a Cluster CA, e.g. via
             # GenerateClientCertificate.
             SSL_MODE_VERIFY_CA = 3
+
+            # SSL connections are optional. CA verification not enforced.
+            ALLOW_UNENCRYPTED_AND_ENCRYPTED = 4
+
+            # SSL connections are required. CA verification not enforced.
+            ENCRYPTED_ONLY = 5
           end
 
           # Certificate Authority (CA) source for SSL/TLS certificates.
@@ -276,6 +282,10 @@ module Google
         #   @return [::Array<::Google::Type::DayOfWeek>]
         #     Output only. Days of the week on which a continuous backup is taken. Output
         #     only field. Ignored if passed into the request.
+        # @!attribute [r] earliest_restorable_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The earliest restorable time that can be restored to. Output
+        #     only field.
         class ContinuousBackupInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,6 +370,8 @@ module Google
         #     Output only. The database engine major version. This is an output-only
         #     field and it's populated at the Cluster creation time. This field cannot be
         #     changed after cluster creation.
+        # @!attribute [rw] network_config
+        #   @return [::Google::Cloud::AlloyDB::V1beta::Cluster::NetworkConfig]
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. The resource link for the VPC network in which cluster resources
@@ -397,7 +409,7 @@ module Google
         #     documentation for the message type.
         # @!attribute [rw] ssl_config
         #   @return [::Google::Cloud::AlloyDB::V1beta::SslConfig]
-        #     SSL configuration for this AlloyDB Cluster.
+        #     SSL configuration for this AlloyDB cluster.
         # @!attribute [rw] encryption_config
         #   @return [::Google::Cloud::AlloyDB::V1beta::EncryptionConfig]
         #     Optional. The encryption config can be specified to encrypt the data disks
@@ -423,6 +435,30 @@ module Google
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Metadata related to network configuration.
+          # @!attribute [rw] network
+          #   @return [::String]
+          #     Required. The resource link for the VPC network in which cluster
+          #     resources are created and from which they are accessible via Private IP.
+          #     The network must belong to the same project as the cluster. It is
+          #     specified in the form:
+          #     "projects/\\{project_number}/global/networks/\\{network_id}". This is
+          #     required to create a cluster. It can be updated, but it cannot be
+          #     removed.
+          # @!attribute [rw] allocated_ip_range
+          #   @return [::String]
+          #     Optional. The name of the allocated IP range for the private IP AlloyDB
+          #     cluster. For example: "google-managed-services-default". If set, the
+          #     instance IPs for this cluster will be created in the allocated range. The
+          #     range name must comply with RFC 1035. Specifically, the name must be 1-63
+          #     characters long and match the regular expression
+          #     [a-z]([-a-z0-9]*[a-z0-9])?.
+          #     Field name is intended to be consistent with CloudSQL.
+          class NetworkConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Configuration information for the secondary cluster. This should be set
           # if and only if the cluster is of type SECONDARY.
@@ -565,8 +601,11 @@ module Google
         # @!attribute [rw] availability_type
         #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::AvailabilityType]
         #     Availability type of an Instance.
-        #     Defaults to REGIONAL for both primary and read instances.
-        #     Note that primary and read instances can have different availability types.
+        #     If empty, defaults to REGIONAL for primary instances.
+        #     For read pools, availability_type is always UNSPECIFIED. Instances in the
+        #     read pools are evenly distributed across available zones within the region
+        #     (i.e. read pools with more than one node will have a node in at
+        #     least two zones).
         # @!attribute [rw] gce_zone
         #   @return [::String]
         #     The Compute Engine zone that the instance should serve from, per
@@ -624,6 +663,12 @@ module Google
         #     Annotations to allow client tools to store small amount of arbitrary data.
         #     This is distinct from labels.
         #     https://google.aip.dev/128
+        # @!attribute [rw] update_policy
+        #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::UpdatePolicy]
+        #     Update policy that will be applied during instance update.
+        #     This field is not persisted when you update the instance.
+        #     To use a non-default update policy, you must
+        #     specify explicitly specify the value in each update request.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -690,6 +735,28 @@ module Google
           class ReadPoolConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Policy to be used while updating the instance.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::UpdatePolicy::Mode]
+          #     Mode for updating the instance.
+          class UpdatePolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Specifies the available modes of update.
+            module Mode
+              # Mode is unknown.
+              MODE_UNSPECIFIED = 0
+
+              # Least disruptive way to apply the update.
+              DEFAULT = 1
+
+              # Performs a forced update when applicable. This will be fast but may
+              # incur a downtime.
+              FORCE_APPLY = 2
+            end
           end
 
           # @!attribute [rw] key
@@ -776,10 +843,11 @@ module Google
           end
 
           # The Availability type of an instance. Potential values:
+          #
           # - ZONAL: The instance serves data from only one zone. Outages in that
-          # zone affect instance availability.
+          #     zone affect instance availability.
           # - REGIONAL: The instance can serve data from more than one zone in a
-          # region (it is highly available).
+          #     region (it is highly available).
           module AvailabilityType
             # This is an unknown Availability type.
             AVAILABILITY_TYPE_UNSPECIFIED = 0
@@ -862,7 +930,7 @@ module Google
         # @!attribute [rw] cluster_name
         #   @return [::String]
         #     Required. The full resource name of the backup source cluster
-        #     (e.g., projects/<project>/locations/<location>/clusters/<cluster_id>).
+        #     (e.g., projects/\\{project}/locations/\\{region}/clusters/\\{cluster_id}).
         # @!attribute [r] reconciling
         #   @return [::Boolean]
         #     Output only. Reconciling (https://google.aip.dev/128#reconciliation), if
@@ -1035,16 +1103,37 @@ module Google
           end
         end
 
-        # The supported database engine versions.
-        module DatabaseVersion
-          # This is an unknown database version.
-          DATABASE_VERSION_UNSPECIFIED = 0
+        # Message describing User object.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of the resource in the form of
+        #     projects/\\{project}/locations/\\{location}/cluster/\\{cluster}/users/\\{user}.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Input only. Password for the user.
+        # @!attribute [rw] database_roles
+        #   @return [::Array<::String>]
+        #     Optional. List of database roles this user has.
+        #     The database role strings are subject to the PostgreSQL naming conventions.
+        # @!attribute [rw] user_type
+        #   @return [::Google::Cloud::AlloyDB::V1beta::User::UserType]
+        #     Optional. Type of this user.
+        class User
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # DEPRECATED - The database version is Postgres 13.
-          POSTGRES_13 = 1
+          # Enum that details the user type.
+          module UserType
+            # Unspecified user type.
+            USER_TYPE_UNSPECIFIED = 0
 
-          # The database version is Postgres 14.
-          POSTGRES_14 = 2
+            # The default user type that authenticates via password-based
+            # authentication.
+            ALLOYDB_BUILT_IN = 1
+
+            # Database user that can authenticate via IAM-Based authentication.
+            ALLOYDB_IAM_USER = 2
+          end
         end
 
         # View on Instance. Pass this enum to rpcs that returns an Instance message to
@@ -1061,6 +1150,35 @@ module Google
           # FULL response is equivalent to BASIC for primary instance (for now).
           # For read pool instance, this includes details of each node in the pool.
           INSTANCE_VIEW_FULL = 2
+        end
+
+        # View on Cluster. Pass this enum to rpcs that returns a cluster message to
+        # control which subsets of fields to get.
+        module ClusterView
+          # CLUSTER_VIEW_UNSPECIFIED Not specified, equivalent to BASIC.
+          CLUSTER_VIEW_UNSPECIFIED = 0
+
+          # BASIC server responses include all the relevant cluster details, excluding
+          # Cluster.ContinuousBackupInfo.EarliestRestorableTime and other view-specific
+          # fields. The default value.
+          CLUSTER_VIEW_BASIC = 1
+
+          # CONTINUOUS_BACKUP response returns all the fields from BASIC plus
+          # the earliest restorable time if continuous backups are enabled.
+          # May increase latency.
+          CLUSTER_VIEW_CONTINUOUS_BACKUP = 2
+        end
+
+        # The supported database engine versions.
+        module DatabaseVersion
+          # This is an unknown database version.
+          DATABASE_VERSION_UNSPECIFIED = 0
+
+          # DEPRECATED - The database version is Postgres 13.
+          POSTGRES_13 = 1
+
+          # The database version is Postgres 14.
+          POSTGRES_14 = 2
         end
       end
     end

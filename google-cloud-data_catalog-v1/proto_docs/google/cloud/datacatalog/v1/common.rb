@@ -50,6 +50,12 @@ module Google
           # Dataplex.
           DATAPLEX = 4
 
+          # Cloud Spanner
+          CLOUD_SPANNER = 6
+
+          # Cloud Bigtable
+          CLOUD_BIGTABLE = 7
+
           # Cloud Sql
           CLOUD_SQL = 8
 

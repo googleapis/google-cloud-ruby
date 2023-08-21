@@ -35,6 +35,18 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientPathsTest < Min
     end
   end
 
+  def test_conversion_workspace_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.conversion_workspace_path project: "value0", location: "value1", conversion_workspace: "value2"
+      assert_equal "projects/value0/locations/value1/conversionWorkspaces/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -56,6 +68,30 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientPathsTest < Min
 
       path = client.migration_job_path project: "value0", location: "value1", migration_job: "value2"
       assert_equal "projects/value0/locations/value1/migrationJobs/value2", path
+    end
+  end
+
+  def test_networks_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.networks_path project: "value0", network: "value1"
+      assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
+  def test_private_connection_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.private_connection_path project: "value0", location: "value1", private_connection: "value2"
+      assert_equal "projects/value0/locations/value1/privateConnections/value2", path
     end
   end
 end

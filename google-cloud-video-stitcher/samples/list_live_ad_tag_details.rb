@@ -27,7 +27,8 @@ def list_live_ad_tag_details project_id:, location:, session_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
-  parent = client.live_session_path project: project_id, location: location, live_session: session_id
+  parent = client.live_session_path project: project_id, location: location,
+                                    live_session: session_id
 
   # List all ad tag details for the live session.
   response = client.list_live_ad_tag_details parent: parent

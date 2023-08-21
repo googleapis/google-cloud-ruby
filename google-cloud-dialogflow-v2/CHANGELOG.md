@@ -1,5 +1,45 @@
 # Release History
 
+### 0.27.0 (2023-08-15)
+
+#### Features
+
+* Query parameters no include the platform of virtual agent response messages 
+* Support for the baseline model version used to generate a summary ([#22775](https://github.com/googleapis/google-cloud-ruby/issues/22775)) 
+
+### 0.26.2 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22706](https://github.com/googleapis/google-cloud-ruby/issues/22706)) 
+
+### 0.26.1 (2023-08-03)
+
+#### Documentation
+
+* Improve documentation format ([#22678](https://github.com/googleapis/google-cloud-ruby/issues/22678)) 
+
+### 0.26.0 (2023-06-23)
+
+#### Features
+
+* support session_ttl for AutomatedAgentConfig 
+
+### 0.25.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.24.0 (2023-05-16)
+
+#### Features
+
+* add baseline model configuration for conversation summarization ([#21568](https://github.com/googleapis/google-cloud-ruby/issues/21568)) 
+
 ### 0.23.0 (2023-03-08)
 
 #### Features

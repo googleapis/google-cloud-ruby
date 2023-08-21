@@ -50,6 +50,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_ad_sense_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.ad_sense_link_path property: "value0", adsense_link: "value1"
+      assert_equal "properties/value0/adSenseLinks/value1", path
+    end
+  end
+
   def test_attribution_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -83,6 +95,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
       path = client.big_query_link_path property: "value0", bigquery_link: "value1"
       assert_equal "properties/value0/bigQueryLinks/value1", path
+    end
+  end
+
+  def test_channel_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.channel_group_path property: "value0", channel_group: "value1"
+      assert_equal "properties/value0/channelGroups/value1", path
     end
   end
 
@@ -191,6 +215,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
       path = client.enhanced_measurement_settings_path property: "value0", data_stream: "value1"
       assert_equal "properties/value0/dataStreams/value1/enhancedMeasurementSettings", path
+    end
+  end
+
+  def test_event_create_rule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.event_create_rule_path property: "value0", data_stream: "value1", event_create_rule: "value2"
+      assert_equal "properties/value0/dataStreams/value1/eventCreateRules/value2", path
     end
   end
 

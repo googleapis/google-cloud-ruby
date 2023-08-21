@@ -24,7 +24,7 @@ module Google
     module Build
       module V2
         module RepositoryManager
-          # Manages connections to source code repostiories.
+          # Manages connections to source code repositories.
           class Service
 
             include ::GRPC::GenericService
@@ -60,6 +60,8 @@ module Google
             # FetchLinkableRepositories get repositories from SCM that are
             # accessible and could be added to the connection.
             rpc :FetchLinkableRepositories, ::Google::Cloud::Build::V2::FetchLinkableRepositoriesRequest, ::Google::Cloud::Build::V2::FetchLinkableRepositoriesResponse
+            # Fetch the list of branches or tags for a given repository.
+            rpc :FetchGitRefs, ::Google::Cloud::Build::V2::FetchGitRefsRequest, ::Google::Cloud::Build::V2::FetchGitRefsResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -29,7 +29,7 @@ module Google
           ##
           # Client for the RepositoryManager service.
           #
-          # Manages connections to source code repostiories.
+          # Manages connections to source code repositories.
           #
           class Client
             include Paths
@@ -170,7 +170,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -1472,6 +1472,94 @@ module Google
             end
 
             ##
+            # Fetch the list of branches or tags for a given repository.
+            #
+            # @overload fetch_git_refs(request, options = nil)
+            #   Pass arguments to `fetch_git_refs` via a request object, either of type
+            #   {::Google::Cloud::Build::V2::FetchGitRefsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Build::V2::FetchGitRefsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_git_refs(repository: nil, ref_type: nil)
+            #   Pass arguments to `fetch_git_refs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param repository [::String]
+            #     Required. The resource name of the repository in the format
+            #     `projects/*/locations/*/connections/*/repositories/*`.
+            #   @param ref_type [::Google::Cloud::Build::V2::FetchGitRefsRequest::RefType]
+            #     Type of refs to fetch
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Build::V2::FetchGitRefsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Build::V2::FetchGitRefsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V2::RepositoryManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V2::FetchGitRefsRequest.new
+            #
+            #   # Call the fetch_git_refs method.
+            #   result = client.fetch_git_refs request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V2::FetchGitRefsResponse.
+            #   p result
+            #
+            def fetch_git_refs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Build::V2::FetchGitRefsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_git_refs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Build::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.repository
+                header_params["repository"] = request.repository
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_git_refs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_git_refs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @repository_manager_stub.call_rpc :fetch_git_refs, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the RepositoryManager API.
             #
             # This class represents the configuration for RepositoryManager,
@@ -1553,7 +1641,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudbuild.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudbuild.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1671,6 +1761,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :fetch_linkable_repositories
+                ##
+                # RPC-specific configuration for `fetch_git_refs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_git_refs
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1700,6 +1795,8 @@ module Google
                   @fetch_read_token = ::Gapic::Config::Method.new fetch_read_token_config
                   fetch_linkable_repositories_config = parent_rpcs.fetch_linkable_repositories if parent_rpcs.respond_to? :fetch_linkable_repositories
                   @fetch_linkable_repositories = ::Gapic::Config::Method.new fetch_linkable_repositories_config
+                  fetch_git_refs_config = parent_rpcs.fetch_git_refs if parent_rpcs.respond_to? :fetch_git_refs
+                  @fetch_git_refs = ::Gapic::Config::Method.new fetch_git_refs_config
 
                   yield self if block_given?
                 end

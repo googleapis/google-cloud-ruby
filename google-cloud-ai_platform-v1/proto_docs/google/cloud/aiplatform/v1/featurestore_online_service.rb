@@ -129,7 +129,7 @@ module Google
           # @!attribute [rw] feature_descriptors
           #   @return [::Array<::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse::FeatureDescriptor>]
           #     List of Feature metadata corresponding to each piece of
-          #     [ReadFeatureValuesResponse.data][].
+          #     {::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse::EntityView#data ReadFeatureValuesResponse.EntityView.data}.
           class Header
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

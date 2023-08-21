@@ -103,17 +103,20 @@ module Google
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
         #     modifies the desired state.
-        # @!attribute [rw] labels
+        # @!attribute [r] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style labels for the resource.
-        #     User-provided labels are shared with Google's billing system, so they can
-        #     be used to filter, or break down billing charges by team, component,
-        #     environment, state, etc. For more information, visit
+        #     Output only. Unstructured key value map that can be used to organize and
+        #     categorize objects. User-provided labels are shared with Google's billing
+        #     system, so they can be used to filter, or break down billing charges by
+        #     team, component, environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
-        #     https://cloud.google.com/run/docs/configuring/labels
-        # @!attribute [rw] annotations
+        #     https://cloud.google.com/run/docs/configuring/labels.
+        # @!attribute [r] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style annotations for the resource.
+        #     Output only. Unstructured key value map that may
+        #     be set by external tools to store and arbitrary metadata.
+        #     They are not queryable and should be preserved
+        #     when modifying objects.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time.
@@ -131,10 +134,14 @@ module Google
         #     request.
         # @!attribute [rw] launch_stage
         #   @return [::Google::Api::LaunchStage]
-        #     Set the launch stage to a preview stage on write to allow use of preview
-        #     features in that stage. On read, describes whether the resource uses
-        #     preview features. Launch Stages are defined at [Google Cloud Platform
-        #     Launch Stages](https://cloud.google.com/terms/launch-stages).
+        #     The least stable launch stage needed to create this resource, as defined by
+        #     [Google Cloud Platform Launch
+        #     Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports
+        #     `ALPHA`, `BETA`, and `GA`.
+        #     <p>Note that this value might not be what was used
+        #     as input. For example, if ALPHA was provided as input in the parent
+        #     resource, but only BETA and GA-level features are were, this field will be
+        #     BETA.
         # @!attribute [r] service
         #   @return [::String]
         #     Output only. The name of the parent service.
@@ -196,6 +203,12 @@ module Google
         # @!attribute [r] log_uri
         #   @return [::String]
         #     Output only. The Google Console URI to obtain logs for the Revision.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [rw] session_affinity
+        #   @return [::Boolean]
+        #     Enable session affinity.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

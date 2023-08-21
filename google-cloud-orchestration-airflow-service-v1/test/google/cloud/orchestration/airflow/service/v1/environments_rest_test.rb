@@ -337,6 +337,179 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     end
   end
 
+  def test_execute_airflow_command
+    # Create test objects.
+    client_result = ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    command = "hello world"
+    subcommand = "hello world"
+    parameters = ["hello world"]
+
+    execute_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_execute_airflow_command_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_airflow_command_client_stub do
+        # Create client
+        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_airflow_command environment: environment, command: command, subcommand: subcommand, parameters: parameters do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_airflow_command_client_stub.call_count
+      end
+    end
+  end
+
+  def test_stop_airflow_command
+    # Create test objects.
+    client_result = ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    execution_id = "hello world"
+    pod = "hello world"
+    pod_namespace = "hello world"
+    force = true
+
+    stop_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_stop_airflow_command_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, stop_airflow_command_client_stub do
+        # Create client
+        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.stop_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.stop_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.stop_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, stop_airflow_command_client_stub.call_count
+      end
+    end
+  end
+
+  def test_poll_airflow_command
+    # Create test objects.
+    client_result = ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    execution_id = "hello world"
+    pod = "hello world"
+    pod_namespace = "hello world"
+    next_line_number = 42
+
+    poll_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_poll_airflow_command_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, poll_airflow_command_client_stub do
+        # Create client
+        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.poll_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.poll_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.poll_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, poll_airflow_command_client_stub.call_count
+      end
+    end
+  end
+
   def test_save_snapshot
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -447,6 +620,114 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
 
         # Verify method calls
         assert_equal 5, load_snapshot_client_stub.call_count
+      end
+    end
+  end
+
+  def test_database_failover
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+
+    database_failover_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_database_failover_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, database_failover_client_stub do
+        # Create client
+        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.database_failover({ environment: environment }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.database_failover environment: environment do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.database_failover ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.database_failover({ environment: environment }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.database_failover(::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, database_failover_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_database_properties
+    # Create test objects.
+    client_result = ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+
+    fetch_database_properties_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_fetch_database_properties_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_database_properties_client_stub do
+        # Create client
+        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_database_properties({ environment: environment }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_database_properties environment: environment do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_database_properties ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_database_properties({ environment: environment }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_database_properties(::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_database_properties_client_stub.call_count
       end
     end
   end

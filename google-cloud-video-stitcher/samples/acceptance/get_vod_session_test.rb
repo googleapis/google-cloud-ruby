@@ -22,7 +22,8 @@ describe "#get_vod_session", :stitcher_snippet do
     @session_id = vod_session.name.split("/").last
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     end
 
     assert_match %r{VOD session: projects/\S+/locations/#{location_id}/vodSessions/#{@session_id}}, out

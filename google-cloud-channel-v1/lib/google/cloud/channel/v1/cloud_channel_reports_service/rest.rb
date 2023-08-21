@@ -34,8 +34,7 @@ module Google
         ##
         # CloudChannelReportsService lets Google Cloud resellers and
         # distributors retrieve and combine a variety of data in Cloud Channel for
-        # multiple products (Google Cloud Platform (GCP), Google Voice, and
-        # Google Workspace.)
+        # multiple products (Google Cloud, Google Voice, and Google Workspace.)
         #
         # To load this service and instantiate a REST client:
         #

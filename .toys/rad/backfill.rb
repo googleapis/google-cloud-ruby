@@ -1,3 +1,19 @@
+# frozen_string_literal: true
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 desc "Backfill reference documentation upload"
 
 remaining_args :specified_releases
@@ -29,15 +45,13 @@ def analyze_git_info
     next unless match
     (@releases[match[1]] ||= []) << ::Gem::Version.new(match[2])
   end
-  @releases.each_value do |versions|
-    versions.sort!
-  end
+  @releases.each_value(&:sort!)
 end
 
 def interpret_releases
   @jobs = []
   specified_releases.each do |release_spec|
-    segments = release_spec.split /[:,;]/
+    segments = release_spec.split(/[:,;]/)
     gem_name = segments.shift
     existing_versions = @releases[gem_name]
     error "No such gem #{gem_name}" unless existing_versions

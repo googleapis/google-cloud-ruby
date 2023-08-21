@@ -321,6 +321,24 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity EkmService.VerifyConnectivity}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::EkmConnection#name name} of the
+        #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} to verify.
+        class VerifyConnectivityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity EkmService.VerifyConnectivity}.
+        class VerifyConnectivityResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

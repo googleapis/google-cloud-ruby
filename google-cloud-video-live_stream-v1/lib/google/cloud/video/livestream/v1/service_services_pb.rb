@@ -73,6 +73,19 @@ module Google
               rpc :GetEvent, ::Google::Cloud::Video::LiveStream::V1::GetEventRequest, ::Google::Cloud::Video::LiveStream::V1::Event
               # Deletes the specified event.
               rpc :DeleteEvent, ::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest, ::Google::Protobuf::Empty
+              # Creates a Asset with the provided unique ID in the specified
+              # region.
+              rpc :CreateAsset, ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest, ::Google::Longrunning::Operation
+              # Deletes the specified asset if it is not used.
+              rpc :DeleteAsset, ::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest, ::Google::Longrunning::Operation
+              # Returns the specified asset.
+              rpc :GetAsset, ::Google::Cloud::Video::LiveStream::V1::GetAssetRequest, ::Google::Cloud::Video::LiveStream::V1::Asset
+              # Returns a list of all assets in the specified region.
+              rpc :ListAssets, ::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest, ::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse
+              # Returns the specified pool.
+              rpc :GetPool, ::Google::Cloud::Video::LiveStream::V1::GetPoolRequest, ::Google::Cloud::Video::LiveStream::V1::Pool
+              # Updates the specified pool.
+              rpc :UpdatePool, ::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

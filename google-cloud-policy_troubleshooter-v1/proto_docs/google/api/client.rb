@@ -83,7 +83,7 @@ module Google
     #     long-running operation pattern.
     # @!attribute [rw] new_issue_uri
     #   @return [::String]
-    #     Link to a place that API users can report issues.  Example:
+    #     Link to a *public* URI where users can report issues.  Example:
     #     https://issuetracker.google.com/issues/new?component=190865&template=1161103
     # @!attribute [rw] documentation_uri
     #   @return [::String]
@@ -353,6 +353,15 @@ module Google
 
       # Street View Org.
       STREET_VIEW = 4
+
+      # Shopping Org.
+      SHOPPING = 5
+
+      # Geo Org.
+      GEO = 6
+
+      # Generative AI - https://developers.generativeai.google
+      GENERATIVE_AI = 7
     end
 
     # To where should client libraries be published?
