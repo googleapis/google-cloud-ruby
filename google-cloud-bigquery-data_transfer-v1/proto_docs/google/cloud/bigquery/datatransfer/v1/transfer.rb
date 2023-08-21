@@ -159,7 +159,23 @@ module Google
           #     Output only. Information about the user whose credentials are used to
           #     transfer data. Populated only for `transferConfigs.get` requests. In case
           #     the user information is not available, this field will not be populated.
+          # @!attribute [rw] encryption_configuration
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EncryptionConfiguration]
+          #     The encryption configuration part. Currently, it is only used for the
+          #     optional KMS key name. The BigQuery service account of your project must be
+          #     granted permissions to use the key. Read methods will return the key name
+          #     applied in effect. Write methods will apply the key if it is present, or
+          #     otherwise try to apply project default keys if it is absent.
           class TransferConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents the encryption configuration for a transfer.
+          # @!attribute [rw] kms_key_name
+          #   @return [::Google::Protobuf::StringValue]
+          #     The name of the KMS key used for encrypting BigQuery data.
+          class EncryptionConfiguration
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

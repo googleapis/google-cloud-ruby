@@ -348,6 +348,8 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     agent_uri = "hello world"
     data_format = :DATA_FORMAT_UNSPECIFIED
     environment = "hello world"
+    git_destination = {}
+    include_bigquery_export_settings = true
 
     export_agent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -363,27 +365,27 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
         end
 
         # Use hash object
-        client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment }) do |_result, response|
+        client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_agent name: name, agent_uri: agent_uri, data_format: data_format, environment: environment do |_result, response|
+        client.export_agent name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_agent ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment) do |_result, response|
+        client.export_agent ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment }, call_options) do |_result, response|
+        client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_agent(::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment), call_options) do |_result, response|
+        client.export_agent(::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

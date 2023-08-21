@@ -72,7 +72,10 @@ module Google
           #         intent, then the first group in the ordered list takes precedence.
           #
           #     Format:`projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`.
+          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`
+          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/transitionRouteGroups/<TransitionRouteGroup ID>` for agent-level
+          #     groups.
           # @!attribute [rw] transition_routes
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::TransitionRoute>]
           #     A list of transitions for the transition rules of this page.

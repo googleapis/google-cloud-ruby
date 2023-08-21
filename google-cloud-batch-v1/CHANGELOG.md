@@ -1,5 +1,46 @@
 # Changelog
 
+### 0.10.3 (2023-08-15)
+
+#### Documentation
+
+* Clarify Batch API proto doc about pubsub notifications ([#22749](https://github.com/googleapis/google-cloud-ruby/issues/22749)) 
+
+### 0.10.2 (2023-08-03)
+
+#### Documentation
+
+* Add documentation for "order_by" field in list_jobs API ([#22672](https://github.com/googleapis/google-cloud-ruby/issues/22672)) 
+
+### 0.10.1 (2023-07-10)
+
+#### Documentation
+
+* Add image shortcut example for Batch HPC CentOS Image ([#22476](https://github.com/googleapis/google-cloud-ruby/issues/22476)) 
+
+### 0.10.0 (2023-06-16)
+
+#### Features
+
+* Add support for scheduling_policy ([#22399](https://github.com/googleapis/google-cloud-ruby/issues/22399)) 
+
+### 0.9.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.8.0 (2023-05-19)
+
+#### Features
+
+* support for placement policies 
+* support labels for runnable 
+* support UNEXECUTED state for TaskStatus 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features

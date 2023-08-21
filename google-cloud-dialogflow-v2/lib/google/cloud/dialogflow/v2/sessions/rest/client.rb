@@ -133,7 +133,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -218,12 +218,12 @@ module Google
               #   @param query_input [::Google::Cloud::Dialogflow::V2::QueryInput, ::Hash]
               #     Required. The input specification. It can be set to:
               #
-              #     1.  an audio config
-              #         which instructs the speech recognizer how to process the speech audio,
+              #     1. an audio config which instructs the speech recognizer how to process
+              #     the speech audio,
               #
-              #     2.  a conversational query in the form of text, or
+              #     2. a conversational query in the form of text, or
               #
-              #     3.  an event that specifies which intent to trigger.
+              #     3. an event that specifies which intent to trigger.
               #   @param output_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
               #     Instructs the speech synthesizer how to generate the output
               #     audio. If this field is not set and agent-level speech synthesizer is not
@@ -356,7 +356,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

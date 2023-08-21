@@ -39,6 +39,11 @@
               "methods": [
                 "update_ekm_config"
               ]
+            },
+            "VerifyConnectivity": {
+              "methods": [
+                "verify_connectivity"
+              ]
             }
           }
         }
@@ -152,6 +157,16 @@
             "Decrypt": {
               "methods": [
                 "decrypt"
+              ]
+            },
+            "RawEncrypt": {
+              "methods": [
+                "raw_encrypt"
+              ]
+            },
+            "RawDecrypt": {
+              "methods": [
+                "raw_decrypt"
               ]
             },
             "AsymmetricSign": {

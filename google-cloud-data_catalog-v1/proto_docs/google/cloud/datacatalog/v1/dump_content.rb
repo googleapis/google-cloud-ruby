@@ -28,11 +28,11 @@ module Google
         #     Non-encrypted Data Catalog v1 Entry.
         # @!attribute [rw] present_tags
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::Tag>]
-        #     Tags that should be ingested into the Data Catalog.
+        #     Optional. Tags that should be ingested into the Data Catalog.
         #     Caller should populate template name, column and fields.
         # @!attribute [rw] absent_tags
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::Tag>]
-        #     Tags that should be deleted from the Data Catalog.
+        #     Optional. Tags that should be deleted from the Data Catalog.
         #     Caller should populate template name and column only.
         class TaggedEntry
           include ::Google::Protobuf::MessageExts

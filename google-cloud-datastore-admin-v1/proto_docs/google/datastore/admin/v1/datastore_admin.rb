@@ -123,8 +123,8 @@ module Google
           #
           #     The resulting files will be nested deeper than the specified URL prefix.
           #     The final output URL will be provided in the
-          #     {::Google::Cloud::Datastore::Admin::V1::ExportEntitiesResponse#output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url} field. That
-          #     value should be used for subsequent ImportEntities operations.
+          #     {::Google::Cloud::Datastore::Admin::V1::ExportEntitiesResponse#output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url}
+          #     field. That value should be used for subsequent ImportEntities operations.
           #
           #     By nesting the data files deeper, the same Cloud Storage bucket can be used
           #     in multiple ExportEntities operations without conflict.
@@ -152,8 +152,9 @@ module Google
           #     Client-assigned labels.
           # @!attribute [rw] input_url
           #   @return [::String]
-          #     Required. The full resource URL of the external storage location. Currently, only
-          #     Google Cloud Storage is supported. So input_url should be of the form:
+          #     Required. The full resource URL of the external storage location.
+          #     Currently, only Google Cloud Storage is supported. So input_url should be
+          #     of the form:
           #     `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where
           #     `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is
           #     an optional Cloud Storage namespace path (this is not a Cloud Datastore
@@ -239,7 +240,9 @@ module Google
           # @!attribute [rw] input_url
           #   @return [::String]
           #     The location of the import metadata file. This will be the same value as
-          #     the {::Google::Cloud::Datastore::Admin::V1::ExportEntitiesResponse#output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url} field.
+          #     the
+          #     {::Google::Cloud::Datastore::Admin::V1::ExportEntitiesResponse#output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url}
+          #     field.
           class ImportEntitiesMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,7 +311,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#get_index google.datastore.admin.v1.DatastoreAdmin.GetIndex}.
+          # The request for
+          # {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#get_index google.datastore.admin.v1.DatastoreAdmin.GetIndex}.
           # @!attribute [rw] project_id
           #   @return [::String]
           #     Project ID against which to make the request.

@@ -33,6 +33,7 @@
     "proto_docs/google/api/httpbody.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/api/routing.rb",
     "proto_docs/google/devtools/cloudbuild/v1/cloudbuild.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",

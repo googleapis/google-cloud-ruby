@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-ai_platform-v1",
-    "version": "0.22.0",
+    "version": "0.30.0",
     "language": "RUBY",
     "apis": [
       {
@@ -407,6 +407,46 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DatasetService_DeleteSavedQuery_sync",
+      "title": "Snippet for the delete_saved_query call in the DatasetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DatasetService::Client#delete_saved_query. It may require modification in order to execute successfully.",
+      "file": "dataset_service/delete_saved_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_saved_query",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client#delete_saved_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatasetService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSavedQuery",
+          "full_name": "google.cloud.aiplatform.v1.DatasetService.DeleteSavedQuery",
+          "service": {
+            "short_name": "DatasetService",
+            "full_name": "google.cloud.aiplatform.v1.DatasetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -3772,6 +3812,86 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_MatchService_FindNeighbors_sync",
+      "title": "Snippet for the find_neighbors call in the MatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::MatchService::Client#find_neighbors. It may require modification in order to execute successfully.",
+      "file": "match_service/find_neighbors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "find_neighbors",
+        "full_name": "::Google::Cloud::AIPlatform::V1::MatchService::Client#find_neighbors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::FindNeighborsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::FindNeighborsResponse",
+        "client": {
+          "short_name": "MatchService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::MatchService::Client"
+        },
+        "method": {
+          "short_name": "FindNeighbors",
+          "full_name": "google.cloud.aiplatform.v1.MatchService.FindNeighbors",
+          "service": {
+            "short_name": "MatchService",
+            "full_name": "google.cloud.aiplatform.v1.MatchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_MatchService_ReadIndexDatapoints_sync",
+      "title": "Snippet for the read_index_datapoints call in the MatchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::MatchService::Client#read_index_datapoints. It may require modification in order to execute successfully.",
+      "file": "match_service/read_index_datapoints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_index_datapoints",
+        "full_name": "::Google::Cloud::AIPlatform::V1::MatchService::Client#read_index_datapoints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsResponse",
+        "client": {
+          "short_name": "MatchService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::MatchService::Client"
+        },
+        "method": {
+          "short_name": "ReadIndexDatapoints",
+          "full_name": "google.cloud.aiplatform.v1.MatchService.ReadIndexDatapoints",
+          "service": {
+            "short_name": "MatchService",
+            "full_name": "google.cloud.aiplatform.v1.MatchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_MetadataService_CreateMetadataStore_sync",
       "title": "Snippet for the create_metadata_store call in the MetadataService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::MetadataService::Client#create_metadata_store. It may require modification in order to execute successfully.",
@@ -5332,6 +5452,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_ModelService_UpdateExplanationDataset_sync",
+      "title": "Snippet for the update_explanation_dataset call in the ModelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset. It may require modification in order to execute successfully.",
+      "file": "model_service/update_explanation_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_explanation_dataset",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "UpdateExplanationDataset",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.UpdateExplanationDataset",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_ModelService_DeleteModel_sync",
       "title": "Snippet for the delete_model call in the ModelService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model. It may require modification in order to execute successfully.",
@@ -5807,6 +5967,46 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ModelGardenService_GetPublisherModel_sync",
+      "title": "Snippet for the get_publisher_model call in the ModelGardenService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ModelGardenService::Client#get_publisher_model. It may require modification in order to execute successfully.",
+      "file": "model_garden_service/get_publisher_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_publisher_model",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client#get_publisher_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::PublisherModel",
+        "client": {
+          "short_name": "ModelGardenService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client"
+        },
+        "method": {
+          "short_name": "GetPublisherModel",
+          "full_name": "google.cloud.aiplatform.v1.ModelGardenService.GetPublisherModel",
+          "service": {
+            "short_name": "ModelGardenService",
+            "full_name": "google.cloud.aiplatform.v1.ModelGardenService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]
@@ -6292,6 +6492,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_PredictionService_ServerStreamingPredict_sync",
+      "title": "Snippet for the server_streaming_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#server_streaming_predict. It may require modification in order to execute successfully.",
+      "file": "prediction_service/server_streaming_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "server_streaming_predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#server_streaming_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StreamingPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::StreamingPredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "ServerStreamingPredict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.ServerStreamingPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_PredictionService_Explain_sync",
       "title": "Snippet for the explain call in the PredictionService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#explain. It may require modification in order to execute successfully.",
@@ -6318,6 +6558,286 @@
           "service": {
             "short_name": "PredictionService",
             "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_CreateSchedule_sync",
+      "title": "Snippet for the create_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#create_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/create_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#create_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Schedule",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "CreateSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.CreateSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_DeleteSchedule_sync",
+      "title": "Snippet for the delete_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#delete_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/delete_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#delete_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.DeleteSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_GetSchedule_sync",
+      "title": "Snippet for the get_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#get_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/get_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#get_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Schedule",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "GetSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.GetSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_ListSchedules_sync",
+      "title": "Snippet for the list_schedules call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#list_schedules. It may require modification in order to execute successfully.",
+      "file": "schedule_service/list_schedules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schedules",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#list_schedules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListSchedulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListSchedulesResponse",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "ListSchedules",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.ListSchedules",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_PauseSchedule_sync",
+      "title": "Snippet for the pause_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#pause_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/pause_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pause_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#pause_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::PauseScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "PauseSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.PauseSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_ResumeSchedule_sync",
+      "title": "Snippet for the resume_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#resume_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/resume_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#resume_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ResumeScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "ResumeSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.ResumeSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_UpdateSchedule_sync",
+      "title": "Snippet for the update_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#update_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/update_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#update_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Schedule",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.UpdateSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
           }
         }
       },
@@ -6612,46 +7132,6 @@
       ]
     },
     {
-      "region_tag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_sync",
-      "title": "Snippet for the read_tensorboard_usage call in the TensorboardService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage. It may require modification in order to execute successfully.",
-      "file": "tensorboard_service/read_tensorboard_usage.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "read_tensorboard_usage",
-        "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse",
-        "client": {
-          "short_name": "TensorboardService::Client",
-          "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client"
-        },
-        "method": {
-          "short_name": "ReadTensorboardUsage",
-          "full_name": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
-          "service": {
-            "short_name": "TensorboardService",
-            "full_name": "google.cloud.aiplatform.v1.TensorboardService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboard_sync",
       "title": "Snippet for the update_tensorboard call in the TensorboardService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#update_tensorboard. It may require modification in order to execute successfully.",
@@ -6767,6 +7247,86 @@
         {
           "start": 20,
           "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_sync",
+      "title": "Snippet for the read_tensorboard_usage call in the TensorboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage. It may require modification in order to execute successfully.",
+      "file": "tensorboard_service/read_tensorboard_usage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_tensorboard_usage",
+        "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse",
+        "client": {
+          "short_name": "TensorboardService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client"
+        },
+        "method": {
+          "short_name": "ReadTensorboardUsage",
+          "full_name": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
+          "service": {
+            "short_name": "TensorboardService",
+            "full_name": "google.cloud.aiplatform.v1.TensorboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardSize_sync",
+      "title": "Snippet for the read_tensorboard_size call in the TensorboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_size. It may require modification in order to execute successfully.",
+      "file": "tensorboard_service/read_tensorboard_size.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_tensorboard_size",
+        "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_size",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse",
+        "client": {
+          "short_name": "TensorboardService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client"
+        },
+        "method": {
+          "short_name": "ReadTensorboardSize",
+          "full_name": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardSize",
+          "service": {
+            "short_name": "TensorboardService",
+            "full_name": "google.cloud.aiplatform.v1.TensorboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

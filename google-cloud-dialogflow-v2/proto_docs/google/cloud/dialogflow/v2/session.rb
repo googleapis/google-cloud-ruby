@@ -48,12 +48,12 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
         #
-        #     1.  an audio config
-        #         which instructs the speech recognizer how to process the speech audio,
+        #     1. an audio config which instructs the speech recognizer how to process
+        #     the speech audio,
         #
-        #     2.  a conversational query in the form of text, or
+        #     2. a conversational query in the form of text, or
         #
-        #     3.  an event that specifies which intent to trigger.
+        #     3. an event that specifies which intent to trigger.
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Instructs the speech synthesizer how to generate the output
@@ -156,6 +156,13 @@ module Google
         #     "Host", "Content-Length", "Connection", "From", "User-Agent",
         #     "Accept-Encoding", "If-Modified-Since", "If-None-Match", "X-Forwarded-For",
         #     etc.
+        # @!attribute [rw] platform
+        #   @return [::String]
+        #     The platform of the virtual agent response messages.
+        #
+        #     If not empty, only emits messages from this platform in the response.
+        #     Valid values are the enum names of
+        #     {::Google::Cloud::Dialogflow::V2::Intent::Message#platform platform}.
         class QueryParameters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -172,12 +179,12 @@ module Google
 
         # Represents the query input. It can contain either:
         #
-        # 1.  An audio config which
-        #     instructs the speech recognizer how to process the speech audio.
+        # 1. An audio config which instructs the speech recognizer how to process the
+        # speech audio.
         #
-        # 2.  A conversational query in the form of text,.
+        # 2. A conversational query in the form of text.
         #
-        # 3.  An event that specifies which intent to trigger.
+        # 3. An event that specifies which intent to trigger.
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
         #     Instructs the speech recognizer how to process the speech audio.
@@ -233,16 +240,14 @@ module Google
         #     map, associative array, symbol table, dictionary, or JSON object
         #     composed of a collection of (MapKey, MapValue) pairs:
         #
-        #     -   MapKey type: string
-        #     -   MapKey value: parameter name
-        #     -   MapValue type:
-        #         -   If parameter's entity type is a composite entity: map
-        #         -   Else: depending on parameter value type, could be one of string,
-        #             number, boolean, null, list or map
-        #     -   MapValue value:
-        #         -   If parameter's entity type is a composite entity:
-        #             map from composite entity property names to property values
-        #         -   Else: parameter value
+        #     * MapKey type: string
+        #     * MapKey value: parameter name
+        #     * MapValue type: If parameter's entity type is a composite entity then use
+        #     map, otherwise, depending on the parameter value type, it could be one of
+        #     string, number, boolean, null, list or map.
+        #     * MapValue value: If parameter's entity type is a composite entity then use
+        #     map from composite entity property names to property values, otherwise,
+        #     use parameter value.
         # @!attribute [rw] all_required_params_present
         #   @return [::Boolean]
         #     This field is set to:
@@ -370,12 +375,12 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
         #
-        #     1.  an audio config which instructs the speech recognizer how to process
-        #         the speech audio,
+        #     1. an audio config which instructs the speech recognizer how to process
+        #     the speech audio,
         #
-        #     2.  a conversational query in the form of text, or
+        #     2. a conversational query in the form of text, or
         #
-        #     3.  an event that specifies which intent to trigger.
+        #     3. an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [::Boolean]
         #     Please use
@@ -407,7 +412,78 @@ module Google
         #     The input audio content to be recognized. Must be sent if
         #     `query_input` was set to a streaming input audio config. The complete audio
         #     over all streaming messages must not exceed 1 minute.
+        # @!attribute [rw] enable_debugging_info
+        #   @return [::Boolean]
+        #     if true, `StreamingDetectIntentResponse.debugging_info` will get populated.
         class StreamingDetectIntentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud conversation info for easier debugging.
+        # It will get populated in `StreamingDetectIntentResponse` or
+        # `StreamingAnalyzeContentResponse` when the flag `enable_debugging_info` is
+        # set to true in corresponding requests.
+        # @!attribute [rw] audio_data_chunks
+        #   @return [::Integer]
+        #     Number of input audio data chunks in streaming requests.
+        # @!attribute [rw] result_end_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end of speech utterance relative to the
+        #     beginning of the first audio chunk.
+        # @!attribute [rw] first_audio_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Duration of first audio chunk.
+        # @!attribute [rw] single_utterance
+        #   @return [::Boolean]
+        #     Whether client used single utterance mode.
+        # @!attribute [rw] speech_partial_results_end_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the speech partial results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] speech_final_results_end_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the speech final results (is_final=true) relative to the
+        #     beginning of the stream.
+        # @!attribute [rw] partial_responses
+        #   @return [::Integer]
+        #     Total number of partial responses.
+        # @!attribute [rw] speaker_id_passive_latency_ms_offset
+        #   @return [::Integer]
+        #     Time offset of Speaker ID stream close time relative to the Speech stream
+        #     close time in milliseconds. Only meaningful for conversations involving
+        #     passive verification.
+        # @!attribute [rw] bargein_event_triggered
+        #   @return [::Boolean]
+        #     Whether a barge-in event is triggered in this request.
+        # @!attribute [rw] speech_single_utterance
+        #   @return [::Boolean]
+        #     Whether speech uses single utterance mode.
+        # @!attribute [rw] dtmf_partial_results_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the DTMF partial results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] dtmf_final_results_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the DTMF final results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] single_utterance_end_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end-of-single-utterance signal relative to the
+        #     beginning of the stream.
+        # @!attribute [rw] no_speech_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     No speech timeout settings observed at runtime.
+        # @!attribute [rw] is_input_text
+        #   @return [::Boolean]
+        #     Whether the streaming terminates with an injected text query.
+        # @!attribute [rw] client_half_close_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Client half close time in terms of input audio duration.
+        # @!attribute [rw] client_half_close_streaming_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Client half close time in terms of API streaming duration.
+        class CloudConversationDebuggingInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -454,6 +530,10 @@ module Google
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
+        # @!attribute [rw] debugging_info
+        #   @return [::Google::Cloud::Dialogflow::V2::CloudConversationDebuggingInfo]
+        #     Debugging info that would get populated when
+        #     `StreamingDetectIntentRequest.enable_debugging_info` is set to true.
         class StreamingDetectIntentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -555,7 +635,6 @@ module Google
           end
         end
 
-        # ============================================================================
         # Auxiliary proto messages.
         #
         # Represents the natural language text to be processed.
@@ -590,16 +669,14 @@ module Google
         #     map, associative array, symbol table, dictionary, or JSON object
         #     composed of a collection of (MapKey, MapValue) pairs:
         #
-        #     -   MapKey type: string
-        #     -   MapKey value: parameter name
-        #     -   MapValue type:
-        #         -   If parameter's entity type is a composite entity: map
-        #         -   Else: depending on parameter value type, could be one of string,
-        #             number, boolean, null, list or map
-        #     -   MapValue value:
-        #         -   If parameter's entity type is a composite entity:
-        #             map from composite entity property names to property values
-        #         -   Else: parameter value
+        #     * MapKey type: string
+        #     * MapKey value: parameter name
+        #     * MapValue type: If parameter's entity type is a composite entity then use
+        #     map, otherwise, depending on the parameter value type, it could be one of
+        #     string, number, boolean, null, list or map.
+        #     * MapValue value: If parameter's entity type is a composite entity then use
+        #     map from composite entity property names to property values, otherwise,
+        #     use parameter value.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this query. See [Language

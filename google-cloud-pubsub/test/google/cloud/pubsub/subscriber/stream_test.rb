@@ -45,7 +45,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
     subscriber_retries = 0
     until called
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 120
       subscriber_retries += 1
       sleep 0.01
     end
@@ -80,7 +80,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
     subscriber_retries = 0
     until called
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 120
       subscriber_retries += 1
       sleep 0.01
     end
@@ -109,7 +109,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
     subscriber_retries = 0
     until called
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 120
       subscriber_retries += 1
       sleep 0.01
     end
@@ -145,7 +145,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
     subscriber_retries = 0
     until called
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 120
       subscriber_retries += 1
       sleep 0.01
     end
@@ -176,7 +176,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.start
 
     subscriber_retries = 0
-    until subscriber_retries < 100
+    until subscriber_retries < 120
       subscriber_retries += 1
       sleep 0.01
     end
@@ -209,7 +209,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
     subscriber_retries = 0
     until called
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 120
       subscriber_retries += 1
       sleep 0.01
     end

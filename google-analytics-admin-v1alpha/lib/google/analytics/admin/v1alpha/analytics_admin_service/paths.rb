@@ -78,6 +78,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AdSenseLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/adSenseLinks/{adsense_link}`
+            #
+            # @param property [String]
+            # @param adsense_link [String]
+            #
+            # @return [::String]
+            def ad_sense_link_path property:, adsense_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/adSenseLinks/#{adsense_link}"
+            end
+
+            ##
             # Create a fully-qualified AttributionSettings resource string.
             #
             # The resource will be in the following format:
@@ -287,6 +304,25 @@ module Google
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
               "properties/#{property}/dataStreams/#{data_stream}/enhancedMeasurementSettings"
+            end
+
+            ##
+            # Create a fully-qualified EventCreateRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/eventCreateRules/{event_create_rule}`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            # @param event_create_rule [String]
+            #
+            # @return [::String]
+            def event_create_rule_path property:, data_stream:, event_create_rule:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+              raise ::ArgumentError, "data_stream cannot contain /" if data_stream.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/eventCreateRules/#{event_create_rule}"
             end
 
             ##

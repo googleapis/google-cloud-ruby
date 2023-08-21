@@ -15,6 +15,7 @@
 require_relative "helper"
 require_relative "../create_job_from_ad_hoc"
 require_relative "../create_job_from_preset"
+require_relative "../create_job_from_preset_batch_mode"
 require_relative "../create_job_from_template"
 require_relative "../create_job_template"
 require_relative "../create_job_with_animated_overlay"
@@ -56,6 +57,7 @@ describe "Transcoder Snippets" do
   let(:output_uri_for_get_list) { "#{output_uri_prefix}/test-output-get-list/" }
   let(:output_uri_for_delete) { "#{output_uri_prefix}/test-output-delete/" }
   let(:output_uri_for_preset) { "#{output_uri_prefix}/test-output-preset/" }
+  let(:output_uri_for_preset) { "#{output_uri_prefix}/test-output-preset-batch-mode/" }
   let(:output_uri_for_template) { "#{output_uri_prefix}/test-output-template/" }
   let(:output_uri_for_concat) { "#{output_uri_prefix}/test-output-concat/" }
   let(:job_state_retries) { 4 }
@@ -122,6 +124,37 @@ describe "Transcoder Snippets" do
       expect {
         job = create_job_from_preset(project_id: project_id, location: location_id,
                                      input_uri: input_uri, output_uri: output_uri_for_preset, preset: preset)
+        expect(job).wont_be_nil
+        expect(job.name).must_include(project_number)
+        str_slice = job.name.split "/"
+        job_id = str_slice[str_slice.length - 1].rstrip
+      }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
+
+      output = ""
+
+      job_state_retries.times do
+        sleep rand(30..35)
+        state = ""
+        output = capture_io {
+          state = get_job_state project_id: project_id, location: location_id, job_id: job_id
+        }
+        break if state.eql? job_state_succeeded
+      end
+      expect(output).must_include(job_state_succeeded_message)
+    end
+  end
+
+  describe "create a job from a preset in batch mode" do
+    job_id = ""
+
+    after do
+      delete_job project_id: project_id, location: location_id, job_id: job_id
+    end
+
+    it "creates a preset job in batch mode" do
+      expect {
+        job = create_job_from_preset_batch_mode(project_id: project_id, location: location_id,
+                                                input_uri: input_uri, output_uri: output_uri_for_preset, preset: preset)
         expect(job).wont_be_nil
         expect(job.name).must_include(project_number)
         str_slice = job.name.split "/"
@@ -212,7 +245,7 @@ describe "Transcoder Snippets" do
 
     it "lists a job" do
       expect {
-        list_jobs(project_id: project_id, location: location_id)
+        list_jobs project_id: project_id, location: location_id
       }.must_output(%r{Jobs:(.*\s)*projects/#{project_number}/locations/#{location_id}/jobs/#{job_id}})
     end
   end

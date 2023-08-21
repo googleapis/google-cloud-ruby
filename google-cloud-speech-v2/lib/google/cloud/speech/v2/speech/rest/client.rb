@@ -125,7 +125,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -266,8 +266,8 @@ module Google
               #     format is `projects/{project}/locations/{location}`.
               #   @param page_size [::Integer]
               #     The maximum number of Recognizers to return. The service may return fewer
-              #     than this value. If unspecified, at most 20 Recognizers will be returned.
-              #     The maximum value is 20; values above 20 will be coerced to 20.
+              #     than this value. If unspecified, at most 5 Recognizers will be returned.
+              #     The maximum value is 100; values above 100 will be coerced to 100.
               #   @param page_token [::String]
               #     A page token, received from a previous
               #     {::Google::Cloud::Speech::V2::Speech::Rest::Client#list_recognizers ListRecognizers} call.
@@ -626,7 +626,8 @@ module Google
               #   @param recognizer [::String]
               #     Required. The name of the Recognizer to use during recognition. The
               #     expected format is
-              #     `projects/{project}/locations/{location}/recognizers/{recognizer}`.
+              #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+              #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
               #   @param config [::Google::Cloud::Speech::V2::RecognitionConfig, ::Hash]
               #     Features and audio metadata to use for the Automatic Speech Recognition.
               #     This field in combination with the
@@ -719,13 +720,16 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil, recognition_output_config: nil)
+              # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil, recognition_output_config: nil, processing_strategy: nil)
               #   Pass arguments to `batch_recognize` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param recognizer [::String]
-              #     Required. Resource name of the recognizer to be used for ASR.
+              #     Required. The name of the Recognizer to use during recognition. The
+              #     expected format is
+              #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+              #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
               #   @param config [::Google::Cloud::Speech::V2::RecognitionConfig, ::Hash]
               #     Features and audio metadata to use for the Automatic Speech Recognition.
               #     This field in combination with the
@@ -752,6 +756,8 @@ module Google
               #     The maximum number of files allowed to be specified is 5.
               #   @param recognition_output_config [::Google::Cloud::Speech::V2::RecognitionOutputConfig, ::Hash]
               #     Configuration options for where to output the transcripts of each file.
+              #   @param processing_strategy [::Google::Cloud::Speech::V2::BatchRecognizeRequest::ProcessingStrategy]
+              #     Processing strategy to use for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1023,10 +1029,10 @@ module Google
               #     Required. The project and location of CustomClass resources to list. The
               #     expected format is `projects/{project}/locations/{location}`.
               #   @param page_size [::Integer]
-              #     Number of results per requests. A valid page_size ranges from 0 to 20
+              #     Number of results per requests. A valid page_size ranges from 0 to 100
               #     inclusive. If the page_size is zero or unspecified, a page size of 5 will
-              #     be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-              #     that a call might return fewer results than the requested page size.
+              #     be chosen. If the page size exceeds 100, it will be coerced down to 100.
+              #     Note that a call might return fewer results than the requested page size.
               #   @param page_token [::String]
               #     A page token, received from a previous
               #     {::Google::Cloud::Speech::V2::Speech::Rest::Client#list_custom_classes ListCustomClasses} call.
@@ -1462,8 +1468,8 @@ module Google
               #     expected format is `projects/{project}/locations/{location}`.
               #   @param page_size [::Integer]
               #     The maximum number of PhraseSets to return. The service may return fewer
-              #     than this value. If unspecified, at most 20 PhraseSets will be returned.
-              #     The maximum value is 20; values above 20 will be coerced to 20.
+              #     than this value. If unspecified, at most 5 PhraseSets will be returned.
+              #     The maximum value is 100; values above 100 will be coerced to 100.
               #   @param page_token [::String]
               #     A page token, received from a previous
               #     {::Google::Cloud::Speech::V2::Speech::Rest::Client#list_phrase_sets ListPhraseSets} call.
@@ -1871,7 +1877,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "speech.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "speech.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

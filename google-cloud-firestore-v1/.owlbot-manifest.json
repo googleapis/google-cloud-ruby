@@ -23,6 +23,7 @@
     "lib/google/cloud/firestore/v1/rest.rb",
     "lib/google/cloud/firestore/v1/version.rb",
     "lib/google/firestore/v1/aggregation_result_pb.rb",
+    "lib/google/firestore/v1/bloom_filter_pb.rb",
     "lib/google/firestore/v1/common_pb.rb",
     "lib/google/firestore/v1/document_pb.rb",
     "lib/google/firestore/v1/firestore_pb.rb",
@@ -35,6 +36,7 @@
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/firestore/v1/aggregation_result.rb",
+    "proto_docs/google/firestore/v1/bloom_filter.rb",
     "proto_docs/google/firestore/v1/common.rb",
     "proto_docs/google/firestore/v1/document.rb",
     "proto_docs/google/firestore/v1/firestore.rb",
@@ -71,7 +73,6 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml",
-    ".owlbot.rb"
+    ".OwlBot.yaml"
   ]
 }

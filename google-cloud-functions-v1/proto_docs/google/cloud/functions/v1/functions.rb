@@ -22,7 +22,7 @@ module Google
     module Functions
       module V1
         # Describes a Cloud Function that contains user computation executed in
-        # response to an event. It encapsulate function and triggers configurations.
+        # response to an event. It encapsulates function and triggers configurations.
         # @!attribute [rw] name
         #   @return [::String]
         #     A user-defined name of the function. Function names must be unique
@@ -41,7 +41,7 @@ module Google
         #     The source repository where a function is hosted.
         # @!attribute [rw] source_upload_url
         #   @return [::String]
-        #     The Google Cloud Storage signed URL used for source uploading, generated
+        #     The Google Cloud Storage-signed URL used for source uploading, generated
         #     by calling [google.cloud.functions.v1.GenerateUploadUrl].
         #
         #     The signature is validated on write methods (Create, Update)
@@ -58,12 +58,12 @@ module Google
         #     Output only. Status of the function deployment.
         # @!attribute [rw] entry_point
         #   @return [::String]
-        #     The name of the function (as defined in source code) that will be
-        #     executed. Defaults to the resource name suffix, if not specified. For
-        #     backward compatibility, if function with given name is not found, then the
-        #     system will try to use function named "function".
-        #     For Node.js this is name of a function exported by the module specified
-        #     in `source_location`.
+        #     The name of the function (as defined in source code) that is executed.
+        #     Defaults to the resource name suffix, if not specified. For
+        #     backward compatibility, if function with given name is not found, the
+        #     system tries to use the function named "function".
+        #     For Node.js, this is the name of a function exported by the module
+        #     as specified in `source_location`.
         # @!attribute [rw] runtime
         #   @return [::String]
         #     The runtime in which to run the function. Required when deploying a new
@@ -89,8 +89,8 @@ module Google
         #     Output only. The last update timestamp of a Cloud Function.
         # @!attribute [r] version_id
         #   @return [::Integer]
-        #     Output only. The version identifier of the Cloud Function. Each deployment attempt
-        #     results in a new version of a function being created.
+        #     Output only. The version identifier of the Cloud Function. Each deployment
+        #     attempt results in a new version of a function being created.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this Cloud Function.
@@ -102,11 +102,11 @@ module Google
         #     Build environment variables that shall be available during build time.
         # @!attribute [rw] network
         #   @return [::String]
-        #     The VPC Network that this cloud function can connect to. It can be
-        #     either the fully-qualified URI, or the short name of the network resource.
-        #     If the short network name is used, the network must belong to the same
-        #     project. Otherwise, it must belong to a project within the same
-        #     organization. The format of this field is either
+        #     The Serverless VPC Access connector that this cloud function can connect
+        #     to. It can be either the fully qualified URI, or the short name of the
+        #     connector resource. If the connector name is used, the connector must
+        #     belong to the same project as the function. Otherwise, it must belong to a
+        #     project within the same organization. The format of this field is either
         #     `projects/{project}/global/networks/{network}` or `{network}`, where
         #     `{project}` is a project id where the network is defined, and `{network}`
         #     is the short name of the network.
@@ -118,13 +118,13 @@ module Google
         #     more information on connecting Cloud projects.
         # @!attribute [rw] max_instances
         #   @return [::Integer]
-        #     The limit on the maximum number of function instances that may coexist at a
+        #     The limit on the maximum number of function instances that can coexist at a
         #     given time.
         #
-        #     In some cases, such as rapid traffic surges, Cloud Functions may, for a
-        #     short period of time, create more instances than the specified max
+        #     In some cases, such as rapid traffic surges, Cloud Functions can for a
+        #     short period of time create more instances than the specified max
         #     instances limit. If your function cannot tolerate this temporary behavior,
-        #     you may want to factor in a safety margin and set a lower max instances
+        #     you might want to factor in a safety margin and set a lower max instances
         #     value than your function can tolerate.
         #
         #     See the [Max
@@ -132,12 +132,12 @@ module Google
         #     more details.
         # @!attribute [rw] min_instances
         #   @return [::Integer]
-        #     A lower bound for the number function instances that may coexist at a
+        #     A lower bound for the number function instances that can coexist at a
         #     given time.
         # @!attribute [rw] vpc_connector
         #   @return [::String]
         #     The VPC Network Connector that this cloud function can connect to. It can
-        #     be either the fully-qualified URI, or the short name of the network
+        #     be either the fully qualified URI, or the short name of the network
         #     connector resource. The format of this field is
         #     `projects/*/locations/*/connectors/*`
         #
@@ -215,8 +215,8 @@ module Google
         #     Secret volumes configuration.
         # @!attribute [rw] source_token
         #   @return [::String]
-        #     Input only. An identifier for Firebase function sources. Disclaimer: This field is only
-        #     supported for Firebase function deployments.
+        #     Input only. An identifier for Firebase function sources. Disclaimer: This
+        #     field is only supported for Firebase function deployments.
         # @!attribute [rw] docker_repository
         #   @return [::String]
         #     User managed repository created in Artifact Registry optionally with a
@@ -224,7 +224,7 @@ module Google
         #     Artifact Registry. If unspecified and the deployment is eligible to use
         #     Artifact Registry, GCF will create and use a repository named
         #     'gcf-artifacts' for every deployed region. This is the repository to which
-        #     the function docker image will be pushed after it is built by Cloud Build.
+        #     the function docker image is pushed after it is built by Cloud Build.
         #
         #     It must match the pattern
         #     `projects/{project}/locations/{location}/repositories/{repository}`.
@@ -236,7 +236,7 @@ module Google
         #   @return [::Google::Cloud::Functions::V1::CloudFunction::DockerRegistry]
         #     Docker Registry to use for this deployment.
         #
-        #     If `docker_repository` field is specified, this field will be automatically
+        #     If `docker_repository` field is specified, this field is automatically
         #     set as `ARTIFACT_REGISTRY`.
         #     If unspecified, it currently defaults to `CONTAINER_REGISTRY`.
         #     This field may be overridden by the backend for eligible deployments.
@@ -273,17 +273,18 @@ module Google
 
           # Available egress settings.
           #
-          # This controls what traffic is diverted through the VPC Access Connector
-          # resource. By default PRIVATE_RANGES_ONLY will be used.
+          # This controls what traffic is diverted through the Serverless VPC Access
+          # connector resource. By default, PRIVATE_RANGES_ONLY is used.
           module VpcConnectorEgressSettings
             # Unspecified.
             VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED = 0
 
-            # Use the VPC Access Connector only for private IP space from RFC1918.
+            # Use the Serverless VPC Access connector only for private IP space from
+            # RFC1918.
             PRIVATE_RANGES_ONLY = 1
 
-            # Force the use of VPC Access Connector for all egress traffic from the
-            # function.
+            # Force the use of Serverless VPC Access connector for all egress traffic
+            # from the function.
             ALL_TRAFFIC = 2
           end
 
@@ -291,7 +292,7 @@ module Google
           #
           # This controls what traffic can reach the function.
           #
-          # If unspecified, ALLOW_ALL will be used.
+          # If unspecified, ALLOW_ALL is used.
           module IngressSettings
             # Unspecified.
             INGRESS_SETTINGS_UNSPECIFIED = 0
@@ -311,15 +312,15 @@ module Google
             # Unspecified.
             DOCKER_REGISTRY_UNSPECIFIED = 0
 
-            # Docker images will be stored in multi-regional Container Registry
+            # Docker images are stored in multi-regional Container Registry
             # repositories named `gcf`.
             CONTAINER_REGISTRY = 1
 
-            # Docker images will be stored in regional Artifact Registry repositories.
-            # By default, GCF will create and use repositories named `gcf-artifacts`
-            # in every region in which a function is deployed. But the repository to
-            # use can also be specified by the user using the `docker_repository`
-            # field.
+            # Docker images are stored in regional Artifact Registry repositories.
+            # By default, Cloud Functions creates and uses repositories named
+            # `gcf-artifacts` in every region in which a function is deployed. But the
+            # repository to use can also be specified by the user by using the
+            # `docker_repository` field.
             ARTIFACT_REGISTRY = 2
           end
         end
@@ -340,7 +341,7 @@ module Google
         #     To refer to a specific fixed alias (tag):
         #     `https://source.developers.google.com/projects/*/repos/*/fixed-aliases/*/paths/*`
         #
-        #     You may omit `paths/*` if you want to use the main directory.
+        #     You can omit `paths/*` if you want to use the main directory.
         # @!attribute [r] deployed_url
         #   @return [::String]
         #     Output only. The URL pointing to the hosted repository where the function
@@ -354,7 +355,7 @@ module Google
         # Describes HttpsTrigger, could be used to connect web hooks to function.
         # @!attribute [r] url
         #   @return [::String]
-        #     Output only. The deployed url for the function.
+        #     Output only. The deployed URL for the function.
         # @!attribute [rw] security_level
         #   @return [::Google::Cloud::Functions::V1::HttpsTrigger::SecurityLevel]
         #     The security level for the function.
@@ -362,11 +363,11 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Available security level settings.
+          # Available security-level settings.
           #
           # This controls the methods to enforce security (HTTPS) on a URL.
           #
-          # If unspecified, SECURE_OPTIONAL will be used.
+          # If unspecified, SECURE_OPTIONAL is used.
           module SecurityLevel
             # Unspecified.
             SECURITY_LEVEL_UNSPECIFIED = 0
@@ -383,7 +384,7 @@ module Google
           end
         end
 
-        # Describes EventTrigger, used to request events be sent from another
+        # Describes EventTrigger, used to request that events be sent from another
         # service.
         # @!attribute [rw] event_type
         #   @return [::String]
@@ -400,7 +401,7 @@ module Google
         #        example, the Google Cloud Storage API includes the type `object`.
         #     3. action: The action that generates the event. For example, action for
         #        a Google Cloud Storage Object is 'change'.
-        #     These parts are lower case.
+        #     These parts are lowercase.
         # @!attribute [rw] resource
         #   @return [::String]
         #     Required. The resource(s) from which to observe events, for example,
@@ -418,7 +419,7 @@ module Google
         #        that matches Google Cloud Pub/Sub topics.
         #
         #     Additionally, some services may support short names when creating an
-        #     `EventTrigger`. These will always be returned in the normalized "long"
+        #     `EventTrigger`. These are always returned in the normalized "long"
         #     format.
         #
         #     See each *service's* documentation for supported formats.
@@ -438,17 +439,17 @@ module Google
         end
 
         # Describes the policy in case of function's execution failure.
-        # If empty, then defaults to ignoring failures (i.e. not retrying them).
+        # If empty, then defaults to ignoring failures (i.e., not retrying them).
         # @!attribute [rw] retry
         #   @return [::Google::Cloud::Functions::V1::FailurePolicy::Retry]
-        #     If specified, then the function will be retried in case of a failure.
+        #     If specified, the function is retried in case of a failure.
         class FailurePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Describes the retry policy in case of function's execution failure.
-          # A function execution will be retried on any failure.
-          # A failed execution will be retried up to 7 days with an exponential backoff
+          # A function execution is retried on any failure.
+          # A failed execution is retried up to 7 days with an exponential backoff
           # (capped at 10 seconds).
           # Retried execution is charged as any other execution.
           class Retry
@@ -458,7 +459,7 @@ module Google
         end
 
         # Configuration for a secret environment variable. It has the information
-        # necessary to fetch the secret value from secret manager and expose it as an
+        # necessary to fetch the secret value from Secret Manager and expose it as an
         # environment variable.
         # @!attribute [rw] key
         #   @return [::String]
@@ -466,12 +467,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Project identifier (preferrably project number but can also be the project
-        #     ID) of the project that contains the secret. If not set, it will be
-        #     populated with the function's project assuming that the secret exists in
-        #     the same project as of the function.
+        #     ID) of the project that contains the secret. If not set, it is
+        #     populated with the function's project, assuming that the secret exists in
+        #     the same project as the function.
         # @!attribute [rw] secret
         #   @return [::String]
-        #     Name of the secret in secret manager (not the full resource name).
+        #     Name of the secret in Secret Manager (not the full resource name).
         # @!attribute [rw] version
         #   @return [::String]
         #     Version of the secret (version number or the string 'latest'). It is
@@ -483,15 +484,15 @@ module Google
         end
 
         # Configuration for a secret volume. It has the information necessary to fetch
-        # the secret value from secret manager and make it available as files mounted
+        # the secret value from Secret Manager and make it available as files mounted
         # at the requested paths within the application container. Secret value is not
-        # a part of the configuration. Every filesystem read operation performs a
-        # lookup in secret manager to retrieve the secret value.
+        # a part of the configuration. Every file system read operation performs a
+        # lookup in Secret Manager to retrieve the secret value.
         # @!attribute [rw] mount_path
         #   @return [::String]
         #     The path within the container to mount the secret volume. For example,
-        #     setting the mount_path as `/etc/secrets` would mount the secret value files
-        #     under the `/etc/secrets` directory. This directory will also be completely
+        #     setting the mount_path as `/etc/secrets` mounts the secret value files
+        #     under the `/etc/secrets` directory. This directory is also completely
         #     shadowed and unavailable to mount any other secrets.
         #
         #     Recommended mount paths: /etc/secrets
@@ -499,16 +500,16 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Project identifier (preferrably project number but can also be the project
-        #     ID) of the project that contains the secret. If not set, it will be
-        #     populated with the function's project assuming that the secret exists in
-        #     the same project as of the function.
+        #     ID) of the project that contains the secret. If not set, it is
+        #     populated with the function's project, assuming that the secret exists in
+        #     the same project as the function.
         # @!attribute [rw] secret
         #   @return [::String]
-        #     Name of the secret in secret manager (not the full resource name).
+        #     Name of the secret in Secret Manager (not the full resource name).
         # @!attribute [rw] versions
         #   @return [::Array<::Google::Cloud::Functions::V1::SecretVolume::SecretVersion>]
         #     List of secret versions to mount for this secret. If empty, the `latest`
-        #     version of the secret will be made available in a file named after the
+        #     version of the secret is made available in a file named after the
         #     secret under the mount point.
         class SecretVolume
           include ::Google::Protobuf::MessageExts
@@ -518,13 +519,13 @@ module Google
           # @!attribute [rw] version
           #   @return [::String]
           #     Version of the secret (version number or the string 'latest'). It is
-          #     preferrable to use `latest` version with secret volumes as secret value
+          #     preferable to use `latest` version with secret volumes as secret value
           #     changes are reflected immediately.
           # @!attribute [rw] path
           #   @return [::String]
           #     Relative path of the file under the mount path where the secret value for
-          #     this version will be fetched and made available. For example, setting the
-          #     mount_path as '/etc/secrets' and path as `/secret_foo` would mount the
+          #     this version is fetched and made available. For example, setting the
+          #     mount_path as '/etc/secrets' and path as `/secret_foo` mounts the
           #     secret value file at `/etc/secrets/secret_foo`.
           class SecretVersion
             include ::Google::Protobuf::MessageExts
@@ -535,8 +536,8 @@ module Google
         # Request for the `CreateFunction` method.
         # @!attribute [rw] location
         #   @return [::String]
-        #     Required. The project and location in which the function should be created, specified
-        #     in the format `projects/*/locations/*`
+        #     Required. The project and location in which the function should be created,
+        #     specified in the format `projects/*/locations/*`
         # @!attribute [rw] function
         #   @return [::Google::Cloud::Functions::V1::CloudFunction]
         #     Required. Function to be created.

@@ -957,6 +957,340 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     end
   end
 
+  def test_create_asset
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    asset = {}
+    asset_id = "hello world"
+    request_id = "hello world"
+
+    create_asset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_asset_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_asset_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_asset({ parent: parent, asset: asset, asset_id: asset_id, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_asset parent: parent, asset: asset, asset_id: asset_id, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_asset ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_asset({ parent: parent, asset: asset, asset_id: asset_id, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_asset(::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_asset_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_asset
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_asset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_asset_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_asset_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_asset({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_asset name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_asset ::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_asset({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_asset(::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_asset_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_asset
+    # Create test objects.
+    client_result = ::Google::Cloud::Video::LiveStream::V1::Asset.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_asset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_asset_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_asset_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_asset({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_asset name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_asset ::Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_asset({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_asset(::Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_asset_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_assets
+    # Create test objects.
+    client_result = ::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_assets ::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_assets(::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_assets_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_pool
+    # Create test objects.
+    client_result = ::Google::Cloud::Video::LiveStream::V1::Pool.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_pool_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_pool_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_pool({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_pool name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_pool ::Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_pool({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_pool(::Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_pool_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_pool
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    pool = {}
+    request_id = "hello world"
+
+    update_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_update_pool_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_pool_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_pool({ update_mask: update_mask, pool: pool, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_pool update_mask: update_mask, pool: pool, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_pool ::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new(update_mask: update_mask, pool: pool, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_pool({ update_mask: update_mask, pool: pool, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_pool(::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new(update_mask: update_mask, pool: pool, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_pool_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

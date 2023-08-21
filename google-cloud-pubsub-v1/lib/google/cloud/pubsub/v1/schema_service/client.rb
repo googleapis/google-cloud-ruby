@@ -65,6 +65,56 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.rpcs.create_schema.timeout = 60.0
+                default_config.rpcs.create_schema.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_schema.timeout = 60.0
+                default_config.rpcs.get_schema.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_schemas.timeout = 60.0
+                default_config.rpcs.list_schemas.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_schema_revisions.timeout = 60.0
+                default_config.rpcs.list_schema_revisions.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.commit_schema.timeout = 60.0
+                default_config.rpcs.commit_schema.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.rollback_schema.timeout = 60.0
+                default_config.rpcs.rollback_schema.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.delete_schema_revision.timeout = 60.0
+                default_config.rpcs.delete_schema_revision.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.delete_schema.timeout = 60.0
+                default_config.rpcs.delete_schema.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.validate_schema.timeout = 60.0
+                default_config.rpcs.validate_schema.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.validate_message.timeout = 60.0
+                default_config.rpcs.validate_message.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -124,7 +174,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -1167,7 +1217,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "pubsub.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "pubsub.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -128,6 +128,9 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::ClientPathsTest < Minitest
 
       path = client.transition_route_group_path project: "value0", location: "value1", agent: "value2", flow: "value3", transition_route_group: "value4"
       assert_equal "projects/value0/locations/value1/agents/value2/flows/value3/transitionRouteGroups/value4", path
+
+      path = client.transition_route_group_path project: "value0", location: "value1", agent: "value2", transition_route_group: "value3"
+      assert_equal "projects/value0/locations/value1/agents/value2/transitionRouteGroups/value3", path
     end
   end
 

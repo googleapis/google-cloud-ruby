@@ -40,8 +40,10 @@ module Google
             # along with entity types, salience, mentions for each entity, and
             # other properties.
             rpc :AnalyzeEntities, ::Google::Cloud::Language::V1beta2::AnalyzeEntitiesRequest, ::Google::Cloud::Language::V1beta2::AnalyzeEntitiesResponse
-            # Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1beta2.LanguageService.AnalyzeEntities] in the text and analyzes
-            # sentiment associated with each entity and its mentions.
+            # Finds entities, similar to
+            # [AnalyzeEntities][google.cloud.language.v1beta2.LanguageService.AnalyzeEntities]
+            # in the text and analyzes sentiment associated with each entity and its
+            # mentions.
             rpc :AnalyzeEntitySentiment, ::Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentRequest, ::Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentResponse
             # Analyzes the syntax of the text and provides sentence boundaries and
             # tokenization along with part of speech tags, dependency trees, and other
@@ -49,6 +51,8 @@ module Google
             rpc :AnalyzeSyntax, ::Google::Cloud::Language::V1beta2::AnalyzeSyntaxRequest, ::Google::Cloud::Language::V1beta2::AnalyzeSyntaxResponse
             # Classifies a document into categories.
             rpc :ClassifyText, ::Google::Cloud::Language::V1beta2::ClassifyTextRequest, ::Google::Cloud::Language::V1beta2::ClassifyTextResponse
+            # Moderates a document for harmful and sensitive categories.
+            rpc :ModerateText, ::Google::Cloud::Language::V1beta2::ModerateTextRequest, ::Google::Cloud::Language::V1beta2::ModerateTextResponse
             # A convenience method that provides all syntax, sentiment, entity, and
             # classification features in one call.
             rpc :AnnotateText, ::Google::Cloud::Language::V1beta2::AnnotateTextRequest, ::Google::Cloud::Language::V1beta2::AnnotateTextResponse

@@ -130,10 +130,19 @@ module Google
         #     Adds additional latency comparable to regular OCR to the process call.
         # @!attribute [rw] advanced_ocr_options
         #   @return [::Array<::String>]
-        #     A list of advanced OCR options to further fine-tune OCR behavior.
+        #     A list of advanced OCR options to further fine-tune OCR behavior. Current
+        #     valid values are:
+        #
+        #     - `legacy_layout`: a heuristics layout detection algorithm, which serves as
+        #     an alternative to the current ML-based layout detection algorithm.
+        #     Customers can choose the best suitable layout algorithm based on their
+        #     situation.
         # @!attribute [rw] enable_symbol
         #   @return [::Boolean]
         #     Includes symbol level OCR information if set to true.
+        # @!attribute [rw] compute_style_info
+        #   @return [::Boolean]
+        #     Turn on font id model and returns font style information.
         class OcrConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

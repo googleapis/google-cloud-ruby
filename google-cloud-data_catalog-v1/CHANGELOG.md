@@ -1,5 +1,36 @@
 # Release History
 
+### 0.18.0 (2023-08-04)
+
+#### Features
+
+* Support admin_search in SearchCatalog() API ([#22691](https://github.com/googleapis/google-cloud-ruby/issues/22691)) 
+
+### 0.17.0 (2023-07-07)
+
+#### Features
+
+* added rpc RenameTagTemplateFieldEnumValue ([#22481](https://github.com/googleapis/google-cloud-ruby/issues/22481)) 
+
+### 0.16.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.16.0 (2023-05-31)
+
+#### Features
+
+* search_catalog returns the approximate total number of entries matched by the query 
+* Support job_id argument to the import_entries call 
+* Support project and location arguments to the lookup_entry call 
+* Support spanner and bigtable integration ([#21692](https://github.com/googleapis/google-cloud-ruby/issues/21692)) 
+* Uses binary protobuf definitions for better forward compatibility 
+#### Bug Fixes
+
+* Update timeouts and retry policies 
+
 ### 0.15.0 (2023-03-23)
 
 #### Features

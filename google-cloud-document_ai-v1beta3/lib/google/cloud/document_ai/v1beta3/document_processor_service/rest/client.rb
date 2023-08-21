@@ -30,7 +30,7 @@ module Google
             ##
             # REST client for the DocumentProcessorService service.
             #
-            # Service to call Cloud DocumentAI to process documents according to the
+            # Service to call Document AI to process documents according to the
             # processor's definition. Processors are built using state-of-the-art Google
             # AI such as natural language, computer vision, and translation to extract
             # structured information from unstructured or semi-structured documents.
@@ -70,7 +70,7 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.process_document.timeout = 120.0
+                  default_config.rpcs.process_document.timeout = 300.0
                   default_config.rpcs.process_document.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
@@ -138,7 +138,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -194,7 +194,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload process_document(inline_document: nil, raw_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
+              # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
               #   Pass arguments to `process_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -203,6 +203,8 @@ module Google
               #     An inline document proto.
               #   @param raw_document [::Google::Cloud::DocumentAI::V1beta3::RawDocument, ::Hash]
               #     A raw document content (bytes).
+              #   @param gcs_document [::Google::Cloud::DocumentAI::V1beta3::GcsDocument, ::Hash]
+              #     A raw document on Google Cloud Storage.
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
@@ -215,14 +217,18 @@ module Google
               #     or
               #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
               #   @param document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
-              #     The document payload, the [content] and [mime_type] fields must be set.
+              #     The document payload, the
+              #     {::Google::Cloud::DocumentAI::V1beta3::Document#content content} and
+              #     {::Google::Cloud::DocumentAI::V1beta3::Document#mime_type mime_type} fields must
+              #     be set.
               #   @param skip_human_review [::Boolean]
-              #     Whether Human Review feature should be skipped for this request. Default to
-              #     false.
+              #     Whether human review should be skipped for this request. Default to
+              #     `false`.
               #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Specifies which fields to include in ProcessResponse's document.
-              #     Only supports top level document and pages field so it must be in the form
-              #     of `{document_field_name}` or `pages.{page_field_name}`.
+              #     Specifies which fields to include in the
+              #     {::Google::Cloud::DocumentAI::V1beta3::ProcessResponse#document ProcessResponse.document}
+              #     output. Only supports top-level document and pages field, so it must be in
+              #     the form of `{document_field_name}` or `pages.{page_field_name}`.
               #   @param process_options [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions, ::Hash]
               #     Inference-time options for the process API
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -298,12 +304,16 @@ module Google
               #   @param output_config [::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig, ::Hash]
               #     The overall output config for batch process.
               #   @param input_documents [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig, ::Hash]
-              #     The input documents for batch process.
+              #     The input documents for the
+              #     {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Client#batch_process_documents BatchProcessDocuments}
+              #     method.
               #   @param document_output_config [::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig, ::Hash]
-              #     The overall output config for batch process.
+              #     The output configuration for the
+              #     {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Client#batch_process_documents BatchProcessDocuments}
+              #     method.
               #   @param skip_human_review [::Boolean]
-              #     Whether Human Review feature should be skipped for this request. Default to
-              #     false.
+              #     Whether human review should be skipped for this request. Default to
+              #     `false`.
               #   @param process_options [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions, ::Hash]
               #     Inference-time options for the process API
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -350,8 +360,9 @@ module Google
               end
 
               ##
-              # Fetches processor types. Note that we do not use ListProcessorTypes here
-              # because it is not paginated.
+              # Fetches processor types. Note that we don't use
+              # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Client#list_processor_types ListProcessorTypes}
+              # here, because it isn't paginated.
               #
               # @overload fetch_processor_types(request, options = nil)
               #   Pass arguments to `fetch_processor_types` via a request object, either of type
@@ -369,9 +380,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project of processor type to list.
-              #     The available processor types may depend on the allow-listing on projects.
-              #     Format: `projects/{project}/locations/{location}`
+              #     Required. The location of processor types to list.
+              #     Format: `projects/{project}/locations/{location}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -433,13 +443,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The location of processor type to list.
-              #     The available processor types may depend on the allow-listing on projects.
-              #     Format: `projects/{project}/locations/{location}`
+              #     Required. The location of processor types to list.
+              #     Format: `projects/{project}/locations/{location}`.
               #   @param page_size [::Integer]
               #     The maximum number of processor types to return.
-              #     If unspecified, at most 100 processor types will be returned.
-              #     The maximum value is 500; values above 500 will be coerced to 500.
+              #     If unspecified, at most `100` processor types will be returned.
+              #     The maximum value is `500`. Values above `500` will be coerced to `500`.
               #   @param page_token [::String]
               #     Used to retrieve the next page of results, empty if at the end of the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -570,8 +579,8 @@ module Google
               #     Processors. Format: `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     The maximum number of processors to return.
-              #     If unspecified, at most 50 processors will be returned.
-              #     The maximum value is 100; values above 100 will be coerced to 100.
+              #     If unspecified, at most `50` processors will be returned.
+              #     The maximum value is `100`. Values above `100` will be coerced to `100`.
               #   @param page_token [::String]
               #     We will return the processors sorted by creation time. The page token
               #     will point to the next processor.
@@ -683,7 +692,7 @@ module Google
               ##
               # Trains a new processor version.
               # Operation metadata is returned as
-              # cloud_documentai_core.TrainProcessorVersionMetadata.
+              # {::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionMetadata TrainProcessorVersionMetadata}.
               #
               # @overload train_processor_version(request, options = nil)
               #   Pass arguments to `train_processor_version` via a request object, either of type
@@ -695,11 +704,13 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload train_processor_version(parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
+              # @overload train_processor_version(custom_document_extraction_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
               #   Pass arguments to `train_processor_version` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param custom_document_extraction_options [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::CustomDocumentExtractionOptions, ::Hash]
+              #     Options to control Custom Document Extraction (CDE) Processor.
               #   @param parent [::String]
               #     Required. The parent (project, location and processor) to create the new
               #     version for. Format:
@@ -709,7 +720,8 @@ module Google
               #   @param document_schema [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema, ::Hash]
               #     Optional. The schema the processor version will be trained with.
               #   @param input_data [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::InputData, ::Hash]
-              #     Optional. The input data used to train the `ProcessorVersion`.
+              #     Optional. The input data used to train the
+              #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}.
               #   @param base_processor_version [::String]
               #     Optional. The processor version to use as a base for training. This
               #     processor version must be a child of `parent`. Format:
@@ -843,8 +855,8 @@ module Google
               #     `projects/{project}/locations/{location}/processors/{processor}`
               #   @param page_size [::Integer]
               #     The maximum number of processor versions to return.
-              #     If unspecified, at most 10 processor versions will be returned.
-              #     The maximum value is 20; values above 20 will be coerced to 20.
+              #     If unspecified, at most `10` processor versions will be returned.
+              #     The maximum value is `20`. Values above `20` will be coerced to `20`.
               #   @param page_token [::String]
               #     We will return the processor versions sorted by creation time. The page
               #     token will point to the next processor version.
@@ -1082,8 +1094,9 @@ module Google
               end
 
               ##
-              # Creates a processor from the type processor that the user chose.
-              # The processor will be at "ENABLED" state by default after its creation.
+              # Creates a processor from the
+              # {::Google::Cloud::DocumentAI::V1beta3::ProcessorType ProcessorType} provided.
+              # The processor will be at `ENABLED` state by default after its creation.
               #
               # @overload create_processor(request, options = nil)
               #   Pass arguments to `create_processor` via a request object, either of type
@@ -1104,9 +1117,11 @@ module Google
               #     Required. The parent (project and location) under which to create the
               #     processor. Format: `projects/{project}/locations/{location}`
               #   @param processor [::Google::Cloud::DocumentAI::V1beta3::Processor, ::Hash]
-              #     Required. The processor to be created, requires [processor_type] and
-              #     [display_name] to be set. Also, the processor is under CMEK if CMEK fields
-              #     are set.
+              #     Required. The processor to be created, requires
+              #     {::Google::Cloud::DocumentAI::V1beta3::Processor#type Processor.type} and
+              #     [Processor.display_name]][] to be set. Also, the
+              #     {::Google::Cloud::DocumentAI::V1beta3::Processor#kms_key_name Processor.kms_key_name}
+              #     field must be set if the processor is under CMEK.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DocumentAI::V1beta3::Processor]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1435,8 +1450,9 @@ module Google
               #   @param inline_document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
               #     An inline document proto.
               #   @param human_review_config [::String]
-              #     Required. The resource name of the HumanReviewConfig that the document will
-              #     be reviewed with.
+              #     Required. The resource name of the
+              #     [HumanReviewConfig][google.cloud.documentai.v1beta3.HumanReviewConfig] that
+              #     the document will be reviewed with.
               #   @param document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
               #     The document that needs human review.
               #   @param enable_schema_validation [::Boolean]
@@ -1647,8 +1663,8 @@ module Google
               #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
               #   @param page_size [::Integer]
               #     The standard list page size.
-              #     If unspecified, at most 5 evaluations will be returned.
-              #     The maximum value is 100; values above 100 will be coerced to 100.
+              #     If unspecified, at most `5` evaluations are returned.
+              #     The maximum value is `100`. Values above `100` are coerced to `100`.
               #   @param page_token [::String]
               #     A page token, received from a previous `ListEvaluations` call.
               #     Provide this to retrieve the subsequent page.
@@ -1708,13 +1724,17 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_processor_version(processor_version_source: nil, parent: nil)
+              # @overload import_processor_version(processor_version_source: nil, external_processor_version_source: nil, parent: nil)
               #   Pass arguments to `import_processor_version` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param processor_version_source [::String]
-              #     The source processor version to import from.
+              #     The source processor version to import from. The source processor version
+              #     and destination processor need to be in the same environment and region.
+              #   @param external_processor_version_source [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource, ::Hash]
+              #     The source processor version to import from, and can be from different
+              #     environment and region than the destination processor.
               #   @param parent [::String]
               #     Required. The destination processor name to create the processor version
               #     in. Format:
@@ -1835,7 +1855,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "documentai.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "documentai.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

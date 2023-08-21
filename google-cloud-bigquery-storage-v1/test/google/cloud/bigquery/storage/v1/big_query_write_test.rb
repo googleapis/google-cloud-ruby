@@ -120,6 +120,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
     proto_rows = {}
     trace_id = "hello world"
     missing_value_interpretations = {}
+    default_missing_value_interpretation = :MISSING_VALUE_INTERPRETATION_UNSPECIFIED
 
     append_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :append_rows, name
@@ -135,8 +136,8 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
       enum_input = [request_hash, request_proto].to_enum
       client.append_rows enum_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -147,8 +148,8 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
       stream_input = Gapic::StreamInput.new
       client.append_rows stream_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -162,8 +163,8 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
       enum_input = [request_hash, request_proto].to_enum
       client.append_rows enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -174,8 +175,8 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
       stream_input = Gapic::StreamInput.new
       client.append_rows stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -199,6 +200,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
           assert_equal :proto_rows, r.rows
           assert_equal "hello world", r["trace_id"]
           assert_equal({}, r["missing_value_interpretations"].to_h)
+          assert_equal :MISSING_VALUE_INTERPRETATION_UNSPECIFIED, r["default_missing_value_interpretation"]
         end
       end
     end

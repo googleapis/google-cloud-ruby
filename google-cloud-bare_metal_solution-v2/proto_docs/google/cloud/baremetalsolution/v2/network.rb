@@ -64,6 +64,18 @@ module Google
         #     List of IP address reservations in this network.
         #     When updating this field, an error will be generated if a reservation
         #     conflicts with an IP address already allocated to a physical server.
+        # @!attribute [r] pod
+        #   @return [::String]
+        #     Output only. Pod name.
+        # @!attribute [rw] mount_points
+        #   @return [::Array<::Google::Cloud::BareMetalSolution::V2::NetworkMountPoint>]
+        #     Input only. List of mount points to attach the network to.
+        # @!attribute [rw] jumbo_frames_enabled
+        #   @return [::Boolean]
+        #     Whether network uses standard frames or jumbo ones.
+        # @!attribute [r] gateway_ip
+        #   @return [::String]
+        #     Output only. Gateway ip address.
         class Network
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,6 +111,12 @@ module Google
 
             # The Network has been provisioned.
             PROVISIONED = 2
+
+            # The Network is being deprovisioned.
+            DEPROVISIONING = 3
+
+            # The Network is being updated.
+            UPDATING = 4
           end
         end
 
@@ -131,6 +149,9 @@ module Google
         # @!attribute [rw] qos_policy
         #   @return [::Google::Cloud::BareMetalSolution::V2::VRF::QosPolicy]
         #     The QOS policy applied to this VRF.
+        #     The value is only meaningful when all the vlan attachments have the same
+        #     QoS. This field should not be used for new integrations, use vlan
+        #     attachment level qos instead. The field is left for backward-compatibility.
         # @!attribute [rw] vlan_attachments
         #   @return [::Array<::Google::Cloud::BareMetalSolution::V2::VRF::VlanAttachment>]
         #     The list of VLAN attachments for the VRF.
@@ -157,6 +178,20 @@ module Google
           # @!attribute [rw] router_ip
           #   @return [::String]
           #     The router IP of the attachment.
+          # @!attribute [rw] pairing_key
+          #   @return [::String]
+          #     Input only. Pairing key.
+          # @!attribute [rw] qos_policy
+          #   @return [::Google::Cloud::BareMetalSolution::V2::VRF::QosPolicy]
+          #     The QOS policy applied to this VLAN attachment.
+          #     This value should be preferred to using qos at vrf level.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     Immutable. The identifier of the attachment within vrf.
+          # @!attribute [rw] interconnect_attachment
+          #   @return [::String]
+          #     Optional. The name of the vlan attachment within vrf. This is of the form
+          #     projects/\\{project_number}/regions/\\{region}/interconnectAttachments/\\{interconnect_attachment}
           class VlanAttachment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,7 +224,7 @@ module Google
         # @!attribute [rw] interface_index
         #   @return [::Integer]
         #     The index of the logical interface mapping to the index of the hardware
-        #     bond or nic on the chosen network template.
+        #     bond or nic on the chosen network template. This field is deprecated.
         class LogicalInterface
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -271,7 +306,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to update.
         #     The only currently supported fields are:
-        #       `labels`, `reservations`
+        #       `labels`, `reservations`, `vrf.vlan_attachments`
         class UpdateNetworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,6 +338,37 @@ module Google
         #   @return [::Array<::Google::Cloud::BareMetalSolution::V2::NetworkUsage>]
         #     Networks with IPs.
         class ListNetworkUsageResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Mount point for a network.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Instance to attach network to.
+        # @!attribute [rw] logical_interface
+        #   @return [::String]
+        #     Logical interface to detach from.
+        # @!attribute [rw] default_gateway
+        #   @return [::Boolean]
+        #     Network should be a default gateway.
+        # @!attribute [rw] ip_address
+        #   @return [::String]
+        #     Ip address of the server.
+        class NetworkMountPoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message requesting rename of a server.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The `name` field is used to identify the network.
+        #     Format: projects/\\{project}/locations/\\{location}/networks/\\{network}
+        # @!attribute [rw] new_network_id
+        #   @return [::String]
+        #     Required. The new `id` of the network.
+        class RenameNetworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

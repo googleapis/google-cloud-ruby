@@ -210,6 +210,11 @@
                 "create_conversion_event"
               ]
             },
+            "UpdateConversionEvent": {
+              "methods": [
+                "update_conversion_event"
+              ]
+            },
             "GetConversionEvent": {
               "methods": [
                 "get_conversion_event"
@@ -573,6 +578,51 @@
             "FetchConnectedGa4Property": {
               "methods": [
                 "fetch_connected_ga4_property"
+              ]
+            },
+            "GetAdSenseLink": {
+              "methods": [
+                "get_ad_sense_link"
+              ]
+            },
+            "CreateAdSenseLink": {
+              "methods": [
+                "create_ad_sense_link"
+              ]
+            },
+            "DeleteAdSenseLink": {
+              "methods": [
+                "delete_ad_sense_link"
+              ]
+            },
+            "ListAdSenseLinks": {
+              "methods": [
+                "list_ad_sense_links"
+              ]
+            },
+            "GetEventCreateRule": {
+              "methods": [
+                "get_event_create_rule"
+              ]
+            },
+            "ListEventCreateRules": {
+              "methods": [
+                "list_event_create_rules"
+              ]
+            },
+            "CreateEventCreateRule": {
+              "methods": [
+                "create_event_create_rule"
+              ]
+            },
+            "UpdateEventCreateRule": {
+              "methods": [
+                "update_event_create_rule"
+              ]
+            },
+            "DeleteEventCreateRule": {
+              "methods": [
+                "delete_event_create_rule"
               ]
             }
           }

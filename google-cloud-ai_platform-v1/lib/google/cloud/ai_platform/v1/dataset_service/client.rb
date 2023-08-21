@@ -29,8 +29,7 @@ module Google
           ##
           # Client for the DatasetService service.
           #
-          # The service that handles the CRUD of Vertex AI Dataset and its child
-          # resources.
+          # The service that manages Vertex AI Dataset and its child resources.
           #
           class Client
             include Paths
@@ -126,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -1230,6 +1229,101 @@ module Google
             end
 
             ##
+            # Deletes a SavedQuery.
+            #
+            # @overload delete_saved_query(request, options = nil)
+            #   Pass arguments to `delete_saved_query` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_saved_query(name: nil)
+            #   Pass arguments to `delete_saved_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the SavedQuery to delete.
+            #     Format:
+            #     `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new
+            #
+            #   # Call the delete_saved_query method.
+            #   result = client.delete_saved_query request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_saved_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_saved_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_saved_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_saved_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataset_service_stub.call_rpc :delete_saved_query, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets an AnnotationSpec.
             #
             # @overload get_annotation_spec(request, options = nil)
@@ -1503,7 +1597,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1607,6 +1703,11 @@ module Google
                 #
                 attr_reader :list_saved_queries
                 ##
+                # RPC-specific configuration for `delete_saved_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_saved_query
+                ##
                 # RPC-specific configuration for `get_annotation_spec`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1639,6 +1740,8 @@ module Google
                   @search_data_items = ::Gapic::Config::Method.new search_data_items_config
                   list_saved_queries_config = parent_rpcs.list_saved_queries if parent_rpcs.respond_to? :list_saved_queries
                   @list_saved_queries = ::Gapic::Config::Method.new list_saved_queries_config
+                  delete_saved_query_config = parent_rpcs.delete_saved_query if parent_rpcs.respond_to? :delete_saved_query
+                  @delete_saved_query = ::Gapic::Config::Method.new delete_saved_query_config
                   get_annotation_spec_config = parent_rpcs.get_annotation_spec if parent_rpcs.respond_to? :get_annotation_spec
                   @get_annotation_spec = ::Gapic::Config::Method.new get_annotation_spec_config
                   list_annotations_config = parent_rpcs.list_annotations if parent_rpcs.respond_to? :list_annotations

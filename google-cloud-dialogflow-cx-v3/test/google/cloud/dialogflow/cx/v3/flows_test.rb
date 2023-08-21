@@ -554,6 +554,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::ClientTest < Minitest::Test
     parent = "hello world"
     flow_uri = "hello world"
     import_option = :IMPORT_OPTION_UNSPECIFIED
+    flow_import_strategy = {}
 
     import_flow_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_flow, name
@@ -562,6 +563,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::ClientTest < Minitest::Test
       assert_equal "hello world", request["flow_uri"]
       assert_equal :flow_uri, request.flow
       assert_equal :IMPORT_OPTION_UNSPECIFIED, request["import_option"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::CX::V3::FlowImportStrategy), request["flow_import_strategy"]
       refute_nil options
     end
 
@@ -572,35 +574,35 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option }) do |response, operation|
+      client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_flow parent: parent, flow_uri: flow_uri, import_option: import_option do |response, operation|
+      client.import_flow parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_flow ::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option) do |response, operation|
+      client.import_flow ::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option }, grpc_options) do |response, operation|
+      client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_flow(::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option), grpc_options) do |response, operation|
+      client.import_flow(::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

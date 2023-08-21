@@ -69,50 +69,8 @@ module Google
                   default_config = Client::Configuration.new parent_config
 
                   default_config.timeout = 60.0
-
-                  default_config.rpcs.search_catalog.timeout = 60.0
-                  default_config.rpcs.search_catalog.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.get_entry_group.timeout = 60.0
-                  default_config.rpcs.get_entry_group.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.list_entry_groups.timeout = 60.0
-                  default_config.rpcs.list_entry_groups.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.get_entry.timeout = 60.0
-                  default_config.rpcs.get_entry.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.lookup_entry.timeout = 60.0
-                  default_config.rpcs.lookup_entry.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.list_entries.timeout = 60.0
-                  default_config.rpcs.list_entries.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.list_tags.timeout = 60.0
-                  default_config.rpcs.list_tags.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.get_iam_policy.timeout = 60.0
-                  default_config.rpcs.get_iam_policy.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                  }
-
-                  default_config.rpcs.import_entries.timeout = 60.0
-                  default_config.rpcs.import_entries.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  default_config.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 8, 13]
                   }
 
                   default_config
@@ -168,7 +126,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -237,7 +195,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_catalog(scope: nil, query: nil, page_size: nil, page_token: nil, order_by: nil)
+              # @overload search_catalog(scope: nil, query: nil, page_size: nil, page_token: nil, order_by: nil, admin_search: nil)
               #   Pass arguments to `search_catalog` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -262,7 +220,7 @@ module Google
               #     * `column:y`
               #     * `description:z`
               #   @param page_size [::Integer]
-              #     Number of results to return in a single search page.
+              #     Upper bound on the number of results you can get in a single response.
               #
               #     Can't be negative or 0, defaults to 10 in this case.
               #     The maximum number is 1000. If exceeded, throws an "invalid argument"
@@ -285,7 +243,20 @@ module Google
               #     * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
               #     * `default` that can only be descending
               #
+              #     Search queries don't guarantee full recall. Results that match your query
+              #     might not be returned, even in subsequent result pages. Additionally,
+              #     returned (and not returned) results can vary if you repeat search queries.
+              #     If you are experiencing recall issues and you don't have to fetch the
+              #     results in any specific order, consider setting this parameter to
+              #     `default`.
+              #
               #     If this parameter is omitted, it defaults to the descending `relevance`.
+              #   @param admin_search [::Boolean]
+              #     Optional. If set, uses searchAll permission granted on organizations from
+              #     `include_org_ids` and projects from `include_project_ids` instead of the
+              #     fine grained per resource permissions when filtering the search results.
+              #     The only allowed `order_by` criteria for admin_search mode is `default`.
+              #     Using this flags guarantees a full recall of the search results.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::SearchCatalogResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1035,7 +1006,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload lookup_entry(linked_resource: nil, sql_resource: nil, fully_qualified_name: nil)
+              # @overload lookup_entry(linked_resource: nil, sql_resource: nil, fully_qualified_name: nil, project: nil, location: nil)
               #   Pass arguments to `lookup_entry` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1064,7 +1035,9 @@ module Google
               #     [Lexical structure in Standard SQL]
               #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
               #   @param fully_qualified_name [::String]
-              #     Fully qualified name (FQN) of the resource.
+              #     [Fully Qualified Name
+              #     (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+              #     of the resource.
               #
               #     FQNs take two forms:
               #
@@ -1079,6 +1052,14 @@ module Google
               #     Example for a DPMS table:
               #
               #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+              #   @param project [::String]
+              #     Project where the lookup should be performed. Required to lookup
+              #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+              #     using its `fully_qualified_name`. Ignored in other cases.
+              #   @param location [::String]
+              #     Location where the lookup should be performed. Required to lookup
+              #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+              #     using its `fully_qualified_name`. Ignored in other cases.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::Entry]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2784,7 +2765,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_entries(parent: nil, gcs_bucket_path: nil)
+              # @overload import_entries(parent: nil, gcs_bucket_path: nil, job_id: nil)
               #   Pass arguments to `import_entries` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2793,6 +2774,9 @@ module Google
               #     Required. Target entry group for ingested entries.
               #   @param gcs_bucket_path [::String]
               #     Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+              #   @param job_id [::String]
+              #     Optional. (Optional) Dataplex task job id, if specified will be used as
+              #     part of ImportEntries LRO ID
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2909,7 +2893,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "datacatalog.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "datacatalog.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

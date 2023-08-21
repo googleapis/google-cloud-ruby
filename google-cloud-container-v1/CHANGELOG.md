@@ -1,5 +1,68 @@
 # Release History
 
+### 0.27.0 (2023-08-15)
+
+#### Features
+
+* add APIs for GKE OOTB metrics packages ([#22752](https://github.com/googleapis/google-cloud-ruby/issues/22752)) 
+
+### 0.26.0 (2023-07-19)
+
+#### Features
+
+* Add Multi-networking API ([#22547](https://github.com/googleapis/google-cloud-ruby/issues/22547)) 
+* Add policy_name to PlacementPolicy message within a node pool 
+
+### 0.25.0 (2023-07-13)
+
+#### Features
+
+* Support for advanced datapath observability configs ([#22521](https://github.com/googleapis/google-cloud-ruby/issues/22521)) 
+* Support for Cloud Storage Fuse CSI driver configs 
+* Support for enabling/disabling the Kubelet readonly port 
+* Support for IPv4 range utilization 
+
+### 0.24.0 (2023-07-10)
+
+#### Features
+
+* Support for network performance configuration ([#22464](https://github.com/googleapis/google-cloud-ruby/issues/22464)) 
+* Support for using KubeDNS for DNS resolution 
+
+### 0.23.0 (2023-06-16)
+
+#### Features
+
+* add API for GPU driver installation config ([#22377](https://github.com/googleapis/google-cloud-ruby/issues/22377)) 
+* add SecurityPostureConfig API field to allow customers to enable GKE Security Posture capabilities for their clusters 
+* add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters 
+
+### 0.22.0 (2023-06-06)
+
+#### Features
+
+* Support enabling FQDN Network Policy for a Cluster 
+* Support for best-effort provisioning in a NodePool 
+* Support for check_autopilot_compatibility ([#21907](https://github.com/googleapis/google-cloud-ruby/issues/21907)) 
+* Support for Kubernetes Beta APIs in a Cluster 
+* Support parameters for node pools to be backed by shared sole tenant node groups 
+* Uses binary protobuf definitions for better forward compatibility ([#21673](https://github.com/googleapis/google-cloud-ruby/issues/21673)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.21.1 (2023-05-19)
+
+#### Documentation
+
+* clarify release channel defaulting behavior 
+
+### 0.21.0 (2023-05-04)
+
+#### Features
+
+* support fleet registration via cluster update ([#21535](https://github.com/googleapis/google-cloud-ruby/issues/21535)) 
+
 ### 0.20.0 (2023-04-24)
 
 #### Features

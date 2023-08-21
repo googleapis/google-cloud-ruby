@@ -140,6 +140,27 @@ module Google
               "projects/#{project}/global/networks/#{network}"
             end
 
+            ##
+            # Create a fully-qualified User resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/clusters/{cluster}/users/{user}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param cluster [String]
+            # @param user [String]
+            #
+            # @return [::String]
+            def user_path project:, location:, cluster:, user:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/clusters/#{cluster}/users/#{user}"
+            end
+
             extend self
           end
         end

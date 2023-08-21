@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-document_ai
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Credentials`):
+`::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Credentials`):
 
 * `DOCUMENT_AI_CREDENTIALS` - Path to JSON file, or JSON contents
 * `DOCUMENT_AI_KEYFILE` - Path to JSON file, or JSON contents

@@ -129,7 +129,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -641,7 +641,8 @@ module Google
             # suggested by Vertex AI Vizier. Returns a long-running
             # operation associated with the generation of Trial suggestions.
             # When this long-running operation succeeds, it will contain
-            # a [SuggestTrialsResponse][google.cloud.ml.v1.SuggestTrialsResponse].
+            # a
+            # {::Google::Cloud::AIPlatform::V1::SuggestTrialsResponse SuggestTrialsResponse}.
             #
             # @overload suggest_trials(request, options = nil)
             #   Pass arguments to `suggest_trials` via a request object, either of type
@@ -1643,7 +1644,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

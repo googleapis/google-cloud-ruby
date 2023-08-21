@@ -27,7 +27,9 @@ module Google
         #     The per-package log levels for the driver. This may include
         #     "root" package name to configure rootLogger.
         #     Examples:
-        #       'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'
+        #     - 'com.google = FATAL'
+        #     - 'root = INFO'
+        #     - 'org.apache = DEBUG'
         class LoggingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,7 +116,7 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure Hadoop.
         #     Properties that conflict with values set by the Dataproc API may be
-        #     overwritten. Can include properties set in /etc/hadoop/conf/*-site and
+        #     overwritten. Can include properties set in `/etc/hadoop/conf/*-site` and
         #     classes in user code.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Dataproc::V1::LoggingConfig]
@@ -279,7 +281,7 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names and values, used to configure Hive.
         #     Properties that conflict with values set by the Dataproc API may be
-        #     overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
+        #     overwritten. Can include properties set in `/etc/hadoop/conf/*-site.xml`,
         #     /etc/hive/conf/hive-site.xml, and classes in user code.
         # @!attribute [rw] jar_file_uris
         #   @return [::Array<::String>]
@@ -376,7 +378,7 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure Pig.
         #     Properties that conflict with values set by the Dataproc API may be
-        #     overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
+        #     overwritten. Can include properties set in `/etc/hadoop/conf/*-site.xml`,
         #     /etc/pig/conf/pig.properties, and classes in user code.
         # @!attribute [rw] jar_file_uris
         #   @return [::Array<::String>]

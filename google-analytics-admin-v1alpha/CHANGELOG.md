@@ -1,5 +1,65 @@
 # Release History
 
+### 0.23.0 (2023-08-15)
+
+#### Features
+
+* add `UpdateConversionEvent` method to the Admin API v1 alpha 
+* add the `ConversionCountingMethod` enum 
+* add the `counting_method` field to the `ConversionEvent` type 
+#### Bug Fixes
+
+* rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource ([#22766](https://github.com/googleapis/google-cloud-ruby/issues/22766)) 
+
+### 0.22.0 (2023-07-28)
+
+### ⚠ BREAKING CHANGES
+
+* update the `ReportingAttributionModel` enum
+
+#### Bug Fixes
+
+* update the `ReportingAttributionModel` enum 
+
+### 0.21.0 (2023-06-23)
+
+#### Features
+
+* support AdsWebConversionDataExportScope 
+#### Documentation
+
+* announce the deprecation of first-click, linear, time-decay and position-based attribution models 
+
+### 0.20.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21671](https://github.com/googleapis/google-cloud-ruby/issues/21671)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.19.0 (2023-05-15)
+
+#### Features
+
+* add AUDIENCE, EVENT_CREATE_RULE options to the ChangeHistoryResourceType enum 
+* add AdSenseLink type to the Admin API v1alpha 
+* add audience, event_create_rule fields to the ChangeHistoryResource.resource oneof field 
+* add CreateEventCreateRule, UpdateEventCreateRule,DeleteEventCreateRule, ListEventCreateRules methods to the Admin API v1alpha 
+* add EventCreateRule, MatchingCondition types to the Admin API v1alpha 
+* add FetchConnectedGa4Property method to the Admin API v1alpha 
+* add GetAdSenseLink, CreateAdSenseLink, DeleteAdSenseLink, ListAdSenseLinks methods to the Admin API v1alpha 
+
+### 0.18.0 (2023-05-04)
+
+#### Features
+
+* Added ChangeHistoryResource#channel_group 
+* Added CustomDimension::DimensionScope::ITEM 
+* Support for fetch_connected_ga4_property 
+* Support for managing channel groups 
+
 ### 0.17.0 (2023-03-23)
 
 #### Features

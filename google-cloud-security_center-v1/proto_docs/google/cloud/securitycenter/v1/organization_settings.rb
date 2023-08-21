@@ -32,9 +32,9 @@ module Google
         # @!attribute [rw] enable_asset_discovery
         #   @return [::Boolean]
         #     A flag that indicates if Asset Discovery should be enabled. If the flag is
-        #     set to `true`, then discovery of assets will occur. If it is set to `false,
-        #     all historical assets will remain, but discovery of future assets will not
-        #     occur.
+        #     set to `true`, then discovery of assets will occur. If it is set to
+        #     `false`, all historical assets will remain, but discovery of future assets
+        #     will not occur.
         # @!attribute [rw] asset_discovery_config
         #   @return [::Google::Cloud::SecurityCenter::V1::OrganizationSettings::AssetDiscoveryConfig]
         #     The configuration used for Asset Discovery runs.

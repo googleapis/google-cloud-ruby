@@ -860,7 +860,8 @@ module Google
         #     Required. The measurement protocol secret to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated.
         class UpdateMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -936,6 +937,22 @@ module Google
         #     Required. The resource name of the parent property where this conversion
         #     event will be created. Format: properties/123
         class CreateConversionEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateConversionEvent RPC
+        # @!attribute [rw] conversion_event
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+        #     Required. The conversion event to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateConversionEventRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2160,6 +2177,78 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message to be passed to CreateAdSenseLink method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to create an AdSense Link.
+        #     Format: properties/\\{propertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] adsense_link
+        #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+        #     Required. The AdSense Link to create
+        class CreateAdSenseLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to GetAdSenseLink method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Unique identifier for the AdSense Link requested.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/5678
+        class GetAdSenseLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to DeleteAdSenseLink method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Unique identifier for the AdSense Link to be deleted.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/5678
+        class DeleteAdSenseLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to be passed to ListAdSenseLinks method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the parent property.
+        #     Format: properties/\\{propertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token received from a previous `ListAdSenseLinks` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListAdSenseLinks` must
+        #     match the call that provided the page token.
+        class ListAdSenseLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAdSenseLinks method.
+        # @!attribute [rw] adsense_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AdSenseLink>]
+        #     List of AdSenseLinks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAdSenseLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for looking up GA4 property connected to a UA property.
         # @!attribute [rw] property
         #   @return [::String]
@@ -2181,6 +2270,90 @@ module Google
         #     Format: properties/\\{property_id}
         #     Example: properties/1234
         class FetchConnectedGa4PropertyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateEventCreateRule RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] event_create_rule
+        #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+        #     Required. The EventCreateRule to create.
+        class CreateEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateEventCreateRule RPC.
+        # @!attribute [rw] event_create_rule
+        #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+        #     Required. The EventCreateRule to update.
+        #     The resource's `name` field is used to identify the EventCreateRule to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteEventCreateRule RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format:
+        #     properties/123/dataStreams/456/eventCreateRules/789
+        class DeleteEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetEventCreateRule RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the EventCreateRule to get.
+        #     Example format: properties/123/dataStreams/456/eventCreateRules/789
+        class GetEventCreateRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListEventCreateRules RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListEventCreateRules` call. Provide
+        #     this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListEventCreateRules`
+        #     must match the call that provided the page token.
+        class ListEventCreateRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListEventCreateRules RPC.
+        # @!attribute [rw] event_create_rules
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::EventCreateRule>]
+        #     List of EventCreateRules. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListEventCreateRulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

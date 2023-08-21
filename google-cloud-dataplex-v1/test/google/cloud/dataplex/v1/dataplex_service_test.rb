@@ -1636,11 +1636,15 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::ClientTest < Minitest::Tes
 
     # Create request parameters for a unary method.
     name = "hello world"
+    labels = {}
+    args = {}
 
     run_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_task, name
       assert_kind_of ::Google::Cloud::Dataplex::V1::RunTaskRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal({}, request["labels"].to_h)
+      assert_equal({}, request["args"].to_h)
       refute_nil options
     end
 
@@ -1651,31 +1655,31 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.run_task({ name: name }) do |response, operation|
+      client.run_task({ name: name, labels: labels, args: args }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_task name: name do |response, operation|
+      client.run_task name: name, labels: labels, args: args do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_task ::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name) do |response, operation|
+      client.run_task ::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_task({ name: name }, grpc_options) do |response, operation|
+      client.run_task({ name: name, labels: labels, args: args }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_task(::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name), grpc_options) do |response, operation|
+      client.run_task(::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

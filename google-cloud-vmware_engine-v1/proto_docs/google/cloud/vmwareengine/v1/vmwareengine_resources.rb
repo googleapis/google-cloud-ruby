@@ -116,6 +116,9 @@ module Google
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System-generated unique identifier for the resource.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateCloud::Type]
+        #     Optional. Type of the private cloud. Defaults to STANDARD.
         class PrivateCloud
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -174,6 +177,18 @@ module Google
             # The private cloud is irreversibly deleted and is being removed from the
             # system.
             PURGING = 7
+          end
+
+          # Enum Type defines private cloud type.
+          module Type
+            # Standard private is a zonal resource, with 3+ nodes. Default type.
+            STANDARD = 0
+
+            # Time limited private cloud is a zonal resource, can have only 1 node and
+            # has limited life span. Will be deleted after defined period of time,
+            # can be converted into standard private cloud by expanding it up to 3
+            # or more nodes.
+            TIME_LIMITED = 1
           end
         end
 
@@ -286,6 +301,13 @@ module Google
 
             # The subnet is being deleted.
             DELETING = 4
+
+            # Changes requested in the last operation are being propagated.
+            RECONCILING = 5
+
+            # Last operation on the subnet did not succeed. Subnet's payload is
+            # reverted back to its most recent working state.
+            FAILED = 6
           end
         end
 
@@ -471,6 +493,68 @@ module Google
 
             # The appliance is being deployed.
             CREATING = 2
+          end
+        end
+
+        # Exchanged network peering route.
+        # @!attribute [r] dest_range
+        #   @return [::String]
+        #     Output only. Destination range of the peering route in CIDR notation.
+        # @!attribute [r] type
+        #   @return [::Google::Cloud::VmwareEngine::V1::PeeringRoute::Type]
+        #     Output only. Type of the route in the peer VPC network.
+        # @!attribute [r] next_hop_region
+        #   @return [::String]
+        #     Output only. Region containing the next hop of the peering route. This
+        #     field only applies to dynamic routes in the peer VPC network.
+        # @!attribute [r] priority
+        #   @return [::Integer]
+        #     Output only. The priority of the peering route.
+        # @!attribute [r] imported
+        #   @return [::Boolean]
+        #     Output only. True if the peering route has been imported from a peered
+        #     VPC network; false otherwise. The import happens if the field
+        #     `NetworkPeering.importCustomRoutes` is true for this network,
+        #     `NetworkPeering.exportCustomRoutes` is true for the peer VPC network, and
+        #     the import does not result in a route conflict.
+        # @!attribute [r] direction
+        #   @return [::Google::Cloud::VmwareEngine::V1::PeeringRoute::Direction]
+        #     Output only. Direction of the routes exchanged with the peer network, from
+        #     the VMware Engine network perspective:
+        #
+        #     * Routes of direction `INCOMING` are imported from the peer network.
+        #     * Routes of direction `OUTGOING` are exported from the intranet VPC network
+        #     of the VMware Engine network.
+        class PeeringRoute
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the peering route.
+          module Type
+            # Unspecified peering route type. This is the default value.
+            TYPE_UNSPECIFIED = 0
+
+            # Dynamic routes in the peer network.
+            DYNAMIC_PEERING_ROUTE = 1
+
+            # Static routes in the peer network.
+            STATIC_PEERING_ROUTE = 2
+
+            # Created, updated, and removed automatically by Google Cloud when subnets
+            # are created, modified, or deleted in the peer network.
+            SUBNET_PEERING_ROUTE = 3
+          end
+
+          # The direction of the exchanged routes.
+          module Direction
+            # Unspecified exchanged routes direction. This is default.
+            DIRECTION_UNSPECIFIED = 0
+
+            # Routes imported from the peer network.
+            INCOMING = 1
+
+            # Routes exported to the peer network.
+            OUTGOING = 2
           end
         end
 
@@ -666,6 +750,149 @@ module Google
             # of type `STANDARD`. This network type is no longer used for new VMware
             # Engine private cloud deployments.
             LEGACY = 1
+          end
+        end
+
+        # Private connection resource that provides connectivity for VMware Engine
+        # private clouds.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of the private connection.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/privateConnections/my-connection`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. User-provided description for this private connection.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection::State]
+        #     Output only. State of the private connection.
+        # @!attribute [rw] vmware_engine_network
+        #   @return [::String]
+        #     Required. The relative resource name of Legacy VMware Engine network.
+        #     Specify the name in the following form:
+        #     `projects/{project}/locations/{location}/vmwareEngineNetworks/{vmware_engine_network_id}`
+        #     where `{project}`, `{location}` will be same as specified in private
+        #     connection resource name and `{vmware_engine_network_id}` will be in the
+        #     form of `{location}`-default e.g.
+        #     projects/project/locations/us-central1/vmwareEngineNetworks/us-central1-default.
+        # @!attribute [r] vmware_engine_network_canonical
+        #   @return [::String]
+        #     Output only. The canonical name of the VMware Engine network in the form:
+        #     `projects/{project_number}/locations/{location}/vmwareEngineNetworks/{vmware_engine_network_id}`
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection::Type]
+        #     Required. Private connection type.
+        # @!attribute [r] peering_id
+        #   @return [::String]
+        #     Output only. VPC network peering id between given network VPC and
+        #     VMwareEngineNetwork.
+        # @!attribute [rw] routing_mode
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection::RoutingMode]
+        #     Optional. Routing Mode.
+        #     Default value is set to GLOBAL.
+        #     For type = PRIVATE_SERVICE_ACCESS, this field can be set to GLOBAL or
+        #     REGIONAL, for other types only GLOBAL is supported.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System-generated unique identifier for the resource.
+        # @!attribute [rw] service_network
+        #   @return [::String]
+        #     Required. Service network to create private connection.
+        #     Specify the name in the following form:
+        #     `projects/{project}/global/networks/{network_id}`
+        #     For type = PRIVATE_SERVICE_ACCESS, this field represents servicenetworking
+        #     VPC, e.g. projects/project-tp/global/networks/servicenetworking.
+        #     For type = NETAPP_CLOUD_VOLUME, this field represents NetApp service VPC,
+        #     e.g. projects/project-tp/global/networks/netapp-tenant-vpc.
+        #     For type = DELL_POWERSCALE, this field represent Dell service VPC, e.g.
+        #     projects/project-tp/global/networks/dell-tenant-vpc.
+        #     For type= THIRD_PARTY_SERVICE, this field could represent a consumer VPC or
+        #     any other producer VPC to which the VMware Engine Network needs to be
+        #     connected, e.g. projects/project/global/networks/vpc.
+        # @!attribute [r] peering_state
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection::PeeringState]
+        #     Output only. Peering state between service network and VMware Engine
+        #     network.
+        class PrivateConnection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum State defines possible states of private connection.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # The private connection is being created.
+            CREATING = 1
+
+            # The private connection is ready.
+            ACTIVE = 2
+
+            # The private connection is being updated.
+            UPDATING = 3
+
+            # The private connection is being deleted.
+            DELETING = 4
+
+            # The private connection is not provisioned, since no private cloud is
+            # present for which this private connection is needed.
+            UNPROVISIONED = 5
+
+            # The private connection is in failed state.
+            FAILED = 6
+          end
+
+          # Enum Type defines possible types of private connection.
+          module Type
+            # The default value. This value should never be used.
+            TYPE_UNSPECIFIED = 0
+
+            # Connection used for establishing [private services
+            # access](https://cloud.google.com/vpc/docs/private-services-access).
+            PRIVATE_SERVICE_ACCESS = 1
+
+            # Connection used for connecting to NetApp Cloud Volumes.
+            NETAPP_CLOUD_VOLUMES = 2
+
+            # Connection used for connecting to Dell PowerScale.
+            DELL_POWERSCALE = 3
+
+            # Connection used for connecting to third-party services.
+            THIRD_PARTY_SERVICE = 4
+          end
+
+          # Possible types for RoutingMode
+          module RoutingMode
+            # The default value. This value should never be used.
+            ROUTING_MODE_UNSPECIFIED = 0
+
+            # Global Routing Mode
+            GLOBAL = 1
+
+            # Regional Routing Mode
+            REGIONAL = 2
+          end
+
+          # Enum PeeringState defines the possible states of peering between service
+          # network and the vpc network peered to service network
+          module PeeringState
+            # The default value. This value is used if the peering state is omitted or
+            # unknown.
+            PEERING_STATE_UNSPECIFIED = 0
+
+            # The peering is in active state.
+            PEERING_ACTIVE = 1
+
+            # The peering is in inactive state.
+            PEERING_INACTIVE = 2
           end
         end
       end

@@ -24,9 +24,11 @@ flag :rebase
 static :repo_name, "googleapis/google-cloud-ruby"
 
 include :exec, e: true
+include "yoshi-utils"
 
 def run
   require "json"
+  yoshi_utils.git_ensure_identity
   check_preconditions
   save_state
   setup_branch base_branch
@@ -58,7 +60,7 @@ end
 def setup_branch branch
   shallow = capture(["git", "rev-parse", "--is-shallow-repository"]).strip == "true"
   fetch_options = shallow ? ["--unshallow"] : []
-  exec(["git", "fetch"] + fetch_options + [remote, branch])
+  exec ["git", "fetch"] + fetch_options + [remote, branch]
   exec ["git", "switch", branch]
   exec ["git", "pull", remote, branch]
 end
@@ -66,26 +68,24 @@ end
 def merge_branches
   exec ["git", "switch", head_branch]
   result = exec ["git", "merge", "-m", "Merge the latest #{base_branch} branch", base_branch], e: false
-  unless result.success?
-    exec ["git", "merge", "--abort"]
-    error "Merge failed"
-  end
+  return if result.success?
+  exec ["git", "merge", "--abort"]
+  error "Merge failed"
 end
 
 def rebase_branches
   exec ["git", "switch", head_branch]
   result = exec ["git", "rebase", base_branch], e: false
-  unless result.success?
-    exec ["git", "rebase", "--abort"]
-    error "Rebase failed"
-  end
+  return if result.success?
+  exec ["git", "rebase", "--abort"]
+  error "Rebase failed"
 end
 
 def push_branch
   return if no_push
   exec ["git", "switch", head_branch]
   push_options = rebase ? ["-f"] : []
-  exec(["git", "push"] + push_options + [remote, head_branch])
+  exec ["git", "push"] + push_options + [remote, head_branch]
 end
 
 def base_branch

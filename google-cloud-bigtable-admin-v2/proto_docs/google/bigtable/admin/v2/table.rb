@@ -35,6 +35,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Change stream configuration.
+          # @!attribute [rw] retention_period
+          #   @return [::Google::Protobuf::Duration]
+          #     How long the change stream should be retained. Change stream data older
+          #     than the retention period will not be returned when reading the change
+          #     stream from the table.
+          #     Values must be at least 1 day and at most 7 days, and will be truncated to
+          #     microsecond granularity.
+          class ChangeStreamConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A collection of user data indexed by row, column, and timestamp.
           # Each table is served using the resources of its parent cluster.
           # @!attribute [rw] name
@@ -52,24 +65,31 @@ module Google
           # @!attribute [rw] column_families
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::ColumnFamily}]
           #     The column families configured for this table, mapped by column family ID.
-          #     Views: `SCHEMA_VIEW`, `FULL`
+          #     Views: `SCHEMA_VIEW`, `STATS_VIEW`, `FULL`
           # @!attribute [rw] granularity
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::TimestampGranularity]
-          #     Immutable. The granularity (i.e. `MILLIS`) at which timestamps are stored in this
-          #     table. Timestamps not matching the granularity will be rejected.
-          #     If unspecified at creation time, the value will be set to `MILLIS`.
-          #     Views: `SCHEMA_VIEW`, `FULL`.
+          #     Immutable. The granularity (i.e. `MILLIS`) at which timestamps are stored
+          #     in this table. Timestamps not matching the granularity will be rejected. If
+          #     unspecified at creation time, the value will be set to `MILLIS`. Views:
+          #     `SCHEMA_VIEW`, `FULL`.
           # @!attribute [r] restore_info
           #   @return [::Google::Cloud::Bigtable::Admin::V2::RestoreInfo]
-          #     Output only. If this table was restored from another data source (e.g. a backup), this
-          #     field will be populated with information about the restore.
+          #     Output only. If this table was restored from another data source (e.g. a
+          #     backup), this field will be populated with information about the restore.
+          # @!attribute [rw] change_stream_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::ChangeStreamConfig]
+          #     If specified, enable the change stream on this table.
+          #     Otherwise, the change stream is disabled and the change stream is not
+          #     retained.
           # @!attribute [rw] deletion_protection
           #   @return [::Boolean]
           #     Set to true to make the table protected against data loss. i.e. deleting
           #     the following resources through Admin APIs are prohibited:
-          #       - The table.
-          #       - The column families in the table.
-          #       - The instance containing the table.
+          #
+          #     * The table.
+          #     * The column families in the table.
+          #     * The instance containing the table.
+          #
           #     Note one can still delete the data stored in the table through Data APIs.
           class Table
             include ::Google::Protobuf::MessageExts
@@ -233,12 +253,13 @@ module Google
           #     Output only. The type of encryption used to protect this resource.
           # @!attribute [r] encryption_status
           #   @return [::Google::Rpc::Status]
-          #     Output only. The status of encrypt/decrypt calls on underlying data for this resource.
-          #     Regardless of status, the existing data is always encrypted at rest.
+          #     Output only. The status of encrypt/decrypt calls on underlying data for
+          #     this resource. Regardless of status, the existing data is always encrypted
+          #     at rest.
           # @!attribute [r] kms_key_version
           #   @return [::String]
-          #     Output only. The version of the Cloud KMS key specified in the parent cluster that is
-          #     in use for the data underlying this table.
+          #     Output only. The version of the Cloud KMS key specified in the parent
+          #     cluster that is in use for the data underlying this table.
           class EncryptionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -273,32 +294,32 @@ module Google
           # for production use. It is not subject to any SLA or deprecation policy.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The unique name of the snapshot.
+          #     The unique name of the snapshot.
           #     Values are of the form
           #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
-          # @!attribute [rw] source_table
+          # @!attribute [r] source_table
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table]
           #     Output only. The source table at the time the snapshot was taken.
-          # @!attribute [rw] data_size_bytes
+          # @!attribute [r] data_size_bytes
           #   @return [::Integer]
           #     Output only. The size of the data in the source table at the time the
           #     snapshot was taken. In some cases, this value may be computed
           #     asynchronously via a background process and a placeholder of 0 will be used
           #     in the meantime.
-          # @!attribute [rw] create_time
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The time when the snapshot is created.
           # @!attribute [rw] delete_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. The time when the snapshot will be deleted. The maximum amount
-          #     of time a snapshot can stay active is 365 days. If 'ttl' is not specified,
+          #     The time when the snapshot will be deleted. The maximum amount of time a
+          #     snapshot can stay active is 365 days. If 'ttl' is not specified,
           #     the default maximum of 365 days will be used.
-          # @!attribute [rw] state
+          # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Snapshot::State]
           #     Output only. The current state of the snapshot.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Output only. Description of the snapshot.
+          #     Description of the snapshot.
           class Snapshot
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -333,13 +354,18 @@ module Google
           #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
           # @!attribute [rw] source_table
           #   @return [::String]
-          #     Required. Immutable. Name of the table from which this backup was created. This needs
-          #     to be in the same instance as the backup. Values are of the form
+          #     Required. Immutable. Name of the table from which this backup was created.
+          #     This needs to be in the same instance as the backup. Values are of the form
           #     `projects/{project}/instances/{instance}/tables/{source_table}`.
+          # @!attribute [r] source_backup
+          #   @return [::String]
+          #     Output only. Name of the backup from which this backup was copied. If a
+          #     backup is not created by copying a backup, this field will be empty. Values
+          #     are of the form: projects/<project>/instances/<instance>/backups/<backup>.
           # @!attribute [rw] expire_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Required. The expiration time of the backup, with microseconds
-          #     granularity that must be at least 6 hours and at most 30 days
+          #     granularity that must be at least 6 hours and at most 90 days
           #     from the time the request is received. Once the `expire_time`
           #     has passed, Cloud Bigtable will delete the backup and free the
           #     resources used by the backup.
@@ -347,8 +373,9 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. `start_time` is the time that the backup was started
           #     (i.e. approximately the time the
-          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup CreateBackup} request is received).  The
-          #     row data in this backup will be no older than this timestamp.
+          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup CreateBackup}
+          #     request is received).  The row data in this backup will be no older than
+          #     this timestamp.
           # @!attribute [r] end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. `end_time` is the time that the backup was finished. The row
@@ -395,6 +422,11 @@ module Google
           # @!attribute [r] source_table
           #   @return [::String]
           #     Output only. Name of the table the backup was created from.
+          # @!attribute [r] source_backup
+          #   @return [::String]
+          #     Output only. Name of the backup from which this backup was copied. If a
+          #     backup is not created by copying a backup, this field will be empty. Values
+          #     are of the form: projects/<project>/instances/<instance>/backups/<backup>.
           class BackupInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

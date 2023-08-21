@@ -24,11 +24,50 @@ module Google
         # DataQualityScan related setting.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRule>]
-        #     The list of rules to evaluate against a data source. At least one rule is
-        #     required.
+        #     Required. The list of rules to evaluate against a data source. At least one
+        #     rule is required.
+        # @!attribute [rw] sampling_percent
+        #   @return [::Float]
+        #     Optional. The percentage of the records to be selected from the dataset for
+        #     DataScan.
+        #
+        #     * Value can range between 0.0 and 100.0 with up to 3 significant decimal
+        #     digits.
+        #     * Sampling is not applied if `sampling_percent` is not specified, 0 or
+        #     100.
+        # @!attribute [rw] row_filter
+        #   @return [::String]
+        #     Optional. A filter applied to all rows in a single DataScan job.
+        #     The filter needs to be a valid SQL expression for a WHERE clause in
+        #     BigQuery standard SQL syntax.
+        #     Example: col1 >= 0 AND col2 < 10
+        # @!attribute [rw] post_scan_actions
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualitySpec::PostScanActions]
+        #     Optional. Actions to take upon job completion.
         class DataQualitySpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The configuration of post scan actions of DataQualityScan.
+          # @!attribute [rw] bigquery_export
+          #   @return [::Google::Cloud::Dataplex::V1::DataQualitySpec::PostScanActions::BigQueryExport]
+          #     Optional. If set, results will be exported to the provided BigQuery
+          #     table.
+          class PostScanActions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The configuration of BigQuery export post scan action.
+            # @!attribute [rw] results_table
+            #   @return [::String]
+            #     Optional. The BigQuery table to export DataQualityScan results to.
+            #     Format:
+            #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            class BigQueryExport
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # The output of a DataQualityScan.
@@ -47,9 +86,49 @@ module Google
         # @!attribute [rw] scanned_data
         #   @return [::Google::Cloud::Dataplex::V1::ScannedData]
         #     The data scanned for this result.
+        # @!attribute [r] post_scan_actions_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult::PostScanActionsResult]
+        #     Output only. The result of post scan actions.
         class DataQualityResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The result of post scan actions of DataQualityScan job.
+          # @!attribute [r] bigquery_export_result
+          #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult::PostScanActionsResult::BigQueryExportResult]
+          #     Output only. The result of BigQuery export post scan action.
+          class PostScanActionsResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The result of BigQuery export post scan action.
+            # @!attribute [r] state
+            #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult::PostScanActionsResult::BigQueryExportResult::State]
+            #     Output only. Execution state for the BigQuery exporting.
+            # @!attribute [r] message
+            #   @return [::String]
+            #     Output only. Additional information about the BigQuery exporting.
+            class BigQueryExportResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Execution state for the exporting.
+              module State
+                # The exporting state is unspecified.
+                STATE_UNSPECIFIED = 0
+
+                # The exporting completed successfully.
+                SUCCEEDED = 1
+
+                # The exporting is no longer running due to an error.
+                FAILED = 2
+
+                # The exporting is skipped due to no valid scan result to export
+                # (usually caused by scan failed).
+                SKIPPED = 3
+              end
+            end
+          end
         end
 
         # DataQualityRuleResult provides a more detailed, per-rule view of the results.
@@ -61,8 +140,9 @@ module Google
         #     Whether the rule passed or failed.
         # @!attribute [rw] evaluated_count
         #   @return [::Integer]
-        #     The number of rows a rule was evaluated against. This field is only valid
-        #     for ColumnMap type rules.
+        #     The number of rows a rule was evaluated against.
+        #
+        #     This field is only valid for row-level type rules.
         #
         #     Evaluated count can be configured to either
         #
@@ -73,18 +153,21 @@ module Google
         # @!attribute [rw] passed_count
         #   @return [::Integer]
         #     The number of rows which passed a rule evaluation.
-        #     This field is only valid for ColumnMap type rules.
+        #
+        #     This field is only valid for row-level type rules.
         # @!attribute [rw] null_count
         #   @return [::Integer]
         #     The number of rows with null values in the specified column.
         # @!attribute [rw] pass_ratio
         #   @return [::Float]
         #     The ratio of **passed_count / evaluated_count**.
-        #     This field is only valid for ColumnMap type rules.
+        #
+        #     This field is only valid for row-level type rules.
         # @!attribute [rw] failing_rows_query
         #   @return [::String]
         #     The query to find rows that did not pass this rule.
-        #     Only applies to ColumnMap and RowCondition rules.
+        #
+        #     This field is only valid for row-level type rules.
         class DataQualityRuleResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,33 +186,34 @@ module Google
         # A rule captures data quality intent about a data source.
         # @!attribute [rw] range_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RangeExpectation]
-        #     ColumnMap rule which evaluates whether each column value lies between a
+        #     Row-level rule which evaluates whether each column value lies between a
         #     specified range.
         # @!attribute [rw] non_null_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::NonNullExpectation]
-        #     ColumnMap rule which evaluates whether each column value is null.
+        #     Row-level rule which evaluates whether each column value is null.
         # @!attribute [rw] set_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::SetExpectation]
-        #     ColumnMap rule which evaluates whether each column value is contained by
+        #     Row-level rule which evaluates whether each column value is contained by
         #     a specified set.
         # @!attribute [rw] regex_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RegexExpectation]
-        #     ColumnMap rule which evaluates whether each column value matches a
+        #     Row-level rule which evaluates whether each column value matches a
         #     specified regex.
         # @!attribute [rw] uniqueness_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::UniquenessExpectation]
-        #     ColumnAggregate rule which evaluates whether the column has duplicates.
+        #     Row-level rule which evaluates whether each column value is unique.
         # @!attribute [rw] statistic_range_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::StatisticRangeExpectation]
-        #     ColumnAggregate rule which evaluates whether the column aggregate
+        #     Aggregate rule which evaluates whether the column aggregate
         #     statistic lies between a specified range.
         # @!attribute [rw] row_condition_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RowConditionExpectation]
-        #     Table rule which evaluates whether each row passes the specified
-        #     condition.
+        #     Row-level rule which evaluates whether each row in a table passes the
+        #     specified condition.
         # @!attribute [rw] table_condition_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::TableConditionExpectation]
-        #     Table rule which evaluates whether the provided expression is true.
+        #     Aggregate rule which evaluates whether the provided expression is true
+        #     for a table.
         # @!attribute [rw] column
         #   @return [::String]
         #     Optional. The unnested column which this rule is evaluated against.
@@ -139,7 +223,7 @@ module Google
         #     `ignore_null` is `true`. In that case, such `null` rows are trivially
         #     considered passing.
         #
-        #     Only applicable to ColumnMap rules.
+        #     This field is only valid for row-level type rules.
         # @!attribute [rw] dimension
         #   @return [::String]
         #     Required. The dimension a rule belongs to. Results are also aggregated at
@@ -151,6 +235,22 @@ module Google
         #     pass this rule, with a range of [0.0, 1.0].
         #
         #     0 indicates default value (i.e. 1.0).
+        #
+        #     This field is only valid for row-level type rules.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. A mutable name for the rule.
+        #
+        #     * The name must contain only letters (a-z, A-Z), numbers (0-9), or
+        #     hyphens (-).
+        #     * The maximum length is 63 characters.
+        #     * Must start with a letter.
+        #     * Must end with a number or a letter.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the rule.
+        #
+        #     * The maximum length is 1,024 characters.
         class DataQualityRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -192,7 +292,7 @@ module Google
           # Evaluates whether each column value is contained by a specified set.
           # @!attribute [rw] values
           #   @return [::Array<::String>]
-          #     Expected values for the column value.
+          #     Optional. Expected values for the column value.
           class SetExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -201,7 +301,7 @@ module Google
           # Evaluates whether each column value matches a specified regex.
           # @!attribute [rw] regex
           #   @return [::String]
-          #     A regular expression the column value is expected to match.
+          #     Optional. A regular expression the column value is expected to match.
           class RegexExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -217,29 +317,29 @@ module Google
           # range.
           # @!attribute [rw] statistic
           #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::StatisticRangeExpectation::ColumnStatistic]
-          #     The aggregate metric to evaluate.
+          #     Optional. The aggregate metric to evaluate.
           # @!attribute [rw] min_value
           #   @return [::String]
-          #     The minimum column statistic value allowed for a row to pass this
-          #     validation.
+          #     Optional. The minimum column statistic value allowed for a row to pass
+          #     this validation.
           #
           #     At least one of `min_value` and `max_value` need to be provided.
           # @!attribute [rw] max_value
           #   @return [::String]
-          #     The maximum column statistic value allowed for a row to pass this
-          #     validation.
+          #     Optional. The maximum column statistic value allowed for a row to pass
+          #     this validation.
           #
           #     At least one of `min_value` and `max_value` need to be provided.
           # @!attribute [rw] strict_min_enabled
           #   @return [::Boolean]
-          #     Whether column statistic needs to be strictly greater than ('>')
-          #     the minimum, or if equality is allowed.
+          #     Optional. Whether column statistic needs to be strictly greater than
+          #     ('>') the minimum, or if equality is allowed.
           #
           #     Only relevant if a `min_value` has been defined. Default = false.
           # @!attribute [rw] strict_max_enabled
           #   @return [::Boolean]
-          #     Whether column statistic needs to be strictly lesser than ('<') the
-          #     maximum, or if equality is allowed.
+          #     Optional. Whether column statistic needs to be strictly lesser than ('<')
+          #     the maximum, or if equality is allowed.
           #
           #     Only relevant if a `max_value` has been defined. Default = false.
           class StatisticRangeExpectation
@@ -270,7 +370,7 @@ module Google
           # Example: col1 >= 0 AND col2 < 10
           # @!attribute [rw] sql_expression
           #   @return [::String]
-          #     The SQL expression.
+          #     Optional. The SQL expression.
           class RowConditionExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -284,7 +384,7 @@ module Google
           # Example: MIN(col1) >= 0
           # @!attribute [rw] sql_expression
           #   @return [::String]
-          #     The SQL expression.
+          #     Optional. The SQL expression.
           class TableConditionExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

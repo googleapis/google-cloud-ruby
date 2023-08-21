@@ -427,6 +427,70 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     end
   end
 
+  def test_generate_stateless_summary
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    stateless_conversation = {}
+    conversation_profile = {}
+    latest_message = "hello world"
+    max_context_size = 42
+
+    generate_stateless_summary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_stateless_summary, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest::MinimalConversation), request["stateless_conversation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::ConversationProfile), request["conversation_profile"]
+      assert_equal "hello world", request["latest_message"]
+      assert_equal 42, request["max_context_size"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_stateless_summary_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_stateless_summary({ stateless_conversation: stateless_conversation, conversation_profile: conversation_profile, latest_message: latest_message, max_context_size: max_context_size }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_stateless_summary stateless_conversation: stateless_conversation, conversation_profile: conversation_profile, latest_message: latest_message, max_context_size: max_context_size do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_stateless_summary ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest.new(stateless_conversation: stateless_conversation, conversation_profile: conversation_profile, latest_message: latest_message, max_context_size: max_context_size) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_stateless_summary({ stateless_conversation: stateless_conversation, conversation_profile: conversation_profile, latest_message: latest_message, max_context_size: max_context_size }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_stateless_summary(::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest.new(stateless_conversation: stateless_conversation, conversation_profile: conversation_profile, latest_message: latest_message, max_context_size: max_context_size), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_stateless_summary_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

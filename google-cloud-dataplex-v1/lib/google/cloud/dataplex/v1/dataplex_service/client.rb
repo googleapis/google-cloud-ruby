@@ -236,7 +236,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -2669,7 +2669,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_task(name: nil)
+            # @overload run_task(name: nil, labels: nil, args: nil)
             #   Pass arguments to `run_task` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2677,6 +2677,22 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the task:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+            #   @param labels [::Hash{::String => ::String}]
+            #     Optional. User-defined labels for the task. If the map is left empty, the
+            #     task will run with existing labels from task definition. If the map
+            #     contains an entry with a new key, the same will be added to existing set of
+            #     labels. If the map contains an entry with an existing label key in task
+            #     definition, the task will run with new label value for that entry. Clearing
+            #     an existing label will require label value to be explicitly set to a hyphen
+            #     "-". The label value cannot be empty.
+            #   @param args [::Hash{::String => ::String}]
+            #     Optional. Execution spec arguments. If the map is left empty, the task will
+            #     run with existing execution spec args from task definition. If the map
+            #     contains an entry with a new key, the same will be added to existing set of
+            #     args. If the map contains an entry with an existing arg key in task
+            #     definition, the task will run with new arg value for that entry. Clearing
+            #     an existing arg will require arg value to be explicitly set to a hyphen
+            #     "-". The arg value cannot be empty.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::RunTaskResponse]
@@ -3597,7 +3613,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "dataplex.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "dataplex.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

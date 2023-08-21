@@ -39,7 +39,10 @@ module Google
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads the version of the document at the given time.
-        #     This may not be older than 270 seconds.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class GetDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -98,7 +101,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Perform the read at the provided time.
         #
-        #     This may not be older than 270 seconds.
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         # @!attribute [rw] show_missing
         #   @return [::Boolean]
         #     If the list should show missing documents.
@@ -235,7 +240,10 @@ module Google
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads documents as they were at the given time.
-        #     This may not be older than 270 seconds.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class BatchGetDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -365,7 +373,10 @@ module Google
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads documents as they were at the given time.
-        #     This may not be older than 270 seconds.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -433,9 +444,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Executes the query at the given timestamp.
         #
-        #     Requires:
-        #
-        #     * Cannot be more than 270 seconds in the past.
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -520,7 +531,10 @@ module Google
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads documents as they were at the given time.
-        #     This may not be older than 270 seconds.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class PartitionQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -723,6 +737,14 @@ module Google
         # @!attribute [rw] once
         #   @return [::Boolean]
         #     If the target should be removed once it is current and consistent.
+        # @!attribute [rw] expected_count
+        #   @return [::Google::Protobuf::Int32Value]
+        #     The number of documents that last matched the query at the resume token or
+        #     read time.
+        #
+        #     This value is only relevant when a `resume_type` is provided. This value
+        #     being present and greater than zero signals that the client wants
+        #     `ExistenceFilter.unchanged_names` to be included in the response.
         class Target
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -841,7 +863,10 @@ module Google
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads documents as they were at the given time.
-        #     This may not be older than 270 seconds.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
         class ListCollectionIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

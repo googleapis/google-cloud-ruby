@@ -21,8 +21,8 @@ module Google
   module Cloud
     module Translate
       module V3
-        # Configures which glossary should be used for a specific target language,
-        # and defines options for applying that glossary.
+        # Configures which glossary is used for a specific target language and defines
+        # options for applying that glossary.
         # @!attribute [rw] glossary
         #   @return [::String]
         #     Required. The `glossary` to be applied for this translation.
@@ -94,7 +94,7 @@ module Google
         #     For example,
         #     `projects/{project-number-or-id}/locations/global/models/general/nmt`.
         #
-        #     If not provided, the default Google model (NMT) will be used.
+        #     If not provided, the default Google model (NMT) will be used
         # @!attribute [rw] glossary_config
         #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
         #     Optional. Glossary to be applied. The glossary must be
@@ -438,10 +438,10 @@ module Google
         #     If input file extension is a txt or html, the translation is directly
         #     written to the output file. If glossary is requested, a separate
         #     glossary_translations_file has format of
-        #     gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]`
         #
         #     The format of errors file (for target language code 'trg') is:
-        #     gs://translation_test/a_b_c_'trg'_errors.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_errors.[extension]`
         #
         #     If the input file extension is tsv, errors_file contains the following:
         #     Column 1: ID of the request provided in the input, if it's not
@@ -453,7 +453,7 @@ module Google
         #
         #     If the input file extension is txt or html, glossary_error_file will be
         #     generated that contains error details. glossary_error_file has format of
-        #     gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]`
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -503,9 +503,9 @@ module Google
         #
         #     For a DocumentInputConfig.gcs_uri provided document, the output file will
         #     have a name according to its URI. For example: an input file with URI:
-        #     "gs://a/b/c.[extension]" stored in a gcs_destination bucket with name
+        #     `gs://a/b/c.[extension]` stored in a gcs_destination bucket with name
         #     "my_bucket" will have an output URI:
-        #     "gs://my_bucket/a_b_c_[trg]_translations.[ext]", where
+        #     `gs://my_bucket/a_b_c_[trg]_translations.[ext]`, where
         #     - [trg] corresponds to the translated file's language code,
         #     - [ext] corresponds to the translated file's extension according to its
         #     mime type.
@@ -513,7 +513,7 @@ module Google
         #
         #     If the document was directly provided through the request, then the
         #     output document will have the format:
-        #     "gs://my_bucket/translated_document_[trg]_translations.[ext], where
+        #     `gs://my_bucket/translated_document_[trg]_translations.[ext]`, where
         #     - [trg] corresponds to the translated file's language code,
         #     - [ext] corresponds to the translated file's extension according to its
         #     mime type.
@@ -522,7 +522,7 @@ module Google
         #     translation will be equal to the default output URI but have
         #     `glossary_translations` instead of `translations`. For the previous
         #     example, its glossary URI would be:
-        #     "gs://my_bucket/a_b_c_[trg]_glossary_translations.[ext]".
+        #     `gs://my_bucket/a_b_c_[trg]_glossary_translations.[ext]`.
         #
         #     Thus the max number of output files will be 2 (Translated document,
         #     Glossary translated document).
@@ -622,14 +622,18 @@ module Google
         #     https://cloud.google.com/translate/attribution#attribution_and_logos
         # @!attribute [rw] is_translate_native_pdf_only
         #   @return [::Boolean]
-        #     Optional. If true, the page limit of online native pdf translation is 300
-        #     and only native pdf pages will be translated.
+        #     Optional. is_translate_native_pdf_only field for external customers.
+        #     If true, the page limit of online native pdf translation is 300 and only
+        #     native pdf pages will be translated.
         # @!attribute [rw] enable_shadow_removal_native_pdf
         #   @return [::Boolean]
-        #     Optional. If true, use the text removal to remove the shadow text on
+        #     Optional. If true, use the text removal server to remove the shadow text on
         #     background image for native pdf translation.
         #     Shadow removal feature can only be enabled when
-        #     is_translate_native_pdf_only is false
+        #     is_translate_native_pdf_only: false && pdf_native_only: false
+        # @!attribute [rw] enable_rotation_correction
+        #   @return [::Boolean]
+        #     Optional. If true, enable auto rotation correction in DVS.
         class TranslateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1194,6 +1198,15 @@ module Google
         #     If not provided, the default is `Machine Translated by Google`.
         #     Customized attribution should follow rules in
         #     https://cloud.google.com/translate/attribution#attribution_and_logos
+        # @!attribute [rw] enable_shadow_removal_native_pdf
+        #   @return [::Boolean]
+        #     Optional. If true, use the text removal server to remove the shadow text on
+        #     background image for native pdf translation.
+        #     Shadow removal feature can only be enabled when
+        #     is_translate_native_pdf_only: false && pdf_native_only: false
+        # @!attribute [rw] enable_rotation_correction
+        #   @return [::Boolean]
+        #     Optional. If true, enable auto rotation correction in DVS.
         class BatchTranslateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1291,15 +1304,15 @@ module Google
         #
         #     The naming format of translation output files follows (for target
         #     language code [trg]): `translation_output`:
-        #     gs://translation_output/a_b_c_[trg]_translation.[extension]
+        #     `gs://translation_output/a_b_c_[trg]_translation.[extension]`
         #     `glossary_translation_output`:
-        #     gs://translation_test/a_b_c_[trg]_glossary_translation.[extension] The
+        #     `gs://translation_test/a_b_c_[trg]_glossary_translation.[extension]`. The
         #     output document will maintain the same file format as the input document.
         #
         #     The naming format of error output files follows (for target language code
-        #     [trg]): `error_output`: gs://translation_test/a_b_c_[trg]_errors.txt
+        #     [trg]): `error_output`: `gs://translation_test/a_b_c_[trg]_errors.txt`
         #     `glossary_error_output`:
-        #     gs://translation_test/a_b_c_[trg]_glossary_translation.txt The error
+        #     `gs://translation_test/a_b_c_[trg]_glossary_translation.txt`. The error
         #     output is a txt file containing error details.
         class BatchDocumentOutputConfig
           include ::Google::Protobuf::MessageExts

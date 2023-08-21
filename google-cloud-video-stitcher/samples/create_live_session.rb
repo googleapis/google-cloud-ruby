@@ -21,33 +21,27 @@ require "google/cloud/video/stitcher"
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
-# @param source_uri [String] The URI of an MPEG-DASH manifest (.mpd) file or
-#   an M3U playlist manifest (.m3u8) file
-#   (e.g. "https://storage.googleapis.com/my-bucket/main.mpd")
-# @param ad_tag_uri [String] The URI of the ad tag. See Single Inline Linear at
-#   https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/tags.
-# @param slate_id [String] The user-defined slate ID of the default slate to use
-#   when no slates are specified in an ad break's message (e.g. "my-slate")
+# @param live_config_id [String] Your live config name (e.g. "my-live-config")
 #
-def create_live_session project_id:, location:, source_uri:, ad_tag_uri:, slate_id:
+def create_live_session project_id:, location:, live_config_id:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
   parent = client.location_path project: project_id, location: location
 
+  # Build the resource name of the live config.
+  live_config_name = client.live_config_path project: project_id,
+                                             location: location,
+                                             live_config: live_config_id
+
   # Set the session fields.
   new_live_session = {
-    source_uri: source_uri,
-    ad_tag_map: {
-      default: {
-        uri: ad_tag_uri
-      }
-    },
-    default_slate_id: slate_id
+    live_config: live_config_name
   }
 
-  response = client.create_live_session parent: parent, live_session: new_live_session
+  response = client.create_live_session parent: parent,
+                                        live_session: new_live_session
 
   # Print the live session name.
   puts "Live session: #{response.name}"

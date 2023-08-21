@@ -22,7 +22,8 @@ describe "#list_vod_stitch_details", :stitcher_snippet do
     @session_id = vod_session.name.split("/").last
 
     assert_output %r{VOD stitch details:\n#{vod_session.name}/vodStitchDetails/\S+} do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     end
   end
 end

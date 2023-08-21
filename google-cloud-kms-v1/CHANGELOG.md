@@ -1,5 +1,45 @@
 # Release History
 
+### 0.22.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22686](https://github.com/googleapis/google-cloud-ruby/issues/22686)) 
+
+### 0.22.0 (2023-07-25)
+
+#### Features
+
+* support more algorithm in CryptoKeyVersionAlgorithm 
+
+### 0.21.0 (2023-07-10)
+
+#### Features
+
+* Support for AES Galois Counter Mode 
+* Support for raw_encrypt and raw_decrypt RPCs ([#22469](https://github.com/googleapis/google-cloud-ruby/issues/22469)) 
+
+### 0.20.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21675](https://github.com/googleapis/google-cloud-ruby/issues/21675)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.19.0 (2023-05-19)
+
+#### Features
+
+* add VerifyConnectivity RPC ([#21574](https://github.com/googleapis/google-cloud-ruby/issues/21574)) 
+
+### 0.19.0 (2023-05-16)
+
+#### Features
+
+* add VerifyConnectivity RPC ([#21574](https://github.com/googleapis/google-cloud-ruby/issues/21574)) 
+
 ### 0.18.1 (2023-03-29)
 
 #### Documentation

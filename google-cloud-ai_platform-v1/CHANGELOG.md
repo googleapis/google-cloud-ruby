@@ -1,5 +1,80 @@
 # Changelog
 
+### 0.30.0 (2023-08-15)
+
+#### Features
+
+* Added disable_retries to custom job scheduling 
+* Added open_evaluation_pipeline to PublisherModel::CallToAction 
+* PipelineJob returns the schedule_name 
+* Support the read_tensorboard_size RPC 
+
+### 0.29.0 (2023-07-28)
+
+#### Features
+
+* support server_streaming_predict 
+* support Tensor type 
+
+### 0.28.0 (2023-07-25)
+
+#### Features
+
+* support ScheduleService 
+
+### 0.27.0 (2023-07-13)
+
+#### Features
+
+* Non-structured Datasets report the count of DataItems 
+* Support delete_saved_query RPC ([#22519](https://github.com/googleapis/google-cloud-ruby/issues/22519)) 
+* Support for reserved IP range names for a PipelineJob 
+* Support for the JOB_STATE_PARTIALLY_SUCCEEDED state 
+
+### 0.26.0 (2023-06-20)
+
+#### Features
+
+* support UpdateExplanationDataset 
+
+### 0.25.0 (2023-06-06)
+
+#### Features
+
+* Added ImportFeatureValuesOperationMetadata#blocking_operation_ids 
+* Model resource includes the pipeline job that produced it 
+* Support for model garden ([#21948](https://github.com/googleapis/google-cloud-ruby/issues/21948)) 
+* Support for the NVIDIA_A100_80GB accelerator type 
+* Uses binary protobuf definitions for better forward compatibility ([#21671](https://github.com/googleapis/google-cloud-ruby/issues/21671)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.24.0 (2023-05-19)
+
+#### Features
+
+* add match service 
+* support examples for ExplanationParameters 
+
+### 0.24.0 (2023-05-18)
+
+#### Features
+
+* add match service 
+* support examples for ExplanationParameters 
+
+### 0.23.0 (2023-05-04)
+
+#### Features
+
+* Added AcceleratorType::NVIDIA_L4 
+* Added EntityType#offline_storage_ttl_days 
+* Added experiment and experiment_run fields to CustomJobSpec 
+* Added Featurestore#online_storage_ttl_days 
+* Added ModelSourceInfo::ModelSourceType::GENIE 
+* Support for mutate_deployed_model 
+
 ### 0.22.0 (2023-04-21)
 
 #### Features

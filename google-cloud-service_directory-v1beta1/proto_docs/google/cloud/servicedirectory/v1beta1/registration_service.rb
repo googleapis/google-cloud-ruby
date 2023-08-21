@@ -21,7 +21,8 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_namespace RegistrationService.CreateNamespace}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_namespace RegistrationService.CreateNamespace}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the project and location the namespace
@@ -43,17 +44,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the project and location whose namespaces you'd like
-        #     to list.
+        #     Required. The resource name of the project and location whose namespaces
+        #     you'd like to list.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of items to return.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. The next_page_token value returned from a previous List request, if any.
+        #     Optional. The next_page_token value returned from a previous List request,
+        #     if any.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. The filter to list results by.
@@ -61,7 +64,8 @@ module Google
         #     General `filter` string syntax:
         #     `<field> <operator> <value> (<logical connector>)`
         #
-        #     *   `<field>` can be `name` or `labels.<key>` for map field
+        #     *   `<field>` can be `name`, `labels.<key>` for map field, or
+        #     `attributes.<field>` for attributes field
         #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
         #         means `HAS`, and is roughly the same as `=`
         #     *   `<value>` must be the same data type as field
@@ -80,6 +84,8 @@ module Google
         #     *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
         #         doesn't have a field called "doesnotexist". Since the filter does not
         #         match any namespaces, it returns no results
+        #     *   `attributes.managed_registration=true` returns namespaces that are
+        #         managed by a GCP product or service
         #
         #     For more information about filtering, see
         #     [API Filtering](https://aip.dev/160).
@@ -100,7 +106,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
+        # The response message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
         # @!attribute [rw] namespaces
         #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
         #     The list of namespaces.
@@ -113,7 +120,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_namespace RegistrationService.GetNamespace}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_namespace RegistrationService.GetNamespace}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the namespace to retrieve.
@@ -122,7 +130,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_namespace RegistrationService.UpdateNamespace}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_namespace RegistrationService.UpdateNamespace}.
         # @!attribute [rw] namespace
         #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
         #     Required. The updated namespace.
@@ -134,7 +143,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_namespace RegistrationService.DeleteNamespace}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_namespace RegistrationService.DeleteNamespace}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the namespace to delete.
@@ -143,7 +153,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_service RegistrationService.CreateService}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_service RegistrationService.CreateService}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the namespace this service will belong to.
@@ -164,7 +175,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the namespace whose services you'd
@@ -205,6 +217,9 @@ module Google
         #     *   `doesnotexist.foo=bar` returns an empty list. Note that service
         #         doesn't have a field called "doesnotexist". Since the filter does not
         #         match any services, it returns no results
+        #     *   `attributes.managed_registration=true` returns services that are
+        #     managed
+        #         by a GCP product or service
         #
         #     For more information about filtering, see
         #     [API Filtering](https://aip.dev/160).
@@ -225,7 +240,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
+        # The response message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
         # @!attribute [rw] services
         #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Service>]
         #     The list of services.
@@ -238,8 +254,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_service RegistrationService.GetService}.
-        # This should not be used for looking up a service. Insead, use the `resolve`
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_service RegistrationService.GetService}.
+        # This should not be used for looking up a service. Instead, use the `resolve`
         # method as it contains all endpoints and associated metadata.
         # @!attribute [rw] name
         #   @return [::String]
@@ -249,7 +266,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service RegistrationService.UpdateService}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service RegistrationService.UpdateService}.
         # @!attribute [rw] service
         #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
         #     Required. The updated service.
@@ -261,7 +279,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service RegistrationService.DeleteService}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service RegistrationService.DeleteService}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the service to delete.
@@ -270,7 +289,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_endpoint RegistrationService.CreateEndpoint}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_endpoint RegistrationService.CreateEndpoint}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the service that this endpoint provides.
@@ -291,7 +311,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the service whose endpoints you'd like to
@@ -310,8 +331,8 @@ module Google
         #     General `filter` string syntax:
         #     `<field> <operator> <value> (<logical connector>)`
         #
-        #     *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for map
-        #         field
+        #     *   `<field>` can be `name`, `address`, `port`, `metadata.<key>` for map
+        #         field, or `attributes.<field>` for attributes field
         #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
         #         means `HAS`, and is roughly the same as `=`
         #     *   `<value>` must be the same data type as field
@@ -335,6 +356,8 @@ module Google
         #     *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
         #         doesn't have a field called "doesnotexist". Since the filter does not
         #         match any endpoints, it returns no results
+        #     *   `attributes.kubernetes_resource_type=KUBERNETES_RESOURCE_TYPE_CLUSTER_
+        #         IP` returns endpoints with the corresponding kubernetes_resource_type
         #
         #     For more information about filtering, see
         #     [API Filtering](https://aip.dev/160).
@@ -355,7 +378,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
+        # The response message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [rw] endpoints
         #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
         #     The list of endpoints.
@@ -368,7 +392,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint RegistrationService.GetEndpoint}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint RegistrationService.GetEndpoint}.
         # This should not be used to lookup endpoints at runtime. Instead, use
         # the `resolve` method.
         # @!attribute [rw] name
@@ -379,7 +404,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_endpoint RegistrationService.UpdateEndpoint}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_endpoint RegistrationService.UpdateEndpoint}.
         # @!attribute [rw] endpoint
         #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
         #     Required. The updated endpoint.
@@ -391,7 +417,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint RegistrationService.DeleteEndpoint}.
+        # The request message for
+        # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint RegistrationService.DeleteEndpoint}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the endpoint to delete.

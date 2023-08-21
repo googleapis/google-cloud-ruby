@@ -22,9 +22,75 @@ module Google
     module Dataplex
       module V1
         # DataProfileScan related setting.
+        # @!attribute [rw] sampling_percent
+        #   @return [::Float]
+        #     Optional. The percentage of the records to be selected from the dataset for
+        #     DataScan.
+        #
+        #     * Value can range between 0.0 and 100.0 with up to 3 significant decimal
+        #     digits.
+        #     * Sampling is not applied if `sampling_percent` is not specified, 0 or
+        #     100.
+        # @!attribute [rw] row_filter
+        #   @return [::String]
+        #     Optional. A filter applied to all rows in a single DataScan job.
+        #     The filter needs to be a valid SQL expression for a WHERE clause in
+        #     BigQuery standard SQL syntax.
+        #     Example: col1 >= 0 AND col2 < 10
+        # @!attribute [rw] post_scan_actions
+        #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::PostScanActions]
+        #     Optional. Actions to take upon job completion..
+        # @!attribute [rw] include_fields
+        #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::SelectedFields]
+        #     Optional. The fields to include in data profile.
+        #
+        #     If not specified, all fields at the time of profile scan job execution are
+        #     included, except for ones listed in `exclude_fields`.
+        # @!attribute [rw] exclude_fields
+        #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::SelectedFields]
+        #     Optional. The fields to exclude from data profile.
+        #
+        #     If specified, the fields will be excluded from data profile, regardless of
+        #     `include_fields` value.
         class DataProfileSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The configuration of post scan actions of DataProfileScan job.
+          # @!attribute [rw] bigquery_export
+          #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::PostScanActions::BigQueryExport]
+          #     Optional. If set, results will be exported to the provided BigQuery
+          #     table.
+          class PostScanActions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The configuration of BigQuery export post scan action.
+            # @!attribute [rw] results_table
+            #   @return [::String]
+            #     Optional. The BigQuery table to export DataProfileScan results to.
+            #     Format:
+            #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            class BigQueryExport
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # The specification for fields to include or exclude in data profile scan.
+          # @!attribute [rw] field_names
+          #   @return [::Array<::String>]
+          #     Optional. Expected input is a list of fully qualified names of fields as
+          #     in the schema.
+          #
+          #     Only top-level field names for nested fields are supported.
+          #     For instance, if 'x' is of nested field type, listing 'x' is supported
+          #     but 'x.y.z' is not supported. Here 'y' and 'y.z' are nested fields of
+          #     'x'.
+          class SelectedFields
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # DataProfileResult defines the output of DataProfileScan. Each field of the
@@ -38,6 +104,9 @@ module Google
         # @!attribute [rw] scanned_data
         #   @return [::Google::Cloud::Dataplex::V1::ScannedData]
         #     The data scanned for this result.
+        # @!attribute [r] post_scan_actions_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::PostScanActionsResult]
+        #     Output only. The result of post scan actions.
         class DataProfileResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,10 +155,11 @@ module Google
               #     with REPEATABLE mode.
               # @!attribute [rw] top_n_values
               #   @return [::Array<::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::TopNValue>]
-              #     The list of top N non-null values and number of times they occur in
-              #     the scanned data. N is 10 or equal to the number of distinct values
-              #     in the field, whichever is smaller. Not available for complex
-              #     non-groupable field type RECORD and fields with REPEATABLE mode.
+              #     The list of top N non-null values, frequency and ratio with which
+              #     they occur in the scanned data. N is 10 or equal to the number of
+              #     distinct values in the field, whichever is smaller. Not available for
+              #     complex non-groupable field type RECORD and fields with REPEATABLE
+              #     mode.
               # @!attribute [rw] string_profile
               #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::StringFieldInfo]
               #     String type field information.
@@ -142,8 +212,9 @@ module Google
                 #     below this point. The third quartile (Q3) splits off the highest
                 #     25% of data from the lowest 75%. It is known as the upper or 75th
                 #     empirical quartile, as 75% of the data lies below this point.
-                #     Here, the quartiles is provided as an ordered list of quartile
-                #     values for the scanned data, occurring in order Q1, median, Q3.
+                #     Here, the quartiles is provided as an ordered list of approximate
+                #     quartile values for the scanned data, occurring in order Q1,
+                #     median, Q3.
                 # @!attribute [rw] max
                 #   @return [::Integer]
                 #     Maximum of non-null values in the scanned data. NaN, if the field
@@ -195,10 +266,51 @@ module Google
                 # @!attribute [rw] count
                 #   @return [::Integer]
                 #     Count of the corresponding value in the scanned data.
+                # @!attribute [rw] ratio
+                #   @return [::Float]
+                #     Ratio of the corresponding value in the field against the total
+                #     number of rows in the scanned data.
                 class TopNValue
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
+              end
+            end
+          end
+
+          # The result of post scan actions of DataProfileScan job.
+          # @!attribute [r] bigquery_export_result
+          #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::PostScanActionsResult::BigQueryExportResult]
+          #     Output only. The result of BigQuery export post scan action.
+          class PostScanActionsResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The result of BigQuery export post scan action.
+            # @!attribute [r] state
+            #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::PostScanActionsResult::BigQueryExportResult::State]
+            #     Output only. Execution state for the BigQuery exporting.
+            # @!attribute [r] message
+            #   @return [::String]
+            #     Output only. Additional information about the BigQuery exporting.
+            class BigQueryExportResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Execution state for the exporting.
+              module State
+                # The exporting state is unspecified.
+                STATE_UNSPECIFIED = 0
+
+                # The exporting completed successfully.
+                SUCCEEDED = 1
+
+                # The exporting is no longer running due to an error.
+                FAILED = 2
+
+                # The exporting is skipped due to no valid scan result to export
+                # (usually caused by scan failed).
+                SKIPPED = 3
               end
             end
           end

@@ -506,6 +506,7 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_data_scan_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_data_scan_jobs, name
@@ -513,6 +514,7 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -523,35 +525,35 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_scan_jobs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_data_scan_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_scan_jobs ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_data_scan_jobs ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_scan_jobs(::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_data_scan_jobs(::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

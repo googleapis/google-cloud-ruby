@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource using the form:
-        #         `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+        #         `projects/{project_id}/locations/global/connectivityTests/{test}`
         # @!attribute [rw] description
         #   @return [::String]
         #     The user-supplied description of the Connectivity Test.
@@ -98,6 +98,12 @@ module Google
         #     Output only. The reachability details of this test from the latest run.
         #     The details are updated when creating a new test, updating an
         #     existing test, or triggering a one-time rerun of an existing test.
+        # @!attribute [r] probing_details
+        #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails]
+        #     Output only. The probing details of this test from the latest run, present
+        #     for applicable tests only. The details are updated when creating a new
+        #     test, updating an existing test, or triggering a one-time rerun of an
+        #     existing test.
         class ConnectivityTest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -117,7 +123,8 @@ module Google
         #   @return [::String]
         #     The IP address of the endpoint, which can be an external or internal IP.
         #     An IPv6 address is only allowed when the test's destination is a
-        #     [global load balancer VIP](/load-balancing/docs/load-balancing-overview).
+        #     [global load balancer
+        #     VIP](https://cloud.google.com/load-balancing/docs/load-balancing-overview).
         # @!attribute [rw] port
         #   @return [::Integer]
         #     The IP protocol port of the endpoint.
@@ -125,6 +132,24 @@ module Google
         # @!attribute [rw] instance
         #   @return [::String]
         #     A Compute Engine instance URI.
+        # @!attribute [rw] forwarding_rule
+        #   @return [::String]
+        #     A forwarding rule and its corresponding IP address represent the frontend
+        #     configuration of a Google Cloud load balancer. Forwarding rules are also
+        #     used for protocol forwarding, Private Service Connect and other network
+        #     services to provide forwarding information in the control plane. Format:
+        #      projects/\\{project}/global/forwardingRules/\\{id} or
+        #      projects/\\{project}/regions/\\{region}/forwardingRules/\\{id}
+        # @!attribute [r] forwarding_rule_target
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::ForwardingRuleTarget]
+        #     Output only. Specifies the type of the target of the forwarding rule.
+        # @!attribute [r] load_balancer_id
+        #   @return [::String]
+        #     Output only. ID of the load balancer the forwarding rule points to. Empty
+        #     for forwarding rules not related to load balancers.
+        # @!attribute [r] load_balancer_type
+        #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerType]
+        #     Output only. Type of the load balancer the forwarding rule points to.
         # @!attribute [rw] gke_master_cluster
         #   @return [::String]
         #     A cluster URI for [Google Kubernetes Engine
@@ -132,6 +157,17 @@ module Google
         # @!attribute [rw] cloud_sql_instance
         #   @return [::String]
         #     A [Cloud SQL](https://cloud.google.com/sql) instance URI.
+        # @!attribute [rw] cloud_function
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudFunctionEndpoint]
+        #     A [Cloud Function](https://cloud.google.com/functions).
+        # @!attribute [rw] app_engine_version
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::AppEngineVersionEndpoint]
+        #     An [App Engine](https://cloud.google.com/appengine) [service
+        #     version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions).
+        # @!attribute [rw] cloud_run_revision
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudRunRevisionEndpoint]
+        #     A [Cloud Run](https://cloud.google.com/run)
+        #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
         # @!attribute [rw] network
         #   @return [::String]
         #     A Compute Engine network URI.
@@ -155,6 +191,38 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Wrapper for Cloud Function attributes.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     A [Cloud Function](https://cloud.google.com/functions) name.
+          class CloudFunctionEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Wrapper for the App Engine service version attributes.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     An [App Engine](https://cloud.google.com/appengine) [service
+          #     version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions)
+          #     name.
+          class AppEngineVersionEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Wrapper for Cloud Run revision attributes.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     A [Cloud Run](https://cloud.google.com/run)
+          #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
+          #     URI. The format is:
+          #     projects/\\{project}/locations/\\{location}/revisions/\\{revision}
+          class CloudRunRevisionEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The type definition of an endpoint's network. Use one of the
           # following choices:
           module NetworkType
@@ -170,6 +238,25 @@ module Google
             # This can be an on-premises network, or a network hosted by another cloud
             # provider.
             NON_GCP_NETWORK = 2
+          end
+
+          # Type of the target of a forwarding rule.
+          module ForwardingRuleTarget
+            # Forwarding rule target is unknown.
+            FORWARDING_RULE_TARGET_UNSPECIFIED = 0
+
+            # Compute Engine instance for protocol forwarding.
+            INSTANCE = 1
+
+            # Load Balancer. The specific type can be found from [load_balancer_type]
+            # [google.cloud.networkmanagement.v1.Endpoint.load_balancer_type].
+            LOAD_BALANCER = 2
+
+            # Classic Cloud VPN Gateway.
+            VPN_GATEWAY = 3
+
+            # Forwarding Rule is a Private Service Connect endpoint.
+            PSC = 4
           end
         end
 
@@ -224,6 +311,114 @@ module Google
             # * The analyzer received an invalid or unsupported argument or was unable
             #   to identify a known endpoint.
             UNDETERMINED = 5
+          end
+        end
+
+        # Latency percentile rank and value.
+        # @!attribute [rw] percent
+        #   @return [::Integer]
+        #     Percentage of samples this data point applies to.
+        # @!attribute [rw] latency_micros
+        #   @return [::Integer]
+        #     percent-th percentile of latency observed, in microseconds.
+        #     Fraction of percent/100 of samples have latency lower or
+        #     equal to the value of this field.
+        class LatencyPercentile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes measured latency distribution.
+        # @!attribute [rw] latency_percentiles
+        #   @return [::Array<::Google::Cloud::NetworkManagement::V1::LatencyPercentile>]
+        #     Representative latency percentiles.
+        class LatencyDistribution
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Results of active probing from the last run of the test.
+        # @!attribute [rw] result
+        #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails::ProbingResult]
+        #     The overall result of active probing.
+        # @!attribute [rw] verify_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time that reachability was assessed through active probing.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Details about an internal failure or the cancellation of active probing.
+        # @!attribute [rw] abort_cause
+        #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails::ProbingAbortCause]
+        #     The reason probing was aborted.
+        # @!attribute [rw] sent_probe_count
+        #   @return [::Integer]
+        #     Number of probes sent.
+        # @!attribute [rw] successful_probe_count
+        #   @return [::Integer]
+        #     Number of probes that reached the destination.
+        # @!attribute [rw] endpoint_info
+        #   @return [::Google::Cloud::NetworkManagement::V1::EndpointInfo]
+        #     The source and destination endpoints derived from the test input and used
+        #     for active probing.
+        # @!attribute [rw] probing_latency
+        #   @return [::Google::Cloud::NetworkManagement::V1::LatencyDistribution]
+        #     Latency as measured by active probing in one direction:
+        #     from the source to the destination endpoint.
+        # @!attribute [rw] destination_egress_location
+        #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails::EdgeLocation]
+        #     The EdgeLocation from which a packet destined for/originating from the
+        #     internet will egress/ingress the Google network.
+        #     This will only be populated for a connectivity test which has an internet
+        #     destination/source address.
+        #     The absence of this field *must not* be used as an indication that the
+        #     destination/source is part of the Google network.
+        class ProbingDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Representation of a network edge location as per
+          # https://cloud.google.com/vpc/docs/edge-locations.
+          # @!attribute [rw] metropolitan_area
+          #   @return [::String]
+          #     Name of the metropolitan area.
+          class EdgeLocation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Overall probing result of the test.
+          module ProbingResult
+            # No result was specified.
+            PROBING_RESULT_UNSPECIFIED = 0
+
+            # At least 95% of packets reached the destination.
+            REACHABLE = 1
+
+            # No packets reached the destination.
+            UNREACHABLE = 2
+
+            # Less than 95% of packets reached the destination.
+            REACHABILITY_INCONSISTENT = 3
+
+            # Reachability could not be determined. Possible reasons are:
+            # * The user lacks permission to access some of the network resources
+            #   required to run the test.
+            # * No valid source endpoint could be derived from the request.
+            # * An internal error occurred.
+            UNDETERMINED = 4
+          end
+
+          # Abort cause types.
+          module ProbingAbortCause
+            # No reason was specified.
+            PROBING_ABORT_CAUSE_UNSPECIFIED = 0
+
+            # The user lacks permission to access some of the
+            # network resources required to run the test.
+            PERMISSION_DENIED = 1
+
+            # No valid source endpoint could be derived from the request.
+            NO_SOURCE_LOCATION = 2
           end
         end
       end

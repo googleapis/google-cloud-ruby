@@ -47,7 +47,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.servicedirectory.v1.RegistrationService'
 
-            # Creates a namespace, and returns the new Namespace.
+            # Creates a namespace, and returns the new namespace.
             rpc :CreateNamespace, ::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest, ::Google::Cloud::ServiceDirectory::V1::Namespace
             # Lists all namespaces.
             rpc :ListNamespaces, ::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest, ::Google::Cloud::ServiceDirectory::V1::ListNamespacesResponse
@@ -58,7 +58,7 @@ module Google
             # Deletes a namespace. This also deletes all services and endpoints in
             # the namespace.
             rpc :DeleteNamespace, ::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest, ::Google::Protobuf::Empty
-            # Creates a service, and returns the new Service.
+            # Creates a service, and returns the new service.
             rpc :CreateService, ::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest, ::Google::Cloud::ServiceDirectory::V1::Service
             # Lists all services belonging to a namespace.
             rpc :ListServices, ::Google::Cloud::ServiceDirectory::V1::ListServicesRequest, ::Google::Cloud::ServiceDirectory::V1::ListServicesResponse
@@ -69,15 +69,15 @@ module Google
             # Deletes a service. This also deletes all endpoints associated with
             # the service.
             rpc :DeleteService, ::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest, ::Google::Protobuf::Empty
-            # Creates a endpoint, and returns the new Endpoint.
+            # Creates an endpoint, and returns the new endpoint.
             rpc :CreateEndpoint, ::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest, ::Google::Cloud::ServiceDirectory::V1::Endpoint
             # Lists all endpoints.
             rpc :ListEndpoints, ::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest, ::Google::Cloud::ServiceDirectory::V1::ListEndpointsResponse
-            # Gets a endpoint.
+            # Gets an endpoint.
             rpc :GetEndpoint, ::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest, ::Google::Cloud::ServiceDirectory::V1::Endpoint
-            # Updates a endpoint.
+            # Updates an endpoint.
             rpc :UpdateEndpoint, ::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest, ::Google::Cloud::ServiceDirectory::V1::Endpoint
-            # Deletes a endpoint.
+            # Deletes an endpoint.
             rpc :DeleteEndpoint, ::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest, ::Google::Protobuf::Empty
             # Gets the IAM Policy for a resource (namespace or service only).
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy

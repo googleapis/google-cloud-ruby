@@ -50,7 +50,7 @@ module Google
             body = {
               q: Array(text), target: to, source: from, format: format,
               model: model, cid: cid
-            }.delete_if { |_k, v| v.nil? }.to_json
+            }.compact.to_json
 
             post "/language/translate/v2", body
           end
@@ -104,7 +104,7 @@ module Google
           def http
             @http ||= Faraday.new url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
-            }.delete_if { |_k, v| v.nil? }
+            }.compact
           end
 
           ##
@@ -162,10 +162,10 @@ module Google
             self.backoff = ->(retries) { sleep retries.to_i }
 
             def initialize options = {} # :nodoc:
-              @max_retries  = (options[:retries]    || Backoff.retries).to_i
-              @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
-              @reasons      = (options[:reasons]    || Backoff.reasons).to_a
-              @backoff      =  options[:backoff]    || Backoff.backoff
+              @max_retries = (options[:retries] || Backoff.retries).to_i
+              @http_codes = (options[:http_codes] || Backoff.http_codes).to_a
+              @reasons = (options[:reasons] || Backoff.reasons).to_a
+              @backoff = options[:backoff] || Backoff.backoff
             end
 
             def execute # :nodoc:

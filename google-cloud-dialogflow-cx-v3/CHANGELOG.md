@@ -1,5 +1,45 @@
 # Changelog
 
+### 0.20.0 (2023-08-15)
+
+#### Features
+
+* added agent level route group ([#22764](https://github.com/googleapis/google-cloud-ruby/issues/22764)) 
+* added flow import strategy 
+
+### 0.19.0 (2023-07-11)
+
+#### Features
+
+* Support for specifying agent git integration settings 
+* Support for specifying the git branch for export_agent and restore_agent ([#22512](https://github.com/googleapis/google-cloud-ruby/issues/22512)) 
+* The response for export_agent provides the commit SHA 
+
+### 0.18.0 (2023-06-20)
+
+#### Features
+
+* add include_bigquery_export_settings to ExportAgentRequest ([#22426](https://github.com/googleapis/google-cloud-ruby/issues/22426)) 
+
+### 0.17.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.16.0 (2023-05-09)
+
+#### Features
+
+* add debug info to StreamingDetectIntent 
+* add dtmf digits to WebhookRequest 
+* add FLOW as a new DiffType in TestRunDifference 
+* extended CreateAgent timeout to 180 seconds 
+* extended CreateAgent timeout to 180 seconds ([#21559](https://github.com/googleapis/google-cloud-ruby/issues/21559)) 
+
 ### 0.15.1 (2023-03-15)
 
 #### Documentation

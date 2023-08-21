@@ -1,5 +1,32 @@
 # Release History
 
+### 0.8.0 (2023-07-26)
+
+#### Features
+
+* support method_policies and field_policies 
+
+### 0.7.0 (2023-06-27)
+
+#### Features
+
+* Support overriding of bindings ([#22452](https://github.com/googleapis/google-cloud-ruby/issues/22452)) 
+#### Documentation
+
+* Update docs for Field Mask & Expressions ([#22452](https://github.com/googleapis/google-cloud-ruby/issues/22452)) 
+
+### 0.6.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.6.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
 ### 0.5.0 (2023-03-08)
 
 #### Features

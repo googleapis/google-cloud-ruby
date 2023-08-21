@@ -22,7 +22,9 @@ describe "#update_cdn_key_akamai", :stitcher_snippet do
     @akamai_cdn_key_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: akamai_cdn_key_id, hostname: updated_hostname, akamai_token_key: akamai_token_key
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: akamai_cdn_key_id, hostname: updated_hostname,
+                 akamai_token_key: akamai_token_key
     end
 
     cdn_key_id_regex = Regexp.escape akamai_cdn_key_id

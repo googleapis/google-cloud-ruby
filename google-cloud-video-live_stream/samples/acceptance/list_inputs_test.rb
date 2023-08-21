@@ -21,7 +21,7 @@ describe "#list_inputs", :live_stream_snippet do
     refute_nil input
     @input_created = true
 
-    assert_output(/Inputs:\n#{input.name}/) do
+    assert_output(/Inputs:\n(\S+\n)*#{input.name}/) do
       sample.run project_id: project_id, location: location_id
     end
   end

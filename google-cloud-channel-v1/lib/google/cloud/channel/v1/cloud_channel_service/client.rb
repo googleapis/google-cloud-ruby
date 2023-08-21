@@ -169,7 +169,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -3471,7 +3471,8 @@ module Google
             # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
             # resources. The data for each resource is displayed in the ascending order
             # of:
-            # * customer ID
+            #
+            # * Customer ID
             # * {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity#entitlement RepricingConfig.EntitlementGranularity.entitlement}
             # * {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
             # * {::Google::Cloud::Channel::V1::CustomerRepricingConfig#update_time CustomerRepricingConfig.update_time}
@@ -4058,7 +4059,8 @@ module Google
             # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
             # resources. The data for each resource is displayed in the ascending order
             # of:
-            # * channel partner ID
+            #
+            # * Channel Partner ID
             # * {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
             # * {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig#update_time ChannelPartnerRepricingConfig.update_time}
             #
@@ -4517,6 +4519,245 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :delete_channel_partner_repricing_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists the Rebilling supported SKU groups the account is authorized to
+            # sell.
+            # Reference: https://cloud.google.com/skus/sku-groups
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different, or the account doesn't exist.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the {::Google::Cloud::Channel::V1::SkuGroup SkuGroup} resources.
+            # The data for each resource is displayed in the alphabetical order of SKU
+            # group display name.
+            # The data for each resource is displayed in the ascending order of
+            # {::Google::Cloud::Channel::V1::SkuGroup#display_name SkuGroup.display_name}
+            #
+            # If unsuccessful, returns an error.
+            #
+            # @overload list_sku_groups(request, options = nil)
+            #   Pass arguments to `list_sku_groups` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::ListSkuGroupsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::ListSkuGroupsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_sku_groups(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_sku_groups` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the account from which to list SKU groups.
+            #     Parent uses the format: accounts/\\{account}.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of SKU groups to return. The service may
+            #     return fewer than this value. If unspecified, returns a maximum of 1000 SKU
+            #     groups. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results beyond the first page.
+            #     Obtained through
+            #     [ListSkuGroups.next_page_token][] of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups CloudChannelService.ListSkuGroups}
+            #     call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::SkuGroup>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::SkuGroup>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListSkuGroupsRequest.new
+            #
+            #   # Call the list_sku_groups method.
+            #   result = client.list_sku_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::SkuGroup.
+            #     p item
+            #   end
+            #
+            def list_sku_groups request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::ListSkuGroupsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_sku_groups.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_sku_groups.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_sku_groups.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :list_sku_groups, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_channel_service_stub, :list_sku_groups, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists the Billable SKUs in a given SKU group.
+            #
+            # Possible error codes:
+            # PERMISSION_DENIED: If the account making the request and the account
+            # being queried for are different, or the account doesn't exist.
+            # INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # INTERNAL: Any non-user error related to technical issue in the
+            # backend. In this case, contact cloud channel support.
+            #
+            # Return Value:
+            # If successful, the {::Google::Cloud::Channel::V1::BillableSku BillableSku}
+            # resources. The data for each resource is displayed in the ascending order
+            # of:
+            #
+            # * {::Google::Cloud::Channel::V1::BillableSku#service_display_name BillableSku.service_display_name}
+            # * {::Google::Cloud::Channel::V1::BillableSku#sku_display_name BillableSku.sku_display_name}
+            #
+            # If unsuccessful, returns an error.
+            #
+            # @overload list_sku_group_billable_skus(request, options = nil)
+            #   Pass arguments to `list_sku_group_billable_skus` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_sku_group_billable_skus(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_sku_group_billable_skus` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the SKU group.
+            #     Format: accounts/\\{account}/skuGroups/\\{sku_group}.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of SKUs to return. The service may return
+            #     fewer than this value. If unspecified, returns a maximum of 100000 SKUs.
+            #     The maximum value is 100000; values above 100000 will be coerced to 100000.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results beyond the first page.
+            #     Obtained through
+            #     [ListSkuGroupBillableSkus.next_page_token][] of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus CloudChannelService.ListSkuGroupBillableSkus}
+            #     call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::BillableSku>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::BillableSku>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest.new
+            #
+            #   # Call the list_sku_group_billable_skus method.
+            #   result = client.list_sku_group_billable_skus request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::BillableSku.
+            #     p item
+            #   end
+            #
+            def list_sku_group_billable_skus request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_sku_group_billable_skus.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_sku_group_billable_skus.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_sku_group_billable_skus.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :list_sku_group_billable_skus, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_channel_service_stub, :list_sku_group_billable_skus, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -5701,7 +5942,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudchannel.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudchannel.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -5935,6 +6178,16 @@ module Google
                 #
                 attr_reader :delete_channel_partner_repricing_config
                 ##
+                # RPC-specific configuration for `list_sku_groups`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_sku_groups
+                ##
+                # RPC-specific configuration for `list_sku_group_billable_skus`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_sku_group_billable_skus
+                ##
                 # RPC-specific configuration for `lookup_offer`
                 # @return [::Gapic::Config::Method]
                 #
@@ -6059,6 +6312,10 @@ module Google
                   @update_channel_partner_repricing_config = ::Gapic::Config::Method.new update_channel_partner_repricing_config_config
                   delete_channel_partner_repricing_config_config = parent_rpcs.delete_channel_partner_repricing_config if parent_rpcs.respond_to? :delete_channel_partner_repricing_config
                   @delete_channel_partner_repricing_config = ::Gapic::Config::Method.new delete_channel_partner_repricing_config_config
+                  list_sku_groups_config = parent_rpcs.list_sku_groups if parent_rpcs.respond_to? :list_sku_groups
+                  @list_sku_groups = ::Gapic::Config::Method.new list_sku_groups_config
+                  list_sku_group_billable_skus_config = parent_rpcs.list_sku_group_billable_skus if parent_rpcs.respond_to? :list_sku_group_billable_skus
+                  @list_sku_group_billable_skus = ::Gapic::Config::Method.new list_sku_group_billable_skus_config
                   lookup_offer_config = parent_rpcs.lookup_offer if parent_rpcs.respond_to? :lookup_offer
                   @lookup_offer = ::Gapic::Config::Method.new lookup_offer_config
                   list_products_config = parent_rpcs.list_products if parent_rpcs.respond_to? :list_products

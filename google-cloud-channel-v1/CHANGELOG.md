@@ -1,5 +1,32 @@
 # Release History
 
+### 0.21.0 (2023-06-16)
+
+#### Features
+
+* Add support for ListSkuGroups and ListSkuGroupBillableSkus APIs ([#22409](https://github.com/googleapis/google-cloud-ruby/issues/22409)) 
+
+### 0.20.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21673](https://github.com/googleapis/google-cloud-ruby/issues/21673)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.19.0 (2023-05-19)
+
+#### Features
+
+* support partition_keys to filter results from FetchReportResults 
+
+### 0.18.0 (2023-05-08)
+
+#### Features
+
+* Added billing account field to the Entitlement resource ([#21551](https://github.com/googleapis/google-cloud-ruby/issues/21551)) 
+
 ### 0.17.0 (2023-03-15)
 
 #### Features

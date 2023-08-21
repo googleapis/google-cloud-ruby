@@ -89,8 +89,7 @@ module Google
         # @!attribute [rw] sample_rate_hertz
         #   @return [::Integer]
         #     Required. Sample rate (in Hertz) of the audio content sent in the query.
-        #     Refer to
-        #     [Cloud Speech API
+        #     Refer to [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics) for
         #     more details.
         # @!attribute [rw] language_code
@@ -117,9 +116,9 @@ module Google
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
         #     for more details.
         #
-        #     This field is deprecated. Please use [speech_contexts]() instead. If you
-        #     specify both [phrase_hints]() and [speech_contexts](), Dialogflow will
-        #     treat the [phrase_hints]() as a single additional [SpeechContext]().
+        #     This field is deprecated. Please use [`speech_contexts`]() instead. If you
+        #     specify both [`phrase_hints`]() and [`speech_contexts`](), Dialogflow will
+        #     treat the [`phrase_hints`]() as a single additional [`SpeechContext`]().
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SpeechContext>]
         #     Context information to assist speech recognition.
@@ -140,6 +139,12 @@ module Google
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
+        #     If you specify a model, the following models typically have the best
+        #     performance:
+        #
+        #     - phone_call (best for Agent Assist and telephony)
+        #     - latest_short (best for Dialogflow non-telephony)
+        #     - command_and_search (best for very short utterances and commands)
         # @!attribute [rw] model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
         #     Which variant of the [Speech
@@ -164,6 +169,9 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}.
         #     If `false` and recognition doesn't return any result, trigger
         #     `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
+        # @!attribute [rw] enable_automatic_punctuation
+        #   @return [::Boolean]
+        #     Enable automatic punctuation option at the speech backend.
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -192,9 +200,9 @@ module Google
         # @!attribute [rw] speaking_rate
         #   @return [::Float]
         #     Optional. Speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
-        #     native speed supported by the specific voice. 2.0 is twice as fast, and
-        #     0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
-        #     other values < 0.25 or > 4.0 will return an error.
+        #     native speed supported by the specific voice. 2.0 is twice as fast, and 0.5
+        #     is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any other
+        #     values < 0.25 or > 4.0 will return an error.
         # @!attribute [rw] pitch
         #   @return [::Float]
         #     Optional. Speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
@@ -278,6 +286,61 @@ module Google
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling)
+        # digit in Telephony Gateway.
+        module TelephonyDtmf
+          # Not specified. This value may be used to indicate an absent digit.
+          TELEPHONY_DTMF_UNSPECIFIED = 0
+
+          # Number: '1'.
+          DTMF_ONE = 1
+
+          # Number: '2'.
+          DTMF_TWO = 2
+
+          # Number: '3'.
+          DTMF_THREE = 3
+
+          # Number: '4'.
+          DTMF_FOUR = 4
+
+          # Number: '5'.
+          DTMF_FIVE = 5
+
+          # Number: '6'.
+          DTMF_SIX = 6
+
+          # Number: '7'.
+          DTMF_SEVEN = 7
+
+          # Number: '8'.
+          DTMF_EIGHT = 8
+
+          # Number: '9'.
+          DTMF_NINE = 9
+
+          # Number: '0'.
+          DTMF_ZERO = 10
+
+          # Letter: 'A'.
+          DTMF_A = 11
+
+          # Letter: 'B'.
+          DTMF_B = 12
+
+          # Letter: 'C'.
+          DTMF_C = 13
+
+          # Letter: 'D'.
+          DTMF_D = 14
+
+          # Asterisk/star: '*'.
+          DTMF_STAR = 15
+
+          # Pound/diamond/hash/square/gate/octothorpe: '#'.
+          DTMF_POUND = 16
         end
 
         # Audio encoding of the audio content sent in the conversational query request.
@@ -413,61 +476,6 @@ module Google
 
           # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
           OUTPUT_AUDIO_ENCODING_MULAW = 5
-        end
-
-        # [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling)
-        # digit in Telephony Gateway.
-        module TelephonyDtmf
-          # Not specified. This value may be used to indicate an absent digit.
-          TELEPHONY_DTMF_UNSPECIFIED = 0
-
-          # Number: '1'.
-          DTMF_ONE = 1
-
-          # Number: '2'.
-          DTMF_TWO = 2
-
-          # Number: '3'.
-          DTMF_THREE = 3
-
-          # Number: '4'.
-          DTMF_FOUR = 4
-
-          # Number: '5'.
-          DTMF_FIVE = 5
-
-          # Number: '6'.
-          DTMF_SIX = 6
-
-          # Number: '7'.
-          DTMF_SEVEN = 7
-
-          # Number: '8'.
-          DTMF_EIGHT = 8
-
-          # Number: '9'.
-          DTMF_NINE = 9
-
-          # Number: '0'.
-          DTMF_ZERO = 10
-
-          # Letter: 'A'.
-          DTMF_A = 11
-
-          # Letter: 'B'.
-          DTMF_B = 12
-
-          # Letter: 'C'.
-          DTMF_C = 13
-
-          # Letter: 'D'.
-          DTMF_D = 14
-
-          # Asterisk/star: '*'.
-          DTMF_STAR = 15
-
-          # Pound/diamond/hash/square/gate/octothorpe: '#'.
-          DTMF_POUND = 16
         end
       end
     end

@@ -185,7 +185,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -233,9 +233,11 @@ module Google
               # Service calls
 
               ##
-              # Creates a composite index. This returns a {::Google::Longrunning::Operation google.longrunning.Operation}
-              # which may be used to track the status of the creation. The metadata for
-              # the operation will be the type {::Google::Cloud::Firestore::Admin::V1::IndexOperationMetadata IndexOperationMetadata}.
+              # Creates a composite index. This returns a
+              # {::Google::Longrunning::Operation google.longrunning.Operation} which may be
+              # used to track the status of the creation. The metadata for the operation
+              # will be the type
+              # {::Google::Cloud::Firestore::Admin::V1::IndexOperationMetadata IndexOperationMetadata}.
               #
               # @overload create_index(request, options = nil)
               #   Pass arguments to `create_index` via a request object, either of type
@@ -357,8 +359,8 @@ module Google
               #     The number of results to return.
               #   @param page_token [::String]
               #     A page token, returned from a previous call to
-              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes}, that may be used to get the next
-              #     page of results.
+              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes},
+              #     that may be used to get the next page of results.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::Admin::V1::Index>]
@@ -690,13 +692,16 @@ module Google
               ##
               # Updates a field configuration. Currently, field updates apply only to
               # single field index configuration. However, calls to
-              # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field FirestoreAdmin.UpdateField} should provide a field mask to avoid
-              # changing any configuration that the caller isn't aware of. The field mask
-              # should be specified as: `{ paths: "index_config" }`.
+              # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field FirestoreAdmin.UpdateField}
+              # should provide a field mask to avoid changing any configuration that the
+              # caller isn't aware of. The field mask should be specified as: `{ paths:
+              # "index_config" }`.
               #
-              # This call returns a {::Google::Longrunning::Operation google.longrunning.Operation} which may be used to
-              # track the status of the field update. The metadata for
-              # the operation will be the type {::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata FieldOperationMetadata}.
+              # This call returns a
+              # {::Google::Longrunning::Operation google.longrunning.Operation} which may be
+              # used to track the status of the field update. The metadata for the
+              # operation will be the type
+              # {::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata FieldOperationMetadata}.
               #
               # To configure the default field settings for the database, use
               # the special `Field` with resource name:
@@ -798,10 +803,12 @@ module Google
               ##
               # Lists the field configuration and metadata for this database.
               #
-              # Currently, {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} only supports listing fields
-              # that have been explicitly overridden. To issue this query, call
-              # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} with the filter set to
-              # `indexConfig.usesAncestorConfig:false` .
+              # Currently,
+              # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
+              # only supports listing fields that have been explicitly overridden. To issue
+              # this query, call
+              # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
+              # with the filter set to `indexConfig.usesAncestorConfig:false` .
               #
               # @overload list_fields(request, options = nil)
               #   Pass arguments to `list_fields` via a request object, either of type
@@ -823,16 +830,17 @@ module Google
               #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
               #   @param filter [::String]
               #     The filter to apply to list results. Currently,
-              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} only supports listing fields
-              #     that have been explicitly overridden. To issue this query, call
-              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} with a filter that includes
-              #     `indexConfig.usesAncestorConfig:false` .
+              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
+              #     only supports listing fields that have been explicitly overridden. To issue
+              #     this query, call
+              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
+              #     with a filter that includes `indexConfig.usesAncestorConfig:false` .
               #   @param page_size [::Integer]
               #     The number of results to return.
               #   @param page_token [::String]
               #     A page token, returned from a previous call to
-              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}, that may be used to get the next
-              #     page of results.
+              #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields},
+              #     that may be used to get the next page of results.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::Admin::V1::Field>]
@@ -1117,6 +1125,107 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @firestore_admin_stub.call_rpc :import_documents, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Create a database.
+              #
+              # @overload create_database(request, options = nil)
+              #   Pass arguments to `create_database` via a request object, either of type
+              #   {::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_database(parent: nil, database: nil, database_id: nil)
+              #   Pass arguments to `create_database` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. A parent name of the form
+              #     `projects/{project_id}`
+              #   @param database [::Google::Cloud::Firestore::Admin::V1::Database, ::Hash]
+              #     Required. The Database to create.
+              #   @param database_id [::String]
+              #     Required. The ID to use for the database, which will become the final
+              #     component of the database's resource name.
+              #
+              #     The value must be set to "(default)".
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest.new
+              #
+              #   # Call the create_database method.
+              #   result = client.create_database request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_database request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_database.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_database.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_database.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @firestore_admin_stub.call_rpc :create_database, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
@@ -1474,7 +1583,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "firestore.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "firestore.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1573,6 +1684,11 @@ module Google
                   #
                   attr_reader :import_documents
                   ##
+                  # RPC-specific configuration for `create_database`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_database
+                  ##
                   # RPC-specific configuration for `get_database`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1608,6 +1724,8 @@ module Google
                     @export_documents = ::Gapic::Config::Method.new export_documents_config
                     import_documents_config = parent_rpcs.import_documents if parent_rpcs.respond_to? :import_documents
                     @import_documents = ::Gapic::Config::Method.new import_documents_config
+                    create_database_config = parent_rpcs.create_database if parent_rpcs.respond_to? :create_database
+                    @create_database = ::Gapic::Config::Method.new create_database_config
                     get_database_config = parent_rpcs.get_database if parent_rpcs.respond_to? :get_database
                     @get_database = ::Gapic::Config::Method.new get_database_config
                     list_databases_config = parent_rpcs.list_databases if parent_rpcs.respond_to? :list_databases

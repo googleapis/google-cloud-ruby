@@ -206,7 +206,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -270,7 +270,10 @@ module Google
             #     Reads the document in a transaction.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads the version of the document at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::Document]
@@ -318,9 +321,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_document.timeout,
@@ -400,7 +400,9 @@ module Google
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Perform the read at the provided time.
             #
-            #     This may not be older than 270 seconds.
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #   @param show_missing [::Boolean]
             #     If the list should show missing documents.
             #
@@ -465,9 +467,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_documents.timeout,
@@ -571,9 +570,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_document.timeout,
@@ -663,9 +659,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_document.timeout,
@@ -727,7 +720,10 @@ module Google
             #     stream.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
@@ -778,9 +774,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_get_documents.timeout,
@@ -870,9 +863,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
@@ -965,9 +955,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
@@ -1056,9 +1043,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
@@ -1115,7 +1099,10 @@ module Google
             #     stream.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
@@ -1166,9 +1153,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_query.timeout,
@@ -1238,9 +1222,9 @@ module Google
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Executes the query at the given timestamp.
             #
-            #     Requires:
-            #
-            #     * Cannot be more than 270 seconds in the past.
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
@@ -1291,9 +1275,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
@@ -1375,7 +1356,10 @@ module Google
             #     2 partitions, to complete the total of 10 specified in `partition_count`.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
@@ -1427,9 +1411,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.partition_query.timeout,
@@ -1637,7 +1618,10 @@ module Google
             #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
@@ -1685,9 +1669,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_collection_ids.timeout,
@@ -1791,9 +1772,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_write.timeout,
@@ -1898,9 +1876,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_document.timeout,
@@ -2001,7 +1976,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "firestore.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "firestore.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -153,7 +153,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -356,11 +356,13 @@ module Google
             #     `entries.write`, you should try to include several log entries in this
             #     list, rather than calling this method for each individual log entry.
             #   @param partial_success [::Boolean]
-            #     Optional. Whether valid entries should be written even if some other
-            #     entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
-            #     entry is not written, then the response status is the error associated
-            #     with one of the failed entries and the response includes error details
-            #     keyed by the entries' zero-based index in the `entries.write` method.
+            #     Optional. Whether a batch's valid entries should be written even if some
+            #     other entry failed due to a permanent error such as INVALID_ARGUMENT or
+            #     PERMISSION_DENIED. If any entry failed, then the response status is the
+            #     response status of one of the failed entries. The response will include
+            #     error details in `WriteLogEntriesPartialErrors.log_entry_errors` keyed by
+            #     the entries' zero-based index in the `entries`. Failed requests for which
+            #     no entries are written will not include per-entry errors.
             #   @param dry_run [::Boolean]
             #     Optional. If true, the request should expect normal response, but the
             #     entries won't be persisted nor exported. Useful for checking whether the
@@ -460,14 +462,13 @@ module Google
             #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
             #
             #     Projects listed in the `project_ids` field are added to this list.
+            #     A maximum of 100 resources may be specified in a single request.
             #   @param filter [::String]
-            #     Optional. A filter that chooses which log entries to return.  See [Advanced
-            #     Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
-            #     Only log entries that match the filter are returned.  An empty filter
-            #     matches all log entries in the resources listed in `resource_names`.
+            #     Optional. Only log entries that match the filter are returned.  An empty
+            #     filter matches all log entries in the resources listed in `resource_names`.
             #     Referencing a parent resource that is not listed in `resource_names` will
-            #     cause the filter to return no results. The maximum length of the filter is
-            #     20000 characters.
+            #     cause the filter to return no results. The maximum length of a filter is
+            #     20,000 characters.
             #   @param order_by [::String]
             #     Optional. How the results should be sorted.  Presently, the only permitted
             #     values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -476,10 +477,10 @@ module Google
             #     in order of decreasing timestamps (newest first).  Entries with equal
             #     timestamps are returned in order of their `insert_id` values.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of results to return from this request. Default is 50.
-            #     If the value is negative or exceeds 1000, the request is rejected. The
-            #     presence of `next_page_token` in the response indicates that more results
-            #     might be available.
+            #     Optional. The maximum number of results to return from this request.
+            #     Default is 50. If the value is negative or exceeds 1000, the request is
+            #     rejected. The presence of `next_page_token` in the response indicates that
+            #     more results might be available.
             #   @param page_token [::String]
             #     Optional. If present, then retrieve the next batch of results from the
             #     preceding call to this method.  `page_token` must be the value of
@@ -650,29 +651,20 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_logs(parent: nil, page_size: nil, page_token: nil, resource_names: nil)
+            # @overload list_logs(parent: nil, resource_names: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_logs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name that owns the logs:
+            #     Required. The resource name to list logs for:
             #
             #     *  `projects/[PROJECT_ID]`
             #     *  `organizations/[ORGANIZATION_ID]`
             #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
             #     *  `folders/[FOLDER_ID]`
-            #   @param page_size [::Integer]
-            #     Optional. The maximum number of results to return from this request.
-            #     Non-positive values are ignored.  The presence of `nextPageToken` in the
-            #     response indicates that more results might be available.
-            #   @param page_token [::String]
-            #     Optional. If present, then retrieve the next batch of results from the
-            #     preceding call to this method.  `pageToken` must be the value of
-            #     `nextPageToken` from the previous response.  The values of other method
-            #     parameters should be identical to those in the previous call.
             #   @param resource_names [::Array<::String>]
-            #     Optional. The resource name that owns the logs:
+            #     Optional. List of resource names to list logs for:
             #
             #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
             #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
@@ -685,6 +677,17 @@ module Google
             #     *  `organizations/[ORGANIZATION_ID]`
             #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
             #     *  `folders/[FOLDER_ID]`
+            #
+            #     The resource name in the `parent` field is added to this list.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return from this request.
+            #     Non-positive values are ignored.  The presence of `nextPageToken` in the
+            #     response indicates that more results might be available.
+            #   @param page_token [::String]
+            #     Optional. If present, then retrieve the next batch of results from the
+            #     preceding call to this method.  `pageToken` must be the value of
+            #     `nextPageToken` from the previous response.  The values of other method
+            #     parameters should be identical to those in the previous call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Logging::V2::ListLogsResponse]
@@ -911,7 +914,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "logging.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "logging.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

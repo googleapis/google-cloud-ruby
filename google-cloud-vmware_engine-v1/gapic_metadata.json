@@ -70,6 +70,16 @@
                 "list_subnets"
               ]
             },
+            "GetSubnet": {
+              "methods": [
+                "get_subnet"
+              ]
+            },
+            "UpdateSubnet": {
+              "methods": [
+                "update_subnet"
+              ]
+            },
             "ListNodeTypes": {
               "methods": [
                 "list_node_types"
@@ -163,6 +173,36 @@
             "ListVmwareEngineNetworks": {
               "methods": [
                 "list_vmware_engine_networks"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "create_private_connection"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "get_private_connection"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "list_private_connections"
+              ]
+            },
+            "UpdatePrivateConnection": {
+              "methods": [
+                "update_private_connection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "delete_private_connection"
+              ]
+            },
+            "ListPrivateConnectionPeeringRoutes": {
+              "methods": [
+                "list_private_connection_peering_routes"
               ]
             }
           }

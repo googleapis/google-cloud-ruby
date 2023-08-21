@@ -41,8 +41,9 @@ module Google
           # Types][google.cloud.dialogflow.cx.v3.EntityType],
           # {::Google::Cloud::Dialogflow::CX::V3::Flow Flows},
           # {::Google::Cloud::Dialogflow::CX::V3::Fulfillment Fulfillments},
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhook Webhooks}, and so on to manage the
-          # conversation flows..
+          # {::Google::Cloud::Dialogflow::CX::V3::Webhook Webhooks},
+          # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroups}
+          # and so on to manage the conversation flows.
           # @!attribute [rw] name
           #   @return [::String]
           #     The unique identifier of the agent.
@@ -116,6 +117,9 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
           #     Hierarchical advanced settings for this agent. The settings exposed at the
           #     lower level overrides the settings exposed at the higher level.
+          # @!attribute [rw] git_integration_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Agent::GitIntegrationSettings]
+          #     Git integration settings for this agent.
           # @!attribute [rw] text_to_speech_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextToSpeechSettings]
           #     Settings on instructing the speech synthesizer on how to generate the
@@ -123,6 +127,37 @@ module Google
           class Agent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Settings for connecting to Git repository for an agent.
+            # @!attribute [rw] github_settings
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::Agent::GitIntegrationSettings::GithubSettings]
+            #     GitHub settings.
+            class GitIntegrationSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Settings of integration with GitHub.
+              # @!attribute [rw] display_name
+              #   @return [::String]
+              #     The unique repository display name for the GitHub repository.
+              # @!attribute [rw] repository_uri
+              #   @return [::String]
+              #     The GitHub repository URI related to the agent.
+              # @!attribute [rw] tracking_branch
+              #   @return [::String]
+              #     The branch of the GitHub repository tracked for this agent.
+              # @!attribute [rw] access_token
+              #   @return [::String]
+              #     The access token used to authenticate the access to the GitHub
+              #     repository.
+              # @!attribute [rw] branches
+              #   @return [::Array<::String>]
+              #     A list of branches configured to be used from Dialogflow.
+              class GithubSettings
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
           end
 
           # The request message for
@@ -235,9 +270,27 @@ module Google
           #     Optional. Environment name. If not set, draft environment is assumed.
           #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/environments/<Environment ID>`.
+          # @!attribute [rw] git_destination
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::GitDestination]
+          #     Optional. The Git branch to export the agent to.
+          # @!attribute [rw] include_bigquery_export_settings
+          #   @return [::Boolean]
+          #     Optional. Whether to include BigQuery Export setting.
           class ExportAgentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Settings for exporting to a git branch.
+            # @!attribute [rw] tracking_branch
+            #   @return [::String]
+            #     Tracking branch for the git push.
+            # @!attribute [rw] commit_message
+            #   @return [::String]
+            #     Commit message for the git push.
+            class GitDestination
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Data format of the exported agent.
             module DataFormat
@@ -257,11 +310,18 @@ module Google
           # @!attribute [rw] agent_uri
           #   @return [::String]
           #     The URI to a file containing the exported agent. This field is populated
-          #     only if `agent_uri` is specified in
+          #     if `agent_uri` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
           # @!attribute [rw] agent_content
           #   @return [::String]
-          #     Uncompressed raw byte content for agent.
+          #     Uncompressed raw byte content for agent. This field is populated
+          #     if none of `agent_uri` and `git_destination` are specified in
+          #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
+          # @!attribute [rw] commit_sha
+          #   @return [::String]
+          #     Commit SHA of the git push. This field is populated if
+          #     `git_destination` is specified in
+          #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
           class ExportAgentResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -287,12 +347,24 @@ module Google
           # @!attribute [rw] agent_content
           #   @return [::String]
           #     Uncompressed raw byte content for agent.
+          # @!attribute [rw] git_source
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::GitSource]
+          #     Setting for restoring from a git branch
           # @!attribute [rw] restore_option
           #   @return [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]
           #     Agent restore mode. If not specified, `KEEP` is assumed.
           class RestoreAgentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Settings for restoring from a git branch
+            # @!attribute [rw] tracking_branch
+            #   @return [::String]
+            #     tracking branch for the git pull
+            class GitSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Restore option.
             module RestoreOption

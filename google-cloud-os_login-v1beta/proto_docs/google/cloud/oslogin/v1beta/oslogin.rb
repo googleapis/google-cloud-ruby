@@ -196,6 +196,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] ssh_public_key
+        #   @return [::String]
+        #     The SSH public key to sign.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     The parent project and zone for the signing request. This is needed to
+        #     properly ensure per-organization ISS processing and potentially to provide
+        #     for the possibility of zone-specific certificates used in the signing
+        #     process.
+        class SignSshPublicKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] signed_ssh_public_key
+        #   @return [::String]
+        #     The signed SSH public key to use in the SSH handshake.
+        class SignSshPublicKeyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The login profile view limits the user content retrieved.
         module LoginProfileView
           # The default login profile view. The API defaults to the BASIC view.

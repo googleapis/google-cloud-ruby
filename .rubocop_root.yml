@@ -2,10 +2,36 @@ inherit_gem:
   google-style: google-style.yml
 
 AllCops:
+  Exclude:
+    - "integration/**/*"
   Include:
-    - "NOTHING.rb"
-#   - ".toys/**/*.rb"
+    - ".toys/**/*.rb"
 
+Lint/NonLocalExitFromIterator:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 40
 Metrics/BlockLength:
   Exclude:
     - ".toys/**/*.rb"
+Metrics/CyclomaticComplexity:
+  Max: 20
+Metrics/MethodLength:
+  Max: 50
+Metrics/PerceivedComplexity:
+  Max: 20
+Naming/AccessorMethodName:
+  Enabled: false
+Naming/FileName:
+  Exclude:
+    - ".toys/**/*.rb"
+Style/GuardClause:
+  AllowConsecutiveConditionals: true
+Style/MultilineBlockChain:
+  Enabled: false
+Style/StderrPuts:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

@@ -29,7 +29,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The fully qualified name of the Backup.
-        #     projects/*/locations/*/backupPlans/*/backups/*
+        #     `projects/*/locations/*/backupPlans/*/backups/*`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Server generated global unique identifier of
@@ -42,9 +42,9 @@ module Google
         #     Output only. The timestamp when this Backup resource was last updated.
         # @!attribute [r] manual
         #   @return [::Boolean]
-        #     Output only. This flag indicates whether this Backup resource was created manually
-        #     by a user or via a schedule in the BackupPlan. A value of True means that
-        #     the Backup was created manually.
+        #     Output only. This flag indicates whether this Backup resource was created
+        #     manually by a user or via a schedule in the BackupPlan. A value of True
+        #     means that the Backup was created manually.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     A set of custom labels supplied by user.
@@ -62,75 +62,87 @@ module Google
         #     (either at creation time or in a subsequent update).
         # @!attribute [r] delete_lock_expire_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which an existing delete lock will expire for this backup
-        #     (calculated from create_time + {::Google::Cloud::GkeBackup::V1::Backup#delete_lock_days delete_lock_days}).
+        #     Output only. The time at which an existing delete lock will expire for this
+        #     backup (calculated from create_time +
+        #     {::Google::Cloud::GkeBackup::V1::Backup#delete_lock_days delete_lock_days}).
         # @!attribute [rw] retain_days
         #   @return [::Integer]
         #     The age (in days) after which this Backup will be automatically deleted.
         #     Must be an integer value >= 0:
         #
         #     - If 0, no automatic deletion will occur for this Backup.
-        #     - If not 0, this must be >= {::Google::Cloud::GkeBackup::V1::Backup#delete_lock_days delete_lock_days}.
+        #     - If not 0, this must be >=
+        #     {::Google::Cloud::GkeBackup::V1::Backup#delete_lock_days delete_lock_days} and
+        #     <= 365.
         #
         #     Once a Backup is created, this value may only be increased.
         #
         #     Defaults to the parent BackupPlan's
-        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::RetentionPolicy#backup_retain_days backup_retain_days} value.
+        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::RetentionPolicy#backup_retain_days backup_retain_days}
+        #     value.
         # @!attribute [r] retain_expire_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which this Backup will be automatically deleted (calculated
-        #     from create_time + {::Google::Cloud::GkeBackup::V1::Backup#retain_days retain_days}).
+        #     Output only. The time at which this Backup will be automatically deleted
+        #     (calculated from create_time +
+        #     {::Google::Cloud::GkeBackup::V1::Backup#retain_days retain_days}).
         # @!attribute [r] encryption_key
         #   @return [::Google::Cloud::GkeBackup::V1::EncryptionKey]
-        #     Output only. The customer managed encryption key that was used to encrypt the Backup's
-        #     artifacts.  Inherited from the parent BackupPlan's
-        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#encryption_key encryption_key} value.
+        #     Output only. The customer managed encryption key that was used to encrypt
+        #     the Backup's artifacts.  Inherited from the parent BackupPlan's
+        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#encryption_key encryption_key}
+        #     value.
         # @!attribute [r] all_namespaces
         #   @return [::Boolean]
         #     Output only. If True, all namespaces were included in the Backup.
         # @!attribute [r] selected_namespaces
         #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
-        #     Output only. If set, the list of namespaces that were included in the Backup.
+        #     Output only. If set, the list of namespaces that were included in the
+        #     Backup.
         # @!attribute [r] selected_applications
         #   @return [::Google::Cloud::GkeBackup::V1::NamespacedNames]
-        #     Output only. If set, the list of ProtectedApplications whose resources were included
-        #     in the Backup.
+        #     Output only. If set, the list of ProtectedApplications whose resources
+        #     were included in the Backup.
         # @!attribute [r] contains_volume_data
         #   @return [::Boolean]
-        #     Output only. Whether or not the Backup contains volume data.  Controlled by the parent
-        #     BackupPlan's
-        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#include_volume_data include_volume_data} value.
+        #     Output only. Whether or not the Backup contains volume data.  Controlled by
+        #     the parent BackupPlan's
+        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#include_volume_data include_volume_data}
+        #     value.
         # @!attribute [r] contains_secrets
         #   @return [::Boolean]
-        #     Output only. Whether or not the Backup contains Kubernetes Secrets.  Controlled by the
-        #     parent BackupPlan's
-        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#include_secrets include_secrets} value.
+        #     Output only. Whether or not the Backup contains Kubernetes Secrets.
+        #     Controlled by the parent BackupPlan's
+        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#include_secrets include_secrets}
+        #     value.
         # @!attribute [r] cluster_metadata
         #   @return [::Google::Cloud::GkeBackup::V1::Backup::ClusterMetadata]
-        #     Output only. Information about the GKE cluster from which this Backup was created.
+        #     Output only. Information about the GKE cluster from which this Backup was
+        #     created.
         # @!attribute [r] state
         #   @return [::Google::Cloud::GkeBackup::V1::Backup::State]
         #     Output only. Current state of the Backup
         # @!attribute [r] state_reason
         #   @return [::String]
-        #     Output only. Human-readable description of why the backup is in the current `state`.
+        #     Output only. Human-readable description of why the backup is in the current
+        #     `state`.
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Completion time of the Backup
         # @!attribute [r] resource_count
         #   @return [::Integer]
-        #     Output only. The total number of Kubernetes resources included in the Backup.
+        #     Output only. The total number of Kubernetes resources included in the
+        #     Backup.
         # @!attribute [r] volume_count
         #   @return [::Integer]
         #     Output only. The total number of volume backups contained in the Backup.
         # @!attribute [r] size_bytes
         #   @return [::Integer]
-        #     Output only. The total size of the Backup in bytes = config backup size + sum(volume
-        #     backup sizes)
+        #     Output only. The total size of the Backup in bytes = config backup size +
+        #     sum(volume backup sizes)
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. `etag` is used for optimistic concurrency control as a way to help
-        #     prevent simultaneous updates of a backup from overwriting each other.
+        #     Output only. `etag` is used for optimistic concurrency control as a way to
+        #     help prevent simultaneous updates of a backup from overwriting each other.
         #     It is strongly suggested that systems make use of the `etag` in the
         #     read-modify-write cycle to perform backup updates in order to avoid
         #     race conditions: An `etag` is returned in the response to `GetBackup`,
@@ -156,8 +168,8 @@ module Google
           #     The source cluster from which this Backup was created.
           #     Valid formats:
           #
-          #       - projects/*/locations/*/clusters/*
-          #       - projects/*/zones/*/clusters/*
+          #       - `projects/*/locations/*/clusters/*`
+          #       - `projects/*/zones/*/clusters/*`
           #
           #     This is inherited from the parent BackupPlan's
           #     {::Google::Cloud::GkeBackup::V1::BackupPlan#cluster cluster} field.

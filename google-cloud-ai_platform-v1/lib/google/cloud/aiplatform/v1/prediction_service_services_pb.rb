@@ -47,6 +47,9 @@ module Google
             # [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] that served this
             # prediction.
             rpc :RawPredict, ::Google::Cloud::AIPlatform::V1::RawPredictRequest, ::Google::Api::HttpBody
+            # Perform a server-side streaming online prediction request for Vertex
+            # LLM streaming.
+            rpc :ServerStreamingPredict, ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest, stream(::Google::Cloud::AIPlatform::V1::StreamingPredictResponse)
             # Perform an online explanation.
             #
             # If
@@ -57,8 +60,7 @@ module Google
             # [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id]
             # is not specified, all DeployedModels must have
             # [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec]
-            # populated. Only deployed AutoML tabular Models have
-            # explanation_spec.
+            # populated.
             rpc :Explain, ::Google::Cloud::AIPlatform::V1::ExplainRequest, ::Google::Cloud::AIPlatform::V1::ExplainResponse
           end
 

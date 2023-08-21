@@ -1,5 +1,37 @@
 # Release History
 
+### 0.22.0 (2023-08-15)
+
+#### Features
+
+* Added ability to configure the default missing_value_interpretation when calling append_rows ([#22778](https://github.com/googleapis/google-cloud-ruby/issues/22778)) 
+
+### 0.21.0 (2023-07-07)
+
+#### Features
+
+* add ResourceExhausted to retryable error for Write API unary calls ([#22483](https://github.com/googleapis/google-cloud-ruby/issues/22483)) 
+
+### 0.20.0 (2023-06-23)
+
+#### Features
+
+* add estimated_total_physical_file_size for TableReadOptions 
+
+### 0.19.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.19.0 (2023-05-31)
+
+#### Features
+
+* Defined additional storage error codes ([#21682](https://github.com/googleapis/google-cloud-ruby/issues/21682)) 
+* Support for table sampling percentage 
+* Uses binary protobuf definitions for better forward compatibility 
+
 ### 0.18.0 (2023-02-13)
 
 #### Features

@@ -29,7 +29,7 @@ module Google
         #     Format: `projects/{project}/processorTypes/{processor_type}`
         # @!attribute [rw] type
         #   @return [::String]
-        #     The processor type, e.g., `OCR_PROCESSOR`, `INVOICE_PROCESSOR`, etc.
+        #     The processor type, such as: `OCR_PROCESSOR`, `INVOICE_PROCESSOR`.
         # @!attribute [rw] category
         #   @return [::String]
         #     The processor category, used by UI to group processor types.
@@ -53,7 +53,8 @@ module Google
           # The location information about where the processor is available.
           # @!attribute [rw] location_id
           #   @return [::String]
-          #     The location id, currently must be one of [us, eu].
+          #     The location ID. For supported locations, refer to [regional and
+          #     multi-regional support](/document-ai/docs/regions).
           class LocationInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -107,6 +107,30 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
     end
   end
 
+  def test_private_connection_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.private_connection_path project: "value0", location: "value1", private_connection: "value2"
+      assert_equal "projects/value0/locations/value1/privateConnections/value2", path
+    end
+  end
+
+  def test_subnet_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.subnet_path project: "value0", location: "value1", private_cloud: "value2", subnet: "value3"
+      assert_equal "projects/value0/locations/value1/privateClouds/value2/subnets/value3", path
+    end
+  end
+
   def test_vmware_engine_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

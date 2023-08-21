@@ -338,9 +338,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A subscription resource. If none of `push_config` or `bigquery_config` is
-        # set, then the subscriber will pull and ack messages using API methods. At
-        # most one of these fields may be set.
+        # A subscription resource. If none of `push_config`, `bigquery_config`, or
+        # `cloud_storage_config` is set, then the subscriber will pull and ack messages
+        # using API methods. At most one of these fields may be set.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the subscription. It must have the format
@@ -362,6 +362,10 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig]
         #     If delivery to BigQuery is used with this subscription, this field is
         #     used to configure it.
+        # @!attribute [rw] cloud_storage_config
+        #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig]
+        #     If delivery to Google Cloud Storage is used with this subscription, this
+        #     field is used to configure it.
         # @!attribute [rw] ack_deadline_seconds
         #   @return [::Integer]
         #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
@@ -612,6 +616,14 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::PushConfig::OidcToken]
         #     If specified, Pub/Sub will generate and attach an OIDC JWT token as an
         #     `Authorization` header in the HTTP request for every pushed message.
+        # @!attribute [rw] pubsub_wrapper
+        #   @return [::Google::Cloud::PubSub::V1::PushConfig::PubsubWrapper]
+        #     When set, the payload to the push endpoint is in the form of the JSON
+        #     representation of a PubsubMessage
+        #     (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
+        # @!attribute [rw] no_wrapper
+        #   @return [::Google::Cloud::PubSub::V1::PushConfig::NoWrapper]
+        #     When set, the payload to the push endpoint is not wrapped.
         class PushConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -623,9 +635,9 @@ module Google
           #   @return [::String]
           #     [Service account
           #     email](https://cloud.google.com/iam/docs/service-accounts)
-          #     to be used for generating the OIDC token. The caller (for
-          #     CreateSubscription, UpdateSubscription, and ModifyPushConfig RPCs) must
-          #     have the iam.serviceAccounts.actAs permission for the service account.
+          #     used for generating the OIDC token. For more information
+          #     on setting up authentication, see
+          #     [Push subscriptions](https://cloud.google.com/pubsub/docs/push).
           # @!attribute [rw] audience
           #   @return [::String]
           #     Audience to be used when generating OIDC token. The audience claim
@@ -635,6 +647,25 @@ module Google
           #     token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
           #     Note: if not specified, the Push endpoint URL will be used.
           class OidcToken
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The payload to the push endpoint is in the form of the JSON representation
+          # of a PubsubMessage
+          # (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
+          class PubsubWrapper
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Sets the `data` field as the HTTP body for delivery.
+          # @!attribute [rw] write_metadata
+          #   @return [::Boolean]
+          #     When true, writes the Pub/Sub message metadata to
+          #     `x-goog-pubsub-<KEY>:<VAL>` headers of the HTTP request. Writes the
+          #     Pub/Sub message attributes to `<KEY>:<VAL>` headers of the HTTP request.
+          class NoWrapper
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -701,6 +732,86 @@ module Google
 
             # Cannot write to the BigQuery table due to a schema mismatch.
             SCHEMA_MISMATCH = 4
+          end
+        end
+
+        # Configuration for a Cloud Storage subscription.
+        # @!attribute [rw] bucket
+        #   @return [::String]
+        #     Required. User-provided name for the Cloud Storage bucket.
+        #     The bucket must be created by the user. The bucket name must be without
+        #     any prefix like "gs://". See the [bucket naming
+        #     requirements] (https://cloud.google.com/storage/docs/buckets#naming).
+        # @!attribute [rw] filename_prefix
+        #   @return [::String]
+        #     User-provided prefix for Cloud Storage filename. See the [object naming
+        #     requirements](https://cloud.google.com/storage/docs/objects#naming).
+        # @!attribute [rw] filename_suffix
+        #   @return [::String]
+        #     User-provided suffix for Cloud Storage filename. See the [object naming
+        #     requirements](https://cloud.google.com/storage/docs/objects#naming). Must
+        #     not end in "/".
+        # @!attribute [rw] text_config
+        #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::TextConfig]
+        #     If set, message data will be written to Cloud Storage in text format.
+        # @!attribute [rw] avro_config
+        #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::AvroConfig]
+        #     If set, message data will be written to Cloud Storage in Avro format.
+        # @!attribute [rw] max_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     The maximum duration that can elapse before a new Cloud Storage file is
+        #     created. Min 1 minute, max 10 minutes, default 5 minutes. May not exceed
+        #     the subscription's acknowledgement deadline.
+        # @!attribute [rw] max_bytes
+        #   @return [::Integer]
+        #     The maximum bytes that can be written to a Cloud Storage file before a new
+        #     file is created. Min 1 KB, max 10 GiB. The max_bytes limit may be exceeded
+        #     in cases where messages are larger than the limit.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::State]
+        #     Output only. An output-only field that indicates whether or not the
+        #     subscription can receive messages.
+        class CloudStorageConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for writing message data in text format.
+          # Message payloads will be written to files as raw text, separated by a
+          # newline.
+          class TextConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for writing message data in Avro format.
+          # Message payloads and metadata will be written to files as an Avro binary.
+          # @!attribute [rw] write_metadata
+          #   @return [::Boolean]
+          #     When true, write the subscription name, message_id, publish_time,
+          #     attributes, and ordering_key as additional fields in the output. The
+          #     subscription name, message_id, and publish_time fields are put in their
+          #     own fields while all other message properties other than data (for
+          #     example, an ordering_key, if present) are added as entries in the
+          #     attributes map.
+          class AvroConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states for a Cloud Storage subscription.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The subscription can actively send messages to Cloud Storage.
+            ACTIVE = 1
+
+            # Cannot write to the Cloud Storage bucket because of permission denied
+            # errors.
+            PERMISSION_DENIED = 2
+
+            # Cannot write to the Cloud Storage bucket because it does not exist.
+            NOT_FOUND = 3
           end
         end
 

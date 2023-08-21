@@ -28,7 +28,9 @@ def get_vod_ad_tag_detail project_id:, location:, session_id:, ad_tag_detail_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the VOD ad tag detail.
-  name = client.vod_ad_tag_detail_path project: project_id, location: location, vod_session: session_id, vod_ad_tag_detail: ad_tag_detail_id
+  name = client.vod_ad_tag_detail_path project: project_id, location: location,
+                                       vod_session: session_id,
+                                       vod_ad_tag_detail: ad_tag_detail_id
 
   # Get the VOD ad tag detail.
   ad_tag_detail = client.get_vod_ad_tag_detail name: name

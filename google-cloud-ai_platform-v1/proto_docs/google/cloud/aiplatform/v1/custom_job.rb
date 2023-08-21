@@ -301,6 +301,11 @@ module Google
         #     Restarts the entire CustomJob if a worker gets restarted.
         #     This feature can be used by distributed training jobs that are not
         #     resilient to workers leaving and joining a job.
+        # @!attribute [rw] disable_retries
+        #   @return [::Boolean]
+        #     Optional. Indicates if the job should retry for internal errors after the
+        #     job starts running. If true, overrides
+        #     `Scheduling.restart_job_on_worker_restart` to false.
         class Scheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

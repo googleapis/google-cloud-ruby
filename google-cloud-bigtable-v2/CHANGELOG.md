@@ -1,5 +1,32 @@
 # Release History
 
+### 0.13.0 (2023-07-28)
+
+#### Features
+
+* add last_scanned_row_key feature 
+
+### 0.12.0 (2023-07-18)
+
+#### Features
+
+* Experimental support for reverse scans ([#22453](https://github.com/googleapis/google-cloud-ruby/issues/22453)) 
+
+### 0.11.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-04)
+
+#### Features
+
+* The mutate_rows call now returns rate limit information 
+
 ### 0.9.0 (2023-03-01)
 
 #### Features

@@ -28,7 +28,8 @@ def get_vod_session project_id:, location:, session_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the VOD session.
-  name = client.vod_session_path project: project_id, location: location, vod_session: session_id
+  name = client.vod_session_path project: project_id, location: location,
+                                 vod_session: session_id
 
   # Get the VOD session.
   session = client.get_vod_session name: name

@@ -32,7 +32,7 @@ module Google
     module Build
       module V2
         ##
-        # Manages connections to source code repostiories.
+        # Manages connections to source code repositories.
         #
         # @example Load this service and instantiate a gRPC client
         #

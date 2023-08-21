@@ -92,6 +92,10 @@ module Google
         #   @return [::String]
         #     Output only. The resource name of the TrainingPipeline that uploaded this
         #     Model, if any.
+        # @!attribute [rw] pipeline_job
+        #   @return [::String]
+        #     Optional. This field is populated if the model is produced by a pipeline
+        #     job.
         # @!attribute [rw] container_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ModelContainerSpec]
         #     Input only. The specification of the container that is to be used when
@@ -379,6 +383,17 @@ module Google
             # pre-configured [DeploymentResourcePool][] is required.
             SHARED_RESOURCES = 3
           end
+        end
+
+        # Contains information about the Large Model.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The unique name of the large Foundation or pre-built model. Like
+        #     "chat-bison", "text-bison". Or model name with version ID, like
+        #     "chat-bison@001", "text-bison@005", etc.
+        class LargeModelReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains the schemata used in Model's predictions and explanations via

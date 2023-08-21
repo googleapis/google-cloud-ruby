@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/workflows/v1/workflows"
 
 class ::Google::Cloud::Workflows::V1::Workflows::ClientPathsTest < Minitest::Test
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Workflows::V1::Workflows::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

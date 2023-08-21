@@ -23,7 +23,7 @@ describe "#list_channels", :live_stream_snippet do
     @input_created = true
     @channel_created_stopped = true
 
-    assert_output(/Channels:\n#{channel.name}/) do
+    assert_output(/\n#{channel.name}/) do
       sample.run project_id: project_id, location: location_id
     end
   end

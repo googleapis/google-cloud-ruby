@@ -22,14 +22,17 @@ require "google/cloud/video/stitcher"
 # @param location [String] The location (e.g. "us-central1")
 # @param cdn_key_id [String] The user-defined CDN key ID
 # @param hostname [String] The hostname to which this CDN key applies
-# @param akamai_token_key [String] Applies to an Akamai CDN key. A base64-encoded string token key.
+# @param akamai_token_key [String] Applies to an Akamai CDN key. A
+#   base64-encoded string token key.
 #
-def update_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:, akamai_token_key:
+def update_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:,
+                          akamai_token_key:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the path for the CDN key resource.
-  cdn_key_path = client.cdn_key_path project: project_id, location: location, cdn_key: cdn_key_id
+  cdn_key_path = client.cdn_key_path project: project_id, location: location,
+                                     cdn_key: cdn_key_id
 
   # Set the CDN key fields.
   update_mask = { paths: ["hostname", "akamai_cdn_key"] }
@@ -41,9 +44,15 @@ def update_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:, akamai
     }
   }
 
-  response = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
+  operation = client.update_cdn_key cdn_key: new_cdn_key,
+                                    update_mask: update_mask
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print the CDN key name.
-  puts "Updated CDN key: #{response.name}"
+  puts "Updated CDN key: #{operation.response.name}"
 end
 # [END videostitcher_update_cdn_key_akamai]

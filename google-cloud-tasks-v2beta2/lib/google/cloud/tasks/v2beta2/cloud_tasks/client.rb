@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/tasks/v2beta2/cloudtasks_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -90,6 +91,8 @@ module Google
 
                 default_config.rpcs.resume_queue.timeout = 20.0
 
+                default_config.rpcs.upload_queue_yaml.timeout = 20.0
+
                 default_config.rpcs.get_iam_policy.timeout = 20.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -128,6 +131,8 @@ module Google
                 default_config.rpcs.cancel_lease.timeout = 20.0
 
                 default_config.rpcs.run_task.timeout = 20.0
+
+                default_config.rpcs.buffer_task.timeout = 20.0
 
                 default_config
               end
@@ -188,7 +193,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -198,6 +203,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @cloud_tasks_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Tasks::V2beta2::CloudTasks::Stub,
                 credentials:  credentials,
@@ -206,6 +217,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -463,7 +481,7 @@ module Google
             #
             #     The list of allowed locations can be obtained by calling Cloud
             #     Tasks' implementation of
-            #     [ListLocations][google.cloud.location.Locations.ListLocations].
+            #     `::Google::Cloud::Location::Locations::Client#list_locations`.
             #   @param queue [::Google::Cloud::Tasks::V2beta2::Queue, ::Hash]
             #     Required. The queue to create.
             #
@@ -1020,6 +1038,91 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_tasks_stub.call_rpc :resume_queue, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update queue list by uploading a queue.yaml file.
+            #
+            # The queue.yaml file is supplied in the request body as a YAML encoded
+            # string. This method was added to support gcloud clients versions before
+            # 322.0.0. New clients should use CreateQueue instead of this method.
+            #
+            # @overload upload_queue_yaml(request, options = nil)
+            #   Pass arguments to `upload_queue_yaml` via a request object, either of type
+            #   {::Google::Cloud::Tasks::V2beta2::UploadQueueYamlRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Tasks::V2beta2::UploadQueueYamlRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upload_queue_yaml(app_id: nil, http_body: nil)
+            #   Pass arguments to `upload_queue_yaml` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param app_id [::String]
+            #     Required. The App ID is supplied as an HTTP parameter. Unlike internal
+            #     usage of App ID, it does not include a region prefix. Rather, the App ID
+            #     represents the Project ID against which to make the request.
+            #   @param http_body [::Google::Api::HttpBody, ::Hash]
+            #     The http body contains the queue.yaml file which used to update queue lists
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2beta2::UploadQueueYamlRequest.new
+            #
+            #   # Call the upload_queue_yaml method.
+            #   result = client.upload_queue_yaml request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def upload_queue_yaml request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::UploadQueueYamlRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upload_queue_yaml.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.upload_queue_yaml.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upload_queue_yaml.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_tasks_stub.call_rpc :upload_queue_yaml, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1612,10 +1715,10 @@ module Google
             #     that was deleted or completed recently then the call will fail
             #     with [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS].
             #     If the task's queue was created using Cloud Tasks, then another task with
-            #     the same name can't be created for ~1hour after the original task was
+            #     the same name can't be created for ~1 hour after the original task was
             #     deleted or completed. If the task's queue was created using queue.yaml or
             #     queue.xml, then another task with the same name can't be created
-            #     for ~9days after the original task was deleted or completed.
+            #     for ~9 days after the original task was deleted or completed.
             #
             #     Because there is an extra lookup cost to identify duplicate task
             #     names, these {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask}
@@ -2447,6 +2550,115 @@ module Google
             end
 
             ##
+            # Creates and buffers a new task without the need to explicitly define a Task
+            # message. The queue must have [HTTP
+            # target][google.cloud.tasks.v2beta2.HttpTarget]. To create the task with a
+            # custom ID, use the following format and set TASK_ID to your desired ID:
+            # projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer
+            # To create the task with an automatically generated ID, use the following
+            # format:
+            # projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer.
+            # Note: This feature is in its experimental stage. You must request access to
+            # the API through the [Cloud Tasks BufferTask Experiment Signup
+            # form](https://forms.gle/X8Zr5hiXH5tTGFqh8).
+            #
+            # @overload buffer_task(request, options = nil)
+            #   Pass arguments to `buffer_task` via a request object, either of type
+            #   {::Google::Cloud::Tasks::V2beta2::BufferTaskRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Tasks::V2beta2::BufferTaskRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload buffer_task(queue: nil, task_id: nil, body: nil)
+            #   Pass arguments to `buffer_task` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param queue [::String]
+            #     Required. The parent queue name. For example:
+            #     projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+            #
+            #     The queue must already exist.
+            #   @param task_id [::String]
+            #     Optional. Task ID for the task being created. If not provided, a random
+            #     task ID is assigned to the task.
+            #   @param body [::Google::Api::HttpBody, ::Hash]
+            #     Optional. Body of the HTTP request.
+            #
+            #     The body can take any generic value. The value is written to the
+            #     [HttpRequest][payload] of the [Task].
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::BufferTaskResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Tasks::V2beta2::BufferTaskResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2beta2::BufferTaskRequest.new
+            #
+            #   # Call the buffer_task method.
+            #   result = client.buffer_task request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2beta2::BufferTaskResponse.
+            #   p result
+            #
+            def buffer_task request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::BufferTaskRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.buffer_task.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.queue
+                header_params["queue"] = request.queue
+              end
+              if request.task_id
+                header_params["task_id"] = request.task_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.buffer_task.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.buffer_task.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_tasks_stub.call_rpc :buffer_task, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CloudTasks API.
             #
             # This class represents the configuration for CloudTasks,
@@ -2528,7 +2740,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "cloudtasks.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "cloudtasks.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -2622,6 +2836,11 @@ module Google
                 #
                 attr_reader :resume_queue
                 ##
+                # RPC-specific configuration for `upload_queue_yaml`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upload_queue_yaml
+                ##
                 # RPC-specific configuration for `get_iam_policy`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2681,6 +2900,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_task
+                ##
+                # RPC-specific configuration for `buffer_task`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :buffer_task
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2700,6 +2924,8 @@ module Google
                   @pause_queue = ::Gapic::Config::Method.new pause_queue_config
                   resume_queue_config = parent_rpcs.resume_queue if parent_rpcs.respond_to? :resume_queue
                   @resume_queue = ::Gapic::Config::Method.new resume_queue_config
+                  upload_queue_yaml_config = parent_rpcs.upload_queue_yaml if parent_rpcs.respond_to? :upload_queue_yaml
+                  @upload_queue_yaml = ::Gapic::Config::Method.new upload_queue_yaml_config
                   get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
@@ -2724,6 +2950,8 @@ module Google
                   @cancel_lease = ::Gapic::Config::Method.new cancel_lease_config
                   run_task_config = parent_rpcs.run_task if parent_rpcs.respond_to? :run_task
                   @run_task = ::Gapic::Config::Method.new run_task_config
+                  buffer_task_config = parent_rpcs.buffer_task if parent_rpcs.respond_to? :buffer_task
+                  @buffer_task = ::Gapic::Config::Method.new buffer_task_config
 
                   yield self if block_given?
                 end

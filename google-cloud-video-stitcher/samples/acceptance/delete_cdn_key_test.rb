@@ -24,7 +24,8 @@ describe "#delete_cdn_key", :stitcher_snippet do
     client.get_cdn_key name: akamai_cdn_key_name
 
     assert_output(/Deleted CDN key/) do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: akamai_cdn_key_id
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: akamai_cdn_key_id
     end
 
     assert_raises Google::Cloud::NotFoundError do
@@ -41,7 +42,8 @@ describe "#delete_cdn_key", :stitcher_snippet do
     client.get_cdn_key name: media_cdn_key_name
 
     assert_output(/Deleted CDN key/) do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: media_cdn_key_id
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: media_cdn_key_id
     end
 
     assert_raises Google::Cloud::NotFoundError do
@@ -58,7 +60,8 @@ describe "#delete_cdn_key", :stitcher_snippet do
     client.get_cdn_key name: cloud_cdn_key_name
 
     assert_output(/Deleted CDN key/) do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: cloud_cdn_key_id
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: cloud_cdn_key_id
     end
 
     assert_raises Google::Cloud::NotFoundError do

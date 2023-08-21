@@ -89,6 +89,36 @@
               "methods": [
                 "delete_event"
               ]
+            },
+            "CreateAsset": {
+              "methods": [
+                "create_asset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "delete_asset"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "get_asset"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "list_assets"
+              ]
+            },
+            "GetPool": {
+              "methods": [
+                "get_pool"
+              ]
+            },
+            "UpdatePool": {
+              "methods": [
+                "update_pool"
+              ]
             }
           }
         }

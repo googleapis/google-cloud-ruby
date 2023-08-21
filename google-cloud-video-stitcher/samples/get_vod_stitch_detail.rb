@@ -28,7 +28,9 @@ def get_vod_stitch_detail project_id:, location:, session_id:, stitch_detail_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the VOD stitch detail.
-  name = client.vod_stitch_detail_path project: project_id, location: location, vod_session: session_id, vod_stitch_detail: stitch_detail_id
+  name = client.vod_stitch_detail_path project: project_id, location: location,
+                                       vod_session: session_id,
+                                       vod_stitch_detail: stitch_detail_id
 
   # Get the VOD stitch detail.
   stitch_detail = client.get_vod_stitch_detail name: name

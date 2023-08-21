@@ -1,5 +1,41 @@
 # Changelog
 
+### 0.11.0 (2023-07-28)
+
+#### Features
+
+* support predeploy and postdeploy actions 
+
+### 0.10.0 (2023-07-11)
+
+#### Features
+
+* Support for configuring the time to wait for route updates to propagate ([#22511](https://github.com/googleapis/google-cloud-ruby/issues/22511)) 
+* Support resource state change and process aborted log entry types 
+
+### 0.9.0 (2023-06-23)
+
+#### Features
+
+* support deploy_parameters for stage 
+
+### 0.8.0 (2023-06-06)
+
+#### Features
+
+* Added ServiceNetworking#disable_pod_overprovisioning ([#22241](https://github.com/googleapis/google-cloud-ruby/issues/22241)) 
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.7.0 (2023-05-04)
+
+#### Features
+
+* Added PhaseArtifact#job_manifests_path 
+* Added support for DeployArtifacts 
+
 ### 0.6.0 (2023-03-24)
 
 #### Features
