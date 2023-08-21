@@ -95,18 +95,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :alias, :string, 7
       oneof :operator do
         optional :count, :message, 1, "google.firestore.v1.StructuredAggregationQuery.Aggregation.Count"
-        optional :sum, :message, 2, "google.firestore.v1.StructuredAggregationQuery.Aggregation.Sum"
-        optional :avg, :message, 3, "google.firestore.v1.StructuredAggregationQuery.Aggregation.Avg"
       end
     end
     add_message "google.firestore.v1.StructuredAggregationQuery.Aggregation.Count" do
       optional :up_to, :message, 1, "google.protobuf.Int64Value"
-    end
-    add_message "google.firestore.v1.StructuredAggregationQuery.Aggregation.Sum" do
-      optional :field, :message, 1, "google.firestore.v1.StructuredQuery.FieldReference"
-    end
-    add_message "google.firestore.v1.StructuredAggregationQuery.Aggregation.Avg" do
-      optional :field, :message, 1, "google.firestore.v1.StructuredQuery.FieldReference"
     end
     add_message "google.firestore.v1.Cursor" do
       repeated :values, :message, 1, "google.firestore.v1.Value"
@@ -135,8 +127,6 @@ module Google
         StructuredAggregationQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery").msgclass
         StructuredAggregationQuery::Aggregation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery.Aggregation").msgclass
         StructuredAggregationQuery::Aggregation::Count = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery.Aggregation.Count").msgclass
-        StructuredAggregationQuery::Aggregation::Sum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery.Aggregation.Sum").msgclass
-        StructuredAggregationQuery::Aggregation::Avg = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery.Aggregation.Avg").msgclass
         Cursor = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.Cursor").msgclass
       end
     end
