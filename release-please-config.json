@@ -879,6 +879,10 @@
       "component": "google-cloud-notebooks-v1beta1",
       "version_file": "lib/google/cloud/notebooks/v1beta1/version.rb"
     },
+    "google-cloud-notebooks-v2": {
+      "component": "google-cloud-notebooks-v2",
+      "version_file": "lib/google/cloud/notebooks/v2/version.rb"
+    },
     "google-cloud-optimization": {
       "component": "google-cloud-optimization",
       "version_file": "lib/google/cloud/optimization/version.rb"
