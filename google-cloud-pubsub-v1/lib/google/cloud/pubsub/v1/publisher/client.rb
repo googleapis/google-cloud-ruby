@@ -78,7 +78,7 @@ module Google
 
                 default_config.rpcs.publish.timeout = 60.0
                 default_config.rpcs.publish.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 13, 8, 2, 14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 4.0, retry_codes: [10, 1, 13, 8, 2, 14, 4]
                 }
 
                 default_config.rpcs.get_topic.timeout = 60.0
