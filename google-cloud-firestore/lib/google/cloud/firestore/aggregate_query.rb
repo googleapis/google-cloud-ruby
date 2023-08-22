@@ -71,16 +71,20 @@ module Google
         attr_reader :query
 
         ##
-        # @private Array of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation objects
-        attr_reader :aggregates
+        # @private Object of type
+        # Google::Cloud::Firestore::V1::StructuredAggregationQuery
+        attr_reader :grpc
 
         ##
         # @private Creates a new AggregateQuery
-        def initialize query, parent_path, client, aggregates: []
+        def initialize query, parent_path, client
           @query = query
           @parent_path = parent_path
-          @aggregates = aggregates
           @client = client
+          @grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+            structured_query: @query,
+            aggregations: []
+          )
         end
 
         ##
@@ -107,12 +111,25 @@ module Google
         #
         def add_count aggregate_alias: nil
           aggregate_alias ||= ALIASES[:count]
-          new_aggregates = @aggregates.dup
-          new_aggregates << StructuredAggregationQuery::Aggregation.new(
-            count: StructuredAggregationQuery::Aggregation::Count.new,
+          new_aggregate = Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
             alias: aggregate_alias
           )
-          AggregateQuery.start query, new_aggregates, parent_path, client
+
+          start new_aggregate
+        end
+
+        ##
+        # @private
+        def start new_aggregate
+          combined_aggregates = [].concat(grpc.aggregations).concat([new_aggregate])
+          new_grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+            structured_query: @query,
+            aggregations: combined_aggregates
+          )
+          dup.tap do |aq|
+            aq.instance_variable_set :@grpc, new_grpc
+          end
         end
 
         ##
@@ -143,7 +160,7 @@ module Google
 
           return enum_for :get unless block_given?
 
-          responses = service.run_aggregate_query @parent_path, structured_aggregation_query
+          responses = service.run_aggregate_query @parent_path, @grpc
           responses.each do |response|
             next if response.result.nil?
             yield AggregateQuerySnapshot.from_run_aggregate_query_response response
@@ -151,25 +168,12 @@ module Google
         end
 
         ##
-        # @private Creates a Google::Cloud::Firestore::V1::StructuredAggregationQuery object
-        def structured_aggregation_query
-          StructuredAggregationQuery.new(
-            structured_query: @query,
-            aggregations: @aggregates
-          )
-        end
-
-        ##
-        # @private Start a new AggregateQuery.
-        def self.start query, aggregates, parent_path, client
-          new query, parent_path, client, aggregates: aggregates
+        # @private
+        def to_grpc
+          @grpc
         end
 
         protected
-
-        ##
-        # @private
-        StructuredAggregationQuery = Google::Cloud::Firestore::V1::StructuredAggregationQuery
 
         ##
         # @private
