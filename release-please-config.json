@@ -955,6 +955,10 @@
       "component": "google-cloud-policy_troubleshooter",
       "version_file": "lib/google/cloud/policy_troubleshooter/version.rb"
     },
+    "google-cloud-policy_troubleshooter-iam-v3": {
+      "component": "google-cloud-policy_troubleshooter-iam-v3",
+      "version_file": "lib/google/cloud/policy_troubleshooter/iam/v3/version.rb"
+    },
     "google-cloud-policy_troubleshooter-v1": {
       "component": "google-cloud-policy_troubleshooter-v1",
       "version_file": "lib/google/cloud/policy_troubleshooter/v1/version.rb"
