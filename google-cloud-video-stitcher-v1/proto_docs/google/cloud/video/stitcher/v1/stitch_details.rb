@@ -22,7 +22,9 @@ module Google
     module Video
       module Stitcher
         module V1
-          # Detailed information related to the interstitial of a VOD session.
+          # Detailed information related to the interstitial of a VOD session. This
+          # resource is only available for VOD sessions that do not implement Google Ad
+          # Manager ad insertion.
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the stitch detail in the specified VOD session, in the form of
