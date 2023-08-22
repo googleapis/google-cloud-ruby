@@ -68,6 +68,14 @@ module Google
           #   @return [::String]
           #     Required. Name of billing account to list budgets under. Values
           #     are of the form `billingAccounts/{billingAccountId}`.
+          # @!attribute [rw] scope
+          #   @return [::String]
+          #     Optional. Set the scope of the budgets to be returned, in the format of the
+          #     resource name. The scope of a budget is the cost that it tracks, such as
+          #     costs for a single project, or the costs for all projects in a folder. Only
+          #     project scope (in the format of "projects/project-id" or "projects/123") is
+          #     supported in this field. When this field is set to a project's resource
+          #     name, the budgets returned are tracking the costs for that project.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Optional. The maximum number of budgets to return per page.
