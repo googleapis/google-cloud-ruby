@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/redis/v1/cloud_redis_pb"
 require "google/cloud/redis/v1/cloud_redis/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -155,7 +156,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -172,6 +173,13 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
                 @cloud_redis_stub = ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -181,6 +189,13 @@ module Google
               # @return [::Google::Cloud::Redis::V1::CloudRedis::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -224,7 +239,8 @@ module Google
               #     to determine if there are more instances left to be queried.
               #   @param page_token [::String]
               #     The `next_page_token` value returned from a previous
-              #     {::Google::Cloud::Redis::V1::CloudRedis::Rest::Client#list_instances ListInstances} request, if any.
+              #     {::Google::Cloud::Redis::V1::CloudRedis::Rest::Client#list_instances ListInstances} request, if
+              #     any.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Redis::V1::ListInstancesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -935,7 +951,8 @@ module Google
               #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
               #     where `location_id` refers to a GCP region.
               #   @param reschedule_type [::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest::RescheduleType]
-              #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+              #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+              #     well.
               #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Optional. Timestamp when the maintenance shall be rescheduled to if
               #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
@@ -1056,7 +1073,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "redis.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "redis.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -1068,6 +1087,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil

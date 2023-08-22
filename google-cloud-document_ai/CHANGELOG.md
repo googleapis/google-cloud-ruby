@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.2 (2023-06-23)
+
+#### Documentation
+
+* Use V1 instead of V1beta3 in examples ([#22420](https://github.com/googleapis/google-cloud-ruby/issues/22420)) 
+
 ### 1.2.1 (2023-03-16)
 
 #### Documentation

@@ -142,7 +142,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -180,7 +180,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read_rows(table_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil)
+            # @overload read_rows(table_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
             #   Pass arguments to `read_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -190,8 +190,8 @@ module Google
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
-            #     This value specifies routing for replication. This API only accepts the
-            #     empty value of app_profile_id.
+            #     This value specifies routing for replication. If not specified, the
+            #     "default" application profile will be used.
             #   @param rows [::Google::Cloud::Bigtable::V2::RowSet, ::Hash]
             #     The row keys and/or ranges to read sequentially. If not specified, reads
             #     from all rows.
@@ -203,6 +203,19 @@ module Google
             #     default (zero) is to return all results.
             #   @param request_stats_view [::Google::Cloud::Bigtable::V2::ReadRowsRequest::RequestStatsView]
             #     The view into RequestStats, as described above.
+            #   @param reversed [::Boolean]
+            #     Experimental API - Please note that this API is currently experimental
+            #     and can change in the future.
+            #
+            #     Return rows in lexiographical descending order of the row keys. The row
+            #     contents will not be affected by this flag.
+            #
+            #     Example result set:
+            #
+            #         [
+            #           {key: "k2", "f:col1": "v1", "f:col2": "v1"},
+            #           {key: "k1", "f:col1": "v2", "f:col2": "v2"}
+            #         ]
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::ReadRowsResponse>]
@@ -1197,7 +1210,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "bigtable.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "bigtable.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

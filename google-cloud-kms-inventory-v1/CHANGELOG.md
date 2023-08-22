@@ -1,5 +1,38 @@
 # Changelog
 
+### 0.6.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22687](https://github.com/googleapis/google-cloud-ruby/issues/22687)) 
+
+### 0.6.0 (2023-07-25)
+
+#### Features
+
+* support more algorithm in CryptoKeyVersionAlgorithm 
+
+### 0.5.0 (2023-07-14)
+
+#### Features
+
+* Support filtering resources by type ([#22526](https://github.com/googleapis/google-cloud-ruby/issues/22526)) 
+
+### 0.4.0 (2023-07-06)
+
+#### Features
+
+* add interoperable symmetric encryption system ([#22470](https://github.com/googleapis/google-cloud-ruby/issues/22470)) 
+
+### 0.3.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21675](https://github.com/googleapis/google-cloud-ruby/issues/21675)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.2.1 (2023-03-29)
 
 #### Documentation

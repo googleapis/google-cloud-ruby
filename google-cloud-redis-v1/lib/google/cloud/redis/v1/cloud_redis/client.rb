@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/redis/v1/cloud_redis_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -159,7 +160,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -170,6 +171,12 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
@@ -190,6 +197,13 @@ module Google
             # @return [::Google::Cloud::Redis::V1::CloudRedis::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -233,7 +247,8 @@ module Google
             #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `next_page_token` value returned from a previous
-            #     {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances} request, if any.
+            #     {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances} request, if
+            #     any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1::Instance>]
@@ -1228,7 +1243,8 @@ module Google
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
             #   @param reschedule_type [::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest::RescheduleType]
-            #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+            #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+            #     well.
             #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. Timestamp when the maintenance shall be rescheduled to if
             #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
@@ -1388,7 +1404,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "redis.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "redis.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

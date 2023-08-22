@@ -268,6 +268,7 @@
     "snippets/conversation_profiles/update_conversation_profile.rb",
     "snippets/conversations/complete_conversation.rb",
     "snippets/conversations/create_conversation.rb",
+    "snippets/conversations/generate_stateless_summary.rb",
     "snippets/conversations/get_conversation.rb",
     "snippets/conversations/list_conversations.rb",
     "snippets/conversations/list_messages.rb",

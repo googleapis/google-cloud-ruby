@@ -150,7 +150,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -516,7 +516,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil)
+            # @overload list_jobs(parent: nil, filter: nil, order_by: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -525,6 +525,9 @@ module Google
             #     Parent path.
             #   @param filter [::String]
             #     List filter.
+            #   @param order_by [::String]
+            #     Optional. Sort results. Supported are "name", "name desc", "create_time",
+            #     and "create_time desc".
             #   @param page_size [::Integer]
             #     Page size.
             #   @param page_token [::String]
@@ -866,7 +869,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "batch.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "batch.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

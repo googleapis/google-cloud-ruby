@@ -166,6 +166,18 @@ module Google
             # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
             # [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
             rpc :Decrypt, ::Google::Cloud::Kms::V1::DecryptRequest, ::Google::Cloud::Kms::V1::DecryptResponse
+            # Encrypts data using portable cryptographic primitives. Most users should
+            # choose [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt] and
+            # [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt] rather than
+            # their raw counterparts. The
+            # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+            # [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].
+            rpc :RawEncrypt, ::Google::Cloud::Kms::V1::RawEncryptRequest, ::Google::Cloud::Kms::V1::RawEncryptResponse
+            # Decrypts data that was originally encrypted using a raw cryptographic
+            # mechanism. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+            # must be
+            # [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].
+            rpc :RawDecrypt, ::Google::Cloud::Kms::V1::RawDecryptRequest, ::Google::Cloud::Kms::V1::RawDecryptResponse
             # Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
             # with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
             # ASYMMETRIC_SIGN, producing a signature that can be verified with the public

@@ -60,6 +60,11 @@
                 "list_saved_queries"
               ]
             },
+            "DeleteSavedQuery": {
+              "methods": [
+                "delete_saved_query"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "get_annotation_spec"
@@ -112,6 +117,11 @@
             "UndeployModel": {
               "methods": [
                 "undeploy_model"
+              ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutate_deployed_model"
               ]
             }
           }
@@ -533,6 +543,25 @@
         }
       }
     },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::MatchService::Client",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "find_neighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "read_index_datapoints"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
@@ -751,6 +780,11 @@
                 "update_model"
               ]
             },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "update_explanation_dataset"
+              ]
+            },
             "DeleteModel": {
               "methods": [
                 "delete_model"
@@ -809,6 +843,20 @@
             "ListModelEvaluationSlices": {
               "methods": [
                 "list_model_evaluation_slices"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "get_publisher_model"
               ]
             }
           }
@@ -889,9 +937,58 @@
                 "raw_predict"
               ]
             },
+            "ServerStreamingPredict": {
+              "methods": [
+                "server_streaming_predict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ScheduleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client",
+          "rpcs": {
+            "CreateSchedule": {
+              "methods": [
+                "create_schedule"
+              ]
+            },
+            "DeleteSchedule": {
+              "methods": [
+                "delete_schedule"
+              ]
+            },
+            "GetSchedule": {
+              "methods": [
+                "get_schedule"
+              ]
+            },
+            "ListSchedules": {
+              "methods": [
+                "list_schedules"
+              ]
+            },
+            "PauseSchedule": {
+              "methods": [
+                "pause_schedule"
+              ]
+            },
+            "ResumeSchedule": {
+              "methods": [
+                "resume_schedule"
+              ]
+            },
+            "UpdateSchedule": {
+              "methods": [
+                "update_schedule"
               ]
             }
           }
@@ -947,11 +1044,6 @@
                 "get_tensorboard"
               ]
             },
-            "ReadTensorboardUsage": {
-              "methods": [
-                "read_tensorboard_usage"
-              ]
-            },
             "UpdateTensorboard": {
               "methods": [
                 "update_tensorboard"
@@ -965,6 +1057,16 @@
             "DeleteTensorboard": {
               "methods": [
                 "delete_tensorboard"
+              ]
+            },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "read_tensorboard_usage"
+              ]
+            },
+            "ReadTensorboardSize": {
+              "methods": [
+                "read_tensorboard_size"
               ]
             },
             "CreateTensorboardExperiment": {

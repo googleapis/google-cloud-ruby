@@ -23,11 +23,11 @@ module Google
       module V1
         # The configuration of a potential series of Restore operations to be performed
         # against Backups belong to a particular BackupPlan.
-        # Next id: 11
+        # Next id: 13
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full name of the RestorePlan resource.
-        #     Format: projects/*/locations/*/restorePlans/*.
+        #     Format: `projects/*/locations/*/restorePlans/*`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Server generated global unique identifier of
@@ -45,18 +45,18 @@ module Google
         #     User specified descriptive string for this RestorePlan.
         # @!attribute [rw] backup_plan
         #   @return [::String]
-        #     Required. Immutable. A reference to the {::Google::Cloud::GkeBackup::V1::BackupPlan BackupPlan} from which Backups may be used as the
-        #     source for Restores created via this RestorePlan.
-        #     Format: projects/*/locations/*/backupPlans/*.
+        #     Required. Immutable. A reference to the
+        #     {::Google::Cloud::GkeBackup::V1::BackupPlan BackupPlan} from which Backups may
+        #     be used as the source for Restores created via this RestorePlan. Format:
+        #     `projects/*/locations/*/backupPlans/*`.
         # @!attribute [rw] cluster
         #   @return [::String]
-        #     Required. Immutable. The target cluster into which Restores created via this RestorePlan
-        #     will restore data. NOTE: the cluster's region must be the same as the
-        #     RestorePlan.
-        #     Valid formats:
+        #     Required. Immutable. The target cluster into which Restores created via
+        #     this RestorePlan will restore data. NOTE: the cluster's region must be the
+        #     same as the RestorePlan. Valid formats:
         #
-        #       - projects/*/locations/*/clusters/*
-        #       - projects/*/zones/*/clusters/*
+        #       - `projects/*/locations/*/clusters/*`
+        #       - `projects/*/zones/*/clusters/*`
         # @!attribute [rw] restore_config
         #   @return [::Google::Cloud::GkeBackup::V1::RestoreConfig]
         #     Required. Configuration of Restores created via this RestorePlan.
@@ -65,14 +65,23 @@ module Google
         #     A set of custom labels supplied by user.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. `etag` is used for optimistic concurrency control as a way to help
-        #     prevent simultaneous updates of a restore from overwriting each other.
+        #     Output only. `etag` is used for optimistic concurrency control as a way to
+        #     help prevent simultaneous updates of a restore from overwriting each other.
         #     It is strongly suggested that systems make use of the `etag` in the
         #     read-modify-write cycle to perform restore updates in order to avoid
         #     race conditions: An `etag` is returned in the response to `GetRestorePlan`,
         #     and systems are expected to put that etag in the request to
         #     `UpdateRestorePlan` or `DeleteRestorePlan` to ensure that their change
         #     will be applied to the same version of the resource.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::GkeBackup::V1::RestorePlan::State]
+        #     Output only. State of the RestorePlan. This State field reflects the
+        #     various stages a RestorePlan can be in
+        #     during the Create operation.
+        # @!attribute [r] state_reason
+        #   @return [::String]
+        #     Output only. Human-readable description of why RestorePlan is in the
+        #     current `state`
         class RestorePlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,6 +93,24 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # State
+          module State
+            # Default first value for Enums.
+            STATE_UNSPECIFIED = 0
+
+            # Waiting for cluster state to be RUNNING.
+            CLUSTER_PENDING = 1
+
+            # The RestorePlan has successfully been created and is ready for Restores.
+            READY = 2
+
+            # RestorePlan creation has failed.
+            FAILED = 3
+
+            # The RestorePlan is in the process of being deleted.
+            DELETING = 4
           end
         end
       end

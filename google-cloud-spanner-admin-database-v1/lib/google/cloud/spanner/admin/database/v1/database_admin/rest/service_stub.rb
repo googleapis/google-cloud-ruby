@@ -61,7 +61,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_list_databases_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -99,7 +99,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_create_database_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -137,7 +137,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_get_database_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -151,6 +151,44 @@ module Google
                     )
                     operation = ::Gapic::Rest::TransportOperation.new response
                     result = ::Google::Cloud::Spanner::Admin::Database::V1::Database.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the update_database REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Longrunning::Operation]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Longrunning::Operation]
+                  #   A result object deserialized from the server's reply
+                  def update_database request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_update_database_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
 
                     yield result, operation if block_given?
                     result
@@ -175,7 +213,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_update_database_ddl_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -213,7 +251,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_drop_database_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -251,7 +289,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_get_database_ddl_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -289,7 +327,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_set_iam_policy_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -327,7 +365,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_get_iam_policy_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -365,7 +403,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_test_iam_permissions_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -403,7 +441,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_create_backup_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -441,7 +479,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_copy_backup_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -479,7 +517,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_get_backup_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -517,7 +555,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_update_backup_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -555,7 +593,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_delete_backup_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -593,7 +631,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_list_backups_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -631,7 +669,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_restore_database_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -669,7 +707,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_list_database_operations_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -707,7 +745,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_list_backup_operations_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -745,7 +783,7 @@ module Google
 
                     verb, uri, query_string_params, body = ServiceStub.transcode_list_database_roles_request request_pb
                     query_string_params = if query_string_params.any?
-                                            query_string_params.to_h { |p| p.split("=", 2) }
+                                            query_string_params.to_h { |p| p.split "=", 2 }
                                           else
                                             {}
                                           end
@@ -823,6 +861,28 @@ module Google
                                                               uri_template: "/v1/{name}",
                                                               matches: [
                                                                 ["name", %r{^projects/[^/]+/instances/[^/]+/databases/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the update_database REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_update_database_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :patch,
+                                                              uri_template: "/v1/{database.name}",
+                                                              body: "database",
+                                                              matches: [
+                                                                ["database.name", %r{^projects/[^/]+/instances/[^/]+/databases/[^/]+/?$}, false]
                                                               ]
                                                             )
                     transcoder.transcode request_pb

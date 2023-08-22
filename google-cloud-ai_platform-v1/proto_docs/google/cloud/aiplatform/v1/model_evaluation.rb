@@ -44,8 +44,9 @@ module Google
         #     Output only. Timestamp when this ModelEvaluation was created.
         # @!attribute [rw] slice_dimensions
         #   @return [::Array<::String>]
-        #     All possible [dimensions][ModelEvaluationSlice.slice.dimension] of
-        #     ModelEvaluationSlices. The dimensions can be used as the filter of the
+        #     All possible
+        #     {::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice::Slice#dimension dimensions}
+        #     of ModelEvaluationSlices. The dimensions can be used as the filter of the
         #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}
         #     request, in the form of `slice.dimension = <dimension>`.
         # @!attribute [rw] data_item_schema_uri

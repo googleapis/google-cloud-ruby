@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-policy_simulator.gemspec",
+    "lib/google-cloud-policy_simulator.rb",
+    "lib/google/cloud/policy_simulator.rb",
+    "lib/google/cloud/policy_simulator/version.rb",
+    "test/google/cloud/policy_simulator/client_test.rb",
+    "test/google/cloud/policy_simulator/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

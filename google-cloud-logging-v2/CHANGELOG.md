@@ -1,5 +1,28 @@
 # Release History
 
+### 0.10.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.9.0 (2023-05-08)
+
+#### Features
+
+* Added bucket_name field to LogMetric 
+* Support analytics_enabled field for LogBucket 
+* Support for configuring the KMS key version name 
+* Support for managing links 
+* Support index configuration for LogBucket 
+* Support RPCs for creating and updating log buckets asynchronously 
+
 ### 0.8.1 (2022-07-28)
 
 #### Documentation

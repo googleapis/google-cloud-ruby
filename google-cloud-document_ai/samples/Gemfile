@@ -21,7 +21,7 @@ gem "google-cloud-document_ai", path: master ? "../../google-cloud-document_ai" 
 group :test do
   gem "google-style", "~> 1.26.2"
   gem "minitest", "~> 5.17"
-  gem "minitest-focus", "~> 1.3.1"
+  gem "minitest-focus", "~> 1.4"
   gem "minitest-rg", "~> 5.2"
   gem "rake"
 end

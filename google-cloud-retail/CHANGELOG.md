@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.0 (2023-05-04)
+
+#### Features
+
+* Support for the model service 
+
 ### 1.5.0 (2023-03-09)
 
 #### Features

@@ -23,6 +23,7 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
+require "google/cloud/firestore/bulk_writer"
 require "google/cloud/firestore/filter"
 
 module Google
@@ -787,6 +788,35 @@ module Google
         def read_only_transaction read_time: nil
           transaction = Transaction.from_client self, read_time: read_time, read_only: true
           yield transaction
+        end
+
+        ##
+        # Create a bulk writer to perform multiple writes that are
+        # executed parallely.
+        #
+        # @param [Integer] request_threads The number of threads used for handling
+        #  requests. Default is 2. Optional.
+        # @param [Integer] batch_threads The number of threads used for processing
+        #  batches. Default is 4. Optional.
+        # @param [Integer] retries The number of times a failed write request will
+        # be retried (with exponential delay) before being marked as failure. Max
+        # attempts are 15. Optional
+        #
+        # @return [Google::Cloud::Firestore::BulkWriter] Returns an object of
+        #   bulk writer.
+        #
+        # @example Initializing a BulkWriter with all the configurations.
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   bw = firestore.bulk_writer
+        #
+        #   bulk_write_result = bw.create "doc_ref", request_threads: 4, batch_threads: 10, retries: 10
+        #
+        def bulk_writer request_threads: nil, batch_threads: nil, retries: nil
+          BulkWriter.new self, @service, request_threads: request_threads,
+                         batch_threads: batch_threads, retries: retries
         end
 
         # @!endgroup

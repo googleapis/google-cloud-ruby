@@ -239,6 +239,7 @@ class ::Google::Cloud::Batch::V1::BatchService::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     parent = "hello world"
     filter = "hello world"
+    order_by = "hello world"
     page_size = 42
     page_token = "hello world"
 
@@ -256,27 +257,27 @@ class ::Google::Cloud::Batch::V1::BatchService::Rest::ClientTest < Minitest::Tes
         end
 
         # Use hash object
-        client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_jobs parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_jobs ::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_jobs ::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_jobs(::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_jobs(::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -426,7 +426,42 @@ module Google
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached when making an aggregated query using
+        #     wildcards.
         class ListSubnetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_subnet VmwareEngine.GetSubnet}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the subnet to retrieve.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/subnets/my-subnet`
+        class GetSubnetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_subnet VmwareEngine.UpdateSubnet}
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `Subnet` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] subnet
+        #   @return [::Google::Cloud::VmwareEngine::V1::Subnet]
+        #     Required. Subnet description.
+        class UpdateSubnetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1160,6 +1195,245 @@ module Google
         #   @return [::Array<::String>]
         #     Unreachable resources.
         class ListVmwareEngineNetworksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_connection VmwareEngine.CreatePrivateConnection}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the location to create the new private
+        #     connection in. Private connection is a regional resource.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/us-central1`
+        # @!attribute [rw] private_connection_id
+        #   @return [::String]
+        #     Required. The user-provided identifier of the new private connection.
+        #     This identifier must be unique among private connection resources
+        #     within the parent and becomes the final token in the name URI. The
+        #     identifier must meet the following requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+        #     (section 3.5)
+        # @!attribute [rw] private_connection
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection]
+        #     Required. The initial description of the new private connection.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreatePrivateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_connection VmwareEngine.GetPrivateConnection}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the private connection to retrieve.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/privateConnections/my-connection`
+        class GetPrivateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connections VmwareEngine.ListPrivateConnections}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the location to query for
+        #     private connections. Resource names are schemeless URIs that follow the
+        #     conventions in https://cloud.google.com/apis/design/resource_names. For
+        #     example: `projects/my-project/locations/us-central1`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of private connections to return in one page.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListPrivateConnections` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListPrivateConnections` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The comparison operator
+        #     must be `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering a list of private connections, you can
+        #     exclude the ones named `example-connection` by specifying
+        #     `name != "example-connection"`.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (name = "example-connection")
+        #     (createTime > "2022-09-22T08:15:10.40Z")
+        #     ```
+        #
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (name = "example-connection-1") AND
+        #     (createTime > "2021-04-12T08:15:10.40Z") OR
+        #     (name = "example-connection-2")
+        #     ```
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, returned results
+        #     are ordered by `name` in ascending order.
+        #     You can also sort results in descending order based on the `name` value
+        #     using `orderBy="name desc"`.
+        #     Currently, only ordering by `name` is supported.
+        class ListPrivateConnectionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connections VmwareEngine.ListPrivateConnections}
+        # @!attribute [rw] private_connections
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::PrivateConnection>]
+        #     A list of private connections.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources.
+        class ListPrivateConnectionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_connection VmwareEngine.UpdatePrivateConnection}
+        # @!attribute [rw] private_connection
+        #   @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection]
+        #     Required. Private connection description.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `PrivateConnection` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdatePrivateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_connection VmwareEngine.DeletePrivateConnection}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the private connection to be deleted.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/privateConnections/my-connection`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeletePrivateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connection_peering_routes VmwareEngine.ListPrivateConnectionPeeringRoutes}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private connection to retrieve peering
+        #     routes from. Resource names are schemeless URIs that follow the conventions
+        #     in https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/us-west1/privateConnections/my-connection`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of peering routes to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListPrivateConnectionPeeringRoutes`
+        #     call. Provide this to retrieve the subsequent page. When paginating, all
+        #     other parameters provided to `ListPrivateConnectionPeeringRoutes` must
+        #     match the call that provided the page token.
+        class ListPrivateConnectionPeeringRoutesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connection_peering_routes VmwareEngine.ListPrivateConnectionPeeringRoutes}
+        # @!attribute [rw] peering_routes
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
+        #     A list of peering routes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListPrivateConnectionPeeringRoutesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -20,29 +20,28 @@ desc "Samples runnable from this directory"
 
 SampleLoader.list.each do |filename|
   sample = SampleLoader.load filename
+  next unless sample.well_formed?
 
-  if sample.well_formed?
-    tool_name = sample.name_segments.map { |seg| seg.tr "_", "-" }
-    tool tool_name do
-      desc "Run the \"#{sample.file_name}\" sample"
+  tool_name = sample.name_segments.map { |seg| seg.tr "_", "-" }
+  tool tool_name do
+    desc "Run the \"#{sample.file_name}\" sample"
 
-      sample.param_names.each do |param|
-        accepted_type =
-          case sample.param_type(param)
-          when "Integer"
-            Integer
-          when "Array<String>"
-            Array
-          else
-            String
-          end
-        flag param, accept: accepted_type, desc: sample.param_desc(param)
-      end
+    sample.param_names.each do |param|
+      accepted_type =
+        case sample.param_type param
+        when "Integer"
+          Integer
+        when "Array<String>"
+          Array
+        else
+          String
+        end
+      flag param, accept: accepted_type, desc: sample.param_desc(param)
+    end
 
-      to_run do
-        params = sample.param_names.to_h { |param| [param, get(param)] }
-        sample.run(**params)
-      end
+    to_run do
+      params = sample.param_names.to_h { |param| [param, get(param)] }
+      sample.run(**params)
     end
   end
 end

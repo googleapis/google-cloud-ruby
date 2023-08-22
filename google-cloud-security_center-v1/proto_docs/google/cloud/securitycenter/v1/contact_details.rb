@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # The details pertaining to specific contacts
+        # Details about specific contacts
         # @!attribute [rw] contacts
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Contact>]
         #     A list of contacts

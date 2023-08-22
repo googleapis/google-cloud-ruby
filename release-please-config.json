@@ -23,10 +23,6 @@
       "component": "google-analytics-data",
       "version_file": "lib/google/analytics/data/version.rb"
     },
-    "google-analytics-data-v1alpha": {
-      "component": "google-analytics-data-v1alpha",
-      "version_file": "lib/google/analytics/data/v1alpha/version.rb"
-    },
     "google-analytics-data-v1beta": {
       "component": "google-analytics-data-v1beta",
       "version_file": "lib/google/analytics/data/v1beta/version.rb"
@@ -70,6 +66,10 @@
     "google-cloud-alloy_db-v1": {
       "component": "google-cloud-alloy_db-v1",
       "version_file": "lib/google/cloud/alloy_db/v1/version.rb"
+    },
+    "google-cloud-alloy_db-v1alpha": {
+      "component": "google-cloud-alloy_db-v1alpha",
+      "version_file": "lib/google/cloud/alloy_db/v1alpha/version.rb"
     },
     "google-cloud-alloy_db-v1beta": {
       "component": "google-cloud-alloy_db-v1beta",
@@ -351,6 +351,14 @@
       "component": "google-cloud-cloud_dms-v1",
       "version_file": "lib/google/cloud/cloud_dms/v1/version.rb"
     },
+    "google-cloud-commerce-consumer-procurement": {
+      "component": "google-cloud-commerce-consumer-procurement",
+      "version_file": "lib/google/cloud/commerce/consumer/procurement/version.rb"
+    },
+    "google-cloud-commerce-consumer-procurement-v1": {
+      "component": "google-cloud-commerce-consumer-procurement-v1",
+      "version_file": "lib/google/cloud/commerce/consumer/procurement/v1/version.rb"
+    },
     "google-cloud-compute": {
       "component": "google-cloud-compute",
       "version_file": "lib/google/cloud/compute/version.rb"
@@ -415,6 +423,10 @@
       "component": "google-cloud-data_catalog-v1",
       "version_file": "lib/google/cloud/data_catalog/v1/version.rb"
     },
+    "google-cloud-data_catalog-v1beta1": {
+      "component": "google-cloud-data_catalog-v1beta1",
+      "version_file": "lib/google/cloud/data_catalog/v1beta1/version.rb"
+    },
     "google-cloud-data_fusion": {
       "component": "google-cloud-data_fusion",
       "version_file": "lib/google/cloud/data_fusion/version.rb"
@@ -463,10 +475,6 @@
       "component": "google-cloud-dataproc-v1",
       "version_file": "lib/google/cloud/dataproc/v1/version.rb"
     },
-    "google-cloud-dataproc-v1beta2": {
-      "component": "google-cloud-dataproc-v1beta2",
-      "version_file": "lib/google/cloud/dataproc/v1beta2/version.rb"
-    },
     "google-cloud-dataqna": {
       "component": "google-cloud-dataqna",
       "version_file": "lib/google/cloud/dataqna/version.rb"
@@ -503,14 +511,6 @@
       "component": "google-cloud-datastream-v1alpha1",
       "version_file": "lib/google/cloud/datastream/v1alpha1/version.rb"
     },
-    "google-cloud-debugger": {
-      "component": "google-cloud-debugger",
-      "version_file": "lib/google/cloud/debugger/version.rb"
-    },
-    "google-cloud-debugger-v2": {
-      "component": "google-cloud-debugger-v2",
-      "version_file": "lib/google/cloud/debugger/v2/version.rb"
-    },
     "google-cloud-deploy": {
       "component": "google-cloud-deploy",
       "version_file": "lib/google/cloud/deploy/version.rb"
@@ -534,6 +534,18 @@
     "google-cloud-dialogflow-v2": {
       "component": "google-cloud-dialogflow-v2",
       "version_file": "lib/google/cloud/dialogflow/v2/version.rb"
+    },
+    "google-cloud-discovery_engine": {
+      "component": "google-cloud-discovery_engine",
+      "version_file": "lib/google/cloud/discovery_engine/version.rb"
+    },
+    "google-cloud-discovery_engine-v1": {
+      "component": "google-cloud-discovery_engine-v1",
+      "version_file": "lib/google/cloud/discovery_engine/v1/version.rb"
+    },
+    "google-cloud-discovery_engine-v1beta": {
+      "component": "google-cloud-discovery_engine-v1beta",
+      "version_file": "lib/google/cloud/discovery_engine/v1beta/version.rb"
     },
     "google-cloud-dlp": {
       "component": "google-cloud-dlp",
@@ -747,6 +759,10 @@
       "component": "google-cloud-language-v1beta2",
       "version_file": "lib/google/cloud/language/v1beta2/version.rb"
     },
+    "google-cloud-language-v2": {
+      "component": "google-cloud-language-v2",
+      "version_file": "lib/google/cloud/language/v2/version.rb"
+    },
     "google-cloud-life_sciences": {
       "component": "google-cloud-life_sciences",
       "version_file": "lib/google/cloud/life_sciences/version.rb"
@@ -919,6 +935,14 @@
       "component": "google-cloud-phishing_protection-v1beta1",
       "version_file": "lib/google/cloud/phishing_protection/v1beta1/version.rb"
     },
+    "google-cloud-policy_simulator": {
+      "component": "google-cloud-policy_simulator",
+      "version_file": "lib/google/cloud/policy_simulator/version.rb"
+    },
+    "google-cloud-policy_simulator-v1": {
+      "component": "google-cloud-policy_simulator-v1",
+      "version_file": "lib/google/cloud/policy_simulator/v1/version.rb"
+    },
     "google-cloud-policy_troubleshooter": {
       "component": "google-cloud-policy_troubleshooter",
       "version_file": "lib/google/cloud/policy_troubleshooter/version.rb"
@@ -950,6 +974,14 @@
     "google-cloud-pubsub-v1": {
       "component": "google-cloud-pubsub-v1",
       "version_file": "lib/google/cloud/pubsub/v1/version.rb"
+    },
+    "google-cloud-rapid_migration_assessment": {
+      "component": "google-cloud-rapid_migration_assessment",
+      "version_file": "lib/google/cloud/rapid_migration_assessment/version.rb"
+    },
+    "google-cloud-rapid_migration_assessment-v1": {
+      "component": "google-cloud-rapid_migration_assessment-v1",
+      "version_file": "lib/google/cloud/rapid_migration_assessment/v1/version.rb"
     },
     "google-cloud-recaptcha_enterprise": {
       "component": "google-cloud-recaptcha_enterprise",
@@ -1041,7 +1073,7 @@
     },
     "google-cloud-secret_manager-v1": {
       "component": "google-cloud-secret_manager-v1",
-      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
+      "version_file": "lib/google/cloud/secret_manager/v1/version.rb"
     },
     "google-cloud-secret_manager-v1beta1": {
       "component": "google-cloud-secret_manager-v1beta1",
@@ -1171,6 +1203,14 @@
       "component": "google-cloud-storage_transfer-v1",
       "version_file": "lib/google/cloud/storage_transfer/v1/version.rb"
     },
+    "google-cloud-support": {
+      "component": "google-cloud-support",
+      "version_file": "lib/google/cloud/support/version.rb"
+    },
+    "google-cloud-support-v2": {
+      "component": "google-cloud-support-v2",
+      "version_file": "lib/google/cloud/support/v2/version.rb"
+    },
     "google-cloud-talent": {
       "component": "google-cloud-talent",
       "version_file": "lib/google/cloud/talent/version.rb"
@@ -1266,10 +1306,6 @@
     "google-cloud-video-transcoder-v1": {
       "component": "google-cloud-video-transcoder-v1",
       "version_file": "lib/google/cloud/video/transcoder/v1/version.rb"
-    },
-    "google-cloud-video-transcoder-v1beta1": {
-      "component": "google-cloud-video-transcoder-v1beta1",
-      "version_file": "lib/google/cloud/video/transcoder/v1beta1/version.rb"
     },
     "google-cloud-video_intelligence": {
       "component": "google-cloud-video_intelligence",
@@ -1414,10 +1450,6 @@
     "grafeas": {
       "component": "grafeas",
       "version_file": "lib/grafeas/version.rb"
-    },
-    "grafeas-client": {
-      "component": "grafeas-client",
-      "version_file": "lib/grafeas/client/version.rb"
     },
     "grafeas-v1": {
       "component": "grafeas-v1",

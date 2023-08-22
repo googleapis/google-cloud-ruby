@@ -288,6 +288,63 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ClientTest < Minitest
     end
   end
 
+  def test_move
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    address = "hello world"
+    global_addresses_move_request_resource = {}
+    project = "hello world"
+    request_id = "hello world"
+
+    move_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.stub :transcode_move_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move({ address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move ::Google::Cloud::Compute::V1::MoveGlobalAddressRequest.new(address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move({ address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move(::Google::Cloud::Compute::V1::MoveGlobalAddressRequest.new(address: address, global_addresses_move_request_resource: global_addresses_move_request_resource, project: project, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_client_stub.call_count
+      end
+    end
+  end
+
   def test_set_labels
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new

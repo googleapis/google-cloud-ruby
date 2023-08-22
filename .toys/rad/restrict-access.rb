@@ -1,3 +1,19 @@
+# frozen_string_literal: true
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 desc "Create _access.yaml files"
 
 required_arg :piper_client
@@ -19,7 +35,7 @@ def run
   end
 end
 
-def each_gem
+def each_gem &block
   omit_list = [
     "gcloud",
     "google-cloud",
@@ -31,15 +47,13 @@ def each_gem
     "google-cloud-ids",
     "google-cloud-ids-v1",
     "google-cloud-vmmigration",
-    "google-cloud-vmmigration-v1"
+    "google-cloud-vmmigration-v1",
   ]
-  Dir.glob("*/*.gemspec") do |path|
+  Dir.glob "*/*.gemspec" do |path|
     name = File.dirname path
     yield name unless omit_list.include? name
   end
-  extra_list.each do |name|
-    yield name
-  end
+  extra_list.each(&block)
 end
 
 def piper_client_dir

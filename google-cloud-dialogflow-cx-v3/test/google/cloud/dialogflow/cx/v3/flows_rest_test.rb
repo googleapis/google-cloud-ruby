@@ -516,6 +516,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     parent = "hello world"
     flow_uri = "hello world"
     import_option = :IMPORT_OPTION_UNSPECIFIED
+    flow_import_strategy = {}
 
     import_flow_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -531,27 +532,27 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option }) do |_result, response|
+        client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_flow parent: parent, flow_uri: flow_uri, import_option: import_option do |_result, response|
+        client.import_flow parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_flow ::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option) do |_result, response|
+        client.import_flow ::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option }, call_options) do |_result, response|
+        client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_flow(::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option), call_options) do |_result, response|
+        client.import_flow(::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

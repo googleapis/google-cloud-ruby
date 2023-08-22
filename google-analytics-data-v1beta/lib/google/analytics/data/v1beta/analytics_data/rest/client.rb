@@ -138,7 +138,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -202,7 +202,7 @@ module Google
               #     response rows for both date ranges. In a cohort request, this `dateRanges`
               #     must be unspecified.
               #   @param dimension_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
-              #     Dimension filters allow you to ask for only specific dimension values in
+              #     Dimension filters let you ask for only specific dimension values in
               #     the report. To learn more, see [Fundamentals of Dimension
               #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
               #     for examples. Metrics cannot be used in this filter.
@@ -221,7 +221,7 @@ module Google
               #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
               #   @param limit [::Integer]
               #     The number of rows to return. If unspecified, 10,000 rows are returned. The
-              #     API returns a maximum of 100,000 rows per request, no matter how many you
+              #     API returns a maximum of 250,000 rows per request, no matter how many you
               #     ask for. `limit` must be positive.
               #
               #     The API can also return fewer rows than the requested `limit`, if there
@@ -247,6 +247,13 @@ module Google
               #     If false or unspecified, each row with all metrics equal to 0 will not be
               #     returned. If true, these rows will be returned if they are not separately
               #     removed by a filter.
+              #
+              #     Regardless of this `keep_empty_rows` setting, only data recorded by the
+              #     Google Analytics (GA4) property can be displayed in a report.
+              #
+              #     For example if a property never logs a `purchase` event, then a query for
+              #     the `eventName` dimension and  `eventCount` metric will not have a row
+              #     eventName: "purchase" and eventCount: 0.
               #   @param return_property_quota [::Boolean]
               #     Toggles whether to return the current state of this Analytics Property's
               #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
@@ -358,6 +365,13 @@ module Google
               #     If false or unspecified, each row with all metrics equal to 0 will not be
               #     returned. If true, these rows will be returned if they are not separately
               #     removed by a filter.
+              #
+              #     Regardless of this `keep_empty_rows` setting, only data recorded by the
+              #     Google Analytics (GA4) property can be displayed in a report.
+              #
+              #     For example if a property never logs a `purchase` event, then a query for
+              #     the `eventName` dimension and  `eventCount` metric will not have a row
+              #     eventName: "purchase" and eventCount: 0.
               #   @param return_property_quota [::Boolean]
               #     Toggles whether to return the current state of this Analytics Property's
               #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
@@ -676,7 +690,7 @@ module Google
               #     SQL having-clause. Dimensions cannot be used in this filter.
               #   @param limit [::Integer]
               #     The number of rows to return. If unspecified, 10,000 rows are returned. The
-              #     API returns a maximum of 100,000 rows per request, no matter how many you
+              #     API returns a maximum of 250,000 rows per request, no matter how many you
               #     ask for. `limit` must be positive.
               #
               #     The API can also return fewer rows than the requested `limit`, if there
@@ -774,10 +788,6 @@ module Google
               #     `property` should be the same value as in your `runReport` request.
               #
               #     Example: properties/1234
-              #
-              #     Set the Property ID to 0 for compatibility checking on dimensions and
-              #     metrics common to all properties. In this special mode, this method will
-              #     not return custom dimensions and metrics.
               #   @param dimensions [::Array<::Google::Analytics::Data::V1beta::Dimension, ::Hash>]
               #     The dimensions in this report. `dimensions` should be the same value as in
               #     your `runReport` request.
@@ -909,7 +919,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "analyticsdata.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "analyticsdata.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

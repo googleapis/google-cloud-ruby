@@ -47,6 +47,11 @@ module Google
         #                  or
         #                `projects/{project}/locations/{location}/models/{model}@golden`
         #     if no version is specified, the default version will be deployed.
+        #
+        #     The model resource could also be a publisher model.
+        #      Example: `publishers/{publisher}/models/{model}`
+        #                  or
+        #               `projects/{project}/locations/{location}/publishers/{publisher}/models/{model}`
         # @!attribute [r] model_version_id
         #   @return [::String]
         #     Output only. The version ID of the Model that produces the predictions via
@@ -205,9 +210,9 @@ module Google
         #   @return [::Boolean]
         #     For custom-trained Models and AutoML Tabular Models, the container of the
         #     DeployedModel instances will send `stderr` and `stdout` streams to
-        #     Stackdriver Logging by default. Please note that the logs incur cost,
+        #     Cloud Logging by default. Please note that the logs incur cost,
         #     which are subject to [Cloud Logging
-        #     pricing](https://cloud.google.com/stackdriver/pricing).
+        #     pricing](https://cloud.google.com/logging/pricing).
         #
         #     User can disable container logging by setting this flag to true.
         class BatchPredictionJob

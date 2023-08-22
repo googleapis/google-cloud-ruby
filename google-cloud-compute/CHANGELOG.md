@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2023-07-11)
+
+#### Features
+
+* Support for the InterconnectRemoteLocations service ([#22467](https://github.com/googleapis/google-cloud-ruby/issues/22467)) 
+
 ### 1.1.0 (2023-03-23)
 
 #### Features

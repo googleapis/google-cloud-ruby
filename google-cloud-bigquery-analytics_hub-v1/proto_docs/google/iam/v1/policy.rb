@@ -40,6 +40,7 @@ module Google
       #
       # **JSON example:**
       #
+      # ```
       #     {
       #       "bindings": [
       #         {
@@ -67,9 +68,11 @@ module Google
       #       "etag": "BwWWja0YfJA=",
       #       "version": 3
       #     }
+      # ```
       #
       # **YAML example:**
       #
+      # ```
       #     bindings:
       #     - members:
       #       - user:mike@example.com
@@ -86,6 +89,7 @@ module Google
       #         expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
       #     etag: BwWWja0YfJA=
       #     version: 3
+      # ```
       #
       # For a description of IAM and its features, see the
       # [IAM documentation](https://cloud.google.com/iam/docs/).
@@ -157,7 +161,7 @@ module Google
       #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       # @!attribute [rw] members
       #   @return [::Array<::String>]
-      #     Specifies the principals requesting access for a Cloud Platform resource.
+      #     Specifies the principals requesting access for a Google Cloud resource.
       #     `members` can have the following values:
       #
       #     * `allUsers`: A special identifier that represents anyone who is
@@ -267,8 +271,8 @@ module Google
       #     }
       #
       # For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      # logging. It also exempts jose@example.com from DATA_READ logging, and
-      # aliya@example.com from DATA_WRITE logging.
+      # logging. It also exempts `jose@example.com` from DATA_READ logging, and
+      # `aliya@example.com` from DATA_WRITE logging.
       # @!attribute [rw] service
       #   @return [::String]
       #     Specifies a service that will be enabled for audit logging.
@@ -356,7 +360,7 @@ module Google
       #     Required
       # @!attribute [rw] member
       #   @return [::String]
-      #     A single identity requesting access for a Cloud Platform resource.
+      #     A single identity requesting access for a Google Cloud resource.
       #     Follows the same format of Binding.members.
       #     Required
       # @!attribute [rw] condition

@@ -106,4 +106,16 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientPathsTest < Minit
       assert_equal "products/value0", path
     end
   end
+
+  def test_sku_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.sku_group_path account: "value0", sku_group: "value1"
+      assert_equal "accounts/value0/skuGroups/value1", path
+    end
+  end
 end

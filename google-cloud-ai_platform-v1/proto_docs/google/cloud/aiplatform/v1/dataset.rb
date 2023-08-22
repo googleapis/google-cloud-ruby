@@ -42,6 +42,10 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Value]
         #     Required. Additional information about the Dataset.
+        # @!attribute [r] data_item_count
+        #   @return [::Integer]
+        #     Output only. The number of DataItems in this Dataset. Only apply for
+        #     non-structured Dataset.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this Dataset was created.
@@ -73,7 +77,7 @@ module Google
         # @!attribute [rw] saved_queries
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::SavedQuery>]
         #     All SavedQueries belong to the Dataset will be returned in List/Get
-        #     Dataset response. The [annotation_specs][SavedQuery.annotation_specs] field
+        #     Dataset response. The annotation_specs field
         #     will not be populated except for UI cases which will only use
         #     {::Google::Cloud::AIPlatform::V1::SavedQuery#annotation_spec_count annotation_spec_count}.
         #     In CreateDataset request, a SavedQuery is created together if
@@ -182,9 +186,9 @@ module Google
         #     Split based on fractions defining the size of each set.
         # @!attribute [rw] annotations_filter
         #   @return [::String]
-        #     A filter on Annotations of the Dataset. Only Annotations on to-be-exported
-        #     DataItems(specified by [data_items_filter][]) that match this filter will
-        #     be exported. The filter syntax is the same as in
+        #     An expression for filtering what part of the Dataset is to be exported.
+        #     Only Annotations that match this filter will be exported. The filter syntax
+        #     is the same as in
         #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_annotations ListAnnotations}.
         class ExportDataConfig
           include ::Google::Protobuf::MessageExts

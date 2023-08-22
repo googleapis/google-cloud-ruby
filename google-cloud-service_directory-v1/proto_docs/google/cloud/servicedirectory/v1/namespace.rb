@@ -30,9 +30,13 @@ module Google
         #     `projects/*/locations/*/namespaces/*`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Resource labels associated with this Namespace.
-        #     No more than 64 user labels can be associated with a given resource.  Label
+        #     Optional. Resource labels associated with this namespace.
+        #     No more than 64 user labels can be associated with a given resource. Label
         #     keys and values can be no longer than 63 characters.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. The globally unique identifier of the namespace in the UUID4
+        #     format.
         class Namespace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

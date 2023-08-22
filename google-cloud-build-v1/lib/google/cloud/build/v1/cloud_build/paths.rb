@@ -128,6 +128,47 @@ module Google
             end
 
             ##
+            # Create a fully-qualified GithubEnterpriseConfig resource string.
+            #
+            # @overload github_enterprise_config_path(project:, config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/githubEnterpriseConfigs/{config}`
+            #
+            #   @param project [String]
+            #   @param config [String]
+            #
+            # @overload github_enterprise_config_path(project:, location:, config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/githubEnterpriseConfigs/{config}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param config [String]
+            #
+            # @return [::String]
+            def github_enterprise_config_path **args
+              resources = {
+                "config:project" => (proc do |project:, config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/githubEnterpriseConfigs/#{config}"
+                end),
+                "config:location:project" => (proc do |project:, location:, config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/githubEnterpriseConfigs/#{config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -173,6 +214,27 @@ module Google
             # @return [::String]
             def project_path project:
               "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified Repository resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/connections/{connection}/repositories/{repository}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param connection [String]
+            # @param repository [String]
+            #
+            # @return [::String]
+            def repository_path project:, location:, connection:, repository:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "connection cannot contain /" if connection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/connections/#{connection}/repositories/#{repository}"
             end
 
             ##

@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.1.0 (2023-08-03)
+
+#### Features
+
+* Support Data Taxonomy Service ([#22584](https://github.com/googleapis/google-cloud-ruby/issues/22584)) 
+
+### 1.0.0 (2023-07-28)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.5.0 (2023-03-09)
 
 #### Features

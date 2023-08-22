@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dialogflow/cx/v3/transition_route_groups"
 
 class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientPathsTest < Minitest::Test
+  def test_agent_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.agent_path project: "value0", location: "value1", agent: "value2"
+      assert_equal "projects/value0/locations/value1/agents/value2", path
+    end
+  end
+
   def test_flow_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -68,6 +80,9 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientPathsTes
 
       path = client.transition_route_group_path project: "value0", location: "value1", agent: "value2", flow: "value3", transition_route_group: "value4"
       assert_equal "projects/value0/locations/value1/agents/value2/flows/value3/transitionRouteGroups/value4", path
+
+      path = client.transition_route_group_path project: "value0", location: "value1", agent: "value2", transition_route_group: "value3"
+      assert_equal "projects/value0/locations/value1/agents/value2/transitionRouteGroups/value3", path
     end
   end
 

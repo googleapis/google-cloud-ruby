@@ -409,6 +409,65 @@ class ::Google::Cloud::Compute::V1::ResourcePolicies::Rest::ClientTest < Minites
     end
   end
 
+  def test_patch
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+    resource_policy = "hello world"
+    resource_policy_resource = {}
+    update_mask = "hello world"
+
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::ResourcePolicies::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::ResourcePolicies::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.patch({ project: project, region: region, request_id: request_id, resource_policy: resource_policy, resource_policy_resource: resource_policy_resource, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.patch project: project, region: region, request_id: request_id, resource_policy: resource_policy, resource_policy_resource: resource_policy_resource, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.patch ::Google::Cloud::Compute::V1::PatchResourcePolicyRequest.new(project: project, region: region, request_id: request_id, resource_policy: resource_policy, resource_policy_resource: resource_policy_resource, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.patch({ project: project, region: region, request_id: request_id, resource_policy: resource_policy, resource_policy_resource: resource_policy_resource, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.patch(::Google::Cloud::Compute::V1::PatchResourcePolicyRequest.new(project: project, region: region, request_id: request_id, resource_policy: resource_policy, resource_policy_resource: resource_policy_resource, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, patch_client_stub.call_count
+      end
+    end
+  end
+
   def test_set_iam_policy
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Policy.new

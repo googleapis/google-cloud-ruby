@@ -38,6 +38,20 @@ module Google
               "billingAccounts/#{billing_account}"
             end
 
+            ##
+            # Create a fully-qualified ProjectBillingInfo resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/billingInfo`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_billing_info_path project:
+              "projects/#{project}/billingInfo"
+            end
+
             extend self
           end
         end

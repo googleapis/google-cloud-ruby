@@ -4,6 +4,24 @@
 
 * Clarify Finding#event_time description
 
+### 0.11.2 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22685](https://github.com/googleapis/google-cloud-ruby/issues/22685)) 
+
+### 0.11.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.11.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21678](https://github.com/googleapis/google-cloud-ruby/issues/21678)) 
+
 ### 0.10.0 (2023-03-08)
 
 #### Features

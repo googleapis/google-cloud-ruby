@@ -127,6 +127,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientTest < Min
     report_job = "hello world"
     page_size = 42
     page_token = "hello world"
+    partition_keys = ["hello world"]
 
     fetch_report_results_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :fetch_report_results, name
@@ -134,6 +135,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientTest < Min
       assert_equal "hello world", request["report_job"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["partition_keys"]
       refute_nil options
     end
 
@@ -144,35 +146,35 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientTest < Min
       end
 
       # Use hash object
-      client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token do |response, operation|
+      client.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token) do |response, operation|
+      client.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

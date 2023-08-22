@@ -40,6 +40,10 @@ module Google
         #     * Must end with a number or a letter.
         #     * Must be between 1-63 characters.
         #     * Must be unique within the customer project / location.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is `false`.
         class CreateDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -54,6 +58,10 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is `false`.
         class UpdateDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,7 +116,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of dataScans to return. The service may return
-        #     fewer than this value. If unspecified, at most 10 scans will be returned.
+        #     fewer than this value. If unspecified, at most 500 scans will be returned.
         #     The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -171,7 +179,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the DataScanJob:
-        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
         #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] view
@@ -213,6 +221,25 @@ module Google
         #     Provide this to retrieve the subsequent page. When paginating, all other
         #     parameters provided to `ListDataScanJobs` must match the call that provided
         #     the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the ListDataScanJobs
+        #     request.
+        #
+        #     If unspecified, all datascan jobs will be returned. Multiple filters can be
+        #     applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+        #
+        #     Allowed fields are:
+        #
+        #     - `start_time`
+        #     - `end_time`
+        #
+        #     `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+        #     2018-10-08T18:30:00-07:00).
+        #
+        #     For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+        #     2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+        #     specified start and end times.
         class ListDataScanJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

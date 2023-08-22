@@ -367,6 +367,202 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client
     end
   end
 
+  def test_execute_airflow_command
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    command = "hello world"
+    subcommand = "hello world"
+    parameters = ["hello world"]
+
+    execute_airflow_command_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_airflow_command, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest, request
+      assert_equal "hello world", request["environment"]
+      assert_equal "hello world", request["command"]
+      assert_equal "hello world", request["subcommand"]
+      assert_equal ["hello world"], request["parameters"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_airflow_command_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_airflow_command environment: environment, command: command, subcommand: subcommand, parameters: parameters do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_airflow_command_client_stub.call_rpc_count
+    end
+  end
+
+  def test_stop_airflow_command
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    execution_id = "hello world"
+    pod = "hello world"
+    pod_namespace = "hello world"
+    force = true
+
+    stop_airflow_command_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :stop_airflow_command, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest, request
+      assert_equal "hello world", request["environment"]
+      assert_equal "hello world", request["execution_id"]
+      assert_equal "hello world", request["pod"]
+      assert_equal "hello world", request["pod_namespace"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stop_airflow_command_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.stop_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.stop_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.stop_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stop_airflow_command_client_stub.call_rpc_count
+    end
+  end
+
+  def test_poll_airflow_command
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    execution_id = "hello world"
+    pod = "hello world"
+    pod_namespace = "hello world"
+    next_line_number = 42
+
+    poll_airflow_command_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :poll_airflow_command, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest, request
+      assert_equal "hello world", request["environment"]
+      assert_equal "hello world", request["execution_id"]
+      assert_equal "hello world", request["pod"]
+      assert_equal "hello world", request["pod_namespace"]
+      assert_equal 42, request["next_line_number"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, poll_airflow_command_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.poll_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.poll_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.poll_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, poll_airflow_command_client_stub.call_rpc_count
+    end
+  end
+
   def test_save_snapshot
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -502,6 +698,127 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client
 
       # Verify method calls
       assert_equal 5, load_snapshot_client_stub.call_rpc_count
+    end
+  end
+
+  def test_database_failover
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+
+    database_failover_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :database_failover, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest, request
+      assert_equal "hello world", request["environment"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, database_failover_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.database_failover({ environment: environment }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.database_failover environment: environment do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.database_failover ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.database_failover({ environment: environment }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.database_failover(::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, database_failover_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_database_properties
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+
+    fetch_database_properties_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_database_properties, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest, request
+      assert_equal "hello world", request["environment"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_database_properties_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_database_properties({ environment: environment }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_database_properties environment: environment do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_database_properties ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_database_properties({ environment: environment }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_database_properties(::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_database_properties_client_stub.call_rpc_count
     end
   end
 

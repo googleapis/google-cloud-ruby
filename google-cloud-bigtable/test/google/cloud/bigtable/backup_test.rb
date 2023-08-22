@@ -60,8 +60,10 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
                 start_time: start_time,
                 end_time: end_time,
                 size_bytes: size_bytes,
-                state: state
+                state: state,
+                source_backup: source_backup
   end
+  let(:source_backup) { "projects/#{bigtable.service.project_id}/instances/#{instance_id}/clusters/#{cluster_id}/backups/#{backup_id}" }
   let(:backup) { Google::Cloud::Bigtable::Backup.from_grpc backup_res, bigtable.service }
   let(:ops_name) { "operations/1234567890" }
   let(:job_grpc) do
@@ -91,6 +93,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     _(backup.state).must_equal state
     _(backup.creating?).must_equal false
     _(backup.ready?).must_equal true
+    _(backup.source_backup).must_equal source_backup
   end
 
   it "knows its encryption info" do

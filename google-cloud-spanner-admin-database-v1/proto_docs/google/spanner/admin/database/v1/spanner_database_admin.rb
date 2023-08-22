@@ -96,6 +96,14 @@ module Google
             # @!attribute [r] database_dialect
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
             #     Output only. The dialect of the Cloud Spanner Database.
+            # @!attribute [rw] enable_drop_protection
+            #   @return [::Boolean]
+            #     Whether drop protection is enabled for this database. Defaults to false,
+            #     if not set.
+            # @!attribute [r] reconciling
+            #   @return [::Boolean]
+            #     Output only. If true, the database is being updated. If false, there are no
+            #     ongoing update operations for the database.
             class Database
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -208,6 +216,42 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] database
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::Database]
+            #     Required. The database to update.
+            #     The `name` field of the database is of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>`.
+            # @!attribute [rw] update_mask
+            #   @return [::Google::Protobuf::FieldMask]
+            #     Required. The list of fields to update. Currently, only
+            #     `enable_drop_protection` field can be updated.
+            class UpdateDatabaseRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Metadata type for the operation returned by
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] request
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest]
+            #     The request for
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] progress
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress]
+            #     The progress of the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}
+            #     operation.
+            # @!attribute [rw] cancel_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation was cancelled. If set, this operation is
+            #     in the process of undoing itself (which is best-effort).
+            class UpdateDatabaseMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Enqueues the given DDL statements to be applied, in order but not
             # necessarily all at once, to the database schema at some point (or
             # points) in the future. The server checks that the statements
@@ -256,6 +300,30 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # Action information extracted from a DDL statement. This proto is used to
+            # display the brief info of the DDL statement for the operation
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}.
+            # @!attribute [rw] action
+            #   @return [::String]
+            #     The action for the DDL statement, e.g. CREATE, ALTER, DROP, GRANT, etc.
+            #     This field is a non-empty string.
+            # @!attribute [rw] entity_type
+            #   @return [::String]
+            #     The entity type for the DDL statement, e.g. TABLE, INDEX, VIEW, etc.
+            #     This field can be empty string for some DDL statement,
+            #     e.g. for statement "ANALYZE", `entity_type` = "".
+            # @!attribute [rw] entity_names
+            #   @return [::Array<::String>]
+            #     The entity name(s) being operated on the DDL statement.
+            #     E.g.
+            #     1. For statement "CREATE TABLE t1(...)", `entity_names` = ["t1"].
+            #     2. For statement "GRANT ROLE r1, r2 ...", `entity_names` = ["r1", "r2"].
+            #     3. For statement "ANALYZE", `entity_names` = [].
+            class DdlStatementActionInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Metadata type for the operation returned by
             # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}.
             # @!attribute [rw] database
@@ -272,19 +340,22 @@ module Google
             #     timestamp for the statement `statements[i]`.
             # @!attribute [r] throttled
             #   @return [::Boolean]
-            #     Output only. When true, indicates that the operation is throttled e.g
+            #     Output only. When true, indicates that the operation is throttled e.g.
             #     due to resource constraints. When resources become available the operation
             #     will resume and this field will be false again.
             # @!attribute [rw] progress
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress>]
             #     The progress of the
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} operations.
-            #     Currently, only index creation statements will have a continuously
-            #     updating progress.
-            #     For non-index creation statements, `progress[i]` will have start time
-            #     and end time populated with commit timestamp of operation,
-            #     as well as a progress of 100% once the operation has completed.
-            #     `progress[i]` is the operation progress for `statements[i]`.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}
+            #     operations. All DDL statements will have continuously updating progress,
+            #     and `progress[i]` is the operation progress for `statements[i]`. Also,
+            #     `progress[i]` will have start time and end time populated with commit
+            #     timestamp of operation, as well as a progress of 100% once the operation
+            #     has completed.
+            # @!attribute [rw] actions
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::DdlStatementActionInfo>]
+            #     The brief action info for the DDL statements.
+            #     `actions[i]` is the brief info for `statements[i]`.
             class UpdateDatabaseDdlMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

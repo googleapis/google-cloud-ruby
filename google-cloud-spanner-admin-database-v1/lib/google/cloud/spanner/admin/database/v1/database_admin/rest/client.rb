@@ -86,6 +86,11 @@ module Google
                         initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
                       }
 
+                      default_config.rpcs.update_database.timeout = 3600.0
+                      default_config.rpcs.update_database.retry_policy = {
+                        initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
+                      }
+
                       default_config.rpcs.update_database_ddl.timeout = 3600.0
                       default_config.rpcs.update_database_ddl.retry_policy = {
                         initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -204,7 +209,7 @@ module Google
                     credentials = @config.credentials
                     # Use self-signed JWT if the endpoint is unchanged from default,
                     # but only if the default endpoint does not have a region prefix.
-                    enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                    enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                              !@config.endpoint.split(".").first.include?("-")
                     credentials ||= Credentials.default scope: @config.scope,
                                                         enable_self_signed_jwt: enable_self_signed_jwt
@@ -448,6 +453,109 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @database_admin_stub.get_database request, options do |result, operation|
+                      yield result, operation if block_given?
+                      return result
+                    end
+                  rescue ::Gapic::Rest::Error => e
+                    raise ::Google::Cloud::Error.from_error(e)
+                  end
+
+                  ##
+                  # Updates a Cloud Spanner database. The returned
+                  # {::Google::Longrunning::Operation long-running operation} can be used to track
+                  # the progress of updating the database. If the named database does not
+                  # exist, returns `NOT_FOUND`.
+                  #
+                  # While the operation is pending:
+                  #
+                  #   * The database's
+                  #     {::Google::Cloud::Spanner::Admin::Database::V1::Database#reconciling reconciling}
+                  #     field is set to true.
+                  #   * Cancelling the operation is best-effort. If the cancellation succeeds,
+                  #     the operation metadata's
+                  #     {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseMetadata#cancel_time cancel_time}
+                  #     is set, the updates are reverted, and the operation terminates with a
+                  #     `CANCELLED` status.
+                  #   * New UpdateDatabase requests will return a `FAILED_PRECONDITION` error
+                  #     until the pending operation is done (returns successfully or with
+                  #     error).
+                  #   * Reading the database via the API continues to give the pre-request
+                  #     values.
+                  #
+                  # Upon completion of the returned operation:
+                  #
+                  #   * The new values are in effect and readable via the API.
+                  #   * The database's
+                  #     {::Google::Cloud::Spanner::Admin::Database::V1::Database#reconciling reconciling}
+                  #     field becomes false.
+                  #
+                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # have a name of the format
+                  # `projects/<project>/instances/<instance>/databases/<database>/operations/<operation_id>`
+                  # and can be used to track the database modification. The
+                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseMetadata UpdateDatabaseMetadata}.
+                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # {::Google::Cloud::Spanner::Admin::Database::V1::Database Database}, if successful.
+                  #
+                  # @overload update_database(request, options = nil)
+                  #   Pass arguments to `update_database` via a request object, either of type
+                  #   {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest} or an equivalent Hash.
+                  #
+                  #   @param request [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest, ::Hash]
+                  #     A request object representing the call parameters. Required. To specify no
+                  #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                  #   @param options [::Gapic::CallOptions, ::Hash]
+                  #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @overload update_database(database: nil, update_mask: nil)
+                  #   Pass arguments to `update_database` via keyword arguments. Note that at
+                  #   least one keyword argument is required. To specify no parameters, or to keep all
+                  #   the default parameter values, pass an empty Hash as a request object (see above).
+                  #
+                  #   @param database [::Google::Cloud::Spanner::Admin::Database::V1::Database, ::Hash]
+                  #     Required. The database to update.
+                  #     The `name` field of the database is of the form
+                  #     `projects/<project>/instances/<instance>/databases/<database>`.
+                  #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                  #     Required. The list of fields to update. Currently, only
+                  #     `enable_drop_protection` field can be updated.
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Gapic::Operation]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Gapic::Operation]
+                  #
+                  # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  def update_database request, options = nil
+                    raise ::ArgumentError, "request must be provided" if request.nil?
+
+                    request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest
+
+                    # Converts hash and nil to an options object
+                    options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                    # Customize the options with defaults
+                    call_metadata = @config.rpcs.update_database.metadata.to_h
+
+                    # Set x-goog-api-client and x-goog-user-project headers
+                    call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                      lib_name: @config.lib_name, lib_version: @config.lib_version,
+                      gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION,
+                      transports_version_send: [:rest]
+
+                    call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                    options.apply_defaults timeout:      @config.rpcs.update_database.timeout,
+                                           metadata:     call_metadata,
+                                           retry_policy: @config.rpcs.update_database.retry_policy
+
+                    options.apply_defaults timeout:      @config.timeout,
+                                           metadata:     @config.metadata,
+                                           retry_policy: @config.retry_policy
+
+                    @database_admin_stub.update_database request, options do |result, operation|
+                      result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
                       return result
                     end
@@ -1919,7 +2027,9 @@ module Google
                   class Configuration
                     extend ::Gapic::Config
 
-                    config_attr :endpoint,      "spanner.googleapis.com", ::String
+                    DEFAULT_ENDPOINT = "spanner.googleapis.com"
+
+                    config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                     config_attr :credentials,   nil do |value|
                       allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                       allowed.any? { |klass| klass === value }
@@ -1984,6 +2094,11 @@ module Google
                       # @return [::Gapic::Config::Method]
                       #
                       attr_reader :get_database
+                      ##
+                      # RPC-specific configuration for `update_database`
+                      # @return [::Gapic::Config::Method]
+                      #
+                      attr_reader :update_database
                       ##
                       # RPC-specific configuration for `update_database_ddl`
                       # @return [::Gapic::Config::Method]
@@ -2073,6 +2188,8 @@ module Google
                         @create_database = ::Gapic::Config::Method.new create_database_config
                         get_database_config = parent_rpcs.get_database if parent_rpcs.respond_to? :get_database
                         @get_database = ::Gapic::Config::Method.new get_database_config
+                        update_database_config = parent_rpcs.update_database if parent_rpcs.respond_to? :update_database
+                        @update_database = ::Gapic::Config::Method.new update_database_config
                         update_database_ddl_config = parent_rpcs.update_database_ddl if parent_rpcs.respond_to? :update_database_ddl
                         @update_database_ddl = ::Gapic::Config::Method.new update_database_ddl_config
                         drop_database_config = parent_rpcs.drop_database if parent_rpcs.respond_to? :drop_database

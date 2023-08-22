@@ -71,6 +71,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_agent.timeout = 180.0
+                  default_config.rpcs.create_agent.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -130,7 +135,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -651,7 +656,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil)
+              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil, git_destination: nil, include_bigquery_export_settings: nil)
               #   Pass arguments to `export_agent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -677,6 +682,10 @@ module Google
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
+              #   @param git_destination [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::GitDestination, ::Hash]
+              #     Optional. The Git branch to export the agent to.
+              #   @param include_bigquery_export_settings [::Boolean]
+              #     Optional. Whether to include BigQuery Export setting.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -779,7 +788,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload restore_agent(name: nil, agent_uri: nil, agent_content: nil, restore_option: nil)
+              # @overload restore_agent(name: nil, agent_uri: nil, agent_content: nil, git_source: nil, restore_option: nil)
               #   Pass arguments to `restore_agent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -799,6 +808,8 @@ module Google
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #   @param agent_content [::String]
               #     Uncompressed raw byte content for agent.
+              #   @param git_source [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::GitSource, ::Hash]
+              #     Setting for restoring from a git branch
               #   @param restore_option [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]
               #     Agent restore mode. If not specified, `KEEP` is assumed.
               #
@@ -1136,7 +1147,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

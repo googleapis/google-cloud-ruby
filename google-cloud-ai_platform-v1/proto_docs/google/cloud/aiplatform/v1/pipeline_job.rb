@@ -64,6 +64,9 @@ module Google
         #     characters, underscores and dashes. International characters are allowed.
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
+        #
+        #     Note there is some reserved label key for Vertex AI Pipelines.
+        #     - `vertex-ai-pipelines-run-billing-id`, user set value will get overrided.
         # @!attribute [rw] runtime_config
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig]
         #     Runtime config of the pipeline.
@@ -97,6 +100,16 @@ module Google
         #     resources being launched, if applied, such as Vertex AI
         #     Training or Dataflow job. If left unspecified, the workload is not peered
         #     with any network.
+        # @!attribute [rw] reserved_ip_ranges
+        #   @return [::Array<::String>]
+        #     A list of names for the reserved ip ranges under the VPC network
+        #     that can be used for this Pipeline Job's workload.
+        #
+        #     If set, we will deploy the Pipeline Job's workload within the provided ip
+        #     ranges. Otherwise, the job will be deployed to any ip ranges under the
+        #     provided VPC network.
+        #
+        #     Example: ['vertex-ai-ip-range'].
         # @!attribute [rw] template_uri
         #   @return [::String]
         #     A template uri from where the
@@ -107,6 +120,10 @@ module Google
         #     Output only. Pipeline template metadata. Will fill up fields if
         #     {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri}
         #     is from supported template registry.
+        # @!attribute [r] schedule_name
+        #   @return [::String]
+        #     Output only. The schedule resource name.
+        #     Only returned if the Pipeline is created by Schedule API.
         class PipelineJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -251,7 +268,7 @@ module Google
         # @!attribute [r] task_name
         #   @return [::String]
         #     Output only. The user specified name of the task that is defined in
-        #     [PipelineJob.spec][].
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec pipeline_spec}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Task create time.

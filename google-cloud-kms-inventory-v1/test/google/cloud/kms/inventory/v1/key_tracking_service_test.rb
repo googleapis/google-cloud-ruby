@@ -117,6 +117,7 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Mini
     crypto_key = "hello world"
     page_size = 42
     page_token = "hello world"
+    resource_types = ["hello world"]
 
     search_protected_resources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_protected_resources, name
@@ -125,6 +126,7 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Mini
       assert_equal "hello world", request["crypto_key"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["resource_types"]
       refute_nil options
     end
 
@@ -135,35 +137,35 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Mini
       end
 
       # Use hash object
-      client.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_protected_resources scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token do |response, operation|
+      client.search_protected_resources scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_protected_resources ::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token) do |response, operation|
+      client.search_protected_resources ::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_protected_resources(::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.search_protected_resources(::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

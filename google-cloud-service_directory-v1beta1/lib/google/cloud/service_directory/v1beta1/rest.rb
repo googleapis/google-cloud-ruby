@@ -18,6 +18,7 @@
 
 require "google/cloud/service_directory/v1beta1/lookup_service/rest"
 require "google/cloud/service_directory/v1beta1/registration_service/rest"
+require "google/cloud/service_directory/v1beta1/bindings_override"
 require "google/cloud/service_directory/v1beta1/version"
 
 module Google

@@ -8,7 +8,7 @@
     "name": "run",
     "name_pretty": "Cloud Run API",
     "product_documentation": "https://cloud.google.com/run",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Run deploys and manages user provided container images that scale automatically based on incoming requests.",

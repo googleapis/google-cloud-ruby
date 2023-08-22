@@ -35,6 +35,30 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
     end
   end
 
+  def test_instance_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_config_path project: "value0", location: "value1", instance_config: "value2"
+      assert_equal "projects/value0/locations/value1/instanceConfigs/value2", path
+    end
+  end
+
+  def test_interconnect_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.interconnect_attachment_path project: "value0", region: "value1", interconnect_attachment: "value2"
+      assert_equal "projects/value0/regions/value1/interconnectAttachments/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -83,6 +107,30 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
     end
   end
 
+  def test_network_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_config_path project: "value0", location: "value1", network_config: "value2"
+      assert_equal "projects/value0/locations/value1/networkConfigs/value2", path
+    end
+  end
+
+  def test_provisioning_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.provisioning_config_path project: "value0", location: "value1", provisioning_config: "value2"
+      assert_equal "projects/value0/locations/value1/provisioningConfigs/value2", path
+    end
+  end
+
   def test_server_network_template_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -95,6 +143,18 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
     end
   end
 
+  def test_ssh_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.ssh_key_path project: "value0", location: "value1", ssh_key: "value2"
+      assert_equal "projects/value0/locations/value1/sshKeys/value2", path
+    end
+  end
+
   def test_volume_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -104,6 +164,30 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
       path = client.volume_path project: "value0", location: "value1", volume: "value2"
       assert_equal "projects/value0/locations/value1/volumes/value2", path
+    end
+  end
+
+  def test_volume_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.volume_config_path project: "value0", location: "value1", volume_config: "value2"
+      assert_equal "projects/value0/locations/value1/volumeConfigs/value2", path
+    end
+  end
+
+  def test_volume_snapshot_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.volume_snapshot_path project: "value0", location: "value1", volume: "value2", snapshot: "value3"
+      assert_equal "projects/value0/locations/value1/volumes/value2/snapshots/value3", path
     end
   end
 end

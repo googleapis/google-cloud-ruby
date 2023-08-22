@@ -35,6 +35,11 @@
                 "classify_text"
               ]
             },
+            "ModerateText": {
+              "methods": [
+                "moderate_text"
+              ]
+            },
             "AnnotateText": {
               "methods": [
                 "annotate_text"

@@ -1,5 +1,64 @@
 # Release History
 
+### 0.26.0 (2023-08-15)
+
+#### Features
+
+* add APIs for GKE OOTB metrics packages ([#22753](https://github.com/googleapis/google-cloud-ruby/issues/22753)) 
+* Support for configuring a container's binary authorization policies ([#22774](https://github.com/googleapis/google-cloud-ruby/issues/22774)) 
+
+### 0.25.0 (2023-07-25)
+
+#### Features
+
+* add enable_multi_networking to NetworkConfig 
+* add policy_name to PlacementPolicy message within a node pool 
+* add support for AdditionalPodNetworkConfig and AdditionalNodeNetworkConfig 
+* add support for HostMaintenancePolicy 
+
+### 0.24.0 (2023-07-13)
+
+#### Features
+
+* Support for advanced datapath observability configs ([#22520](https://github.com/googleapis/google-cloud-ruby/issues/22520)) 
+
+### 0.23.0 (2023-07-10)
+
+#### Features
+
+* Added a flag for toggling the Kubelet readonly port 
+* Report the utilization of the IPv4 range for a pod 
+* Support for network performance configuration ([#22466](https://github.com/googleapis/google-cloud-ruby/issues/22466)) 
+* Support for the TPU placement topology 
+* Support for using KubeDNS for DNS resolution 
+
+### 0.22.0 (2023-06-06)
+
+#### Features
+
+* Support enabling FQDN Network Policy for a Cluster 
+* Support for best-effort provisioning in a NodePool 
+* Support for check_autopilot_compatibility ([#21908](https://github.com/googleapis/google-cloud-ruby/issues/21908)) 
+* Support for Kubernetes Beta APIs in a Cluster 
+* Support parameters for node pools to be backed by shared sole tenant node groups 
+* Uses binary protobuf definitions for better forward compatibility ([#21673](https://github.com/googleapis/google-cloud-ruby/issues/21673)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.21.1 (2023-05-19)
+
+#### Documentation
+
+* clarify release channel defaulting behavior 
+
+### 0.21.0 (2023-05-08)
+
+#### Features
+
+* Support for configuring the Cloud Storage Fuse CSI driver 
+* Support for fleet registration via cluster update 
+
 ### 0.20.0 (2023-04-27)
 
 #### Features

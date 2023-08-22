@@ -905,6 +905,174 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     end
   end
 
+  def test_query_metadata
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    service = "hello world"
+    query = "hello world"
+
+    query_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_query_metadata_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_metadata_client_stub do
+        # Create client
+        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_metadata({ service: service, query: query }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_metadata service: service, query: query do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_metadata ::Google::Cloud::Metastore::V1::QueryMetadataRequest.new(service: service, query: query) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_metadata({ service: service, query: query }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_metadata(::Google::Cloud::Metastore::V1::QueryMetadataRequest.new(service: service, query: query), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_metadata_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move_table_to_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    service = "hello world"
+    table_name = "hello world"
+    db_name = "hello world"
+    destination_db_name = "hello world"
+
+    move_table_to_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_move_table_to_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_table_to_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move_table_to_database({ service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move_table_to_database service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move_table_to_database ::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new(service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move_table_to_database({ service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move_table_to_database(::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new(service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_table_to_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_alter_metadata_resource_location
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    service = "hello world"
+    resource_name = "hello world"
+    location_uri = "hello world"
+
+    alter_metadata_resource_location_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_alter_metadata_resource_location_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, alter_metadata_resource_location_client_stub do
+        # Create client
+        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.alter_metadata_resource_location({ service: service, resource_name: resource_name, location_uri: location_uri }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.alter_metadata_resource_location service: service, resource_name: resource_name, location_uri: location_uri do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.alter_metadata_resource_location ::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new(service: service, resource_name: resource_name, location_uri: location_uri) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.alter_metadata_resource_location({ service: service, resource_name: resource_name, location_uri: location_uri }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.alter_metadata_resource_location(::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new(service: service, resource_name: resource_name, location_uri: location_uri), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, alter_metadata_resource_location_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

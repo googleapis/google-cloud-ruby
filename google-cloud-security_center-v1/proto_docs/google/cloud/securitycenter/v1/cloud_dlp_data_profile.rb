@@ -27,9 +27,24 @@ module Google
         #   @return [::String]
         #     Name of the data profile, for example,
         #     `projects/123/locations/europe/tableProfiles/8383929`.
+        # @!attribute [rw] parent_type
+        #   @return [::Google::Cloud::SecurityCenter::V1::CloudDlpDataProfile::ParentType]
+        #     The resource hierarchy level at which the data profile was generated.
         class CloudDlpDataProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Parents for configurations that produce data profile findings.
+          module ParentType
+            # Unspecified parent type.
+            PARENT_TYPE_UNSPECIFIED = 0
+
+            # Organization-level configurations.
+            ORGANIZATION = 1
+
+            # Project-level configurations.
+            PROJECT = 2
+          end
         end
       end
     end

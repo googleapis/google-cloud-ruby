@@ -19,7 +19,10 @@ describe "#create_cdn_key", :stitcher_snippet do
     sample = SampleLoader.load "create_cdn_key.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: media_cdn_key_id, hostname: hostname, key_name: key_name, private_key: media_cdn_private_key, is_media_cdn: true
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: media_cdn_key_id, hostname: hostname,
+                 key_name: key_name, private_key: media_cdn_private_key,
+                 is_media_cdn: true
     end
     @media_cdn_key_created = true
 
@@ -31,7 +34,10 @@ describe "#create_cdn_key", :stitcher_snippet do
     sample = SampleLoader.load "create_cdn_key.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: cloud_cdn_key_id, hostname: hostname, key_name: key_name, private_key: cloud_cdn_private_key, is_media_cdn: false
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: cloud_cdn_key_id, hostname: hostname,
+                 key_name: key_name, private_key: cloud_cdn_private_key,
+                 is_media_cdn: false
     end
     @cloud_cdn_key_created = true
 

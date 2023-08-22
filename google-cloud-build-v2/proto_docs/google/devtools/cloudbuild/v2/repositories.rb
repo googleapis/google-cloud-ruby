@@ -39,6 +39,10 @@ module Google
         # @!attribute [rw] github_enterprise_config
         #   @return [::Google::Cloud::Build::V2::GitHubEnterpriseConfig]
         #     Configuration for connections to an instance of GitHub Enterprise.
+        # @!attribute [rw] gitlab_config
+        #   @return [::Google::Cloud::Build::V2::GitLabConfig]
+        #     Configuration for connections to gitlab.com or an instance of GitLab
+        #     Enterprise.
         # @!attribute [r] installation_state
         #   @return [::Google::Cloud::Build::V2::InstallationState]
         #     Output only. Installation state of the Connection.
@@ -195,6 +199,43 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for connections to gitlab.com or an instance of GitLab
+        # Enterprise.
+        # @!attribute [rw] host_uri
+        #   @return [::String]
+        #     The URI of the GitLab Enterprise host this connection is for.
+        #     If not specified, the default value is https://gitlab.com.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. Immutable. SecretManager resource containing the webhook secret
+        #     of a GitLab Enterprise project, formatted as
+        #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::Build::V2::UserCredential]
+        #     Required. A GitLab personal access token with the minimum `read_api` scope
+        #     access.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::Build::V2::UserCredential]
+        #     Required. A GitLab personal access token with the `api` scope access.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::Build::V2::ServiceDirectoryConfig]
+        #     Configuration for using Service Directory to privately connect to a GitLab
+        #     Enterprise server. This should only be set if the GitLab Enterprise server
+        #     is hosted on-premises and not reachable by public internet. If this field
+        #     is left empty, calls to the GitLab Enterprise server will be made over the
+        #     public internet.
+        # @!attribute [rw] ssl_ca
+        #   @return [::String]
+        #     SSL certificate to use for requests to GitLab Enterprise.
+        # @!attribute [r] server_version
+        #   @return [::String]
+        #     Output only. Version of the GitLab Enterprise server running on the
+        #     `host_uri`.
+        class GitLabConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # ServiceDirectoryConfig represents Service Directory configuration for a
         # connection.
         # @!attribute [rw] service
@@ -229,6 +270,9 @@ module Google
         #     This checksum is computed by the server based on the value of other
         #     fields, and may be sent on update and delete requests to ensure the
         #     client has an up-to-date value before proceeding.
+        # @!attribute [r] webhook_id
+        #   @return [::String]
+        #     Output only. External ID of the webhook created for the repository.
         class Repository
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -253,6 +297,21 @@ module Google
         #   @return [::String]
         #     Output only. The username associated to this token.
         class OAuthCredential
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a personal access token that authorized the Connection,
+        # and associated metadata.
+        # @!attribute [rw] user_token_secret_version
+        #   @return [::String]
+        #     Required. A SecretManager resource containing the user token that
+        #     authorizes the Cloud Build connection. Format:
+        #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [r] username
+        #   @return [::String]
+        #     Output only. The username associated to this token.
+        class UserCredential
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -502,6 +561,57 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Expiration timestamp. Can be empty if unknown or non-expiring.
         class FetchReadWriteTokenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RPC request object accepted by the ProcessWebhook RPC method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Project and location where the webhook will be received.
+        #     Format: `projects/*/locations/*`.
+        # @!attribute [rw] body
+        #   @return [::Google::Api::HttpBody]
+        #     HTTP request body.
+        # @!attribute [rw] webhook_key
+        #   @return [::String]
+        #     Arbitrary additional key to find the maching repository for a webhook event
+        #     if needed.
+        class ProcessWebhookRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for fetching git refs
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     Required. The resource name of the repository in the format
+        #     `projects/*/locations/*/connections/*/repositories/*`.
+        # @!attribute [rw] ref_type
+        #   @return [::Google::Cloud::Build::V2::FetchGitRefsRequest::RefType]
+        #     Type of refs to fetch
+        class FetchGitRefsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of refs
+          module RefType
+            # No type specified.
+            REF_TYPE_UNSPECIFIED = 0
+
+            # To fetch tags.
+            TAG = 1
+
+            # To fetch branches.
+            BRANCH = 2
+          end
+        end
+
+        # Response for fetching git refs
+        # @!attribute [rw] ref_names
+        #   @return [::Array<::String>]
+        #     Name of the refs fetched.
+        class FetchGitRefsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

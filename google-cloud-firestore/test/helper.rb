@@ -19,6 +19,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/firestore"
+require "google/cloud/firestore/rate_limiter"
 require "grpc"
 
 ##
@@ -97,6 +98,33 @@ class StreamingListenStub
   end
 end
 
+class BatchWriteStub
+  attr_reader :requests, :responses
+
+  def initialize responses, requests, response_delay = 0
+    @requests = requests
+    @responses = responses
+    @response_delay = response_delay
+  end
+
+  def batch_write request, options = nil
+    sleep @response_delay
+    if @requests.first == [request, options]
+      @requests.shift
+      @responses.shift
+    else
+      batch_write_fail_resp(request[:writes]&.length)
+    end
+  end
+
+  def batch_write_fail_resp size = 20, code: nil, message: nil
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new(code: (code || 1), message: (message || "Mock rejection"))]*size
+    )
+  end
+end
+
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
   let(:database) { "(default)" }
@@ -115,6 +143,7 @@ class MockFirestore < Minitest::Spec
   let(:firestore_mock) { Minitest::Mock.new }
 
   before do
+    @start_time = Time.now
     firestore.service.instance_variable_set :@firestore, firestore_mock
   end
 
@@ -235,6 +264,32 @@ class MockFirestore < Minitest::Spec
     "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
 
+
+  def batch_write_args writes
+    [{ database: database_path, writes: writes }, default_options]
+  end
+
+  def batch_write_pass_resp size = 20
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new]*size
+    )
+  end
+
+  def batch_write_fail_resp size = 20, code: nil, message: nil
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new(code: (code || 1), message: (message || "Mock rejection"))]*size
+    )
+  end
+
+  def batch_write_mix_resp size = 20
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new]*(size/2) +
+        [Google::Rpc::Status.new(code: 1, message: "Mock rejection")]*(size/2)
+    )
+  end
 end
 
 class WatchFirestore < MockFirestore

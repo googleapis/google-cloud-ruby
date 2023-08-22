@@ -195,7 +195,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -254,7 +254,10 @@ module Google
               #     Reads the document in a transaction.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads the version of the document at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::Document]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -358,7 +361,9 @@ module Google
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Perform the read at the provided time.
               #
-              #     This may not be older than 270 seconds.
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               #   @param show_missing [::Boolean]
               #     If the list should show missing documents.
               #
@@ -600,7 +605,10 @@ module Google
               #     stream.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -882,7 +890,10 @@ module Google
               #     stream.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -977,9 +988,9 @@ module Google
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Executes the query at the given timestamp.
               #
-              #     Requires:
-              #
-              #     * Cannot be more than 270 seconds in the past.
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -1086,7 +1097,10 @@ module Google
               #     2 partitions, to complete the total of 10 specified in `partition_count`.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1160,7 +1174,10 @@ module Google
               #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1435,7 +1452,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "firestore.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "firestore.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

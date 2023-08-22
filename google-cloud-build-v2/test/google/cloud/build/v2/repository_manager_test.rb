@@ -884,6 +884,66 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
     end
   end
 
+  def test_fetch_git_refs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Build::V2::FetchGitRefsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    repository = "hello world"
+    ref_type = :REF_TYPE_UNSPECIFIED
+
+    fetch_git_refs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_git_refs, name
+      assert_kind_of ::Google::Cloud::Build::V2::FetchGitRefsRequest, request
+      assert_equal "hello world", request["repository"]
+      assert_equal :REF_TYPE_UNSPECIFIED, request["ref_type"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_git_refs_client_stub do
+      # Create client
+      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_git_refs({ repository: repository, ref_type: ref_type }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_git_refs repository: repository, ref_type: ref_type do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_git_refs ::Google::Cloud::Build::V2::FetchGitRefsRequest.new(repository: repository, ref_type: ref_type) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_git_refs({ repository: repository, ref_type: ref_type }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_git_refs(::Google::Cloud::Build::V2::FetchGitRefsRequest.new(repository: repository, ref_type: ref_type), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_git_refs_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

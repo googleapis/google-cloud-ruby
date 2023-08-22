@@ -40,10 +40,10 @@ module Google
         #     dots (.), and alphanumerics between.
         # @!attribute [r] namespaced_name
         #   @return [::String]
-        #     Output only. Namespaced name of the TagValue. Now only supported in the
-        #     format
-        #     `{organization_id}/{tag_key_short_name}/{short_name}`. Other
-        #     formats will be supported when we add non-org parented tags.
+        #     Output only. The namespaced name of the TagValue. Can be in the form
+        #     `{organization_id}/{tag_key_short_name}/{tag_value_short_name}` or
+        #     `{project_id}/{tag_key_short_name}/{tag_value_short_name}` or
+        #     `{project_number}/{tag_key_short_name}/{tag_value_short_name}`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. User-assigned description of the TagValue.

@@ -287,7 +287,7 @@ module Google
               table_id:       table_id,
               table:          table,
               initial_splits: initial_splits
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -671,7 +671,7 @@ module Google
               app_profile_id: app_profile_id,
               row_key:        row_key,
               mutations:      mutations
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -681,7 +681,7 @@ module Google
               table_name:     table_name,
               app_profile_id: app_profile_id,
               entries:        entries
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -699,7 +699,7 @@ module Google
               predicate_filter: predicate_filter,
               true_mutations:   true_mutations,
               false_mutations:  false_mutations
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -710,7 +710,7 @@ module Google
               app_profile_id: app_profile_id,
               row_key:        row_key,
               rules:          rules
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -723,6 +723,19 @@ module Google
           backup = Google::Cloud::Bigtable::Admin::V2::Backup.new \
             source_table: table_path(instance_id, source_table_id), expire_time: expire_time
           tables.create_backup parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup
+        end
+
+        ##
+        # Starts copying the selected backup to the chosen location.
+        # The underlying Google::Longrunning::Operation tracks the copying of backup.
+        #
+        # @return [Gapic::Operation]
+        #
+        def copy_backup project_id:, instance_id:, cluster_id:, backup_id:, source_backup:, expire_time:
+          tables.copy_backup parent: "projects/#{project_id}/instances/#{instance_id}/clusters/#{cluster_id}",
+                             backup_id: backup_id,
+                             source_backup: source_backup,
+                             expire_time: expire_time
         end
 
         ##

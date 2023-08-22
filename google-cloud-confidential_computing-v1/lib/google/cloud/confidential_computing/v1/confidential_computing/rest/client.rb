@@ -132,7 +132,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -241,7 +241,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload verify_attestation(challenge: nil, gcp_credentials: nil, tpm_attestation: nil)
+              # @overload verify_attestation(challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil)
               #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -256,6 +256,11 @@ module Google
               #   @param tpm_attestation [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation, ::Hash]
               #     Required. The TPM-specific data provided by the attesting platform, used to
               #     populate any of the claims regarding platform state.
+              #   @param confidential_space_info [::Google::Cloud::ConfidentialComputing::V1::ConfidentialSpaceInfo, ::Hash]
+              #     Optional. Optional information related to the Confidential Space TEE.
+              #   @param token_options [::Google::Cloud::ConfidentialComputing::V1::TokenOptions, ::Hash]
+              #     Optional. A collection of optional, workload-specified claims that modify
+              #     the token output.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -371,7 +376,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "confidentialcomputing.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "confidentialcomputing.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }

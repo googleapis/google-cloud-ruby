@@ -37,14 +37,21 @@ module Google
             rpc :ListBuckets, ::Google::Cloud::Logging::V2::ListBucketsRequest, ::Google::Cloud::Logging::V2::ListBucketsResponse
             # Gets a log bucket.
             rpc :GetBucket, ::Google::Cloud::Logging::V2::GetBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
+            # Creates a log bucket asynchronously that can be used to store log entries.
+            #
+            # After a bucket has been created, the bucket's location cannot be changed.
+            rpc :CreateBucketAsync, ::Google::Cloud::Logging::V2::CreateBucketRequest, ::Google::Longrunning::Operation
+            # Updates a log bucket asynchronously.
+            #
+            # If the bucket has a `lifecycle_state` of `DELETE_REQUESTED`, then
+            # `FAILED_PRECONDITION` will be returned.
+            #
+            # After a bucket has been created, the bucket's location cannot be changed.
+            rpc :UpdateBucketAsync, ::Google::Cloud::Logging::V2::UpdateBucketRequest, ::Google::Longrunning::Operation
             # Creates a log bucket that can be used to store log entries. After a bucket
             # has been created, the bucket's location cannot be changed.
             rpc :CreateBucket, ::Google::Cloud::Logging::V2::CreateBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
-            # Updates a log bucket. This method replaces the following fields in the
-            # existing bucket with values from the new bucket: `retention_period`
-            #
-            # If the retention period is decreased and the bucket is locked,
-            # `FAILED_PRECONDITION` will be returned.
+            # Updates a log bucket.
             #
             # If the bucket has a `lifecycle_state` of `DELETE_REQUESTED`, then
             # `FAILED_PRECONDITION` will be returned.
@@ -96,6 +103,17 @@ module Google
             # Deletes a sink. If the sink has a unique `writer_identity`, then that
             # service account is also deleted.
             rpc :DeleteSink, ::Google::Cloud::Logging::V2::DeleteSinkRequest, ::Google::Protobuf::Empty
+            # Asynchronously creates a linked dataset in BigQuery which makes it possible
+            # to use BigQuery to read the logs stored in the log bucket. A log bucket may
+            # currently only contain one link.
+            rpc :CreateLink, ::Google::Cloud::Logging::V2::CreateLinkRequest, ::Google::Longrunning::Operation
+            # Deletes a link. This will also delete the corresponding BigQuery linked
+            # dataset.
+            rpc :DeleteLink, ::Google::Cloud::Logging::V2::DeleteLinkRequest, ::Google::Longrunning::Operation
+            # Lists links.
+            rpc :ListLinks, ::Google::Cloud::Logging::V2::ListLinksRequest, ::Google::Cloud::Logging::V2::ListLinksResponse
+            # Gets a link.
+            rpc :GetLink, ::Google::Cloud::Logging::V2::GetLinkRequest, ::Google::Cloud::Logging::V2::Link
             # Lists all the exclusions on the _Default sink in a parent resource.
             rpc :ListExclusions, ::Google::Cloud::Logging::V2::ListExclusionsRequest, ::Google::Cloud::Logging::V2::ListExclusionsResponse
             # Gets the description of an exclusion in the _Default sink.

@@ -698,6 +698,187 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt KeyManagementService.RawEncrypt}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+        #     encryption.
+        # @!attribute [rw] plaintext
+        #   @return [::String]
+        #     Required. The data to encrypt. Must be no larger than 64KiB.
+        #
+        #     The maximum size depends on the key version's
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}.
+        #     For {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the
+        #     plaintext must be no larger than 64KiB. For
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of
+        #     the plaintext and additional_authenticated_data fields must be no larger
+        #     than 8KiB.
+        # @!attribute [rw] additional_authenticated_data
+        #   @return [::String]
+        #     Optional. Optional data that, if specified, must also be provided during
+        #     decryption through
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#additional_authenticated_data RawDecryptRequest.additional_authenticated_data}.
+        #
+        #     This field may only be used in conjunction with an
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm} that accepts
+        #     additional authenticated data (for example, AES-GCM).
+        #
+        #     The maximum size depends on the key version's
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}.
+        #     For {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the
+        #     plaintext must be no larger than 64KiB. For
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of
+        #     the plaintext and additional_authenticated_data fields must be no larger
+        #     than 8KiB.
+        # @!attribute [rw] plaintext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#plaintext RawEncryptRequest.plaintext}.
+        #     If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     verify the integrity of the received plaintext using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     report an error if the checksum verification fails. If you receive a
+        #     checksum error, your client should verify that CRC32C(plaintext) is equal
+        #     to plaintext_crc32c, and if so, perform a limited number of retries. A
+        #     persistent mismatch may indicate an issue in your computation of the CRC32C
+        #     checksum. Note: This field is defined as int64 for reasons of compatibility
+        #     across different languages. However, it is a non-negative integer, which
+        #     will never exceed 2^32-1, and can be safely downconverted to uint32 in
+        #     languages that support this type.
+        # @!attribute [rw] additional_authenticated_data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#additional_authenticated_data RawEncryptRequest.additional_authenticated_data}.
+        #     If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     verify the integrity of the received additional_authenticated_data using
+        #     this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     report an error if the checksum verification fails. If you receive a
+        #     checksum error, your client should verify that
+        #     CRC32C(additional_authenticated_data) is equal to
+        #     additional_authenticated_data_crc32c, and if so, perform
+        #     a limited number of retries. A persistent mismatch may indicate an issue in
+        #     your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] initialization_vector
+        #   @return [::String]
+        #     Optional. A customer-supplied initialization vector that will be used for
+        #     encryption. If it is not provided for AES-CBC and AES-CTR, one will be
+        #     generated. It will be returned in
+        #     {::Google::Cloud::Kms::V1::RawEncryptResponse#initialization_vector RawEncryptResponse.initialization_vector}.
+        # @!attribute [rw] initialization_vector_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#initialization_vector RawEncryptRequest.initialization_vector}.
+        #     If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     verify the integrity of the received initialization_vector using this
+        #     checksum. {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}
+        #     will report an error if the checksum verification fails. If you receive a
+        #     checksum error, your client should verify that
+        #     CRC32C(initialization_vector) is equal to
+        #     initialization_vector_crc32c, and if so, perform
+        #     a limited number of retries. A persistent mismatch may indicate an issue in
+        #     your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        class RawEncryptRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt KeyManagementService.RawDecrypt}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+        #     decryption.
+        # @!attribute [rw] ciphertext
+        #   @return [::String]
+        #     Required. The encrypted data originally returned in
+        #     {::Google::Cloud::Kms::V1::RawEncryptResponse#ciphertext RawEncryptResponse.ciphertext}.
+        # @!attribute [rw] additional_authenticated_data
+        #   @return [::String]
+        #     Optional. Optional data that must match the data originally supplied in
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#additional_authenticated_data RawEncryptRequest.additional_authenticated_data}.
+        # @!attribute [rw] initialization_vector
+        #   @return [::String]
+        #     Required. The initialization vector (IV) used during encryption, which must
+        #     match the data originally provided in
+        #     {::Google::Cloud::Kms::V1::RawEncryptResponse#initialization_vector RawEncryptResponse.initialization_vector}.
+        # @!attribute [rw] tag_length
+        #   @return [::Integer]
+        #     The length of the authentication tag that is appended to the end of
+        #     the ciphertext. If unspecified (0), the default value for the key's
+        #     algorithm will be used (for AES-GCM, the default value is 16).
+        # @!attribute [rw] ciphertext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#ciphertext RawDecryptRequest.ciphertext}.
+        #     If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     verify the integrity of the received ciphertext using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     report an error if the checksum verification fails. If you receive a
+        #     checksum error, your client should verify that CRC32C(ciphertext) is equal
+        #     to ciphertext_crc32c, and if so, perform a limited number of retries. A
+        #     persistent mismatch may indicate an issue in your computation of the CRC32C
+        #     checksum. Note: This field is defined as int64 for reasons of compatibility
+        #     across different languages. However, it is a non-negative integer, which
+        #     will never exceed 2^32-1, and can be safely downconverted to uint32 in
+        #     languages that support this type.
+        # @!attribute [rw] additional_authenticated_data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#additional_authenticated_data RawDecryptRequest.additional_authenticated_data}.
+        #     If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     verify the integrity of the received additional_authenticated_data using
+        #     this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     report an error if the checksum verification fails. If you receive a
+        #     checksum error, your client should verify that
+        #     CRC32C(additional_authenticated_data) is equal to
+        #     additional_authenticated_data_crc32c, and if so, perform
+        #     a limited number of retries. A persistent mismatch may indicate an issue in
+        #     your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] initialization_vector_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#initialization_vector RawDecryptRequest.initialization_vector}.
+        #     If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will
+        #     verify the integrity of the received initialization_vector using this
+        #     checksum. {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}
+        #     will report an error if the checksum verification fails. If you receive a
+        #     checksum error, your client should verify that
+        #     CRC32C(initialization_vector) is equal to initialization_vector_crc32c, and
+        #     if so, perform a limited number of retries. A persistent mismatch may
+        #     indicate an issue in your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        class RawDecryptRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::Kms::V1::KeyManagementService::Client#asymmetric_sign KeyManagementService.AsymmetricSign}.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1020,6 +1201,185 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in
         #     decryption.
         class DecryptResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt KeyManagementService.RawEncrypt}.
+        # @!attribute [rw] ciphertext
+        #   @return [::String]
+        #     The encrypted data. In the case of AES-GCM, the authentication tag
+        #     is the {::Google::Cloud::Kms::V1::RawEncryptResponse#tag_length tag_length}
+        #     bytes at the end of this field.
+        # @!attribute [rw] initialization_vector
+        #   @return [::String]
+        #     The initialization vector (IV) generated by the service during
+        #     encryption. This value must be stored and provided in
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#initialization_vector RawDecryptRequest.initialization_vector}
+        #     at decryption time.
+        # @!attribute [rw] tag_length
+        #   @return [::Integer]
+        #     The length of the authentication tag that is appended to
+        #     the end of the ciphertext.
+        # @!attribute [rw] ciphertext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::RawEncryptResponse#ciphertext RawEncryptResponse.ciphertext}.
+        #     An integrity check of ciphertext can be performed by computing the CRC32C
+        #     checksum of ciphertext and comparing your results to this field. Discard
+        #     the response in case of non-matching checksum values, and perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum. Note: This field is defined as int64
+        #     for reasons of compatibility across different languages. However, it is a
+        #     non-negative integer, which will never exceed 2^32-1, and can be safely
+        #     downconverted to uint32 in languages that support this type.
+        # @!attribute [rw] initialization_vector_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::RawEncryptResponse#initialization_vector RawEncryptResponse.initialization_vector}.
+        #     An integrity check of initialization_vector can be performed by computing
+        #     the CRC32C checksum of initialization_vector and comparing your results to
+        #     this field. Discard the response in case of non-matching checksum values,
+        #     and perform a limited number of retries. A persistent mismatch may indicate
+        #     an issue in your computation of the CRC32C checksum. Note: This field is
+        #     defined as int64 for reasons of compatibility across different languages.
+        #     However, it is a non-negative integer, which will never exceed 2^32-1, and
+        #     can be safely downconverted to uint32 in languages that support this type.
+        # @!attribute [rw] verified_plaintext_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#plaintext_crc32c RawEncryptRequest.plaintext_crc32c}
+        #     was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used
+        #     for the integrity verification of the plaintext. A false value of this
+        #     field indicates either that
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#plaintext_crc32c RawEncryptRequest.plaintext_crc32c}
+        #     was left unset or that it was not delivered to
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#plaintext_crc32c RawEncryptRequest.plaintext_crc32c}
+        #     but this field is still false, discard the response and perform a limited
+        #     number of retries.
+        # @!attribute [rw] verified_additional_authenticated_data_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#additional_authenticated_data_crc32c RawEncryptRequest.additional_authenticated_data_crc32c}
+        #     was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used
+        #     for the integrity verification of additional_authenticated_data. A false
+        #     value of this field indicates either that //
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#additional_authenticated_data_crc32c RawEncryptRequest.additional_authenticated_data_crc32c}
+        #     was left unset or that it was not delivered to
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#additional_authenticated_data_crc32c RawEncryptRequest.additional_authenticated_data_crc32c}
+        #     but this field is still false, discard the response and perform a limited
+        #     number of retries.
+        # @!attribute [rw] verified_initialization_vector_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#initialization_vector_crc32c RawEncryptRequest.initialization_vector_crc32c}
+        #     was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used
+        #     for the integrity verification of initialization_vector. A false value of
+        #     this field indicates either that
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#initialization_vector_crc32c RawEncryptRequest.initialization_vector_crc32c}
+        #     was left unset or that it was not delivered to
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set
+        #     {::Google::Cloud::Kms::V1::RawEncryptRequest#initialization_vector_crc32c RawEncryptRequest.initialization_vector_crc32c}
+        #     but this field is still false, discard the response and perform a limited
+        #     number of retries.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in
+        #     encryption. Check this field to verify that the intended resource was used
+        #     for encryption.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in
+        #     encryption.
+        class RawEncryptResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt KeyManagementService.RawDecrypt}.
+        # @!attribute [rw] plaintext
+        #   @return [::String]
+        #     The decrypted data.
+        # @!attribute [rw] plaintext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::RawDecryptResponse#plaintext RawDecryptResponse.plaintext}.
+        #     An integrity check of plaintext can be performed by computing the CRC32C
+        #     checksum of plaintext and comparing your results to this field. Discard the
+        #     response in case of non-matching checksum values, and perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum. Note: receiving this response message
+        #     indicates that
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} is able to
+        #     successfully decrypt the
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#ciphertext ciphertext}.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in
+        #     decryption.
+        # @!attribute [rw] verified_ciphertext_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#ciphertext_crc32c RawDecryptRequest.ciphertext_crc32c}
+        #     was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used
+        #     for the integrity verification of the ciphertext. A false value of this
+        #     field indicates either that
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#ciphertext_crc32c RawDecryptRequest.ciphertext_crc32c}
+        #     was left unset or that it was not delivered to
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#ciphertext_crc32c RawDecryptRequest.ciphertext_crc32c}
+        #     but this field is still false, discard the response and perform a limited
+        #     number of retries.
+        # @!attribute [rw] verified_additional_authenticated_data_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#additional_authenticated_data_crc32c RawDecryptRequest.additional_authenticated_data_crc32c}
+        #     was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used
+        #     for the integrity verification of additional_authenticated_data. A false
+        #     value of this field indicates either that //
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#additional_authenticated_data_crc32c RawDecryptRequest.additional_authenticated_data_crc32c}
+        #     was left unset or that it was not delivered to
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#additional_authenticated_data_crc32c RawDecryptRequest.additional_authenticated_data_crc32c}
+        #     but this field is still false, discard the response and perform a limited
+        #     number of retries.
+        # @!attribute [rw] verified_initialization_vector_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#initialization_vector_crc32c RawDecryptRequest.initialization_vector_crc32c}
+        #     was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used
+        #     for the integrity verification of initialization_vector. A false value of
+        #     this field indicates either that
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#initialization_vector_crc32c RawDecryptRequest.initialization_vector_crc32c}
+        #     was left unset or that it was not delivered to
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set
+        #     {::Google::Cloud::Kms::V1::RawDecryptRequest#initialization_vector_crc32c RawDecryptRequest.initialization_vector_crc32c}
+        #     but this field is still false, discard the response and perform a limited
+        #     number of retries.
+        class RawDecryptResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

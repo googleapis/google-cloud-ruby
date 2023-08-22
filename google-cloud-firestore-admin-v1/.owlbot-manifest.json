@@ -51,6 +51,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/firestore_admin/create_database.rb",
     "snippets/firestore_admin/create_index.rb",
     "snippets/firestore_admin/delete_index.rb",
     "snippets/firestore_admin/export_documents.rb",

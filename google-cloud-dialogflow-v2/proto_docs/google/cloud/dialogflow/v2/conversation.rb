@@ -117,7 +117,7 @@ module Google
         #     auto-generated one to you.
         #
         #     The conversation ID must be compliant with the regression fomula
-        #     "[a-zA-Z][a-zA-Z0-9_-]*" with the characters length in range of [3,64].
+        #     `[a-zA-Z][a-zA-Z0-9_-]*` with the characters length in range of [3,64].
         #     If the field is provided, the caller is resposible for
         #     1. the uniqueness of the ID, otherwise the request will be rejected.
         #     2. the consistency for whether to use custom ID or not under a project to
@@ -280,7 +280,7 @@ module Google
         #     suggestion. By default 500 and at most 1000.
         # @!attribute [rw] assist_query_params
         #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
-        #     Parameters for a human assist query.
+        #     Parameters for a human assist query. Only used for POC/demo purpose.
         class SuggestConversationSummaryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,6 +321,103 @@ module Google
           #   @return [::String]
           #     The name of the answer record. Format:
           #     "projects/<Project ID>/answerRecords/<Answer Record ID>"
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     The baseline model version used to generate this summary. It is empty if
+          #     a baseline model was not used to generate this summary.
+          class Summary
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TextSectionsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_summary Conversations.GenerateStatelessSummary}.
+        # @!attribute [rw] stateless_conversation
+        #   @return [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest::MinimalConversation]
+        #     Required. The conversation to suggest a summary for.
+        # @!attribute [rw] conversation_profile
+        #   @return [::Google::Cloud::Dialogflow::V2::ConversationProfile]
+        #     Required. A ConversationProfile containing information required for Summary
+        #     generation.
+        #     Required fields: \\{language_code, security_settings}
+        #     Optional fields: \\{agent_assistant_config}
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message used as context for
+        #     generating a Summary. If empty, the latest message of the conversation will
+        #     be used. The format is specific to the user and the names of the messages
+        #     provided.
+        # @!attribute [rw] max_context_size
+        #   @return [::Integer]
+        #     Max number of messages prior to and including
+        #     [latest_message] to use as context when compiling the
+        #     suggestion. By default 500 and at most 1000.
+        class GenerateStatelessSummaryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The minimum amount of information required to generate a Summary without
+          # having a Conversation resource created.
+          # @!attribute [rw] messages
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Message>]
+          #     Required. The messages that the Summary will be generated from. It is
+          #     expected that this message content is already redacted and does not
+          #     contain any PII. Required fields: {content, language_code, participant,
+          #     participant_role} Optional fields: \\{send_time} If send_time is not
+          #     provided, then the messages must be provided in chronological order.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource to charge for the Summary's generation.
+          #     Format: `projects/<Project ID>/locations/<Location ID>`.
+          class MinimalConversation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_summary Conversations.GenerateStatelessSummary}.
+        # @!attribute [rw] summary
+        #   @return [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse::Summary]
+        #     Generated summary.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message used as context for
+        #     compiling suggestion. The format is specific to the user and the names of
+        #     the messages provided.
+        # @!attribute [rw] context_size
+        #   @return [::Integer]
+        #     Number of messages prior to and including
+        #     [last_conversation_message][] used to compile the suggestion. It may be
+        #     smaller than the [GenerateStatelessSummaryRequest.context_size][] field in
+        #     the request if there weren't that many messages in the conversation.
+        class GenerateStatelessSummaryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Generated summary for a conversation.
+          # @!attribute [rw] text
+          #   @return [::String]
+          #     The summary content that is concatenated into one string.
+          # @!attribute [rw] text_sections
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     The summary content that is divided into sections. The key is the
+          #     section's name and the value is the section's content. There is no
+          #     specific format for the key or value.
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     The baseline model version used to generate this summary. It is empty if
+          #     a baseline model was not used to generate this summary.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

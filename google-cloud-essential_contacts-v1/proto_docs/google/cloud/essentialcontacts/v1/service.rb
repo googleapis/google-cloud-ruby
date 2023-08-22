@@ -22,22 +22,22 @@ module Google
     module EssentialContacts
       module V1
         # A contact that will receive notifications from Google Cloud.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     The identifier for the contact.
+        #     Output only. The identifier for the contact.
         #     Format: \\{resource_type}/\\{resource_id}/contacts/\\{contact_id}
         # @!attribute [rw] email
         #   @return [::String]
-        #     Required. The email address to send notifications to. This does not need to
-        #     be a Google account.
+        #     Required. The email address to send notifications to. The email address
+        #     does not need to be a Google Account.
         # @!attribute [rw] notification_category_subscriptions
         #   @return [::Array<::Google::Cloud::EssentialContacts::V1::NotificationCategory>]
-        #     The categories of notifications that the contact will receive
+        #     Required. The categories of notifications that the contact will receive
         #     communications for.
         # @!attribute [rw] language_tag
         #   @return [::String]
-        #     The preferred language for notifications, as a ISO 639-1 language code. See
-        #     [Supported
+        #     Required. The preferred language for notifications, as a ISO 639-1 language
+        #     code. See [Supported
         #     languages](https://cloud.google.com/resource-manager/docs/managing-notification-contacts#supported-languages)
         #     for a list of supported languages.
         # @!attribute [rw] validation_state

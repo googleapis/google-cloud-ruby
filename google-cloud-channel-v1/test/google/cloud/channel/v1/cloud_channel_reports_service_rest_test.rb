@@ -130,6 +130,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ClientTest
     report_job = "hello world"
     page_size = 42
     page_token = "hello world"
+    partition_keys = ["hello world"]
 
     fetch_report_results_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -145,27 +146,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ClientTest
         end
 
         # Use hash object
-        client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token do |_result, response|
+        client.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token) do |_result, response|
+        client.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

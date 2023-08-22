@@ -129,7 +129,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -254,7 +254,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload search_protected_resources(scope: nil, crypto_key: nil, page_size: nil, page_token: nil)
+              # @overload search_protected_resources(scope: nil, crypto_key: nil, page_size: nil, page_token: nil, resource_types: nil)
               #   Pass arguments to `search_protected_resources` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -278,6 +278,21 @@ module Google
               #     When paginating, all other parameters provided to
               #     {::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources KeyTrackingService.SearchProtectedResources}
               #     must match the call that provided the page token.
+              #   @param resource_types [::Array<::String>]
+              #     Optional. A list of resource types that this request searches for. If
+              #     empty, it will search all the [trackable resource
+              #     types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
+              #
+              #     Regular expressions are also supported. For example:
+              #
+              #     * `compute.googleapis.com.*` snapshots resources whose type starts
+              #     with `compute.googleapis.com`.
+              #     * `.*Image` snapshots resources whose type ends with `Image`.
+              #     * `.*Image.*` snapshots resources whose type contains `Image`.
+              #
+              #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+              #     regular expression syntax. If the regular expression does not match any
+              #     supported resource type, an INVALID_ARGUMENT error will be returned.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Kms::Inventory::V1::ProtectedResource>]
@@ -430,7 +445,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "kmsinventory.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "kmsinventory.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

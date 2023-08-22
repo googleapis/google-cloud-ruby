@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/workflows/v1/workflows_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -125,7 +126,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -136,6 +137,12 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
@@ -157,10 +164,17 @@ module Google
             #
             attr_reader :operations_client
 
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
             # Service calls
 
             ##
-            # Lists Workflows in a given project and location.
+            # Lists workflows in a given project and location.
             # The default order is not specified.
             #
             # @overload list_workflows(request, options = nil)
@@ -182,10 +196,10 @@ module Google
             #     Required. Project and location from which the workflows should be listed.
             #     Format: projects/\\{project}/locations/\\{location}
             #   @param page_size [::Integer]
-            #     Maximum number of workflows to return per call. The service may return
-            #     fewer than this value. If the value is not specified, a default value of
-            #     500 will be used. The maximum permitted value is 1000 and values greater
-            #     than 1000 will be coerced down to 1000.
+            #     Maximum number of workflows to return per call. The service might return
+            #     fewer than this value even if not at the end of the collection. If a value
+            #     is not specified, a default value of 500 is used. The maximum permitted
+            #     value is 1000 and values greater than 1000 are coerced down to 1000.
             #   @param page_token [::String]
             #     A page token, received from a previous `ListWorkflows` call.
             #     Provide this to retrieve the subsequent page.
@@ -195,10 +209,10 @@ module Google
             #   @param filter [::String]
             #     Filter to restrict results to specific workflows.
             #   @param order_by [::String]
-            #     Comma-separated list of fields that that specify the order of the results.
+            #     Comma-separated list of fields that specify the order of the results.
             #     Default sorting order for a field is ascending. To specify descending order
-            #     for a field, append a " desc" suffix.
-            #     If not specified, the results will be returned in an unspecified order.
+            #     for a field, append a "desc" suffix.
+            #     If not specified, the results are returned in an unspecified order.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Workflows::V1::Workflow>]
@@ -270,7 +284,7 @@ module Google
             end
 
             ##
-            # Gets details of a single Workflow.
+            # Gets details of a single workflow.
             #
             # @overload get_workflow(request, options = nil)
             #   Pass arguments to `get_workflow` via a request object, either of type
@@ -282,14 +296,20 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_workflow(name: nil)
+            # @overload get_workflow(name: nil, revision_id: nil)
             #   Pass arguments to `get_workflow` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the workflow which information should be retrieved.
+            #     Required. Name of the workflow for which information should be retrieved.
             #     Format: projects/\\{project}/locations/\\{location}/workflows/\\{workflow}
+            #   @param revision_id [::String]
+            #     Optional. The revision of the workflow to retrieve. If the revision_id is
+            #     empty, the latest revision is retrieved.
+            #     The format is "000001-a4d", where the first six characters define
+            #     the zero-padded decimal revision number. They are followed by a hyphen and
+            #     three hexadecimal characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Workflows::V1::Workflow]
@@ -358,7 +378,7 @@ module Google
             ##
             # Creates a new workflow. If a workflow with the specified name already
             # exists in the specified project and location, the long running operation
-            # will return [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
+            # returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
             #
             # @overload create_workflow(request, options = nil)
             #   Pass arguments to `create_workflow` via a request object, either of type
@@ -561,8 +581,8 @@ module Google
             ##
             # Updates an existing workflow.
             # Running this method has no impact on already running executions of the
-            # workflow. A new revision of the workflow may be created as a result of a
-            # successful update operation. In that case, such revision will be used
+            # workflow. A new revision of the workflow might be created as a result of a
+            # successful update operation. In that case, the new revision is used
             # in new workflow executions.
             #
             # @overload update_workflow(request, options = nil)
@@ -740,7 +760,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "workflows.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "workflows.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

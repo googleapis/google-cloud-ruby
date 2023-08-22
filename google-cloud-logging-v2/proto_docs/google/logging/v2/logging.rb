@@ -106,11 +106,13 @@ module Google
         #     list, rather than calling this method for each individual log entry.
         # @!attribute [rw] partial_success
         #   @return [::Boolean]
-        #     Optional. Whether valid entries should be written even if some other
-        #     entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
-        #     entry is not written, then the response status is the error associated
-        #     with one of the failed entries and the response includes error details
-        #     keyed by the entries' zero-based index in the `entries.write` method.
+        #     Optional. Whether a batch's valid entries should be written even if some
+        #     other entry failed due to a permanent error such as INVALID_ARGUMENT or
+        #     PERMISSION_DENIED. If any entry failed, then the response status is the
+        #     response status of one of the failed entries. The response will include
+        #     error details in `WriteLogEntriesPartialErrors.log_entry_errors` keyed by
+        #     the entries' zero-based index in the `entries`. Failed requests for which
+        #     no entries are written will not include per-entry errors.
         # @!attribute [rw] dry_run
         #   @return [::Boolean]
         #     Optional. If true, the request should expect normal response, but the
@@ -178,15 +180,14 @@ module Google
         #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
         #
         #     Projects listed in the `project_ids` field are added to this list.
+        #     A maximum of 100 resources may be specified in a single request.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. A filter that chooses which log entries to return.  See [Advanced
-        #     Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
-        #     Only log entries that match the filter are returned.  An empty filter
-        #     matches all log entries in the resources listed in `resource_names`.
+        #     Optional. Only log entries that match the filter are returned.  An empty
+        #     filter matches all log entries in the resources listed in `resource_names`.
         #     Referencing a parent resource that is not listed in `resource_names` will
-        #     cause the filter to return no results. The maximum length of the filter is
-        #     20000 characters.
+        #     cause the filter to return no results. The maximum length of a filter is
+        #     20,000 characters.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. How the results should be sorted.  Presently, the only permitted
@@ -197,10 +198,10 @@ module Google
         #     timestamps are returned in order of their `insert_id` values.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of results to return from this request. Default is 50.
-        #     If the value is negative or exceeds 1000, the request is rejected. The
-        #     presence of `next_page_token` in the response indicates that more results
-        #     might be available.
+        #     Optional. The maximum number of results to return from this request.
+        #     Default is 50. If the value is negative or exceeds 1000, the request is
+        #     rejected. The presence of `next_page_token` in the response indicates that
+        #     more results might be available.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. If present, then retrieve the next batch of results from the
@@ -269,26 +270,15 @@ module Google
         # The parameters to ListLogs.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name that owns the logs:
+        #     Required. The resource name to list logs for:
         #
         #     *  `projects/[PROJECT_ID]`
         #     *  `organizations/[ORGANIZATION_ID]`
         #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
         #     *  `folders/[FOLDER_ID]`
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     Optional. The maximum number of results to return from this request.
-        #     Non-positive values are ignored.  The presence of `nextPageToken` in the
-        #     response indicates that more results might be available.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     Optional. If present, then retrieve the next batch of results from the
-        #     preceding call to this method.  `pageToken` must be the value of
-        #     `nextPageToken` from the previous response.  The values of other method
-        #     parameters should be identical to those in the previous call.
         # @!attribute [rw] resource_names
         #   @return [::Array<::String>]
-        #     Optional. The resource name that owns the logs:
+        #     Optional. List of resource names to list logs for:
         #
         #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
         #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
@@ -301,6 +291,19 @@ module Google
         #     *  `organizations/[ORGANIZATION_ID]`
         #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
         #     *  `folders/[FOLDER_ID]`
+        #
+        #     The resource name in the `parent` field is added to this list.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return from this request.
+        #     Non-positive values are ignored.  The presence of `nextPageToken` in the
+        #     response indicates that more results might be available.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method.  `pageToken` must be the value of
+        #     `nextPageToken` from the previous response.  The values of other method
+        #     parameters should be identical to those in the previous call.
         class ListLogsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -340,13 +343,11 @@ module Google
         #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. A filter that chooses which log entries to return.  See [Advanced
-        #     Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
-        #     Only log entries that match the filter are returned.  An empty filter
-        #     matches all log entries in the resources listed in `resource_names`.
-        #     Referencing a parent resource that is not in `resource_names` will cause
-        #     the filter to return no results. The maximum length of the filter is 20000
-        #     characters.
+        #     Optional. Only log entries that match the filter are returned.  An empty
+        #     filter matches all log entries in the resources listed in `resource_names`.
+        #     Referencing a parent resource that is not listed in `resource_names` will
+        #     cause the filter to return no results. The maximum length of a filter is
+        #     20,000 characters.
         # @!attribute [rw] buffer_window
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The amount of time to buffer log entries at the server before

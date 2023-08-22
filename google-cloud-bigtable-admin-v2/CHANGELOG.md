@@ -1,5 +1,36 @@
 # Release History
 
+### 0.17.0 (2023-08-15)
+
+#### Features
+
+* Support for the copy_backup RPC ([#22783](https://github.com/googleapis/google-cloud-ruby/issues/22783)) 
+
+### 0.16.3 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.16.2 (2023-07-10)
+
+#### Documentation
+
+* Increase the max backup retention period to 90 days ([#22465](https://github.com/googleapis/google-cloud-ruby/issues/22465)) 
+
+### 0.16.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.16.0 (2023-05-31)
+
+#### Features
+
+* Support for enabling the change stream on a table ([#21683](https://github.com/googleapis/google-cloud-ruby/issues/21683)) 
+* Uses binary protobuf definitions for better forward compatibility 
+
 ### 0.15.0 (2022-09-16)
 
 #### Features

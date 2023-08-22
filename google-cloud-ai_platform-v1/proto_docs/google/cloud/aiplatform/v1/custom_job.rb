@@ -203,6 +203,16 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::Trial#web_access_uris Trial.web_access_uris}
         #     (within
         #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials}).
+        # @!attribute [rw] experiment
+        #   @return [::String]
+        #     Optional. The Experiment associated with this job.
+        #     Format:
+        #     `projects/{project}/locations/{location}/metadataStores/{metadataStores}/contexts/{experiment-name}`
+        # @!attribute [rw] experiment_run
+        #   @return [::String]
+        #     Optional. The Experiment Run associated with this job.
+        #     Format:
+        #     `projects/{project}/locations/{location}/metadataStores/{metadataStores}/contexts/{experiment-name}-{experiment-run-name}`
         class CustomJobSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -291,6 +301,11 @@ module Google
         #     Restarts the entire CustomJob if a worker gets restarted.
         #     This feature can be used by distributed training jobs that are not
         #     resilient to workers leaving and joining a job.
+        # @!attribute [rw] disable_retries
+        #   @return [::Boolean]
+        #     Optional. Indicates if the job should retry for internal errors after the
+        #     job starts running. If true, overrides
+        #     `Scheduling.restart_job_on_worker_restart` to false.
         class Scheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

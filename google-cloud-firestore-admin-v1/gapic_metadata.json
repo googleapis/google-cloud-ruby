@@ -55,6 +55,11 @@
                 "import_documents"
               ]
             },
+            "CreateDatabase": {
+              "methods": [
+                "create_database"
+              ]
+            },
             "GetDatabase": {
               "methods": [
                 "get_database"

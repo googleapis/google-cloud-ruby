@@ -130,7 +130,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -1012,7 +1012,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload import_flow(parent: nil, flow_uri: nil, flow_content: nil, import_option: nil)
+              # @overload import_flow(parent: nil, flow_uri: nil, flow_content: nil, import_option: nil, flow_import_strategy: nil)
               #   Pass arguments to `import_flow` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1034,6 +1034,9 @@ module Google
               #     Uncompressed raw byte content for flow.
               #   @param import_option [::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest::ImportOption]
               #     Flow import mode. If not specified, `KEEP` is assumed.
+              #   @param flow_import_strategy [::Google::Cloud::Dialogflow::CX::V3::FlowImportStrategy, ::Hash]
+              #     Optional. Specifies the import strategy used when resolving resource
+              #     conflicts.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -1309,7 +1312,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "dialogflow.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

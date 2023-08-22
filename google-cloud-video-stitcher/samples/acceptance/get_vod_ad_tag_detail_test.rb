@@ -22,14 +22,16 @@ describe "#get_vod_ad_tag_detail", :stitcher_snippet do
     @session_id = vod_session.name.split("/").last
 
     output = capture_io {
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     }
 
     @ad_tag_detail_id = output[0].to_s.split("/").last.strip
     sample = SampleLoader.load "get_vod_ad_tag_detail.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id, ad_tag_detail_id: @ad_tag_detail_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id, ad_tag_detail_id: @ad_tag_detail_id
     end
 
     assert_match %r{VOD ad tag detail: projects/\S+/locations/#{location_id}/vodSessions/#{@session_id}/vodAdTagDetails/#{@ad_tag_detail_id}}, out

@@ -94,7 +94,8 @@ module Google
               # - `response`:
               # [ExportTestCasesResponse][google.cloud.dialogflow.cx.v3.ExportTestCasesResponse]
               rpc :ExportTestCases, ::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesRequest, ::Google::Longrunning::Operation
-              # Fetches a list of results for a given test case.
+              # Fetches the list of run results for the given test case. A maximum of 100
+              # results are kept for each test case.
               rpc :ListTestCaseResults, ::Google::Cloud::Dialogflow::CX::V3::ListTestCaseResultsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListTestCaseResultsResponse
               # Gets a test case result.
               rpc :GetTestCaseResult, ::Google::Cloud::Dialogflow::CX::V3::GetTestCaseResultRequest, ::Google::Cloud::Dialogflow::CX::V3::TestCaseResult

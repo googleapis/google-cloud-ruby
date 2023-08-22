@@ -181,7 +181,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -1064,10 +1064,15 @@ module Google
               #     `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
               #   @param requested_time_range [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange, ::Hash]
-              #     Time range for the transfer runs that should be started.
+              #     A time_range start and end timestamp for historical data files or reports
+              #     that are scheduled to be transferred by the scheduled transfer run.
+              #     requested_time_range must be a past time and cannot include future time
+              #     values.
               #   @param requested_run_time [::Google::Protobuf::Timestamp, ::Hash]
-              #     Specific run_time for a transfer run to be started. The
-              #     requested_run_time must not be in the future.
+              #     A run_time timestamp for historical data files or reports
+              #     that are scheduled to be transferred by the scheduled transfer run.
+              #     requested_run_time must be a past time and cannot include future time
+              #     values.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsResponse]
@@ -1782,7 +1787,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "bigquerydatatransfer.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "bigquerydatatransfer.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

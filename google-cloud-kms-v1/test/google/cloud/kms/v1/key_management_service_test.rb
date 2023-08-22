@@ -1370,6 +1370,148 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     end
   end
 
+  def test_raw_encrypt
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::RawEncryptResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    plaintext = "hello world"
+    additional_authenticated_data = "hello world"
+    plaintext_crc32c = {}
+    additional_authenticated_data_crc32c = {}
+    initialization_vector = "hello world"
+    initialization_vector_crc32c = {}
+
+    raw_encrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :raw_encrypt, name
+      assert_kind_of ::Google::Cloud::Kms::V1::RawEncryptRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["plaintext"]
+      assert_equal "hello world", request["additional_authenticated_data"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["plaintext_crc32c"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["additional_authenticated_data_crc32c"]
+      assert_equal "hello world", request["initialization_vector"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["initialization_vector_crc32c"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, raw_encrypt_client_stub do
+      # Create client
+      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.raw_encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.raw_encrypt ::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.raw_encrypt(::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, raw_encrypt_client_stub.call_rpc_count
+    end
+  end
+
+  def test_raw_decrypt
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::RawDecryptResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ciphertext = "hello world"
+    additional_authenticated_data = "hello world"
+    initialization_vector = "hello world"
+    tag_length = 42
+    ciphertext_crc32c = {}
+    additional_authenticated_data_crc32c = {}
+    initialization_vector_crc32c = {}
+
+    raw_decrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :raw_decrypt, name
+      assert_kind_of ::Google::Cloud::Kms::V1::RawDecryptRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["ciphertext"]
+      assert_equal "hello world", request["additional_authenticated_data"]
+      assert_equal "hello world", request["initialization_vector"]
+      assert_equal 42, request["tag_length"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["ciphertext_crc32c"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["additional_authenticated_data_crc32c"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["initialization_vector_crc32c"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, raw_decrypt_client_stub do
+      # Create client
+      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.raw_decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.raw_decrypt ::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.raw_decrypt(::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, raw_decrypt_client_stub.call_rpc_count
+    end
+  end
+
   def test_asymmetric_sign
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Kms::V1::AsymmetricSignResponse.new

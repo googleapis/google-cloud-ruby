@@ -114,7 +114,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Static IP address connectivity.
+        # Static IP address connectivity. Used when the source database is configured
+        # to allow incoming connections from the Datastream public IP addresses
+        # for the region specified in the connection profile.
         class StaticServiceIpConnectivity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,7 +179,8 @@ module Google
         #     Output only. The state of the Private Connection.
         # @!attribute [r] error
         #   @return [::Google::Cloud::Datastream::V1::Error]
-        #     Output only. In case of error, the details of the error in a user-friendly format.
+        #     Output only. In case of error, the details of the error in a user-friendly
+        #     format.
         # @!attribute [rw] vpc_peering_config
         #   @return [::Google::Cloud::Datastream::V1::VpcPeeringConfig]
         #     VPC Peering Config.
@@ -282,8 +285,8 @@ module Google
         #     Output only. Indicates whether the client_certificate field is set.
         # @!attribute [rw] ca_certificate
         #   @return [::String]
-        #     Input only. PEM-encoded certificate of the CA that signed the source database
-        #     server's certificate.
+        #     Input only. PEM-encoded certificate of the CA that signed the source
+        #     database server's certificate.
         # @!attribute [r] ca_certificate_set
         #   @return [::Boolean]
         #     Output only. Indicates whether the ca_certificate field is set.
@@ -424,14 +427,18 @@ module Google
         #     Oracle objects to exclude from the stream.
         # @!attribute [rw] max_concurrent_cdc_tasks
         #   @return [::Integer]
-        #     Maximum number of concurrent CDC tasks. The number should be non negative.
-        #     If not set (or set to 0), the system's default value will be used.
+        #     Maximum number of concurrent CDC tasks. The number should be non-negative.
+        #     If not set (or set to 0), the system's default value is used.
+        # @!attribute [rw] max_concurrent_backfill_tasks
+        #   @return [::Integer]
+        #     Maximum number of concurrent backfill tasks. The number should be
+        #     non-negative. If not set (or set to 0), the system's default value is used.
         # @!attribute [rw] drop_large_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::DropLargeObjects]
         #     Drop large object values.
         # @!attribute [rw] stream_large_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::StreamLargeObjects]
-        #     Stream large object values.
+        #     Stream large object values. NOTE: This feature is currently experimental.
         class OracleSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -523,12 +530,17 @@ module Google
         #     PostgreSQL objects to exclude from the stream.
         # @!attribute [rw] replication_slot
         #   @return [::String]
-        #     Required. The name of the logical replication slot that's configured with the
-        #     pgoutput plugin.
+        #     Required. Immutable. The name of the logical replication slot that's
+        #     configured with the pgoutput plugin.
         # @!attribute [rw] publication
         #   @return [::String]
-        #     Required. The name of the publication that includes the set of all tables that are
-        #     defined in the stream's include_objects.
+        #     Required. The name of the publication that includes the set of all tables
+        #     that are defined in the stream's include_objects.
+        # @!attribute [rw] max_concurrent_backfill_tasks
+        #   @return [::Integer]
+        #     Maximum number of concurrent backfill tasks. The number should be non
+        #     negative. If not set (or set to 0), the system's default value will be
+        #     used.
         class PostgresqlSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -557,6 +569,12 @@ module Google
         # @!attribute [rw] ordinal_position
         #   @return [::Integer]
         #     The ordinal position of the column in the table.
+        # @!attribute [rw] precision
+        #   @return [::Integer]
+        #     Column precision.
+        # @!attribute [rw] scale
+        #   @return [::Integer]
+        #     Column scale.
         class MysqlColumn
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -608,6 +626,11 @@ module Google
         #   @return [::Integer]
         #     Maximum number of concurrent CDC tasks. The number should be non negative.
         #     If not set (or set to 0), the system's default value will be used.
+        # @!attribute [rw] max_concurrent_backfill_tasks
+        #   @return [::Integer]
+        #     Maximum number of concurrent backfill tasks. The number should be non
+        #     negative. If not set (or set to 0), the system's default value will be
+        #     used.
         class MysqlSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -684,7 +707,8 @@ module Google
         # @!attribute [rw] file_rotation_interval
         #   @return [::Google::Protobuf::Duration]
         #     The maximum duration for which new events are added before a file is
-        #     closed and a new file is created.
+        #     closed and a new file is created. Values within the range of 15-60 seconds
+        #     are allowed.
         # @!attribute [rw] avro_file_format
         #   @return [::Google::Cloud::Datastream::V1::AvroFileFormat]
         #     AVRO file format configuration.
@@ -696,6 +720,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # BigQuery destination configuration
         # @!attribute [rw] single_target_dataset
         #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SingleTargetDataset]
         #     Single destination dataset.
@@ -715,6 +740,7 @@ module Google
           # A single target dataset to which all data will be streamed.
           # @!attribute [rw] dataset_id
           #   @return [::String]
+          #     The dataset ID of the target dataset.
           class SingleTargetDataset
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -724,6 +750,7 @@ module Google
           # objects matches the source hierarchy.
           # @!attribute [rw] dataset_template
           #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SourceHierarchyDatasets::DatasetTemplate]
+          #     The dataset template to use for dynamic dataset creation.
           class SourceHierarchyDatasets
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

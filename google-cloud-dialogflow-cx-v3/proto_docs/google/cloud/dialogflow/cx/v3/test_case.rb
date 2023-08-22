@@ -192,7 +192,8 @@ module Google
           #     The type of diff.
           # @!attribute [rw] description
           #   @return [::String]
-          #     A description of the diff, showing the actual output vs expected output.
+          #     A human readable description of the diff, showing the actual output vs
+          #     expected output.
           class TestRunDifference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,6 +214,9 @@ module Google
 
               # The message utterance.
               UTTERANCE = 4
+
+              # The flow.
+              FLOW = 5
             end
           end
 
@@ -255,7 +259,7 @@ module Google
             #     The end node of a transition.
             # @!attribute [rw] covered
             #   @return [::Boolean]
-            #     Whether or not the transition is covered by at least one of the
+            #     Whether the transition is covered by at least one of the
             #     agent's test cases.
             # @!attribute [rw] transition_route
             #   @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRoute]
@@ -304,7 +308,7 @@ module Google
               #     Intent route or condition route.
               # @!attribute [rw] covered
               #   @return [::Boolean]
-              #     Whether or not the transition route is covered by at least one of the
+              #     Whether the transition route is covered by at least one of the
               #     agent's test cases.
               class Transition
                 include ::Google::Protobuf::MessageExts
@@ -331,7 +335,7 @@ module Google
             #     The intent full resource name
             # @!attribute [rw] covered
             #   @return [::Boolean]
-            #     Whether or not the intent is covered by at least one of the agent's
+            #     Whether the intent is covered by at least one of the agent's
             #     test cases.
             class Intent
               include ::Google::Protobuf::MessageExts

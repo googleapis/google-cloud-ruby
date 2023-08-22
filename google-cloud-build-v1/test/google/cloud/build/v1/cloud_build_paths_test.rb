@@ -65,6 +65,21 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_github_enterprise_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.github_enterprise_config_path project: "value0", config: "value1"
+      assert_equal "projects/value0/githubEnterpriseConfigs/value1", path
+
+      path = client.github_enterprise_config_path project: "value0", location: "value1", config: "value2"
+      assert_equal "projects/value0/locations/value1/githubEnterpriseConfigs/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -98,6 +113,18 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
       path = client.project_path project: "value0"
       assert_equal "projects/value0", path
+    end
+  end
+
+  def test_repository_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.repository_path project: "value0", location: "value1", connection: "value2", repository: "value3"
+      assert_equal "projects/value0/locations/value1/connections/value2/repositories/value3", path
     end
   end
 

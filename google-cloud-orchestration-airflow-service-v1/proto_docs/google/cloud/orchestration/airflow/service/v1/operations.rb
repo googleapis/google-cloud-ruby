@@ -90,6 +90,10 @@ module Google
 
                 # Loads snapshot of the resource operation.
                 LOAD_SNAPSHOT = 6
+
+                # Triggers failover of environment's Cloud SQL instance (only for highly
+                # resilient environments).
+                DATABASE_FAILOVER = 7
               end
             end
           end

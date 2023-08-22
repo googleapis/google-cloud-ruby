@@ -21,6 +21,31 @@ module Google
   module Cloud
     module Logging
       module V2
+        # Configuration for an indexed field.
+        # @!attribute [rw] field_path
+        #   @return [::String]
+        #     Required. The LogEntry field path to index.
+        #
+        #     Note that some paths are automatically indexed, and other paths are not
+        #     eligible for indexing. See [indexing documentation](
+        #     https://cloud.google.com/logging/docs/view/advanced-queries#indexed-fields)
+        #     for details.
+        #
+        #     For example: `jsonPayload.request.status`
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Logging::V2::IndexType]
+        #     Required. The type of data in this index.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the index was last modified.
+        #
+        #     This is used to return the timestamp, and will be ignored if supplied
+        #     during update.
+        class IndexConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Describes a repository in which log entries are stored.
         # @!attribute [r] name
         #   @return [::String]
@@ -42,8 +67,8 @@ module Google
         #     Describes this bucket.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The creation timestamp of the bucket. This is not set for any of the
-        #     default buckets.
+        #     Output only. The creation timestamp of the bucket. This is not set for any
+        #     of the default buckets.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update timestamp of the bucket.
@@ -62,6 +87,11 @@ module Google
         # @!attribute [r] lifecycle_state
         #   @return [::Google::Cloud::Logging::V2::LifecycleState]
         #     Output only. The bucket lifecycle state.
+        # @!attribute [rw] analytics_enabled
+        #   @return [::Boolean]
+        #     Whether log analytics is enabled for this bucket.
+        #
+        #     Once enabled, log analytics features cannot be disabled.
         # @!attribute [rw] restricted_fields
         #   @return [::Array<::String>]
         #     Log entry field paths that are denied access in this bucket.
@@ -71,6 +101,9 @@ module Google
         #
         #     Restricting a repeated field will restrict all values. Adding a parent will
         #     block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
+        # @!attribute [rw] index_configs
+        #   @return [::Array<::Google::Cloud::Logging::V2::IndexConfig>]
+        #     A list of indexed fields and related configuration data.
         # @!attribute [rw] cmek_settings
         #   @return [::Google::Cloud::Logging::V2::CmekSettings]
         #     The CMEK settings of the log bucket. If present, new log entries written to
@@ -164,11 +197,12 @@ module Google
         #     The maximum length of the description is 8000 characters.
         # @!attribute [rw] disabled
         #   @return [::Boolean]
-        #     Optional. If set to true, then this sink is disabled and it does not export any log
-        #     entries.
+        #     Optional. If set to true, then this sink is disabled and it does not export
+        #     any log entries.
         # @!attribute [rw] exclusions
         #   @return [::Array<::Google::Cloud::Logging::V2::LogExclusion>]
-        #     Optional. Log entries that match any of these exclusion filters will not be exported.
+        #     Optional. Log entries that match any of these exclusion filters will not be
+        #     exported.
         #
         #     If a log entry is matched by both `filter` and one of `exclusion_filters`
         #     it will not be exported.
@@ -177,9 +211,10 @@ module Google
         #     Deprecated. This field is unused.
         # @!attribute [r] writer_identity
         #   @return [::String]
-        #     Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
-        #     Logging writes the exported log entries to the sink's destination. This
-        #     field is set by
+        #     Output only. An IAM identity&mdash;a service account or group&mdash;under
+        #     which Cloud Logging writes the exported log entries to the sink's
+        #     destination. This field is either set by specifying
+        #     `custom_writer_identity` or set automatically by
         #     {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create} and
         #     {::Google::Cloud::Logging::V2::ConfigService::Client#update_sink sinks.update} based on the
         #     value of `unique_writer_identity` in those methods.
@@ -192,17 +227,17 @@ module Google
         #     appropriate IAM roles to assign to the identity.
         #
         #     Sinks that have a destination that is a log bucket in the same project as
-        #     the sink do not have a writer_identity and no additional permissions are
+        #     the sink cannot have a writer_identity and no additional permissions are
         #     required.
         # @!attribute [rw] include_children
         #   @return [::Boolean]
-        #     Optional. This field applies only to sinks owned by organizations and folders. If the
-        #     field is false, the default, only the logs owned by the sink's parent
-        #     resource are available for export. If the field is true, then log entries
-        #     from all the projects, folders, and billing accounts contained in the
-        #     sink's parent resource are also available for export. Whether a particular
-        #     log entry from the children is exported depends on the sink's filter
-        #     expression.
+        #     Optional. This field applies only to sinks owned by organizations and
+        #     folders. If the field is false, the default, only the logs owned by the
+        #     sink's parent resource are available for export. If the field is true, then
+        #     log entries from all the projects, folders, and billing accounts contained
+        #     in the sink's parent resource are also available for export. Whether a
+        #     particular log entry from the children is exported depends on the sink's
+        #     filter expression.
         #
         #     For example, if this field is true, then the filter
         #     `resource.type=gce_instance` would export all Compute Engine VM instance
@@ -243,6 +278,58 @@ module Google
           end
         end
 
+        # Describes a BigQuery dataset that was created by a link.
+        # @!attribute [r] dataset_id
+        #   @return [::String]
+        #     Output only. The full resource name of the BigQuery dataset. The DATASET_ID
+        #     will match the ID of the link, so the link must match the naming
+        #     restrictions of BigQuery datasets (alphanumeric characters and underscores
+        #     only).
+        #
+        #     The dataset will have a resource path of
+        #       "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET_ID]"
+        class BigQueryDataset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a link connected to an analytics enabled bucket.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the link. The name can have up to 100 characters.
+        #     A valid link id (at the end of the link name) must only have alphanumeric
+        #     characters and underscores within it.
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #
+        #     For example:
+        #
+        #       `projects/my-project/locations/global/buckets/my-bucket/links/my_link
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Describes this link.
+        #
+        #     The maximum length of the description is 8000 characters.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The creation timestamp of the link.
+        # @!attribute [r] lifecycle_state
+        #   @return [::Google::Cloud::Logging::V2::LifecycleState]
+        #     Output only. The resource lifecycle state.
+        # @!attribute [rw] bigquery_dataset
+        #   @return [::Google::Cloud::Logging::V2::BigQueryDataset]
+        #     The information of a BigQuery Dataset. When a link is created, a BigQuery
+        #     dataset is created along with it, in the same project as the LogBucket it's
+        #     linked to. This dataset will also have BigQuery Views corresponding to the
+        #     LogViews in the bucket.
+        class Link
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Options that change functionality of a sink exporting data to BigQuery.
         # @!attribute [rw] use_partitioned_tables
         #   @return [::Boolean]
@@ -256,8 +343,8 @@ module Google
         #     timezone.
         # @!attribute [r] uses_timestamp_column_partitioning
         #   @return [::Boolean]
-        #     Output only. True if new timestamp column based partitioning is in use, false if legacy
-        #     ingestion-time partitioning is in use.
+        #     Output only. True if new timestamp column based partitioning is in use,
+        #     false if legacy ingestion-time partitioning is in use.
         #
         #     All new sinks will have this field set true and will use timestamp column
         #     based partitioning. If use_partitioned_tables is false, this value has no
@@ -283,15 +370,15 @@ module Google
         #     buckets.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. If present, then retrieve the next batch of results from the preceding call
-        #     to this method. `pageToken` must be the value of `nextPageToken` from the
-        #     previous response. The values of other method parameters should be
-        #     identical to those in the previous call.
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `pageToken` must be the value of
+        #     `nextPageToken` from the previous response. The values of other method
+        #     parameters should be identical to those in the previous call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of results to return from this request. Non-positive
-        #     values are ignored. The presence of `nextPageToken` in the response
-        #     indicates that more results might be available.
+        #     Optional. The maximum number of results to return from this request.
+        #     Non-positive values are ignored. The presence of `nextPageToken` in the
+        #     response indicates that more results might be available.
         class ListBucketsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -323,14 +410,14 @@ module Google
         #       `"projects/my-project/locations/global"`
         # @!attribute [rw] bucket_id
         #   @return [::String]
-        #     Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
-        #     to 100 characters and can include only letters, digits, underscores,
-        #     hyphens, and periods.
+        #     Required. A client-assigned identifier such as `"my-bucket"`. Identifiers
+        #     are limited to 100 characters and can include only letters, digits,
+        #     underscores, hyphens, and periods.
         # @!attribute [rw] bucket
         #   @return [::Google::Cloud::Logging::V2::LogBucket]
-        #     Required. The new bucket. The region specified in the new bucket must be compliant
-        #     with any Location Restriction Org Policy. The name field in the bucket is
-        #     ignored.
+        #     Required. The new bucket. The region specified in the new bucket must be
+        #     compliant with any Location Restriction Org Policy. The name field in the
+        #     bucket is ignored.
         class CreateBucketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -354,9 +441,9 @@ module Google
         #     Required. The updated bucket.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask that specifies the fields in `bucket` that need an update. A
-        #     bucket field will be overwritten if, and only if, it is in the update mask.
-        #     `name` and output only fields cannot be updated.
+        #     Required. Field mask that specifies the fields in `bucket` that need an
+        #     update. A bucket field will be overwritten if, and only if, it is in the
+        #     update mask. `name` and output only fields cannot be updated.
         #
         #     For a detailed `FieldMask` definition, see:
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
@@ -429,10 +516,10 @@ module Google
         #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. If present, then retrieve the next batch of results from the preceding call
-        #     to this method. `pageToken` must be the value of `nextPageToken` from the
-        #     previous response. The values of other method parameters should be
-        #     identical to those in the previous call.
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `pageToken` must be the value of
+        #     `nextPageToken` from the previous response. The values of other method
+        #     parameters should be identical to those in the previous call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.
@@ -470,7 +557,9 @@ module Google
         #       `"projects/my-project/locations/global/buckets/my-bucket"`
         # @!attribute [rw] view_id
         #   @return [::String]
-        #     Required. The id to use for this view.
+        #     Required. A client-assigned identifier such as `"my-view"`. Identifiers are
+        #     limited to 100 characters and can include only letters, digits,
+        #     underscores, hyphens, and periods.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Logging::V2::LogView]
         #     Required. The new view.
@@ -624,7 +713,8 @@ module Google
         #     If this field is set to true, or if the sink is owned by a non-project
         #     resource such as an organization, then the value of `writer_identity` will
         #     be a unique service account used only for exports from the new sink. For
-        #     more information, see `writer_identity` in {::Google::Cloud::Logging::V2::LogSink LogSink}.
+        #     more information, see `writer_identity` in
+        #     {::Google::Cloud::Logging::V2::LogSink LogSink}.
         class CreateSinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -633,8 +723,8 @@ module Google
         # The parameters to `UpdateSink`.
         # @!attribute [rw] sink_name
         #   @return [::String]
-        #     Required. The full resource name of the sink to update, including the parent
-        #     resource and the sink identifier:
+        #     Required. The full resource name of the sink to update, including the
+        #     parent resource and the sink identifier:
         #
         #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
         #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -646,8 +736,8 @@ module Google
         #       `"projects/my-project/sinks/my-sink"`
         # @!attribute [rw] sink
         #   @return [::Google::Cloud::Logging::V2::LogSink]
-        #     Required. The updated sink, whose name is the same identifier that appears as part
-        #     of `sink_name`.
+        #     Required. The updated sink, whose name is the same identifier that appears
+        #     as part of `sink_name`.
         # @!attribute [rw] unique_writer_identity
         #   @return [::Boolean]
         #     Optional. See {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create}
@@ -687,8 +777,8 @@ module Google
         # The parameters to `DeleteSink`.
         # @!attribute [rw] sink_name
         #   @return [::String]
-        #     Required. The full resource name of the sink to delete, including the parent
-        #     resource and the sink identifier:
+        #     Required. The full resource name of the sink to delete, including the
+        #     parent resource and the sink identifier:
         #
         #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
         #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -703,6 +793,92 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The parameters to CreateLink.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The full resource name of the bucket to create a link for.
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        # @!attribute [rw] link
+        #   @return [::Google::Cloud::Logging::V2::Link]
+        #     Required. The new link.
+        # @!attribute [rw] link_id
+        #   @return [::String]
+        #     Required. The ID to use for the link. The link_id can have up to 100
+        #     characters. A valid link_id must only have alphanumeric characters and
+        #     underscores within it.
+        class CreateLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to DeleteLink.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the link to delete.
+        #
+        #      "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        class DeleteLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to ListLinks.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource whose links are to be listed:
+        #
+        #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/"
+        #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/"
+        #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/"
+        #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `pageToken` must be the value of
+        #     `nextPageToken` from the previous response.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return from this request.
+        class ListLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from ListLinks.
+        # @!attribute [rw] links
+        #   @return [::Array<::Google::Cloud::Logging::V2::Link>]
+        #     A list of links.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If there might be more results than those appearing in this response, then
+        #     `nextPageToken` is included. To get the next set of results, call the same
+        #     method again using the value of `nextPageToken` as `pageToken`.
+        class ListLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to GetLink.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the link:
+        #
+        #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]
+        class GetLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Specifies a set of log entries that are filtered out by a sink. If
         # your Google Cloud resource receives a large volume of log entries, you can
         # use exclusions to reduce your chargeable logs. Note that exclusions on
@@ -710,10 +886,10 @@ module Google
         # Note also that you cannot modify the _Required sink or exclude logs from it.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
-        #     Identifiers are limited to 100 characters and can include only letters,
-        #     digits, underscores, hyphens, and periods. First character has to be
-        #     alphanumeric.
+        #     Required. A client-assigned identifier, such as
+        #     `"load-balancer-exclusion"`. Identifiers are limited to 100 characters and
+        #     can include only letters, digits, underscores, hyphens, and periods. First
+        #     character has to be alphanumeric.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A description of this exclusion.
@@ -845,14 +1021,15 @@ module Google
         #       `"projects/my-project/exclusions/my-exclusion"`
         # @!attribute [rw] exclusion
         #   @return [::Google::Cloud::Logging::V2::LogExclusion]
-        #     Required. New values for the existing exclusion. Only the fields specified in
-        #     `update_mask` are relevant.
+        #     Required. New values for the existing exclusion. Only the fields specified
+        #     in `update_mask` are relevant.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. A non-empty list of fields to change in the existing exclusion. New values
-        #     for the fields are taken from the corresponding fields in the
-        #     {::Google::Cloud::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
-        #     `update_mask` are not changed and are ignored in the request.
+        #     Required. A non-empty list of fields to change in the existing exclusion.
+        #     New values for the fields are taken from the corresponding fields in the
+        #     {::Google::Cloud::Logging::V2::LogExclusion LogExclusion} included in this request.
+        #     Fields not mentioned in `update_mask` are not changed and are ignored in
+        #     the request.
         #
         #     For example, to change the filter and description of an exclusion,
         #     specify an `update_mask` of `"filter,description"`.
@@ -993,10 +1170,29 @@ module Google
         #     See [Enabling CMEK for Log
         #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
         #     for more information.
+        # @!attribute [rw] kms_key_version_name
+        #   @return [::String]
+        #     The CryptoKeyVersion resource name for the configured Cloud KMS key.
+        #
+        #     KMS key name format:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]/cryptoKeyVersions/[VERSION]"
+        #
+        #     For example:
+        #
+        #       `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key/cryptoKeyVersions/1"`
+        #
+        #     This is a read-only field used to convey the specific configured
+        #     CryptoKeyVersion of `kms_key` that has been configured. It will be
+        #     populated in cases where the CMEK settings are bound to a single key
+        #     version.
+        #
+        #     If this field is populated, the `kms_key` is tied to a specific
+        #     CryptoKeyVersion.
         # @!attribute [r] service_account_id
         #   @return [::String]
-        #     Output only. The service account that will be used by the Log Router to access your
-        #     Cloud KMS key.
+        #     Output only. The service account that will be used by the Log Router to
+        #     access your Cloud KMS key.
         #
         #     Before enabling CMEK for Log Router, you must first assign the
         #     cloudkms.cryptoKeyEncrypterDecrypter role to the service account that
@@ -1116,8 +1312,8 @@ module Google
         #     for more information.
         # @!attribute [r] kms_service_account_id
         #   @return [::String]
-        #     Output only. The service account that will be used by the Log Router to access your
-        #     Cloud KMS key.
+        #     Output only. The service account that will be used by the Log Router to
+        #     access your Cloud KMS key.
         #
         #     Before enabling CMEK for Log Router, you must first assign the role
         #     `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
@@ -1130,15 +1326,15 @@ module Google
         #     for more information.
         # @!attribute [rw] storage_location
         #   @return [::String]
-        #     Optional. The Cloud region that will be used for _Default and _Required log buckets
-        #     for newly created projects and folders. For example `europe-west1`.
+        #     Optional. The Cloud region that will be used for _Default and _Required log
+        #     buckets for newly created projects and folders. For example `europe-west1`.
         #     This setting does not affect the location of custom log buckets.
         # @!attribute [rw] disable_default_sink
         #   @return [::Boolean]
-        #     Optional. If set to true, the _Default sink in newly created projects and folders
-        #     will created in a disabled state. This can be used to automatically disable
-        #     log ingestion if there is already an aggregated sink configured in the
-        #     hierarchy. The _Default sink can be re-enabled manually if needed.
+        #     Optional. If set to true, the _Default sink in newly created projects and
+        #     folders will created in a disabled state. This can be used to automatically
+        #     disable log ingestion if there is already an aggregated sink configured in
+        #     the hierarchy. The _Default sink can be re-enabled manually if needed.
         class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1154,8 +1350,8 @@ module Google
         #       `"projects/my-project/locations/global/buckets/my-source-bucket"`
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. A filter specifying which log entries to copy. The filter must be no more
-        #     than 20k characters. An empty filter matches all log entries.
+        #     Optional. A filter specifying which log entries to copy. The filter must be
+        #     no more than 20k characters. An empty filter matches all log entries.
         # @!attribute [rw] destination
         #   @return [::String]
         #     Required. Destination to which to copy log entries.
@@ -1206,18 +1402,56 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # LogBucket lifecycle states.
-        module LifecycleState
-          # Unspecified state. This is only used/useful for distinguishing unset
-          # values.
-          LIFECYCLE_STATE_UNSPECIFIED = 0
+        # Metadata for LongRunningUpdateBucket Operations.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The create time of an operation.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end time of an operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Logging::V2::OperationState]
+        #     State of an operation.
+        # @!attribute [rw] create_bucket_request
+        #   @return [::Google::Cloud::Logging::V2::CreateBucketRequest]
+        #     LongRunningCreateBucket RPC request.
+        # @!attribute [rw] update_bucket_request
+        #   @return [::Google::Cloud::Logging::V2::UpdateBucketRequest]
+        #     LongRunningUpdateBucket RPC request.
+        class BucketMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
 
-          # The normal and active state.
-          ACTIVE = 1
+        # Metadata for long running Link operations.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The start time of an operation.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end time of an operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Logging::V2::OperationState]
+        #     State of an operation.
+        # @!attribute [rw] create_link_request
+        #   @return [::Google::Cloud::Logging::V2::CreateLinkRequest]
+        #     CreateLink RPC request.
+        # @!attribute [rw] delete_link_request
+        #   @return [::Google::Cloud::Logging::V2::DeleteLinkRequest]
+        #     DeleteLink RPC request.
+        class LinkMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
 
-          # The resource has been marked for deletion by the user. For some resources
-          # (e.g. buckets), this can be reversed by an un-delete operation.
-          DELETE_REQUESTED = 2
+        # Cloud Logging specific location metadata.
+        # @!attribute [rw] log_analytics_enabled
+        #   @return [::Boolean]
+        #     Indicates whether or not Log Analytics features are supported in the given
+        #     location.
+        class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # List of different operation states.
@@ -1246,6 +1480,44 @@ module Google
 
           # The operation was cancelled by the user.
           OPERATION_STATE_CANCELLED = 6
+        end
+
+        # LogBucket lifecycle states.
+        module LifecycleState
+          # Unspecified state. This is only used/useful for distinguishing unset
+          # values.
+          LIFECYCLE_STATE_UNSPECIFIED = 0
+
+          # The normal and active state.
+          ACTIVE = 1
+
+          # The resource has been marked for deletion by the user. For some resources
+          # (e.g. buckets), this can be reversed by an un-delete operation.
+          DELETE_REQUESTED = 2
+
+          # The resource has been marked for an update by the user. It will remain in
+          # this state until the update is complete.
+          UPDATING = 3
+
+          # The resource has been marked for creation by the user. It will remain in
+          # this state until the creation is complete.
+          CREATING = 4
+
+          # The resource is in an INTERNAL error state.
+          FAILED = 5
+        end
+
+        # IndexType is used for custom indexing. It describes the type of an indexed
+        # field.
+        module IndexType
+          # The index's type is unspecified.
+          INDEX_TYPE_UNSPECIFIED = 0
+
+          # The index is a string-type index.
+          INDEX_TYPE_STRING = 1
+
+          # The index is a integer-type index.
+          INDEX_TYPE_INTEGER = 2
         end
       end
     end

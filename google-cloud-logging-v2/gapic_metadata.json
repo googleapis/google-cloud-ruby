@@ -59,6 +59,16 @@
                 "get_bucket"
               ]
             },
+            "CreateBucketAsync": {
+              "methods": [
+                "create_bucket_async"
+              ]
+            },
+            "UpdateBucketAsync": {
+              "methods": [
+                "update_bucket_async"
+              ]
+            },
             "CreateBucket": {
               "methods": [
                 "create_bucket"
@@ -127,6 +137,26 @@
             "DeleteSink": {
               "methods": [
                 "delete_sink"
+              ]
+            },
+            "CreateLink": {
+              "methods": [
+                "create_link"
+              ]
+            },
+            "DeleteLink": {
+              "methods": [
+                "delete_link"
+              ]
+            },
+            "ListLinks": {
+              "methods": [
+                "list_links"
+              ]
+            },
+            "GetLink": {
+              "methods": [
+                "get_link"
               ]
             },
             "ListExclusions": {

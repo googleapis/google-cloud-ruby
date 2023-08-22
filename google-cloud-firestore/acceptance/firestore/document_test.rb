@@ -405,14 +405,14 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
     _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal times[1]
 
     doc_ref.set({ time: firestore.field_server_time, a: { d: firestore.field_server_time } }, merge: true)
     doc_snp = doc_ref.get
     _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal times[1]
     _(doc_snp[:a][:d]).must_equal times[2]
 
@@ -420,7 +420,7 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
     _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal times[1]
     _(doc_snp[:a][:d]).must_equal times[2]
     _(doc_snp[:e]).must_equal times[3]
@@ -429,7 +429,7 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
     _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal times[1]
     _(doc_snp[:a][:d]).must_equal times[2]
     _(doc_snp[:e][:f]).must_equal times[4]
@@ -438,7 +438,7 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
     _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal times[1]
     _(doc_snp[:a][:d]).must_equal times[2]
     _(doc_snp[:e][:f]).must_equal times[4]
@@ -448,7 +448,7 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
     _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal times[1]
     _(doc_snp[:a][:d]).must_equal times[2]
     _(doc_snp[:e][:f]).must_equal times[4]
@@ -470,20 +470,20 @@ describe "Document", :firestore_acceptance do
     doc_ref.set({ num: firestore.field_increment(50), a: { c: firestore.field_maximum(100) } })
     doc_snp = doc_ref.get
     _(doc_snp[:num]).must_equal 50
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal 100
 
     doc_ref.set({ num: firestore.field_increment(1), a: { d: firestore.field_minimum(-100) } }, merge: true)
     doc_snp = doc_ref.get
     _(doc_snp[:num]).must_equal 51
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal 100
     _(doc_snp[:a][:d]).must_equal -100
 
     doc_ref.set({ num: firestore.field_minimum(100), e: firestore.field_minimum(100) }, merge: true)
     doc_snp = doc_ref.get
     _(doc_snp[:num]).must_equal 51
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal 100
     _(doc_snp[:a][:d]).must_equal -100
     _(doc_snp[:e]).must_equal 100
@@ -491,7 +491,7 @@ describe "Document", :firestore_acceptance do
     doc_ref.set({ num: firestore.field_maximum(-100), e: { f: firestore.field_maximum(100) } }, merge: true)
     doc_snp = doc_ref.get
     _(doc_snp[:num]).must_equal 51
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal 100
     _(doc_snp[:a][:d]).must_equal -100
     _(doc_snp[:e][:f]).must_equal 100
@@ -499,7 +499,7 @@ describe "Document", :firestore_acceptance do
     doc_ref.update({ num: firestore.field_minimum(-100), e: { f: firestore.field_maximum(1000) } })
     doc_snp = doc_ref.get
     _(doc_snp[:num]).must_equal -100
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal 100
     _(doc_snp[:a][:d]).must_equal -100
     _(doc_snp[:e][:f]).must_equal 1000
@@ -507,7 +507,7 @@ describe "Document", :firestore_acceptance do
     doc_ref.update({ num: firestore.field_maximum(100), e: { f: firestore.field_minimum(10) } })
     doc_snp = doc_ref.get
     _(doc_snp[:num]).must_equal 100
-    _(doc_snp[:a][:b]).must_be :nil?
+    assert_nil doc_snp[:a][:b]
     _(doc_snp[:a][:c]).must_equal 100
     _(doc_snp[:a][:d]).must_equal -100
     _(doc_snp[:e][:f]).must_equal 10

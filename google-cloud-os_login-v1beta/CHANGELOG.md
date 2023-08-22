@@ -1,5 +1,20 @@
 # Release History
 
+### 0.9.0 (2023-08-15)
+
+#### Features
+
+* Support for the sign_ssh_public_key RPC ([#22776](https://github.com/googleapis/google-cloud-ruby/issues/22776)) 
+
+### 0.8.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features

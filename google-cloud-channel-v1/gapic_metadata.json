@@ -214,6 +214,16 @@
                 "delete_channel_partner_repricing_config"
               ]
             },
+            "ListSkuGroups": {
+              "methods": [
+                "list_sku_groups"
+              ]
+            },
+            "ListSkuGroupBillableSkus": {
+              "methods": [
+                "list_sku_group_billable_skus"
+              ]
+            },
             "LookupOffer": {
               "methods": [
                 "lookup_offer"

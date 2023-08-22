@@ -79,11 +79,12 @@ module Google
             rpc :UpdateEndpoint, ::Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint
             # Deletes an endpoint.
             rpc :DeleteEndpoint, ::Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest, ::Google::Protobuf::Empty
-            # Gets the IAM Policy for a resource (namespace or service only).
+            # Gets the IAM Policy for a resource
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
-            # Sets the IAM Policy for a resource (namespace or service only).
+            # Sets the IAM Policy for a resource
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-            # Tests IAM permissions for a resource (namespace or service only).
+            # Tests IAM permissions for a resource (namespace, service  or
+            # service workload only).
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 

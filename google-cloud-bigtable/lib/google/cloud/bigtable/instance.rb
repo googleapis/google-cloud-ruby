@@ -429,7 +429,7 @@ module Google
             serve_nodes:          nodes,
             default_storage_type: storage_type,
             location:             location
-          }.delete_if { |_, v| v.nil? }
+          }.compact
 
           cluster = Google::Cloud::Bigtable::Admin::V2::Cluster.new attrs
           grpc = service.create_cluster instance_id, cluster_id, cluster
@@ -721,7 +721,7 @@ module Google
             single_cluster_routing:        single_cluster_routing,
             description:                   description,
             etag:                          etag
-          }.delete_if { |_, v| v.nil? }
+          }.compact
 
           grpc = service.create_app_profile(
             instance_id,

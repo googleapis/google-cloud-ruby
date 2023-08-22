@@ -264,6 +264,53 @@ module Google
           end
 
           ##
+          # The default value of a field using a SQL expression. It can only
+          # be set for top level fields (columns). Default value for the entire struct or
+          # array is set using a struct or array expression. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
+          # @return [String] The default value expression of the field.
+          #
+          def default_value_expression
+            @gapi.default_value_expression
+          end
+
+          ##
+          # Updates the default value expression of the field.
+          #
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
+          def default_value_expression= default_value_expression
+            @gapi.update! default_value_expression: default_value_expression
+          end
+
+          ##
           # The maximum length of values of this field for {#string?} or {bytes?} fields. If `max_length` is not
           # specified, no maximum length constraint is imposed on this field. If type = `STRING`, then `max_length`
           # represents the maximum UTF-8 length of strings in this field. If type = `BYTES`, then `max_length`

@@ -125,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -916,6 +916,120 @@ module Google
             end
 
             ##
+            # Updates an existing deployed model. Updatable fields include
+            # `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`,
+            # `disable_container_logging` (v1 only), and `enable_container_logging`
+            # (v1beta1 only).
+            #
+            # @overload mutate_deployed_model(request, options = nil)
+            #   Pass arguments to `mutate_deployed_model` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mutate_deployed_model(endpoint: nil, deployed_model: nil, update_mask: nil)
+            #   Pass arguments to `mutate_deployed_model` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param endpoint [::String]
+            #     Required. The name of the Endpoint resource into which to mutate a
+            #     DeployedModel. Format:
+            #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+            #   @param deployed_model [::Google::Cloud::AIPlatform::V1::DeployedModel, ::Hash]
+            #     Required. The DeployedModel to be mutated within the Endpoint. Only the
+            #     following fields can be mutated:
+            #
+            #     * `min_replica_count` in either
+            #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources} or
+            #     {::Google::Cloud::AIPlatform::V1::AutomaticResources AutomaticResources}
+            #     * `max_replica_count` in either
+            #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources} or
+            #     {::Google::Cloud::AIPlatform::V1::AutomaticResources AutomaticResources}
+            #     * {::Google::Cloud::AIPlatform::V1::DedicatedResources#autoscaling_metric_specs autoscaling_metric_specs}
+            #     * `disable_container_logging` (v1 only)
+            #     * `enable_container_logging` (v1beta1 only)
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The update mask applies to the resource. See
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::EndpointService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new
+            #
+            #   # Call the mutate_deployed_model method.
+            #   result = client.mutate_deployed_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def mutate_deployed_model request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mutate_deployed_model.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.endpoint
+                header_params["endpoint"] = request.endpoint
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mutate_deployed_model.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mutate_deployed_model.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @endpoint_service_stub.call_rpc :mutate_deployed_model, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the EndpointService API.
             #
             # This class represents the configuration for EndpointService,
@@ -997,7 +1111,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1085,6 +1201,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :undeploy_model
+                ##
+                # RPC-specific configuration for `mutate_deployed_model`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :mutate_deployed_model
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1102,6 +1223,8 @@ module Google
                   @deploy_model = ::Gapic::Config::Method.new deploy_model_config
                   undeploy_model_config = parent_rpcs.undeploy_model if parent_rpcs.respond_to? :undeploy_model
                   @undeploy_model = ::Gapic::Config::Method.new undeploy_model_config
+                  mutate_deployed_model_config = parent_rpcs.mutate_deployed_model if parent_rpcs.respond_to? :mutate_deployed_model
+                  @mutate_deployed_model = ::Gapic::Config::Method.new mutate_deployed_model_config
 
                   yield self if block_given?
                 end

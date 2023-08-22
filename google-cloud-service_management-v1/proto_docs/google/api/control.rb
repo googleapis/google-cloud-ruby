@@ -30,6 +30,9 @@ module Google
     #     The service controller environment to use. If empty, no control plane
     #     feature (like quota and billing) will be enabled. The recommended value for
     #     most services is servicecontrol.googleapis.com
+    # @!attribute [rw] method_policies
+    #   @return [::Array<::Google::Api::MethodPolicy>]
+    #     Defines policies applying to the API methods of the service.
     class Control
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

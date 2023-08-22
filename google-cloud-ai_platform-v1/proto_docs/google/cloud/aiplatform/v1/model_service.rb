@@ -185,8 +185,10 @@ module Google
         #   @return [::String]
         #     The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token}
-        #     of the previous [ModelService.ListModelversions][] call.
+        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ListModelVersions}
+        #     call.
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression for filtering the results of the request. For field names
@@ -264,6 +266,30 @@ module Google
         #     For the `FieldMask` definition, see
         #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
         class UpdateModelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The resource name of the Model to update.
+        #     Format: `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] examples
+        #   @return [::Google::Cloud::AIPlatform::V1::Examples]
+        #     The example config containing the location of the dataset.
+        class UpdateExplanationDatasetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class UpdateExplanationDatasetOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -392,6 +418,14 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}
+        # operation.
+        class UpdateExplanationDatasetResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message of
