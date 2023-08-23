@@ -672,8 +672,9 @@ module Google
               #     information that you want to update. For example,
               #     `projects/tokyo-rain-123`.
               #   @param project_billing_info [::Google::Cloud::Billing::V1::ProjectBillingInfo, ::Hash]
-              #     The new billing information for the project. Read-only fields are ignored;
-              #     thus, you can leave empty all fields except `billing_account_name`.
+              #     The new billing information for the project. Output-only fields are
+              #     ignored; thus, you can leave empty all fields except
+              #     `billing_account_name`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Billing::V1::ProjectBillingInfo]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
