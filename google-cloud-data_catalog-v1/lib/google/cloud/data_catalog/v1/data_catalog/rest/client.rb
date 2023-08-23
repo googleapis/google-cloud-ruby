@@ -252,7 +252,7 @@ module Google
               #
               #     If this parameter is omitted, it defaults to the descending `relevance`.
               #   @param admin_search [::Boolean]
-              #     Optional. If set, uses searchAll permission granted on organizations from
+              #     Optional. If set, use searchAll permission granted on organizations from
               #     `include_org_ids` and projects from `include_project_ids` instead of the
               #     fine grained per resource permissions when filtering the search results.
               #     The only allowed `order_by` criteria for admin_search mode is `default`.
