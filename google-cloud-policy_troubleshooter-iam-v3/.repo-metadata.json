@@ -8,7 +8,7 @@
     "name": "policytroubleshooter",
     "name_pretty": "Policy Troubleshooter V3 API",
     "product_documentation": "https://cloud.google.com/policy-intelligence/docs/troubleshoot-access",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-policy_troubleshooter-iam-v3 is the official client library for the Policy Troubleshooter V3 API. Note that google-cloud-policy_troubleshooter-iam-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-policy_troubleshooter-iam instead. See the readme for more details.",
