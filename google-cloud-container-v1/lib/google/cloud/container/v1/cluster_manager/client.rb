@@ -650,7 +650,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -738,6 +738,21 @@ module Google
             #     Google Compute Engine resources.
             #   @param windows_node_config [::Google::Cloud::Container::V1::WindowsNodeConfig, ::Hash]
             #     Parameters that can be configured on Windows nodes.
+            #   @param machine_type [::String]
+            #     Optional. The desired [Google Compute Engine machine
+            #     type](https://cloud.google.com/compute/docs/machine-types) for nodes in the
+            #     node pool. Initiates an upgrade operation that migrates the nodes in the
+            #     node pool to the specified machine type.
+            #   @param disk_type [::String]
+            #     Optional. The desired disk type (e.g. 'pd-standard', 'pd-ssd' or
+            #     'pd-balanced') for nodes in the node pool.
+            #     Initiates an upgrade operation that migrates the nodes in the
+            #     node pool to the specified disk type.
+            #   @param disk_size_gb [::Integer]
+            #     Optional. The desired disk size for nodes in the node pool specified in GB.
+            #     The smallest allowed disk size is 10GB.
+            #     Initiates an upgrade operation that migrates the nodes in the
+            #     node pool to the specified disk size.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
