@@ -16,6 +16,7 @@ require "helper"
 
 describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
+  let(:session_id) { "mysessionid" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
@@ -143,6 +144,72 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
       _(job.job_id).must_equal job_id
     end
 
+    mock.verify
+  end
+
+  it "load the data with create_session option" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    temp_csv do |file|
+      mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.csv", session_id: session_id),
+        [project, load_job_gapi(table_reference, "CSV", create_session: true)], upload_source: file, content_type: "text/csv"
+
+      job = dataset.load_job table_id, file, format: :csv, create_session: true
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.session_id).must_equal session_id
+    end
+    mock.verify
+  end
+
+  it "load the data with create_session in block" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    temp_csv do |file|
+      mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.csv", session_id: session_id),
+        [project, load_job_gapi(table_reference, "CSV", create_session: true)], upload_source: file, content_type: "text/csv"
+
+      job = dataset.load_job table_id, file, format: :csv do |j|
+            j.create_session = true
+        end
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.session_id).must_equal session_id
+    end
+    mock.verify
+  end
+
+  it "load the data with session_id option" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    temp_csv do |file|
+      mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.csv", session_id: session_id),
+        [project, load_job_gapi(table_reference, "CSV", session_id: session_id)], upload_source: file, content_type: "text/csv"
+
+      job = dataset.load_job table_id, file, format: :csv, session_id: session_id
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.session_id).must_equal session_id
+    end
+    mock.verify
+  end
+
+  it "load the data with session_id in block" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    temp_csv do |file|
+      mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.csv", session_id: session_id),
+        [project, load_job_gapi(table_reference, "CSV", session_id: session_id)], upload_source: file, content_type: "text/csv"
+
+      job = dataset.load_job table_id, file, format: :csv do |j|
+            j.session_id = session_id
+            j.session_id = nil
+            j.session_id = session_id
+        end
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.session_id).must_equal session_id
+    end
     mock.verify
   end
 end

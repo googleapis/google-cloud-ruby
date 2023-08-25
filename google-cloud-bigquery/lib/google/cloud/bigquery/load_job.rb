@@ -1704,6 +1704,37 @@ module Google
           end
 
           ##
+          # Sets the create_session property. If true, creates a new session,
+          # where session id will be a server generated random id. If false,
+          # runs query with an existing {#session_id=}, otherwise runs query in
+          # non-session mode. The default value is `false`.
+          #
+          # @param [Boolean] value The create_session property. The default
+          # value is `false`.
+          #
+          # @!group Attributes
+          def create_session= value
+            @gapi.configuration.load.create_session = value
+          end
+
+          ##
+          # Sets the session ID for a query run in session mode. See {#create_session=}.
+          #
+          # @param [String] value The session ID. The default value is `nil`.
+          #
+          # @!group Attributes
+          def session_id= value
+            @gapi.configuration.load.connection_properties ||= []
+            prop = @gapi.configuration.load.connection_properties.find { |cp| cp.key == "session_id" }
+            if prop
+              prop.value = value
+            else
+              prop = Google::Apis::BigqueryV2::ConnectionProperty.new key: "session_id", value: value
+              @gapi.configuration.load.connection_properties << prop
+            end
+          end
+
+          ##
           # Sets the projection fields.
           #
           # If the `format` option is set to `datastore_backup`, indicates
