@@ -127,7 +127,7 @@ module Google
             structured_query: @query,
             aggregations: combined_aggregates
           )
-          dup.tap do |aq|
+          self.class.new(@query, @parent_path, @client).tap do |aq|
             aq.instance_variable_set :@grpc, new_grpc
           end
         end
