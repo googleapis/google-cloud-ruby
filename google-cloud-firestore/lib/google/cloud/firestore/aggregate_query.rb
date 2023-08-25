@@ -120,19 +120,6 @@ module Google
         end
 
         ##
-        # @private
-        def start new_aggregate
-          combined_aggregates = [].concat(grpc.aggregations).concat([new_aggregate])
-          new_grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
-            structured_query: @query,
-            aggregations: combined_aggregates
-          )
-          dup.tap do |aq|
-            aq.instance_variable_set :@grpc, new_grpc
-          end
-        end
-
-        ##
         # Adds a sum aggregate.
         #
         # @param field [String] The field to sum by
@@ -158,16 +145,16 @@ module Google
         def add_sum field, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:sum]
           field = FieldPath.parse field unless field.is_a? FieldPath
-          new_aggregates = @aggregates.dup
-          new_aggregates << StructuredAggregationQuery::Aggregation.new(
-            sum: StructuredAggregationQuery::Aggregation::Sum.new(
-              field: StructuredQuery::FieldReference.new(
+          new_aggregate = Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            sum: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
                 field_path: field.formatted_string
               )
             ),
             alias: aggregate_alias
           )
-          AggregateQuery.start query, new_aggregates, parent_path, client
+
+          start new_aggregate
         end
 
         ##
@@ -195,16 +182,30 @@ module Google
         #
         def add_avg field, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:avg]
-          new_aggregates = @aggregates.dup
-          new_aggregates << StructuredAggregationQuery::Aggregation.new(
-            avg: StructuredAggregationQuery::Aggregation::Avg.new(
-              field: StructuredQuery::FieldReference.new(
+          field = FieldPath.parse field unless field.is_a? FieldPath
+          new_aggregate = Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            avg: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
                 field_path: field.formatted_string
               )
             ),
             alias: aggregate_alias
           )
-          AggregateQuery.start query, new_aggregates, parent_path, client
+
+          start new_aggregate
+        end
+
+        ##
+        # @private
+        def start new_aggregate
+          combined_aggregates = [].concat(grpc.aggregations).concat([new_aggregate])
+          new_grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+            structured_query: @query,
+            aggregations: combined_aggregates
+          )
+          dup.tap do |aq|
+            aq.instance_variable_set :@grpc, new_grpc
+          end
         end
 
         ##
