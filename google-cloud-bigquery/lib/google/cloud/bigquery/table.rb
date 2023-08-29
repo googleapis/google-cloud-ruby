@@ -2428,14 +2428,14 @@ module Google
         def load_job files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: nil
           ensure_service!
 
           updater = load_job_updater format: format, create: create, write: write, projection_fields: projection_fields,
                                      jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                                      delimiter: delimiter, ignore_unknown: ignore_unknown,
                                      max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
-                                     dryrun: dryrun, job_id: job_id, prefix: prefix, schema: schema, labels: labels,
+                                     dryrun: dryrun, job_id: job_id, prefix: prefix, schema: schema || self.schema, labels: labels,
                                      autodetect: autodetect, null_marker: null_marker, create_session: create_session,
                                      session_id: session_id
 
