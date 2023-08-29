@@ -2127,7 +2127,7 @@ module Google
         def load_job table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil
+                     null_marker: nil, dryrun: nil
           ensure_service!
 
           updater = load_job_updater table_id,
@@ -2136,8 +2136,7 @@ module Google
                                      delimiter: delimiter, ignore_unknown: ignore_unknown,
                                      max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
                                      dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
-                                     autodetect: autodetect, null_marker: null_marker, create_session: create_session,
-                                     session_id: session_id
+                                     autodetect: autodetect, null_marker: null_marker
 
           yield updater if block_given?
 
@@ -2355,13 +2354,13 @@ module Google
         #
         def load table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                  quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
-                 quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
+                 quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, &block
           job = load_job table_id, files,
                          format: format, create: create, write: write, projection_fields: projection_fields,
                          jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                          delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
                          quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
-                         null_marker: null_marker, session_id: session_id, &block
+                         null_marker: null_marker, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -2915,8 +2914,6 @@ module Google
             job.schema = schema unless schema.nil?
             job.autodetect = autodetect unless autodetect.nil?
             job.labels = labels unless labels.nil?
-            job.create_session = create_session unless create_session.nil?
-            job.session_id = session_id unless session_id.nil?
             load_job_file_options! job, format:            format,
                                         projection_fields: projection_fields,
                                         jagged_rows:       jagged_rows,
