@@ -386,11 +386,11 @@ module Google
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
           #
-          # Algorithms beginning with `RSA_SIGN_` are usable with
+          # Algorithms beginning with "RSA_SIGN_" are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
           #
-          # The fields in the name after `RSA_SIGN_` correspond to the following
+          # The fields in the name after "RSA_SIGN_" correspond to the following
           # parameters: padding algorithm, modulus bit length, and digest algorithm.
           #
           # For PSS, the salt length used is equal to the length of digest
@@ -398,25 +398,25 @@ module Google
           # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::RSA_SIGN_PSS_2048_SHA256 RSA_SIGN_PSS_2048_SHA256}
           # will use PSS with a salt length of 256 bits or 32 bytes.
           #
-          # Algorithms beginning with `RSA_DECRYPT_` are usable with
+          # Algorithms beginning with "RSA_DECRYPT_" are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
           #
-          # The fields in the name after `RSA_DECRYPT_` correspond to the following
+          # The fields in the name after "RSA_DECRYPT_" correspond to the following
           # parameters: padding algorithm, modulus bit length, and digest algorithm.
           #
-          # Algorithms beginning with `EC_SIGN_` are usable with
+          # Algorithms beginning with "EC_SIGN_" are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
           #
-          # The fields in the name after `EC_SIGN_` correspond to the following
+          # The fields in the name after "EC_SIGN_" correspond to the following
           # parameters: elliptic curve, digest algorithm.
           #
-          # Algorithms beginning with `HMAC_` are usable with
+          # Algorithms beginning with "HMAC_" are usable with
           # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
           # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::MAC MAC}.
           #
-          # The suffix following `HMAC_` corresponds to the hash algorithm being used
+          # The suffix following "HMAC_" corresponds to the hash algorithm being used
           # (eg. SHA256).
           #
           # For more information, see [Key purposes and algorithms]
