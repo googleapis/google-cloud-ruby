@@ -138,6 +138,37 @@ module Google
         # @!attribute [rw] content_search_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec]
         #     A specification for configuring the behavior of content search.
+        # @!attribute [rw] embedding_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec]
+        #     Uses the provided embedding to do additional semantic document retrieval.
+        #     The retrieval is based on the dot product of
+        #     [SearchRequest.embedding_spec.embedding_vectors.vector][] and the document
+        #     embedding that is provided in
+        #     [SearchRequest.embedding_spec.embedding_vectors.field_path][].
+        #
+        #     If [SearchRequest.embedding_spec.embedding_vectors.field_path][] is not
+        #     provided, it will use [ServingConfig.embedding_config.field_paths][].
+        # @!attribute [rw] ranking_expression
+        #   @return [::String]
+        #     The ranking expression controls the customized ranking on retrieval
+        #     documents. This overrides [ServingConfig.ranking_expression][].
+        #     The ranking expression is a single function or multiple functions that are
+        #     joint by "+".
+        #       * ranking_expression = function, { " + ", function };
+        #     Supported functions:
+        #       * double * relevance_score
+        #       * double * dotProduct(embedding_field_path)
+        #     Function variables:
+        #       `relevance_score`: pre-defined keywords, used for measure relevance
+        #       between query and document.
+        #       `embedding_field_path`: the document embedding field
+        #       used with query embedding vector.
+        #       `dotProduct`: embedding function between embedding_field_path and query
+        #       embedding vector.
+        #
+        #      Example ranking expression:
+        #        If document has an embedding field doc_embedding, the ranking expression
+        #        could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
         # @!attribute [rw] safe_search
         #   @return [::Boolean]
         #     Whether to turn on safe search. This is only supported for
@@ -368,6 +399,11 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec::Condition]
           #     The condition under which query expansion should occur. Default to
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec::Condition::DISABLED Condition.DISABLED}.
+          # @!attribute [rw] pin_unexpanded_results
+          #   @return [::Boolean]
+          #     Whether to pin unexpanded results. If this field is set to true,
+          #     unexpanded products are always at the top of the search results, followed
+          #     by the expanded results.
           class QueryExpansionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -508,6 +544,10 @@ module Google
             #     navigational queries. If this field is set to `true`, we skip
             #     generating summaries for non-summary seeking queries and return
             #     fallback messages instead.
+            # @!attribute [rw] language_code
+            #   @return [::String]
+            #     Language code for Summary. Use language tags defined by
+            #     [BCP47][https://www.rfc-editor.org/rfc/bcp/bcp47.txt].
             class SummarySpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -549,10 +589,43 @@ module Google
             #     If the number of matching segments is less than
             #     `max_extractive_segment_count`, return all of the segments. Otherwise,
             #     return the `max_extractive_segment_count`.
-            #
-            #     Currently one segment is returned for each
-            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult SearchResult}.
+            # @!attribute [rw] return_extractive_segment_score
+            #   @return [::Boolean]
+            #     Specifies whether to return the confidence score from the extractive
+            #     segments in each search result. The default value is `false`.
+            # @!attribute [rw] num_previous_segments
+            #   @return [::Integer]
+            #     Specifies whether to also include the adjacent from each selected
+            #     segments.
+            #     Return at most `num_previous_segments` segments before each selected
+            #     segments.
+            # @!attribute [rw] num_next_segments
+            #   @return [::Integer]
+            #     Return at most `num_next_segments` segments after each selected
+            #     segments.
             class ExtractiveContentSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # The specification that uses customized query embedding vector to do
+          # semantic document retrieval.
+          # @!attribute [rw] embedding_vectors
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector>]
+          #     The embedding vector used for retrieval. Limit to 1.
+          class EmbeddingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Embedding vector.
+            # @!attribute [rw] field_path
+            #   @return [::String]
+            #     Embedding field path in schema.
+            # @!attribute [rw] vector
+            #   @return [::Array<::Float>]
+            #     Query embedding vector.
+            class EmbeddingVector
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -631,6 +704,9 @@ module Google
         # @!attribute [rw] applied_controls
         #   @return [::Array<::String>]
         #     Controls applied as part of the Control service.
+        # @!attribute [rw] query_expansion_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::QueryExpansionInfo]
+        #     Query expansion information for the returned results.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -644,9 +720,21 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Document]
           #     The document data snippet in the search response. Only fields that are
           #     marked as retrievable are populated.
+          # @!attribute [rw] model_scores
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::DoubleList}]
+          #     Google provided available scores.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DoubleList]
+            class ModelScoresEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # A facet result.
@@ -715,9 +803,27 @@ module Google
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::SummarySkippedReason>]
           #     Additional summary-skipped reasons. This provides the reason for ignored
           #     cases. If nothing is skipped, this field is not set.
+          # @!attribute [rw] safety_attributes
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::SafetyAttributes]
+          #     A collection of Safety Attribute categories and their associated
+          #     confidence scores.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Safety Attribute categories and their associated confidence scores.
+            # @!attribute [rw] categories
+            #   @return [::Array<::String>]
+            #     The display names of Safety Attribute categories associated with the
+            #     generated content. Order matches the Scores.
+            # @!attribute [rw] scores
+            #   @return [::Array<::Float>]
+            #     The confidence scores of the each category, higher
+            #     value means higher confidence. Order matches the Categories.
+            class SafetyAttributes
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # An Enum for summary-skipped reasons.
             module SummarySkippedReason
@@ -744,7 +850,34 @@ module Google
               # For example, the data store contains facts about company A but the
               # user query is asking questions about company B.
               OUT_OF_DOMAIN_QUERY_IGNORED = 3
+
+              # The potential policy violation case.
+              #
+              # Google skips the summary if there is a potential policy violation
+              # detected. This includes content that may be violent or toxic.
+              POTENTIAL_POLICY_VIOLATION = 4
+
+              # The LLM addon not enabled case.
+              #
+              # Google skips the summary if the LLM addon is not enabled.
+              LLM_ADDON_NOT_ENABLED = 5
             end
+          end
+
+          # Information describing query expansion including whether expansion has
+          # occurred.
+          # @!attribute [rw] expanded_query
+          #   @return [::Boolean]
+          #     Bool describing whether query expansion has occurred.
+          # @!attribute [rw] pinned_result_count
+          #   @return [::Integer]
+          #     Number of pinned results. This field will only be set when expansion
+          #     happens and
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec#pin_unexpanded_results SearchRequest.QueryExpansionSpec.pin_unexpanded_results}
+          #     is set to true.
+          class QueryExpansionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

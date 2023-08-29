@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1beta/conversational_search_service_pb"
 require "google/cloud/discovery_engine/v1beta/conversational_search_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -135,8 +136,21 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @conversational_search_service_stub = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -153,7 +167,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil)
+              # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil, user_labels: nil, summary_spec: nil)
               #   Pass arguments to `converse_conversation` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -177,6 +191,26 @@ module Google
               #     session.
               #   @param safe_search [::Boolean]
               #     Whether to turn on safe search.
+              #   @param user_labels [::Hash{::String => ::String}]
+              #     The user labels applied to a resource must meet the following requirements:
+              #
+              #     * Each resource can have multiple labels, up to a maximum of 64.
+              #     * Each label must be a key-value pair.
+              #     * Keys have a minimum length of 1 character and a maximum length of 63
+              #       characters and cannot be empty. Values can be empty and have a maximum
+              #       length of 63 characters.
+              #     * Keys and values can contain only lowercase letters, numeric characters,
+              #       underscores, and dashes. All characters must use UTF-8 encoding, and
+              #       international characters are allowed.
+              #     * The key portion of a label must be unique. However, you can use the same
+              #       key with multiple resources.
+              #     * Keys must start with a lowercase letter or international character.
+              #
+              #     See [Google Cloud
+              #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+              #     for more details.
+              #   @param summary_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec, ::Hash]
+              #     A specification for configuring the summary returned in the response.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

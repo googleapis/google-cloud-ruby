@@ -100,6 +100,15 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Double list.
+        # @!attribute [rw] values
+        #   @return [::Array<::Float>]
+        #     Double values.
+        class DoubleList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1beta/user_event_service_pb"
 require "google/cloud/discovery_engine/v1beta/user_event_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -146,6 +147,12 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @user_event_service_stub = ::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -155,6 +162,13 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
