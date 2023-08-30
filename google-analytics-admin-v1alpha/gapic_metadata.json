@@ -190,6 +190,31 @@
                 "acknowledge_user_data_collection"
               ]
             },
+            "GetSKAdNetworkConversionValueSchema": {
+              "methods": [
+                "get_sk_ad_network_conversion_value_schema"
+              ]
+            },
+            "CreateSKAdNetworkConversionValueSchema": {
+              "methods": [
+                "create_sk_ad_network_conversion_value_schema"
+              ]
+            },
+            "DeleteSKAdNetworkConversionValueSchema": {
+              "methods": [
+                "delete_sk_ad_network_conversion_value_schema"
+              ]
+            },
+            "UpdateSKAdNetworkConversionValueSchema": {
+              "methods": [
+                "update_sk_ad_network_conversion_value_schema"
+              ]
+            },
+            "ListSKAdNetworkConversionValueSchemas": {
+              "methods": [
+                "list_sk_ad_network_conversion_value_schemas"
+              ]
+            },
             "SearchChangeHistoryEvents": {
               "methods": [
                 "search_change_history_events"

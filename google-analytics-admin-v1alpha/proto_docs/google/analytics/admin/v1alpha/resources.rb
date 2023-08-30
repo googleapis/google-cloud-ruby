@@ -448,6 +448,135 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # SKAdNetwork conversion value schema of an iOS stream.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of the schema. This will be child of ONLY an iOS
+        #     stream, and there can be at most one such child under an iOS stream.
+        #     Format:
+        #     properties/\\{property}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema
+        # @!attribute [rw] postback_window_one
+        #   @return [::Google::Analytics::Admin::V1alpha::PostbackWindow]
+        #     Required. The conversion value settings for the first postback window.
+        #     These differ from values for postback window two and three in that they
+        #     contain a "Fine" grained conversion value (a numeric value).
+        #
+        #     Conversion values for this postback window must be set.  The other windows
+        #     are optional and may inherit this window's settings if unset or disabled.
+        # @!attribute [rw] postback_window_two
+        #   @return [::Google::Analytics::Admin::V1alpha::PostbackWindow]
+        #     The conversion value settings for the second postback window.
+        #
+        #     This field should only be configured if there is a need to define different
+        #     conversion values for this postback window.
+        #
+        #     If enable_postback_window_settings is set to false for this postback
+        #     window, the values from postback_window_one will be used.
+        # @!attribute [rw] postback_window_three
+        #   @return [::Google::Analytics::Admin::V1alpha::PostbackWindow]
+        #     The conversion value settings for the third postback window.
+        #
+        #     This field should only be set if the user chose to define different
+        #     conversion values for this postback window. It is allowed to configure
+        #     window 3 without setting window 2. In case window 1 & 2 settings are set
+        #     and enable_postback_window_settings for this postback window is set to
+        #     false, the schema will inherit settings from postback_window_two.
+        # @!attribute [rw] apply_conversion_values
+        #   @return [::Boolean]
+        #     If enabled, the GA SDK will set conversion values using this schema
+        #     definition, and schema will be exported to any Google Ads accounts linked
+        #     to this property. If disabled, the GA SDK will not automatically set
+        #     conversion values, and also the schema will not be exported to Ads.
+        class SKAdNetworkConversionValueSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings for a SKAdNetwork conversion postback window.
+        # @!attribute [rw] conversion_values
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ConversionValues>]
+        #     Ordering of the repeated field will be used to prioritize the conversion
+        #     value settings. Lower indexed entries are prioritized higher. The first
+        #     conversion value setting that evaluates to true will be selected. It must
+        #     have at least one entry if enable_postback_window_settings is set to
+        #     true. It can have maximum of 128 entries.
+        # @!attribute [rw] postback_window_settings_enabled
+        #   @return [::Boolean]
+        #     If enable_postback_window_settings is true, conversion_values
+        #     must be populated and will be used for determining when and how to set the
+        #     Conversion Value on a client device and exporting schema to linked Ads
+        #     accounts. If false, the settings are not used, but are retained in case
+        #     they may be used in the future. This must always be true for
+        #     postback_window_one.
+        class PostbackWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Conversion value settings for a postback window for SKAdNetwork conversion
+        # value schema.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Display name of the SKAdNetwork conversion value.
+        #     The max allowed display name length is 50 UTF-16 code units.
+        # @!attribute [rw] fine_value
+        #   @return [::Integer]
+        #     The fine-grained conversion value.  This is applicable only to the first
+        #     postback window. Its valid values are [0,63], both inclusive. It must be
+        #     set for postback window 1, and must not be set for postback window 2 & 3.
+        #     This value is not guaranteed to be unique.
+        #
+        #     If the configuration for the first postback window is re-used for second or
+        #     third postback windows this field has no effect.
+        # @!attribute [rw] coarse_value
+        #   @return [::Google::Analytics::Admin::V1alpha::CoarseValue]
+        #     Required. A coarse grained conversion value.
+        #
+        #     This value is not guaranteed to be unique.
+        # @!attribute [rw] event_mappings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::EventMapping>]
+        #     Event conditions that must be met for this Conversion Value to be achieved.
+        #     The conditions in this list are ANDed together. It must have minimum of 1
+        #     entry and maximum of 3 entries, if the postback window is enabled.
+        # @!attribute [rw] lock_enabled
+        #   @return [::Boolean]
+        #     If true, the SDK should lock to this conversion value for the current
+        #     postback window.
+        class ConversionValues
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Event setting conditions to match an event.
+        # @!attribute [rw] event_name
+        #   @return [::String]
+        #     Required. Name of the GA4 event. It must always be set.
+        #     The max allowed display name length is 40 UTF-16 code units.
+        # @!attribute [rw] min_event_count
+        #   @return [::Integer]
+        #     At least one of the following four min/max values must be set. The
+        #     values set will be ANDed together to qualify an event.
+        #     The minimum number of times the event occurred. If not set, minimum event
+        #     count won't be checked.
+        # @!attribute [rw] max_event_count
+        #   @return [::Integer]
+        #     The maximum number of times the event occurred. If not set, maximum event
+        #     count won't be checked.
+        # @!attribute [rw] min_event_value
+        #   @return [::Float]
+        #     The minimum revenue generated due to the event. Revenue currency will be
+        #     defined at the property level. If not set, minimum event value won't be
+        #     checked.
+        # @!attribute [rw] max_event_value
+        #   @return [::Float]
+        #     The maximum revenue generated due to the event. Revenue currency will be
+        #     defined at the property level. If not set, maximum event value won't be
+        #     checked.
+        class EventMapping
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A set of changes within a Google Analytics account or its child properties
         # that resulted from the same cause. Common causes would be updates made in the
         # Google Analytics UI, changes from customer support, or automatic Google
@@ -559,6 +688,10 @@ module Google
           # @!attribute [rw] enhanced_measurement_settings
           #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
           #     A snapshot of EnhancedMeasurementSettings resource in change history.
+          # @!attribute [rw] skadnetwork_conversion_value_schema
+          #   @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+          #     A snapshot of SKAdNetworkConversionValueSchema resource in change
+          #     history.
           # @!attribute [rw] adsense_link
           #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
           #     A snapshot of an AdSenseLink resource in change history.
@@ -1195,9 +1328,9 @@ module Google
         # @!attribute [rw] streaming_export_enabled
         #   @return [::Boolean]
         #     If set true, enables streaming export to the linked Google Cloud project.
-        # @!attribute [rw] enterprise_export_enabled
+        # @!attribute [rw] fresh_daily_export_enabled
         #   @return [::Boolean]
-        #     If set true, enables enterprise export to the linked Google Cloud project.
+        #     If set true, enables fresh daily export to the linked Google Cloud project.
         # @!attribute [rw] include_advertising_id
         #   @return [::Boolean]
         #     If set true, exported data will include advertising identifiers for mobile
@@ -1488,6 +1621,9 @@ module Google
           # EnhancedMeasurementSettings resource
           ENHANCED_MEASUREMENT_SETTINGS = 24
 
+          # SKAdNetworkConversionValueSchema resource
+          SKADNETWORK_CONVERSION_VALUE_SCHEMA = 26
+
           # AdSenseLink resource
           ADSENSE_LINK = 27
 
@@ -1583,6 +1719,24 @@ module Google
 
           # GA4 rollup property
           PROPERTY_TYPE_ROLLUP = 3
+        end
+
+        # The coarse conversion value set on the updatePostbackConversionValue SDK call
+        # when a ConversionValues.event_mappings conditions are satisfied. For
+        # more information, see
+        # [SKAdNetwork.CoarseConversionValue](https://developer.apple.com/documentation/storekit/skadnetwork/coarseconversionvalue).
+        module CoarseValue
+          # Coarse value not specified.
+          COARSE_VALUE_UNSPECIFIED = 0
+
+          # Coarse value of low.
+          COARSE_VALUE_LOW = 1
+
+          # Coarse value of medium.
+          COARSE_VALUE_MEDIUM = 2
+
+          # Coarse value of high.
+          COARSE_VALUE_HIGH = 3
         end
       end
     end
