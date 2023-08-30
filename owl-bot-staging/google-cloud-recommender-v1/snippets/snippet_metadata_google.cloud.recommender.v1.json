@@ -1,0 +1,535 @@
+{
+  "client_library": {
+    "name": "google-cloud-recommender-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.recommender.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "recommender_v1_generated_Recommender_ListInsights_sync",
+      "title": "Snippet for the list_insights call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#list_insights. It may require modification in order to execute successfully.",
+      "file": "recommender/list_insights.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_insights",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#list_insights",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::ListInsightsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::ListInsightsResponse",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "ListInsights",
+          "full_name": "google.cloud.recommender.v1.Recommender.ListInsights",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_GetInsight_sync",
+      "title": "Snippet for the get_insight call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_insight. It may require modification in order to execute successfully.",
+      "file": "recommender/get_insight.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_insight",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#get_insight",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::GetInsightRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Insight",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "GetInsight",
+          "full_name": "google.cloud.recommender.v1.Recommender.GetInsight",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_MarkInsightAccepted_sync",
+      "title": "Snippet for the mark_insight_accepted call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_insight_accepted. It may require modification in order to execute successfully.",
+      "file": "recommender/mark_insight_accepted.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_insight_accepted",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#mark_insight_accepted",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Insight",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "MarkInsightAccepted",
+          "full_name": "google.cloud.recommender.v1.Recommender.MarkInsightAccepted",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_ListRecommendations_sync",
+      "title": "Snippet for the list_recommendations call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#list_recommendations. It may require modification in order to execute successfully.",
+      "file": "recommender/list_recommendations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_recommendations",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#list_recommendations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::ListRecommendationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::ListRecommendationsResponse",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "ListRecommendations",
+          "full_name": "google.cloud.recommender.v1.Recommender.ListRecommendations",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_GetRecommendation_sync",
+      "title": "Snippet for the get_recommendation call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_recommendation. It may require modification in order to execute successfully.",
+      "file": "recommender/get_recommendation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_recommendation",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#get_recommendation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::GetRecommendationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Recommendation",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "GetRecommendation",
+          "full_name": "google.cloud.recommender.v1.Recommender.GetRecommendation",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationDismissed_sync",
+      "title": "Snippet for the mark_recommendation_dismissed call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_dismissed. It may require modification in order to execute successfully.",
+      "file": "recommender/mark_recommendation_dismissed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_recommendation_dismissed",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_dismissed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Recommendation",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "MarkRecommendationDismissed",
+          "full_name": "google.cloud.recommender.v1.Recommender.MarkRecommendationDismissed",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationClaimed_sync",
+      "title": "Snippet for the mark_recommendation_claimed call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_claimed. It may require modification in order to execute successfully.",
+      "file": "recommender/mark_recommendation_claimed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_recommendation_claimed",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_claimed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Recommendation",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "MarkRecommendationClaimed",
+          "full_name": "google.cloud.recommender.v1.Recommender.MarkRecommendationClaimed",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationSucceeded_sync",
+      "title": "Snippet for the mark_recommendation_succeeded call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_succeeded. It may require modification in order to execute successfully.",
+      "file": "recommender/mark_recommendation_succeeded.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_recommendation_succeeded",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_succeeded",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Recommendation",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "MarkRecommendationSucceeded",
+          "full_name": "google.cloud.recommender.v1.Recommender.MarkRecommendationSucceeded",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationFailed_sync",
+      "title": "Snippet for the mark_recommendation_failed call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_failed. It may require modification in order to execute successfully.",
+      "file": "recommender/mark_recommendation_failed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_recommendation_failed",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_failed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Recommendation",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "MarkRecommendationFailed",
+          "full_name": "google.cloud.recommender.v1.Recommender.MarkRecommendationFailed",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_GetRecommenderConfig_sync",
+      "title": "Snippet for the get_recommender_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_recommender_config. It may require modification in order to execute successfully.",
+      "file": "recommender/get_recommender_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_recommender_config",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#get_recommender_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::RecommenderConfig",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "GetRecommenderConfig",
+          "full_name": "google.cloud.recommender.v1.Recommender.GetRecommenderConfig",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_UpdateRecommenderConfig_sync",
+      "title": "Snippet for the update_recommender_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#update_recommender_config. It may require modification in order to execute successfully.",
+      "file": "recommender/update_recommender_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_recommender_config",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#update_recommender_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::RecommenderConfig",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "UpdateRecommenderConfig",
+          "full_name": "google.cloud.recommender.v1.Recommender.UpdateRecommenderConfig",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_GetInsightTypeConfig_sync",
+      "title": "Snippet for the get_insight_type_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#get_insight_type_config. It may require modification in order to execute successfully.",
+      "file": "recommender/get_insight_type_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_insight_type_config",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#get_insight_type_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::InsightTypeConfig",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "GetInsightTypeConfig",
+          "full_name": "google.cloud.recommender.v1.Recommender.GetInsightTypeConfig",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_UpdateInsightTypeConfig_sync",
+      "title": "Snippet for the update_insight_type_config call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#update_insight_type_config. It may require modification in order to execute successfully.",
+      "file": "recommender/update_insight_type_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_insight_type_config",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#update_insight_type_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::InsightTypeConfig",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "UpdateInsightTypeConfig",
+          "full_name": "google.cloud.recommender.v1.Recommender.UpdateInsightTypeConfig",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
