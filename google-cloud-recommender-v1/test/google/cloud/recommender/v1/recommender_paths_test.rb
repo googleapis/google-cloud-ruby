@@ -77,6 +77,9 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.insight_type_config_path organization: "value0", location: "value1", insight_type: "value2"
       assert_equal "organizations/value0/locations/value1/insightTypes/value2/config", path
+
+      path = client.insight_type_config_path billing_account: "value0", location: "value1", insight_type: "value2"
+      assert_equal "billingAccounts/value0/locations/value1/insightTypes/value2/config", path
     end
   end
 
@@ -134,6 +137,9 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.recommender_config_path organization: "value0", location: "value1", recommender: "value2"
       assert_equal "organizations/value0/locations/value1/recommenders/value2/config", path
+
+      path = client.recommender_config_path billing_account: "value0", location: "value1", recommender: "value2"
+      assert_equal "billingAccounts/value0/locations/value1/recommenders/value2/config", path
     end
   end
 end

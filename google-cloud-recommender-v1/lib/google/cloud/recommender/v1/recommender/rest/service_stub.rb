@@ -231,6 +231,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the mark_recommendation_dismissed REST call
+              #
+              # @param request_pb [::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Recommender::V1::Recommendation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Recommender::V1::Recommendation]
+              #   A result object deserialized from the server's reply
+              def mark_recommendation_dismissed request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_mark_recommendation_dismissed_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Recommender::V1::Recommendation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the mark_recommendation_claimed REST call
               #
               # @param request_pb [::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest]
@@ -713,6 +751,52 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the mark_recommendation_dismissed REST call
+              #
+              # @param request_pb [::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_mark_recommendation_dismissed_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:markDismissed",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/recommenders/[^/]+/recommendations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:markDismissed",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^billingAccounts/[^/]+/locations/[^/]+/recommenders/[^/]+/recommendations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:markDismissed",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/recommenders/[^/]+/recommendations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:markDismissed",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/recommenders/[^/]+/recommendations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the mark_recommendation_claimed REST call
               #
               # @param request_pb [::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest]
@@ -873,6 +957,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/locations/[^/]+/recommenders/[^/]+/config/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^billingAccounts/[^/]+/locations/[^/]+/recommenders/[^/]+/config/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -903,6 +994,14 @@ module Google
                                                             ["recommender_config.name", %r{^organizations/[^/]+/locations/[^/]+/recommenders/[^/]+/config/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{recommender_config.name}",
+                                                          body: "recommender_config",
+                                                          matches: [
+                                                            ["recommender_config.name", %r{^billingAccounts/[^/]+/locations/[^/]+/recommenders/[^/]+/config/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -929,6 +1028,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^organizations/[^/]+/locations/[^/]+/insightTypes/[^/]+/config/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^billingAccounts/[^/]+/locations/[^/]+/insightTypes/[^/]+/config/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -959,6 +1065,14 @@ module Google
                                                           body: "insight_type_config",
                                                           matches: [
                                                             ["insight_type_config.name", %r{^organizations/[^/]+/locations/[^/]+/insightTypes/[^/]+/config/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{insight_type_config.name}",
+                                                          body: "insight_type_config",
+                                                          matches: [
+                                                            ["insight_type_config.name", %r{^billingAccounts/[^/]+/locations/[^/]+/insightTypes/[^/]+/config/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
