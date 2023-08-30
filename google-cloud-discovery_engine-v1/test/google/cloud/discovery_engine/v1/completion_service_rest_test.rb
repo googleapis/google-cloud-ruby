@@ -74,6 +74,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Rest::ClientTest 
     query = "hello world"
     query_model = "hello world"
     user_pseudo_id = "hello world"
+    include_tail_suggestions = true
 
     complete_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -89,27 +90,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Rest::ClientTest 
         end
 
         # Use hash object
-        client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id }) do |_result, response|
+        client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.complete_query data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id do |_result, response|
+        client.complete_query data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.complete_query ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id) do |_result, response|
+        client.complete_query ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id }, call_options) do |_result, response|
+        client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.complete_query(::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id), call_options) do |_result, response|
+        client.complete_query(::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -19,6 +19,59 @@
         }
       }
     },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ConversationalSearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client",
+          "rpcs": {
+            "ConverseConversation": {
+              "methods": [
+                "converse_conversation"
+              ]
+            },
+            "CreateConversation": {
+              "methods": [
+                "create_conversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "delete_conversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "update_conversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DocumentService": {
       "clients": {
         "grpc": {
@@ -91,20 +144,6 @@
             "DeleteSchema": {
               "methods": [
                 "delete_schema"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "SearchService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client",
-          "rpcs": {
-            "Search": {
-              "methods": [
-                "search"
               ]
             }
           }
