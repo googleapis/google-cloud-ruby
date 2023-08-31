@@ -123,7 +123,7 @@ Google::Cloud.configure.add_config! :bigquery do |config|
     ENV["BIGQUERY_PROJECT"]
   end
   default_endpoint = Google::Cloud::Config.deferred do
-    ENV["BIGQUERY_EMULATOR_HOST"] || "bigquery.googleapis.com"
+    ENV["BIGQUERY_EMULATOR_HOST"]
   end
   default_creds = Google::Cloud::Config.deferred do
     Google::Cloud::Config.credentials_from_env(
