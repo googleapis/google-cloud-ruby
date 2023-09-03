@@ -161,6 +161,12 @@ module Google
         # @!attribute [rw] database_service
         #   @return [::String]
         #     Required. Database service for the Oracle connection.
+        # @!attribute [rw] ssl
+        #   @return [::Google::Cloud::CloudDMS::V1::SslConfig]
+        #     SSL configuration for the connection to the source Oracle database.
+        #
+        #      * Only `SERVER_ONLY` configuration is supported for Oracle SSL.
+        #      * SSL is supported for Oracle versions 12 and above.
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
@@ -356,6 +362,9 @@ module Google
         #     zone affect data availability.
         #     *  `REGIONAL`: The instance can serve data from more than one zone in a
         #     region (it is highly available).
+        # @!attribute [rw] edition
+        #   @return [::Google::Cloud::CloudDMS::V1::CloudSqlSettings::Edition]
+        #     Optional. The edition of the given Cloud SQL instance.
         class CloudSqlSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -433,6 +442,9 @@ module Google
 
             # PostgreSQL 14.
             POSTGRES_14 = 17
+
+            # PostgreSQL 15.
+            POSTGRES_15 = 18
           end
 
           # The availability type of the given Cloud SQL instance.
@@ -445,6 +457,19 @@ module Google
 
             # Regional availability instance.
             REGIONAL = 2
+          end
+
+          # The edition of the given Cloud SQL instance.
+          # Can be ENTERPRISE or ENTERPRISE_PLUS.
+          module Edition
+            # The instance did not specify the edition.
+            EDITION_UNSPECIFIED = 0
+
+            # The instance is an enterprise edition.
+            ENTERPRISE = 2
+
+            # The instance is an enterprise plus edition.
+            ENTERPRISE_PLUS = 3
           end
         end
 
@@ -578,8 +603,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Private Service Connect connectivity
-        # (https://cloud.google.com/vpc/docs/private-service-connect#service-attachments)
+        # [Private Service Connect
+        # connectivity](https://cloud.google.com/vpc/docs/private-service-connect#service-attachments)
         # @!attribute [rw] service_attachment
         #   @return [::String]
         #     Required. A service attachment that exposes a database, and has the
@@ -775,6 +800,10 @@ module Google
         #     connection profile instead).
         #     Each Cloud CMEK key has the following format:
         #     projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME]
+        # @!attribute [rw] performance_config
+        #   @return [::Google::Cloud::CloudDMS::V1::MigrationJob::PerformanceConfig]
+        #     Optional. Data dump parallelism settings used by the migration.
+        #     Currently applicable only for MySQL to Cloud SQL for MySQL migrations only.
         class MigrationJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -798,6 +827,30 @@ module Google
           class DumpFlags
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Performance configuration definition.
+          # @!attribute [rw] dump_parallel_level
+          #   @return [::Google::Cloud::CloudDMS::V1::MigrationJob::PerformanceConfig::DumpParallelLevel]
+          #     Initial dump parallelism level.
+          class PerformanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Describes the parallelism level during initial dump.
+            module DumpParallelLevel
+              # Unknown dump parallel level. Will be defaulted to OPTIMAL.
+              DUMP_PARALLEL_LEVEL_UNSPECIFIED = 0
+
+              # Minimal parallel level.
+              MIN = 1
+
+              # Optimal parallel level.
+              OPTIMAL = 2
+
+              # Maximum parallel level.
+              MAX = 3
+            end
           end
 
           # @!attribute [rw] key
@@ -1076,6 +1129,9 @@ module Google
             # Migration is already running at the time of restart request.
             CANT_RESTART_RUNNING_MIGRATION = 21
 
+            # The source already has a replication setup.
+            SOURCE_ALREADY_SETUP = 23
+
             # The source has tables with limited support.
             # E.g. PostgreSQL tables without primary keys.
             TABLES_WITH_LIMITED_SUPPORT = 24
@@ -1092,6 +1148,13 @@ module Google
             # The source DB size in Bytes exceeds a certain threshold. The migration
             # might require an increase of quota, or might not be supported.
             SOURCE_SIZE_EXCEEDS_THRESHOLD = 28
+
+            # The destination DB contains existing databases that are conflicting with
+            # those in the source DB.
+            EXISTING_CONFLICTING_DATABASES = 29
+
+            # Insufficient privilege to enable the parallelism configuration.
+            PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 30
           end
         end
 
