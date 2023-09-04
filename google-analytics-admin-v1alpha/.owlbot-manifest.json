@@ -157,6 +157,7 @@
     "snippets/analytics_admin_service/update_attribution_settings.rb",
     "snippets/analytics_admin_service/update_audience.rb",
     "snippets/analytics_admin_service/update_channel_group.rb",
+    "snippets/analytics_admin_service/update_conversion_event.rb",
     "snippets/analytics_admin_service/update_custom_dimension.rb",
     "snippets/analytics_admin_service/update_custom_metric.rb",
     "snippets/analytics_admin_service/update_data_retention_settings.rb",

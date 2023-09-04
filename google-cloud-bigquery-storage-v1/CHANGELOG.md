@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2023-08-15)
+
+#### Features
+
+* Added ability to configure the default missing_value_interpretation when calling append_rows ([#22778](https://github.com/googleapis/google-cloud-ruby/issues/22778)) 
+
 ### 0.21.0 (2023-07-07)
 
 #### Features

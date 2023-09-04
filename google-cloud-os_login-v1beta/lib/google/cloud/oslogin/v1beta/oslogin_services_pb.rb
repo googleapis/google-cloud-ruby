@@ -54,6 +54,8 @@ module Google
             # Updates an SSH public key and returns the profile information. This method
             # supports patch semantics.
             rpc :UpdateSshPublicKey, ::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest, ::Google::Cloud::OsLogin::Common::SshPublicKey
+            # Signs an SSH public key for a user to authenticate to an instance.
+            rpc :SignSshPublicKey, ::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest, ::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse
           end
 
           Stub = Service.rpc_stub_class

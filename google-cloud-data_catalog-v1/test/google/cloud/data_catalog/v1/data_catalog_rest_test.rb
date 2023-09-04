@@ -75,6 +75,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     page_size = 42
     page_token = "hello world"
     order_by = "hello world"
+    admin_search = true
 
     search_catalog_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -90,27 +91,27 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_catalog scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        client.search_catalog scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_catalog ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        client.search_catalog ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_catalog(::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        client.search_catalog(::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

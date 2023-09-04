@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.11.2 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22685](https://github.com/googleapis/google-cloud-ruby/issues/22685)) 
+
 ### 0.11.1 (2023-06-06)
 
 #### Bug Fixes

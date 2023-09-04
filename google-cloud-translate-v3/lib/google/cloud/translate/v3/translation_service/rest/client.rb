@@ -245,7 +245,7 @@ module Google
               #     For example,
               #     `projects/{project-number-or-id}/locations/global/models/general/nmt`.
               #
-              #     If not provided, the default Google model (NMT) will be used.
+              #     If not provided, the default Google model (NMT) will be used
               #   @param glossary_config [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig, ::Hash]
               #     Optional. Glossary to be applied. The glossary must be
               #     within the same region (have the same location-id) as the model, otherwise
@@ -504,7 +504,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil, customized_attribution: nil, is_translate_native_pdf_only: nil, enable_shadow_removal_native_pdf: nil)
+              # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil, customized_attribution: nil, is_translate_native_pdf_only: nil, enable_shadow_removal_native_pdf: nil, enable_rotation_correction: nil)
               #   Pass arguments to `translate_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -574,13 +574,16 @@ module Google
               #     Customized attribution should follow rules in
               #     https://cloud.google.com/translate/attribution#attribution_and_logos
               #   @param is_translate_native_pdf_only [::Boolean]
-              #     Optional. If true, the page limit of online native pdf translation is 300
-              #     and only native pdf pages will be translated.
+              #     Optional. is_translate_native_pdf_only field for external customers.
+              #     If true, the page limit of online native pdf translation is 300 and only
+              #     native pdf pages will be translated.
               #   @param enable_shadow_removal_native_pdf [::Boolean]
-              #     Optional. If true, use the text removal to remove the shadow text on
+              #     Optional. If true, use the text removal server to remove the shadow text on
               #     background image for native pdf translation.
               #     Shadow removal feature can only be enabled when
-              #     is_translate_native_pdf_only is false
+              #     is_translate_native_pdf_only: false && pdf_native_only: false
+              #   @param enable_rotation_correction [::Boolean]
+              #     Optional. If true, enable auto rotation correction in DVS.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Translate::V3::TranslateDocumentResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -761,7 +764,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil, customized_attribution: nil)
+              # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil, customized_attribution: nil, enable_shadow_removal_native_pdf: nil, enable_rotation_correction: nil)
               #   Pass arguments to `batch_translate_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -826,6 +829,13 @@ module Google
               #     If not provided, the default is `Machine Translated by Google`.
               #     Customized attribution should follow rules in
               #     https://cloud.google.com/translate/attribution#attribution_and_logos
+              #   @param enable_shadow_removal_native_pdf [::Boolean]
+              #     Optional. If true, use the text removal server to remove the shadow text on
+              #     background image for native pdf translation.
+              #     Shadow removal feature can only be enabled when
+              #     is_translate_native_pdf_only: false && pdf_native_only: false
+              #   @param enable_rotation_correction [::Boolean]
+              #     Optional. If true, enable auto rotation correction in DVS.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

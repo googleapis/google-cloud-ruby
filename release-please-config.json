@@ -351,6 +351,14 @@
       "component": "google-cloud-cloud_dms-v1",
       "version_file": "lib/google/cloud/cloud_dms/v1/version.rb"
     },
+    "google-cloud-commerce-consumer-procurement": {
+      "component": "google-cloud-commerce-consumer-procurement",
+      "version_file": "lib/google/cloud/commerce/consumer/procurement/version.rb"
+    },
+    "google-cloud-commerce-consumer-procurement-v1": {
+      "component": "google-cloud-commerce-consumer-procurement-v1",
+      "version_file": "lib/google/cloud/commerce/consumer/procurement/v1/version.rb"
+    },
     "google-cloud-compute": {
       "component": "google-cloud-compute",
       "version_file": "lib/google/cloud/compute/version.rb"
@@ -366,6 +374,10 @@
     "google-cloud-confidential_computing-v1": {
       "component": "google-cloud-confidential_computing-v1",
       "version_file": "lib/google/cloud/confidential_computing/v1/version.rb"
+    },
+    "google-cloud-config-v1": {
+      "component": "google-cloud-config-v1",
+      "version_file": "lib/google/cloud/config/v1/version.rb"
     },
     "google-cloud-contact_center_insights": {
       "component": "google-cloud-contact_center_insights",
@@ -751,6 +763,10 @@
       "component": "google-cloud-language-v1beta2",
       "version_file": "lib/google/cloud/language/v1beta2/version.rb"
     },
+    "google-cloud-language-v2": {
+      "component": "google-cloud-language-v2",
+      "version_file": "lib/google/cloud/language/v2/version.rb"
+    },
     "google-cloud-life_sciences": {
       "component": "google-cloud-life_sciences",
       "version_file": "lib/google/cloud/life_sciences/version.rb"
@@ -871,6 +887,10 @@
       "component": "google-cloud-notebooks-v1beta1",
       "version_file": "lib/google/cloud/notebooks/v1beta1/version.rb"
     },
+    "google-cloud-notebooks-v2": {
+      "component": "google-cloud-notebooks-v2",
+      "version_file": "lib/google/cloud/notebooks/v2/version.rb"
+    },
     "google-cloud-optimization": {
       "component": "google-cloud-optimization",
       "version_file": "lib/google/cloud/optimization/version.rb"
@@ -938,6 +958,10 @@
     "google-cloud-policy_troubleshooter": {
       "component": "google-cloud-policy_troubleshooter",
       "version_file": "lib/google/cloud/policy_troubleshooter/version.rb"
+    },
+    "google-cloud-policy_troubleshooter-iam-v3": {
+      "component": "google-cloud-policy_troubleshooter-iam-v3",
+      "version_file": "lib/google/cloud/policy_troubleshooter/iam/v3/version.rb"
     },
     "google-cloud-policy_troubleshooter-v1": {
       "component": "google-cloud-policy_troubleshooter-v1",

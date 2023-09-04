@@ -127,11 +127,13 @@ class ::Google::Cloud::Workflows::V1::Workflows::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    revision_id = "hello world"
 
     get_workflow_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workflow, name
       assert_kind_of ::Google::Cloud::Workflows::V1::GetWorkflowRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["revision_id"]
       refute_nil options
     end
 
@@ -142,31 +144,31 @@ class ::Google::Cloud::Workflows::V1::Workflows::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_workflow({ name: name }) do |response, operation|
+      client.get_workflow({ name: name, revision_id: revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workflow name: name do |response, operation|
+      client.get_workflow name: name, revision_id: revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workflow ::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name) do |response, operation|
+      client.get_workflow ::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workflow({ name: name }, grpc_options) do |response, operation|
+      client.get_workflow({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workflow(::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_workflow(::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

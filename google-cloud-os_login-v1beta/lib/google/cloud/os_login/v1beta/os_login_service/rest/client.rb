@@ -633,6 +633,73 @@ module Google
               end
 
               ##
+              # Signs an SSH public key for a user to authenticate to an instance.
+              #
+              # @overload sign_ssh_public_key(request, options = nil)
+              #   Pass arguments to `sign_ssh_public_key` via a request object, either of type
+              #   {::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload sign_ssh_public_key(ssh_public_key: nil, parent: nil)
+              #   Pass arguments to `sign_ssh_public_key` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param ssh_public_key [::String]
+              #     The SSH public key to sign.
+              #   @param parent [::String]
+              #     The parent project and zone for the signing request. This is needed to
+              #     properly ensure per-organization ISS processing and potentially to provide
+              #     for the possibility of zone-specific certificates used in the signing
+              #     process.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def sign_ssh_public_key request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.sign_ssh_public_key.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.sign_ssh_public_key.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.sign_ssh_public_key.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @os_login_service_stub.sign_ssh_public_key request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the OsLoginService REST API.
               #
               # This class represents the configuration for OsLoginService REST,
@@ -792,6 +859,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_ssh_public_key
+                  ##
+                  # RPC-specific configuration for `sign_ssh_public_key`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :sign_ssh_public_key
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -809,6 +881,8 @@ module Google
                     @import_ssh_public_key = ::Gapic::Config::Method.new import_ssh_public_key_config
                     update_ssh_public_key_config = parent_rpcs.update_ssh_public_key if parent_rpcs.respond_to? :update_ssh_public_key
                     @update_ssh_public_key = ::Gapic::Config::Method.new update_ssh_public_key_config
+                    sign_ssh_public_key_config = parent_rpcs.sign_ssh_public_key if parent_rpcs.respond_to? :sign_ssh_public_key
+                    @sign_ssh_public_key = ::Gapic::Config::Method.new sign_ssh_public_key_config
 
                     yield self if block_given?
                   end

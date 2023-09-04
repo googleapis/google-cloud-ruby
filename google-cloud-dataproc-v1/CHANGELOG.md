@@ -1,5 +1,17 @@
 # Release History
 
+### 0.19.0 (2023-09-04)
+
+#### Features
+
+* support min_num_instances for primary worker and InstanceFlexibilityPolicy for secondary worker ([#22841](https://github.com/googleapis/google-cloud-ruby/issues/22841)) 
+
+### 0.18.1 (2023-08-03)
+
+#### Documentation
+
+* Improve documentation format ([#22680](https://github.com/googleapis/google-cloud-ruby/issues/22680)) 
+
 ### 0.18.0 (2023-06-06)
 
 #### Features

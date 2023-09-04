@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.5.1 (2023-08-17)
+
+#### Bug Fixes
+
+* Restore the locations of proto message classes that were moved in 0.5.0 ([#22793](https://github.com/googleapis/google-cloud-ruby/issues/22793)) 
+
+### 0.5.0 (2023-08-15)
+
+#### Features
+
+* add new Instance state values 
+* add NFSShare resource and methods 
+* add OsImage resource and methods 
+* add ProvisioningConfig resource and methods 
+* add RPC EvictLune 
+* add RPCs Enable/Disable InteractiveSerialConsole 
+* add RPCs Rename/Evict Volume 
+* add SSHKey resource and methods 
+* add VolumeSnapshot resource and methods 
+* several new resources and RPCs ([#22751](https://github.com/googleapis/google-cloud-ruby/issues/22751)) 
+* include IAMPolicy mixin ([#22765](https://github.com/googleapis/google-cloud-ruby/issues/22765)) 
+
 ### 0.4.1 (2023-06-06)
 
 #### Bug Fixes

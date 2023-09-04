@@ -1,5 +1,17 @@
 # Release History
 
+### 0.18.1 (2023-09-04)
+
+#### Documentation
+
+* fix typo in reference docs ([#22852](https://github.com/googleapis/google-cloud-ruby/issues/22852)) 
+
+### 0.18.0 (2023-08-04)
+
+#### Features
+
+* Support admin_search in SearchCatalog() API ([#22691](https://github.com/googleapis/google-cloud-ruby/issues/22691)) 
+
 ### 0.17.0 (2023-07-07)
 
 #### Features

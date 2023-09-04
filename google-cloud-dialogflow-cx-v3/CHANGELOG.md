@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.20.0 (2023-08-15)
+
+#### Features
+
+* added agent level route group ([#22764](https://github.com/googleapis/google-cloud-ruby/issues/22764)) 
+* added flow import strategy 
+
 ### 0.19.0 (2023-07-11)
 
 #### Features

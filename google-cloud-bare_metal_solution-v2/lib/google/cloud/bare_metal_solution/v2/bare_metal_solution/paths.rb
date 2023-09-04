@@ -44,6 +44,44 @@ module Google
             end
 
             ##
+            # Create a fully-qualified InstanceConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instanceConfigs/{instance_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance_config [String]
+            #
+            # @return [::String]
+            def instance_config_path project:, location:, instance_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instanceConfigs/#{instance_config}"
+            end
+
+            ##
+            # Create a fully-qualified InterconnectAttachment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/interconnectAttachments/{interconnect_attachment}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param interconnect_attachment [String]
+            #
+            # @return [::String]
+            def interconnect_attachment_path project:, region:, interconnect_attachment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/interconnectAttachments/#{interconnect_attachment}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -120,6 +158,44 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NetworkConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/networkConfigs/{network_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param network_config [String]
+            #
+            # @return [::String]
+            def network_config_path project:, location:, network_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/networkConfigs/#{network_config}"
+            end
+
+            ##
+            # Create a fully-qualified ProvisioningConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/provisioningConfigs/{provisioning_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param provisioning_config [String]
+            #
+            # @return [::String]
+            def provisioning_config_path project:, location:, provisioning_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/provisioningConfigs/#{provisioning_config}"
+            end
+
+            ##
             # Create a fully-qualified ServerNetworkTemplate resource string.
             #
             # The resource will be in the following format:
@@ -139,6 +215,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SshKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/sshKeys/{ssh_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ssh_key [String]
+            #
+            # @return [::String]
+            def ssh_key_path project:, location:, ssh_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/sshKeys/#{ssh_key}"
+            end
+
+            ##
             # Create a fully-qualified Volume resource string.
             #
             # The resource will be in the following format:
@@ -155,6 +250,46 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/volumes/#{volume}"
+            end
+
+            ##
+            # Create a fully-qualified VolumeConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/volumeConfigs/{volume_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param volume_config [String]
+            #
+            # @return [::String]
+            def volume_config_path project:, location:, volume_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/volumeConfigs/#{volume_config}"
+            end
+
+            ##
+            # Create a fully-qualified VolumeSnapshot resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param volume [String]
+            # @param snapshot [String]
+            #
+            # @return [::String]
+            def volume_snapshot_path project:, location:, volume:, snapshot:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "volume cannot contain /" if volume.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/volumes/#{volume}/snapshots/#{snapshot}"
             end
 
             extend self

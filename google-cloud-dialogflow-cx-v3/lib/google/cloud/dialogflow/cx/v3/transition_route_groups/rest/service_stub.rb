@@ -249,6 +249,13 @@ module Google
                                                               ["parent", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/flows/[^/]+/?$}, false]
                                                             ]
                                                           )
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v3/{parent}/transitionRouteGroups",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/?$}, false]
+                                                            ]
+                                                          )
                   transcoder.transcode request_pb
                 end
 
@@ -268,6 +275,13 @@ module Google
                                                             uri_template: "/v3/{name}",
                                                             matches: [
                                                               ["name", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/flows/[^/]+/transitionRouteGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v3/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/transitionRouteGroups/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -292,6 +306,14 @@ module Google
                                                               ["parent", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/flows/[^/]+/?$}, false]
                                                             ]
                                                           )
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v3/{parent}/transitionRouteGroups",
+                                                            body: "transition_route_group",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/?$}, false]
+                                                            ]
+                                                          )
                   transcoder.transcode request_pb
                 end
 
@@ -314,6 +336,14 @@ module Google
                                                               ["transition_route_group.name", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/flows/[^/]+/transitionRouteGroups/[^/]+/?$}, false]
                                                             ]
                                                           )
+                                                          .with_bindings(
+                                                            uri_method: :patch,
+                                                            uri_template: "/v3/{transition_route_group.name}",
+                                                            body: "transition_route_group",
+                                                            matches: [
+                                                              ["transition_route_group.name", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/transitionRouteGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
                   transcoder.transcode request_pb
                 end
 
@@ -333,6 +363,13 @@ module Google
                                                             uri_template: "/v3/{name}",
                                                             matches: [
                                                               ["name", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/flows/[^/]+/transitionRouteGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                                                          .with_bindings(
+                                                            uri_method: :delete,
+                                                            uri_template: "/v3/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/transitionRouteGroups/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

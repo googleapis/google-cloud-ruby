@@ -41,6 +41,9 @@ module Google
         # @!attribute [rw] requested_size_gib
         #   @return [::Integer]
         #     The requested size of this storage volume, in GiB.
+        # @!attribute [rw] originally_requested_size_gib
+        #   @return [::Integer]
+        #     Originally requested size, in GiB.
         # @!attribute [rw] current_size_gib
         #   @return [::Integer]
         #     The current size of this storage volume, in GiB, including space reserved
@@ -50,6 +53,9 @@ module Google
         #   @return [::Integer]
         #     Additional emergency size that was requested for this Volume, in GiB.
         #     current_size_gib includes this value.
+        # @!attribute [rw] max_size_gib
+        #   @return [::Integer]
+        #     Maximum size volume can be expanded to in case of evergency, in GiB.
         # @!attribute [rw] auto_grown_size_gib
         #   @return [::Integer]
         #     The size, in GiB, that this storage volume has expanded as a result of an
@@ -73,6 +79,37 @@ module Google
         # @!attribute [rw] pod
         #   @return [::String]
         #     Immutable. Pod name.
+        # @!attribute [r] protocol
+        #   @return [::Google::Cloud::BareMetalSolution::V2::Volume::Protocol]
+        #     Output only. Storage protocol for the Volume.
+        # @!attribute [r] boot_volume
+        #   @return [::Boolean]
+        #     Output only. Whether this volume is a boot volume. A boot volume is one
+        #     which contains a boot LUN.
+        # @!attribute [rw] performance_tier
+        #   @return [::Google::Cloud::BareMetalSolution::V2::VolumePerformanceTier]
+        #     Immutable. Performance tier of the Volume.
+        #     Default is SHARED.
+        # @!attribute [rw] notes
+        #   @return [::String]
+        #     Input only. User-specified notes for new Volume.
+        #     Used to provision Volumes that require manual intervention.
+        # @!attribute [rw] workload_profile
+        #   @return [::Google::Cloud::BareMetalSolution::V2::Volume::WorkloadProfile]
+        #     The workload profile for the volume.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time after which volume will be fully deleted.
+        #     It is filled only for volumes in COOLOFF state.
+        # @!attribute [r] instances
+        #   @return [::Array<::String>]
+        #     Output only. Instances this Volume is attached to.
+        #     This field is set only in Get requests.
+        # @!attribute [r] attached
+        #   @return [::Boolean]
+        #     Output only. Is the Volume attached at at least one instance.
+        #     This field is a lightweight counterpart of `instances` field.
+        #     It is filled in List responses as well.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -137,6 +174,13 @@ module Google
 
             # The storage volume has been requested to be deleted.
             DELETING = 3
+
+            # The storage volume is being updated.
+            UPDATING = 4
+
+            # The storage volume is in cool off state. It will be deleted after
+            # `expire_time`.
+            COOL_OFF = 5
           end
 
           # The kinds of auto delete behavior to use when snapshot reserved space is
@@ -154,6 +198,31 @@ module Google
 
             # Delete the newest snapshots first.
             NEWEST_FIRST = 3
+          end
+
+          # Storage protocol.
+          module Protocol
+            # Value is not specified.
+            PROTOCOL_UNSPECIFIED = 0
+
+            # Fibre Channel protocol.
+            FIBRE_CHANNEL = 1
+
+            # NFS protocol means Volume is a NFS Share volume.
+            # Such volumes cannot be manipulated via Volumes API.
+            NFS = 2
+          end
+
+          # The possible values for a workload profile.
+          module WorkloadProfile
+            # The workload profile is in an unknown state.
+            WORKLOAD_PROFILE_UNSPECIFIED = 0
+
+            # The workload profile is generic.
+            GENERIC = 1
+
+            # The workload profile is hana.
+            HANA = 2
           end
         end
 
@@ -211,12 +280,30 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to update.
         #     The only currently supported fields are:
-        #       `snapshot_auto_delete_behavior`
-        #       `snapshot_schedule_policy_name`
         #       'labels'
-        #       'snapshot_enabled'
-        #       'snapshot_reservation_detail.reserved_space_percent'
         class UpdateVolumeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message requesting rename of a server.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The `name` field is used to identify the volume.
+        #     Format: projects/\\{project}/locations/\\{location}/volumes/\\{volume}
+        # @!attribute [rw] new_volume_id
+        #   @return [::String]
+        #     Required. The new `id` of the volume.
+        class RenameVolumeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for skip volume cooloff and delete it.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Volume.
+        class EvictVolumeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

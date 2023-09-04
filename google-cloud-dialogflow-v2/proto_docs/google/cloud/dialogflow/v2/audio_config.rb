@@ -116,9 +116,9 @@ module Google
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
         #     for more details.
         #
-        #     This field is deprecated. Please use [speech_contexts]() instead. If you
-        #     specify both [phrase_hints]() and [speech_contexts](), Dialogflow will
-        #     treat the [phrase_hints]() as a single additional [SpeechContext]().
+        #     This field is deprecated. Please use [`speech_contexts`]() instead. If you
+        #     specify both [`phrase_hints`]() and [`speech_contexts`](), Dialogflow will
+        #     treat the [`phrase_hints`]() as a single additional [`SpeechContext`]().
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SpeechContext>]
         #     Context information to assist speech recognition.

@@ -739,9 +739,28 @@ module Google
         #     usually created for you by the GA system, but in some cases can be created
         #     by property admins. Custom events count towards the maximum number of
         #     custom conversion events that may be created per property.
+        # @!attribute [rw] counting_method
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent::ConversionCountingMethod]
+        #     Optional. The method by which conversions will be counted across multiple
+        #     events within a session. If this value is not provided, it will be set to
+        #     `ONCE_PER_EVENT`.
         class ConversionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The method by which conversions will be counted across multiple events
+          # within a session.
+          module ConversionCountingMethod
+            # Counting method not specified.
+            CONVERSION_COUNTING_METHOD_UNSPECIFIED = 0
+
+            # Each Event instance is considered a Conversion.
+            ONCE_PER_EVENT = 1
+
+            # An Event instance is considered a Conversion at most once per session per
+            # user.
+            ONCE_PER_SESSION = 2
+          end
         end
 
         # Settings values for Google Signals.  This is a singleton resource.
@@ -1176,9 +1195,9 @@ module Google
         # @!attribute [rw] streaming_export_enabled
         #   @return [::Boolean]
         #     If set true, enables streaming export to the linked Google Cloud project.
-        # @!attribute [rw] intraday_export_enabled
+        # @!attribute [rw] enterprise_export_enabled
         #   @return [::Boolean]
-        #     If set true, enables intraday export to the linked Google Cloud project.
+        #     If set true, enables enterprise export to the linked Google Cloud project.
         # @!attribute [rw] include_advertising_id
         #   @return [::Boolean]
         #     If set true, exported data will include advertising identifiers for mobile

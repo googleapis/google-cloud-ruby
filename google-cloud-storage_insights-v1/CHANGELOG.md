@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.2 (2023-08-15)
+
+#### Documentation
+
+* Add link to documentation for ReportConfig proto fields ([#22772](https://github.com/googleapis/google-cloud-ruby/issues/22772)) 
+
 ### 0.2.1 (2023-06-06)
 
 #### Bug Fixes

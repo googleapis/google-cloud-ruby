@@ -35,6 +35,7 @@
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
     "snippets/confidential_computing/create_challenge.rb",
     "snippets/confidential_computing/verify_attestation.rb",

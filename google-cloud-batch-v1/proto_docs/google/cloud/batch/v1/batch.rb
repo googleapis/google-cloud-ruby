@@ -103,6 +103,10 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     List filter.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results. Supported are "name", "name desc", "create_time",
+        #     and "create_time desc".
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Page size.

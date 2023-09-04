@@ -41,8 +41,9 @@ module Google
           # Types][google.cloud.dialogflow.cx.v3.EntityType],
           # {::Google::Cloud::Dialogflow::CX::V3::Flow Flows},
           # {::Google::Cloud::Dialogflow::CX::V3::Fulfillment Fulfillments},
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhook Webhooks}, and so on to manage the
-          # conversation flows..
+          # {::Google::Cloud::Dialogflow::CX::V3::Webhook Webhooks},
+          # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroups}
+          # and so on to manage the conversation flows.
           # @!attribute [rw] name
           #   @return [::String]
           #     The unique identifier of the agent.
@@ -144,7 +145,7 @@ module Google
               #     The GitHub repository URI related to the agent.
               # @!attribute [rw] tracking_branch
               #   @return [::String]
-              #     The branch of GitHub repository tracked for this agent.
+              #     The branch of the GitHub repository tracked for this agent.
               # @!attribute [rw] access_token
               #   @return [::String]
               #     The access token used to authenticate the access to the GitHub
@@ -319,7 +320,7 @@ module Google
           # @!attribute [rw] commit_sha
           #   @return [::String]
           #     Commit SHA of the git push. This field is populated if
-          #     `git_destination` are specified in
+          #     `git_destination` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
           class ExportAgentResponse
             include ::Google::Protobuf::MessageExts
