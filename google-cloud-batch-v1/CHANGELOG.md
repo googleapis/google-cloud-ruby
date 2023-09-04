@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.4 (2023-09-04)
+
+#### Documentation
+
+* Clarify several type descriptions ([#22824](https://github.com/googleapis/google-cloud-ruby/issues/22824)) 
+
 ### 0.10.3 (2023-08-15)
 
 #### Documentation
