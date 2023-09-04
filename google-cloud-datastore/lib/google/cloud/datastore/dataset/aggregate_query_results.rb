@@ -40,6 +40,17 @@ module Google
         #
         class AggregateQueryResults
           ##
+          # @private Object of type [Hash{String => Object}].
+          #
+          # String can have the following values:
+          #   - an aggregate literal "sum", "avg", or "count"
+          #   - a custom aggregate alias
+          # Object can have the following types:
+          #   - Integer
+          #   - Float
+          attr_reader :aggregate_fields
+
+          ##
           # Read timestamp the query was done on the database at.
           #
           # @return Google::Protobuf::Timestamp
