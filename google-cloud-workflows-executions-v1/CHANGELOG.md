@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.4.0 (2023-09-04)
+
+#### Features
+
+* Add support for REST transport ([#22795](https://github.com/googleapis/google-cloud-ruby/issues/22795)) 
+* Support for the LOG_NONE logging level 
+* Support for the UNAVAILABLE and QUEUED states 
+* The Execution resource now includes duration, status, labels, and state_error fields 
+* The list_executions call now supports filtering and ordering 
+
 ### 0.3.1 (2023-06-06)
 
 #### Bug Fixes

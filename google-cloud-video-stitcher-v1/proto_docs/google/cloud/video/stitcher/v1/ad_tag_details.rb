@@ -35,7 +35,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Information related to the details for one ad tag.
+          # Information related to the details for one ad tag. This resource is only
+          # available for VOD sessions that do not implement Google Ad Manager ad
+          # insertion.
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the ad tag detail for the specified VOD session, in the form of

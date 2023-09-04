@@ -386,7 +386,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload list_budgets(parent: nil, page_size: nil, page_token: nil)
+                # @overload list_budgets(parent: nil, scope: nil, page_size: nil, page_token: nil)
                 #   Pass arguments to `list_budgets` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -394,6 +394,13 @@ module Google
                 #   @param parent [::String]
                 #     Required. Name of billing account to list budgets under. Values
                 #     are of the form `billingAccounts/{billingAccountId}`.
+                #   @param scope [::String]
+                #     Optional. Set the scope of the budgets to be returned, in the format of the
+                #     resource name. The scope of a budget is the cost that it tracks, such as
+                #     costs for a single project, or the costs for all projects in a folder. Only
+                #     project scope (in the format of "projects/project-id" or "projects/123") is
+                #     supported in this field. When this field is set to a project's resource
+                #     name, the budgets returned are tracking the costs for that project.
                 #   @param page_size [::Integer]
                 #     Optional. The maximum number of budgets to return per page.
                 #     The default and maximum value are 100.

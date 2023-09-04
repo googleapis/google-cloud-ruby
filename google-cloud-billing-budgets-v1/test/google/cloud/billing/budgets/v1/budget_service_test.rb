@@ -234,6 +234,7 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    scope = "hello world"
     page_size = 42
     page_token = "hello world"
 
@@ -241,6 +242,7 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
       assert_equal :list_budgets, name
       assert_kind_of ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest, request
       assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["scope"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       refute_nil options
@@ -253,35 +255,35 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
       end
 
       # Use hash object
-      client.list_budgets({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_budgets parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_budgets parent: parent, scope: scope, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_budgets({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

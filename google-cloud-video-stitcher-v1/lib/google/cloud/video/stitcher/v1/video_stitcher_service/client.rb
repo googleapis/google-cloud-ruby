@@ -114,6 +114,14 @@ module Google
 
                   default_config.rpcs.get_live_session.timeout = 60.0
 
+                  default_config.rpcs.create_live_config.timeout = 60.0
+
+                  default_config.rpcs.list_live_configs.timeout = 60.0
+
+                  default_config.rpcs.get_live_config.timeout = 60.0
+
+                  default_config.rpcs.delete_live_config.timeout = 60.0
+
                   default_config
                 end
                 yield @configure if block_given?
