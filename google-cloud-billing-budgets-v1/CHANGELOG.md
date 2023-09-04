@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2023-09-04)
+
+#### Features
+
+* Add enable_project_level_recipients for project owner budget emails 
+* Add scope for project scope filter in list_budgets ([#22843](https://github.com/googleapis/google-cloud-ruby/issues/22843)) 
+
 ### 0.4.0 (2023-06-06)
 
 #### Features
