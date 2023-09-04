@@ -298,4 +298,17 @@ describe Google::Cloud::Bigquery, :bigquery do
     data = bigquery.query "SELECT * FROM _SESSION.temp_table;", session_id: session_id
     _(data.count).must_equal 6
   end
+
+  it "imports data from a local file with dataset_id" do
+    job = bigquery.load_job "temp_table", local_file, dataset_id: dataset_id, autodetect: true, create_session: true
+
+    job.wait_until_done!
+    _(job.output_rows).must_equal 3
+
+    session_id = job.statistics["sessionInfo"]["sessionId"]
+
+    bigquery.load "temp_table", local_file, dataset_id: dataset_id, autodetect: true, session_id: session_id
+    data = bigquery.query "SELECT * FROM #{dataset_id}.temp_table;", session_id: session_id
+    _(data.count).must_equal 6
+  end
 end

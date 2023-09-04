@@ -1115,15 +1115,13 @@ module Google
         #   load_job.wait_until_done!
         #   session_id = load_job.statistics["sessionInfo"]["sessionId"]
         #
-        def load_job table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
+        def load_job table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
           quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
           quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
           null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, &block
-
-          raise ArgumentError, "session_id or create_session is required" if session_id.nil? && create_session.nil?
           ensure_service!
-
-          session_dataset = dataset "_SESSION", skip_lookup: true 
+          
+          session_dataset = dataset dataset_id, skip_lookup: true
           table = session_dataset.table table_id, skip_lookup: true
           table.load_job  files,
                           format: format, create: create, write: write, projection_fields: projection_fields,
@@ -1282,19 +1280,19 @@ module Google
         #
         # @!group Data
         #
-        def load table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
+        def load table_id, files, dataset_id: nil, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
               quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
               quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
-        job = load_job table_id, files,
-                      format: format, create: create, write: write, projection_fields: projection_fields,
-                      jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
-                      delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
-                      quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
-                      null_marker: null_marker, session_id: session_id, &block
+          job = load_job table_id, files, dataset_id: dataset_id,
+                        format: format, create: create, write: write, projection_fields: projection_fields,
+                        jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
+                        delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
+                        quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
+                        null_marker: null_marker, session_id: session_id, &block
 
-        job.wait_until_done!
-        ensure_job_succeeded! job
-        true
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
         end
 
         ##
