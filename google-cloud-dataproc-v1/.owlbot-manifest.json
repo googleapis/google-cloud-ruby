@@ -102,6 +102,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
     "snippets/autoscaling_policy_service/create_autoscaling_policy.rb",
     "snippets/autoscaling_policy_service/delete_autoscaling_policy.rb",

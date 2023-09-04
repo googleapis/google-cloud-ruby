@@ -27,9 +27,6 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            ruby: "2.6"
-            task: "--test"
-          - os: ubuntu-latest
             ruby: "2.7"
             task: "--test"
           - os: ubuntu-latest

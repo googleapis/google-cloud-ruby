@@ -1,5 +1,11 @@
 # Release History
 
+### 1.44.0 (2023-09-04)
+
+#### Features
+
+* support BIGQUERY_EMULATOR_HOST env variable for endpoint 
+
 ### 1.43.1 (2023-05-19)
 
 #### Bug Fixes

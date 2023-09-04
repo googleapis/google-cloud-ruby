@@ -122,6 +122,9 @@ Google::Cloud.configure.add_config! :bigquery do |config|
   default_project = Google::Cloud::Config.deferred do
     ENV["BIGQUERY_PROJECT"]
   end
+  default_endpoint = Google::Cloud::Config.deferred do
+    ENV["BIGQUERY_EMULATOR_HOST"]
+  end
   default_creds = Google::Cloud::Config.deferred do
     Google::Cloud::Config.credentials_from_env(
       "BIGQUERY_CREDENTIALS", "BIGQUERY_CREDENTIALS_JSON", "BIGQUERY_KEYFILE", "BIGQUERY_KEYFILE_JSON"
@@ -136,5 +139,5 @@ Google::Cloud.configure.add_config! :bigquery do |config|
   config.add_field! :quota_project, nil, match: String
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, default_endpoint, match: String
 end

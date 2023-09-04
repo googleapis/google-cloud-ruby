@@ -375,6 +375,10 @@
       "component": "google-cloud-confidential_computing-v1",
       "version_file": "lib/google/cloud/confidential_computing/v1/version.rb"
     },
+    "google-cloud-config-v1": {
+      "component": "google-cloud-config-v1",
+      "version_file": "lib/google/cloud/config/v1/version.rb"
+    },
     "google-cloud-contact_center_insights": {
       "component": "google-cloud-contact_center_insights",
       "version_file": "lib/google/cloud/contact_center_insights/version.rb"
@@ -879,6 +883,10 @@
       "component": "google-cloud-notebooks-v1beta1",
       "version_file": "lib/google/cloud/notebooks/v1beta1/version.rb"
     },
+    "google-cloud-notebooks-v2": {
+      "component": "google-cloud-notebooks-v2",
+      "version_file": "lib/google/cloud/notebooks/v2/version.rb"
+    },
     "google-cloud-optimization": {
       "component": "google-cloud-optimization",
       "version_file": "lib/google/cloud/optimization/version.rb"
@@ -946,6 +954,10 @@
     "google-cloud-policy_troubleshooter": {
       "component": "google-cloud-policy_troubleshooter",
       "version_file": "lib/google/cloud/policy_troubleshooter/version.rb"
+    },
+    "google-cloud-policy_troubleshooter-iam-v3": {
+      "component": "google-cloud-policy_troubleshooter-iam-v3",
+      "version_file": "lib/google/cloud/policy_troubleshooter/iam/v3/version.rb"
     },
     "google-cloud-policy_troubleshooter-v1": {
       "component": "google-cloud-policy_troubleshooter-v1",

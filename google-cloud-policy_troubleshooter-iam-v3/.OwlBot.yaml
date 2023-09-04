@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/policytroubleshooter/iam/v3/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-policy_troubleshooter-iam-v3/$1

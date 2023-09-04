@@ -353,7 +353,7 @@ module Google
         #     instances](https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The Compute Engine metadata entries to add to all instances (see
+        #     Optional. The Compute Engine metadata entries to add to all instances (see
         #     [Project and instance
         #     metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
         # @!attribute [rw] reservation_affinity
@@ -471,6 +471,9 @@ module Google
         #   @return [::Array<::String>]
         #     Output only. The list of instance names. Dataproc derives the names
         #     from `cluster_name`, `num_instances`, and the instance group.
+        # @!attribute [r] instance_references
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::InstanceReference>]
+        #     Output only. List of references to Compute Engine instances.
         # @!attribute [rw] image_uri
         #   @return [::String]
         #     Optional. The Compute Engine image resource used for cluster instances.
@@ -536,6 +539,28 @@ module Google
         #     Optional. Specifies the minimum cpu platform for the Instance Group.
         #     See [Dataproc -> Minimum CPU
         #     Platform](https://cloud.google.com/dataproc/docs/concepts/compute/dataproc-min-cpu).
+        # @!attribute [rw] min_num_instances
+        #   @return [::Integer]
+        #     Optional. The minimum number of instances to create.
+        #     If min_num_instances is set, min_num_instances is used for a criteria to
+        #     decide the cluster. Cluster creation will be failed by being an error state
+        #     if the total number of instances created is less than the
+        #     min_num_instances.
+        #     For example, given that num_instances = 5 and min_num_instances = 3,
+        #     * if 4 instances are created and then registered successfully but one
+        #     instance is failed, the failed VM will be deleted and the cluster will be
+        #     resized to 4 instances in running state.
+        #     * if 2 instances are created successfully and 3 instances are failed,
+        #     the cluster will be in an error state and does not delete failed VMs for
+        #     debugging.
+        #     * if 2 instance are created and then registered successfully but 3
+        #     instances are failed to initialize, the cluster will be in an error state
+        #     and does not delete failed VMs for debugging.
+        #     NB: This can only be set for primary workers now.
+        # @!attribute [rw] instance_flexibility_policy
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceFlexibilityPolicy]
+        #     Optional. Instance flexibility Policy allowing a mixture of VM shapes and
+        #     provisioning models.
         class InstanceGroupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -572,6 +597,24 @@ module Google
           end
         end
 
+        # A reference to a Compute Engine instance.
+        # @!attribute [rw] instance_name
+        #   @return [::String]
+        #     The user-friendly name of the Compute Engine instance.
+        # @!attribute [rw] instance_id
+        #   @return [::String]
+        #     The unique identifier of the Compute Engine instance.
+        # @!attribute [rw] public_key
+        #   @return [::String]
+        #     The public RSA key used for sharing data with this instance.
+        # @!attribute [rw] public_ecies_key
+        #   @return [::String]
+        #     The public ECIES key used for sharing data with this instance.
+        class InstanceReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Specifies the resources used to actively manage an instance group.
         # @!attribute [r] instance_template_name
         #   @return [::String]
@@ -580,9 +623,56 @@ module Google
         # @!attribute [r] instance_group_manager_name
         #   @return [::String]
         #     Output only. The name of the Instance Group Manager for this group.
+        # @!attribute [r] instance_group_manager_uri
+        #   @return [::String]
+        #     Output only. The partial URI to the instance group manager for this group.
+        #     E.g. projects/my-project/regions/us-central1/instanceGroupManagers/my-igm.
         class ManagedGroupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance flexibility Policy allowing a mixture of VM shapes and provisioning
+        # models.
+        # @!attribute [rw] instance_selection_list
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::InstanceFlexibilityPolicy::InstanceSelection>]
+        #     Optional. List of instance selection options that the group will use when
+        #     creating new VMs.
+        # @!attribute [r] instance_selection_results
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::InstanceFlexibilityPolicy::InstanceSelectionResult>]
+        #     Output only. A list of instance selection results in the group.
+        class InstanceFlexibilityPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines machines types and a rank to which the machines types belong.
+          # @!attribute [rw] machine_types
+          #   @return [::Array<::String>]
+          #     Optional. Full machine-type names, e.g. "n1-standard-16".
+          # @!attribute [rw] rank
+          #   @return [::Integer]
+          #     Optional. Preference of this instance selection. Lower number means
+          #     higher preference. Dataproc will first try to create a VM based on the
+          #     machine-type with priority rank and fallback to next rank based on
+          #     availability. Machine types and instance selections with the same
+          #     priority have the same preference.
+          class InstanceSelection
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Defines a mapping from machine types to the number of VMs that are created
+          # with each machine type.
+          # @!attribute [r] machine_type
+          #   @return [::String]
+          #     Output only. Full machine-type names, e.g. "n1-standard-16".
+          # @!attribute [r] vm_count
+          #   @return [::Integer]
+          #     Output only. Number of VM provisioned with the machine_type.
+          class InstanceSelectionResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Specifies the type and number of accelerator cards attached to the instances
@@ -784,6 +874,9 @@ module Google
 
             # The cluster is being started. It is not ready for use.
             STARTING = 8
+
+            # The cluster is being repaired. It is not ready for use.
+            REPAIRING = 10
           end
 
           # The cluster substate.
@@ -1042,18 +1135,18 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A Dataproc OSS metric.
+          # A Dataproc custom metric.
           # @!attribute [rw] metric_source
           #   @return [::Google::Cloud::Dataproc::V1::DataprocMetricConfig::MetricSource]
-          #     Required. Default metrics are collected unless `metricOverrides` are
-          #     specified for the metric source (see [Available OSS metrics]
-          #     (https://cloud.google.com/dataproc/docs/guides/monitoring#available_oss_metrics)
+          #     Required. A standard set of metrics is collected unless `metricOverrides`
+          #     are specified for the metric source (see [Custom metrics]
+          #     (https://cloud.google.com/dataproc/docs/guides/dataproc-metrics#custom_metrics)
           #     for more information).
           # @!attribute [rw] metric_overrides
           #   @return [::Array<::String>]
-          #     Optional. Specify one or more [available OSS metrics]
-          #     (https://cloud.google.com/dataproc/docs/guides/monitoring#available_oss_metrics)
-          #     to collect for the metric course (for the `SPARK` metric source, any
+          #     Optional. Specify one or more [Custom metrics]
+          #     (https://cloud.google.com/dataproc/docs/guides/dataproc-metrics#custom_metrics)
+          #     to collect for the metric course (for the `SPARK` metric source (any
           #     [Spark metric]
           #     (https://spark.apache.org/docs/latest/monitoring.html#metrics) can be
           #     specified).
@@ -1073,28 +1166,28 @@ module Google
           #
           #     Notes:
           #
-          #     * Only the specified overridden metrics will be collected for the
+          #     * Only the specified overridden metrics are collected for the
           #       metric source. For example, if one or more `spark:executive` metrics
-          #       are listed as metric overrides, other `SPARK` metrics will not be
-          #       collected. The collection of the default metrics for other OSS metric
-          #       sources is unaffected. For example, if both `SPARK` andd `YARN` metric
-          #       sources are enabled, and overrides are provided for Spark metrics only,
-          #       all default YARN metrics will be collected.
+          #       are listed as metric overrides, other `SPARK` metrics are not
+          #       collected. The collection of the metrics for other enabled custom
+          #       metric sources is unaffected. For example, if both `SPARK` andd `YARN`
+          #       metric sources are enabled, and overrides are provided for Spark
+          #       metrics only, all YARN metrics are collected.
           class Metric
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A source for the collection of Dataproc OSS metrics (see [available OSS
+          # A source for the collection of Dataproc custom metrics (see [Custom
           # metrics]
-          # (https://cloud.google.com//dataproc/docs/guides/monitoring#available_oss_metrics)).
+          # (https://cloud.google.com//dataproc/docs/guides/dataproc-metrics#custom_metrics)).
           module MetricSource
             # Required unspecified metric source.
             METRIC_SOURCE_UNSPECIFIED = 0
 
-            # Default monitoring agent metrics. If this source is enabled,
+            # Monitoring agent metrics. If this source is enabled,
             # Dataproc enables the monitoring agent in Compute Engine,
-            # and collects default monitoring agent metrics, which are published
+            # and collects monitoring agent metrics, which are published
             # with an `agent.googleapis.com` prefix.
             MONITORING_AGENT_DEFAULTS = 1
 
