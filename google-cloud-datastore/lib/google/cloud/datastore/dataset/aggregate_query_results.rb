@@ -101,11 +101,15 @@ module Google
                                .batch
                                .aggregation_results[0]
                                .aggregate_properties
+                               .map do |aggregate_alias, value|
+                                 if value.has_integer_value?
+                                   [aggregate_alias, value.integer_value]
+                                 else
+                                   [aggregate_alias, value.double_value]
+                                 end
+                               end
                                .to_h
-                               # TODO: This won't work after sum/avg is released,
-                               # since they can contain decimal values.
-                               # Need to change this to account for them.
-                               .transform_values { |v| v[:integer_value] }
+
             new.tap do |s|
               s.instance_variable_set :@aggregate_fields, aggregate_fields
               s.instance_variable_set :@read_time, aggregate_query_response.batch.read_time

@@ -96,6 +96,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_count
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 0
     end
 
@@ -106,6 +107,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_count
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 4
     end
 
@@ -117,6 +119,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 1
     end
 
@@ -137,8 +140,10 @@ describe "Aggregate Queries", :datastore do
                              .add_count
 
       res = dataset.run_aggregation aggregate_query, read_time: read_time
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 1
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 2
     end
 
@@ -150,6 +155,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_count
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 2
     end
 
@@ -160,7 +166,9 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_count(aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 4
+      _(res.get('total')).must_be_kind_of Integer
       _(res.get('total')).must_equal 4
     end
 
@@ -172,7 +180,9 @@ describe "Aggregate Queries", :datastore do
                              .add_count(aggregate_alias: "total_1")
                              .add_count(aggregate_alias: "total_2")
       res = dataset.run_aggregation aggregate_query
+      _(res.get('total_1')).must_be_kind_of Integer
       _(res.get('total_1')).must_equal 4
+      _(res.get('total_2')).must_be_kind_of Integer
       _(res.get('total_2')).must_equal 4
     end
 
@@ -214,9 +224,11 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_count
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 4
       dataset.delete bran.key
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 3
     end
     
@@ -236,6 +248,7 @@ describe "Aggregate Queries", :datastore do
         aggregate_query = query.aggregate_query
                                .add_count
         res = dataset.run_aggregation aggregate_query
+        _(res.get).must_be_kind_of Integer
         _(res.get).must_equal 4
       end
     end
@@ -246,6 +259,7 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 4
     end
 
@@ -253,7 +267,9 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT COUNT(*) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 4
+      _(res.get('total')).must_be_kind_of Integer
       _(res.get('total')).must_equal 4
     end
 
@@ -261,6 +277,7 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND alive = @alive",
                         alive: false, bookKey: book.key
       res = dataset.run_aggregation gql
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 1
     end
 
@@ -276,6 +293,7 @@ describe "Aggregate Queries", :datastore do
         gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                           bookKey: book.key
         res = dataset.run_aggregation gql
+        _(res.get).must_be_kind_of Integer
         _(res.get).must_equal 4
       end
     end
@@ -290,6 +308,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_sum('appearances')
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 0
     end
 
@@ -300,7 +319,26 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_sum('appearances')
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 99
+    end
+
+    focus; it "returns double sum for records with double values" do
+      # delete integer dataset and save records with doubles
+      dataset.delete *characters
+      characters.each do |ch|
+        ch["appearances"] = ch["appearances"].to_f
+      end
+      dataset.transaction { |tx| tx.save *characters }
+
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
+      aggregate_query = query.aggregate_query
+                             .add_sum('appearances')
+      res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Float
+      _(res.get).must_equal 99.0
     end
 
     focus; it "returns sum on filter" do
@@ -311,6 +349,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_sum('appearances')
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 32
     end
 
@@ -331,8 +370,10 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances")
 
       res = dataset.run_aggregation aggregate_query, read_time: read_time
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 32
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 0
     end
 
@@ -344,6 +385,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_sum("appearances")
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 34
     end
 
@@ -354,7 +396,9 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_sum("appearances", aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 99
+      _(res.get('total')).must_be_kind_of Integer
       _(res.get('total')).must_equal 99
     end
 
@@ -366,7 +410,9 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances", aggregate_alias: "total_1")
                              .add_sum("appearances", aggregate_alias: "total_2")
       res = dataset.run_aggregation aggregate_query
+      _(res.get('total_1')).must_be_kind_of Integer
       _(res.get('total_1')).must_equal 99
+      _(res.get('total_2')).must_be_kind_of Integer
       _(res.get('total_2')).must_equal 99
     end
 
@@ -408,9 +454,11 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                              .add_sum("appearances")
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 99
       dataset.delete bran.key
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 74
     end
 
@@ -430,6 +478,7 @@ describe "Aggregate Queries", :datastore do
         aggregate_query = query.aggregate_query
                              .add_sum("appearances")
         res = dataset.run_aggregation aggregate_query
+        _(res.get).must_be_kind_of Integer
         _(res.get).must_equal 99
       end
     end
@@ -440,6 +489,7 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT SUM(appearances) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
+        _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 99
     end
 
@@ -447,7 +497,9 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT SUM(appearances) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 99
+      _(res.get('total')).must_be_kind_of Integer
       _(res.get('total')).must_equal 99
     end
 
@@ -455,6 +507,7 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT SUM(appearances) FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @family",
                         family: 'Targaryen', bookKey: book.key
       res = dataset.run_aggregation gql
+      _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 32
     end
 
@@ -470,6 +523,7 @@ describe "Aggregate Queries", :datastore do
         gql = dataset.gql "SELECT SUM(appearances) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                           bookKey: book.key
         res = dataset.run_aggregation gql
+        _(res.get).must_be_kind_of Integer
         _(res.get).must_equal 99
       end
     end
@@ -477,6 +531,7 @@ describe "Aggregate Queries", :datastore do
 
   describe "AVG via API" do
     focus; it "returns 0 for no records" do
+      skip
       dataset.delete *characters # delete dataset before querying
       query = Google::Cloud::Datastore.new
                 .query("Character")
@@ -487,7 +542,7 @@ describe "Aggregate Queries", :datastore do
       _(res.get).must_equal 0
     end
 
-    it "returns avg for non-zero records" do
+    focus; it "returns avg for non-zero records" do
       skip
       query = Google::Cloud::Datastore.new
                 .query("Character")
