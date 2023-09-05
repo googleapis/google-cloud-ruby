@@ -249,7 +249,14 @@ module Google
           #     Automatically iterates all participants and tries to compile
           #     suggestions.
           #
-          #     Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST.
+          #     Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST,
+          #     KNOWLEDGE_ASSIST.
+          # @!attribute [rw] disable_agent_query_logging
+          #   @return [::Boolean]
+          #     Optional. Disable the logging of search queries sent by human agents. It
+          #     can prevent those queries from being stored at answer records.
+          #
+          #     Supported features: KNOWLEDGE_SEARCH.
           # @!attribute [rw] suggestion_trigger_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionTriggerSettings]
           #     Settings of suggestion trigger.
@@ -374,9 +381,24 @@ module Google
             #     intent detection and suggestion. Format: `projects/<Project
             #     ID>/locations/<Location ID>/agent`. When multiple agents are allowed in
             #     the same Dialogflow project.
+            # @!attribute [rw] human_agent_side_config
+            #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::DialogflowQuerySource::HumanAgentSideConfig]
+            #     Optional. The Dialogflow assist configuration for human agent.
             class DialogflowQuerySource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The configuration used for human agent side Dialogflow assist
+              # suggestion.
+              # @!attribute [rw] agent
+              #   @return [::String]
+              #     Optional. The name of a dialogflow virtual agent used for intent
+              #     detection and suggestion triggered by human agent.
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agent`.
+              class HumanAgentSideConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # Settings that determine how to filter recent conversation context when
@@ -588,6 +610,9 @@ module Google
 
             # Run smart reply model for chat.
             SMART_REPLY = 3
+
+            # Run knowledge search with text input from agent or text generated query.
+            KNOWLEDGE_SEARCH = 14
           end
         end
 
