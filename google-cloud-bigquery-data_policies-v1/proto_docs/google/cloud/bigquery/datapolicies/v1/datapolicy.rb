@@ -173,6 +173,11 @@ module Google
           # @!attribute [rw] predefined_expression
           #   @return [::Google::Cloud::Bigquery::DataPolicies::V1::DataMaskingPolicy::PredefinedExpression]
           #     A predefined masking expression.
+          # @!attribute [rw] routine
+          #   @return [::String]
+          #     The name of the BigQuery routine that contains the custom masking
+          #     routine, in the format of
+          #     `projects/{project_number}/datasets/{dataset_id}/routines/{routine_id}`.
           class DataMaskingPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
