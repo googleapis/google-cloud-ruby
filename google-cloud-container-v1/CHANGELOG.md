@@ -1,5 +1,11 @@
 # Release History
 
+### 0.28.0 (2023-09-05)
+
+#### Features
+
+* add support for NodeConfig Update ([#22863](https://github.com/googleapis/google-cloud-ruby/issues/22863)) 
+
 ### 0.27.0 (2023-08-15)
 
 #### Features
