@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.2 (2023-09-05)
+
+#### Documentation
+
+* Minor clarifications ([#22825](https://github.com/googleapis/google-cloud-ruby/issues/22825)) 
+
 ### 0.6.1 (2023-06-06)
 
 #### Bug Fixes
