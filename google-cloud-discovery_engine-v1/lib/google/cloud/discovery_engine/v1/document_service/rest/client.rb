@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1/document_service_pb"
 require "google/cloud/discovery_engine/v1/document_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -147,6 +148,12 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @document_service_stub = ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -156,6 +163,13 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -254,9 +268,10 @@ module Google
               #     Use `default_branch` as the branch ID, to list documents under the default
               #     branch.
               #
-              #     If the caller does not have permission to list [Documents][]s under this
-              #     branch, regardless of whether or not this branch exists, a
-              #     `PERMISSION_DENIED` error is returned.
+              #     If the caller does not have permission to list
+              #     {::Google::Cloud::DiscoveryEngine::V1::Document Document}s under this branch,
+              #     regardless of whether or not this branch exists, a `PERMISSION_DENIED`
+              #     error is returned.
               #   @param page_size [::Integer]
               #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1::Document Document}s to
               #     return. If unspecified, defaults to 100. The maximum allowed value is 1000.
@@ -599,7 +614,7 @@ module Google
               #     `false`, {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id}s have
               #     to be specified using
               #     {::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest#id_field id_field},
-              #     otherwises, documents without IDs will fail to be imported.
+              #     otherwise, documents without IDs fail to be imported.
               #
               #     Only set this field when using
               #     {::Google::Cloud::DiscoveryEngine::V1::GcsSource GcsSource} or
@@ -607,7 +622,7 @@ module Google
               #     {::Google::Cloud::DiscoveryEngine::V1::GcsSource#data_schema GcsSource.data_schema}
               #     or
               #     {::Google::Cloud::DiscoveryEngine::V1::BigQuerySource#data_schema BigQuerySource.data_schema}
-              #     is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+              #     is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
               #   @param id_field [::String]
               #     The field in the Cloud Storage and BigQuery sources that indicates the
               #     unique IDs of the documents.
@@ -617,12 +632,12 @@ module Google
               #     For {::Google::Cloud::DiscoveryEngine::V1::BigQuerySource BigQuerySource} it is
               #     the column name of the BigQuery table where the unique ids are stored.
               #
-              #     The values of the JSON field or the BigQuery column will be used as the
+              #     The values of the JSON field or the BigQuery column are used as the
               #     {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id}s. The JSON field
               #     or the BigQuery column must be of string type, and the values must be set
               #     as valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-              #     with 1-63 characters. Otherwise, documents without valid IDs will fail to
-              #     be imported.
+              #     with 1-63 characters. Otherwise, documents without valid IDs fail to be
+              #     imported.
               #
               #     Only set this field when using
               #     {::Google::Cloud::DiscoveryEngine::V1::GcsSource GcsSource} or

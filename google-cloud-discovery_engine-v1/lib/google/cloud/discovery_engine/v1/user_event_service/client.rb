@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1/user_event_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -149,6 +150,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @user_event_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Stub,
                 credentials:  credentials,
@@ -164,6 +171,13 @@ module Google
             # @return [::Google::Cloud::DiscoveryEngine::V1::UserEventService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -257,7 +271,7 @@ module Google
 
             ##
             # Writes a single user event from the browser. This uses a GET request to
-            # due to browser restriction of POST-ing to a 3rd party domain.
+            # due to browser restriction of POST-ing to a third-party domain.
             #
             # This method is used only by the Discovery Engine API JavaScript pixel and
             # Google Tag Manager. Users should not call this method directly.
@@ -286,7 +300,7 @@ module Google
             #   @param uri [::String]
             #     The URL including cgi-parameters but excluding the hash fragment with a
             #     length limit of 5,000 characters. This is often more useful than the
-            #     referer URL, because many browsers only send the domain for 3rd party
+            #     referer URL, because many browsers only send the domain for third-party
             #     requests.
             #   @param ets [::Integer]
             #     The event timestamp in milliseconds. This prevents browser caching of
@@ -382,11 +396,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest::InlineSource, ::Hash]
-            #     Required. The Inline source for the input content for UserEvents.
+            #     The Inline source for the input content for UserEvents.
             #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
-            #     Required. Cloud Storage location for the input content.
+            #     Cloud Storage location for the input content.
             #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1::BigQuerySource, ::Hash]
-            #     Required. BigQuery input source.
+            #     BigQuery input source.
             #   @param parent [::String]
             #     Required. Parent DataStore resource name, of the form
             #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
