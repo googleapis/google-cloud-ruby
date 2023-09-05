@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2023-09-05)
+
+#### Features
+
+* support using custom UDF in the data policy ([#22860](https://github.com/googleapis/google-cloud-ruby/issues/22860)) 
+
 ### 0.4.0 (2023-08-15)
 
 #### Features
