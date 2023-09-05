@@ -59,6 +59,18 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientPathsTest < Min
     end
   end
 
+  def test_mapping_rule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.mapping_rule_path project: "value0", location: "value1", conversion_workspace: "value2", mapping_rule: "value3"
+      assert_equal "projects/value0/locations/value1/conversionWorkspaces/value2/mappingRules/value3", path
+    end
+  end
+
   def test_migration_job_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

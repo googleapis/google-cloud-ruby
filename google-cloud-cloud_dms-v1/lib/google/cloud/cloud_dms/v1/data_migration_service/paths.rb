@@ -80,6 +80,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MappingRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}/mappingRules/{mapping_rule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param conversion_workspace [String]
+            # @param mapping_rule [String]
+            #
+            # @return [::String]
+            def mapping_rule_path project:, location:, conversion_workspace:, mapping_rule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "conversion_workspace cannot contain /" if conversion_workspace.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/conversionWorkspaces/#{conversion_workspace}/mappingRules/#{mapping_rule}"
+            end
+
+            ##
             # Create a fully-qualified MigrationJob resource string.
             #
             # The resource will be in the following format:
