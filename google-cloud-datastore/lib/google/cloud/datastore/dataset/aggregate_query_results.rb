@@ -63,7 +63,8 @@ module Google
           #   the aggregate value. For an AggregateQuery with a
           #   single aggregate field, this parameter can be omitted.
           #
-          # @return [Integer] The aggregate value.
+          # @return [Integer, Float, nil] The aggregate value. Returns `nil`
+          # if the aggregate_alias does not exist.
           #
           # @example
           #   require "google/cloud/datastore"
