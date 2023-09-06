@@ -56,6 +56,15 @@ module Google
       #   puts aggregate_query_results.get('total')
       #
       class AggregateQuery
+        # @private
+        DEFAULT_COUNT_AGGREGATE_ALIAS = "count".freeze
+
+        # @private
+        DEFAULT_SUM_AGGREGATE_ALIAS = "sum".freeze
+
+        # @private
+        DEFAULT_AVG_AGGREGATE_ALIAS = "avg".freeze
+
         ##
         # @private The Google::Cloud::Datastore::V1::AggregationQuery object.
         attr_reader :grpc
@@ -113,7 +122,7 @@ module Google
         #   puts aggregate_query_results.get('total')
         #
         def add_count aggregate_alias: nil
-          aggregate_alias ||= ALIASES[:count]
+          aggregate_alias ||= DEFAULT_COUNT_AGGREGATE_ALIAS
           @grpc.aggregations << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new,
             alias: aggregate_alias
@@ -163,7 +172,7 @@ module Google
         #   puts aggregate_query_results.get('total_score')
         #
         def add_sum name, aggregate_alias: nil
-          aggregate_alias ||= ALIASES[:sum]
+          aggregate_alias ||= DEFAULT_SUM_AGGREGATE_ALIAS
           @grpc.aggregations << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             sum: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Sum.new(
               property: Google::Cloud::Datastore::V1::PropertyReference.new(
@@ -217,7 +226,7 @@ module Google
         #   puts aggregate_query_results.get('avg_score')
         #
         def add_avg name, aggregate_alias: nil
-          aggregate_alias ||= ALIASES[:avg]
+          aggregate_alias ||= DEFAULT_AVG_AGGREGATE_ALIAS
           @grpc.aggregations << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             avg: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Avg.new(
               property: Google::Cloud::Datastore::V1::PropertyReference.new(
@@ -234,14 +243,6 @@ module Google
         def to_grpc
           @grpc
         end
-
-        ##
-        # @private
-        ALIASES = {
-          count: "count",
-          sum: "sum",
-          avg: "avg"
-        }.freeze
       end
     end
   end
