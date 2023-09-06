@@ -59,7 +59,6 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::ClientTest < Minitest::Te
     timeout = {}
     model = {}
     solving_mode = :DEFAULT_SOLVE
-    max_validation_errors = 42
     search_mode = :SEARCH_MODE_UNSPECIFIED
     injected_first_solution_routes = [{}]
     injected_solution_constraint = {}
@@ -71,6 +70,7 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::ClientTest < Minitest::Te
     allow_large_deadline_despite_interruption_risk = true
     use_geodesic_distances = true
     geodesic_meters_per_second = 3.5
+    max_validation_errors = 42
     label = "hello world"
     populate_travel_step_polylines = true
 
@@ -81,8 +81,6 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::ClientTest < Minitest::Te
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["timeout"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Optimization::V1::ShipmentModel), request["model"]
       assert_equal :DEFAULT_SOLVE, request["solving_mode"]
-      assert_equal 42, request["max_validation_errors"]
-      assert request.has_max_validation_errors?
       assert_equal :SEARCH_MODE_UNSPECIFIED, request["search_mode"]
       assert_kind_of ::Google::Cloud::Optimization::V1::ShipmentRoute, request["injected_first_solution_routes"].first
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Optimization::V1::InjectedSolutionConstraint), request["injected_solution_constraint"]
@@ -95,6 +93,8 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::ClientTest < Minitest::Te
       assert_equal true, request["use_geodesic_distances"]
       assert_equal 3.5, request["geodesic_meters_per_second"]
       assert request.has_geodesic_meters_per_second?
+      assert_equal 42, request["max_validation_errors"]
+      assert request.has_max_validation_errors?
       assert_equal "hello world", request["label"]
       assert_equal true, request["populate_travel_step_polylines"]
       refute_nil options
@@ -107,31 +107,31 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, max_validation_errors: max_validation_errors, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, label: label, populate_travel_step_polylines: populate_travel_step_polylines }) do |response, operation|
+      client.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.optimize_tours parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, max_validation_errors: max_validation_errors, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, label: label, populate_travel_step_polylines: populate_travel_step_polylines do |response, operation|
+      client.optimize_tours parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.optimize_tours ::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, max_validation_errors: max_validation_errors, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, label: label, populate_travel_step_polylines: populate_travel_step_polylines) do |response, operation|
+      client.optimize_tours ::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, max_validation_errors: max_validation_errors, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, label: label, populate_travel_step_polylines: populate_travel_step_polylines }, grpc_options) do |response, operation|
+      client.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.optimize_tours(::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, max_validation_errors: max_validation_errors, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, label: label, populate_travel_step_polylines: populate_travel_step_polylines), grpc_options) do |response, operation|
+      client.optimize_tours(::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
