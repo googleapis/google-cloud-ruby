@@ -2791,6 +2791,21 @@ module Google
         # @!attribute [rw] windows_node_config
         #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig]
         #     Parameters that can be configured on Windows nodes.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Optional. The desired machine type for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified machine type.
+        # @!attribute [rw] disk_type
+        #   @return [::String]
+        #     Optional. The desired disk type for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified disk type.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Optional. The desired disk size for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified disk size.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
