@@ -42,6 +42,44 @@ class Google::Cloud::DiscoveryEngine::ClientConstructionMinitest < Minitest::Tes
     end
   end
 
+  def test_search_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::DiscoveryEngine.search_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::DiscoveryEngine::V1::SearchService::Client, client
+    end
+  end
+
+  def test_search_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::DiscoveryEngine.search_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DiscoveryEngine::V1::SearchService::Rest::Client, client
+    end
+  end
+
+  def test_conversational_search_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::DiscoveryEngine.conversational_search_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client, client
+    end
+  end
+
+  def test_conversational_search_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::DiscoveryEngine.conversational_search_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client, client
+    end
+  end
+
   def test_document_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -77,25 +115,6 @@ class Google::Cloud::DiscoveryEngine::ClientConstructionMinitest < Minitest::Tes
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client, client
-    end
-  end
-
-  def test_search_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DiscoveryEngine.search_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::DiscoveryEngine::V1::SearchService::Client, client
-    end
-  end
-
-  def test_search_service_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
-      client = Google::Cloud::DiscoveryEngine.search_service transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::DiscoveryEngine::V1::SearchService::Rest::Client, client
     end
   end
 
