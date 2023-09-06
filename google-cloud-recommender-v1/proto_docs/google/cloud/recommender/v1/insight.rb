@@ -22,7 +22,7 @@ module Google
     module Recommender
       module V1
         # An insight along with the information used to derive the insight. The insight
-        # may have associated recomendations as well.
+        # may have associated recommendations as well.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the insight.
@@ -94,6 +94,12 @@ module Google
 
             # This insight is related to manageability.
             MANAGEABILITY = 4
+
+            # The insight is related to sustainability.
+            SUSTAINABILITY = 5
+
+            # This insight is related to reliability.
+            RELIABILITY = 6
           end
 
           # Insight severity levels.

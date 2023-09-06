@@ -199,6 +199,15 @@ module Google
             #   @param location [String]
             #   @param insight_type [String]
             #
+            # @overload insight_type_config_path(billing_account:, location:, insight_type:)
+            #   The resource will be in the following format:
+            #
+            #   `billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/config`
+            #
+            #   @param billing_account [String]
+            #   @param location [String]
+            #   @param insight_type [String]
+            #
             # @return [::String]
             def insight_type_config_path **args
               resources = {
@@ -213,6 +222,12 @@ module Google
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/insightTypes/#{insight_type}/config"
+                end),
+                "billing_account:insight_type:location" => (proc do |billing_account:, location:, insight_type:|
+                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "billingAccounts/#{billing_account}/locations/#{location}/insightTypes/#{insight_type}/config"
                 end)
               }
 
@@ -396,6 +411,15 @@ module Google
             #   @param location [String]
             #   @param recommender [String]
             #
+            # @overload recommender_config_path(billing_account:, location:, recommender:)
+            #   The resource will be in the following format:
+            #
+            #   `billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/config`
+            #
+            #   @param billing_account [String]
+            #   @param location [String]
+            #   @param recommender [String]
+            #
             # @return [::String]
             def recommender_config_path **args
               resources = {
@@ -410,6 +434,12 @@ module Google
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/recommenders/#{recommender}/config"
+                end),
+                "billing_account:location:recommender" => (proc do |billing_account:, location:, recommender:|
+                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "billingAccounts/#{billing_account}/locations/#{location}/recommenders/#{recommender}/config"
                 end)
               }
 
