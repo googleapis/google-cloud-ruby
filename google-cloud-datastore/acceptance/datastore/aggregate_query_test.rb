@@ -86,6 +86,16 @@ describe "Aggregate Queries", :datastore do
     dataset.delete *characters
   end
 
+  describe "Common tests for aggregates" do
+    it "throws error when no aggregate is added" do
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
+      aggregate_query = query.aggregate_query
+      expect { dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
+    end
+  end
+
   describe "via AggregateQuery" do
     
     it "returns 0 for no records" do
@@ -230,14 +240,6 @@ describe "Aggregate Queries", :datastore do
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 3
-    end
-    
-    it "throws error when no aggregate is added" do
-      query = Google::Cloud::Datastore.new
-                .query("Character")
-                .ancestor(book)
-      aggregate_query = query.aggregate_query
-      expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
     it "returns count inside a transaction" do
@@ -461,14 +463,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get).must_equal 74
     end
 
-    it "throws error when no aggregate is added" do
-      query = Google::Cloud::Datastore.new
-                .query("Character")
-                .ancestor(book)
-      aggregate_query = query.aggregate_query
-      expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
-    end
-
     it "returns sum inside a transaction" do
       query = Google::Cloud::Datastore.new
                 .query("Character")
@@ -670,14 +664,6 @@ describe "Aggregate Queries", :datastore do
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
       _(res.get.round(2)).must_equal 24.67
-    end
-
-    it "throws error when no aggregate is added" do
-      query = Google::Cloud::Datastore.new
-                .query("Character")
-                .ancestor(book)
-      aggregate_query = query.aggregate_query
-      expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
     it "returns average inside a transaction" do
