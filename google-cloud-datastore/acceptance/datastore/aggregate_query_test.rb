@@ -62,20 +62,20 @@ describe "Aggregate Queries", :datastore do
     character
   end
 
-  let(:jon) do
+  let(:george) do
     character = Google::Cloud::Datastore::Entity.new.tap do |e|
-      e["name"]        = "Jon"
-      e["family"]      = "Targaryen"
-      e["appearances"] = 32
+      e["name"]        = "George"
+      e["family"]      = "Martin"
+      e["appearances"] = 1
       e["alive"]       = true
     end
-    character.key = Google::Cloud::Datastore::Key.new "Character", "Jon"
-    character.key.parent = eddard
+    character.key = Google::Cloud::Datastore::Key.new "Character", "George"
+    character.key.parent = book
     character
   end
 
   let(:characters) do
-    [eddard, arya, bran, jon]
+    [eddard, arya, bran, george]
   end
 
   before do
@@ -322,7 +322,7 @@ describe "Aggregate Queries", :datastore do
                              .add_sum('appearances')
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 99
+      _(res.get).must_equal 68
     end
 
     it "returns double sum for records with double values" do
@@ -340,19 +340,19 @@ describe "Aggregate Queries", :datastore do
                              .add_sum('appearances')
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 99.0
+      _(res.get).must_equal 68.0
     end
 
     it "returns sum on filter" do
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
-                .where("family", "=", "Targaryen")
+                .where("family", "=", "Martin")
       aggregate_query = query.aggregate_query
                             .add_sum('appearances')
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 32
+      _(res.get).must_equal 1
     end
 
     it "returns sum on filter with and without read time" do
@@ -360,19 +360,19 @@ describe "Aggregate Queries", :datastore do
       read_time = Time.now
       sleep(1)
 
-      jon["family"] = "Stark"
-      dataset.transaction { |tx| tx.save jon }
+      george["family"] = "Stark"
+      dataset.transaction { |tx| tx.save george }
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
                                       .ancestor(book)
-                                      .where("family", "=", "Targaryen")
+                                      .where("family", "=", "Martin")
       aggregate_query = query.aggregate_query
                              .add_sum("appearances")
 
       res = dataset.run_aggregation aggregate_query, read_time: read_time
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 32
+      _(res.get).must_equal 1
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
       _(res.get).must_equal 0
@@ -387,7 +387,7 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 34
+      _(res.get).must_equal 10
     end
 
     it "returns sum with a custom alias" do
@@ -398,9 +398,9 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances", aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 99
+      _(res.get).must_equal 68
       _(res.get('total')).must_be_kind_of Integer
-      _(res.get('total')).must_equal 99
+      _(res.get('total')).must_equal 68
     end
 
     it "returns sum with multiple custom aliases" do
@@ -412,9 +412,9 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances", aggregate_alias: "total_2")
       res = dataset.run_aggregation aggregate_query
       _(res.get('total_1')).must_be_kind_of Integer
-      _(res.get('total_1')).must_equal 99
+      _(res.get('total_1')).must_equal 68
       _(res.get('total_2')).must_be_kind_of Integer
-      _(res.get('total_2')).must_equal 99
+      _(res.get('total_2')).must_equal 68
     end
 
     it "returns nil with unspecified aliases" do
@@ -456,11 +456,11 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 99
+      _(res.get).must_equal 68
       dataset.delete bran.key
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 74
+      _(res.get).must_equal 43
     end
 
     it "returns sum inside a transaction" do
@@ -472,7 +472,7 @@ describe "Aggregate Queries", :datastore do
                              .add_sum("appearances")
         res = dataset.run_aggregation aggregate_query
         _(res.get).must_be_kind_of Integer
-        _(res.get).must_equal 99
+        _(res.get).must_equal 68
       end
     end
   end
@@ -483,7 +483,7 @@ describe "Aggregate Queries", :datastore do
                         bookKey: book.key
       res = dataset.run_aggregation gql
         _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 99
+      _(res.get).must_equal 68
     end
 
     it "returns sum with single custom alias" do
@@ -491,17 +491,17 @@ describe "Aggregate Queries", :datastore do
                         bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 99
+      _(res.get).must_equal 68
       _(res.get('total')).must_be_kind_of Integer
-      _(res.get('total')).must_equal 99
+      _(res.get('total')).must_equal 68
     end
 
     it "returns sum with a filter" do
       gql = dataset.gql "SELECT SUM(appearances) FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @family",
-                        family: 'Targaryen', bookKey: book.key
+                        family: 'Martin', bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 32
+      _(res.get).must_equal 1
     end
 
     it "throws error when custom alias isn't specified for multiple aliases" do
@@ -517,7 +517,7 @@ describe "Aggregate Queries", :datastore do
                           bookKey: book.key
         res = dataset.run_aggregation gql
         _(res.get).must_be_kind_of Integer
-        _(res.get).must_equal 99
+        _(res.get).must_equal 68
       end
     end
   end
@@ -543,19 +543,19 @@ describe "Aggregate Queries", :datastore do
                              .add_avg('appearances')
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 24.75
+      _(res.get).must_equal 17.0
     end
 
     it "returns average on filter" do
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
-                .where("family", "=", "Targaryen")
+                .where("family", "=", "Martin")
       aggregate_query = query.aggregate_query
                             .add_avg('appearances')
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 32.0
+      _(res.get).must_equal 1.0
     end
 
     it "returns average on filter with and without read time" do
@@ -563,19 +563,19 @@ describe "Aggregate Queries", :datastore do
       read_time = Time.now
       sleep(1)
 
-      jon["family"] = "Stark"
-      dataset.transaction { |tx| tx.save jon }
+      george["family"] = "Stark"
+      dataset.transaction { |tx| tx.save george }
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
                                       .ancestor(book)
-                                      .where("family", "=", "Targaryen")
+                                      .where("family", "=", "Martin")
       aggregate_query = query.aggregate_query
                              .add_avg("appearances")
 
       res = dataset.run_aggregation aggregate_query, read_time: read_time
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 32.0
+      _(res.get).must_equal 1.0
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
       _(res.get).must_equal 0.0
@@ -590,7 +590,7 @@ describe "Aggregate Queries", :datastore do
                              .add_avg("appearances")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 17.0
+      _(res.get).must_equal 5.0
     end
 
     it "returns average with a custom alias" do
@@ -601,9 +601,9 @@ describe "Aggregate Queries", :datastore do
                              .add_avg("appearances", aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 24.75
+      _(res.get).must_equal 17.0
       _(res.get('total')).must_be_kind_of Float
-      _(res.get('total')).must_equal 24.75
+      _(res.get('total')).must_equal 17.0
     end
 
     it "returns average with multiple custom aliases" do
@@ -615,9 +615,9 @@ describe "Aggregate Queries", :datastore do
                              .add_avg("appearances", aggregate_alias: "total_2")
       res = dataset.run_aggregation aggregate_query
       _(res.get('total_1')).must_be_kind_of Float
-      _(res.get('total_1')).must_equal 24.75
+      _(res.get('total_1')).must_equal 17.0
       _(res.get('total_2')).must_be_kind_of Float
-      _(res.get('total_2')).must_equal 24.75
+      _(res.get('total_2')).must_equal 17.0
     end
 
     it "returns nil with unspecified aliases" do
@@ -659,11 +659,11 @@ describe "Aggregate Queries", :datastore do
                              .add_avg("appearances")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 24.75
+      _(res.get).must_equal 17.0
       dataset.delete bran.key
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get.round(2)).must_equal 24.67
+      _(res.get.round(2)).must_equal 14.33
     end
 
     it "returns average inside a transaction" do
@@ -675,7 +675,7 @@ describe "Aggregate Queries", :datastore do
                              .add_avg("appearances")
         res = dataset.run_aggregation aggregate_query
         _(res.get).must_be_kind_of Float
-        _(res.get).must_equal 24.75
+        _(res.get).must_equal 17.0
       end
     end
   end
@@ -686,7 +686,7 @@ describe "Aggregate Queries", :datastore do
                         bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 24.75
+      _(res.get).must_equal 17.0
     end
 
     it "returns average with single custom alias" do
@@ -694,17 +694,17 @@ describe "Aggregate Queries", :datastore do
                         bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 24.75
+      _(res.get).must_equal 17.0
       _(res.get('total')).must_be_kind_of Float
-      _(res.get('total')).must_equal 24.75
+      _(res.get('total')).must_equal 17.0
     end
 
     it "returns average with a filter" do
       gql = dataset.gql "SELECT AVG(appearances) FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @family",
-                        family: 'Targaryen', bookKey: book.key
+                        family: 'Martin', bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 32.0
+      _(res.get).must_equal 1.0
     end
 
     it "throws error when custom alias isn't specified for multiple aliases" do
@@ -720,7 +720,7 @@ describe "Aggregate Queries", :datastore do
                           bookKey: book.key
         res = dataset.run_aggregation gql
         _(res.get).must_be_kind_of Float
-        _(res.get).must_equal 24.75
+        _(res.get).must_equal 17.0
       end
     end
   end
