@@ -96,7 +96,7 @@ describe "Aggregate Queries", :datastore do
     end
   end
 
-  describe "via AggregateQuery" do
+  describe "COUNT via AggregateQuery" do
     
     it "returns 0 for no records" do
       dataset.delete *characters
@@ -254,7 +254,7 @@ describe "Aggregate Queries", :datastore do
     end
   end
 
-  describe "via GQL" do
+  describe "COUNT via GQL" do
     it "returns count without alias" do
       gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
@@ -299,7 +299,7 @@ describe "Aggregate Queries", :datastore do
     end
   end
 
-  describe "SUM via API" do
+  describe "SUM via AggregateQuery" do
     it "returns 0 for no records" do
       dataset.delete *characters # delete dataset before querying
       query = Google::Cloud::Datastore.new
@@ -517,7 +517,7 @@ describe "Aggregate Queries", :datastore do
     end
   end
 
-  describe "AVG via API" do
+  describe "AVG via AggregateQuery" do
     it "returns 0 for no records" do
       dataset.delete *characters # delete dataset before querying
       query = Google::Cloud::Datastore.new
