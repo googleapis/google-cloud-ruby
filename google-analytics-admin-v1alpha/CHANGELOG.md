@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2023-09-07)
+
+#### Features
+
+* Support CRUD operations on SKAdNetworkConversionValueSchema ([#22874](https://github.com/googleapis/google-cloud-ruby/issues/22874)) 
+
 ### 0.23.0 (2023-08-15)
 
 #### Features
