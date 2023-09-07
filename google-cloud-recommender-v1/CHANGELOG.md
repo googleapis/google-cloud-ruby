@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2023-09-07)
+
+#### Features
+
+* Add mark_recommendation_dismissed() method ([#22877](https://github.com/googleapis/google-cloud-ruby/issues/22877)) 
+
 ### 0.13.1 (2023-06-06)
 
 #### Bug Fixes
