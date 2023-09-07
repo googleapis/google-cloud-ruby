@@ -705,6 +705,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     page_token = "hello world"
     sku = "hello world"
     language_code = "hello world"
+    billing_account = "hello world"
 
     list_transferable_offers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_transferable_offers, name
@@ -716,6 +717,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["sku"]
       assert_equal "hello world", request["language_code"]
+      assert_equal "hello world", request["billing_account"]
       refute_nil options
     end
 
@@ -726,35 +728,35 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code }) do |response, operation|
+      client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_transferable_offers cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code do |response, operation|
+      client.list_transferable_offers cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_transferable_offers ::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code) do |response, operation|
+      client.list_transferable_offers ::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code }, grpc_options) do |response, operation|
+      client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_transferable_offers(::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code), grpc_options) do |response, operation|
+      client.list_transferable_offers(::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1039,6 +1041,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     parameters = [{}]
     purchase_order_id = "hello world"
     request_id = "hello world"
+    billing_account = "hello world"
 
     change_offer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :change_offer, name
@@ -1048,6 +1051,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       assert_kind_of ::Google::Cloud::Channel::V1::Parameter, request["parameters"].first
       assert_equal "hello world", request["purchase_order_id"]
       assert_equal "hello world", request["request_id"]
+      assert_equal "hello world", request["billing_account"]
       refute_nil options
     end
 
@@ -1058,35 +1062,35 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id }) do |response, operation|
+      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id do |response, operation|
+      client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id) do |response, operation|
+      client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id }, grpc_options) do |response, operation|
+      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id), grpc_options) do |response, operation|
+      client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2896,6 +2900,66 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
 
       # Verify method calls
       assert_equal 5, list_purchasable_offers_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_eligible_billing_accounts
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    customer = "hello world"
+    skus = ["hello world"]
+
+    query_eligible_billing_accounts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_eligible_billing_accounts, name
+      assert_kind_of ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest, request
+      assert_equal "hello world", request["customer"]
+      assert_equal ["hello world"], request["skus"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_eligible_billing_accounts_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.query_eligible_billing_accounts({ customer: customer, skus: skus }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.query_eligible_billing_accounts customer: customer, skus: skus do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.query_eligible_billing_accounts ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest.new(customer: customer, skus: skus) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.query_eligible_billing_accounts({ customer: customer, skus: skus }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.query_eligible_billing_accounts(::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest.new(customer: customer, skus: skus), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_eligible_billing_accounts_client_stub.call_rpc_count
     end
   end
 
