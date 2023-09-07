@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.31.0 (2023-09-07)
+
+#### Features
+
+* Add field "encryption_spec" to Index ([#22903](https://github.com/googleapis/google-cloud-ruby/issues/22903)) 
+* Support contexts for a Trial ([#22903](https://github.com/googleapis/google-cloud-ruby/issues/22903)) 
+
 ### 0.30.0 (2023-08-15)
 
 #### Features
