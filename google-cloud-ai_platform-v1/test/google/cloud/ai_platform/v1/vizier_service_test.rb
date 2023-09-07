@@ -361,6 +361,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
     parent = "hello world"
     suggestion_count = 42
     client_id = "hello world"
+    contexts = [{}]
 
     suggest_trials_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :suggest_trials, name
@@ -368,6 +369,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["suggestion_count"]
       assert_equal "hello world", request["client_id"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::TrialContext, request["contexts"].first
       refute_nil options
     end
 
@@ -378,35 +380,35 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id }) do |response, operation|
+      client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.suggest_trials parent: parent, suggestion_count: suggestion_count, client_id: client_id do |response, operation|
+      client.suggest_trials parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.suggest_trials ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id) do |response, operation|
+      client.suggest_trials ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id }, grpc_options) do |response, operation|
+      client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.suggest_trials(::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id), grpc_options) do |response, operation|
+      client.suggest_trials(::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
