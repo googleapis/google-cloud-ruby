@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2023-09-07)
+
+#### Features
+
+* Support field "cost_per_kilometer_below_soft_max" in DistanceLimit class ([#22902](https://github.com/googleapis/google-cloud-ruby/issues/22902)) 
+* Support WALKING option in TravelMode enum ([#22902](https://github.com/googleapis/google-cloud-ruby/issues/22902)) 
+
 ### 0.4.1 (2023-06-06)
 
 #### Bug Fixes
