@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.5 (2023-09-07)
+
+#### Documentation
+
+* Update description for size_gb field in Disk ([#22875](https://github.com/googleapis/google-cloud-ruby/issues/22875)) 
+
 ### 0.10.4 (2023-09-04)
 
 #### Documentation
