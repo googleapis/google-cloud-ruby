@@ -86,7 +86,9 @@ module Google
         #     Applies the repricing configuration at the channel partner level.
         #     Only
         #     {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
-        #     supports this value.
+        #     supports this value. Deprecated: This is no longer supported. Use
+        #     {::Google::Cloud::Channel::V1::RepricingConfig#entitlement_granularity RepricingConfig.entitlement_granularity}
+        #     instead.
         # @!attribute [rw] effective_invoice_month
         #   @return [::Google::Type::Date]
         #     Required. The YearMonth when these adjustments activate. The Day field
@@ -122,6 +124,9 @@ module Google
           # Applies the repricing configuration at the channel partner level.
           # The channel partner value is derived from the resource name. Takes an
           # empty json object.
+          # Deprecated: This is no longer supported. Use
+          # {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity RepricingConfig.EntitlementGranularity}
+          # instead.
           class ChannelPartnerGranularity
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
