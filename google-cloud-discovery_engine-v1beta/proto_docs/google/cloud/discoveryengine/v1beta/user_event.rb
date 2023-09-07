@@ -409,6 +409,10 @@ module Google
         #     The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} resource
         #     full name, of the form:
         #     `projects/{project_id}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} URI - only
+        #     allowed for website data stores.
         # @!attribute [rw] quantity
         #   @return [::Integer]
         #     Quantity of the Document associated with the user event. Defaults to 1.

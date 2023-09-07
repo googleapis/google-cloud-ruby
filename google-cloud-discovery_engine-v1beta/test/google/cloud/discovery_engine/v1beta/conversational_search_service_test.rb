@@ -60,6 +60,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
     serving_config = "hello world"
     conversation = {}
     safe_search = true
+    user_labels = {}
+    summary_spec = {}
 
     converse_conversation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :converse_conversation, name
@@ -69,6 +71,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
       assert_equal "hello world", request["serving_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::Conversation), request["conversation"]
       assert_equal true, request["safe_search"]
+      assert_equal({}, request["user_labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec), request["summary_spec"]
       refute_nil options
     end
 
@@ -79,31 +83,31 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
       end
 
       # Use hash object
-      client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search }) do |response, operation|
+      client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.converse_conversation name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search do |response, operation|
+      client.converse_conversation name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.converse_conversation ::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search) do |response, operation|
+      client.converse_conversation ::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search }, grpc_options) do |response, operation|
+      client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.converse_conversation(::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search), grpc_options) do |response, operation|
+      client.converse_conversation(::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
