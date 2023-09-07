@@ -2239,6 +2239,309 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_get_sk_ad_network_conversion_value_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_sk_ad_network_conversion_value_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_sk_ad_network_conversion_value_schema, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_sk_ad_network_conversion_value_schema_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_sk_ad_network_conversion_value_schema({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_sk_ad_network_conversion_value_schema name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_sk_ad_network_conversion_value_schema ::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_sk_ad_network_conversion_value_schema({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_sk_ad_network_conversion_value_schema(::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_sk_ad_network_conversion_value_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_sk_ad_network_conversion_value_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    skadnetwork_conversion_value_schema = {}
+
+    create_sk_ad_network_conversion_value_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_sk_ad_network_conversion_value_schema, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema), request["skadnetwork_conversion_value_schema"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_sk_ad_network_conversion_value_schema_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_sk_ad_network_conversion_value_schema({ parent: parent, skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_sk_ad_network_conversion_value_schema parent: parent, skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_sk_ad_network_conversion_value_schema ::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest.new(parent: parent, skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_sk_ad_network_conversion_value_schema({ parent: parent, skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_sk_ad_network_conversion_value_schema(::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest.new(parent: parent, skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_sk_ad_network_conversion_value_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_sk_ad_network_conversion_value_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_sk_ad_network_conversion_value_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_sk_ad_network_conversion_value_schema, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_sk_ad_network_conversion_value_schema_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_sk_ad_network_conversion_value_schema({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_sk_ad_network_conversion_value_schema name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_sk_ad_network_conversion_value_schema ::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_sk_ad_network_conversion_value_schema({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_sk_ad_network_conversion_value_schema(::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_sk_ad_network_conversion_value_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_sk_ad_network_conversion_value_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    skadnetwork_conversion_value_schema = {}
+    update_mask = {}
+
+    update_sk_ad_network_conversion_value_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_sk_ad_network_conversion_value_schema, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema), request["skadnetwork_conversion_value_schema"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_sk_ad_network_conversion_value_schema_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_sk_ad_network_conversion_value_schema({ skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_sk_ad_network_conversion_value_schema skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_sk_ad_network_conversion_value_schema ::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest.new(skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_sk_ad_network_conversion_value_schema({ skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_sk_ad_network_conversion_value_schema(::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest.new(skadnetwork_conversion_value_schema: skadnetwork_conversion_value_schema, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_sk_ad_network_conversion_value_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_sk_ad_network_conversion_value_schemas
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_sk_ad_network_conversion_value_schemas_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_sk_ad_network_conversion_value_schemas, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_sk_ad_network_conversion_value_schemas_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_sk_ad_network_conversion_value_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_sk_ad_network_conversion_value_schemas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_sk_ad_network_conversion_value_schemas ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_sk_ad_network_conversion_value_schemas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_sk_ad_network_conversion_value_schemas(::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_sk_ad_network_conversion_value_schemas_client_stub.call_rpc_count
+    end
+  end
+
   def test_search_change_history_events
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse.new

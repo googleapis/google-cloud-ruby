@@ -159,6 +159,17 @@ module Google
             # or through this API) before MeasurementProtocolSecret resources may be
             # created.
             rpc :AcknowledgeUserDataCollection, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse
+            # Looks up a single SKAdNetworkConversionValueSchema.
+            rpc :GetSKAdNetworkConversionValueSchema, ::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest, ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema
+            # Creates a SKAdNetworkConversionValueSchema.
+            rpc :CreateSKAdNetworkConversionValueSchema, ::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest, ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema
+            # Deletes target SKAdNetworkConversionValueSchema.
+            rpc :DeleteSKAdNetworkConversionValueSchema, ::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest, ::Google::Protobuf::Empty
+            # Updates a SKAdNetworkConversionValueSchema.
+            rpc :UpdateSKAdNetworkConversionValueSchema, ::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest, ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema
+            # Lists SKAdNetworkConversionValueSchema on a stream.
+            # Properties can have at most one SKAdNetworkConversionValueSchema.
+            rpc :ListSKAdNetworkConversionValueSchemas, ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest, ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse
             # Searches through all changes to an account or its children given the
             # specified set of filters.
             rpc :SearchChangeHistoryEvents, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse

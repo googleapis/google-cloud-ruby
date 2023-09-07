@@ -902,6 +902,95 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for GetSKAdNetworkConversionValueSchema RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of SKAdNetwork conversion value schema to look
+        #     up. Format:
+        #     properties/\\{property}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema/\\{skadnetwork_conversion_value_schema}
+        class GetSKAdNetworkConversionValueSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateSKAdNetworkConversionValueSchema RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this schema will be created.
+        #     Format: properties/\\{property}/dataStreams/\\{dataStream}
+        # @!attribute [rw] skadnetwork_conversion_value_schema
+        #   @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+        #     Required. SKAdNetwork conversion value schema to create.
+        class CreateSKAdNetworkConversionValueSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteSKAdNetworkConversionValueSchema RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the SKAdNetworkConversionValueSchema to delete.
+        #     Format:
+        #     properties/\\{property}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema/\\{skadnetwork_conversion_value_schema}
+        class DeleteSKAdNetworkConversionValueSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateSKAdNetworkConversionValueSchema RPC.
+        # @!attribute [rw] skadnetwork_conversion_value_schema
+        #   @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+        #     Required. SKAdNetwork conversion value schema to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated.
+        class UpdateSKAdNetworkConversionValueSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListSKAdNetworkConversionValueSchemas RPC
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format:
+        #     properties/\\{property_id}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema
+        #     Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
+        #     subsequent page. When paginating, all other parameters provided to
+        #     `ListSKAdNetworkConversionValueSchema` must match the call that provided
+        #     the page token.
+        class ListSKAdNetworkConversionValueSchemasRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListSKAdNetworkConversionValueSchemas RPC
+        # @!attribute [rw] skadnetwork_conversion_value_schemas
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema>]
+        #     List of SKAdNetworkConversionValueSchemas. This will have at most one
+        #     value.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        #     Currently, Google Analytics supports only one
+        #     SKAdNetworkConversionValueSchema per dataStream, so this will never be
+        #     populated.
+        class ListSKAdNetworkConversionValueSchemasResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetGoogleSignalsSettings RPC
         # @!attribute [rw] name
         #   @return [::String]
