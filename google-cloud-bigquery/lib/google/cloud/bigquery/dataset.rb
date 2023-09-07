@@ -269,7 +269,6 @@ module Google
         #
         def location
           return nil if reference?
-          ensure_full_data!
           @gapi.location
         end
 
