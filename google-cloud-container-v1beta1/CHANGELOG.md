@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.0 (2023-09-07)
+
+#### Features
+
+* Add config options for UpdateNodePoolRequest ([#22864](https://github.com/googleapis/google-cloud-ruby/issues/22864)) 
+
 ### 0.26.0 (2023-08-15)
 
 #### Features
