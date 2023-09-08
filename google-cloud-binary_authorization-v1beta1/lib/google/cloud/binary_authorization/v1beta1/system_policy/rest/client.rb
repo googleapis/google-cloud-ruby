@@ -163,6 +163,22 @@ module Google
               # @return [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/binary_authorization/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new
+              #
+              #   # Call the get_system_policy method.
+              #   result = client.get_system_policy request
+              #
+              #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Policy.
+              #   p result
+              #
               def get_system_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
