@@ -1,0 +1,17 @@
+{
+    "api_id": "certificatemanager.googleapis.com",
+    "api_shortname": "certificatemanager",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-certificate_manager-v1/latest",
+    "distribution_name": "google-cloud-certificate_manager-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "certificatemanager",
+    "name_pretty": "Certificate Manager V1 API",
+    "product_documentation": "https://cloud.google.com/certificate-manager",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Certificate Manager lets you acquire and manage Transport Layer Security (TLS) (SSL) certificates for use with classic external HTTP(S) load balancers in Google Cloud. Note that google-cloud-certificate_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-certificate_manager instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/certificate-manager",
+    "library_type": "GAPIC_AUTO"
+}
