@@ -833,6 +833,136 @@ module Google
                 end
 
                 ##
+                # Gets the generative settings for the agent.
+                #
+                # @overload get_generative_settings(request, options = nil)
+                #   Pass arguments to `get_generative_settings` via a request object, either of type
+                #   {::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_generative_settings(name: nil, language_code: nil)
+                #   Pass arguments to `get_generative_settings` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Format: `projects/<Project ID>/locations/<Location
+                #     ID>/agents/<Agent ID>/generativeSettings`.
+                #   @param language_code [::String]
+                #     Required. Language code of the generative settings.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                def get_generative_settings request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_generative_settings.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_generative_settings.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_generative_settings.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @agents_stub.get_generative_settings request, options do |result, operation|
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Updates the generative settings for the agent.
+                #
+                # @overload update_generative_settings(request, options = nil)
+                #   Pass arguments to `update_generative_settings` via a request object, either of type
+                #   {::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload update_generative_settings(generative_settings: nil, update_mask: nil)
+                #   Pass arguments to `update_generative_settings` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param generative_settings [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings, ::Hash]
+                #     Required. Generative settings to update.
+                #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     Optional. The mask to control which fields get updated. If the mask is not
+                #     present, all fields will be updated.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                def update_generative_settings request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.update_generative_settings.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.update_generative_settings.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.update_generative_settings.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @agents_stub.update_generative_settings request, options do |result, operation|
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the Agents REST API.
                 #
                 # This class represents the configuration for Agents REST,
@@ -1009,6 +1139,16 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :get_agent_validation_result
+                    ##
+                    # RPC-specific configuration for `get_generative_settings`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_generative_settings
+                    ##
+                    # RPC-specific configuration for `update_generative_settings`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_generative_settings
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -1030,6 +1170,10 @@ module Google
                       @validate_agent = ::Gapic::Config::Method.new validate_agent_config
                       get_agent_validation_result_config = parent_rpcs.get_agent_validation_result if parent_rpcs.respond_to? :get_agent_validation_result
                       @get_agent_validation_result = ::Gapic::Config::Method.new get_agent_validation_result_config
+                      get_generative_settings_config = parent_rpcs.get_generative_settings if parent_rpcs.respond_to? :get_generative_settings
+                      @get_generative_settings = ::Gapic::Config::Method.new get_generative_settings_config
+                      update_generative_settings_config = parent_rpcs.update_generative_settings if parent_rpcs.respond_to? :update_generative_settings
+                      @update_generative_settings = ::Gapic::Config::Method.new update_generative_settings_config
 
                       yield self if block_given?
                     end

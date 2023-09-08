@@ -45,6 +45,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified AgentGenerativeSettings resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/agents/{agent}/generativeSettings`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param agent [String]
+              #
+              # @return [::String]
+              def agent_generative_settings_path project:, location:, agent:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/agents/#{agent}/generativeSettings"
+              end
+
+              ##
               # Create a fully-qualified AgentValidationResult resource string.
               #
               # The resource will be in the following format:

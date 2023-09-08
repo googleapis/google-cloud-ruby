@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           # Import strategies for the conflict resolution of resources (i.e. intents,
           # entities, and webhooks) with identical display names during import
