@@ -173,6 +173,22 @@ module Google
                 # @return [::Google::Cloud::Kms::Inventory::V1::ProtectedResourcesSummary]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/kms/inventory/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new
+                #
+                #   # Call the get_protected_resources_summary method.
+                #   result = client.get_protected_resources_summary request
+                #
+                #   # The returned object is of type Google::Cloud::Kms::Inventory::V1::ProtectedResourcesSummary.
+                #   p result
+                #
                 def get_protected_resources_summary request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -268,6 +284,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::Inventory::V1::ProtectedResource>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/kms/inventory/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new
+                #
+                #   # Call the search_protected_resources method.
+                #   result = client.search_protected_resources request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Kms::Inventory::V1::ProtectedResource.
+                #     p item
+                #   end
+                #
                 def search_protected_resources request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

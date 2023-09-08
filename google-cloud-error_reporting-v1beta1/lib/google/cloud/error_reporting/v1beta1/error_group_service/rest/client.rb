@@ -172,6 +172,22 @@ module Google
               # @return [::Google::Cloud::ErrorReporting::V1beta1::ErrorGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/error_reporting/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new
+              #
+              #   # Call the get_group method.
+              #   result = client.get_group request
+              #
+              #   # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::ErrorGroup.
+              #   p result
+              #
               def get_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -235,6 +251,22 @@ module Google
               # @return [::Google::Cloud::ErrorReporting::V1beta1::ErrorGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/error_reporting/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new
+              #
+              #   # Call the update_group method.
+              #   result = client.update_group request
+              #
+              #   # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::ErrorGroup.
+              #   p result
+              #
               def update_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

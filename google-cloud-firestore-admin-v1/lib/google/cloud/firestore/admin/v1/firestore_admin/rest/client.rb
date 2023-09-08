@@ -257,6 +257,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new
+                #
+                #   # Call the create_index method.
+                #   result = client.create_index request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_index request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -329,6 +352,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::Admin::V1::Index>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new
+                #
+                #   # Call the list_indexes method.
+                #   result = client.list_indexes request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Firestore::Admin::V1::Index.
+                #     p item
+                #   end
+                #
                 def list_indexes request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -393,6 +436,22 @@ module Google
                 # @return [::Google::Cloud::Firestore::Admin::V1::Index]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new
+                #
+                #   # Call the get_index method.
+                #   result = client.get_index request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::Index.
+                #   p result
+                #
                 def get_index request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -456,6 +515,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new
+                #
+                #   # Call the delete_index method.
+                #   result = client.delete_index request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_index request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -519,6 +594,22 @@ module Google
                 # @return [::Google::Cloud::Firestore::Admin::V1::Field]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new
+                #
+                #   # Call the get_field method.
+                #   result = client.get_field request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::Field.
+                #   p result
+                #
                 def get_field request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -599,6 +690,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new
+                #
+                #   # Call the update_field method.
+                #   result = client.update_field request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_field request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -683,6 +797,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::Admin::V1::Field>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new
+                #
+                #   # Call the list_fields method.
+                #   result = client.list_fields request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Firestore::Admin::V1::Field.
+                #     p item
+                #   end
+                #
                 def list_fields request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -768,6 +902,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new
+                #
+                #   # Call the export_documents method.
+                #   result = client.export_documents request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def export_documents request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -845,6 +1002,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new
+                #
+                #   # Call the import_documents method.
+                #   result = client.import_documents request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def import_documents request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -916,6 +1096,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest.new
+                #
+                #   # Call the create_database method.
+                #   result = client.create_database request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_database request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -980,6 +1183,22 @@ module Google
                 # @return [::Google::Cloud::Firestore::Admin::V1::Database]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::GetDatabaseRequest.new
+                #
+                #   # Call the get_database method.
+                #   result = client.get_database request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::Database.
+                #   p result
+                #
                 def get_database request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1043,6 +1262,22 @@ module Google
                 # @return [::Google::Cloud::Firestore::Admin::V1::ListDatabasesResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new
+                #
+                #   # Call the list_databases method.
+                #   result = client.list_databases request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::ListDatabasesResponse.
+                #   p result
+                #
                 def list_databases request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1107,6 +1342,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest.new
+                #
+                #   # Call the update_database method.
+                #   result = client.update_database request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_database request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
