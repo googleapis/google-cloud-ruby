@@ -1,5 +1,11 @@
 # Release History
 
+### 1.44.1 (2023-09-08)
+
+#### Bug Fixes
+
+* remove unnecessary warning ([#22904](https://github.com/googleapis/google-cloud-ruby/issues/22904)) 
+
 ### 1.44.0 (2023-09-04)
 
 #### Features
