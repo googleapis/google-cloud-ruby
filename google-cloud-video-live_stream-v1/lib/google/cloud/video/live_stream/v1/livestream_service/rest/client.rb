@@ -267,6 +267,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::CreateChannelRequest.new
+                #
+                #   # Call the create_channel method.
+                #   result = client.create_channel request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_channel request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -344,6 +367,26 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::ListChannelsRequest.new
+                #
+                #   # Call the list_channels method.
+                #   result = client.list_channels request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Channel.
+                #     p item
+                #   end
+                #
                 def list_channels request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -407,6 +450,22 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::Channel]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new
+                #
+                #   # Call the get_channel method.
+                #   result = client.get_channel request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Channel.
+                #   p result
+                #
                 def get_channel request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -489,6 +548,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::DeleteChannelRequest.new
+                #
+                #   # Call the delete_channel method.
+                #   result = client.delete_channel request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_channel request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -587,6 +669,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::UpdateChannelRequest.new
+                #
+                #   # Call the update_channel method.
+                #   result = client.update_channel request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_channel request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -666,6 +771,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::StartChannelRequest.new
+                #
+                #   # Call the start_channel method.
+                #   result = client.start_channel request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def start_channel request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -745,6 +873,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::StopChannelRequest.new
+                #
+                #   # Call the stop_channel method.
+                #   result = client.stop_channel request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def stop_channel request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -829,6 +980,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::CreateInputRequest.new
+                #
+                #   # Call the create_input method.
+                #   result = client.create_input request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_input request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -906,6 +1080,26 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::ListInputsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::ListInputsRequest.new
+                #
+                #   # Call the list_inputs method.
+                #   result = client.list_inputs request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Input.
+                #     p item
+                #   end
+                #
                 def list_inputs request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -969,6 +1163,22 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::Input]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::GetInputRequest.new
+                #
+                #   # Call the get_input method.
+                #   result = client.get_input request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Input.
+                #   p result
+                #
                 def get_input request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1046,6 +1256,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::DeleteInputRequest.new
+                #
+                #   # Call the delete_input method.
+                #   result = client.delete_input request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_input request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1136,6 +1369,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::UpdateInputRequest.new
+                #
+                #   # Call the update_input method.
+                #   result = client.update_input request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_input request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1220,6 +1476,22 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::Event]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::CreateEventRequest.new
+                #
+                #   # Call the create_event method.
+                #   result = client.create_event request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Event.
+                #   p result
+                #
                 def create_event request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1296,6 +1568,26 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::ListEventsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::ListEventsRequest.new
+                #
+                #   # Call the list_events method.
+                #   result = client.list_events request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Event.
+                #     p item
+                #   end
+                #
                 def list_events request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1359,6 +1651,22 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::Event]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::GetEventRequest.new
+                #
+                #   # Call the get_event method.
+                #   result = client.get_event request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Event.
+                #   p result
+                #
                 def get_event request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1436,6 +1744,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new
+                #
+                #   # Call the delete_event method.
+                #   result = client.delete_event request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_event request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1520,6 +1844,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new
+                #
+                #   # Call the create_asset method.
+                #   result = client.create_asset request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_asset request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1598,6 +1945,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new
+                #
+                #   # Call the delete_asset method.
+                #   result = client.delete_asset request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_asset request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1662,6 +2032,22 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::Asset]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new
+                #
+                #   # Call the get_asset method.
+                #   result = client.get_asset request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Asset.
+                #   p result
+                #
                 def get_asset request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1734,6 +2120,26 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new
+                #
+                #   # Call the list_assets method.
+                #   result = client.list_assets request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Asset.
+                #     p item
+                #   end
+                #
                 def list_assets request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1797,6 +2203,22 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::Pool]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new
+                #
+                #   # Call the get_pool method.
+                #   result = client.get_pool request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::Pool.
+                #   p result
+                #
                 def get_pool request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1881,6 +2303,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new
+                #
+                #   # Call the update_pool method.
+                #   result = client.update_pool request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_pool request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -227,6 +227,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListSourcesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListSourcesRequest.new
+              #
+              #   # Call the list_sources method.
+              #   result = client.list_sources request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::Source.
+              #     p item
+              #   end
+              #
               def list_sources request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -289,6 +309,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::Source]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetSourceRequest.new
+              #
+              #   # Call the get_source method.
+              #   result = client.get_source request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::Source.
+              #   p result
+              #
               def get_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -369,6 +405,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateSourceRequest.new
+              #
+              #   # Call the create_source method.
+              #   result = client.create_source request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -452,6 +511,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::UpdateSourceRequest.new
+              #
+              #   # Call the update_source method.
+              #   result = client.update_source request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,6 +611,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::DeleteSourceRequest.new
+              #
+              #   # Call the delete_source method.
+              #   result = client.delete_source request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -599,6 +704,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::FetchInventoryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::FetchInventoryRequest.new
+              #
+              #   # Call the fetch_inventory method.
+              #   result = client.fetch_inventory request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::FetchInventoryResponse.
+              #   p result
+              #
               def fetch_inventory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -679,6 +800,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListUtilizationReportsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListUtilizationReportsRequest.new
+              #
+              #   # Call the list_utilization_reports method.
+              #   result = client.list_utilization_reports request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::UtilizationReport.
+              #     p item
+              #   end
+              #
               def list_utilization_reports request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -744,6 +885,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::UtilizationReport]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetUtilizationReportRequest.new
+              #
+              #   # Call the get_utilization_report method.
+              #   result = client.get_utilization_report request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::UtilizationReport.
+              #   p result
+              #
               def get_utilization_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -829,6 +986,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateUtilizationReportRequest.new
+              #
+              #   # Call the create_utilization_report method.
+              #   result = client.create_utilization_report request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_utilization_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -906,6 +1086,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::DeleteUtilizationReportRequest.new
+              #
+              #   # Call the delete_utilization_report method.
+              #   result = client.delete_utilization_report request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_utilization_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -985,6 +1188,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListDatacenterConnectorsRequest.new
+              #
+              #   # Call the list_datacenter_connectors method.
+              #   result = client.list_datacenter_connectors request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::DatacenterConnector.
+              #     p item
+              #   end
+              #
               def list_datacenter_connectors request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1047,6 +1270,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::DatacenterConnector]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetDatacenterConnectorRequest.new
+              #
+              #   # Call the get_datacenter_connector method.
+              #   result = client.get_datacenter_connector request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::DatacenterConnector.
+              #   p result
+              #
               def get_datacenter_connector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1130,6 +1369,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateDatacenterConnectorRequest.new
+              #
+              #   # Call the create_datacenter_connector method.
+              #   result = client.create_datacenter_connector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_datacenter_connector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1207,6 +1469,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::DeleteDatacenterConnectorRequest.new
+              #
+              #   # Call the delete_datacenter_connector method.
+              #   result = client.delete_datacenter_connector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_datacenter_connector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1285,6 +1570,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new
+              #
+              #   # Call the upgrade_appliance method.
+              #   result = client.upgrade_appliance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def upgrade_appliance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1366,6 +1674,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateMigratingVmRequest.new
+              #
+              #   # Call the create_migrating_vm method.
+              #   result = client.create_migrating_vm request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_migrating_vm request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1446,6 +1777,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListMigratingVmsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new
+              #
+              #   # Call the list_migrating_vms method.
+              #   result = client.list_migrating_vms request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::MigratingVm.
+              #     p item
+              #   end
+              #
               def list_migrating_vms request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1510,6 +1861,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::MigratingVm]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new
+              #
+              #   # Call the get_migrating_vm method.
+              #   result = client.get_migrating_vm request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::MigratingVm.
+              #   p result
+              #
               def get_migrating_vm request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1592,6 +1959,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new
+              #
+              #   # Call the update_migrating_vm method.
+              #   result = client.update_migrating_vm request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_migrating_vm request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1655,6 +2045,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::DeleteMigratingVmRequest.new
+              #
+              #   # Call the delete_migrating_vm method.
+              #   result = client.delete_migrating_vm request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_migrating_vm request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1719,6 +2132,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::StartMigrationRequest.new
+              #
+              #   # Call the start_migration method.
+              #   result = client.start_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def start_migration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1785,6 +2221,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ResumeMigrationRequest.new
+              #
+              #   # Call the resume_migration method.
+              #   result = client.resume_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def resume_migration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1850,6 +2309,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::PauseMigrationRequest.new
+              #
+              #   # Call the pause_migration method.
+              #   result = client.pause_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def pause_migration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1914,6 +2396,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::FinalizeMigrationRequest.new
+              #
+              #   # Call the finalize_migration method.
+              #   result = client.finalize_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def finalize_migration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1995,6 +2500,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateCloneJobRequest.new
+              #
+              #   # Call the create_clone_job method.
+              #   result = client.create_clone_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_clone_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2058,6 +2586,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CancelCloneJobRequest.new
+              #
+              #   # Call the cancel_clone_job method.
+              #   result = client.cancel_clone_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def cancel_clone_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2136,6 +2687,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListCloneJobsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListCloneJobsRequest.new
+              #
+              #   # Call the list_clone_jobs method.
+              #   result = client.list_clone_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::CloneJob.
+              #     p item
+              #   end
+              #
               def list_clone_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2198,6 +2769,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::CloneJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetCloneJobRequest.new
+              #
+              #   # Call the get_clone_job method.
+              #   result = client.get_clone_job request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::CloneJob.
+              #   p result
+              #
               def get_clone_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2280,6 +2867,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateCutoverJobRequest.new
+              #
+              #   # Call the create_cutover_job method.
+              #   result = client.create_cutover_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_cutover_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2343,6 +2953,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CancelCutoverJobRequest.new
+              #
+              #   # Call the cancel_cutover_job method.
+              #   result = client.cancel_cutover_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def cancel_cutover_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2421,6 +3054,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListCutoverJobsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListCutoverJobsRequest.new
+              #
+              #   # Call the list_cutover_jobs method.
+              #   result = client.list_cutover_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::CutoverJob.
+              #     p item
+              #   end
+              #
               def list_cutover_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2483,6 +3136,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::CutoverJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetCutoverJobRequest.new
+              #
+              #   # Call the get_cutover_job method.
+              #   result = client.get_cutover_job request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::CutoverJob.
+              #   p result
+              #
               def get_cutover_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2560,6 +3229,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListGroupsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListGroupsRequest.new
+              #
+              #   # Call the list_groups method.
+              #   result = client.list_groups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::Group.
+              #     p item
+              #   end
+              #
               def list_groups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2622,6 +3311,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::Group]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetGroupRequest.new
+              #
+              #   # Call the get_group method.
+              #   result = client.get_group request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::Group.
+              #   p result
+              #
               def get_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2702,6 +3407,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateGroupRequest.new
+              #
+              #   # Call the create_group method.
+              #   result = client.create_group request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2785,6 +3513,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::UpdateGroupRequest.new
+              #
+              #   # Call the update_group method.
+              #   result = client.update_group request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2862,6 +3613,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::DeleteGroupRequest.new
+              #
+              #   # Call the delete_group method.
+              #   result = client.delete_group request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2927,6 +3701,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::AddGroupMigrationRequest.new
+              #
+              #   # Call the add_group_migration method.
+              #   result = client.add_group_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def add_group_migration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2992,6 +3789,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::RemoveGroupMigrationRequest.new
+              #
+              #   # Call the remove_group_migration method.
+              #   result = client.remove_group_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def remove_group_migration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3073,6 +3893,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListTargetProjectsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListTargetProjectsRequest.new
+              #
+              #   # Call the list_target_projects method.
+              #   result = client.list_target_projects request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::TargetProject.
+              #     p item
+              #   end
+              #
               def list_target_projects request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3138,6 +3978,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::TargetProject]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new
+              #
+              #   # Call the get_target_project method.
+              #   result = client.get_target_project request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::TargetProject.
+              #   p result
+              #
               def get_target_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3221,6 +4077,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::CreateTargetProjectRequest.new
+              #
+              #   # Call the create_target_project method.
+              #   result = client.create_target_project request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_target_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3307,6 +4186,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::UpdateTargetProjectRequest.new
+              #
+              #   # Call the update_target_project method.
+              #   result = client.update_target_project request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_target_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3387,6 +4289,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::DeleteTargetProjectRequest.new
+              #
+              #   # Call the delete_target_project method.
+              #   result = client.delete_target_project request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_target_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3465,6 +4390,26 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ListReplicationCyclesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new
+              #
+              #   # Call the list_replication_cycles method.
+              #   result = client.list_replication_cycles request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VMMigration::V1::ReplicationCycle.
+              #     p item
+              #   end
+              #
               def list_replication_cycles request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3527,6 +4472,22 @@ module Google
               # @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vm_migration/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new
+              #
+              #   # Call the get_replication_cycle method.
+              #   result = client.get_replication_cycle request
+              #
+              #   # The returned object is of type Google::Cloud::VMMigration::V1::ReplicationCycle.
+              #   p result
+              #
               def get_replication_cycle request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
