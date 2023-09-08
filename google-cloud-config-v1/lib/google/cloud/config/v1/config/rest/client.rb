@@ -240,6 +240,26 @@ module Google
               # @return [::Google::Cloud::Config::V1::ListDeploymentsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ListDeploymentsRequest.new
+              #
+              #   # Call the list_deployments method.
+              #   result = client.list_deployments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Config::V1::Deployment.
+              #     p item
+              #   end
+              #
               def list_deployments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -303,6 +323,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::Deployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::GetDeploymentRequest.new
+              #
+              #   # Call the get_deployment method.
+              #   result = client.get_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::Deployment.
+              #   p result
+              #
               def get_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -385,6 +421,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::CreateDeploymentRequest.new
+              #
+              #   # Call the create_deployment method.
+              #   result = client.create_deployment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -473,6 +532,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::UpdateDeploymentRequest.new
+              #
+              #   # Call the update_deployment method.
+              #   result = client.update_deployment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -559,6 +641,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::DeleteDeploymentRequest.new
+              #
+              #   # Call the delete_deployment method.
+              #   result = client.delete_deployment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -655,6 +760,26 @@ module Google
               # @return [::Google::Cloud::Config::V1::ListRevisionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ListRevisionsRequest.new
+              #
+              #   # Call the list_revisions method.
+              #   result = client.list_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Config::V1::Revision.
+              #     p item
+              #   end
+              #
               def list_revisions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -718,6 +843,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::Revision]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::GetRevisionRequest.new
+              #
+              #   # Call the get_revision method.
+              #   result = client.get_revision request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::Revision.
+              #   p result
+              #
               def get_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -782,6 +923,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::Resource]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::GetResourceRequest.new
+              #
+              #   # Call the get_resource method.
+              #   result = client.get_resource request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::Resource.
+              #   p result
+              #
               def get_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -869,6 +1026,26 @@ module Google
               # @return [::Google::Cloud::Config::V1::ListResourcesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ListResourcesRequest.new
+              #
+              #   # Call the list_resources method.
+              #   result = client.list_resources request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Config::V1::Resource.
+              #     p item
+              #   end
+              #
               def list_resources request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -937,6 +1114,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::Statefile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ExportDeploymentStatefileRequest.new
+              #
+              #   # Call the export_deployment_statefile method.
+              #   result = client.export_deployment_statefile request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::Statefile.
+              #   p result
+              #
               def export_deployment_statefile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1001,6 +1194,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::Statefile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ExportRevisionStatefileRequest.new
+              #
+              #   # Call the export_revision_statefile method.
+              #   result = client.export_revision_statefile request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::Statefile.
+              #   p result
+              #
               def export_revision_statefile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1071,6 +1280,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::Statefile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ImportStatefileRequest.new
+              #
+              #   # Call the import_statefile method.
+              #   result = client.import_statefile request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::Statefile.
+              #   p result
+              #
               def import_statefile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1137,6 +1362,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::DeleteStatefileRequest.new
+              #
+              #   # Call the delete_statefile method.
+              #   result = client.delete_statefile request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_statefile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1200,6 +1441,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::LockDeploymentRequest.new
+              #
+              #   # Call the lock_deployment method.
+              #   result = client.lock_deployment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def lock_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1266,6 +1530,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::UnlockDeploymentRequest.new
+              #
+              #   # Call the unlock_deployment method.
+              #   result = client.unlock_deployment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def unlock_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1330,6 +1617,22 @@ module Google
               # @return [::Google::Cloud::Config::V1::LockInfo]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Config::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Config::V1::ExportLockInfoRequest.new
+              #
+              #   # Call the export_lock_info method.
+              #   result = client.export_lock_info request
+              #
+              #   # The returned object is of type Google::Cloud::Config::V1::LockInfo.
+              #   p result
+              #
               def export_lock_info request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

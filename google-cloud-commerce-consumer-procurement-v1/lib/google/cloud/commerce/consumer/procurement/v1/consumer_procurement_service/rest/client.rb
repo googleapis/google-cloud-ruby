@@ -219,6 +219,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/commerce/consumer/procurement/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new
+                  #
+                  #   # Call the place_order method.
+                  #   result = client.place_order request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def place_order request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -283,6 +306,22 @@ module Google
                   # @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::Order]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/commerce/consumer/procurement/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new
+                  #
+                  #   # Call the get_order method.
+                  #   result = client.get_order request
+                  #
+                  #   # The returned object is of type Google::Cloud::Commerce::Consumer::Procurement::V1::Order.
+                  #   p result
+                  #
                   def get_order request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -370,6 +409,26 @@ module Google
                   # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Commerce::Consumer::Procurement::V1::Order>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/commerce/consumer/procurement/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new
+                  #
+                  #   # Call the list_orders method.
+                  #   result = client.list_orders request
+                  #
+                  #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                  #   # over elements, and API calls will be issued to fetch pages as needed.
+                  #   result.each do |item|
+                  #     # Each element is of type ::Google::Cloud::Commerce::Consumer::Procurement::V1::Order.
+                  #     p item
+                  #   end
+                  #
                   def list_orders request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 

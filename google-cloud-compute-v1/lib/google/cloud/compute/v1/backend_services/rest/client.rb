@@ -220,6 +220,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest.new
+              #
+              #   # Call the add_signed_url_key method.
+              #   result = client.add_signed_url_key request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def add_signed_url_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -302,6 +318,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::BackendServicesScopedList>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest.new
+              #
+              #   # Call the aggregated_list method.
+              #   result = client.aggregated_list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::BackendServiceAggregatedList.
+              #   p result
+              #
               def aggregated_list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -369,6 +401,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteBackendServiceRequest.new
+              #
+              #   # Call the delete method.
+              #   result = client.delete request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -445,6 +493,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest.new
+              #
+              #   # Call the delete_signed_url_key method.
+              #   result = client.delete_signed_url_key request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def delete_signed_url_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -517,6 +581,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::BackendService]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetBackendServiceRequest.new
+              #
+              #   # Call the get method.
+              #   result = client.get request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::BackendService.
+              #   p result
+              #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -582,6 +662,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::BackendServiceGroupHealth]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetHealthBackendServiceRequest.new
+              #
+              #   # Call the get_health method.
+              #   result = client.get_health request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::BackendServiceGroupHealth.
+              #   p result
+              #
               def get_health request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -648,6 +744,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyBackendServiceRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,6 +826,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::InsertBackendServiceRequest.new
+              #
+              #   # Call the insert method.
+              #   result = client.insert request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -794,6 +922,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::BackendService>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListBackendServicesRequest.new
+              #
+              #   # Call the list method.
+              #   result = client.list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::BackendServiceList.
+              #   p result
+              #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -863,6 +1007,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchBackendServiceRequest.new
+              #
+              #   # Call the patch method.
+              #   result = client.patch request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -939,6 +1099,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest.new
+              #
+              #   # Call the set_edge_security_policy method.
+              #   result = client.set_edge_security_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_edge_security_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1013,6 +1189,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyBackendServiceRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1081,6 +1273,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest.new
+              #
+              #   # Call the set_security_policy method.
+              #   result = client.set_security_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_security_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1157,6 +1365,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::UpdateBackendServiceRequest.new
+              #
+              #   # Call the update method.
+              #   result = client.update request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def update request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

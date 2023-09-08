@@ -234,6 +234,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AddAssociationFirewallPolicyRequest.new
+              #
+              #   # Call the add_association method.
+              #   result = client.add_association request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def add_association request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -306,6 +322,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AddRuleFirewallPolicyRequest.new
+              #
+              #   # Call the add_rule method.
+              #   result = client.add_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def add_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -378,6 +410,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::CloneRulesFirewallPolicyRequest.new
+              #
+              #   # Call the clone_rules method.
+              #   result = client.clone_rules request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def clone_rules request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -448,6 +496,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteFirewallPolicyRequest.new
+              #
+              #   # Call the delete method.
+              #   result = client.delete request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -516,6 +580,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::FirewallPolicy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetFirewallPolicyRequest.new
+              #
+              #   # Call the get method.
+              #   result = client.get request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::FirewallPolicy.
+              #   p result
+              #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -580,6 +660,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetAssociationFirewallPolicyRequest.new
+              #
+              #   # Call the get_association method.
+              #   result = client.get_association request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::FirewallPolicyAssociation.
+              #   p result
+              #
               def get_association request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -644,6 +740,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyFirewallPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -708,6 +820,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetRuleFirewallPolicyRequest.new
+              #
+              #   # Call the get_rule method.
+              #   result = client.get_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::FirewallPolicyRule.
+              #   p result
+              #
               def get_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -774,6 +902,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::InsertFirewallPolicyRequest.new
+              #
+              #   # Call the insert method.
+              #   result = client.insert request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -854,6 +998,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::FirewallPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListFirewallPoliciesRequest.new
+              #
+              #   # Call the list method.
+              #   result = client.list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::FirewallPolicyList.
+              #   p result
+              #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -917,6 +1077,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::FirewallPoliciesListAssociationsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListAssociationsFirewallPolicyRequest.new
+              #
+              #   # Call the list_associations method.
+              #   result = client.list_associations request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::FirewallPoliciesListAssociationsResponse.
+              #   p result
+              #
               def list_associations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -983,6 +1159,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::MoveFirewallPolicyRequest.new
+              #
+              #   # Call the move method.
+              #   result = client.move request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def move request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1057,6 +1249,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchFirewallPolicyRequest.new
+              #
+              #   # Call the patch method.
+              #   result = client.patch request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1131,6 +1339,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchRuleFirewallPolicyRequest.new
+              #
+              #   # Call the patch_rule method.
+              #   result = client.patch_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def patch_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1203,6 +1427,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::RemoveAssociationFirewallPolicyRequest.new
+              #
+              #   # Call the remove_association method.
+              #   result = client.remove_association request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def remove_association request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1275,6 +1515,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::RemoveRuleFirewallPolicyRequest.new
+              #
+              #   # Call the remove_rule method.
+              #   result = client.remove_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def remove_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1345,6 +1601,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyFirewallPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1409,6 +1681,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsFirewallPolicyRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::TestPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

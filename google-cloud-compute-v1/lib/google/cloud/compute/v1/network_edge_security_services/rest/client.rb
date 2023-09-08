@@ -202,6 +202,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServicesScopedList>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AggregatedListNetworkEdgeSecurityServicesRequest.new
+              #
+              #   # Call the aggregated_list method.
+              #   result = client.aggregated_list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::NetworkEdgeSecurityServiceAggregatedList.
+              #   p result
+              #
               def aggregated_list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -271,6 +287,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteNetworkEdgeSecurityServiceRequest.new
+              #
+              #   # Call the delete method.
+              #   result = client.delete request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -346,6 +378,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetNetworkEdgeSecurityServiceRequest.new
+              #
+              #   # Call the get method.
+              #   result = client.get request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::NetworkEdgeSecurityService.
+              #   p result
+              #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -416,6 +464,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::InsertNetworkEdgeSecurityServiceRequest.new
+              #
+              #   # Call the insert method.
+              #   result = client.insert request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -498,6 +562,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchNetworkEdgeSecurityServiceRequest.new
+              #
+              #   # Call the patch method.
+              #   result = client.patch request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

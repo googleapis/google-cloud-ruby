@@ -198,6 +198,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteGlobalForwardingRuleRequest.new
+              #
+              #   # Call the delete method.
+              #   result = client.delete request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -270,6 +286,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::ForwardingRule]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetGlobalForwardingRuleRequest.new
+              #
+              #   # Call the get method.
+              #   result = client.get request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::ForwardingRule.
+              #   p result
+              #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -336,6 +368,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::InsertGlobalForwardingRuleRequest.new
+              #
+              #   # Call the insert method.
+              #   result = client.insert request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -416,6 +464,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ForwardingRule>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListGlobalForwardingRulesRequest.new
+              #
+              #   # Call the list method.
+              #   result = client.list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::ForwardingRuleList.
+              #   p result
+              #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -485,6 +549,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchGlobalForwardingRuleRequest.new
+              #
+              #   # Call the patch method.
+              #   result = client.patch request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -559,6 +639,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetLabelsGlobalForwardingRuleRequest.new
+              #
+              #   # Call the set_labels method.
+              #   result = client.set_labels request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_labels request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -635,6 +731,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetTargetGlobalForwardingRuleRequest.new
+              #
+              #   # Call the set_target method.
+              #   result = client.set_target request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_target request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

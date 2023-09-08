@@ -216,6 +216,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::ServiceAttachmentsScopedList>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AggregatedListServiceAttachmentsRequest.new
+              #
+              #   # Call the aggregated_list method.
+              #   result = client.aggregated_list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::ServiceAttachmentAggregatedList.
+              #   p result
+              #
               def aggregated_list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -285,6 +301,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteServiceAttachmentRequest.new
+              #
+              #   # Call the delete method.
+              #   result = client.delete request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -360,6 +392,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::ServiceAttachment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetServiceAttachmentRequest.new
+              #
+              #   # Call the get method.
+              #   result = client.get request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::ServiceAttachment.
+              #   p result
+              #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -428,6 +476,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyServiceAttachmentRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -496,6 +560,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::InsertServiceAttachmentRequest.new
+              #
+              #   # Call the insert method.
+              #   result = client.insert request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -579,6 +659,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ServiceAttachment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListServiceAttachmentsRequest.new
+              #
+              #   # Call the list method.
+              #   result = client.list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::ServiceAttachmentList.
+              #   p result
+              #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -650,6 +746,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchServiceAttachmentRequest.new
+              #
+              #   # Call the patch method.
+              #   result = client.patch request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -727,6 +839,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyServiceAttachmentRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -795,6 +923,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsServiceAttachmentRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::TestPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -193,6 +193,22 @@ module Google
               # @return [::Google::Cloud::ConfidentialComputing::V1::Challenge]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/confidential_computing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfidentialComputing::V1::CreateChallengeRequest.new
+              #
+              #   # Call the create_challenge method.
+              #   result = client.create_challenge request
+              #
+              #   # The returned object is of type Google::Cloud::ConfidentialComputing::V1::Challenge.
+              #   p result
+              #
               def create_challenge request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -268,6 +284,22 @@ module Google
               # @return [::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/confidential_computing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new
+              #
+              #   # Call the verify_attestation method.
+              #   result = client.verify_attestation request
+              #
+              #   # The returned object is of type Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse.
+              #   p result
+              #
               def verify_attestation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
