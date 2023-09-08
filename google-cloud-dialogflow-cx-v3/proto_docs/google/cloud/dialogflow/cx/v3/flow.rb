@@ -145,6 +145,9 @@ module Google
           # @!attribute [rw] nlu_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::NluSettings]
           #     NLU related settings of the flow.
+          # @!attribute [rw] knowledge_connector_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::KnowledgeConnectorSettings]
+          #     Optional. Knowledge connector configuration.
           class Flow
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

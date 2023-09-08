@@ -88,6 +88,10 @@ module Google
               # Gets the latest agent validation result. Agent validation is performed
               # when ValidateAgent is called.
               rpc :GetAgentValidationResult, ::Google::Cloud::Dialogflow::CX::V3::GetAgentValidationResultRequest, ::Google::Cloud::Dialogflow::CX::V3::AgentValidationResult
+              # Gets the generative settings for the agent.
+              rpc :GetGenerativeSettings, ::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest, ::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings
+              # Updates the generative settings for the agent.
+              rpc :UpdateGenerativeSettings, ::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest, ::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings
             end
 
             Stub = Service.rpc_stub_class
