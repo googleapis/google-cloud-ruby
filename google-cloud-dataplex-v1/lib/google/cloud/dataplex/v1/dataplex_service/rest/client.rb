@@ -332,6 +332,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateLakeRequest.new
+              #
+              #   # Call the create_lake method.
+              #   result = client.create_lake request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_lake request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -401,6 +424,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateLakeRequest.new
+              #
+              #   # Call the update_lake method.
+              #   result = client.update_lake request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_lake request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -466,6 +512,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteLakeRequest.new
+              #
+              #   # Call the delete_lake method.
+              #   result = client.delete_lake request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_lake request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -543,6 +612,26 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::ListLakesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListLakesRequest.new
+              #
+              #   # Call the list_lakes method.
+              #   result = client.list_lakes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Lake.
+              #     p item
+              #   end
+              #
               def list_lakes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -606,6 +695,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Lake]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetLakeRequest.new
+              #
+              #   # Call the get_lake method.
+              #   result = client.get_lake request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Lake.
+              #   p result
+              #
               def get_lake request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -678,6 +783,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Action>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListLakeActionsRequest.new
+              #
+              #   # Call the list_lake_actions method.
+              #   result = client.list_lake_actions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
+              #     p item
+              #   end
+              #
               def list_lake_actions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -757,6 +882,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateZoneRequest.new
+              #
+              #   # Call the create_zone method.
+              #   result = client.create_zone request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_zone request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -826,6 +974,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateZoneRequest.new
+              #
+              #   # Call the update_zone method.
+              #   result = client.update_zone request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_zone request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -891,6 +1062,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteZoneRequest.new
+              #
+              #   # Call the delete_zone method.
+              #   result = client.delete_zone request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_zone request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -967,6 +1161,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Zone>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListZonesRequest.new
+              #
+              #   # Call the list_zones method.
+              #   result = client.list_zones request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Zone.
+              #     p item
+              #   end
+              #
               def list_zones request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1031,6 +1245,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Zone]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetZoneRequest.new
+              #
+              #   # Call the get_zone method.
+              #   result = client.get_zone request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Zone.
+              #   p result
+              #
               def get_zone request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1103,6 +1333,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Action>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListZoneActionsRequest.new
+              #
+              #   # Call the list_zone_actions method.
+              #   result = client.list_zone_actions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
+              #     p item
+              #   end
+              #
               def list_zone_actions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1181,6 +1431,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateAssetRequest.new
+              #
+              #   # Call the create_asset method.
+              #   result = client.create_asset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_asset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1250,6 +1523,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateAssetRequest.new
+              #
+              #   # Call the update_asset method.
+              #   result = client.update_asset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_asset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1315,6 +1611,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteAssetRequest.new
+              #
+              #   # Call the delete_asset method.
+              #   result = client.delete_asset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_asset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1392,6 +1711,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Asset>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListAssetsRequest.new
+              #
+              #   # Call the list_assets method.
+              #   result = client.list_assets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Asset.
+              #     p item
+              #   end
+              #
               def list_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1456,6 +1795,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Asset]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetAssetRequest.new
+              #
+              #   # Call the get_asset method.
+              #   result = client.get_asset request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Asset.
+              #   p result
+              #
               def get_asset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1528,6 +1883,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Action>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListAssetActionsRequest.new
+              #
+              #   # Call the list_asset_actions method.
+              #   result = client.list_asset_actions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
+              #     p item
+              #   end
+              #
               def list_asset_actions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1599,6 +1974,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateTaskRequest.new
+              #
+              #   # Call the create_task method.
+              #   result = client.create_task request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1668,6 +2066,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateTaskRequest.new
+              #
+              #   # Call the update_task method.
+              #   result = client.update_task request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1732,6 +2153,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteTaskRequest.new
+              #
+              #   # Call the delete_task method.
+              #   result = client.delete_task request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1808,6 +2252,26 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::ListTasksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListTasksRequest.new
+              #
+              #   # Call the list_tasks method.
+              #   result = client.list_tasks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Task.
+              #     p item
+              #   end
+              #
               def list_tasks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1871,6 +2335,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Task]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetTaskRequest.new
+              #
+              #   # Call the get_task method.
+              #   result = client.get_task request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Task.
+              #   p result
+              #
               def get_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1943,6 +2423,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Job>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListJobsRequest.new
+              #
+              #   # Call the list_jobs method.
+              #   result = client.list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Job.
+              #     p item
+              #   end
+              #
               def list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2023,6 +2523,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::RunTaskResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::RunTaskRequest.new
+              #
+              #   # Call the run_task method.
+              #   result = client.run_task request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::RunTaskResponse.
+              #   p result
+              #
               def run_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2086,6 +2602,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetJobRequest.new
+              #
+              #   # Call the get_job method.
+              #   result = client.get_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Job.
+              #   p result
+              #
               def get_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2149,6 +2681,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CancelJobRequest.new
+              #
+              #   # Call the cancel_job method.
+              #   result = client.cancel_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def cancel_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2224,6 +2772,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateEnvironmentRequest.new
+              #
+              #   # Call the create_environment method.
+              #   result = client.create_environment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_environment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2293,6 +2864,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest.new
+              #
+              #   # Call the update_environment method.
+              #   result = client.update_environment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_environment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2358,6 +2952,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest.new
+              #
+              #   # Call the delete_environment method.
+              #   result = client.delete_environment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_environment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2436,6 +3053,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Environment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListEnvironmentsRequest.new
+              #
+              #   # Call the list_environments method.
+              #   result = client.list_environments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Environment.
+              #     p item
+              #   end
+              #
               def list_environments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2500,6 +3137,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Environment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetEnvironmentRequest.new
+              #
+              #   # Call the get_environment method.
+              #   result = client.get_environment request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Environment.
+              #   p result
+              #
               def get_environment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2582,6 +3235,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Session>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListSessionsRequest.new
+              #
+              #   # Call the list_sessions method.
+              #   result = client.list_sessions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Session.
+              #     p item
+              #   end
+              #
               def list_sessions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

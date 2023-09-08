@@ -229,6 +229,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Entity]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateEntityRequest.new
+              #
+              #   # Call the create_entity method.
+              #   result = client.create_entity request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Entity.
+              #   p result
+              #
               def create_entity request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -294,6 +310,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Entity]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateEntityRequest.new
+              #
+              #   # Call the update_entity method.
+              #   result = client.update_entity request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Entity.
+              #   p result
+              #
               def update_entity request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -360,6 +392,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteEntityRequest.new
+              #
+              #   # Call the delete_entity method.
+              #   result = client.delete_entity request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_entity request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -426,6 +474,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Entity]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetEntityRequest.new
+              #
+              #   # Call the get_entity method.
+              #   result = client.get_entity request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Entity.
+              #   p result
+              #
               def get_entity request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -510,6 +574,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Entity>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListEntitiesRequest.new
+              #
+              #   # Call the list_entities method.
+              #   result = client.list_entities request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Entity.
+              #     p item
+              #   end
+              #
               def list_entities request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -579,6 +663,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Partition]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreatePartitionRequest.new
+              #
+              #   # Call the create_partition method.
+              #   result = client.create_partition request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Partition.
+              #   p result
+              #
               def create_partition request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -647,6 +747,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeletePartitionRequest.new
+              #
+              #   # Call the delete_partition method.
+              #   result = client.delete_partition request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_partition request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -712,6 +828,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::Partition]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetPartitionRequest.new
+              #
+              #   # Call the get_partition method.
+              #   result = client.get_partition request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Partition.
+              #   p result
+              #
               def get_partition request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -805,6 +937,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Partition>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListPartitionsRequest.new
+              #
+              #   # Call the list_partitions method.
+              #   result = client.list_partitions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::Partition.
+              #     p item
+              #   end
+              #
               def list_partitions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -202,6 +202,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::V2::AnswerRecord>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new
+              #
+              #   # Call the list_answer_records method.
+              #   result = client.list_answer_records request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::V2::AnswerRecord.
+              #     p item
+              #   end
+              #
               def list_answer_records request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -267,6 +287,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::AnswerRecord]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new
+              #
+              #   # Call the update_answer_record method.
+              #   result = client.update_answer_record request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::AnswerRecord.
+              #   p result
+              #
               def update_answer_record request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

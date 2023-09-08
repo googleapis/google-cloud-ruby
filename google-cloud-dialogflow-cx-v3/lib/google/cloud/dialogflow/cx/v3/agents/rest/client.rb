@@ -207,6 +207,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::Agent>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListAgentsRequest.new
+                #
+                #   # Call the list_agents method.
+                #   result = client.list_agents request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Agent.
+                #     p item
+                #   end
+                #
                 def list_agents request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -271,6 +291,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Agent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetAgentRequest.new
+                #
+                #   # Call the get_agent method.
+                #   result = client.get_agent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Agent.
+                #   p result
+                #
                 def get_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -340,6 +376,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Agent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateAgentRequest.new
+                #
+                #   # Call the create_agent method.
+                #   result = client.create_agent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Agent.
+                #   p result
+                #
                 def create_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -409,6 +461,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Agent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateAgentRequest.new
+                #
+                #   # Call the update_agent method.
+                #   result = client.update_agent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Agent.
+                #   p result
+                #
                 def update_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -472,6 +540,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteAgentRequest.new
+                #
+                #   # Call the delete_agent method.
+                #   result = client.delete_agent request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -566,6 +650,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new
+                #
+                #   # Call the export_agent method.
+                #   result = client.export_agent request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def export_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -662,6 +769,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest.new
+                #
+                #   # Call the restore_agent method.
+                #   result = client.restore_agent request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def restore_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -730,6 +860,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::AgentValidationResult]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new
+                #
+                #   # Call the validate_agent method.
+                #   result = client.validate_agent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::AgentValidationResult.
+                #   p result
+                #
                 def validate_agent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -797,6 +943,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::AgentValidationResult]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetAgentValidationResultRequest.new
+                #
+                #   # Call the get_agent_validation_result method.
+                #   result = client.get_agent_validation_result request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::AgentValidationResult.
+                #   p result
+                #
                 def get_agent_validation_result request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -862,6 +1024,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest.new
+                #
+                #   # Call the get_generative_settings method.
+                #   result = client.get_generative_settings request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::GenerativeSettings.
+                #   p result
+                #
                 def get_generative_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -927,6 +1105,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest.new
+                #
+                #   # Call the update_generative_settings method.
+                #   result = client.update_generative_settings request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::GenerativeSettings.
+                #   p result
+                #
                 def update_generative_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

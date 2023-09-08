@@ -210,6 +210,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1beta::Document]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new
+              #
+              #   # Call the get_document method.
+              #   result = client.get_document request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::Document.
+              #   p result
+              #
               def get_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -297,6 +313,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1beta::Document>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new
+              #
+              #   # Call the list_documents method.
+              #   result = client.list_documents request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1beta::Document.
+              #     p item
+              #   end
+              #
               def list_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,6 +418,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1beta::Document]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new
+              #
+              #   # Call the create_document method.
+              #   result = client.create_document request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::Document.
+              #   p result
+              #
               def create_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,6 +510,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1beta::Document]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new
+              #
+              #   # Call the update_document method.
+              #   result = client.update_document request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::Document.
+              #   p result
+              #
               def update_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,6 +597,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new
+              #
+              #   # Call the delete_document method.
+              #   result = client.delete_document request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -663,6 +747,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new
+              #
+              #   # Call the import_documents method.
+              #   result = client.import_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -750,6 +857,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new
+              #
+              #   # Call the purge_documents method.
+              #   result = client.purge_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def purge_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

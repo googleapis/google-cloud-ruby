@@ -195,6 +195,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1beta::Schema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::GetSchemaRequest.new
+              #
+              #   # Call the get_schema method.
+              #   result = client.get_schema request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::Schema.
+              #   p result
+              #
               def get_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -274,6 +290,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1beta::Schema>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::ListSchemasRequest.new
+              #
+              #   # Call the list_schemas method.
+              #   result = client.list_schemas request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1beta::Schema.
+              #     p item
+              #   end
+              #
               def list_schemas request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -350,6 +386,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::CreateSchemaRequest.new
+              #
+              #   # Call the create_schema method.
+              #   result = client.create_schema request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -419,6 +478,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::UpdateSchemaRequest.new
+              #
+              #   # Call the update_schema method.
+              #   result = client.update_schema request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -483,6 +565,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::DeleteSchemaRequest.new
+              #
+              #   # Call the delete_schema method.
+              #   result = client.delete_schema request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

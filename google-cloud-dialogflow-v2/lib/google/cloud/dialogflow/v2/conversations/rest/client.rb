@@ -217,6 +217,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::CreateConversationRequest.new
+              #
+              #   # Call the create_conversation method.
+              #   result = client.create_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+              #   p result
+              #
               def create_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -303,6 +319,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Conversation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ListConversationsRequest.new
+              #
+              #   # Call the list_conversations method.
+              #   result = client.list_conversations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Conversation.
+              #     p item
+              #   end
+              #
               def list_conversations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -368,6 +404,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::GetConversationRequest.new
+              #
+              #   # Call the get_conversation method.
+              #   result = client.get_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+              #   p result
+              #
               def get_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -433,6 +485,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::CompleteConversationRequest.new
+              #
+              #   # Call the complete_conversation method.
+              #   result = client.complete_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+              #   p result
+              #
               def complete_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -515,6 +583,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Message>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ListMessagesRequest.new
+              #
+              #   # Call the list_messages method.
+              #   result = client.list_messages request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Message.
+              #     p item
+              #   end
+              #
               def list_messages request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -595,6 +683,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new
+              #
+              #   # Call the suggest_conversation_summary method.
+              #   result = client.suggest_conversation_summary request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse.
+              #   p result
+              #
               def suggest_conversation_summary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -672,6 +776,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest.new
+              #
+              #   # Call the generate_stateless_summary method.
+              #   result = client.generate_stateless_summary request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse.
+              #   p result
+              #
               def generate_stateless_summary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -759,6 +879,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new
+              #
+              #   # Call the search_knowledge method.
+              #   result = client.search_knowledge request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse.
+              #   p result
+              #
               def search_knowledge request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
