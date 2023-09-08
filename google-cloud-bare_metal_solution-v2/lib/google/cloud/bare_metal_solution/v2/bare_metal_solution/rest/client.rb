@@ -220,6 +220,26 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListInstancesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListInstancesRequest.new
+              #
+              #   # Call the list_instances method.
+              #   result = client.list_instances request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::Instance.
+              #     p item
+              #   end
+              #
               def list_instances request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -282,6 +302,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Instance]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetInstanceRequest.new
+              #
+              #   # Call the get_instance method.
+              #   result = client.get_instance request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Instance.
+              #   p result
+              #
               def get_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -353,6 +389,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::UpdateInstanceRequest.new
+              #
+              #   # Call the update_instance method.
+              #   result = client.update_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -420,6 +479,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Instance]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new
+              #
+              #   # Call the rename_instance method.
+              #   result = client.rename_instance request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Instance.
+              #   p result
+              #
               def rename_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -483,6 +558,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ResetInstanceRequest.new
+              #
+              #   # Call the reset_instance method.
+              #   result = client.reset_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def reset_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -546,6 +644,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::StartInstanceRequest.new
+              #
+              #   # Call the start_instance method.
+              #   result = client.start_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def start_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -609,6 +730,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::StopInstanceRequest.new
+              #
+              #   # Call the stop_instance method.
+              #   result = client.stop_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def stop_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -672,6 +816,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new
+              #
+              #   # Call the enable_interactive_serial_console method.
+              #   result = client.enable_interactive_serial_console request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def enable_interactive_serial_console request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -735,6 +902,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new
+              #
+              #   # Call the disable_interactive_serial_console method.
+              #   result = client.disable_interactive_serial_console request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def disable_interactive_serial_console request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -802,6 +992,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new
+              #
+              #   # Call the detach_lun method.
+              #   result = client.detach_lun request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def detach_lun request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -871,6 +1084,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::SSHKey>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new
+              #
+              #   # Call the list_ssh_keys method.
+              #   result = client.list_ssh_keys request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::SSHKey.
+              #     p item
+              #   end
+              #
               def list_ssh_keys request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -943,6 +1176,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::SSHKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new
+              #
+              #   # Call the create_ssh_key method.
+              #   result = client.create_ssh_key request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::SSHKey.
+              #   p result
+              #
               def create_ssh_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1006,6 +1255,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new
+              #
+              #   # Call the delete_ssh_key method.
+              #   result = client.delete_ssh_key request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_ssh_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1075,6 +1340,26 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListVolumesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListVolumesRequest.new
+              #
+              #   # Call the list_volumes method.
+              #   result = client.list_volumes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::Volume.
+              #     p item
+              #   end
+              #
               def list_volumes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1137,6 +1422,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Volume]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetVolumeRequest.new
+              #
+              #   # Call the get_volume method.
+              #   result = client.get_volume request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Volume.
+              #   p result
+              #
               def get_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1206,6 +1507,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::UpdateVolumeRequest.new
+              #
+              #   # Call the update_volume method.
+              #   result = client.update_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1273,6 +1597,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Volume]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new
+              #
+              #   # Call the rename_volume method.
+              #   result = client.rename_volume request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Volume.
+              #   p result
+              #
               def rename_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1336,6 +1676,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new
+              #
+              #   # Call the evict_volume method.
+              #   result = client.evict_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def evict_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1401,6 +1764,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ResizeVolumeRequest.new
+              #
+              #   # Call the resize_volume method.
+              #   result = client.resize_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def resize_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1471,6 +1857,26 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListNetworksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListNetworksRequest.new
+              #
+              #   # Call the list_networks method.
+              #   result = client.list_networks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::Network.
+              #     p item
+              #   end
+              #
               def list_networks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1534,6 +1940,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListNetworkUsageResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new
+              #
+              #   # Call the list_network_usage method.
+              #   result = client.list_network_usage request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::ListNetworkUsageResponse.
+              #   p result
+              #
               def list_network_usage request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1596,6 +2018,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Network]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new
+              #
+              #   # Call the get_network method.
+              #   result = client.get_network request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Network.
+              #   p result
+              #
               def get_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1665,6 +2103,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new
+              #
+              #   # Call the update_network method.
+              #   result = client.update_network request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1731,6 +2192,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new
+              #
+              #   # Call the create_volume_snapshot method.
+              #   result = client.create_volume_snapshot request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::VolumeSnapshot.
+              #   p result
+              #
               def create_volume_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1795,6 +2272,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new
+              #
+              #   # Call the restore_volume_snapshot method.
+              #   result = client.restore_volume_snapshot request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def restore_volume_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1859,6 +2359,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new
+              #
+              #   # Call the delete_volume_snapshot method.
+              #   result = client.delete_volume_snapshot request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_volume_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1922,6 +2438,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new
+              #
+              #   # Call the get_volume_snapshot method.
+              #   result = client.get_volume_snapshot request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::VolumeSnapshot.
+              #   p result
+              #
               def get_volume_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1991,6 +2523,26 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new
+              #
+              #   # Call the list_volume_snapshots method.
+              #   result = client.list_volume_snapshots request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot.
+              #     p item
+              #   end
+              #
               def list_volume_snapshots request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2053,6 +2605,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Lun]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetLunRequest.new
+              #
+              #   # Call the get_lun method.
+              #   result = client.get_lun request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Lun.
+              #   p result
+              #
               def get_lun request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2120,6 +2688,26 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListLunsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListLunsRequest.new
+              #
+              #   # Call the list_luns method.
+              #   result = client.list_luns request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::Lun.
+              #     p item
+              #   end
+              #
               def list_luns request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2183,6 +2771,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new
+              #
+              #   # Call the evict_lun method.
+              #   result = client.evict_lun request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def evict_lun request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2246,6 +2857,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::NfsShare]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new
+              #
+              #   # Call the get_nfs_share method.
+              #   result = client.get_nfs_share request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::NfsShare.
+              #   p result
+              #
               def get_nfs_share request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2315,6 +2942,26 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ListNfsSharesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListNfsSharesRequest.new
+              #
+              #   # Call the list_nfs_shares method.
+              #   result = client.list_nfs_shares request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::NfsShare.
+              #     p item
+              #   end
+              #
               def list_nfs_shares request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2385,6 +3032,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::UpdateNfsShareRequest.new
+              #
+              #   # Call the update_nfs_share method.
+              #   result = client.update_nfs_share request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_nfs_share request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2450,6 +3120,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new
+              #
+              #   # Call the create_nfs_share method.
+              #   result = client.create_nfs_share request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_nfs_share request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2517,6 +3210,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::NfsShare]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new
+              #
+              #   # Call the rename_nfs_share method.
+              #   result = client.rename_nfs_share request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::NfsShare.
+              #   p result
+              #
               def rename_nfs_share request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2579,6 +3288,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new
+              #
+              #   # Call the delete_nfs_share method.
+              #   result = client.delete_nfs_share request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_nfs_share request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2649,6 +3381,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::ProvisioningQuota>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new
+              #
+              #   # Call the list_provisioning_quotas method.
+              #   result = client.list_provisioning_quotas request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::ProvisioningQuota.
+              #     p item
+              #   end
+              #
               def list_provisioning_quotas request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2718,6 +3470,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new
+              #
+              #   # Call the submit_provisioning_config method.
+              #   result = client.submit_provisioning_config request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigResponse.
+              #   p result
+              #
               def submit_provisioning_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2780,6 +3548,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new
+              #
+              #   # Call the get_provisioning_config method.
+              #   result = client.get_provisioning_config request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::ProvisioningConfig.
+              #   p result
+              #
               def get_provisioning_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2848,6 +3632,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new
+              #
+              #   # Call the create_provisioning_config method.
+              #   result = client.create_provisioning_config request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::ProvisioningConfig.
+              #   p result
+              #
               def create_provisioning_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2915,6 +3715,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new
+              #
+              #   # Call the update_provisioning_config method.
+              #   result = client.update_provisioning_config request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::ProvisioningConfig.
+              #   p result
+              #
               def update_provisioning_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2981,6 +3797,22 @@ module Google
               # @return [::Google::Cloud::BareMetalSolution::V2::Network]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new
+              #
+              #   # Call the rename_network method.
+              #   result = client.rename_network request
+              #
+              #   # The returned object is of type Google::Cloud::BareMetalSolution::V2::Network.
+              #   p result
+              #
               def rename_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3050,6 +3882,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::OSImage>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bare_metal_solution/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new
+              #
+              #   # Call the list_os_images method.
+              #   result = client.list_os_images request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BareMetalSolution::V2::OSImage.
+              #     p item
+              #   end
+              #
               def list_os_images request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
