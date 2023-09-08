@@ -215,6 +215,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataproc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataproc::V1::CreateNodeGroupRequest.new
+              #
+              #   # Call the create_node_group method.
+              #   result = client.create_node_group request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_node_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -312,6 +335,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataproc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest.new
+              #
+              #   # Call the resize_node_group method.
+              #   result = client.resize_node_group request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def resize_node_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -378,6 +424,22 @@ module Google
               # @return [::Google::Cloud::Dataproc::V1::NodeGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataproc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataproc::V1::GetNodeGroupRequest.new
+              #
+              #   # Call the get_node_group method.
+              #   result = client.get_node_group request
+              #
+              #   # The returned object is of type Google::Cloud::Dataproc::V1::NodeGroup.
+              #   p result
+              #
               def get_node_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

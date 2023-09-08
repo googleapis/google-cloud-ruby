@@ -178,6 +178,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::JobMetrics]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new
+              #
+              #   # Call the get_job_metrics method.
+              #   result = client.get_job_metrics request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::JobMetrics.
+              #   p result
+              #
               def get_job_metrics request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +272,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::StageSummary>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new
+              #
+              #   # Call the get_job_execution_details method.
+              #   result = client.get_job_execution_details request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::StageSummary.
+              #     p item
+              #   end
+              #
               def get_job_execution_details request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -342,6 +378,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::WorkerDetails>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new
+              #
+              #   # Call the get_stage_execution_details method.
+              #   result = client.get_stage_execution_details request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::WorkerDetails.
+              #     p item
+              #   end
+              #
               def get_stage_execution_details request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

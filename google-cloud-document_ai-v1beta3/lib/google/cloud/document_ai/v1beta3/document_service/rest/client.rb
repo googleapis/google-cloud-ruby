@@ -193,6 +193,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest.new
+              #
+              #   # Call the update_dataset method.
+              #   result = client.update_dataset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -261,6 +284,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new
+              #
+              #   # Call the import_documents method.
+              #   result = client.import_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -334,6 +380,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new
+              #
+              #   # Call the get_document method.
+              #   result = client.get_document request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse.
+              #   p result
+              #
               def get_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -403,6 +465,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new
+              #
+              #   # Call the batch_delete_documents method.
+              #   result = client.batch_delete_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_delete_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -470,6 +555,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1beta3::DatasetSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest.new
+              #
+              #   # Call the get_dataset_schema method.
+              #   result = client.get_dataset_schema request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::DatasetSchema.
+              #   p result
+              #
               def get_dataset_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -535,6 +636,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1beta3::DatasetSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::UpdateDatasetSchemaRequest.new
+              #
+              #   # Call the update_dataset_schema method.
+              #   result = client.update_dataset_schema request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::DatasetSchema.
+              #   p result
+              #
               def update_dataset_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

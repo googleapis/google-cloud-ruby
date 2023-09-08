@@ -348,6 +348,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::InspectContentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::InspectContentRequest.new
+              #
+              #   # Call the inspect_content method.
+              #   result = client.inspect_content request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::InspectContentResponse.
+              #   p result
+              #
               def inspect_content request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -443,6 +459,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::RedactImageResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::RedactImageRequest.new
+              #
+              #   # Call the redact_image method.
+              #   result = client.redact_image request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::RedactImageResponse.
+              #   p result
+              #
               def redact_image request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -558,6 +590,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DeidentifyContentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeidentifyContentRequest.new
+              #
+              #   # Call the deidentify_content method.
+              #   result = client.deidentify_content request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyContentResponse.
+              #   p result
+              #
               def deidentify_content request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -669,6 +717,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::ReidentifyContentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ReidentifyContentRequest.new
+              #
+              #   # Call the reidentify_content method.
+              #   result = client.reidentify_content request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::ReidentifyContentResponse.
+              #   p result
+              #
               def reidentify_content request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -746,6 +810,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::ListInfoTypesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListInfoTypesRequest.new
+              #
+              #   # Call the list_info_types method.
+              #   result = client.list_info_types request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::ListInfoTypesResponse.
+              #   p result
+              #
               def list_info_types request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -838,6 +918,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::InspectTemplate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new
+              #
+              #   # Call the create_inspect_template method.
+              #   result = client.create_inspect_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+              #   p result
+              #
               def create_inspect_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -907,6 +1003,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::InspectTemplate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new
+              #
+              #   # Call the update_inspect_template method.
+              #   result = client.update_inspect_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+              #   p result
+              #
               def update_inspect_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -972,6 +1084,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::InspectTemplate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new
+              #
+              #   # Call the get_inspect_template method.
+              #   result = client.get_inspect_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+              #   p result
+              #
               def get_inspect_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1076,6 +1204,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::InspectTemplate>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new
+              #
+              #   # Call the list_inspect_templates method.
+              #   result = client.list_inspect_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::InspectTemplate.
+              #     p item
+              #   end
+              #
               def list_inspect_templates request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1142,6 +1290,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new
+              #
+              #   # Call the delete_inspect_template method.
+              #   result = client.delete_inspect_template request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_inspect_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1235,6 +1399,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new
+              #
+              #   # Call the create_deidentify_template method.
+              #   result = client.create_deidentify_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+              #   p result
+              #
               def create_deidentify_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1305,6 +1485,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new
+              #
+              #   # Call the update_deidentify_template method.
+              #   result = client.update_deidentify_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+              #   p result
+              #
               def update_deidentify_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1371,6 +1567,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new
+              #
+              #   # Call the get_deidentify_template method.
+              #   result = client.get_deidentify_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+              #   p result
+              #
               def get_deidentify_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1476,6 +1688,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::DeidentifyTemplate>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new
+              #
+              #   # Call the list_deidentify_templates method.
+              #   result = client.list_deidentify_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::DeidentifyTemplate.
+              #     p item
+              #   end
+              #
               def list_deidentify_templates request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1543,6 +1775,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new
+              #
+              #   # Call the delete_deidentify_template method.
+              #   result = client.delete_deidentify_template request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_deidentify_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1631,6 +1879,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::JobTrigger]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new
+              #
+              #   # Call the create_job_trigger method.
+              #   result = client.create_job_trigger request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+              #   p result
+              #
               def create_job_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1699,6 +1963,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::JobTrigger]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new
+              #
+              #   # Call the update_job_trigger method.
+              #   result = client.update_job_trigger request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+              #   p result
+              #
               def update_job_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1766,6 +2046,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::HybridInspectResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new
+              #
+              #   # Call the hybrid_inspect_job_trigger method.
+              #   result = client.hybrid_inspect_job_trigger request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::HybridInspectResponse.
+              #   p result
+              #
               def hybrid_inspect_job_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1830,6 +2126,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::JobTrigger]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetJobTriggerRequest.new
+              #
+              #   # Call the get_job_trigger method.
+              #   result = client.get_job_trigger request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+              #   p result
+              #
               def get_job_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1959,6 +2271,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::JobTrigger>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListJobTriggersRequest.new
+              #
+              #   # Call the list_job_triggers method.
+              #   result = client.list_job_triggers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::JobTrigger.
+              #     p item
+              #   end
+              #
               def list_job_triggers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2024,6 +2356,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new
+              #
+              #   # Call the delete_job_trigger method.
+              #   result = client.delete_job_trigger request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_job_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2088,6 +2436,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DlpJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new
+              #
+              #   # Call the activate_job_trigger method.
+              #   result = client.activate_job_trigger request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+              #   p result
+              #
               def activate_job_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2183,6 +2547,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DlpJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateDlpJobRequest.new
+              #
+              #   # Call the create_dlp_job method.
+              #   result = client.create_dlp_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+              #   p result
+              #
               def create_dlp_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2313,6 +2693,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::DlpJob>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListDlpJobsRequest.new
+              #
+              #   # Call the list_dlp_jobs method.
+              #   result = client.list_dlp_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::DlpJob.
+              #     p item
+              #   end
+              #
               def list_dlp_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2378,6 +2778,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::DlpJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetDlpJobRequest.new
+              #
+              #   # Call the get_dlp_job method.
+              #   result = client.get_dlp_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+              #   p result
+              #
               def get_dlp_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2444,6 +2860,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new
+              #
+              #   # Call the delete_dlp_job method.
+              #   result = client.delete_dlp_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_dlp_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2510,6 +2942,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CancelDlpJobRequest.new
+              #
+              #   # Call the cancel_dlp_job method.
+              #   result = client.cancel_dlp_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def cancel_dlp_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2602,6 +3050,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::StoredInfoType]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new
+              #
+              #   # Call the create_stored_info_type method.
+              #   result = client.create_stored_info_type request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+              #   p result
+              #
               def create_stored_info_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2675,6 +3139,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::StoredInfoType]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new
+              #
+              #   # Call the update_stored_info_type method.
+              #   result = client.update_stored_info_type request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+              #   p result
+              #
               def update_stored_info_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2741,6 +3221,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::StoredInfoType]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new
+              #
+              #   # Call the get_stored_info_type method.
+              #   result = client.get_stored_info_type request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+              #   p result
+              #
               def get_stored_info_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2843,6 +3339,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::StoredInfoType>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new
+              #
+              #   # Call the list_stored_info_types method.
+              #   result = client.list_stored_info_types request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::StoredInfoType.
+              #     p item
+              #   end
+              #
               def list_stored_info_types request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2910,6 +3426,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new
+              #
+              #   # Call the delete_stored_info_type method.
+              #   result = client.delete_stored_info_type request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_stored_info_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2977,6 +3509,22 @@ module Google
               # @return [::Google::Cloud::Dlp::V2::HybridInspectResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new
+              #
+              #   # Call the hybrid_inspect_dlp_job method.
+              #   result = client.hybrid_inspect_dlp_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::HybridInspectResponse.
+              #   p result
+              #
               def hybrid_inspect_dlp_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3040,6 +3588,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::FinishDlpJobRequest.new
+              #
+              #   # Call the finish_dlp_job method.
+              #   result = client.finish_dlp_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def finish_dlp_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

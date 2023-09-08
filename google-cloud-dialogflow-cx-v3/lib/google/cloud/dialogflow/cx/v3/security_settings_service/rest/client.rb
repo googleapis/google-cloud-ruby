@@ -187,6 +187,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateSecuritySettingsRequest.new
+                #
+                #   # Call the create_security_settings method.
+                #   result = client.create_security_settings request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
+                #   p result
+                #
                 def create_security_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -253,6 +269,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetSecuritySettingsRequest.new
+                #
+                #   # Call the get_security_settings method.
+                #   result = client.get_security_settings request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
+                #   p result
+                #
                 def get_security_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -320,6 +352,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateSecuritySettingsRequest.new
+                #
+                #   # Call the update_security_settings method.
+                #   result = client.update_security_settings request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
+                #   p result
+                #
                 def update_security_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -388,6 +436,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::SecuritySettings>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListSecuritySettingsRequest.new
+                #
+                #   # Call the list_security_settings method.
+                #   result = client.list_security_settings request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
+                #     p item
+                #   end
+                #
                 def list_security_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -455,6 +523,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteSecuritySettingsRequest.new
+                #
+                #   # Call the delete_security_settings method.
+                #   result = client.delete_security_settings request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_security_settings request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

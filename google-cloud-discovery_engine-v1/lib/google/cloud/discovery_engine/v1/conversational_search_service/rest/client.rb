@@ -218,6 +218,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::ConverseConversationResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::ConverseConversationRequest.new
+              #
+              #   # Call the converse_conversation method.
+              #   result = client.converse_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::ConverseConversationResponse.
+              #   p result
+              #
               def converse_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -286,6 +302,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::CreateConversationRequest.new
+              #
+              #   # Call the create_conversation method.
+              #   result = client.create_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::Conversation.
+              #   p result
+              #
               def create_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -352,6 +384,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::DeleteConversationRequest.new
+              #
+              #   # Call the delete_conversation method.
+              #   result = client.delete_conversation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -427,6 +475,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::UpdateConversationRequest.new
+              #
+              #   # Call the update_conversation method.
+              #   result = client.update_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::Conversation.
+              #   p result
+              #
               def update_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -490,6 +554,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::GetConversationRequest.new
+              #
+              #   # Call the get_conversation method.
+              #   result = client.get_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::Conversation.
+              #   p result
+              #
               def get_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -577,6 +657,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::Conversation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::ListConversationsRequest.new
+              #
+              #   # Call the list_conversations method.
+              #   result = client.list_conversations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1::Conversation.
+              #     p item
+              #   end
+              #
               def list_conversations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
