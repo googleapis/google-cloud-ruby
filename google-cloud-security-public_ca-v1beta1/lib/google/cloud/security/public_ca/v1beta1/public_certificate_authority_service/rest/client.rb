@@ -177,6 +177,22 @@ module Google
                 # @return [::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/public_ca/v1beta1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PublicCA::V1beta1::CreateExternalAccountKeyRequest.new
+                #
+                #   # Call the create_external_account_key method.
+                #   result = client.create_external_account_key request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey.
+                #   p result
+                #
                 def create_external_account_key request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
