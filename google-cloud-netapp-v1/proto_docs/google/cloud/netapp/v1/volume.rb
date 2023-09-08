@@ -226,6 +226,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Indicates whether the volume is part of a replication
         #     relationship.
+        # @!attribute [rw] restricted_actions
+        #   @return [::Array<::Google::Cloud::NetApp::V1::RestrictedAction>]
+        #     Optional. List of actions that are restricted on this volume.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -523,6 +526,15 @@ module Google
 
           # SecurityStyle uses NTFS
           UNIX = 2
+        end
+
+        # Actions to be restricted for a volume.
+        module RestrictedAction
+          # Unspecified restricted action
+          RESTRICTED_ACTION_UNSPECIFIED = 0
+
+          # Prevent volume from being deleted when mounted.
+          DELETE = 1
         end
       end
     end

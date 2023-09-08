@@ -21,6 +21,7 @@ module Google
   module Cloud
     module NetApp
       module V1
+        # GetStoragePoolRequest gets a Storage Pool.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the storage pool
@@ -29,6 +30,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # ListStoragePoolsRequest lists Storage Pools.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value
@@ -50,6 +52,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # ListStoragePoolsResponse is the response to a ListStoragePoolsRequest.
         # @!attribute [rw] storage_pools
         #   @return [::Array<::Google::Cloud::NetApp::V1::StoragePool>]
         #     The list of StoragePools
@@ -64,6 +67,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # CreateStoragePoolRequest creates a Storage Pool.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Value for parent.
@@ -80,6 +84,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # UpdateStoragePoolRequest updates a Storage Pool.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Field mask is used to specify the fields to be overwritten in the
@@ -95,6 +100,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DeleteStoragePoolRequest deletes a Storage Pool.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the storage pool

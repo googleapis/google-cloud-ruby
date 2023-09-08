@@ -194,6 +194,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::AnalyzeSentimentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::AnalyzeSentimentRequest.new
+              #
+              #   # Call the analyze_sentiment method.
+              #   result = client.analyze_sentiment request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeSentimentResponse.
+              #   p result
+              #
               def analyze_sentiment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,6 +276,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::AnalyzeEntitiesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::AnalyzeEntitiesRequest.new
+              #
+              #   # Call the analyze_entities method.
+              #   result = client.analyze_entities request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeEntitiesResponse.
+              #   p result
+              #
               def analyze_entities request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -327,6 +359,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentRequest.new
+              #
+              #   # Call the analyze_entity_sentiment method.
+              #   result = client.analyze_entity_sentiment request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentResponse.
+              #   p result
+              #
               def analyze_entity_sentiment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -393,6 +441,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::AnalyzeSyntaxResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::AnalyzeSyntaxRequest.new
+              #
+              #   # Call the analyze_syntax method.
+              #   result = client.analyze_syntax request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeSyntaxResponse.
+              #   p result
+              #
               def analyze_syntax request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,6 +522,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::ClassifyTextResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::ClassifyTextRequest.new
+              #
+              #   # Call the classify_text method.
+              #   result = client.classify_text request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::ClassifyTextResponse.
+              #   p result
+              #
               def classify_text request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -520,6 +600,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::ModerateTextResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::ModerateTextRequest.new
+              #
+              #   # Call the moderate_text method.
+              #   result = client.moderate_text request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::ModerateTextResponse.
+              #   p result
+              #
               def moderate_text request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -587,6 +683,22 @@ module Google
               # @return [::Google::Cloud::Language::V1beta2::AnnotateTextResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/language/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Language::V1beta2::AnnotateTextRequest.new
+              #
+              #   # Call the annotate_text method.
+              #   result = client.annotate_text request
+              #
+              #   # The returned object is of type Google::Cloud::Language::V1beta2::AnnotateTextResponse.
+              #   p result
+              #
               def annotate_text request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

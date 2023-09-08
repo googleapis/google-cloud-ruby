@@ -350,6 +350,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::KeyRing>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ListKeyRingsRequest.new
+              #
+              #   # Call the list_key_rings method.
+              #   result = client.list_key_rings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::KeyRing.
+              #     p item
+              #   end
+              #
               def list_key_rings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -437,6 +457,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKey>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ListCryptoKeysRequest.new
+              #
+              #   # Call the list_crypto_keys method.
+              #   result = client.list_crypto_keys request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::CryptoKey.
+              #     p item
+              #   end
+              #
               def list_crypto_keys request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -525,6 +565,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKeyVersion>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new
+              #
+              #   # Call the list_crypto_key_versions method.
+              #   result = client.list_crypto_key_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #     p item
+              #   end
+              #
               def list_crypto_key_versions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -610,6 +670,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::ImportJob>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ListImportJobsRequest.new
+              #
+              #   # Call the list_import_jobs method.
+              #   result = client.list_import_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::ImportJob.
+              #     p item
+              #   end
+              #
               def list_import_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -674,6 +754,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::KeyRing]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetKeyRingRequest.new
+              #
+              #   # Call the get_key_ring method.
+              #   result = client.get_key_ring request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::KeyRing.
+              #   p result
+              #
               def get_key_ring request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -739,6 +835,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetCryptoKeyRequest.new
+              #
+              #   # Call the get_crypto_key method.
+              #   result = client.get_crypto_key request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+              #   p result
+              #
               def get_crypto_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -803,6 +915,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new
+              #
+              #   # Call the get_crypto_key_version method.
+              #   result = client.get_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
               def get_crypto_key_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -871,6 +999,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::PublicKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetPublicKeyRequest.new
+              #
+              #   # Call the get_public_key method.
+              #   result = client.get_public_key request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::PublicKey.
+              #   p result
+              #
               def get_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -934,6 +1078,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::ImportJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetImportJobRequest.new
+              #
+              #   # Call the get_import_job method.
+              #   result = client.get_import_job request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::ImportJob.
+              #   p result
+              #
               def get_import_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1005,6 +1165,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::KeyRing]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::CreateKeyRingRequest.new
+              #
+              #   # Call the create_key_ring method.
+              #   result = client.create_key_ring request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::KeyRing.
+              #   p result
+              #
               def create_key_ring request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1088,6 +1264,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new
+              #
+              #   # Call the create_crypto_key method.
+              #   result = client.create_crypto_key request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+              #   p result
+              #
               def create_crypto_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1160,6 +1352,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new
+              #
+              #   # Call the create_crypto_key_version method.
+              #   result = client.create_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
               def create_crypto_key_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1309,6 +1517,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new
+              #
+              #   # Call the import_crypto_key_version method.
+              #   result = client.import_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
               def import_crypto_key_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1383,6 +1607,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::ImportJob]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::CreateImportJobRequest.new
+              #
+              #   # Call the create_import_job method.
+              #   result = client.create_import_job request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::ImportJob.
+              #   p result
+              #
               def create_import_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1447,6 +1687,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new
+              #
+              #   # Call the update_crypto_key method.
+              #   result = client.update_crypto_key request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+              #   p result
+              #
               def update_crypto_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1523,6 +1779,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new
+              #
+              #   # Call the update_crypto_key_version method.
+              #   result = client.update_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
               def update_crypto_key_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1594,6 +1866,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new
+              #
+              #   # Call the update_crypto_key_primary_version method.
+              #   result = client.update_crypto_key_primary_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+              #   p result
+              #
               def update_crypto_key_primary_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1677,6 +1965,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new
+              #
+              #   # Call the destroy_crypto_key_version method.
+              #   result = client.destroy_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
               def destroy_crypto_key_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1748,6 +2052,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new
+              #
+              #   # Call the restore_crypto_key_version method.
+              #   result = client.restore_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
               def restore_crypto_key_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1885,6 +2205,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::EncryptResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::EncryptRequest.new
+              #
+              #   # Call the encrypt method.
+              #   result = client.encrypt request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::EncryptResponse.
+              #   p result
+              #
               def encrypt request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1998,6 +2334,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::DecryptResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::DecryptRequest.new
+              #
+              #   # Call the decrypt method.
+              #   result = client.decrypt request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::DecryptResponse.
+              #   p result
+              #
               def decrypt request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2148,6 +2500,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::RawEncryptResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::RawEncryptRequest.new
+              #
+              #   # Call the raw_encrypt method.
+              #   result = client.raw_encrypt request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::RawEncryptResponse.
+              #   p result
+              #
               def raw_encrypt request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2278,6 +2646,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::RawDecryptResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::RawDecryptRequest.new
+              #
+              #   # Call the raw_decrypt method.
+              #   result = client.raw_decrypt request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::RawDecryptResponse.
+              #   p result
+              #
               def raw_decrypt request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2399,6 +2783,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::AsymmetricSignRequest.new
+              #
+              #   # Call the asymmetric_sign method.
+              #   result = client.asymmetric_sign request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::AsymmetricSignResponse.
+              #   p result
+              #
               def asymmetric_sign request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2491,6 +2891,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new
+              #
+              #   # Call the asymmetric_decrypt method.
+              #   result = client.asymmetric_decrypt request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::AsymmetricDecryptResponse.
+              #   p result
+              #
               def asymmetric_decrypt request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2578,6 +2994,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::MacSignResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::MacSignRequest.new
+              #
+              #   # Call the mac_sign method.
+              #   result = client.mac_sign request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::MacSignResponse.
+              #   p result
+              #
               def mac_sign request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2687,6 +3119,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::MacVerifyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::MacVerifyRequest.new
+              #
+              #   # Call the mac_verify method.
+              #   result = client.mac_verify request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::MacVerifyResponse.
+              #   p result
+              #
               def mac_verify request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2759,6 +3207,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::GenerateRandomBytesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new
+              #
+              #   # Call the generate_random_bytes method.
+              #   result = client.generate_random_bytes request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::GenerateRandomBytesResponse.
+              #   p result
+              #
               def generate_random_bytes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
