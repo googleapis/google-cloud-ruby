@@ -171,6 +171,22 @@ module Google
                 # @return [::Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/policy_troubleshooter/iam/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::PolicyTroubleshooter::Iam::V3::PolicyTroubleshooter::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyRequest.new
+                #
+                #   # Call the troubleshoot_iam_policy method.
+                #   result = client.troubleshoot_iam_policy request
+                #
+                #   # The returned object is of type Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyResponse.
+                #   p result
+                #
                 def troubleshoot_iam_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
