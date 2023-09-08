@@ -254,6 +254,11 @@
                 "list_purchasable_offers"
               ]
             },
+            "QueryEligibleBillingAccounts": {
+              "methods": [
+                "query_eligible_billing_accounts"
+              ]
+            },
             "RegisterSubscriber": {
               "methods": [
                 "register_subscriber"

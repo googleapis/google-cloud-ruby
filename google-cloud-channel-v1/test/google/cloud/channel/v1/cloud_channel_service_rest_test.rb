@@ -637,6 +637,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     sku = "hello world"
     language_code = "hello world"
+    billing_account = "hello world"
 
     list_transferable_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -652,27 +653,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code }) do |_result, response|
+        client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transferable_offers cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code do |_result, response|
+        client.list_transferable_offers cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transferable_offers ::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code) do |_result, response|
+        client.list_transferable_offers ::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code }, call_options) do |_result, response|
+        client.list_transferable_offers({ cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transferable_offers(::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code), call_options) do |_result, response|
+        client.list_transferable_offers(::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code, billing_account: billing_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -918,6 +919,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     parameters = [{}]
     purchase_order_id = "hello world"
     request_id = "hello world"
+    billing_account = "hello world"
 
     change_offer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -933,27 +935,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id }) do |_result, response|
+        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id do |_result, response|
+        client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id) do |_result, response|
+        client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id }, call_options) do |_result, response|
+        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id), call_options) do |_result, response|
+        client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2519,6 +2521,61 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
 
         # Verify method calls
         assert_equal 5, list_purchasable_offers_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_eligible_billing_accounts
+    # Create test objects.
+    client_result = ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    customer = "hello world"
+    skus = ["hello world"]
+
+    query_eligible_billing_accounts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ServiceStub.stub :transcode_query_eligible_billing_accounts_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_eligible_billing_accounts_client_stub do
+        # Create client
+        client = ::Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_eligible_billing_accounts({ customer: customer, skus: skus }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_eligible_billing_accounts customer: customer, skus: skus do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_eligible_billing_accounts ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest.new(customer: customer, skus: skus) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_eligible_billing_accounts({ customer: customer, skus: skus }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_eligible_billing_accounts(::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest.new(customer: customer, skus: skus), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_eligible_billing_accounts_client_stub.call_count
       end
     end
   end
