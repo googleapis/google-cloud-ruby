@@ -327,6 +327,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::ExportAssetsRequest.new
+              #
+              #   # Call the export_assets method.
+              #   result = client.export_assets request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def export_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -446,6 +469,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::ListAssetsRequest.new
+              #
+              #   # Call the list_assets method.
+              #   result = client.list_assets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::Asset.
+              #     p item
+              #   end
+              #
               def list_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -552,6 +595,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new
+              #
+              #   # Call the batch_get_assets_history method.
+              #   result = client.batch_get_assets_history request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse.
+              #   p result
+              #
               def batch_get_assets_history request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -627,6 +686,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::Feed]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::CreateFeedRequest.new
+              #
+              #   # Call the create_feed method.
+              #   result = client.create_feed request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::Feed.
+              #   p result
+              #
               def create_feed request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -692,6 +767,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::Feed]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::GetFeedRequest.new
+              #
+              #   # Call the get_feed method.
+              #   result = client.get_feed request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::Feed.
+              #   p result
+              #
               def get_feed request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -756,6 +847,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::ListFeedsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::ListFeedsRequest.new
+              #
+              #   # Call the list_feeds method.
+              #   result = client.list_feeds request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::ListFeedsResponse.
+              #   p result
+              #
               def list_feeds request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -826,6 +933,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::Feed]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::UpdateFeedRequest.new
+              #
+              #   # Call the update_feed method.
+              #   result = client.update_feed request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::Feed.
+              #   p result
+              #
               def update_feed request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -891,6 +1014,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::DeleteFeedRequest.new
+              #
+              #   # Call the delete_feed method.
+              #   result = client.delete_feed request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_feed request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1102,6 +1241,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::ResourceSearchResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::SearchAllResourcesRequest.new
+              #
+              #   # Call the search_all_resources method.
+              #   result = client.search_all_resources request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
+              #     p item
+              #   end
+              #
               def search_all_resources request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1262,6 +1421,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::IamPolicySearchResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new
+              #
+              #   # Call the search_all_iam_policies method.
+              #   result = client.search_all_iam_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::IamPolicySearchResult.
+              #     p item
+              #   end
+              #
               def search_all_iam_policies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1355,6 +1534,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new
+              #
+              #   # Call the analyze_iam_policy method.
+              #   result = client.analyze_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse.
+              #   p result
+              #
               def analyze_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1446,6 +1641,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new
+              #
+              #   # Call the analyze_iam_policy_longrunning method.
+              #   result = client.analyze_iam_policy_longrunning request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def analyze_iam_policy_longrunning request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1525,6 +1743,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::AnalyzeMoveResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::AnalyzeMoveRequest.new
+              #
+              #   # Call the analyze_move method.
+              #   result = client.analyze_move request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::AnalyzeMoveResponse.
+              #   p result
+              #
               def analyze_move request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1654,6 +1888,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::QueryAssetsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::QueryAssetsRequest.new
+              #
+              #   # Call the query_assets method.
+              #   result = client.query_assets request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::QueryAssetsResponse.
+              #   p result
+              #
               def query_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1733,6 +1983,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::SavedQuery]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::CreateSavedQueryRequest.new
+              #
+              #   # Call the create_saved_query method.
+              #   result = client.create_saved_query request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+              #   p result
+              #
               def create_saved_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1799,6 +2065,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::SavedQuery]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::GetSavedQueryRequest.new
+              #
+              #   # Call the get_saved_query method.
+              #   result = client.get_saved_query request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+              #   p result
+              #
               def get_saved_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1882,6 +2164,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::SavedQuery>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::ListSavedQueriesRequest.new
+              #
+              #   # Call the list_saved_queries method.
+              #   result = client.list_saved_queries request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::SavedQuery.
+              #     p item
+              #   end
+              #
               def list_saved_queries request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1954,6 +2256,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::SavedQuery]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new
+              #
+              #   # Call the update_saved_query method.
+              #   result = client.update_saved_query request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+              #   p result
+              #
               def update_saved_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2021,6 +2339,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new
+              #
+              #   # Call the delete_saved_query method.
+              #   result = client.delete_saved_query request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_saved_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2099,6 +2433,22 @@ module Google
               # @return [::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new
+              #
+              #   # Call the batch_get_effective_iam_policies method.
+              #   result = client.batch_get_effective_iam_policies request
+              #
+              #   # The returned object is of type Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse.
+              #   p result
+              #
               def batch_get_effective_iam_policies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2183,6 +2533,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new
+              #
+              #   # Call the analyze_org_policies method.
+              #   result = client.analyze_org_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult.
+              #     p item
+              #   end
+              #
               def analyze_org_policies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2270,6 +2640,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new
+              #
+              #   # Call the analyze_org_policy_governed_containers method.
+              #   result = client.analyze_org_policy_governed_containers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer.
+              #     p item
+              #   end
+              #
               def analyze_org_policy_governed_containers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2379,6 +2769,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/asset/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Asset::V1::AssetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new
+              #
+              #   # Call the analyze_org_policy_governed_assets method.
+              #   result = client.analyze_org_policy_governed_assets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset.
+              #     p item
+              #   end
+              #
               def analyze_org_policy_governed_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

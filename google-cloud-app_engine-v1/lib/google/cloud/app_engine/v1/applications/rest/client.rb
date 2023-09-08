@@ -173,6 +173,22 @@ module Google
               # @return [::Google::Cloud::AppEngine::V1::Application]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::GetApplicationRequest.new
+              #
+              #   # Call the get_application method.
+              #   result = client.get_application request
+              #
+              #   # The returned object is of type Google::Cloud::AppEngine::V1::Application.
+              #   p result
+              #
               def get_application request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -241,6 +257,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::CreateApplicationRequest.new
+              #
+              #   # Call the create_application method.
+              #   result = client.create_application request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_application request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -313,6 +352,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new
+              #
+              #   # Call the update_application method.
+              #   result = client.update_application request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_application request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -385,6 +447,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::RepairApplicationRequest.new
+              #
+              #   # Call the repair_application method.
+              #   result = client.repair_application request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def repair_application request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
