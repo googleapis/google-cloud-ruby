@@ -21,6 +21,7 @@ module Google
   module Cloud
     module NetApp
       module V1
+        # GetKmsConfigRequest gets a KMS Config.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the KmsConfig
@@ -29,6 +30,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # ListKmsConfigsRequest lists KMS Configs.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value
@@ -50,6 +52,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # ListKmsConfigsResponse is the response to a ListKmsConfigsRequest.
         # @!attribute [rw] kms_configs
         #   @return [::Array<::Google::Cloud::NetApp::V1::KmsConfig>]
         #     The list of KmsConfigs
@@ -64,6 +67,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # CreateKmsConfigRequest creates a KMS Config.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Value for parent.
@@ -80,6 +84,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # UpdateKmsConfigRequest updates a KMS Config.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Field mask is used to specify the fields to be overwritten in the
@@ -95,6 +100,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DeleteKmsConfigRequest deletes a KMS Config.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the KmsConfig.

@@ -249,6 +249,7 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
                 end
 
                 @net_app_stub = ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
@@ -306,6 +307,26 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ListStoragePoolsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new
+              #
+              #   # Call the list_storage_pools method.
+              #   result = client.list_storage_pools request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetApp::V1::StoragePool.
+              #     p item
+              #   end
+              #
               def list_storage_pools request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -374,6 +395,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new
+              #
+              #   # Call the create_storage_pool method.
+              #   result = client.create_storage_pool request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_storage_pool request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -437,6 +481,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::StoragePool]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::GetStoragePoolRequest.new
+              #
+              #   # Call the get_storage_pool method.
+              #   result = client.get_storage_pool request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::StoragePool.
+              #   p result
+              #
               def get_storage_pool request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -505,6 +565,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new
+              #
+              #   # Call the update_storage_pool method.
+              #   result = client.update_storage_pool request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_storage_pool request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -568,6 +651,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new
+              #
+              #   # Call the delete_storage_pool method.
+              #   result = client.delete_storage_pool request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_storage_pool request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -640,6 +746,26 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ListVolumesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ListVolumesRequest.new
+              #
+              #   # Call the list_volumes method.
+              #   result = client.list_volumes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetApp::V1::Volume.
+              #     p item
+              #   end
+              #
               def list_volumes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -702,6 +828,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::Volume]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::GetVolumeRequest.new
+              #
+              #   # Call the get_volume method.
+              #   result = client.get_volume request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::Volume.
+              #   p result
+              #
               def get_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -770,6 +912,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::CreateVolumeRequest.new
+              #
+              #   # Call the create_volume method.
+              #   result = client.create_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -839,6 +1004,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::UpdateVolumeRequest.new
+              #
+              #   # Call the update_volume method.
+              #   result = client.update_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -906,6 +1094,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::DeleteVolumeRequest.new
+              #
+              #   # Call the delete_volume method.
+              #   result = client.delete_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -976,6 +1187,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::RevertVolumeRequest.new
+              #
+              #   # Call the revert_volume method.
+              #   result = client.revert_volume request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def revert_volume request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1050,6 +1284,26 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ListSnapshotsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ListSnapshotsRequest.new
+              #
+              #   # Call the list_snapshots method.
+              #   result = client.list_snapshots request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetApp::V1::Snapshot.
+              #     p item
+              #   end
+              #
               def list_snapshots request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1113,6 +1367,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::Snapshot]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::GetSnapshotRequest.new
+              #
+              #   # Call the get_snapshot method.
+              #   result = client.get_snapshot request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::Snapshot.
+              #   p result
+              #
               def get_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1182,6 +1452,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::CreateSnapshotRequest.new
+              #
+              #   # Call the create_snapshot method.
+              #   result = client.create_snapshot request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1246,6 +1539,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new
+              #
+              #   # Call the delete_snapshot method.
+              #   result = client.delete_snapshot request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1312,6 +1628,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new
+              #
+              #   # Call the update_snapshot method.
+              #   result = client.update_snapshot request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1384,6 +1723,26 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ListActiveDirectoriesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new
+              #
+              #   # Call the list_active_directories method.
+              #   result = client.list_active_directories request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetApp::V1::ActiveDirectory.
+              #     p item
+              #   end
+              #
               def list_active_directories request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1446,6 +1805,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ActiveDirectory]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new
+              #
+              #   # Call the get_active_directory method.
+              #   result = client.get_active_directory request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::ActiveDirectory.
+              #   p result
+              #
               def get_active_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1513,6 +1888,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new
+              #
+              #   # Call the create_active_directory method.
+              #   result = client.create_active_directory request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_active_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1582,6 +1980,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new
+              #
+              #   # Call the update_active_directory method.
+              #   result = client.update_active_directory request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_active_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1645,6 +2066,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new
+              #
+              #   # Call the delete_active_directory method.
+              #   result = client.delete_active_directory request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_active_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1717,6 +2161,26 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ListKmsConfigsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new
+              #
+              #   # Call the list_kms_configs method.
+              #   result = client.list_kms_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetApp::V1::KmsConfig.
+              #     p item
+              #   end
+              #
               def list_kms_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1785,6 +2249,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new
+              #
+              #   # Call the create_kms_config method.
+              #   result = client.create_kms_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_kms_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1848,6 +2335,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::KmsConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::GetKmsConfigRequest.new
+              #
+              #   # Call the get_kms_config method.
+              #   result = client.get_kms_config request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::KmsConfig.
+              #   p result
+              #
               def get_kms_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1916,6 +2419,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new
+              #
+              #   # Call the update_kms_config method.
+              #   result = client.update_kms_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_kms_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1980,6 +2506,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::EncryptVolumesRequest.new
+              #
+              #   # Call the encrypt_volumes method.
+              #   result = client.encrypt_volumes request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def encrypt_volumes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2043,6 +2592,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::VerifyKmsConfigResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new
+              #
+              #   # Call the verify_kms_config method.
+              #   result = client.verify_kms_config request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::VerifyKmsConfigResponse.
+              #   p result
+              #
               def verify_kms_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2105,6 +2670,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new
+              #
+              #   # Call the delete_kms_config method.
+              #   result = client.delete_kms_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_kms_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2179,6 +2767,26 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::ListReplicationsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ListReplicationsRequest.new
+              #
+              #   # Call the list_replications method.
+              #   result = client.list_replications request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetApp::V1::Replication.
+              #     p item
+              #   end
+              #
               def list_replications request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2242,6 +2850,22 @@ module Google
               # @return [::Google::Cloud::NetApp::V1::Replication]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::GetReplicationRequest.new
+              #
+              #   # Call the get_replication method.
+              #   result = client.get_replication request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::Replication.
+              #   p result
+              #
               def get_replication request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2311,6 +2935,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::CreateReplicationRequest.new
+              #
+              #   # Call the create_replication method.
+              #   result = client.create_replication request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_replication request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2375,6 +3022,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::DeleteReplicationRequest.new
+              #
+              #   # Call the delete_replication method.
+              #   result = client.delete_replication request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_replication request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2441,6 +3111,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::UpdateReplicationRequest.new
+              #
+              #   # Call the update_replication method.
+              #   result = client.update_replication request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_replication request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2512,6 +3205,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::StopReplicationRequest.new
+              #
+              #   # Call the stop_replication method.
+              #   result = client.stop_replication request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def stop_replication request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2576,6 +3292,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ResumeReplicationRequest.new
+              #
+              #   # Call the resume_replication method.
+              #   result = client.resume_replication request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def resume_replication request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2641,6 +3380,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new
+              #
+              #   # Call the reverse_replication_direction method.
+              #   result = client.reverse_replication_direction request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def reverse_replication_direction request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2764,6 +3526,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
