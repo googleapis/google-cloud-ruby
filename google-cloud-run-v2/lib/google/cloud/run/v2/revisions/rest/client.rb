@@ -191,6 +191,22 @@ module Google
               # @return [::Google::Cloud::Run::V2::Revision]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Revisions::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Run::V2::GetRevisionRequest.new
+              #
+              #   # Call the get_revision method.
+              #   result = client.get_revision request
+              #
+              #   # The returned object is of type Google::Cloud::Run::V2::Revision.
+              #   p result
+              #
               def get_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -263,6 +279,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Run::V2::Revision>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Revisions::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Run::V2::ListRevisionsRequest.new
+              #
+              #   # Call the list_revisions method.
+              #   result = client.list_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Run::V2::Revision.
+              #     p item
+              #   end
+              #
               def list_revisions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -334,6 +370,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Revisions::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Run::V2::DeleteRevisionRequest.new
+              #
+              #   # Call the delete_revision method.
+              #   result = client.delete_revision request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -184,6 +184,22 @@ module Google
               # @return [::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommendation_engine/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new
+              #
+              #   # Call the create_prediction_api_key_registration method.
+              #   result = client.create_prediction_api_key_registration request
+              #
+              #   # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration.
+              #   p result
+              #
               def create_prediction_api_key_registration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -252,6 +268,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommendation_engine/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new
+              #
+              #   # Call the list_prediction_api_key_registrations method.
+              #   result = client.list_prediction_api_key_registrations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration.
+              #     p item
+              #   end
+              #
               def list_prediction_api_key_registrations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -316,6 +352,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommendation_engine/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new
+              #
+              #   # Call the delete_prediction_api_key_registration method.
+              #   result = client.delete_prediction_api_key_registration request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_prediction_api_key_registration request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
