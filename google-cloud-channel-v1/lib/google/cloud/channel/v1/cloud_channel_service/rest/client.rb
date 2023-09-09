@@ -248,6 +248,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Customer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListCustomersRequest.new
+              #
+              #   # Call the list_customers method.
+              #   result = client.list_customers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Customer.
+              #     p item
+              #   end
+              #
               def list_customers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -324,6 +344,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::Customer]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::GetCustomerRequest.new
+              #
+              #   # Call the get_customer method.
+              #   result = client.get_customer request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+              #   p result
+              #
               def get_customer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -407,6 +443,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new
+              #
+              #   # Call the check_cloud_identity_accounts_exist method.
+              #   result = client.check_cloud_identity_accounts_exist request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistResponse.
+              #   p result
+              #
               def check_cloud_identity_accounts_exist request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -487,6 +539,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::Customer]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CreateCustomerRequest.new
+              #
+              #   # Call the create_customer method.
+              #   result = client.create_customer request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+              #   p result
+              #
               def create_customer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -564,6 +632,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::Customer]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::UpdateCustomerRequest.new
+              #
+              #   # Call the update_customer method.
+              #   result = client.update_customer request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+              #   p result
+              #
               def update_customer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -635,6 +719,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::DeleteCustomerRequest.new
+              #
+              #   # Call the delete_customer method.
+              #   result = client.delete_customer request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_customer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -740,6 +840,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::Customer]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ImportCustomerRequest.new
+              #
+              #   # Call the import_customer method.
+              #   result = client.import_customer request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+              #   p result
+              #
               def import_customer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -832,6 +948,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest.new
+              #
+              #   # Call the provision_cloud_identity method.
+              #   result = client.provision_cloud_identity request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def provision_cloud_identity request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -918,6 +1057,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Entitlement>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListEntitlementsRequest.new
+              #
+              #   # Call the list_entitlements method.
+              #   result = client.list_entitlements request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Entitlement.
+              #     p item
+              #   end
+              #
               def list_entitlements request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1029,6 +1188,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::TransferableSku>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListTransferableSkusRequest.new
+              #
+              #   # Call the list_transferable_skus method.
+              #   result = client.list_transferable_skus request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::TransferableSku.
+              #     p item
+              #   end
+              #
               def list_transferable_skus request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1141,6 +1320,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::TransferableOffer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListTransferableOffersRequest.new
+              #
+              #   # Call the list_transferable_offers method.
+              #   result = client.list_transferable_offers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::TransferableOffer.
+              #     p item
+              #   end
+              #
               def list_transferable_offers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1216,6 +1415,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::Entitlement]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::GetEntitlementRequest.new
+              #
+              #   # Call the get_entitlement method.
+              #   result = client.get_entitlement request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::Entitlement.
+              #   p result
+              #
               def get_entitlement request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1333,6 +1548,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CreateEntitlementRequest.new
+              #
+              #   # Call the create_entitlement method.
+              #   result = client.create_entitlement request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_entitlement request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1442,6 +1680,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ChangeParametersRequest.new
+              #
+              #   # Call the change_parameters method.
+              #   result = client.change_parameters request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def change_parameters request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1544,6 +1805,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ChangeRenewalSettingsRequest.new
+              #
+              #   # Call the change_renewal_settings method.
+              #   result = client.change_renewal_settings request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def change_renewal_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1658,6 +1942,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ChangeOfferRequest.new
+              #
+              #   # Call the change_offer method.
+              #   result = client.change_offer request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def change_offer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1759,6 +2066,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::StartPaidServiceRequest.new
+              #
+              #   # Call the start_paid_service method.
+              #   result = client.start_paid_service request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def start_paid_service request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1857,6 +2187,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::SuspendEntitlementRequest.new
+              #
+              #   # Call the suspend_entitlement method.
+              #   result = client.suspend_entitlement request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def suspend_entitlement request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1960,6 +2313,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CancelEntitlementRequest.new
+              #
+              #   # Call the cancel_entitlement method.
+              #   result = client.cancel_entitlement request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def cancel_entitlement request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2064,6 +2440,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ActivateEntitlementRequest.new
+              #
+              #   # Call the activate_entitlement method.
+              #   result = client.activate_entitlement request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def activate_entitlement request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2180,6 +2579,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::TransferEntitlementsRequest.new
+              #
+              #   # Call the transfer_entitlements method.
+              #   result = client.transfer_entitlements request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def transfer_entitlements request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2288,6 +2710,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::TransferEntitlementsToGoogleRequest.new
+              #
+              #   # Call the transfer_entitlements_to_google method.
+              #   result = client.transfer_entitlements_to_google request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def transfer_entitlements_to_google request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2376,6 +2821,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::ChannelPartnerLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest.new
+              #
+              #   # Call the list_channel_partner_links method.
+              #   result = client.list_channel_partner_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::ChannelPartnerLink.
+              #     p item
+              #   end
+              #
               def list_channel_partner_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2457,6 +2922,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::ChannelPartnerLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::GetChannelPartnerLinkRequest.new
+              #
+              #   # Call the get_channel_partner_link method.
+              #   result = client.get_channel_partner_link request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+              #   p result
+              #
               def get_channel_partner_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2547,6 +3028,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::ChannelPartnerLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new
+              #
+              #   # Call the create_channel_partner_link method.
+              #   result = client.create_channel_partner_link request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+              #   p result
+              #
               def create_channel_partner_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2639,6 +3136,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::ChannelPartnerLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest.new
+              #
+              #   # Call the update_channel_partner_link method.
+              #   result = client.update_channel_partner_link request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+              #   p result
+              #
               def update_channel_partner_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2719,6 +3232,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::GetCustomerRepricingConfigRequest.new
+              #
+              #   # Call the get_customer_repricing_config method.
+              #   result = client.get_customer_repricing_config request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::CustomerRepricingConfig.
+              #   p result
+              #
               def get_customer_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2827,6 +3356,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::CustomerRepricingConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListCustomerRepricingConfigsRequest.new
+              #
+              #   # Call the list_customer_repricing_configs method.
+              #   result = client.list_customer_repricing_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::CustomerRepricingConfig.
+              #     p item
+              #   end
+              #
               def list_customer_repricing_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2935,6 +3484,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CreateCustomerRepricingConfigRequest.new
+              #
+              #   # Call the create_customer_repricing_config method.
+              #   result = client.create_customer_repricing_config request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::CustomerRepricingConfig.
+              #   p result
+              #
               def create_customer_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3028,6 +3593,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::UpdateCustomerRepricingConfigRequest.new
+              #
+              #   # Call the update_customer_repricing_config method.
+              #   result = client.update_customer_repricing_config request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::CustomerRepricingConfig.
+              #   p result
+              #
               def update_customer_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3108,6 +3689,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::DeleteCustomerRepricingConfigRequest.new
+              #
+              #   # Call the delete_customer_repricing_config method.
+              #   result = client.delete_customer_repricing_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_customer_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3188,6 +3785,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::GetChannelPartnerRepricingConfigRequest.new
+              #
+              #   # Call the get_channel_partner_repricing_config method.
+              #   result = client.get_channel_partner_repricing_config request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig.
+              #   p result
+              #
               def get_channel_partner_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3299,6 +3912,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsRequest.new
+              #
+              #   # Call the list_channel_partner_repricing_configs method.
+              #   result = client.list_channel_partner_repricing_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig.
+              #     p item
+              #   end
+              #
               def list_channel_partner_repricing_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3408,6 +4041,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::CreateChannelPartnerRepricingConfigRequest.new
+              #
+              #   # Call the create_channel_partner_repricing_config method.
+              #   result = client.create_channel_partner_repricing_config request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig.
+              #   p result
+              #
               def create_channel_partner_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3501,6 +4150,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::UpdateChannelPartnerRepricingConfigRequest.new
+              #
+              #   # Call the update_channel_partner_repricing_config method.
+              #   result = client.update_channel_partner_repricing_config request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig.
+              #   p result
+              #
               def update_channel_partner_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3580,6 +4245,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::DeleteChannelPartnerRepricingConfigRequest.new
+              #
+              #   # Call the delete_channel_partner_repricing_config method.
+              #   result = client.delete_channel_partner_repricing_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_channel_partner_repricing_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3672,6 +4353,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::SkuGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListSkuGroupsRequest.new
+              #
+              #   # Call the list_sku_groups method.
+              #   result = client.list_sku_groups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::SkuGroup.
+              #     p item
+              #   end
+              #
               def list_sku_groups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3764,6 +4465,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::BillableSku>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest.new
+              #
+              #   # Call the list_sku_group_billable_skus method.
+              #   result = client.list_sku_group_billable_skus request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::BillableSku.
+              #     p item
+              #   end
+              #
               def list_sku_group_billable_skus request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3838,6 +4559,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::Offer]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::LookupOfferRequest.new
+              #
+              #   # Call the lookup_offer method.
+              #   result = client.lookup_offer request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::Offer.
+              #   p result
+              #
               def lookup_offer request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3915,6 +4652,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Product>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListProductsRequest.new
+              #
+              #   # Call the list_products method.
+              #   result = client.list_products request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Product.
+              #     p item
+              #   end
+              #
               def list_products request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3998,6 +4755,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Sku>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListSkusRequest.new
+              #
+              #   # Call the list_skus method.
+              #   result = client.list_skus request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Sku.
+              #     p item
+              #   end
+              #
               def list_skus request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4087,6 +4864,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Offer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListOffersRequest.new
+              #
+              #   # Call the list_offers method.
+              #   result = client.list_offers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Offer.
+              #     p item
+              #   end
+              #
               def list_offers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4173,6 +4970,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::PurchasableSku>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListPurchasableSkusRequest.new
+              #
+              #   # Call the list_purchasable_skus method.
+              #   result = client.list_purchasable_skus request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::PurchasableSku.
+              #     p item
+              #   end
+              #
               def list_purchasable_skus request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4262,6 +5079,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::PurchasableOffer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListPurchasableOffersRequest.new
+              #
+              #   # Call the list_purchasable_offers method.
+              #   result = client.list_purchasable_offers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::PurchasableOffer.
+              #     p item
+              #   end
+              #
               def list_purchasable_offers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4340,6 +5177,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest.new
+              #
+              #   # Call the query_eligible_billing_accounts method.
+              #   result = client.query_eligible_billing_accounts request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse.
+              #   p result
+              #
               def query_eligible_billing_accounts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4422,6 +5275,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::RegisterSubscriberResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::RegisterSubscriberRequest.new
+              #
+              #   # Call the register_subscriber method.
+              #   result = client.register_subscriber request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::RegisterSubscriberResponse.
+              #   p result
+              #
               def register_subscriber request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4507,6 +5376,22 @@ module Google
               # @return [::Google::Cloud::Channel::V1::UnregisterSubscriberResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new
+              #
+              #   # Call the unregister_subscriber method.
+              #   result = client.unregister_subscriber request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::UnregisterSubscriberResponse.
+              #   p result
+              #
               def unregister_subscriber request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4596,6 +5481,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::String>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListSubscribersRequest.new
+              #
+              #   # Call the list_subscribers method.
+              #   result = client.list_subscribers request
+              #
+              #   # The returned object is of type Google::Cloud::Channel::V1::ListSubscribersResponse.
+              #   p result
+              #
               def list_subscribers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4694,6 +5595,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::EntitlementChange>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new
+              #
+              #   # Call the list_entitlement_changes method.
+              #   result = client.list_entitlement_changes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::EntitlementChange.
+              #     p item
+              #   end
+              #
               def list_entitlement_changes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

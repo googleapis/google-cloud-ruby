@@ -186,6 +186,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesRequest.new
+              #
+              #   # Call the import_taxonomies method.
+              #   result = client.import_taxonomies request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesResponse.
+              #   p result
+              #
               def import_taxonomies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +272,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesRequest.new
+              #
+              #   # Call the export_taxonomies method.
+              #   result = client.export_taxonomies request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesResponse.
+              #   p result
+              #
               def export_taxonomies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
