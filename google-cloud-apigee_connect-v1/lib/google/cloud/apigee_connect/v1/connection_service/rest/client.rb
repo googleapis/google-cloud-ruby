@@ -179,6 +179,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeConnect::V1::Connection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new
+              #
+              #   # Call the list_connections method.
+              #   result = client.list_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeConnect::V1::Connection.
+              #     p item
+              #   end
+              #
               def list_connections request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

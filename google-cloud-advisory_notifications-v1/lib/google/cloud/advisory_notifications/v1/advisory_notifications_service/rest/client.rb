@@ -191,6 +191,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AdvisoryNotifications::V1::Notification>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/advisory_notifications/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new
+              #
+              #   # Call the list_notifications method.
+              #   result = client.list_notifications request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AdvisoryNotifications::V1::Notification.
+              #     p item
+              #   end
+              #
               def list_notifications request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -262,6 +282,22 @@ module Google
               # @return [::Google::Cloud::AdvisoryNotifications::V1::Notification]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/advisory_notifications/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new
+              #
+              #   # Call the get_notification method.
+              #   result = client.get_notification request
+              #
+              #   # The returned object is of type Google::Cloud::AdvisoryNotifications::V1::Notification.
+              #   p result
+              #
               def get_notification request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

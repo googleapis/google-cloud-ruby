@@ -229,6 +229,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Account]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetAccountRequest.new
+              #
+              #   # Call the get_account method.
+              #   result = client.get_account request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Account.
+              #   p result
+              #
               def get_account request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -307,6 +323,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::Account>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListAccountsRequest.new
+              #
+              #   # Call the list_accounts method.
+              #   result = client.list_accounts request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
+              #     p item
+              #   end
+              #
               def list_accounts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,6 +418,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteAccountRequest.new
+              #
+              #   # Call the delete_account method.
+              #   result = client.delete_account request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_account request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -450,6 +502,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Account]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateAccountRequest.new
+              #
+              #   # Call the update_account method.
+              #   result = client.update_account request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Account.
+              #   p result
+              #
               def update_account request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -515,6 +583,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest.new
+              #
+              #   # Call the provision_account_ticket method.
+              #   result = client.provision_account_ticket request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse.
+              #   p result
+              #
               def provision_account_ticket request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -585,6 +669,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccountSummary>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest.new
+              #
+              #   # Call the list_account_summaries method.
+              #   result = client.list_account_summaries request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AccountSummary.
+              #     p item
+              #   end
+              #
               def list_account_summaries request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -650,6 +754,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Property]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetPropertyRequest.new
+              #
+              #   # Call the get_property method.
+              #   result = client.get_property request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+              #   p result
+              #
               def get_property request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -746,6 +866,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::Property>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListPropertiesRequest.new
+              #
+              #   # Call the list_properties method.
+              #   result = client.list_properties request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Property.
+              #     p item
+              #   end
+              #
               def list_properties request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -810,6 +950,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Property]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreatePropertyRequest.new
+              #
+              #   # Call the create_property method.
+              #   result = client.create_property request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+              #   p result
+              #
               def create_property request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -884,6 +1040,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Property]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeletePropertyRequest.new
+              #
+              #   # Call the delete_property method.
+              #   result = client.delete_property request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+              #   p result
+              #
               def delete_property request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -953,6 +1125,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Property]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdatePropertyRequest.new
+              #
+              #   # Call the update_property method.
+              #   result = client.update_property request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+              #   p result
+              #
               def update_property request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1015,6 +1203,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::UserLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetUserLinkRequest.new
+              #
+              #   # Call the get_user_link method.
+              #   result = client.get_user_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+              #   p result
+              #
               def get_user_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1084,6 +1288,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest.new
+              #
+              #   # Call the batch_get_user_links method.
+              #   result = client.batch_get_user_links request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse.
+              #   p result
+              #
               def batch_get_user_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1156,6 +1376,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::UserLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListUserLinksRequest.new
+              #
+              #   # Call the list_user_links method.
+              #   result = client.list_user_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::UserLink.
+              #     p item
+              #   end
+              #
               def list_user_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1237,6 +1477,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AuditUserLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::AuditUserLinksRequest.new
+              #
+              #   # Call the audit_user_links method.
+              #   result = client.audit_user_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AuditUserLink.
+              #     p item
+              #   end
+              #
               def audit_user_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1309,6 +1569,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::UserLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new
+              #
+              #   # Call the create_user_link method.
+              #   result = client.create_user_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+              #   p result
+              #
               def create_user_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1384,6 +1660,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest.new
+              #
+              #   # Call the batch_create_user_links method.
+              #   result = client.batch_create_user_links request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse.
+              #   p result
+              #
               def batch_create_user_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1446,6 +1738,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::UserLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest.new
+              #
+              #   # Call the update_user_link method.
+              #   result = client.update_user_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+              #   p result
+              #
               def update_user_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1514,6 +1822,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest.new
+              #
+              #   # Call the batch_update_user_links method.
+              #   result = client.batch_update_user_links request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse.
+              #   p result
+              #
               def batch_update_user_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1576,6 +1900,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest.new
+              #
+              #   # Call the delete_user_link method.
+              #   result = client.delete_user_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_user_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1644,6 +1984,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new
+              #
+              #   # Call the batch_delete_user_links method.
+              #   result = client.batch_delete_user_links request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def batch_delete_user_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1711,6 +2067,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest.new
+              #
+              #   # Call the create_firebase_link method.
+              #   result = client.create_firebase_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::FirebaseLink.
+              #   p result
+              #
               def create_firebase_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1774,6 +2146,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteFirebaseLinkRequest.new
+              #
+              #   # Call the delete_firebase_link method.
+              #   result = client.delete_firebase_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_firebase_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1848,6 +2236,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::FirebaseLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new
+              #
+              #   # Call the list_firebase_links method.
+              #   result = client.list_firebase_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::FirebaseLink.
+              #     p item
+              #   end
+              #
               def list_firebase_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1915,6 +2323,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::GlobalSiteTag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetGlobalSiteTagRequest.new
+              #
+              #   # Call the get_global_site_tag method.
+              #   result = client.get_global_site_tag request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::GlobalSiteTag.
+              #   p result
+              #
               def get_global_site_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1979,6 +2403,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest.new
+              #
+              #   # Call the create_google_ads_link method.
+              #   result = client.create_google_ads_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+              #   p result
+              #
               def create_google_ads_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2046,6 +2486,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateGoogleAdsLinkRequest.new
+              #
+              #   # Call the update_google_ads_link method.
+              #   result = client.update_google_ads_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+              #   p result
+              #
               def update_google_ads_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2108,6 +2564,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteGoogleAdsLinkRequest.new
+              #
+              #   # Call the delete_google_ads_link method.
+              #   result = client.delete_google_ads_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_google_ads_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2180,6 +2652,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::GoogleAdsLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest.new
+              #
+              #   # Call the list_google_ads_links method.
+              #   result = client.list_google_ads_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+              #     p item
+              #   end
+              #
               def list_google_ads_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2246,6 +2738,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DataSharingSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest.new
+              #
+              #   # Call the get_data_sharing_settings method.
+              #   result = client.get_data_sharing_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataSharingSettings.
+              #   p result
+              #
               def get_data_sharing_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2310,6 +2818,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetMeasurementProtocolSecretRequest.new
+              #
+              #   # Call the get_measurement_protocol_secret method.
+              #   result = client.get_measurement_protocol_secret request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+              #   p result
+              #
               def get_measurement_protocol_secret request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2384,6 +2908,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListMeasurementProtocolSecretsRequest.new
+              #
+              #   # Call the list_measurement_protocol_secrets method.
+              #   result = client.list_measurement_protocol_secrets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+              #     p item
+              #   end
+              #
               def list_measurement_protocol_secrets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2450,6 +2994,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateMeasurementProtocolSecretRequest.new
+              #
+              #   # Call the create_measurement_protocol_secret method.
+              #   result = client.create_measurement_protocol_secret request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+              #   p result
+              #
               def create_measurement_protocol_secret request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2514,6 +3074,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteMeasurementProtocolSecretRequest.new
+              #
+              #   # Call the delete_measurement_protocol_secret method.
+              #   result = client.delete_measurement_protocol_secret request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_measurement_protocol_secret request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2579,6 +3155,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateMeasurementProtocolSecretRequest.new
+              #
+              #   # Call the update_measurement_protocol_secret method.
+              #   result = client.update_measurement_protocol_secret request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+              #   p result
+              #
               def update_measurement_protocol_secret request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2654,6 +3246,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest.new
+              #
+              #   # Call the acknowledge_user_data_collection method.
+              #   result = client.acknowledge_user_data_collection request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse.
+              #   p result
+              #
               def acknowledge_user_data_collection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2718,6 +3326,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest.new
+              #
+              #   # Call the get_sk_ad_network_conversion_value_schema method.
+              #   result = client.get_sk_ad_network_conversion_value_schema request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+              #   p result
+              #
               def get_sk_ad_network_conversion_value_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2783,6 +3407,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest.new
+              #
+              #   # Call the create_sk_ad_network_conversion_value_schema method.
+              #   result = client.create_sk_ad_network_conversion_value_schema request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+              #   p result
+              #
               def create_sk_ad_network_conversion_value_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2847,6 +3487,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest.new
+              #
+              #   # Call the delete_sk_ad_network_conversion_value_schema method.
+              #   result = client.delete_sk_ad_network_conversion_value_schema request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_sk_ad_network_conversion_value_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2912,6 +3568,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest.new
+              #
+              #   # Call the update_sk_ad_network_conversion_value_schema method.
+              #   result = client.update_sk_ad_network_conversion_value_schema request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+              #   p result
+              #
               def update_sk_ad_network_conversion_value_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2988,6 +3660,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest.new
+              #
+              #   # Call the list_sk_ad_network_conversion_value_schemas method.
+              #   result = client.list_sk_ad_network_conversion_value_schemas request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+              #     p item
+              #   end
+              #
               def list_sk_ad_network_conversion_value_schemas request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3080,6 +3772,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest.new
+              #
+              #   # Call the search_change_history_events method.
+              #   result = client.search_change_history_events request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent.
+              #     p item
+              #   end
+              #
               def search_change_history_events request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3144,6 +3856,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetGoogleSignalsSettingsRequest.new
+              #
+              #   # Call the get_google_signals_settings method.
+              #   result = client.get_google_signals_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleSignalsSettings.
+              #   p result
+              #
               def get_google_signals_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3212,6 +3940,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateGoogleSignalsSettingsRequest.new
+              #
+              #   # Call the update_google_signals_settings method.
+              #   result = client.update_google_signals_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleSignalsSettings.
+              #   p result
+              #
               def update_google_signals_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3277,6 +4021,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateConversionEventRequest.new
+              #
+              #   # Call the create_conversion_event method.
+              #   result = client.create_conversion_event request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ConversionEvent.
+              #   p result
+              #
               def create_conversion_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3345,6 +4105,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest.new
+              #
+              #   # Call the update_conversion_event method.
+              #   result = client.update_conversion_event request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ConversionEvent.
+              #   p result
+              #
               def update_conversion_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3409,6 +4185,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetConversionEventRequest.new
+              #
+              #   # Call the get_conversion_event method.
+              #   result = client.get_conversion_event request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ConversionEvent.
+              #   p result
+              #
               def get_conversion_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3473,6 +4265,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteConversionEventRequest.new
+              #
+              #   # Call the delete_conversion_event method.
+              #   result = client.delete_conversion_event request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_conversion_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3547,6 +4355,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ConversionEvent>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListConversionEventsRequest.new
+              #
+              #   # Call the list_conversion_events method.
+              #   result = client.list_conversion_events request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ConversionEvent.
+              #     p item
+              #   end
+              #
               def list_conversion_events request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3611,6 +4439,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest.new
+              #
+              #   # Call the get_display_video360_advertiser_link method.
+              #   result = client.get_display_video360_advertiser_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+              #   p result
+              #
               def get_display_video360_advertiser_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3684,6 +4528,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest.new
+              #
+              #   # Call the list_display_video360_advertiser_links method.
+              #   result = client.list_display_video360_advertiser_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+              #     p item
+              #   end
+              #
               def list_display_video360_advertiser_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3753,6 +4617,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest.new
+              #
+              #   # Call the create_display_video360_advertiser_link method.
+              #   result = client.create_display_video360_advertiser_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+              #   p result
+              #
               def create_display_video360_advertiser_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3816,6 +4696,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest.new
+              #
+              #   # Call the delete_display_video360_advertiser_link method.
+              #   result = client.delete_display_video360_advertiser_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_display_video360_advertiser_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3882,6 +4778,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest.new
+              #
+              #   # Call the update_display_video360_advertiser_link method.
+              #   result = client.update_display_video360_advertiser_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+              #   p result
+              #
               def update_display_video360_advertiser_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3945,6 +4857,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest.new
+              #
+              #   # Call the get_display_video360_advertiser_link_proposal method.
+              #   result = client.get_display_video360_advertiser_link_proposal request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+              #   p result
+              #
               def get_display_video360_advertiser_link_proposal request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4019,6 +4947,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest.new
+              #
+              #   # Call the list_display_video360_advertiser_link_proposals method.
+              #   result = client.list_display_video360_advertiser_link_proposals request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+              #     p item
+              #   end
+              #
               def list_display_video360_advertiser_link_proposals request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4084,6 +5032,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest.new
+              #
+              #   # Call the create_display_video360_advertiser_link_proposal method.
+              #   result = client.create_display_video360_advertiser_link_proposal request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+              #   p result
+              #
               def create_display_video360_advertiser_link_proposal request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4148,6 +5112,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest.new
+              #
+              #   # Call the delete_display_video360_advertiser_link_proposal method.
+              #   result = client.delete_display_video360_advertiser_link_proposal request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_display_video360_advertiser_link_proposal request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4213,6 +5193,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest.new
+              #
+              #   # Call the approve_display_video360_advertiser_link_proposal method.
+              #   result = client.approve_display_video360_advertiser_link_proposal request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse.
+              #   p result
+              #
               def approve_display_video360_advertiser_link_proposal request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4280,6 +5276,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest.new
+              #
+              #   # Call the cancel_display_video360_advertiser_link_proposal method.
+              #   result = client.cancel_display_video360_advertiser_link_proposal request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+              #   p result
+              #
               def cancel_display_video360_advertiser_link_proposal request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4344,6 +5356,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateCustomDimensionRequest.new
+              #
+              #   # Call the create_custom_dimension method.
+              #   result = client.create_custom_dimension request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+              #   p result
+              #
               def create_custom_dimension request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4410,6 +5438,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateCustomDimensionRequest.new
+              #
+              #   # Call the update_custom_dimension method.
+              #   result = client.update_custom_dimension request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+              #   p result
+              #
               def update_custom_dimension request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4482,6 +5526,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::CustomDimension>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListCustomDimensionsRequest.new
+              #
+              #   # Call the list_custom_dimensions method.
+              #   result = client.list_custom_dimensions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomDimension.
+              #     p item
+              #   end
+              #
               def list_custom_dimensions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4546,6 +5610,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ArchiveCustomDimensionRequest.new
+              #
+              #   # Call the archive_custom_dimension method.
+              #   result = client.archive_custom_dimension request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def archive_custom_dimension request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4609,6 +5689,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetCustomDimensionRequest.new
+              #
+              #   # Call the get_custom_dimension method.
+              #   result = client.get_custom_dimension request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+              #   p result
+              #
               def get_custom_dimension request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4673,6 +5769,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateCustomMetricRequest.new
+              #
+              #   # Call the create_custom_metric method.
+              #   result = client.create_custom_metric request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomMetric.
+              #   p result
+              #
               def create_custom_metric request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4739,6 +5851,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateCustomMetricRequest.new
+              #
+              #   # Call the update_custom_metric method.
+              #   result = client.update_custom_metric request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomMetric.
+              #   p result
+              #
               def update_custom_metric request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4811,6 +5939,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::CustomMetric>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListCustomMetricsRequest.new
+              #
+              #   # Call the list_custom_metrics method.
+              #   result = client.list_custom_metrics request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomMetric.
+              #     p item
+              #   end
+              #
               def list_custom_metrics request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4875,6 +6023,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ArchiveCustomMetricRequest.new
+              #
+              #   # Call the archive_custom_metric method.
+              #   result = client.archive_custom_metric request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def archive_custom_metric request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4938,6 +6102,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetCustomMetricRequest.new
+              #
+              #   # Call the get_custom_metric method.
+              #   result = client.get_custom_metric request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomMetric.
+              #   p result
+              #
               def get_custom_metric request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5003,6 +6183,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest.new
+              #
+              #   # Call the get_data_retention_settings method.
+              #   result = client.get_data_retention_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataRetentionSettings.
+              #   p result
+              #
               def get_data_retention_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5071,6 +6267,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest.new
+              #
+              #   # Call the update_data_retention_settings method.
+              #   result = client.update_data_retention_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataRetentionSettings.
+              #   p result
+              #
               def update_data_retention_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5135,6 +6347,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DataStream]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateDataStreamRequest.new
+              #
+              #   # Call the create_data_stream method.
+              #   result = client.create_data_stream request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataStream.
+              #   p result
+              #
               def create_data_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5198,6 +6426,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteDataStreamRequest.new
+              #
+              #   # Call the delete_data_stream method.
+              #   result = client.delete_data_stream request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_data_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5264,6 +6508,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DataStream]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateDataStreamRequest.new
+              #
+              #   # Call the update_data_stream method.
+              #   result = client.update_data_stream request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataStream.
+              #   p result
+              #
               def update_data_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5336,6 +6596,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DataStream>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListDataStreamsRequest.new
+              #
+              #   # Call the list_data_streams method.
+              #   result = client.list_data_streams request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DataStream.
+              #     p item
+              #   end
+              #
               def list_data_streams request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5400,6 +6680,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::DataStream]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetDataStreamRequest.new
+              #
+              #   # Call the get_data_stream method.
+              #   result = client.get_data_stream request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataStream.
+              #   p result
+              #
               def get_data_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5465,6 +6761,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Audience]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetAudienceRequest.new
+              #
+              #   # Call the get_audience method.
+              #   result = client.get_audience request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Audience.
+              #   p result
+              #
               def get_audience request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5539,6 +6851,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::Audience>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListAudiencesRequest.new
+              #
+              #   # Call the list_audiences method.
+              #   result = client.list_audiences request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Audience.
+              #     p item
+              #   end
+              #
               def list_audiences request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5604,6 +6936,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Audience]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateAudienceRequest.new
+              #
+              #   # Call the create_audience method.
+              #   result = client.create_audience request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Audience.
+              #   p result
+              #
               def create_audience request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5672,6 +7020,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::Audience]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateAudienceRequest.new
+              #
+              #   # Call the update_audience method.
+              #   result = client.update_audience request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::Audience.
+              #   p result
+              #
               def update_audience request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5734,6 +7098,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest.new
+              #
+              #   # Call the archive_audience method.
+              #   result = client.archive_audience request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def archive_audience request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5797,6 +7177,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest.new
+              #
+              #   # Call the get_search_ads360_link method.
+              #   result = client.get_search_ads360_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SearchAds360Link.
+              #   p result
+              #
               def get_search_ads360_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5870,6 +7266,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SearchAds360Link>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest.new
+              #
+              #   # Call the list_search_ads360_links method.
+              #   result = client.list_search_ads360_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SearchAds360Link.
+              #     p item
+              #   end
+              #
               def list_search_ads360_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5935,6 +7351,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest.new
+              #
+              #   # Call the create_search_ads360_link method.
+              #   result = client.create_search_ads360_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SearchAds360Link.
+              #   p result
+              #
               def create_search_ads360_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5998,6 +7430,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest.new
+              #
+              #   # Call the delete_search_ads360_link method.
+              #   result = client.delete_search_ads360_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_search_ads360_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6064,6 +7512,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest.new
+              #
+              #   # Call the update_search_ads360_link method.
+              #   result = client.update_search_ads360_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SearchAds360Link.
+              #   p result
+              #
               def update_search_ads360_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6127,6 +7591,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest.new
+              #
+              #   # Call the get_attribution_settings method.
+              #   result = client.get_attribution_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AttributionSettings.
+              #   p result
+              #
               def get_attribution_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6195,6 +7675,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateAttributionSettingsRequest.new
+              #
+              #   # Call the update_attribution_settings method.
+              #   result = client.update_attribution_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AttributionSettings.
+              #   p result
+              #
               def update_attribution_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6333,6 +7829,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::RunAccessReportResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new
+              #
+              #   # Call the run_access_report method.
+              #   result = client.run_access_report request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::RunAccessReportResponse.
+              #   p result
+              #
               def run_access_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6399,6 +7911,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest.new
+              #
+              #   # Call the create_access_binding method.
+              #   result = client.create_access_binding request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AccessBinding.
+              #   p result
+              #
               def create_access_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6464,6 +7992,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetAccessBindingRequest.new
+              #
+              #   # Call the get_access_binding method.
+              #   result = client.get_access_binding request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AccessBinding.
+              #   p result
+              #
               def get_access_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6526,6 +8070,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest.new
+              #
+              #   # Call the update_access_binding method.
+              #   result = client.update_access_binding request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AccessBinding.
+              #   p result
+              #
               def update_access_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6590,6 +8150,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest.new
+              #
+              #   # Call the delete_access_binding method.
+              #   result = client.delete_access_binding request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_access_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6664,6 +8240,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccessBinding>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest.new
+              #
+              #   # Call the list_access_bindings method.
+              #   result = client.list_access_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AccessBinding.
+              #     p item
+              #   end
+              #
               def list_access_bindings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6738,6 +8334,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest.new
+              #
+              #   # Call the batch_create_access_bindings method.
+              #   result = client.batch_create_access_bindings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse.
+              #   p result
+              #
               def batch_create_access_bindings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6810,6 +8422,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest.new
+              #
+              #   # Call the batch_get_access_bindings method.
+              #   result = client.batch_get_access_bindings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse.
+              #   p result
+              #
               def batch_get_access_bindings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6881,6 +8509,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest.new
+              #
+              #   # Call the batch_update_access_bindings method.
+              #   result = client.batch_update_access_bindings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse.
+              #   p result
+              #
               def batch_update_access_bindings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6950,6 +8594,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest.new
+              #
+              #   # Call the batch_delete_access_bindings method.
+              #   result = client.batch_delete_access_bindings request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def batch_delete_access_bindings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7013,6 +8673,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest.new
+              #
+              #   # Call the get_expanded_data_set method.
+              #   result = client.get_expanded_data_set request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+              #   p result
+              #
               def get_expanded_data_set request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7085,6 +8761,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ExpandedDataSet>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest.new
+              #
+              #   # Call the list_expanded_data_sets method.
+              #   result = client.list_expanded_data_sets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+              #     p item
+              #   end
+              #
               def list_expanded_data_sets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7150,6 +8846,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest.new
+              #
+              #   # Call the create_expanded_data_set method.
+              #   result = client.create_expanded_data_set request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+              #   p result
+              #
               def create_expanded_data_set request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7219,6 +8931,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest.new
+              #
+              #   # Call the update_expanded_data_set method.
+              #   result = client.update_expanded_data_set request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+              #   p result
+              #
               def update_expanded_data_set request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7281,6 +9009,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest.new
+              #
+              #   # Call the delete_expanded_data_set method.
+              #   result = client.delete_expanded_data_set request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_expanded_data_set request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7344,6 +9088,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetChannelGroupRequest.new
+              #
+              #   # Call the get_channel_group method.
+              #   result = client.get_channel_group request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ChannelGroup.
+              #   p result
+              #
               def get_channel_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7417,6 +9177,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChannelGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest.new
+              #
+              #   # Call the list_channel_groups method.
+              #   result = client.list_channel_groups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ChannelGroup.
+              #     p item
+              #   end
+              #
               def list_channel_groups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7483,6 +9263,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest.new
+              #
+              #   # Call the create_channel_group method.
+              #   result = client.create_channel_group request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ChannelGroup.
+              #   p result
+              #
               def create_channel_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7552,6 +9348,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest.new
+              #
+              #   # Call the update_channel_group method.
+              #   result = client.update_channel_group request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ChannelGroup.
+              #   p result
+              #
               def update_channel_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7615,6 +9427,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest.new
+              #
+              #   # Call the delete_channel_group method.
+              #   result = client.delete_channel_group request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_channel_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7684,6 +9512,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest.new
+              #
+              #   # Call the set_automated_ga4_configuration_opt_out method.
+              #   result = client.set_automated_ga4_configuration_opt_out request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse.
+              #   p result
+              #
               def set_automated_ga4_configuration_opt_out request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7751,6 +9595,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest.new
+              #
+              #   # Call the fetch_automated_ga4_configuration_opt_out method.
+              #   result = client.fetch_automated_ga4_configuration_opt_out request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse.
+              #   p result
+              #
               def fetch_automated_ga4_configuration_opt_out request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7815,6 +9675,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest.new
+              #
+              #   # Call the get_big_query_link method.
+              #   result = client.get_big_query_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BigQueryLink.
+              #   p result
+              #
               def get_big_query_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7889,6 +9765,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::BigQueryLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest.new
+              #
+              #   # Call the list_big_query_links method.
+              #   result = client.list_big_query_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::BigQueryLink.
+              #     p item
+              #   end
+              #
               def list_big_query_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -7957,6 +9853,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new
+              #
+              #   # Call the get_enhanced_measurement_settings method.
+              #   result = client.get_enhanced_measurement_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.
+              #   p result
+              #
               def get_enhanced_measurement_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8027,6 +9939,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new
+              #
+              #   # Call the update_enhanced_measurement_settings method.
+              #   result = client.update_enhanced_measurement_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.
+              #   p result
+              #
               def update_enhanced_measurement_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8096,6 +10024,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest.new
+              #
+              #   # Call the create_connected_site_tag method.
+              #   result = client.create_connected_site_tag request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse.
+              #   p result
+              #
               def create_connected_site_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8165,6 +10109,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest.new
+              #
+              #   # Call the delete_connected_site_tag method.
+              #   result = client.delete_connected_site_tag request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_connected_site_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8232,6 +10192,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest.new
+              #
+              #   # Call the list_connected_site_tags method.
+              #   result = client.list_connected_site_tags request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse.
+              #   p result
+              #
               def list_connected_site_tags request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8299,6 +10275,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest.new
+              #
+              #   # Call the fetch_connected_ga4_property method.
+              #   result = client.fetch_connected_ga4_property request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse.
+              #   p result
+              #
               def fetch_connected_ga4_property request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8363,6 +10355,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest.new
+              #
+              #   # Call the get_ad_sense_link method.
+              #   result = client.get_ad_sense_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AdSenseLink.
+              #   p result
+              #
               def get_ad_sense_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8429,6 +10437,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest.new
+              #
+              #   # Call the create_ad_sense_link method.
+              #   result = client.create_ad_sense_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::AdSenseLink.
+              #   p result
+              #
               def create_ad_sense_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8493,6 +10517,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest.new
+              #
+              #   # Call the delete_ad_sense_link method.
+              #   result = client.delete_ad_sense_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_ad_sense_link request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8567,6 +10607,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AdSenseLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest.new
+              #
+              #   # Call the list_ad_sense_links method.
+              #   result = client.list_ad_sense_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AdSenseLink.
+              #     p item
+              #   end
+              #
               def list_ad_sense_links request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8631,6 +10691,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest.new
+              #
+              #   # Call the get_event_create_rule method.
+              #   result = client.get_event_create_rule request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EventCreateRule.
+              #   p result
+              #
               def get_event_create_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8703,6 +10779,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::EventCreateRule>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest.new
+              #
+              #   # Call the list_event_create_rules method.
+              #   result = client.list_event_create_rules request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::EventCreateRule.
+              #     p item
+              #   end
+              #
               def list_event_create_rules request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8768,6 +10864,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest.new
+              #
+              #   # Call the create_event_create_rule method.
+              #   result = client.create_event_create_rule request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EventCreateRule.
+              #   p result
+              #
               def create_event_create_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8837,6 +10949,22 @@ module Google
               # @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest.new
+              #
+              #   # Call the update_event_create_rule method.
+              #   result = client.update_event_create_rule request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EventCreateRule.
+              #   p result
+              #
               def update_event_create_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -8900,6 +11028,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest.new
+              #
+              #   # Call the delete_event_create_rule method.
+              #   result = client.delete_event_create_rule request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_event_create_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

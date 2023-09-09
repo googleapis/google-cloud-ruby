@@ -177,6 +177,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppEngine::V1::DomainMapping>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new
+              #
+              #   # Call the list_domain_mappings method.
+              #   result = client.list_domain_mappings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AppEngine::V1::DomainMapping.
+              #     p item
+              #   end
+              #
               def list_domain_mappings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -241,6 +261,22 @@ module Google
               # @return [::Google::Cloud::AppEngine::V1::DomainMapping]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new
+              #
+              #   # Call the get_domain_mapping method.
+              #   result = client.get_domain_mapping request
+              #
+              #   # The returned object is of type Google::Cloud::AppEngine::V1::DomainMapping.
+              #   p result
+              #
               def get_domain_mapping request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -310,6 +346,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new
+              #
+              #   # Call the create_domain_mapping method.
+              #   result = client.create_domain_mapping request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_domain_mapping request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,6 +441,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new
+              #
+              #   # Call the update_domain_mapping method.
+              #   result = client.update_domain_mapping request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_domain_mapping request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -448,6 +530,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new
+              #
+              #   # Call the delete_domain_mapping method.
+              #   result = client.delete_domain_mapping request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_domain_mapping request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

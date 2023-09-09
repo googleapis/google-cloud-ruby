@@ -194,6 +194,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::CreateKeyRequest.new
+              #
+              #   # Call the create_key method.
+              #   result = client.create_key request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -268,6 +291,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiKeys::V2::Key>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::ListKeysRequest.new
+              #
+              #   # Call the list_keys method.
+              #   result = client.list_keys request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApiKeys::V2::Key.
+              #     p item
+              #   end
+              #
               def list_keys request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -335,6 +378,22 @@ module Google
               # @return [::Google::Cloud::ApiKeys::V2::Key]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::GetKeyRequest.new
+              #
+              #   # Call the get_key method.
+              #   result = client.get_key request
+              #
+              #   # The returned object is of type Google::Cloud::ApiKeys::V2::Key.
+              #   p result
+              #
               def get_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -400,6 +459,22 @@ module Google
               # @return [::Google::Cloud::ApiKeys::V2::GetKeyStringResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new
+              #
+              #   # Call the get_key_string method.
+              #   result = client.get_key_string request
+              #
+              #   # The returned object is of type Google::Cloud::ApiKeys::V2::GetKeyStringResponse.
+              #   p result
+              #
               def get_key_string request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -476,6 +551,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new
+              #
+              #   # Call the update_key method.
+              #   result = client.update_key request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -546,6 +644,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new
+              #
+              #   # Call the delete_key method.
+              #   result = client.delete_key request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -612,6 +733,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new
+              #
+              #   # Call the undelete_key method.
+              #   result = client.undelete_key request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def undelete_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -679,6 +823,22 @@ module Google
               # @return [::Google::Cloud::ApiKeys::V2::LookupKeyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_keys/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiKeys::V2::LookupKeyRequest.new
+              #
+              #   # Call the lookup_key method.
+              #   result = client.lookup_key request
+              #
+              #   # The returned object is of type Google::Cloud::ApiKeys::V2::LookupKeyResponse.
+              #   p result
+              #
               def lookup_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
