@@ -211,6 +211,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video_intelligence/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VideoIntelligence::V1beta2::AnnotateVideoRequest.new
+              #
+              #   # Call the annotate_video method.
+              #   result = client.annotate_video request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def annotate_video request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

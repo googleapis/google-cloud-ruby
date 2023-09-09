@@ -183,6 +183,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/trace/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Trace::V2::TraceService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Trace::V2::BatchWriteSpansRequest.new
+              #
+              #   # Call the batch_write_spans method.
+              #   result = client.batch_write_spans request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def batch_write_spans request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -301,6 +317,22 @@ module Google
               # @return [::Google::Cloud::Trace::V2::Span]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/trace/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Trace::V2::TraceService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Trace::V2::Span.new
+              #
+              #   # Call the create_span method.
+              #   result = client.create_span request
+              #
+              #   # The returned object is of type Google::Cloud::Trace::V2::Span.
+              #   p result
+              #
               def create_span request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
