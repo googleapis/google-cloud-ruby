@@ -302,6 +302,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::CreateBackupPlanRequest.new
+              #
+              #   # Call the create_backup_plan method.
+              #   result = client.create_backup_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_backup_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -384,6 +407,26 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::ListBackupPlansResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListBackupPlansRequest.new
+              #
+              #   # Call the list_backup_plans method.
+              #   result = client.list_backup_plans request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::BackupPlan.
+              #     p item
+              #   end
+              #
               def list_backup_plans request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -447,6 +490,22 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::BackupPlan]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetBackupPlanRequest.new
+              #
+              #   # Call the get_backup_plan method.
+              #   result = client.get_backup_plan request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::BackupPlan.
+              #   p result
+              #
               def get_backup_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -520,6 +579,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::UpdateBackupPlanRequest.new
+              #
+              #   # Call the update_backup_plan method.
+              #   result = client.update_backup_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_backup_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -588,6 +670,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::DeleteBackupPlanRequest.new
+              #
+              #   # Call the delete_backup_plan method.
+              #   result = client.delete_backup_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_backup_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -663,6 +768,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::CreateBackupRequest.new
+              #
+              #   # Call the create_backup method.
+              #   result = client.create_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -745,6 +873,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::Backup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListBackupsRequest.new
+              #
+              #   # Call the list_backups method.
+              #   result = client.list_backups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::Backup.
+              #     p item
+              #   end
+              #
               def list_backups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -809,6 +957,22 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::Backup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetBackupRequest.new
+              #
+              #   # Call the get_backup method.
+              #   result = client.get_backup request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::Backup.
+              #   p result
+              #
               def get_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -881,6 +1045,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::UpdateBackupRequest.new
+              #
+              #   # Call the update_backup method.
+              #   result = client.update_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -953,6 +1140,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::DeleteBackupRequest.new
+              #
+              #   # Call the delete_backup method.
+              #   result = client.delete_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1035,6 +1245,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::VolumeBackup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListVolumeBackupsRequest.new
+              #
+              #   # Call the list_volume_backups method.
+              #   result = client.list_volume_backups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::VolumeBackup.
+              #     p item
+              #   end
+              #
               def list_volume_backups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1099,6 +1329,22 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::VolumeBackup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetVolumeBackupRequest.new
+              #
+              #   # Call the get_volume_backup method.
+              #   result = client.get_volume_backup request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::VolumeBackup.
+              #   p result
+              #
               def get_volume_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1173,6 +1419,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::CreateRestorePlanRequest.new
+              #
+              #   # Call the create_restore_plan method.
+              #   result = client.create_restore_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_restore_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1255,6 +1524,26 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::ListRestorePlansResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListRestorePlansRequest.new
+              #
+              #   # Call the list_restore_plans method.
+              #   result = client.list_restore_plans request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::RestorePlan.
+              #     p item
+              #   end
+              #
               def list_restore_plans request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1318,6 +1607,22 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::RestorePlan]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetRestorePlanRequest.new
+              #
+              #   # Call the get_restore_plan method.
+              #   result = client.get_restore_plan request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::RestorePlan.
+              #   p result
+              #
               def get_restore_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1390,6 +1695,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::UpdateRestorePlanRequest.new
+              #
+              #   # Call the update_restore_plan method.
+              #   result = client.update_restore_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_restore_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1462,6 +1790,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::DeleteRestorePlanRequest.new
+              #
+              #   # Call the delete_restore_plan method.
+              #   result = client.delete_restore_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_restore_plan request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1537,6 +1888,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::CreateRestoreRequest.new
+              #
+              #   # Call the create_restore method.
+              #   result = client.create_restore request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_restore request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1619,6 +1993,26 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::ListRestoresResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListRestoresRequest.new
+              #
+              #   # Call the list_restores method.
+              #   result = client.list_restores request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::Restore.
+              #     p item
+              #   end
+              #
               def list_restores request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1682,6 +2076,22 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::Restore]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetRestoreRequest.new
+              #
+              #   # Call the get_restore method.
+              #   result = client.get_restore request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::Restore.
+              #   p result
+              #
               def get_restore request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1754,6 +2164,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::UpdateRestoreRequest.new
+              #
+              #   # Call the update_restore method.
+              #   result = client.update_restore request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_restore request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1826,6 +2259,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::DeleteRestoreRequest.new
+              #
+              #   # Call the delete_restore method.
+              #   result = client.delete_restore request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_restore request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1908,6 +2364,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::VolumeRestore>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListVolumeRestoresRequest.new
+              #
+              #   # Call the list_volume_restores method.
+              #   result = client.list_volume_restores request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::VolumeRestore.
+              #     p item
+              #   end
+              #
               def list_volume_restores request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1972,6 +2448,22 @@ module Google
               # @return [::Google::Cloud::GkeBackup::V1::VolumeRestore]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetVolumeRestoreRequest.new
+              #
+              #   # Call the get_volume_restore method.
+              #   result = client.get_volume_restore request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::VolumeRestore.
+              #   p result
+              #
               def get_volume_restore request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -210,6 +210,22 @@ module Google
               # @return [::Google::Cloud::Functions::V2::Function]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::GetFunctionRequest.new
+              #
+              #   # Call the get_function method.
+              #   result = client.get_function request
+              #
+              #   # The returned object is of type Google::Cloud::Functions::V2::Function.
+              #   p result
+              #
               def get_function request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -294,6 +310,26 @@ module Google
               # @return [::Google::Cloud::Functions::V2::ListFunctionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::ListFunctionsRequest.new
+              #
+              #   # Call the list_functions method.
+              #   result = client.list_functions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Functions::V2::Function.
+              #     p item
+              #   end
+              #
               def list_functions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -367,6 +403,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::CreateFunctionRequest.new
+              #
+              #   # Call the create_function method.
+              #   result = client.create_function request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_function request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -434,6 +493,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::UpdateFunctionRequest.new
+              #
+              #   # Call the update_function method.
+              #   result = client.update_function request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_function request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -499,6 +581,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::DeleteFunctionRequest.new
+              #
+              #   # Call the delete_function method.
+              #   result = client.delete_function request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_function request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -601,6 +706,22 @@ module Google
               # @return [::Google::Cloud::Functions::V2::GenerateUploadUrlResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new
+              #
+              #   # Call the generate_upload_url method.
+              #   result = client.generate_upload_url request
+              #
+              #   # The returned object is of type Google::Cloud::Functions::V2::GenerateUploadUrlResponse.
+              #   p result
+              #
               def generate_upload_url request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -668,6 +789,22 @@ module Google
               # @return [::Google::Cloud::Functions::V2::GenerateDownloadUrlResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::GenerateDownloadUrlRequest.new
+              #
+              #   # Call the generate_download_url method.
+              #   result = client.generate_download_url request
+              #
+              #   # The returned object is of type Google::Cloud::Functions::V2::GenerateDownloadUrlResponse.
+              #   p result
+              #
               def generate_download_url request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -734,6 +871,22 @@ module Google
               # @return [::Google::Cloud::Functions::V2::ListRuntimesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/functions/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Functions::V2::ListRuntimesRequest.new
+              #
+              #   # Call the list_runtimes method.
+              #   result = client.list_runtimes request
+              #
+              #   # The returned object is of type Google::Cloud::Functions::V2::ListRuntimesResponse.
+              #   p result
+              #
               def list_runtimes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
