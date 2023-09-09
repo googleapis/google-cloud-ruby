@@ -179,6 +179,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::CreateJobRequest.new
+              #
+              #   # Call the create_job method.
+              #   result = client.create_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::Job.
+              #   p result
+              #
               def create_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -255,6 +271,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::GetJobRequest.new
+              #
+              #   # Call the get_job method.
+              #   result = client.get_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::Job.
+              #   p result
+              #
               def get_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -332,6 +364,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new
+              #
+              #   # Call the update_job method.
+              #   result = client.update_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::Job.
+              #   p result
+              #
               def update_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -417,6 +465,26 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::ListJobsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new
+              #
+              #   # Call the list_jobs method.
+              #   result = client.list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::Job.
+              #     p item
+              #   end
+              #
               def list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -495,6 +563,26 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::ListJobsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new
+              #
+              #   # Call the aggregated_list_jobs method.
+              #   result = client.aggregated_list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::Job.
+              #     p item
+              #   end
+              #
               def aggregated_list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -567,6 +655,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::Snapshot]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Jobs::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::SnapshotJobRequest.new
+              #
+              #   # Call the snapshot_job method.
+              #   result = client.snapshot_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::Snapshot.
+              #   p result
+              #
               def snapshot_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

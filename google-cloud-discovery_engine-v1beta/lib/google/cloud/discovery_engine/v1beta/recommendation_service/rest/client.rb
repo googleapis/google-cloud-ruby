@@ -275,6 +275,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1beta::RecommendResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::RecommendRequest.new
+              #
+              #   # Call the recommend method.
+              #   result = client.recommend request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::RecommendResponse.
+              #   p result
+              #
               def recommend request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

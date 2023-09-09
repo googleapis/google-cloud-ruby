@@ -202,6 +202,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::Intent>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListIntentsRequest.new
+                #
+                #   # Call the list_intents method.
+                #   result = client.list_intents request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Intent.
+                #     p item
+                #   end
+                #
                 def list_intents request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -278,6 +298,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Intent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetIntentRequest.new
+                #
+                #   # Call the get_intent method.
+                #   result = client.get_intent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Intent.
+                #   p result
+                #
                 def get_intent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -357,6 +393,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Intent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateIntentRequest.new
+                #
+                #   # Call the create_intent method.
+                #   result = client.create_intent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Intent.
+                #   p result
+                #
                 def create_intent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -436,6 +488,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Intent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateIntentRequest.new
+                #
+                #   # Call the update_intent method.
+                #   result = client.update_intent request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Intent.
+                #   p result
+                #
                 def update_intent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -504,6 +572,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteIntentRequest.new
+                #
+                #   # Call the delete_intent method.
+                #   result = client.delete_intent request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_intent request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

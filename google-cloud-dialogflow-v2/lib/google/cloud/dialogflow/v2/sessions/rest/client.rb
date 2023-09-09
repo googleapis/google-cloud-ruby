@@ -248,6 +248,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::DetectIntentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Sessions::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
+              #
+              #   # Call the detect_intent method.
+              #   result = client.detect_intent request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
+              #   p result
+              #
               def detect_intent request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -224,6 +224,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::CompletionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new
+              #
+              #   # Call the complete_query method.
+              #   result = client.complete_query request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse.
+              #   p result
+              #
               def complete_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

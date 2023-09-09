@@ -169,6 +169,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new
+              #
+              #   # Call the launch_flex_template method.
+              #   result = client.launch_flex_template request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateResponse.
+              #   p result
+              #
               def launch_flex_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

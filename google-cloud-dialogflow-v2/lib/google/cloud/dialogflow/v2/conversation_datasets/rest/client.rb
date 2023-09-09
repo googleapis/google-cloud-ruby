@@ -210,6 +210,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new
+              #
+              #   # Call the create_conversation_dataset method.
+              #   result = client.create_conversation_dataset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_conversation_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -275,6 +298,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::ConversationDataset]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new
+              #
+              #   # Call the get_conversation_dataset method.
+              #   result = client.get_conversation_dataset request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::ConversationDataset.
+              #   p result
+              #
               def get_conversation_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -344,6 +383,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::V2::ConversationDataset>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new
+              #
+              #   # Call the list_conversation_datasets method.
+              #   result = client.list_conversation_datasets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::V2::ConversationDataset.
+              #     p item
+              #   end
+              #
               def list_conversation_datasets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -418,6 +477,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new
+              #
+              #   # Call the delete_conversation_dataset method.
+              #   result = client.delete_conversation_dataset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_conversation_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -496,6 +578,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new
+              #
+              #   # Call the import_conversation_data method.
+              #   result = client.import_conversation_data request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_conversation_data request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

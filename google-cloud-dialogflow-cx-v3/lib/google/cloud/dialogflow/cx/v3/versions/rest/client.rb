@@ -204,6 +204,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::Version>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest.new
+                #
+                #   # Call the list_versions method.
+                #   result = client.list_versions request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Version.
+                #     p item
+                #   end
+                #
                 def list_versions request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -269,6 +289,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Version]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetVersionRequest.new
+                #
+                #   # Call the get_version method.
+                #   result = client.get_version request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Version.
+                #   p result
+                #
                 def get_version request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -345,6 +381,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest.new
+                #
+                #   # Call the create_version method.
+                #   result = client.create_version request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_version request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -411,6 +470,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Version]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest.new
+                #
+                #   # Call the update_version method.
+                #   result = client.update_version request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Version.
+                #   p result
+                #
                 def update_version request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -475,6 +550,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest.new
+                #
+                #   # Call the delete_version method.
+                #   result = client.delete_version request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_version request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -553,6 +644,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest.new
+                #
+                #   # Call the load_version method.
+                #   result = client.load_version request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def load_version request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -633,6 +747,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new
+                #
+                #   # Call the compare_versions method.
+                #   result = client.compare_versions request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse.
+                #   p result
+                #
                 def compare_versions request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
