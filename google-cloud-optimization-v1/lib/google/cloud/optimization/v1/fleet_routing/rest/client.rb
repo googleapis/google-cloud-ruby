@@ -399,6 +399,22 @@ module Google
               # @return [::Google::Cloud::Optimization::V1::OptimizeToursResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/optimization/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Optimization::V1::OptimizeToursRequest.new
+              #
+              #   # Call the optimize_tours method.
+              #   result = client.optimize_tours request
+              #
+              #   # The returned object is of type Google::Cloud::Optimization::V1::OptimizeToursResponse.
+              #   p result
+              #
               def optimize_tours request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -477,6 +493,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/optimization/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new
+              #
+              #   # Call the batch_optimize_tours method.
+              #   result = client.batch_optimize_tours request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_optimize_tours request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
