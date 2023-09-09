@@ -174,6 +174,22 @@ module Google
               # @return [::Google::Cloud::TextToSpeech::V1::ListVoicesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/text_to_speech/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new
+              #
+              #   # Call the list_voices method.
+              #   result = client.list_voices request
+              #
+              #   # The returned object is of type Google::Cloud::TextToSpeech::V1::ListVoicesResponse.
+              #   p result
+              #
               def list_voices request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -241,6 +257,22 @@ module Google
               # @return [::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/text_to_speech/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new
+              #
+              #   # Call the synthesize_speech method.
+              #   result = client.synthesize_speech request
+              #
+              #   # The returned object is of type Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse.
+              #   p result
+              #
               def synthesize_speech request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
