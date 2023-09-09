@@ -112,6 +112,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Snapshot is a point-in-time version of a Volume's content.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the snapshot.

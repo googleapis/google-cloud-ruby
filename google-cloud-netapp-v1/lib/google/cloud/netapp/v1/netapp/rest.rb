@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/netapp/v1/version"
+require "google/cloud/netapp/v1/bindings_override"
 
 require "google/cloud/netapp/v1/netapp/credentials"
 require "google/cloud/netapp/v1/netapp/paths"

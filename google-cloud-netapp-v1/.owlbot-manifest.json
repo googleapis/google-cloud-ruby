@@ -15,6 +15,7 @@
     "lib/google-cloud-netapp-v1.rb",
     "lib/google/cloud/netapp/v1.rb",
     "lib/google/cloud/netapp/v1/active_directory_pb.rb",
+    "lib/google/cloud/netapp/v1/bindings_override.rb",
     "lib/google/cloud/netapp/v1/cloud_netapp_service_pb.rb",
     "lib/google/cloud/netapp/v1/cloud_netapp_service_services_pb.rb",
     "lib/google/cloud/netapp/v1/common_pb.rb",
