@@ -95,6 +95,4 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   attr_test :default_expiration, 999
   attr_test :etag, "etag123456789"
   attr_test :api_url, "http://googleapi/bigquery/v2/projects/test-project/datasets/my_dataset"
-  attr_test :location, "US"
-
 end
