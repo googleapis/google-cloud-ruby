@@ -212,6 +212,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::CreateModelRequest.new
+              #
+              #   # Call the create_model method.
+              #   result = client.create_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -277,6 +300,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Model]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::GetModelRequest.new
+              #
+              #   # Call the get_model method.
+              #   result = client.get_model request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Model.
+              #   p result
+              #
               def get_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -341,6 +380,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Model]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::PauseModelRequest.new
+              #
+              #   # Call the pause_model method.
+              #   result = client.pause_model request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Model.
+              #   p result
+              #
               def pause_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -405,6 +460,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Model]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ResumeModelRequest.new
+              #
+              #   # Call the resume_model method.
+              #   result = client.resume_model request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Model.
+              #   p result
+              #
               def resume_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -469,6 +540,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::DeleteModelRequest.new
+              #
+              #   # Call the delete_model method.
+              #   result = client.delete_model request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -539,6 +626,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Retail::V2::Model>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ListModelsRequest.new
+              #
+              #   # Call the list_models method.
+              #   result = client.list_models request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Retail::V2::Model.
+              #     p item
+              #   end
+              #
               def list_models request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -608,6 +715,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Model]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::UpdateModelRequest.new
+              #
+              #   # Call the update_model method.
+              #   result = client.update_model request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Model.
+              #   p result
+              #
               def update_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -672,6 +795,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ModelService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::TuneModelRequest.new
+              #
+              #   # Call the tune_model method.
+              #   result = client.tune_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def tune_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

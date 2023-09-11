@@ -192,6 +192,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::Experiment>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListExperimentsRequest.new
+                #
+                #   # Call the list_experiments method.
+                #   result = client.list_experiments request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Experiment.
+                #     p item
+                #   end
+                #
                 def list_experiments request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -259,6 +279,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new
+                #
+                #   # Call the get_experiment method.
+                #   result = client.get_experiment request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
+                #   p result
+                #
                 def get_experiment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -327,6 +363,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateExperimentRequest.new
+                #
+                #   # Call the create_experiment method.
+                #   result = client.create_experiment request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
+                #   p result
+                #
                 def create_experiment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -392,6 +444,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateExperimentRequest.new
+                #
+                #   # Call the update_experiment method.
+                #   result = client.update_experiment request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
+                #   p result
+                #
                 def update_experiment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,6 +526,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new
+                #
+                #   # Call the delete_experiment method.
+                #   result = client.delete_experiment request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_experiment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -524,6 +608,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::StartExperimentRequest.new
+                #
+                #   # Call the start_experiment method.
+                #   result = client.start_experiment request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
+                #   p result
+                #
                 def start_experiment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -589,6 +689,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Experiments::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::StopExperimentRequest.new
+                #
+                #   # Call the stop_experiment method.
+                #   result = client.stop_experiment request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
+                #   p result
+                #
                 def stop_experiment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

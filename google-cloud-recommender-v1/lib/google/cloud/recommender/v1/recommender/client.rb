@@ -169,7 +169,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -719,6 +720,101 @@ module Google
             end
 
             ##
+            # Mark the Recommendation State as Dismissed. Users can use this method to
+            # indicate to the Recommender API that an ACTIVE recommendation has to
+            # be marked back as DISMISSED.
+            #
+            # MarkRecommendationDismissed can be applied to recommendations in ACTIVE
+            # state.
+            #
+            # Requires the recommender.*.update IAM permission for the specified
+            # recommender.
+            #
+            # @overload mark_recommendation_dismissed(request, options = nil)
+            #   Pass arguments to `mark_recommendation_dismissed` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mark_recommendation_dismissed(name: nil, etag: nil)
+            #   Pass arguments to `mark_recommendation_dismissed` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Name of the recommendation.
+            #   @param etag [::String]
+            #     Fingerprint of the Recommendation. Provides optimistic locking.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::Recommendation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::Recommendation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommender/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Recommender::V1::Recommender::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new
+            #
+            #   # Call the mark_recommendation_dismissed method.
+            #   result = client.mark_recommendation_dismissed request
+            #
+            #   # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+            #   p result
+            #
+            def mark_recommendation_dismissed request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mark_recommendation_dismissed.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mark_recommendation_dismissed.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mark_recommendation_dismissed.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :mark_recommendation_dismissed, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Marks the Recommendation State as Claimed. Users can use this method to
             # indicate to the Recommender API that they are starting to apply the
             # recommendation themselves. This stops the recommendation content from being
@@ -1053,6 +1149,8 @@ module Google
             #
             #     * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
             #
+            #     * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+            #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Recommender::V1::RecommenderConfig]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
@@ -1232,11 +1330,13 @@ module Google
             #
             #     Acceptable formats:
             #
-            #     * `projects/[PROJECT_NUMBER]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+            #     * `projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
             #
-            #     * `projects/[PROJECT_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+            #     * `projects/[PROJECT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
             #
-            #     * `organizations/[ORGANIZATION_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+            #     * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
+            #
+            #     * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Recommender::V1::InsightTypeConfig]
@@ -1513,6 +1613,14 @@ module Google
               end
 
               ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+              end
+
+              ##
               # Configuration RPC class for the Recommender API.
               #
               # Includes fields providing the configuration for each RPC in this service.
@@ -1555,6 +1663,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_recommendation
+                ##
+                # RPC-specific configuration for `mark_recommendation_dismissed`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :mark_recommendation_dismissed
                 ##
                 # RPC-specific configuration for `mark_recommendation_claimed`
                 # @return [::Gapic::Config::Method]
@@ -1603,6 +1716,8 @@ module Google
                   @list_recommendations = ::Gapic::Config::Method.new list_recommendations_config
                   get_recommendation_config = parent_rpcs.get_recommendation if parent_rpcs.respond_to? :get_recommendation
                   @get_recommendation = ::Gapic::Config::Method.new get_recommendation_config
+                  mark_recommendation_dismissed_config = parent_rpcs.mark_recommendation_dismissed if parent_rpcs.respond_to? :mark_recommendation_dismissed
+                  @mark_recommendation_dismissed = ::Gapic::Config::Method.new mark_recommendation_dismissed_config
                   mark_recommendation_claimed_config = parent_rpcs.mark_recommendation_claimed if parent_rpcs.respond_to? :mark_recommendation_claimed
                   @mark_recommendation_claimed = ::Gapic::Config::Method.new mark_recommendation_claimed_config
                   mark_recommendation_succeeded_config = parent_rpcs.mark_recommendation_succeeded if parent_rpcs.respond_to? :mark_recommendation_succeeded

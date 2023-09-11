@@ -40,27 +40,28 @@ module Google
         #     following properties of a workflow:
         #
         #     - {::Google::Cloud::Workflows::V1::Workflow#service_account Service account}
-        #     - {::Google::Cloud::Workflows::V1::Workflow#source_contents Workflow code to be executed}
+        #     - [Workflow code to be
+        #     executed][google.cloud.workflows.v1.Workflow.source_contents]
         #
-        #     The format is "000001-a4d", where the first 6 characters define
+        #     The format is "000001-a4d", where the first six characters define
         #     the zero-padded revision ordinal number. They are followed by a hyphen and
-        #     3 hexadecimal random characters.
+        #     three hexadecimal random characters.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp of when the workflow was created.
+        #     Output only. The timestamp for when the workflow was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The last update timestamp of the workflow.
+        #     Output only. The timestamp for when the workflow was last updated.
         # @!attribute [r] revision_create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp that the latest revision of the workflow
-        #     was created.
+        #     Output only. The timestamp for the latest revision of the workflow's
+        #     creation.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this workflow.
         #     Labels can contain at most 64 entries. Keys and values can be no longer
         #     than 63 characters and can only contain lowercase letters, numeric
-        #     characters, underscores and dashes. Label keys must start with a letter.
+        #     characters, underscores, and dashes. Label keys must start with a letter.
         #     International characters are allowed.
         # @!attribute [rw] service_account
         #   @return [::String]
@@ -79,9 +80,60 @@ module Google
         # @!attribute [rw] source_contents
         #   @return [::String]
         #     Workflow code to be executed. The size limit is 128KB.
+        # @!attribute [rw] crypto_key_name
+        #   @return [::String]
+        #     Optional. The resource name of a KMS crypto key used to encrypt or decrypt
+        #     the data associated with the workflow.
+        #
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyRing}/cryptoKeys/\\{cryptoKey}
+        #
+        #     Using `-` as a wildcard for the `{project}` or not providing one at all
+        #     will infer the project from the account.
+        #
+        #     If not provided, data associated with the workflow will not be
+        #     CMEK-encrypted.
+        # @!attribute [r] state_error
+        #   @return [::Google::Cloud::Workflows::V1::Workflow::StateError]
+        #     Output only. Error regarding the state of the workflow. For example, this
+        #     field will have error details if the execution data is unavailable due to
+        #     revoked KMS key permissions.
+        # @!attribute [rw] call_log_level
+        #   @return [::Google::Cloud::Workflows::V1::Workflow::CallLogLevel]
+        #     Optional. Describes the level of platform logging to apply to calls and
+        #     call responses during executions of this workflow. If both the workflow and
+        #     the execution specify a logging level, the execution level takes
+        #     precedence.
+        # @!attribute [rw] user_env_vars
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User-defined environment variables associated with this workflow
+        #     revision. This map has a maximum length of 20. Each string can take up to
+        #     40KiB. Keys cannot be empty strings and cannot start with “GOOGLE” or
+        #     “WORKFLOWS".
         class Workflow
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes an error related to the current state of the workflow.
+          # @!attribute [rw] details
+          #   @return [::String]
+          #     Provides specifics about the error.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Workflows::V1::Workflow::StateError::Type]
+          #     The type of this state error.
+          class StateError
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Describes the possibled types of a state error.
+            module Type
+              # No type specified.
+              TYPE_UNSPECIFIED = 0
+
+              # Caused by an issue with KMS.
+              KMS_ERROR = 1
+            end
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -92,14 +144,42 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Describes the current state of workflow deployment. More states may be
-          # added in the future.
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserEnvVarsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Describes the current state of workflow deployment.
           module State
             # Invalid state.
             STATE_UNSPECIFIED = 0
 
             # The workflow has been deployed successfully and is serving.
             ACTIVE = 1
+
+            # Workflow data is unavailable. See the `state_error` field.
+            UNAVAILABLE = 2
+          end
+
+          # Describes the level of platform logging to apply to calls and call
+          # responses during workflow executions.
+          module CallLogLevel
+            # No call logging level specified.
+            CALL_LOG_LEVEL_UNSPECIFIED = 0
+
+            # Log all call steps within workflows, all call returns, and all exceptions
+            # raised.
+            LOG_ALL_CALLS = 1
+
+            # Log only exceptions that are raised from call steps within workflows.
+            LOG_ERRORS_ONLY = 2
+
+            # Explicitly log nothing.
+            LOG_NONE = 3
           end
         end
 
@@ -112,10 +192,10 @@ module Google
         #     Format: projects/\\{project}/locations/\\{location}
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of workflows to return per call. The service may return
-        #     fewer than this value. If the value is not specified, a default value of
-        #     500 will be used. The maximum permitted value is 1000 and values greater
-        #     than 1000 will be coerced down to 1000.
+        #     Maximum number of workflows to return per call. The service might return
+        #     fewer than this value even if not at the end of the collection. If a value
+        #     is not specified, a default value of 500 is used. The maximum permitted
+        #     value is 1000 and values greater than 1000 are coerced down to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous `ListWorkflows` call.
@@ -128,10 +208,10 @@ module Google
         #     Filter to restrict results to specific workflows.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma-separated list of fields that that specify the order of the results.
+        #     Comma-separated list of fields that specify the order of the results.
         #     Default sorting order for a field is ascending. To specify descending order
-        #     for a field, append a " desc" suffix.
-        #     If not specified, the results will be returned in an unspecified order.
+        #     for a field, append a "desc" suffix.
+        #     If not specified, the results are returned in an unspecified order.
         class ListWorkflowsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,7 +222,7 @@ module Google
         # method.
         # @!attribute [rw] workflows
         #   @return [::Array<::Google::Cloud::Workflows::V1::Workflow>]
-        #     The workflows which match the request.
+        #     The workflows that match the request.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
@@ -159,8 +239,15 @@ module Google
         # {::Google::Cloud::Workflows::V1::Workflows::Client#get_workflow GetWorkflow} method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the workflow which information should be retrieved.
+        #     Required. Name of the workflow for which information should be retrieved.
         #     Format: projects/\\{project}/locations/\\{location}/workflows/\\{workflow}
+        # @!attribute [rw] revision_id
+        #   @return [::String]
+        #     Optional. The revision of the workflow to retrieve. If the revision_id is
+        #     empty, the latest revision is retrieved.
+        #     The format is "000001-a4d", where the first six characters define
+        #     the zero-padded decimal revision number. They are followed by a hyphen and
+        #     three hexadecimal characters.
         class GetWorkflowRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

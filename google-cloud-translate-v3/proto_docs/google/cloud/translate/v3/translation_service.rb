@@ -21,8 +21,8 @@ module Google
   module Cloud
     module Translate
       module V3
-        # Configures which glossary should be used for a specific target language,
-        # and defines options for applying that glossary.
+        # Configures which glossary is used for a specific target language and defines
+        # options for applying that glossary.
         # @!attribute [rw] glossary
         #   @return [::String]
         #     Required. The `glossary` to be applied for this translation.
@@ -94,7 +94,7 @@ module Google
         #     For example,
         #     `projects/{project-number-or-id}/locations/global/models/general/nmt`.
         #
-        #     If not provided, the default Google model (NMT) will be used.
+        #     If not provided, the default Google model (NMT) will be used
         # @!attribute [rw] glossary_config
         #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
         #     Optional. Glossary to be applied. The glossary must be
@@ -438,10 +438,10 @@ module Google
         #     If input file extension is a txt or html, the translation is directly
         #     written to the output file. If glossary is requested, a separate
         #     glossary_translations_file has format of
-        #     gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]`
         #
         #     The format of errors file (for target language code 'trg') is:
-        #     gs://translation_test/a_b_c_'trg'_errors.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_errors.[extension]`
         #
         #     If the input file extension is tsv, errors_file contains the following:
         #     Column 1: ID of the request provided in the input, if it's not
@@ -453,7 +453,7 @@ module Google
         #
         #     If the input file extension is txt or html, glossary_error_file will be
         #     generated that contains error details. glossary_error_file has format of
-        #     gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]
+        #     `gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]`
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -622,14 +622,18 @@ module Google
         #     https://cloud.google.com/translate/attribution#attribution_and_logos
         # @!attribute [rw] is_translate_native_pdf_only
         #   @return [::Boolean]
-        #     Optional. If true, the page limit of online native pdf translation is 300
-        #     and only native pdf pages will be translated.
+        #     Optional. is_translate_native_pdf_only field for external customers.
+        #     If true, the page limit of online native pdf translation is 300 and only
+        #     native pdf pages will be translated.
         # @!attribute [rw] enable_shadow_removal_native_pdf
         #   @return [::Boolean]
-        #     Optional. If true, use the text removal to remove the shadow text on
+        #     Optional. If true, use the text removal server to remove the shadow text on
         #     background image for native pdf translation.
         #     Shadow removal feature can only be enabled when
-        #     is_translate_native_pdf_only is false
+        #     is_translate_native_pdf_only: false && pdf_native_only: false
+        # @!attribute [rw] enable_rotation_correction
+        #   @return [::Boolean]
+        #     Optional. If true, enable auto rotation correction in DVS.
         class TranslateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1194,6 +1198,15 @@ module Google
         #     If not provided, the default is `Machine Translated by Google`.
         #     Customized attribution should follow rules in
         #     https://cloud.google.com/translate/attribution#attribution_and_logos
+        # @!attribute [rw] enable_shadow_removal_native_pdf
+        #   @return [::Boolean]
+        #     Optional. If true, use the text removal server to remove the shadow text on
+        #     background image for native pdf translation.
+        #     Shadow removal feature can only be enabled when
+        #     is_translate_native_pdf_only: false && pdf_native_only: false
+        # @!attribute [rw] enable_rotation_correction
+        #   @return [::Boolean]
+        #     Optional. If true, enable auto rotation correction in DVS.
         class BatchTranslateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -140,7 +140,8 @@ module Google
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
-                  interceptors: @config.interceptors
+                  interceptors: @config.interceptors,
+                  channel_pool_config: @config.channel_pool
                 )
               end
 
@@ -162,7 +163,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload list_executions(parent: nil, page_size: nil, page_token: nil, view: nil)
+              # @overload list_executions(parent: nil, page_size: nil, page_token: nil, view: nil, filter: nil, order_by: nil)
               #   Pass arguments to `list_executions` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -172,7 +173,7 @@ module Google
               #     Format: projects/\\{project}/locations/\\{location}/workflows/\\{workflow}
               #   @param page_size [::Integer]
               #     Maximum number of executions to return per call.
-              #     Max supported value depends on the selected Execution view: it's 10000 for
+              #     Max supported value depends on the selected Execution view: it's 1000 for
               #     BASIC and 100 for FULL. The default value used if the field is not
               #     specified is 100, regardless of the selected view. Values greater than
               #     the max value will be coerced down to it.
@@ -182,9 +183,22 @@ module Google
               #
               #     When paginating, all other parameters provided to `ListExecutions` must
               #     match the call that provided the page token.
+              #
+              #     Note that pagination is applied to dynamic data. The list of executions
+              #     returned can change between page requests.
               #   @param view [::Google::Cloud::Workflows::Executions::V1::ExecutionView]
-              #     Optional. A view defining which fields should be filled in the returned executions.
-              #     The API will default to the BASIC view.
+              #     Optional. A view defining which fields should be filled in the returned
+              #     executions. The API will default to the BASIC view.
+              #   @param filter [::String]
+              #     Optional. Filters applied to the [Executions.ListExecutions] results.
+              #     The following fields are supported for filtering:
+              #     executionID, state, startTime, endTime, duration, workflowRevisionID,
+              #     stepName, and label.
+              #   @param order_by [::String]
+              #     Optional. The ordering applied to the [Executions.ListExecutions] results.
+              #     By default the ordering is based on descending start time.
+              #     The following fields are supported for order by:
+              #     executionID, startTime, endTime, duration, state, and workflowRevisionID.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Workflows::Executions::V1::Execution>]
@@ -367,8 +381,8 @@ module Google
               #     Format:
               #     projects/\\{project}/locations/\\{location}/workflows/\\{workflow}/executions/\\{execution}
               #   @param view [::Google::Cloud::Workflows::Executions::V1::ExecutionView]
-              #     Optional. A view defining which fields should be filled in the returned execution.
-              #     The API will default to the FULL view.
+              #     Optional. A view defining which fields should be filled in the returned
+              #     execution. The API will default to the FULL view.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Workflows::Executions::V1::Execution]
@@ -638,6 +652,14 @@ module Google
                     parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
+                end
+
+                ##
+                # Configuration for the channel pool
+                # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+                #
+                def channel_pool
+                  @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
                 end
 
                 ##

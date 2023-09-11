@@ -157,7 +157,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -204,7 +205,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_catalog(scope: nil, query: nil, page_size: nil, page_token: nil, order_by: nil)
+            # @overload search_catalog(scope: nil, query: nil, page_size: nil, page_token: nil, order_by: nil, admin_search: nil)
             #   Pass arguments to `search_catalog` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -260,6 +261,12 @@ module Google
             #     `default`.
             #
             #     If this parameter is omitted, it defaults to the descending `relevance`.
+            #   @param admin_search [::Boolean]
+            #     Optional. If set, use searchAll permission granted on organizations from
+            #     `include_org_ids` and projects from `include_project_ids` instead of the
+            #     fine grained per resource permissions when filtering the search results.
+            #     The only allowed `order_by` criteria for admin_search mode is `default`.
+            #     Using this flags guarantees a full recall of the search results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
@@ -3737,6 +3744,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

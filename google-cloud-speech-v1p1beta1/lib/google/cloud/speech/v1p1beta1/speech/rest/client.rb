@@ -186,6 +186,22 @@ module Google
               # @return [::Google::Cloud::Speech::V1p1beta1::RecognizeResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/speech/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Speech::V1p1beta1::Speech::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Speech::V1p1beta1::RecognizeRequest.new
+              #
+              #   # Call the recognize method.
+              #   result = client.recognize request
+              #
+              #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::RecognizeResponse.
+              #   p result
+              #
               def recognize request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -258,6 +274,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/speech/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Speech::V1p1beta1::Speech::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest.new
+              #
+              #   # Call the long_running_recognize method.
+              #   result = client.long_running_recognize request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def long_running_recognize request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

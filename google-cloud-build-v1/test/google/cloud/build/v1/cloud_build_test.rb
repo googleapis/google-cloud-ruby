@@ -707,6 +707,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     project_id = "hello world"
     trigger_id = "hello world"
     trigger = {}
+    update_mask = {}
 
     update_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_build_trigger, name
@@ -714,6 +715,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       assert_equal "hello world", request["project_id"]
       assert_equal "hello world", request["trigger_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::BuildTrigger), request["trigger"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -724,31 +726,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger }) do |response, operation|
+      client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_build_trigger project_id: project_id, trigger_id: trigger_id, trigger: trigger do |response, operation|
+      client.update_build_trigger project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger) do |response, operation|
+      client.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger }, grpc_options) do |response, operation|
+      client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger), grpc_options) do |response, operation|
+      client.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

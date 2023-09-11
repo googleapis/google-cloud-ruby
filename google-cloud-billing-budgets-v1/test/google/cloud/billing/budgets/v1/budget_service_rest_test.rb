@@ -235,6 +235,7 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    scope = "hello world"
     page_size = 42
     page_token = "hello world"
 
@@ -252,27 +253,27 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
         end
 
         # Use hash object
-        client.list_budgets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_budgets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_budgets parent: parent, scope: scope, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_budgets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

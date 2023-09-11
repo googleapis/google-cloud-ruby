@@ -1064,6 +1064,11 @@
                 "read_tensorboard_usage"
               ]
             },
+            "ReadTensorboardSize": {
+              "methods": [
+                "read_tensorboard_size"
+              ]
+            },
             "CreateTensorboardExperiment": {
               "methods": [
                 "create_tensorboard_experiment"

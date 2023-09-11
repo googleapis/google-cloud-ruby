@@ -1,5 +1,29 @@
 # Changelog
 
+### 0.10.5 (2023-09-07)
+
+#### Documentation
+
+* Update description for size_gb field in Disk ([#22875](https://github.com/googleapis/google-cloud-ruby/issues/22875)) 
+
+### 0.10.4 (2023-09-04)
+
+#### Documentation
+
+* Clarify several type descriptions ([#22824](https://github.com/googleapis/google-cloud-ruby/issues/22824)) 
+
+### 0.10.3 (2023-08-15)
+
+#### Documentation
+
+* Clarify Batch API proto doc about pubsub notifications ([#22749](https://github.com/googleapis/google-cloud-ruby/issues/22749)) 
+
+### 0.10.2 (2023-08-03)
+
+#### Documentation
+
+* Add documentation for "order_by" field in list_jobs API ([#22672](https://github.com/googleapis/google-cloud-ruby/issues/22672)) 
+
 ### 0.10.1 (2023-07-10)
 
 #### Documentation

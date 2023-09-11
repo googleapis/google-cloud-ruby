@@ -90,6 +90,10 @@ module Google
         # @!attribute [r] oidc_claims_token
         #   @return [::String]
         #     Output only. Same as claims_token, but as a string.
+        # @!attribute [r] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. A list of messages that carry the partial error details
+        #     related to VerifyAttestation.
         class VerifyAttestationResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -202,12 +206,12 @@ module Google
         # signature.
         # @!attribute [rw] payload
         #   @return [::String]
-        #     Required. The binary signature payload following the SimpleSigning format
+        #     Optional. The binary signature payload following the SimpleSigning format
         #     https://github.com/sigstore/cosign/blob/main/specs/SIGNATURE_SPEC.md#simple-signing.
         #     This payload includes the container image digest.
         # @!attribute [rw] signature
         #   @return [::String]
-        #     Required. A signature over the payload.
+        #     Optional. A signature over the payload.
         #     The container image digest is incorporated into the signature as follows:
         #     1. Generate a SimpleSigning format payload that includes the container
         #     image digest.
@@ -216,10 +220,10 @@ module Google
         #     `Sign(sha256(SimpleSigningPayload(sha256(Image Manifest))))`
         # @!attribute [rw] public_key
         #   @return [::String]
-        #     Required. An associated public key used to verify the signature.
+        #     Optional. Reserved for future use.
         # @!attribute [rw] sig_alg
         #   @return [::Google::Cloud::ConfidentialComputing::V1::SigningAlgorithm]
-        #     Required. The algorithm used to produce the container image signature.
+        #     Optional. Reserved for future use.
         class ContainerImageSignature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

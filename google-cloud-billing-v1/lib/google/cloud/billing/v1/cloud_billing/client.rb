@@ -186,7 +186,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -811,8 +812,9 @@ module Google
             #     information that you want to update. For example,
             #     `projects/tokyo-rain-123`.
             #   @param project_billing_info [::Google::Cloud::Billing::V1::ProjectBillingInfo, ::Hash]
-            #     The new billing information for the project. Read-only fields are ignored;
-            #     thus, you can leave empty all fields except `billing_account_name`.
+            #     The new billing information for the project. Output-only fields are
+            #     ignored; thus, you can leave empty all fields except
+            #     `billing_account_name`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Billing::V1::ProjectBillingInfo]
@@ -1281,6 +1283,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

@@ -1250,7 +1250,7 @@ module Google
 
               ##
               # Configuration for the channel pool
-              # @return [Gapic::ChannelPool::Configurations]
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
               #
               def channel_pool
                 @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new

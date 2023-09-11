@@ -243,6 +243,22 @@ module Google
               # @return [::Google::Cloud::Batch::V1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::CreateJobRequest.new
+              #
+              #   # Call the create_job method.
+              #   result = client.create_job request
+              #
+              #   # The returned object is of type Google::Cloud::Batch::V1::Job.
+              #   p result
+              #
               def create_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -305,6 +321,22 @@ module Google
               # @return [::Google::Cloud::Batch::V1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::GetJobRequest.new
+              #
+              #   # Call the get_job method.
+              #   result = client.get_job request
+              #
+              #   # The returned object is of type Google::Cloud::Batch::V1::Job.
+              #   p result
+              #
               def get_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -383,6 +415,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::DeleteJobRequest.new
+              #
+              #   # Call the delete_job method.
+              #   result = client.delete_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -432,7 +487,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              # @overload list_jobs(parent: nil, filter: nil, order_by: nil, page_size: nil, page_token: nil)
               #   Pass arguments to `list_jobs` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -441,6 +496,9 @@ module Google
               #     Parent path.
               #   @param filter [::String]
               #     List filter.
+              #   @param order_by [::String]
+              #     Optional. Sort results. Supported are "name", "name desc", "create_time",
+              #     and "create_time desc".
               #   @param page_size [::Integer]
               #     Page size.
               #   @param page_token [::String]
@@ -452,6 +510,26 @@ module Google
               # @return [::Google::Cloud::Batch::V1::ListJobsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::ListJobsRequest.new
+              #
+              #   # Call the list_jobs method.
+              #   result = client.list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Batch::V1::Job.
+              #     p item
+              #   end
+              #
               def list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -514,6 +592,22 @@ module Google
               # @return [::Google::Cloud::Batch::V1::Task]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::GetTaskRequest.new
+              #
+              #   # Call the get_task method.
+              #   result = client.get_task request
+              #
+              #   # The returned object is of type Google::Cloud::Batch::V1::Task.
+              #   p result
+              #
               def get_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -586,6 +680,26 @@ module Google
               # @return [::Google::Cloud::Batch::V1::ListTasksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::ListTasksRequest.new
+              #
+              #   # Call the list_tasks method.
+              #   result = client.list_tasks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Batch::V1::Task.
+              #     p item
+              #   end
+              #
               def list_tasks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

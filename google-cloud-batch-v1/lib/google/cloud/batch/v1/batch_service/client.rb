@@ -177,7 +177,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -516,7 +517,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil)
+            # @overload list_jobs(parent: nil, filter: nil, order_by: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -525,6 +526,9 @@ module Google
             #     Parent path.
             #   @param filter [::String]
             #     List filter.
+            #   @param order_by [::String]
+            #     Optional. Sort results. Supported are "name", "name desc", "create_time",
+            #     and "create_time desc".
             #   @param page_size [::Integer]
             #     Page size.
             #   @param page_token [::String]
@@ -901,6 +905,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

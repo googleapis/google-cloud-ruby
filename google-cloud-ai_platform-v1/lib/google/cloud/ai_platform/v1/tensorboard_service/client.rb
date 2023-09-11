@@ -158,7 +158,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -756,6 +757,93 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @tensorboard_service_stub.call_rpc :read_tensorboard_usage, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the storage size for a given TensorBoard instance.
+            #
+            # @overload read_tensorboard_size(request, options = nil)
+            #   Pass arguments to `read_tensorboard_size` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload read_tensorboard_size(tensorboard: nil)
+            #   Pass arguments to `read_tensorboard_size` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param tensorboard [::String]
+            #     Required. The name of the Tensorboard resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new
+            #
+            #   # Call the read_tensorboard_size method.
+            #   result = client.read_tensorboard_size request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse.
+            #   p result
+            #
+            def read_tensorboard_size request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.read_tensorboard_size.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.tensorboard
+                header_params["tensorboard"] = request.tensorboard
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.read_tensorboard_size.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.read_tensorboard_size.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tensorboard_service_stub.call_rpc :read_tensorboard_size, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -3102,6 +3190,14 @@ module Google
               end
 
               ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+              end
+
+              ##
               # Configuration RPC class for the TensorboardService API.
               #
               # Includes fields providing the configuration for each RPC in this service.
@@ -3149,6 +3245,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :read_tensorboard_usage
+                ##
+                # RPC-specific configuration for `read_tensorboard_size`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :read_tensorboard_size
                 ##
                 # RPC-specific configuration for `create_tensorboard_experiment`
                 # @return [::Gapic::Config::Method]
@@ -3279,6 +3380,8 @@ module Google
                   @delete_tensorboard = ::Gapic::Config::Method.new delete_tensorboard_config
                   read_tensorboard_usage_config = parent_rpcs.read_tensorboard_usage if parent_rpcs.respond_to? :read_tensorboard_usage
                   @read_tensorboard_usage = ::Gapic::Config::Method.new read_tensorboard_usage_config
+                  read_tensorboard_size_config = parent_rpcs.read_tensorboard_size if parent_rpcs.respond_to? :read_tensorboard_size
+                  @read_tensorboard_size = ::Gapic::Config::Method.new read_tensorboard_size_config
                   create_tensorboard_experiment_config = parent_rpcs.create_tensorboard_experiment if parent_rpcs.respond_to? :create_tensorboard_experiment
                   @create_tensorboard_experiment = ::Gapic::Config::Method.new create_tensorboard_experiment_config
                   get_tensorboard_experiment_config = parent_rpcs.get_tensorboard_experiment if parent_rpcs.respond_to? :get_tensorboard_experiment

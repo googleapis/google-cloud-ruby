@@ -82,7 +82,7 @@ module Google
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         # @!attribute [rw] graceful_decommission_timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Timeout for graceful YARN decomissioning. [Graceful
+        #     Optional. Timeout for graceful YARN decommissioning. [Graceful
         #     decommissioning]
         #     (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/scaling-clusters#graceful_decommissioning)
         #     allows the removal of nodes from the Compute Engine node group

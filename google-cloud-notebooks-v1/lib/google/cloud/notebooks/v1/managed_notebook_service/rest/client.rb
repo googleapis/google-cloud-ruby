@@ -236,6 +236,26 @@ module Google
               # @return [::Google::Cloud::Notebooks::V1::ListRuntimesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::ListRuntimesRequest.new
+              #
+              #   # Call the list_runtimes method.
+              #   result = client.list_runtimes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Notebooks::V1::Runtime.
+              #     p item
+              #   end
+              #
               def list_runtimes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -300,6 +320,22 @@ module Google
               # @return [::Google::Cloud::Notebooks::V1::Runtime]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::GetRuntimeRequest.new
+              #
+              #   # Call the get_runtime method.
+              #   result = client.get_runtime request
+              #
+              #   # The returned object is of type Google::Cloud::Notebooks::V1::Runtime.
+              #   p result
+              #
               def get_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -369,6 +405,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::CreateRuntimeRequest.new
+              #
+              #   # Call the create_runtime method.
+              #   result = client.create_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,6 +517,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::UpdateRuntimeRequest.new
+              #
+              #   # Call the update_runtime method.
+              #   result = client.update_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -524,6 +606,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::DeleteRuntimeRequest.new
+              #
+              #   # Call the delete_runtime method.
+              #   result = client.delete_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -594,6 +699,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::StartRuntimeRequest.new
+              #
+              #   # Call the start_runtime method.
+              #   result = client.start_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def start_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -664,6 +792,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::StopRuntimeRequest.new
+              #
+              #   # Call the stop_runtime method.
+              #   result = client.stop_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def stop_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -734,6 +885,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::SwitchRuntimeRequest.new
+              #
+              #   # Call the switch_runtime method.
+              #   result = client.switch_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def switch_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -800,6 +974,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::ResetRuntimeRequest.new
+              #
+              #   # Call the reset_runtime method.
+              #   result = client.reset_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def reset_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -866,6 +1063,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest.new
+              #
+              #   # Call the upgrade_runtime method.
+              #   result = client.upgrade_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def upgrade_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -935,6 +1155,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest.new
+              #
+              #   # Call the report_runtime_event method.
+              #   result = client.report_runtime_event request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def report_runtime_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1003,6 +1246,22 @@ module Google
               # @return [::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new
+              #
+              #   # Call the refresh_runtime_token_internal method.
+              #   result = client.refresh_runtime_token_internal request
+              #
+              #   # The returned object is of type Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse.
+              #   p result
+              #
               def refresh_runtime_token_internal request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1068,6 +1327,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/notebooks/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest.new
+              #
+              #   # Call the diagnose_runtime method.
+              #   result = client.diagnose_runtime request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def diagnose_runtime request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-08-03)
+
+#### Features
+
+* Provide more enum options for NotificationType ([#22669](https://github.com/googleapis/google-cloud-ruby/issues/22669)) 
+
 ### 0.3.0 (2023-06-06)
 
 #### Features

@@ -110,6 +110,9 @@ module Google
           # @!attribute [rw] request_access
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
           #     Optional. Request for access.
+          # @!attribute [rw] open_evaluation_pipeline
+          #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
+          #     Optional. Open evaluation pipeline of the PublisherModel.
           class CallToAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

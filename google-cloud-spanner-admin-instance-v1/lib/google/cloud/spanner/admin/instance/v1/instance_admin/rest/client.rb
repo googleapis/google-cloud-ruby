@@ -245,6 +245,26 @@ module Google
                   # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new
+                  #
+                  #   # Call the list_instance_configs method.
+                  #   result = client.list_instance_configs request
+                  #
+                  #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                  #   # over elements, and API calls will be issued to fetch pages as needed.
+                  #   result.each do |item|
+                  #     # Each element is of type ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.
+                  #     p item
+                  #   end
+                  #
                   def list_instance_configs request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,6 +329,22 @@ module Google
                   # @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new
+                  #
+                  #   # Call the get_instance_config method.
+                  #   result = client.get_instance_config request
+                  #
+                  #   # The returned object is of type Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.
+                  #   p result
+                  #
                   def get_instance_config request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -426,6 +462,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new
+                  #
+                  #   # Call the create_instance_config method.
+                  #   result = client.create_instance_config request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def create_instance_config request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -547,6 +606,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new
+                  #
+                  #   # Call the update_instance_config method.
+                  #   result = client.update_instance_config request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def update_instance_config request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -630,6 +712,22 @@ module Google
                   # @return [::Google::Protobuf::Empty]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new
+                  #
+                  #   # Call the delete_instance_config method.
+                  #   result = client.delete_instance_config request
+                  #
+                  #   # The returned object is of type Google::Protobuf::Empty.
+                  #   p result
+                  #
                   def delete_instance_config request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -756,6 +854,26 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new
+                  #
+                  #   # Call the list_instance_config_operations method.
+                  #   result = client.list_instance_config_operations request
+                  #
+                  #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                  #   # over elements, and API calls will be issued to fetch pages as needed.
+                  #   result.each do |item|
+                  #     # Each element is of type ::Google::Longrunning::Operation.
+                  #     p item
+                  #   end
+                  #
                   def list_instance_config_operations request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -848,6 +966,26 @@ module Google
                   # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::Instance>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new
+                  #
+                  #   # Call the list_instances method.
+                  #   result = client.list_instances request
+                  #
+                  #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                  #   # over elements, and API calls will be issued to fetch pages as needed.
+                  #   result.each do |item|
+                  #     # Each element is of type ::Google::Cloud::Spanner::Admin::Instance::V1::Instance.
+                  #     p item
+                  #   end
+                  #
                   def list_instances request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -917,6 +1055,22 @@ module Google
                   # @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new
+                  #
+                  #   # Call the get_instance method.
+                  #   result = client.get_instance request
+                  #
+                  #   # The returned object is of type Google::Cloud::Spanner::Admin::Instance::V1::Instance.
+                  #   p result
+                  #
                   def get_instance request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1020,6 +1174,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new
+                  #
+                  #   # Call the create_instance method.
+                  #   result = client.create_instance request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def create_instance request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1131,6 +1308,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new
+                  #
+                  #   # Call the update_instance method.
+                  #   result = client.update_instance request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def update_instance request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1205,6 +1405,22 @@ module Google
                   # @return [::Google::Protobuf::Empty]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new
+                  #
+                  #   # Call the delete_instance method.
+                  #   result = client.delete_instance request
+                  #
+                  #   # The returned object is of type Google::Protobuf::Empty.
+                  #   p result
+                  #
                   def delete_instance request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1283,6 +1499,22 @@ module Google
                   # @return [::Google::Iam::V1::Policy]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Iam::V1::SetIamPolicyRequest.new
+                  #
+                  #   # Call the set_iam_policy method.
+                  #   result = client.set_iam_policy request
+                  #
+                  #   # The returned object is of type Google::Iam::V1::Policy.
+                  #   p result
+                  #
                   def set_iam_policy request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1353,6 +1585,22 @@ module Google
                   # @return [::Google::Iam::V1::Policy]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Iam::V1::GetIamPolicyRequest.new
+                  #
+                  #   # Call the get_iam_policy method.
+                  #   result = client.get_iam_policy request
+                  #
+                  #   # The returned object is of type Google::Iam::V1::Policy.
+                  #   p result
+                  #
                   def get_iam_policy request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1426,6 +1674,22 @@ module Google
                   # @return [::Google::Iam::V1::TestIamPermissionsResponse]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/spanner/admin/instance/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+                  #
+                  #   # Call the test_iam_permissions method.
+                  #   result = client.test_iam_permissions request
+                  #
+                  #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+                  #   p result
+                  #
                   def test_iam_permissions request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 

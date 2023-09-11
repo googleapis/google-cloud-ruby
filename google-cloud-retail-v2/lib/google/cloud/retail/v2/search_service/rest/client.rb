@@ -423,6 +423,26 @@ module Google
               # @return [::Google::Cloud::Retail::V2::SearchResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::SearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::SearchRequest.new
+              #
+              #   # Call the search method.
+              #   result = client.search request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Retail::V2::SearchResponse::SearchResult.
+              #     p item
+              #   end
+              #
               def search request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

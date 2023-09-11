@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.4 (2023-09-04)
+
+#### Bug Fixes
+
+* Adjust retry delays for the publish and streaming_pull calls ([#22799](https://github.com/googleapis/google-cloud-ruby/issues/22799)) 
+
 ### 0.17.3 (2023-07-28)
 
 #### Documentation

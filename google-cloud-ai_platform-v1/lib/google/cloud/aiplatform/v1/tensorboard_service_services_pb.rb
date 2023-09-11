@@ -45,6 +45,8 @@ module Google
             rpc :DeleteTensorboard, ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest, ::Google::Longrunning::Operation
             # Returns a list of monthly active users for a given TensorBoard instance.
             rpc :ReadTensorboardUsage, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse
+            # Returns the storage size for a given TensorBoard instance.
+            rpc :ReadTensorboardSize, ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse
             # Creates a TensorboardExperiment.
             rpc :CreateTensorboardExperiment, ::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest, ::Google::Cloud::AIPlatform::V1::TensorboardExperiment
             # Gets a TensorboardExperiment.

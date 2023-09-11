@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.0 (2023-08-03)
+
+#### Features
+
+* Add update_mask field to UpdateBuildTriggerRequest ([#22668](https://github.com/googleapis/google-cloud-ruby/issues/22668)) 
+
 ### 0.22.0 (2023-07-28)
 
 #### Features

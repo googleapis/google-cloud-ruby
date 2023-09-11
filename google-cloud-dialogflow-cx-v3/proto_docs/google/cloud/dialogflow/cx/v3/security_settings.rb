@@ -174,6 +174,10 @@ module Google
           #     for Agent Assist traffic), higher value will be ignored and use default.
           #     Setting a value higher than that has no effect. A missing value or
           #     setting to 0 also means we use default TTL.
+          # @!attribute [rw] retention_strategy
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::RetentionStrategy]
+          #     Specifies the retention behavior defined by
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::RetentionStrategy SecuritySettings.RetentionStrategy}.
           # @!attribute [rw] purge_data_types
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::PurgeDataType>]
           #     List of types of data to remove when retention settings triggers purge.
@@ -184,7 +188,7 @@ module Google
           #     [Participants.StreamingAnalyzeContent][].
           #
           #     If
-          #     [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy]
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings#retention_strategy retention_strategy}
           #     is set to REMOVE_AFTER_CONVERSATION or [audio_export_settings.gcs_bucket][]
           #     is empty, audio export is disabled.
           #
@@ -202,7 +206,7 @@ module Google
           #     completed.
           #
           #     If
-          #     [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy]
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings#retention_strategy retention_strategy}
           #     is set to REMOVE_AFTER_CONVERSATION, Insights export is disabled no matter
           #     what you configure here.
           class SecuritySettings
@@ -277,6 +281,17 @@ module Google
               # holding data even if power is disconnected. This includes data that are
               # temporarily saved on disk.
               REDACT_DISK_STORAGE = 2
+            end
+
+            # Defines how long we retain persisted data that contains sensitive info.
+            module RetentionStrategy
+              # Retains the persisted data with Dialogflow's internal default 365d TTLs.
+              RETENTION_STRATEGY_UNSPECIFIED = 0
+
+              # Removes data when the conversation ends. If there is no [Conversation][]
+              # explicitly established, a default conversation ends when the
+              # corresponding Dialogflow session ends.
+              REMOVE_AFTER_CONVERSATION = 1
             end
 
             # Type of data we purge after retention settings triggers purge.

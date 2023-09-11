@@ -340,6 +340,61 @@ class ::Google::Cloud::Recommender::V1::Recommender::Rest::ClientTest < Minitest
     end
   end
 
+  def test_mark_recommendation_dismissed
+    # Create test objects.
+    client_result = ::Google::Cloud::Recommender::V1::Recommendation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    mark_recommendation_dismissed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Recommender::V1::Recommender::Rest::ServiceStub.stub :transcode_mark_recommendation_dismissed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, mark_recommendation_dismissed_client_stub do
+        # Create client
+        client = ::Google::Cloud::Recommender::V1::Recommender::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.mark_recommendation_dismissed({ name: name, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.mark_recommendation_dismissed name: name, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.mark_recommendation_dismissed ::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new(name: name, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.mark_recommendation_dismissed({ name: name, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.mark_recommendation_dismissed(::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new(name: name, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, mark_recommendation_dismissed_client_stub.call_count
+      end
+    end
+  end
+
   def test_mark_recommendation_claimed
     # Create test objects.
     client_result = ::Google::Cloud::Recommender::V1::Recommendation.new

@@ -1,5 +1,17 @@
 # Release History
 
+### 0.13.1 (2023-09-04)
+
+#### Documentation
+
+* Clarify description of PropertyReference#name ([#22798](https://github.com/googleapis/google-cloud-ruby/issues/22798)) 
+
+### 0.13.0 (2023-08-04)
+
+#### Features
+
+* Support SUM/AVG aggregations in Datastore ([#22679](https://github.com/googleapis/google-cloud-ruby/issues/22679)) 
+
 ### 0.12.0 (2023-06-06)
 
 #### Features

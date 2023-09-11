@@ -196,6 +196,22 @@ module Google
                 # @return [::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/eventarc/publishing/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new
+                #
+                #   # Call the publish_channel_connection_events method.
+                #   result = client.publish_channel_connection_events request
+                #
+                #   # The returned object is of type Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse.
+                #   p result
+                #
                 def publish_channel_connection_events request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -268,6 +284,22 @@ module Google
                 # @return [::Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/eventarc/publishing/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new
+                #
+                #   # Call the publish_events method.
+                #   result = client.publish_events request
+                #
+                #   # The returned object is of type Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse.
+                #   p result
+                #
                 def publish_events request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

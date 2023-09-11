@@ -178,7 +178,8 @@ module Google
                 #   @param parent [::String]
                 #     Required. The flow to list all transition route groups for.
                 #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/flows/<Flow ID>`.
+                #     ID>/flows/<Flow ID>`
+                #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 100 and
                 #     at most 1000.
@@ -205,6 +206,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new
+                #
+                #   # Call the list_transition_route_groups method.
+                #   result = client.list_transition_route_groups request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+                #     p item
+                #   end
+                #
                 def list_transition_route_groups request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -264,7 +285,9 @@ module Google
                 #     Required. The name of the
                 #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
                 #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+                #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
+                #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+                #     ID>/transitionRouteGroups/<Transition Route Group ID>`.
                 #   @param language_code [::String]
                 #     The language to retrieve the transition route group for. The following
                 #     fields are language dependent:
@@ -285,6 +308,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new
+                #
+                #   # Call the get_transition_route_group method.
+                #   result = client.get_transition_route_group request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+                #   p result
+                #
                 def get_transition_route_group request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -348,7 +387,9 @@ module Google
                 #     Required. The flow to create an
                 #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
                 #     for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/flows/<Flow ID>`.
+                #     ID>/flows/<Flow ID>`
+                #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+                #     for agent-level groups.
                 #   @param transition_route_group [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup, ::Hash]
                 #     Required. The transition route group to create.
                 #   @param language_code [::String]
@@ -370,6 +411,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest.new
+                #
+                #   # Call the create_transition_route_group method.
+                #   result = client.create_transition_route_group request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+                #   p result
+                #
                 def create_transition_route_group request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -451,6 +508,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest.new
+                #
+                #   # Call the update_transition_route_group method.
+                #   result = client.update_transition_route_group request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+                #   p result
+                #
                 def update_transition_route_group request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -514,7 +587,8 @@ module Google
                 #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
                 #     to delete. Format: `projects/<Project ID>/locations/<Location
                 #     ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
-                #     Route Group ID>`.
+                #     Route Group ID>` or `projects/<Project ID>/locations/<Location
+                #     ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
                 #   @param force [::Boolean]
                 #     This field has no effect for transition route group that no page is using.
                 #     If the transition route group is referenced by any page:
@@ -530,6 +604,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteTransitionRouteGroupRequest.new
+                #
+                #   # Call the delete_transition_route_group method.
+                #   result = client.delete_transition_route_group request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_transition_route_group request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

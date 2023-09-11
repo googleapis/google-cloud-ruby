@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1beta/document_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -151,12 +152,19 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @document_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -166,6 +174,13 @@ module Google
             # @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -1077,6 +1092,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

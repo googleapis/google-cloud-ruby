@@ -211,6 +211,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DisableXpnHostProjectRequest.new
+              #
+              #   # Call the disable_xpn_host method.
+              #   result = client.disable_xpn_host request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def disable_xpn_host request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -285,6 +301,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest.new
+              #
+              #   # Call the disable_xpn_resource method.
+              #   result = client.disable_xpn_resource request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def disable_xpn_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -357,6 +389,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::EnableXpnHostProjectRequest.new
+              #
+              #   # Call the enable_xpn_host method.
+              #   result = client.enable_xpn_host request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def enable_xpn_host request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -431,6 +479,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest.new
+              #
+              #   # Call the enable_xpn_resource method.
+              #   result = client.enable_xpn_resource request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def enable_xpn_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -501,6 +565,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Project]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetProjectRequest.new
+              #
+              #   # Call the get method.
+              #   result = client.get request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Project.
+              #   p result
+              #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -563,6 +643,22 @@ module Google
               # @return [::Google::Cloud::Compute::V1::Project]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetXpnHostProjectRequest.new
+              #
+              #   # Call the get_xpn_host method.
+              #   result = client.get_xpn_host request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Project.
+              #   p result
+              #
               def get_xpn_host request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -635,6 +731,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::XpnResourceId>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new
+              #
+              #   # Call the get_xpn_resources method.
+              #   result = client.get_xpn_resources request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::ProjectsGetXpnResources.
+              #   p result
+              #
               def get_xpn_resources request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -710,6 +822,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Project>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new
+              #
+              #   # Call the list_xpn_hosts method.
+              #   result = client.list_xpn_hosts request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::XpnHostList.
+              #   p result
+              #
               def list_xpn_hosts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -777,6 +905,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::MoveDiskProjectRequest.new
+              #
+              #   # Call the move_disk method.
+              #   result = client.move_disk request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def move_disk request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -851,6 +995,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::MoveInstanceProjectRequest.new
+              #
+              #   # Call the move_instance method.
+              #   result = client.move_instance request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def move_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -925,6 +1085,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest.new
+              #
+              #   # Call the set_common_instance_metadata method.
+              #   result = client.set_common_instance_metadata request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_common_instance_metadata request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -999,6 +1175,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest.new
+              #
+              #   # Call the set_default_network_tier method.
+              #   result = client.set_default_network_tier request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_default_network_tier request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1073,6 +1265,22 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest.new
+              #
+              #   # Call the set_usage_export_bucket method.
+              #   result = client.set_usage_export_bucket request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
               def set_usage_export_bucket request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

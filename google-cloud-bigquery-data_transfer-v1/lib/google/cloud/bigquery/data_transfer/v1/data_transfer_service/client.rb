@@ -202,7 +202,8 @@ module Google
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
-                  interceptors: @config.interceptors
+                  interceptors: @config.interceptors,
+                  channel_pool_config: @config.channel_pool
                 )
               end
 
@@ -1064,10 +1065,15 @@ module Google
               #     `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
               #   @param requested_time_range [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange, ::Hash]
-              #     Time range for the transfer runs that should be started.
+              #     A time_range start and end timestamp for historical data files or reports
+              #     that are scheduled to be transferred by the scheduled transfer run.
+              #     requested_time_range must be a past time and cannot include future time
+              #     values.
               #   @param requested_run_time [::Google::Protobuf::Timestamp, ::Hash]
-              #     Specific run_time for a transfer run to be started. The
-              #     requested_run_time must not be in the future.
+              #     A run_time timestamp for historical data files or reports
+              #     that are scheduled to be transferred by the scheduled transfer run.
+              #     requested_run_time must be a past time and cannot include future time
+              #     values.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsResponse]
@@ -1817,6 +1823,14 @@ module Google
                     parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
+                end
+
+                ##
+                # Configuration for the channel pool
+                # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+                #
+                def channel_pool
+                  @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
                 end
 
                 ##

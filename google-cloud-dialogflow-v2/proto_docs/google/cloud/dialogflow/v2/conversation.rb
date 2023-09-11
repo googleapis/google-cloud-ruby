@@ -117,7 +117,7 @@ module Google
         #     auto-generated one to you.
         #
         #     The conversation ID must be compliant with the regression fomula
-        #     "[a-zA-Z][a-zA-Z0-9_-]*" with the characters length in range of [3,64].
+        #     `[a-zA-Z][a-zA-Z0-9_-]*` with the characters length in range of [3,64].
         #     If the field is provided, the caller is resposible for
         #     1. the uniqueness of the ID, otherwise the request will be rejected.
         #     2. the consistency for whether to use custom ID or not under a project to
@@ -321,6 +321,10 @@ module Google
           #   @return [::String]
           #     The name of the answer record. Format:
           #     "projects/<Project ID>/answerRecords/<Answer Record ID>"
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     The baseline model version used to generate this summary. It is empty if
+          #     a baseline model was not used to generate this summary.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -410,6 +414,10 @@ module Google
           #     The summary content that is divided into sections. The key is the
           #     section's name and the value is the section's content. There is no
           #     specific format for the key or value.
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     The baseline model version used to generate this summary. It is empty if
+          #     a baseline model was not used to generate this summary.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -422,6 +430,105 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+        end
+
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#search_knowledge Conversations.SearchKnowledge}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     The parent resource contains the conversation profile
+        #     Format: 'projects/<Project ID>' or `projects/<Project
+        #     ID>/locations/<Location ID>`.
+        # @!attribute [rw] query
+        #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
+        #     Required. The natural language text query for knowledge search.
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     Required. The conversation profile used to configure the search.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`.
+        # @!attribute [rw] session_id
+        #   @return [::String]
+        #     The ID of the search session.
+        #     The session_id can be combined with Dialogflow V3 Agent ID retrieved from
+        #     conversation profile or on its own to identify a search session. The search
+        #     history of the same session will impact the search result. It's up to the
+        #     API caller to choose an appropriate `Session ID`. It can be a random number
+        #     or some type of session identifiers (preferably hashed). The length must
+        #     not exceed 36 characters.
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     The conversation (between human agent and end user) where the search
+        #     request is triggered. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>`.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message when the request is
+        #     triggered.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        class SearchKnowledgeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#search_knowledge Conversations.SearchKnowledge}.
+        # @!attribute [rw] answers
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeAnswer>]
+        #     Most relevant snippets extracted from articles in the given knowledge base,
+        #     ordered by confidence.
+        class SearchKnowledgeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a SearchKnowledge answer.
+        # @!attribute [rw] answer
+        #   @return [::String]
+        #     The piece of text from the knowledge base documents that answers
+        #     the search query
+        # @!attribute [rw] answer_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeAnswer::AnswerType]
+        #     The type of the answer.
+        # @!attribute [rw] answer_sources
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeAnswer::AnswerSource>]
+        #     All sources used to generate the answer.
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     The name of the answer record.
+        #     Format: `projects/<Project ID>/locations/<location ID>/answer
+        #     Records/<Answer Record ID>`
+        class SearchKnowledgeAnswer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The sources of the answers.
+          # @!attribute [rw] title
+          #   @return [::String]
+          #     The title of the article.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     The URI of the article.
+          # @!attribute [rw] snippet
+          #   @return [::String]
+          #     The relevant snippet of the article.
+          class AnswerSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of the answer.
+          module AnswerType
+            # The answer has a unspecified type.
+            ANSWER_TYPE_UNSPECIFIED = 0
+
+            # The answer is from FAQ doucments.
+            FAQ = 1
+
+            # The answer is from generative model.
+            GENERATIVE = 2
           end
         end
       end

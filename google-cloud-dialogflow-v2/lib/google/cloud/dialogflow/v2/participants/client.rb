@@ -157,7 +157,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -548,7 +549,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload analyze_content(participant: nil, text_input: nil, event_input: nil, reply_audio_config: nil, query_params: nil, assist_query_params: nil, cx_parameters: nil, request_id: nil)
+            # @overload analyze_content(participant: nil, text_input: nil, event_input: nil, suggestion_input: nil, reply_audio_config: nil, query_params: nil, assist_query_params: nil, cx_parameters: nil, request_id: nil)
             #   Pass arguments to `analyze_content` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -561,6 +562,8 @@ module Google
             #     The natural language text to be processed.
             #   @param event_input [::Google::Cloud::Dialogflow::V2::EventInput, ::Hash]
             #     An input event to send to Dialogflow.
+            #   @param suggestion_input [::Google::Cloud::Dialogflow::V2::SuggestionInput, ::Hash]
+            #     An input representing the selection of a suggestion.
             #   @param reply_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
             #     Speech synthesis configuration.
             #     The speech synthesis settings for a virtual agent that may be configured
@@ -1159,6 +1162,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

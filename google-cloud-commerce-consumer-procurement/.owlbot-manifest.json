@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-commerce-consumer-procurement.gemspec",
+    "lib/google-cloud-commerce-consumer-procurement.rb",
+    "lib/google/cloud/commerce/consumer/procurement.rb",
+    "lib/google/cloud/commerce/consumer/procurement/version.rb",
+    "test/google/cloud/commerce/consumer/procurement/client_test.rb",
+    "test/google/cloud/commerce/consumer/procurement/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

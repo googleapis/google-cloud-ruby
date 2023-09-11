@@ -159,7 +159,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -531,6 +532,7 @@ module Google
             #     descending order.
             #
             #     Supported fields:
+            #
             #       * `create_time`
             #       * `start_time`
             #       * `end_time`
@@ -822,7 +824,9 @@ module Google
             #   @param schedule [::Google::Cloud::AIPlatform::V1::Schedule, ::Hash]
             #     Required. The Schedule which replaces the resource on the server.
             #     The following restrictions will be applied:
+            #
             #       * The scheduled request type cannot be changed.
+            #       * The non-empty fields cannot be unset.
             #       * The output_only fields will be ignored if specified.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource. See
@@ -1009,6 +1013,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

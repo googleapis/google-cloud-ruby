@@ -1,5 +1,22 @@
 # Release History
 
+### 0.24.0 (2023-09-07)
+
+#### Features
+
+* Support CRUD operations on SKAdNetworkConversionValueSchema ([#22874](https://github.com/googleapis/google-cloud-ruby/issues/22874)) 
+
+### 0.23.0 (2023-08-15)
+
+#### Features
+
+* add `UpdateConversionEvent` method to the Admin API v1 alpha 
+* add the `ConversionCountingMethod` enum 
+* add the `counting_method` field to the `ConversionEvent` type 
+#### Bug Fixes
+
+* rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource ([#22766](https://github.com/googleapis/google-cloud-ruby/issues/22766)) 
+
 ### 0.22.0 (2023-07-28)
 
 ### ⚠ BREAKING CHANGES

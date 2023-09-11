@@ -738,6 +738,19 @@ module Google
         end
 
         ##
+        # Starts copying the selected backup to the chosen location.
+        # The underlying Google::Longrunning::Operation tracks the copying of backup.
+        #
+        # @return [Gapic::Operation]
+        #
+        def copy_backup project_id:, instance_id:, cluster_id:, backup_id:, source_backup:, expire_time:
+          tables.copy_backup parent: "projects/#{project_id}/instances/#{instance_id}/clusters/#{cluster_id}",
+                             backup_id: backup_id,
+                             source_backup: source_backup,
+                             expire_time: expire_time
+        end
+
+        ##
         # @return [Google::Cloud::Bigtable::Admin::V2::Backup]
         #
         def get_backup instance_id, cluster_id, backup_id

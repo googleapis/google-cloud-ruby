@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.31.0 (2023-09-07)
+
+#### Features
+
+* Add field "encryption_spec" to Index ([#22903](https://github.com/googleapis/google-cloud-ruby/issues/22903)) 
+* Support contexts for a Trial ([#22903](https://github.com/googleapis/google-cloud-ruby/issues/22903)) 
+
+### 0.30.0 (2023-08-15)
+
+#### Features
+
+* Added disable_retries to custom job scheduling 
+* Added open_evaluation_pipeline to PublisherModel::CallToAction 
+* PipelineJob returns the schedule_name 
+* Support the read_tensorboard_size RPC 
+
 ### 0.29.0 (2023-07-28)
 
 #### Features

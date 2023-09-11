@@ -38,6 +38,42 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::ClientPathsTest < Minitest
     end
   end
 
+  def test_context_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.context_path project: "value0", session: "value1", context: "value2"
+      assert_equal "projects/value0/agent/sessions/value1/contexts/value2", path
+
+      path = client.context_path project: "value0", environment: "value1", user: "value2", session: "value3", context: "value4"
+      assert_equal "projects/value0/agent/environments/value1/users/value2/sessions/value3/contexts/value4", path
+
+      path = client.context_path project: "value0", location: "value1", session: "value2", context: "value3"
+      assert_equal "projects/value0/locations/value1/agent/sessions/value2/contexts/value3", path
+
+      path = client.context_path project: "value0", location: "value1", environment: "value2", user: "value3", session: "value4", context: "value5"
+      assert_equal "projects/value0/locations/value1/agent/environments/value2/users/value3/sessions/value4/contexts/value5", path
+    end
+  end
+
+  def test_intent_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.intent_path project: "value0", intent: "value1"
+      assert_equal "projects/value0/agent/intents/value1", path
+
+      path = client.intent_path project: "value0", location: "value1", intent: "value2"
+      assert_equal "projects/value0/locations/value1/agent/intents/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

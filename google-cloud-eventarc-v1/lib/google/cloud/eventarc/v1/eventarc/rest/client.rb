@@ -206,6 +206,22 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::Trigger]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::GetTriggerRequest.new
+              #
+              #   # Call the get_trigger method.
+              #   result = client.get_trigger request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::V1::Trigger.
+              #   p result
+              #
               def get_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -287,6 +303,26 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::ListTriggersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::ListTriggersRequest.new
+              #
+              #   # Call the list_triggers method.
+              #   result = client.list_triggers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Eventarc::V1::Trigger.
+              #     p item
+              #   end
+              #
               def list_triggers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,6 +392,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::CreateTriggerRequest.new
+              #
+              #   # Call the create_trigger method.
+              #   result = client.create_trigger request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -429,6 +488,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::UpdateTriggerRequest.new
+              #
+              #   # Call the update_trigger method.
+              #   result = client.update_trigger request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -501,6 +583,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::DeleteTriggerRequest.new
+              #
+              #   # Call the delete_trigger method.
+              #   result = client.delete_trigger request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_trigger request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -564,6 +669,22 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::Channel]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::GetChannelRequest.new
+              #
+              #   # Call the get_channel method.
+              #   result = client.get_channel request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::V1::Channel.
+              #   p result
+              #
               def get_channel request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -641,6 +762,26 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::ListChannelsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::ListChannelsRequest.new
+              #
+              #   # Call the list_channels method.
+              #   result = client.list_channels request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Eventarc::V1::Channel.
+              #     p item
+              #   end
+              #
               def list_channels request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -710,6 +851,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::CreateChannelRequest.new
+              #
+              #   # Call the create_channel method.
+              #   result = client.create_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_channel request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -780,6 +944,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::UpdateChannelRequest.new
+              #
+              #   # Call the update_channel method.
+              #   result = client.update_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_channel request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -846,6 +1033,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::DeleteChannelRequest.new
+              #
+              #   # Call the delete_channel method.
+              #   result = client.delete_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_channel request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -909,6 +1119,22 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::Provider]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::GetProviderRequest.new
+              #
+              #   # Call the get_provider method.
+              #   result = client.get_provider request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::V1::Provider.
+              #   p result
+              #
               def get_provider request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -986,6 +1212,26 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::ListProvidersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::ListProvidersRequest.new
+              #
+              #   # Call the list_providers method.
+              #   result = client.list_providers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Eventarc::V1::Provider.
+              #     p item
+              #   end
+              #
               def list_providers request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1048,6 +1294,22 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::ChannelConnection]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::GetChannelConnectionRequest.new
+              #
+              #   # Call the get_channel_connection method.
+              #   result = client.get_channel_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::V1::ChannelConnection.
+              #   p result
+              #
               def get_channel_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1120,6 +1382,26 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::ListChannelConnectionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest.new
+              #
+              #   # Call the list_channel_connections method.
+              #   result = client.list_channel_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Eventarc::V1::ChannelConnection.
+              #     p item
+              #   end
+              #
               def list_channel_connections request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1186,6 +1468,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest.new
+              #
+              #   # Call the create_channel_connection method.
+              #   result = client.create_channel_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_channel_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1249,6 +1554,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest.new
+              #
+              #   # Call the delete_channel_connection method.
+              #   result = client.delete_channel_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_channel_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1312,6 +1640,22 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::GoogleChannelConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest.new
+              #
+              #   # Call the get_google_channel_config method.
+              #   result = client.get_google_channel_config request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::V1::GoogleChannelConfig.
+              #   p result
+              #
               def get_google_channel_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1378,6 +1722,22 @@ module Google
               # @return [::Google::Cloud::Eventarc::V1::GoogleChannelConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest.new
+              #
+              #   # Call the update_google_channel_config method.
+              #   result = client.update_google_channel_config request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::V1::GoogleChannelConfig.
+              #   p result
+              #
               def update_google_channel_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

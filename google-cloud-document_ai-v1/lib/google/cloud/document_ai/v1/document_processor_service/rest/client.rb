@@ -233,6 +233,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::ProcessResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::ProcessRequest.new
+              #
+              #   # Call the process_document method.
+              #   result = client.process_document request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::ProcessResponse.
+              #   p result
+              #
               def process_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -314,6 +330,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::BatchProcessRequest.new
+              #
+              #   # Call the batch_process_documents method.
+              #   result = client.batch_process_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_process_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -380,6 +419,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::FetchProcessorTypesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::FetchProcessorTypesRequest.new
+              #
+              #   # Call the fetch_processor_types method.
+              #   result = client.fetch_processor_types request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::FetchProcessorTypesResponse.
+              #   p result
+              #
               def fetch_processor_types request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -449,6 +504,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DocumentAI::V1::ProcessorType>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::ListProcessorTypesRequest.new
+              #
+              #   # Call the list_processor_types method.
+              #   result = client.list_processor_types request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DocumentAI::V1::ProcessorType.
+              #     p item
+              #   end
+              #
               def list_processor_types request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -512,6 +587,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::ProcessorType]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::GetProcessorTypeRequest.new
+              #
+              #   # Call the get_processor_type method.
+              #   result = client.get_processor_type request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::ProcessorType.
+              #   p result
+              #
               def get_processor_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -582,6 +673,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DocumentAI::V1::Processor>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::ListProcessorsRequest.new
+              #
+              #   # Call the list_processors method.
+              #   result = client.list_processors request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DocumentAI::V1::Processor.
+              #     p item
+              #   end
+              #
               def list_processors request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -645,6 +756,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::Processor]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::GetProcessorRequest.new
+              #
+              #   # Call the get_processor method.
+              #   result = client.get_processor request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::Processor.
+              #   p result
+              #
               def get_processor request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -724,6 +851,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest.new
+              #
+              #   # Call the train_processor_version method.
+              #   result = client.train_processor_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def train_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -787,6 +937,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::GetProcessorVersionRequest.new
+              #
+              #   # Call the get_processor_version method.
+              #   result = client.get_processor_version request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::ProcessorVersion.
+              #   p result
+              #
               def get_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -858,6 +1024,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DocumentAI::V1::ProcessorVersion>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::ListProcessorVersionsRequest.new
+              #
+              #   # Call the list_processor_versions method.
+              #   result = client.list_processor_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DocumentAI::V1::ProcessorVersion.
+              #     p item
+              #   end
+              #
               def list_processor_versions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -922,6 +1108,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::DeleteProcessorVersionRequest.new
+              #
+              #   # Call the delete_processor_version method.
+              #   result = client.delete_processor_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -985,6 +1194,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::DeployProcessorVersionRequest.new
+              #
+              #   # Call the deploy_processor_version method.
+              #   result = client.deploy_processor_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def deploy_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1048,6 +1280,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::UndeployProcessorVersionRequest.new
+              #
+              #   # Call the undeploy_processor_version method.
+              #   result = client.undeploy_processor_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def undeploy_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1120,6 +1375,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::Processor]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::CreateProcessorRequest.new
+              #
+              #   # Call the create_processor method.
+              #   result = client.create_processor request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::Processor.
+              #   p result
+              #
               def create_processor request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1183,6 +1454,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::DeleteProcessorRequest.new
+              #
+              #   # Call the delete_processor method.
+              #   result = client.delete_processor request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_processor request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1246,6 +1540,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::EnableProcessorRequest.new
+              #
+              #   # Call the enable_processor method.
+              #   result = client.enable_processor request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def enable_processor request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1309,6 +1626,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::DisableProcessorRequest.new
+              #
+              #   # Call the disable_processor method.
+              #   result = client.disable_processor request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def disable_processor request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1383,6 +1723,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::SetDefaultProcessorVersionRequest.new
+              #
+              #   # Call the set_default_processor_version method.
+              #   result = client.set_default_processor_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def set_default_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1457,6 +1820,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::ReviewDocumentRequest.new
+              #
+              #   # Call the review_document method.
+              #   result = client.review_document request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def review_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1527,6 +1913,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::EvaluateProcessorVersionRequest.new
+              #
+              #   # Call the evaluate_processor_version method.
+              #   result = client.evaluate_processor_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def evaluate_processor_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1592,6 +2001,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1::Evaluation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::GetEvaluationRequest.new
+              #
+              #   # Call the get_evaluation method.
+              #   result = client.get_evaluation request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1::Evaluation.
+              #   p result
+              #
               def get_evaluation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1664,6 +2089,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DocumentAI::V1::Evaluation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1::ListEvaluationsRequest.new
+              #
+              #   # Call the list_evaluations method.
+              #   result = client.list_evaluations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DocumentAI::V1::Evaluation.
+              #     p item
+              #   end
+              #
               def list_evaluations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

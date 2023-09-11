@@ -210,6 +210,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::Changelog>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Changelogs::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListChangelogsRequest.new
+                #
+                #   # Call the list_changelogs method.
+                #   result = client.list_changelogs request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Changelog.
+                #     p item
+                #   end
+                #
                 def list_changelogs request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -275,6 +295,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Changelog]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Changelogs::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetChangelogRequest.new
+                #
+                #   # Call the get_changelog method.
+                #   result = client.get_changelog request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Changelog.
+                #   p result
+                #
                 def get_changelog request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

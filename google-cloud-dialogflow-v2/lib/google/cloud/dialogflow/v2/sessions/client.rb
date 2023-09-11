@@ -160,7 +160,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -228,12 +229,12 @@ module Google
             #   @param query_input [::Google::Cloud::Dialogflow::V2::QueryInput, ::Hash]
             #     Required. The input specification. It can be set to:
             #
-            #     1.  an audio config
-            #         which instructs the speech recognizer how to process the speech audio,
+            #     1. an audio config which instructs the speech recognizer how to process
+            #     the speech audio,
             #
-            #     2.  a conversational query in the form of text, or
+            #     2. a conversational query in the form of text, or
             #
-            #     3.  an event that specifies which intent to trigger.
+            #     3. an event that specifies which intent to trigger.
             #   @param output_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
             #     Instructs the speech synthesizer how to generate the output
             #     audio. If this field is not set and agent-level speech synthesizer is not
@@ -524,6 +525,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

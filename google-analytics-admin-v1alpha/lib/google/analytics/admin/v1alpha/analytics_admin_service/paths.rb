@@ -441,6 +441,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SKAdNetworkConversionValueSchema resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/sKAdNetworkConversionValueSchema/{skadnetwork_conversion_value_schema}`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            # @param skadnetwork_conversion_value_schema [String]
+            #
+            # @return [::String]
+            def sk_ad_network_conversion_value_schema_path property:, data_stream:, skadnetwork_conversion_value_schema:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+              raise ::ArgumentError, "data_stream cannot contain /" if data_stream.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/sKAdNetworkConversionValueSchema/#{skadnetwork_conversion_value_schema}"
+            end
+
+            ##
             # Create a fully-qualified SearchAds360Link resource string.
             #
             # The resource will be in the following format:

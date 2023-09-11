@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-cx-v3",
-    "version": "0.19.0",
+    "version": "0.20.0",
     "language": "RUBY",
     "apis": [
       {
@@ -955,6 +955,86 @@
         "method": {
           "short_name": "GetAgentValidationResult",
           "full_name": "google.cloud.dialogflow.cx.v3.Agents.GetAgentValidationResult",
+          "service": {
+            "short_name": "Agents",
+            "full_name": "google.cloud.dialogflow.cx.v3.Agents"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Agents_GetGenerativeSettings_sync",
+      "title": "Snippet for the get_generative_settings call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_generative_settings. It may require modification in order to execute successfully.",
+      "file": "agents/get_generative_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_generative_settings",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_generative_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings",
+        "client": {
+          "short_name": "Agents::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Agents::Client"
+        },
+        "method": {
+          "short_name": "GetGenerativeSettings",
+          "full_name": "google.cloud.dialogflow.cx.v3.Agents.GetGenerativeSettings",
+          "service": {
+            "short_name": "Agents",
+            "full_name": "google.cloud.dialogflow.cx.v3.Agents"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Agents_UpdateGenerativeSettings_sync",
+      "title": "Snippet for the update_generative_settings call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#update_generative_settings. It may require modification in order to execute successfully.",
+      "file": "agents/update_generative_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_generative_settings",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Agents::Client#update_generative_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings",
+        "client": {
+          "short_name": "Agents::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Agents::Client"
+        },
+        "method": {
+          "short_name": "UpdateGenerativeSettings",
+          "full_name": "google.cloud.dialogflow.cx.v3.Agents.UpdateGenerativeSettings",
           "service": {
             "short_name": "Agents",
             "full_name": "google.cloud.dialogflow.cx.v3.Agents"

@@ -194,6 +194,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivateCatalog::V1beta1::Catalog>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/private_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new
+              #
+              #   # Call the search_catalogs method.
+              #   result = client.search_catalogs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::PrivateCatalog::V1beta1::Catalog.
+              #     p item
+              #   end
+              #
               def search_catalogs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -272,6 +292,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivateCatalog::V1beta1::Product>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/private_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new
+              #
+              #   # Call the search_products method.
+              #   result = client.search_products request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::PrivateCatalog::V1beta1::Product.
+              #     p item
+              #   end
+              #
               def search_products request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -350,6 +390,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivateCatalog::V1beta1::Version>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/private_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new
+              #
+              #   # Call the search_versions method.
+              #   result = client.search_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::PrivateCatalog::V1beta1::Version.
+              #     p item
+              #   end
+              #
               def search_versions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

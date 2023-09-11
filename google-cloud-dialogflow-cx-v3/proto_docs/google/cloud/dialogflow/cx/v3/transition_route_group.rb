@@ -22,7 +22,7 @@ module Google
     module Dialogflow
       module CX
         module V3
-          # An TransitionRouteGroup represents a group of
+          # A TransitionRouteGroup represents a group of
           # {::Google::Cloud::Dialogflow::CX::V3::TransitionRoute `TransitionRoutes`} to be
           # used by a {::Google::Cloud::Dialogflow::CX::V3::Page Page}.
           # @!attribute [rw] name
@@ -31,7 +31,8 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#create_transition_route_group TransitionRouteGroups.CreateTransitionRouteGroup}
           #     populates the name automatically. Format: `projects/<Project
           #     ID>/locations/<Location ID>/agents/<Agent ID>/flows/<Flow
-          #     ID>/transitionRouteGroups/<Transition Route Group ID>`.
+          #     ID>/transitionRouteGroups/<Transition Route Group ID>`
+          #     .
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the transition route group, unique
@@ -51,7 +52,8 @@ module Google
           #   @return [::String]
           #     Required. The flow to list all transition route groups for.
           #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     ID>/flows/<Flow ID>`
+          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 100 and
@@ -103,7 +105,9 @@ module Google
           #     Required. The name of the
           #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
           #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+          #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
+          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/transitionRouteGroups/<Transition Route Group ID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to retrieve the transition route group for. The following
@@ -130,7 +134,9 @@ module Google
           #     Required. The flow to create an
           #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
           #     for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     ID>/flows/<Flow ID>`
+          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+          #     for agent-level groups.
           # @!attribute [rw] transition_route_group
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup]
           #     Required. The transition route group to create.
@@ -186,7 +192,8 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
           #     to delete. Format: `projects/<Project ID>/locations/<Location
           #     ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
-          #     Route Group ID>`.
+          #     Route Group ID>` or `projects/<Project ID>/locations/<Location
+          #     ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
           # @!attribute [rw] force
           #   @return [::Boolean]
           #     This field has no effect for transition route group that no page is using.

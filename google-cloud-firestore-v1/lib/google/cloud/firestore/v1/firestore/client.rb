@@ -227,7 +227,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -270,7 +271,10 @@ module Google
             #     Reads the document in a transaction.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads the version of the document at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::Document]
@@ -397,7 +401,9 @@ module Google
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Perform the read at the provided time.
             #
-            #     This may not be older than 270 seconds.
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #   @param show_missing [::Boolean]
             #     If the list should show missing documents.
             #
@@ -715,7 +721,10 @@ module Google
             #     stream.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
@@ -1091,7 +1100,10 @@ module Google
             #     stream.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
@@ -1211,9 +1223,9 @@ module Google
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Executes the query at the given timestamp.
             #
-            #     Requires:
-            #
-            #     * Cannot be more than 270 seconds in the past.
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
@@ -1345,7 +1357,10 @@ module Google
             #     2 partitions, to complete the total of 10 specified in `partition_count`.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
@@ -1604,7 +1619,10 @@ module Google
             #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Reads documents as they were at the given time.
-            #     This may not be older than 270 seconds.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
@@ -1994,6 +2012,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

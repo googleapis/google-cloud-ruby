@@ -118,8 +118,8 @@ module Google
               # [metadata][google.longrunning.Operation.metadata] field type is
               # [CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
               # [response][google.longrunning.Operation.response] field type is
-              # [Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the returned operation will stop the
-              # creation and delete the backup.
+              # [Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+              # returned operation will stop the creation and delete the backup.
               rpc :CreateBackup, ::Google::Cloud::Bigtable::Admin::V2::CreateBackupRequest, ::Google::Longrunning::Operation
               # Gets metadata on a pending or completed Cloud Bigtable Backup.
               rpc :GetBackup, ::Google::Cloud::Bigtable::Admin::V2::GetBackupRequest, ::Google::Cloud::Bigtable::Admin::V2::Backup
@@ -130,8 +130,7 @@ module Google
               # Lists Cloud Bigtable backups. Returns both completed and pending
               # backups.
               rpc :ListBackups, ::Google::Cloud::Bigtable::Admin::V2::ListBackupsRequest, ::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse
-              # Create a new table by restoring from a completed backup. The new table
-              # must be in the same project as the instance containing the backup.  The
+              # Create a new table by restoring from a completed backup.  The
               # returned table [long-running operation][google.longrunning.Operation] can
               # be used to track the progress of the operation, and to cancel it.  The
               # [metadata][google.longrunning.Operation.metadata] field type is
@@ -139,6 +138,9 @@ module Google
               # [response][google.longrunning.Operation.response] type is
               # [Table][google.bigtable.admin.v2.Table], if successful.
               rpc :RestoreTable, ::Google::Cloud::Bigtable::Admin::V2::RestoreTableRequest, ::Google::Longrunning::Operation
+              # Copy a Cloud Bigtable backup to a new backup in the destination cluster
+              # located in the destination instance and project.
+              rpc :CopyBackup, ::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest, ::Google::Longrunning::Operation
               # Gets the access control policy for a Table or Backup resource.
               # Returns an empty policy if the resource exists but does not have a policy
               # set.
@@ -146,7 +148,8 @@ module Google
               # Sets the access control policy on a Table or Backup resource.
               # Replaces any existing policy.
               rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Returns permissions that the caller has on the specified Table or Backup resource.
+              # Returns permissions that the caller has on the specified Table or Backup
+              # resource.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             end
 

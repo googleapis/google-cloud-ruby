@@ -46,6 +46,9 @@ module Google
             rpc :GetInstance, ::Google::Cloud::BareMetalSolution::V2::GetInstanceRequest, ::Google::Cloud::BareMetalSolution::V2::Instance
             # Update details of a single server.
             rpc :UpdateInstance, ::Google::Cloud::BareMetalSolution::V2::UpdateInstanceRequest, ::Google::Longrunning::Operation
+            # RenameInstance sets a new name for an instance.
+            # Use with caution, previous names become immediately invalidated.
+            rpc :RenameInstance, ::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest, ::Google::Cloud::BareMetalSolution::V2::Instance
             # Perform an ungraceful, hard reset on a server. Equivalent to shutting the
             # power off and then turning it back on.
             rpc :ResetInstance, ::Google::Cloud::BareMetalSolution::V2::ResetInstanceRequest, ::Google::Longrunning::Operation
@@ -53,14 +56,32 @@ module Google
             rpc :StartInstance, ::Google::Cloud::BareMetalSolution::V2::StartInstanceRequest, ::Google::Longrunning::Operation
             # Stop a running server.
             rpc :StopInstance, ::Google::Cloud::BareMetalSolution::V2::StopInstanceRequest, ::Google::Longrunning::Operation
+            # Enable the interactive serial console feature on an instance.
+            rpc :EnableInteractiveSerialConsole, ::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest, ::Google::Longrunning::Operation
+            # Disable the interactive serial console feature on an instance.
+            rpc :DisableInteractiveSerialConsole, ::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest, ::Google::Longrunning::Operation
             # Detach LUN from Instance.
             rpc :DetachLun, ::Google::Cloud::BareMetalSolution::V2::DetachLunRequest, ::Google::Longrunning::Operation
+            # Lists the public SSH keys registered for the specified project.
+            # These SSH keys are used only for the interactive serial console feature.
+            rpc :ListSSHKeys, ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest, ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysResponse
+            # Register a public SSH key in the specified project for use with the
+            # interactive serial console feature.
+            rpc :CreateSSHKey, ::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest, ::Google::Cloud::BareMetalSolution::V2::SSHKey
+            # Deletes a public SSH key registered in the specified project.
+            rpc :DeleteSSHKey, ::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest, ::Google::Protobuf::Empty
             # List storage volumes in a given project and location.
             rpc :ListVolumes, ::Google::Cloud::BareMetalSolution::V2::ListVolumesRequest, ::Google::Cloud::BareMetalSolution::V2::ListVolumesResponse
             # Get details of a single storage volume.
             rpc :GetVolume, ::Google::Cloud::BareMetalSolution::V2::GetVolumeRequest, ::Google::Cloud::BareMetalSolution::V2::Volume
             # Update details of a single storage volume.
             rpc :UpdateVolume, ::Google::Cloud::BareMetalSolution::V2::UpdateVolumeRequest, ::Google::Longrunning::Operation
+            # RenameVolume sets a new name for a volume.
+            # Use with caution, previous names become immediately invalidated.
+            rpc :RenameVolume, ::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest, ::Google::Cloud::BareMetalSolution::V2::Volume
+            # Skips volume's cooloff and deletes it now.
+            # Volume must be in cooloff state.
+            rpc :EvictVolume, ::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest, ::Google::Longrunning::Operation
             # Emergency Volume resize.
             rpc :ResizeVolume, ::Google::Cloud::BareMetalSolution::V2::ResizeVolumeRequest, ::Google::Longrunning::Operation
             # List network in a given project and location.
@@ -72,16 +93,57 @@ module Google
             rpc :GetNetwork, ::Google::Cloud::BareMetalSolution::V2::GetNetworkRequest, ::Google::Cloud::BareMetalSolution::V2::Network
             # Update details of a single network.
             rpc :UpdateNetwork, ::Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest, ::Google::Longrunning::Operation
+            # Takes a snapshot of a boot volume.
+            # Returns INVALID_ARGUMENT if called for a non-boot volume.
+            rpc :CreateVolumeSnapshot, ::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest, ::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot
+            # Uses the specified snapshot to restore its parent volume.
+            # Returns INVALID_ARGUMENT if called for a non-boot volume.
+            rpc :RestoreVolumeSnapshot, ::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest, ::Google::Longrunning::Operation
+            # Deletes a volume snapshot.
+            # Returns INVALID_ARGUMENT if called for a non-boot volume.
+            rpc :DeleteVolumeSnapshot, ::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest, ::Google::Protobuf::Empty
+            # Returns the specified snapshot resource.
+            # Returns INVALID_ARGUMENT if called for a non-boot volume.
+            rpc :GetVolumeSnapshot, ::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest, ::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot
+            # Retrieves the list of snapshots for the specified volume.
+            # Returns a response with an empty list of snapshots if called
+            # for a non-boot volume.
+            rpc :ListVolumeSnapshots, ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest, ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsResponse
             # Get details of a single storage logical unit number(LUN).
             rpc :GetLun, ::Google::Cloud::BareMetalSolution::V2::GetLunRequest, ::Google::Cloud::BareMetalSolution::V2::Lun
             # List storage volume luns for given storage volume.
             rpc :ListLuns, ::Google::Cloud::BareMetalSolution::V2::ListLunsRequest, ::Google::Cloud::BareMetalSolution::V2::ListLunsResponse
+            # Skips lun's cooloff and deletes it now.
+            # Lun must be in cooloff state.
+            rpc :EvictLun, ::Google::Cloud::BareMetalSolution::V2::EvictLunRequest, ::Google::Longrunning::Operation
             # Get details of a single NFS share.
             rpc :GetNfsShare, ::Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest, ::Google::Cloud::BareMetalSolution::V2::NfsShare
             # List NFS shares.
             rpc :ListNfsShares, ::Google::Cloud::BareMetalSolution::V2::ListNfsSharesRequest, ::Google::Cloud::BareMetalSolution::V2::ListNfsSharesResponse
             # Update details of a single NFS share.
             rpc :UpdateNfsShare, ::Google::Cloud::BareMetalSolution::V2::UpdateNfsShareRequest, ::Google::Longrunning::Operation
+            # Create an NFS share.
+            rpc :CreateNfsShare, ::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest, ::Google::Longrunning::Operation
+            # RenameNfsShare sets a new name for an nfsshare.
+            # Use with caution, previous names become immediately invalidated.
+            rpc :RenameNfsShare, ::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest, ::Google::Cloud::BareMetalSolution::V2::NfsShare
+            # Delete an NFS share. The underlying volume is automatically deleted.
+            rpc :DeleteNfsShare, ::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest, ::Google::Longrunning::Operation
+            # List the budget details to provision resources on a given project.
+            rpc :ListProvisioningQuotas, ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest, ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasResponse
+            # Submit a provisiong configuration for a given project.
+            rpc :SubmitProvisioningConfig, ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest, ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigResponse
+            # Get ProvisioningConfig by name.
+            rpc :GetProvisioningConfig, ::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest, ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig
+            # Create new ProvisioningConfig.
+            rpc :CreateProvisioningConfig, ::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest, ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig
+            # Update existing ProvisioningConfig.
+            rpc :UpdateProvisioningConfig, ::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest, ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig
+            # RenameNetwork sets a new name for a network.
+            # Use with caution, previous names become immediately invalidated.
+            rpc :RenameNetwork, ::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest, ::Google::Cloud::BareMetalSolution::V2::Network
+            # Retrieves the list of OS images which are currently approved.
+            rpc :ListOSImages, ::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest, ::Google::Cloud::BareMetalSolution::V2::ListOSImagesResponse
           end
 
           Stub = Service.rpc_stub_class

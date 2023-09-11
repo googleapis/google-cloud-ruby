@@ -184,6 +184,28 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_size TensorboardService.ReadTensorboardSize}.
+        # @!attribute [rw] tensorboard
+        #   @return [::String]
+        #     Required. The name of the Tensorboard resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+        class ReadTensorboardSizeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_size TensorboardService.ReadTensorboardSize}.
+        # @!attribute [rw] storage_size_byte
+        #   @return [::Integer]
+        #     Payload storage size for the TensorBoard
+        class ReadTensorboardSizeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#create_tensorboard_experiment TensorboardService.CreateTensorboardExperiment}.
         # @!attribute [rw] parent
         #   @return [::String]

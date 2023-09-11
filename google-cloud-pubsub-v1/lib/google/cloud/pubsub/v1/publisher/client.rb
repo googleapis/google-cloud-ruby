@@ -78,7 +78,7 @@ module Google
 
                 default_config.rpcs.publish.timeout = 60.0
                 default_config.rpcs.publish.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 13, 8, 2, 14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 4.0, retry_codes: [10, 1, 13, 8, 2, 14, 4]
                 }
 
                 default_config.rpcs.get_topic.timeout = 60.0
@@ -191,7 +191,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -1169,6 +1170,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

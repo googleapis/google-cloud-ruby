@@ -198,7 +198,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload optimize_tours(parent: nil, timeout: nil, model: nil, solving_mode: nil, max_validation_errors: nil, search_mode: nil, injected_first_solution_routes: nil, injected_solution_constraint: nil, refresh_details_routes: nil, interpret_injected_solutions_using_labels: nil, consider_road_traffic: nil, populate_polylines: nil, populate_transition_polylines: nil, allow_large_deadline_despite_interruption_risk: nil, use_geodesic_distances: nil, geodesic_meters_per_second: nil, label: nil, populate_travel_step_polylines: nil)
+              # @overload optimize_tours(parent: nil, timeout: nil, model: nil, solving_mode: nil, search_mode: nil, injected_first_solution_routes: nil, injected_solution_constraint: nil, refresh_details_routes: nil, interpret_injected_solutions_using_labels: nil, consider_road_traffic: nil, populate_polylines: nil, populate_transition_polylines: nil, allow_large_deadline_despite_interruption_risk: nil, use_geodesic_distances: nil, geodesic_meters_per_second: nil, max_validation_errors: nil, label: nil, populate_travel_step_polylines: nil)
               #   Pass arguments to `optimize_tours` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -220,14 +220,6 @@ module Google
               #     Shipment model to solve.
               #   @param solving_mode [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SolvingMode]
               #     By default, the solving mode is `DEFAULT_SOLVE` (0).
-              #   @param max_validation_errors [::Integer]
-              #     Truncates the number of validation errors returned. These errors are
-              #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
-              #     error detail (https://cloud.google.com/apis/design/errors#error_details),
-              #     unless solving_mode=VALIDATE_ONLY: see the
-              #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#validation_errors OptimizeToursResponse.validation_errors}
-              #     field.
-              #     This defaults to 100 and is capped at 10,000.
               #   @param search_mode [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SearchMode]
               #     Search mode used to solve the request.
               #   @param injected_first_solution_routes [::Array<::Google::Cloud::Optimization::V1::ShipmentRoute, ::Hash>]
@@ -382,6 +374,14 @@ module Google
               #     When `use_geodesic_distances` is true, this field must be set and defines
               #     the speed applied to compute travel times. Its value must be at least 1.0
               #     meters/seconds.
+              #   @param max_validation_errors [::Integer]
+              #     Truncates the number of validation errors returned. These errors are
+              #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
+              #     error detail (https://cloud.google.com/apis/design/errors#error_details),
+              #     unless solving_mode=VALIDATE_ONLY: see the
+              #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#validation_errors OptimizeToursResponse.validation_errors}
+              #     field.
+              #     This defaults to 100 and is capped at 10,000.
               #   @param label [::String]
               #     Label that may be used to identify this request, reported back in the
               #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#request_label OptimizeToursResponse.request_label}.
@@ -399,6 +399,22 @@ module Google
               # @return [::Google::Cloud::Optimization::V1::OptimizeToursResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/optimization/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Optimization::V1::OptimizeToursRequest.new
+              #
+              #   # Call the optimize_tours method.
+              #   result = client.optimize_tours request
+              #
+              #   # The returned object is of type Google::Cloud::Optimization::V1::OptimizeToursResponse.
+              #   p result
+              #
               def optimize_tours request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -477,6 +493,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/optimization/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new
+              #
+              #   # Call the batch_optimize_tours method.
+              #   result = client.batch_optimize_tours request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_optimize_tours request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -116,9 +116,9 @@ module Google
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
         #     for more details.
         #
-        #     This field is deprecated. Please use [speech_contexts]() instead. If you
-        #     specify both [phrase_hints]() and [speech_contexts](), Dialogflow will
-        #     treat the [phrase_hints]() as a single additional [SpeechContext]().
+        #     This field is deprecated. Please use [`speech_contexts`]() instead. If you
+        #     specify both [`phrase_hints`]() and [`speech_contexts`](), Dialogflow will
+        #     treat the [`phrase_hints`]() as a single additional [`SpeechContext`]().
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SpeechContext>]
         #     Context information to assist speech recognition.
@@ -283,6 +283,10 @@ module Google
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
+        # @!attribute [rw] use_timeout_based_endpointing
+        #   @return [::Boolean]
+        #     Use timeout based endpointing, interpreting endpointer sensitivy as
+        #     seconds of timeout value.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -6,7 +6,6 @@ branchProtectionRules:
   isAdminEnforced: false
   requiredStatusCheckContexts:
     - 'cla/google'
-    - 'CI (ubuntu-latest, 2.6, --test)'
     - 'CI (ubuntu-latest, 2.7, --test)'
     - 'CI (ubuntu-latest, 3.0, --test)'
     - 'CI (ubuntu-latest, 3.1, --test)'

@@ -22,6 +22,7 @@ require_relative "../../../.toys/.lib/sample_loader"
 require_relative "channel_definition"
 require_relative "input_definition"
 require_relative "event_definition"
+require_relative "asset_definition"
 
 DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS = 10_800_000
 
@@ -47,11 +48,20 @@ class LiveStreamSnippetSpec < Minitest::Spec
   let(:event_id) { "my-event" }
   let(:event_name) { "#{channel_name}/events/#{event_id}" }
 
+  let(:asset_id) { "my-asset-test-#{(Time.now.to_f * 1000).to_i}" }
+  let(:asset_name) { "projects/#{project_id}/locations/#{location_id}/assets/#{asset_id}" }
+  let(:asset_uri) { "gs://cloud-samples-data/media/ForBiggerEscapes.mp4" }
+
+  let(:pool_id) { "default" } # only 1 pool supported per location
+  let(:pool_name) { "projects/#{project_id}/locations/#{location_id}/pools/#{pool_id}" }
+  let(:update_pool_peer_network) { "" }
+
   attr_writer :channel_created_started
   attr_writer :channel_created_stopped
   attr_writer :input_created
   attr_writer :update_input_created
   attr_writer :event_created
+  attr_writer :asset_created
 
   before do
     @channel_created_started = false
@@ -59,6 +69,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
     @input_created = false
     @update_input_created = false
     @event_created = false
+    @asset_created = false
     # Remove old channels and inputs in the test project if they exist
     response = client.list_channels parent: location_path
     response.each do |channel|
@@ -94,6 +105,20 @@ class LiveStreamSnippetSpec < Minitest::Spec
       next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
       begin
         operation = client.delete_input name: input.name.to_s
+        operation.wait_until_done!
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+
+    response = client.list_assets parent: location_path
+    response.each do |asset|
+      tmp = asset.name.to_s.split "-"
+      create_time = tmp.last.to_i
+      now = (Time.now.to_f * 1000).to_i
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
+      begin
+        operation = client.delete_asset name: asset.name.to_s
         operation.wait_until_done!
       rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
         puts "Rescued: #{e.inspect}"
@@ -147,6 +172,16 @@ class LiveStreamSnippetSpec < Minitest::Spec
     operation.response
   end
 
+  let :asset do
+    operation = client.create_asset(
+      parent: location_path,
+      asset:  asset_def(asset_uri),
+      asset_id: asset_id
+    )
+    operation.wait_until_done!
+    operation.response
+  end
+
   after do
     if @event_created
       begin
@@ -182,6 +217,14 @@ class LiveStreamSnippetSpec < Minitest::Spec
     if @input_created
       begin
         operation = client.delete_input name: input_name
+        operation.wait_until_done!
+      rescue Google::Cloud::NotFoundError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+    if @asset_created
+      begin
+        operation = client.delete_asset name: asset_name
         operation.wait_until_done!
       rescue Google::Cloud::NotFoundError => e
         puts "Rescued: #{e.inspect}"

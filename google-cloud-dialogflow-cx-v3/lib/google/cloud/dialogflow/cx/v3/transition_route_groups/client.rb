@@ -152,7 +152,8 @@ module Google
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
-                  interceptors: @config.interceptors
+                  interceptors: @config.interceptors,
+                  channel_pool_config: @config.channel_pool
                 )
               end
 
@@ -186,7 +187,8 @@ module Google
               #   @param parent [::String]
               #     Required. The flow to list all transition route groups for.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     ID>/flows/<Flow ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 100 and
               #     at most 1000.
@@ -299,7 +301,9 @@ module Google
               #     Required. The name of the
               #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param language_code [::String]
               #     The language to retrieve the transition route group for. The following
               #     fields are language dependent:
@@ -406,7 +410,9 @@ module Google
               #     Required. The flow to create an
               #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
               #     for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     ID>/flows/<Flow ID>`
+              #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+              #     for agent-level groups.
               #   @param transition_route_group [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup, ::Hash]
               #     Required. The transition route group to create.
               #   @param language_code [::String]
@@ -618,7 +624,8 @@ module Google
               #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
               #     to delete. Format: `projects/<Project ID>/locations/<Location
               #     ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
-              #     Route Group ID>`.
+              #     Route Group ID>` or `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param force [::Boolean]
               #     This field has no effect for transition route group that no page is using.
               #     If the transition route group is referenced by any page:
@@ -809,6 +816,14 @@ module Google
                     parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
+                end
+
+                ##
+                # Configuration for the channel pool
+                # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+                #
+                def channel_pool
+                  @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
                 end
 
                 ##

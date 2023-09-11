@@ -22,9 +22,9 @@ module Google
     module AIPlatform
       module V1
         # Instance of a general context.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the Context.
+        #     Immutable. The resource name of the Context.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     User provided display name of the Context.

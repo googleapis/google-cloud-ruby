@@ -1432,9 +1432,23 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::BinaryAuthorization::EvaluationMode]
         #     Mode of operation for binauthz policy evaluation. If unspecified, defaults
         #     to DISABLED.
+        # @!attribute [rw] policy_bindings
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::BinaryAuthorization::PolicyBinding>]
+        #     Optional. Binauthz policies that apply to this cluster.
         class BinaryAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Binauthz policy that applies to this cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The relative resource name of the binauthz platform policy to audit. GKE
+          #     platform policies have the following format:
+          #     `projects/{project_number}/platforms/gke/policies/{policy_id}`.
+          class PolicyBinding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Binary Authorization mode of operation.
           module EvaluationMode
@@ -1448,6 +1462,13 @@ module Google
             # project's singleton policy. This is equivalent to setting the
             # enabled boolean to true.
             PROJECT_SINGLETON_POLICY_ENFORCE = 2
+
+            # Use Binary Authorization with the policies specified in policy_bindings.
+            POLICY_BINDINGS = 5
+
+            # Use Binary Authorization with the policies specified in policy_bindings,
+            # and also with the project's singleton policy in enforcement mode.
+            POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE = 6
           end
         end
 
@@ -2770,6 +2791,21 @@ module Google
         # @!attribute [rw] windows_node_config
         #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig]
         #     Parameters that can be configured on Windows nodes.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Optional. The desired machine type for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified machine type.
+        # @!attribute [rw] disk_type
+        #   @return [::String]
+        #     Optional. The desired disk type for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified disk type.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Optional. The desired disk size for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified disk size.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5677,6 +5713,24 @@ module Google
 
             # kube-controller-manager
             CONTROLLER_MANAGER = 5
+
+            # Storage
+            STORAGE = 7
+
+            # Horizontal Pod Autoscaling
+            HPA = 8
+
+            # Pod
+            POD = 9
+
+            # DaemonSet
+            DAEMONSET = 10
+
+            # Deployment
+            DEPLOYMENT = 11
+
+            # Statefulset
+            STATEFULSET = 12
           end
         end
 

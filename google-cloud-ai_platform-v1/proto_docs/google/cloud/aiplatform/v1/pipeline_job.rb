@@ -120,6 +120,10 @@ module Google
         #     Output only. Pipeline template metadata. Will fill up fields if
         #     {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri}
         #     is from supported template registry.
+        # @!attribute [r] schedule_name
+        #   @return [::String]
+        #     Output only. The schedule resource name.
+        #     Only returned if the Pipeline is created by Schedule API.
         class PipelineJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

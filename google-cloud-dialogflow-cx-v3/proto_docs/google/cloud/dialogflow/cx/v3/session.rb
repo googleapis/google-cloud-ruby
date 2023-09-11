@@ -234,7 +234,10 @@ module Google
           #     beginning of the stream.
           # @!attribute [rw] no_speech_timeout
           #   @return [::Google::Protobuf::Duration]
-          #     No speech timeout settings observed at runtime.
+          #     No speech timeout settings for the stream.
+          # @!attribute [rw] endpointing_timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Speech endpointing timeout settings for the stream.
           # @!attribute [rw] is_input_text
           #   @return [::Boolean]
           #     Whether the streaming terminates with an injected text query.
@@ -529,15 +532,15 @@ module Google
 
           # Represents the query input. It can contain one of:
           #
-          # 1.  A conversational query in the form of text.
+          # 1. A conversational query in the form of text.
           #
-          # 2.  An intent query that specifies which intent to trigger.
+          # 2. An intent query that specifies which intent to trigger.
           #
-          # 3.  Natural language speech audio to be processed.
+          # 3. Natural language speech audio to be processed.
           #
-          # 4.  An event to be triggered.
+          # 4. An event to be triggered.
           #
-          # 5.  DTMF digits to invoke an intent and fill in parameter value.
+          # 5. DTMF digits to invoke an intent and fill in parameter value.
           # @!attribute [rw] text
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextInput]
           #     The natural language text to be processed.

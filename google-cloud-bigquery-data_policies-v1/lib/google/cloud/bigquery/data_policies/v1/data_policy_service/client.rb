@@ -184,7 +184,8 @@ module Google
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
-                  interceptors: @config.interceptors
+                  interceptors: @config.interceptors,
+                  channel_pool_config: @config.channel_pool
                 )
               end
 
@@ -669,9 +670,10 @@ module Google
               #     are associated with. Currently filter only supports
               #     "policy<span></span>_tag" based filtering and OR based predicates. Sample
               #     filter can be "policy<span></span>_tag:
-              #     `'projects/1/locations/us/taxonomies/2/policyTags/3'`". You may use
-              #     wildcard such as "policy<span></span>_tag:
-              #     `'projects/1/locations/us/taxonomies/2/*'`".
+              #     projects/1/locations/us/taxonomies/2/policyTags/3".
+              #     You may also use wildcard such as "policy<span></span>_tag:
+              #     projects/1/locations/us/taxonomies/2*". Please note that OR predicates
+              #     cannot be used with wildcard filters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy>]
@@ -1136,6 +1138,14 @@ module Google
                     parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
+                end
+
+                ##
+                # Configuration for the channel pool
+                # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+                #
+                def channel_pool
+                  @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
                 end
 
                 ##

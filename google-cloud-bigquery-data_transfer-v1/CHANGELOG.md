@@ -1,5 +1,12 @@
 # Release History
 
+### 0.10.0 (2023-08-03)
+
+#### Features
+
+* Provide more enum options for Parameter type ([#22670](https://github.com/googleapis/google-cloud-ruby/issues/22670)) 
+* Support Encryption configuration in Transfer Config ([#22670](https://github.com/googleapis/google-cloud-ruby/issues/22670)) 
+
 ### 0.9.0 (2023-06-06)
 
 #### Features

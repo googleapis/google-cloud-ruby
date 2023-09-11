@@ -191,6 +191,22 @@ module Google
                 # @return [::Google::Cloud::Billing::Budgets::V1::Budget]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new
+                #
+                #   # Call the create_budget method.
+                #   result = client.create_budget request
+                #
+                #   # The returned object is of type Google::Cloud::Billing::Budgets::V1::Budget.
+                #   p result
+                #
                 def create_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -265,6 +281,22 @@ module Google
                 # @return [::Google::Cloud::Billing::Budgets::V1::Budget]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new
+                #
+                #   # Call the update_budget method.
+                #   result = client.update_budget request
+                #
+                #   # The returned object is of type Google::Cloud::Billing::Budgets::V1::Budget.
+                #   p result
+                #
                 def update_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -333,6 +365,22 @@ module Google
                 # @return [::Google::Cloud::Billing::Budgets::V1::Budget]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new
+                #
+                #   # Call the get_budget method.
+                #   result = client.get_budget request
+                #
+                #   # The returned object is of type Google::Cloud::Billing::Budgets::V1::Budget.
+                #   p result
+                #
                 def get_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -386,7 +434,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload list_budgets(parent: nil, page_size: nil, page_token: nil)
+                # @overload list_budgets(parent: nil, scope: nil, page_size: nil, page_token: nil)
                 #   Pass arguments to `list_budgets` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -394,6 +442,13 @@ module Google
                 #   @param parent [::String]
                 #     Required. Name of billing account to list budgets under. Values
                 #     are of the form `billingAccounts/{billingAccountId}`.
+                #   @param scope [::String]
+                #     Optional. Set the scope of the budgets to be returned, in the format of the
+                #     resource name. The scope of a budget is the cost that it tracks, such as
+                #     costs for a single project, or the costs for all projects in a folder. Only
+                #     project scope (in the format of "projects/project-id" or "projects/123") is
+                #     supported in this field. When this field is set to a project's resource
+                #     name, the budgets returned are tracking the costs for that project.
                 #   @param page_size [::Integer]
                 #     Optional. The maximum number of budgets to return per page.
                 #     The default and maximum value are 100.
@@ -408,6 +463,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Billing::Budgets::V1::Budget>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new
+                #
+                #   # Call the list_budgets method.
+                #   result = client.list_budgets request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Billing::Budgets::V1::Budget.
+                #     p item
+                #   end
+                #
                 def list_budgets request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -472,6 +547,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new
+                #
+                #   # Call the delete_budget method.
+                #   result = client.delete_budget request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -218,12 +218,12 @@ module Google
               #   @param query_input [::Google::Cloud::Dialogflow::V2::QueryInput, ::Hash]
               #     Required. The input specification. It can be set to:
               #
-              #     1.  an audio config
-              #         which instructs the speech recognizer how to process the speech audio,
+              #     1. an audio config which instructs the speech recognizer how to process
+              #     the speech audio,
               #
-              #     2.  a conversational query in the form of text, or
+              #     2. a conversational query in the form of text, or
               #
-              #     3.  an event that specifies which intent to trigger.
+              #     3. an event that specifies which intent to trigger.
               #   @param output_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
               #     Instructs the speech synthesizer how to generate the output
               #     audio. If this field is not set and agent-level speech synthesizer is not
@@ -248,6 +248,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::DetectIntentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Sessions::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
+              #
+              #   # Call the detect_intent method.
+              #   result = client.detect_intent request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
+              #   p result
+              #
               def detect_intent request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

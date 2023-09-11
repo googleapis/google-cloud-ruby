@@ -205,6 +205,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ResourceManager::V3::TagValue>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ResourceManager::V3::ListTagValuesRequest.new
+              #
+              #   # Call the list_tag_values method.
+              #   result = client.list_tag_values request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ResourceManager::V3::TagValue.
+              #     p item
+              #   end
+              #
               def list_tag_values request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -270,6 +290,22 @@ module Google
               # @return [::Google::Cloud::ResourceManager::V3::TagValue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ResourceManager::V3::GetTagValueRequest.new
+              #
+              #   # Call the get_tag_value method.
+              #   result = client.get_tag_value request
+              #
+              #   # The returned object is of type Google::Cloud::ResourceManager::V3::TagValue.
+              #   p result
+              #
               def get_tag_value request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -342,6 +378,22 @@ module Google
               # @return [::Google::Cloud::ResourceManager::V3::TagValue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest.new
+              #
+              #   # Call the get_namespaced_tag_value method.
+              #   result = client.get_namespaced_tag_value request
+              #
+              #   # The returned object is of type Google::Cloud::ResourceManager::V3::TagValue.
+              #   p result
+              #
               def get_namespaced_tag_value request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -411,6 +463,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ResourceManager::V3::CreateTagValueRequest.new
+              #
+              #   # Call the create_tag_value method.
+              #   result = client.create_tag_value request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_tag_value request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -482,6 +557,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ResourceManager::V3::UpdateTagValueRequest.new
+              #
+              #   # Call the update_tag_value method.
+              #   result = client.update_tag_value request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_tag_value request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -553,6 +651,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ResourceManager::V3::DeleteTagValueRequest.new
+              #
+              #   # Call the delete_tag_value method.
+              #   result = client.delete_tag_value request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_tag_value request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -625,6 +746,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -703,6 +840,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -775,6 +928,22 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/resource_manager/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

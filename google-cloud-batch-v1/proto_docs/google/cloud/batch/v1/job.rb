@@ -210,8 +210,8 @@ module Google
         # @!attribute [rw] pubsub_topic
         #   @return [::String]
         #     The Pub/Sub topic where notifications like the job state changes
-        #     will be published. This topic exist in the same project as the job
-        #     and billings will be charged to this project.
+        #     will be published. The topic must exist in the same project as
+        #     the job and billings will be charged to this project.
         #     If not specified, no Pub/Sub messages will be sent.
         #     Topic format: `projects/{project}/topics/{topic}`.
         # @!attribute [rw] message
@@ -223,8 +223,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Message details.
-          # Describe the attribute that a message should have.
-          # Without specified message attributes, no message will be sent by default.
+          # Describe the conditions under which messages will be sent.
+          # If no attribute is defined, no message will be sent by default.
+          # One message should specify either the job or the task level attributes,
+          # but not both. For example,
+          # job level: JOB_STATE_CHANGED and/or a specified new_job_state;
+          # task level: TASK_STATE_CHANGED and/or a specified new_task_state.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Batch::V1::JobNotification::Type]
           #     The message type.
@@ -310,7 +314,7 @@ module Google
           # https://cloud.google.com/compute/docs/disks#localssds.
           # @!attribute [rw] image
           #   @return [::String]
-          #     Name of a public or custom image used as the data source.
+          #     URL for a VM image to use as the data source for this disk.
           #     For example, the following are all valid URLs:
           #
           #     * Specify the image by its family name:
@@ -321,10 +325,10 @@ module Google
           #     You can also use Batch customized image in short names.
           #     The following image values are supported for a boot disk:
           #
-          #     * "batch-debian": use Batch Debian images.
-          #     * "batch-centos": use Batch CentOS images.
-          #     * "batch-cos": use Batch Container-Optimized images.
-          #     * "batch-hpc-centos": use Batch HPC CentOS images.
+          #     * `batch-debian`: use Batch Debian images.
+          #     * `batch-centos`: use Batch CentOS images.
+          #     * `batch-cos`: use Batch Container-Optimized images.
+          #     * `batch-hpc-centos`: use Batch HPC CentOS images.
           # @!attribute [rw] snapshot
           #   @return [::String]
           #     Name of a snapshot used as the data source.
@@ -339,14 +343,23 @@ module Google
           #   @return [::Integer]
           #     Disk size in GB.
           #
-          #     For persistent disk, this field is ignored if `data_source` is `image` or
-          #     `snapshot`.
-          #     For local SSD, size_gb should be a multiple of 375GB,
-          #     otherwise, the final size will be the next greater multiple of 375 GB.
-          #     For boot disk, Batch will calculate the boot disk size based on source
+          #     **Non-Boot Disk**:
+          #     If the `type` specifies a persistent disk, this field
+          #     is ignored if `data_source` is set as `image` or `snapshot`.
+          #     If the `type` specifies a local SSD, this field should be a multiple of
+          #     375 GB, otherwise, the final size will be the next greater multiple of
+          #     375 GB.
+          #
+          #     **Boot Disk**:
+          #     Batch will calculate the boot disk size based on source
           #     image and task requirements if you do not speicify the size.
-          #     If both this field and the boot_disk_mib field in task spec's
-          #     compute_resource are defined, Batch will only honor this field.
+          #     If both this field and the `boot_disk_mib` field in task spec's
+          #     `compute_resource` are defined, Batch will only honor this field.
+          #     Also, this field should be no smaller than the source disk's
+          #     size when the `data_source` is set as `snapshot` or `image`.
+          #     For example, if you set an image as the `data_source` field and the
+          #     image's default disk size 30 GB, you can only use this field to make the
+          #     disk larger or equal to 30 GB.
           # @!attribute [rw] disk_interface
           #   @return [::String]
           #     Local SSDs are available through both "SCSI" and "NVMe" interfaces.
@@ -386,6 +399,15 @@ module Google
           # @!attribute [rw] install_gpu_drivers
           #   @return [::Boolean]
           #     Deprecated: please use instances[0].install_gpu_drivers instead.
+          # @!attribute [rw] driver_version
+          #   @return [::String]
+          #     Optional. The NVIDIA GPU driver version that should be installed for this
+          #     type.
+          #
+          #     You can define the specific driver version such as "470.103.01",
+          #     following the driver version requirements in
+          #     https://cloud.google.com/compute/docs/gpus/install-drivers-gpu#minimum-driver.
+          #     Batch will install the specific accelerator driver if qualified.
           class Accelerator
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -416,12 +438,18 @@ module Google
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::AttachedDisk>]
           #     Non-boot disks to be attached for each VM created by this InstancePolicy.
           #     New disks will be deleted when the VM is deleted.
+          #     A non-boot disk is a disk that can be of a device with a
+          #     file system or a raw storage drive that is not ready for data
+          #     storage and accessing.
           class InstancePolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Either an InstancePolicy or an instance template.
+          # InstancePolicyOrTemplate lets you define the type of resources to use for
+          # this job either with an InstancePolicy or an instance template.
+          # If undefined, Batch picks the type of VM to use and doesn't include
+          # optional VM resources such as GPUs and extra disks.
           # @!attribute [rw] policy
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::InstancePolicy]
           #     InstancePolicy.
@@ -436,6 +464,12 @@ module Google
           #     third party location and install them for GPUs specified in
           #     policy.accelerators or instance_template on their behalf. Default is
           #     false.
+          #
+          #     For Container-Optimized Image cases, Batch will install the
+          #     accelerator driver following milestones of
+          #     https://cloud.google.com/container-optimized-os/docs/release-notes. For
+          #     non Container-Optimized Image cases, following
+          #     https://github.com/GoogleCloudPlatform/compute-gpu-installation/blob/main/linux/install_gpu_driver.py.
           class InstancePolicyOrTemplate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

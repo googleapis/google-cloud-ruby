@@ -254,7 +254,10 @@ module Google
               #     Reads the document in a transaction.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads the version of the document at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::Document]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -262,6 +265,22 @@ module Google
               # @return [::Google::Cloud::Firestore::V1::Document]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::GetDocumentRequest.new
+              #
+              #   # Call the get_document method.
+              #   result = client.get_document request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+              #   p result
+              #
               def get_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -358,7 +377,9 @@ module Google
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Perform the read at the provided time.
               #
-              #     This may not be older than 270 seconds.
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               #   @param show_missing [::Boolean]
               #     If the list should show missing documents.
               #
@@ -376,6 +397,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::V1::Document>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::ListDocumentsRequest.new
+              #
+              #   # Call the list_documents method.
+              #   result = client.list_documents request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Firestore::V1::Document.
+              #     p item
+              #   end
+              #
               def list_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -456,6 +497,22 @@ module Google
               # @return [::Google::Cloud::Firestore::V1::Document]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::UpdateDocumentRequest.new
+              #
+              #   # Call the update_document method.
+              #   result = client.update_document request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+              #   p result
+              #
               def update_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -522,6 +579,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::DeleteDocumentRequest.new
+              #
+              #   # Call the delete_document method.
+              #   result = client.delete_document request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -600,10 +673,32 @@ module Google
               #     stream.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
+              #
+              #   # Call the batch_get_documents method to start streaming.
+              #   output = client.batch_get_documents request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse
+              #   output.each do |current_response|
+              #     p current_response
+              #   end
+              #
               def batch_get_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -675,6 +770,22 @@ module Google
               # @return [::Google::Cloud::Firestore::V1::BeginTransactionResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::BeginTransactionRequest.new
+              #
+              #   # Call the begin_transaction method.
+              #   result = client.begin_transaction request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::BeginTransactionResponse.
+              #   p result
+              #
               def begin_transaction request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -744,6 +855,22 @@ module Google
               # @return [::Google::Cloud::Firestore::V1::CommitResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::CommitRequest.new
+              #
+              #   # Call the commit method.
+              #   result = client.commit request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::CommitResponse.
+              #   p result
+              #
               def commit request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -809,6 +936,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::RollbackRequest.new
+              #
+              #   # Call the rollback method.
+              #   result = client.rollback request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def rollback request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -882,10 +1025,32 @@ module Google
               #     stream.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::RunQueryRequest.new
+              #
+              #   # Call the run_query method to start streaming.
+              #   output = client.run_query request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Firestore::V1::RunQueryResponse
+              #   output.each do |current_response|
+              #     p current_response
+              #   end
+              #
               def run_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -977,12 +1142,31 @@ module Google
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Executes the query at the given timestamp.
               #
-              #     Requires:
-              #
-              #     * Cannot be more than 270 seconds in the past.
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new
+              #
+              #   # Call the run_aggregation_query method to start streaming.
+              #   output = client.run_aggregation_query request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse
+              #   output.each do |current_response|
+              #     p current_response
+              #   end
+              #
               def run_aggregation_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1086,7 +1270,10 @@ module Google
               #     2 partitions, to complete the total of 10 specified in `partition_count`.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1094,6 +1281,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new
+              #
+              #   # Call the partition_query method.
+              #   result = client.partition_query request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
+              #     p item
+              #   end
+              #
               def partition_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1160,7 +1367,10 @@ module Google
               #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
-              #     This may not be older than 270 seconds.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1168,6 +1378,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::String>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new
+              #
+              #   # Call the list_collection_ids method.
+              #   result = client.list_collection_ids request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::ListCollectionIdsResponse.
+              #   p result
+              #
               def list_collection_ids request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1249,6 +1475,22 @@ module Google
               # @return [::Google::Cloud::Firestore::V1::BatchWriteResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::BatchWriteRequest.new
+              #
+              #   # Call the batch_write method.
+              #   result = client.batch_write request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::BatchWriteResponse.
+              #   p result
+              #
               def batch_write request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1327,6 +1569,22 @@ module Google
               # @return [::Google::Cloud::Firestore::V1::Document]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::CreateDocumentRequest.new
+              #
+              #   # Call the create_document method.
+              #   result = client.create_document request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+              #   p result
+              #
               def create_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

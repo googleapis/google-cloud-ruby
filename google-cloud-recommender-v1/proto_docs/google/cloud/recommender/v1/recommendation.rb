@@ -278,6 +278,48 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Contains metadata about how much sustainability a recommendation can save or
+        # incur.
+        # @!attribute [rw] kg_c_o2e
+        #   @return [::Float]
+        #     Carbon Footprint generated in kg of CO2 equivalent.
+        #     Chose kg_c_o2e so that the name renders correctly in camelCase (kgCO2e).
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Duration for which this sustainability applies.
+        class SustainabilityProjection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains information on the impact of a reliability recommendation.
+        # @!attribute [rw] risks
+        #   @return [::Array<::Google::Cloud::Recommender::V1::ReliabilityProjection::RiskType>]
+        #     Reliability risks mitigated by this recommendation.
+        # @!attribute [rw] details
+        #   @return [::Google::Protobuf::Struct]
+        #     Per-recommender projection.
+        class ReliabilityProjection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The risk associated with the reliability issue.
+          module RiskType
+            # Default unspecified risk. Don't use directly.
+            RISK_TYPE_UNSPECIFIED = 0
+
+            # Potential service downtime.
+            SERVICE_DISRUPTION = 1
+
+            # Potential data loss.
+            DATA_LOSS = 2
+
+            # Potential access denial. The service is still up but some or all clients
+            # can't access it.
+            ACCESS_DENY = 3
+          end
+        end
+
         # Contains the impact a recommendation can have for a given category.
         # @!attribute [rw] category
         #   @return [::Google::Cloud::Recommender::V1::Impact::Category]
@@ -288,6 +330,12 @@ module Google
         # @!attribute [rw] security_projection
         #   @return [::Google::Cloud::Recommender::V1::SecurityProjection]
         #     Use with CategoryType.SECURITY
+        # @!attribute [rw] sustainability_projection
+        #   @return [::Google::Cloud::Recommender::V1::SustainabilityProjection]
+        #     Use with CategoryType.SUSTAINABILITY
+        # @!attribute [rw] reliability_projection
+        #   @return [::Google::Cloud::Recommender::V1::ReliabilityProjection]
+        #     Use with CategoryType.RELAIBILITY
         class Impact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,6 +356,12 @@ module Google
 
             # Indicates a potential increase or decrease in manageability.
             MANAGEABILITY = 4
+
+            # Indicates a potential increase or decrease in sustainability.
+            SUSTAINABILITY = 5
+
+            # Indicates a potential increase or decrease in reliability.
+            RELIABILITY = 6
           end
         end
 

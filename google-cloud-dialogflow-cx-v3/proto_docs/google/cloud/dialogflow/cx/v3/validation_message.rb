@@ -85,6 +85,9 @@ module Google
 
               # Transition route group.
               TRANSITION_ROUTE_GROUP = 7
+
+              # Agent transition route group.
+              AGENT_TRANSITION_ROUTE_GROUP = 14
             end
 
             # Severity level.

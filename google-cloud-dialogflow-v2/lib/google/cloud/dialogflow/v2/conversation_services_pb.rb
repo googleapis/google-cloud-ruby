@@ -76,6 +76,8 @@ module Google
             # Generates and returns a summary for a conversation that does not have a
             # resource created for it.
             rpc :GenerateStatelessSummary, ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest, ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse
+            # Get answers for the given query based on knowledge documents.
+            rpc :SearchKnowledge, ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest, ::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse
           end
 
           Stub = Service.rpc_stub_class

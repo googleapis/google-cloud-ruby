@@ -241,6 +241,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Recommender::V1::Insight>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::ListInsightsRequest.new
+              #
+              #   # Call the list_insights method.
+              #   result = client.list_insights request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Recommender::V1::Insight.
+              #     p item
+              #   end
+              #
               def list_insights request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -305,6 +325,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::Insight]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::GetInsightRequest.new
+              #
+              #   # Call the get_insight method.
+              #   result = client.get_insight request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Insight.
+              #   p result
+              #
               def get_insight request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -377,6 +413,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::Insight]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new
+              #
+              #   # Call the mark_insight_accepted method.
+              #   result = client.mark_insight_accepted request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Insight.
+              #   p result
+              #
               def mark_insight_accepted request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -487,6 +539,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Recommender::V1::Recommendation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::ListRecommendationsRequest.new
+              #
+              #   # Call the list_recommendations method.
+              #   result = client.list_recommendations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Recommender::V1::Recommendation.
+              #     p item
+              #   end
+              #
               def list_recommendations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -551,6 +623,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::Recommendation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::GetRecommendationRequest.new
+              #
+              #   # Call the get_recommendation method.
+              #   result = client.get_recommendation request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+              #   p result
+              #
               def get_recommendation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -579,6 +667,94 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @recommender_stub.get_recommendation request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Mark the Recommendation State as Dismissed. Users can use this method to
+              # indicate to the Recommender API that an ACTIVE recommendation has to
+              # be marked back as DISMISSED.
+              #
+              # MarkRecommendationDismissed can be applied to recommendations in ACTIVE
+              # state.
+              #
+              # Requires the recommender.*.update IAM permission for the specified
+              # recommender.
+              #
+              # @overload mark_recommendation_dismissed(request, options = nil)
+              #   Pass arguments to `mark_recommendation_dismissed` via a request object, either of type
+              #   {::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload mark_recommendation_dismissed(name: nil, etag: nil)
+              #   Pass arguments to `mark_recommendation_dismissed` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Name of the recommendation.
+              #   @param etag [::String]
+              #     Fingerprint of the Recommendation. Provides optimistic locking.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Recommender::V1::Recommendation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Recommender::V1::Recommendation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new
+              #
+              #   # Call the mark_recommendation_dismissed method.
+              #   result = client.mark_recommendation_dismissed request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+              #   p result
+              #
+              def mark_recommendation_dismissed request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.mark_recommendation_dismissed.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Recommender::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.mark_recommendation_dismissed.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.mark_recommendation_dismissed.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @recommender_stub.mark_recommendation_dismissed request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -629,6 +805,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::Recommendation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new
+              #
+              #   # Call the mark_recommendation_claimed method.
+              #   result = client.mark_recommendation_claimed request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+              #   p result
+              #
               def mark_recommendation_claimed request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -708,6 +900,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::Recommendation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new
+              #
+              #   # Call the mark_recommendation_succeeded method.
+              #   result = client.mark_recommendation_succeeded request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+              #   p result
+              #
               def mark_recommendation_succeeded request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -787,6 +995,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::Recommendation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new
+              #
+              #   # Call the mark_recommendation_failed method.
+              #   result = client.mark_recommendation_failed request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+              #   p result
+              #
               def mark_recommendation_failed request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -851,6 +1075,8 @@ module Google
               #     * `projects/[PROJECT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
               #
               #     * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+              #
+              #     * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Recommender::V1::RecommenderConfig]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -858,6 +1084,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::RecommenderConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new
+              #
+              #   # Call the get_recommender_config method.
+              #   result = client.get_recommender_config request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::RecommenderConfig.
+              #   p result
+              #
               def get_recommender_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -926,6 +1168,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::RecommenderConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new
+              #
+              #   # Call the update_recommender_config method.
+              #   result = client.update_recommender_config request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::RecommenderConfig.
+              #   p result
+              #
               def update_recommender_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -985,11 +1243,13 @@ module Google
               #
               #     Acceptable formats:
               #
-              #     * `projects/[PROJECT_NUMBER]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+              #     * `projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
               #
-              #     * `projects/[PROJECT_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+              #     * `projects/[PROJECT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
               #
-              #     * `organizations/[ORGANIZATION_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+              #     * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
+              #
+              #     * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Recommender::V1::InsightTypeConfig]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -997,6 +1257,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::InsightTypeConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new
+              #
+              #   # Call the get_insight_type_config method.
+              #   result = client.get_insight_type_config request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::InsightTypeConfig.
+              #   p result
+              #
               def get_insight_type_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1065,6 +1341,22 @@ module Google
               # @return [::Google::Cloud::Recommender::V1::InsightTypeConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/recommender/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new
+              #
+              #   # Call the update_insight_type_config method.
+              #   result = client.update_insight_type_config request
+              #
+              #   # The returned object is of type Google::Cloud::Recommender::V1::InsightTypeConfig.
+              #   p result
+              #
               def update_insight_type_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1251,6 +1543,11 @@ module Google
                   #
                   attr_reader :get_recommendation
                   ##
+                  # RPC-specific configuration for `mark_recommendation_dismissed`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :mark_recommendation_dismissed
+                  ##
                   # RPC-specific configuration for `mark_recommendation_claimed`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1298,6 +1595,8 @@ module Google
                     @list_recommendations = ::Gapic::Config::Method.new list_recommendations_config
                     get_recommendation_config = parent_rpcs.get_recommendation if parent_rpcs.respond_to? :get_recommendation
                     @get_recommendation = ::Gapic::Config::Method.new get_recommendation_config
+                    mark_recommendation_dismissed_config = parent_rpcs.mark_recommendation_dismissed if parent_rpcs.respond_to? :mark_recommendation_dismissed
+                    @mark_recommendation_dismissed = ::Gapic::Config::Method.new mark_recommendation_dismissed_config
                     mark_recommendation_claimed_config = parent_rpcs.mark_recommendation_claimed if parent_rpcs.respond_to? :mark_recommendation_claimed
                     @mark_recommendation_claimed = ::Gapic::Config::Method.new mark_recommendation_claimed_config
                     mark_recommendation_succeeded_config = parent_rpcs.mark_recommendation_succeeded if parent_rpcs.respond_to? :mark_recommendation_succeeded

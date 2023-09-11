@@ -61,8 +61,10 @@ module Google
           #   @return [::Array<::String>]
           #     Ordered list of
           #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup `TransitionRouteGroups`}
-          #     associated with the page. Transition route groups must be unique within a
-          #     page.
+          #     added to the page. Transition route groups must be unique within a page. If
+          #     the page links both flow-level transition route groups and agent-level
+          #     transition route groups, the flow-level ones will have higher priority and
+          #     will be put before the agent-level ones.
           #
           #     *   If multiple transition routes within a page scope refer to the same
           #         intent, then the precedence order is: page's transition route -> page's
@@ -72,7 +74,10 @@ module Google
           #         intent, then the first group in the ordered list takes precedence.
           #
           #     Format:`projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`.
+          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`
+          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/transitionRouteGroups/<TransitionRouteGroup ID>` for agent-level
+          #     groups.
           # @!attribute [rw] transition_routes
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::TransitionRoute>]
           #     A list of transitions for the transition rules of this page.
@@ -101,6 +106,9 @@ module Google
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::EventHandler>]
           #     Handlers associated with the page to handle events such as webhook errors,
           #     no match or no input.
+          # @!attribute [rw] knowledge_connector_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::KnowledgeConnectorSettings]
+          #     Optional. Knowledge connector configuration.
           class Page
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,6 +275,10 @@ module Google
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The unique identifier of this transition route.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     Optional. The description of the transition route. The maximum length is
+          #     500 characters.
           # @!attribute [rw] intent
           #   @return [::String]
           #     The unique identifier of an {::Google::Cloud::Dialogflow::CX::V3::Intent Intent}.
@@ -493,6 +505,39 @@ module Google
           #        page][TransitionRoute.target_page] in transition routes that point to
           #        this page will be cleared).
           class DeletePageRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The Knowledge Connector settings for this page or flow.
+          # This includes information such as the attached Knowledge Bases, and the way
+          # to execute fulfillment.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Whether Knowledge Connector is enabled or not.
+          # @!attribute [rw] trigger_fulfillment
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Fulfillment]
+          #     The fulfillment to be triggered.
+          #
+          #     When the answers from the Knowledge Connector are selected by Dialogflow,
+          #     you can utitlize the request scoped parameter `$request.knowledge.answers`
+          #     (contains up to the 5 highest confidence answers) and
+          #     `$request.knowledge.questions` (contains the corresponding questions) to
+          #     construct the fulfillment.
+          # @!attribute [rw] target_page
+          #   @return [::String]
+          #     The target page to transition to.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          # @!attribute [rw] target_flow
+          #   @return [::String]
+          #     The target flow to transition to.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/flows/<Flow ID>`.
+          # @!attribute [rw] data_store_connections
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::DataStoreConnection>]
+          #     Optional. List of related data store connections.
+          class KnowledgeConnectorSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
