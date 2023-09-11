@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "gapic-common", path: "/Users/diptanshu/Desktop/github/gapic-generator-ruby/gapic-common"
 gem "google-cloud-bigtable-admin-v2", path: "../google-cloud-bigtable-admin-v2"
 gem "google-cloud-bigtable-v2", path: "../google-cloud-bigtable-v2"
 gem "google-cloud-core", path: "../google-cloud-core"
