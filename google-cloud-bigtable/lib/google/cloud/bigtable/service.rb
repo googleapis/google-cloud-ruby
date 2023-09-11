@@ -21,6 +21,7 @@ require "google/cloud/bigtable/credentials"
 require "google/cloud/bigtable/v2"
 require "google/cloud/bigtable/admin/v2"
 require "google/cloud/bigtable/convert"
+require "gapic/lru_hash"
 
 module Google
   module Cloud
@@ -59,8 +60,7 @@ module Google
           @timeout = timeout
           @channel_selection = channel_selection
           @channel_count = channel_count
-          # To be updated with a LRU hash once gapic-common a new version of gapic-common is released.
-          @bigtable_clients = {}
+          @bigtable_clients = ::Gapic::LruHash.new 10
         end
 
         def instances
@@ -91,20 +91,12 @@ module Google
 
         def client table_path, app_profile_id
           return mocked_client if mocked_client
-          @bigtable_clients["#{table_path}_#{app_profile_id}"] ||= V2::Bigtable::Client.new do |config|
-            config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
-            config.endpoint = host if host
-            config.lib_name = "gccl"
-            config.lib_version = Google::Cloud::Bigtable::VERSION
-            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
-            config.channel_pool.channel_selection = @channel_selection
-            config.channel_pool.channel_count = @channel_count
-            request, options = Convert.ping_and_warm_request table_path, app_profile_id, timeout
-            config.channel_pool.on_channel_create = proc do |channel|
-              channel.call_rpc :ping_and_warm, request, options: options
-            end
+          table_key = "#{table_path}_#{app_profile_id}"
+          if @bigtable_clients.get(table_key).nil?
+            bigtable_client = create_bigtable_client table_path, app_profile_id
+            @bigtable_clients.put table_key, bigtable_client
           end
+          @bigtable_clients.get table_key
         end
         attr_accessor :mocked_client
 
@@ -896,6 +888,23 @@ module Google
         #
         def inspect
           "#{self.class}(#{@project_id})"
+        end
+
+        def create_bigtable_client table_path, app_profile_id
+          V2::Bigtable::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::Bigtable::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
+            config.channel_pool.channel_selection = @channel_selection
+            config.channel_pool.channel_count = @channel_count
+            request, options = Convert.ping_and_warm_request table_path, app_profile_id, timeout
+            config.channel_pool.on_channel_create = proc do |channel|
+              channel.call_rpc :ping_and_warm, request, options: options
+            end
+          end
         end
       end
     end

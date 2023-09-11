@@ -26,6 +26,7 @@ require "grpc"
 require "google/cloud/bigtable"
 require "google/cloud/bigtable/project"
 require "google/bigtable/v2/bigtable_pb"
+require "gapic/lru_hash"
 
 class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
   attr_accessor :mocked_instances, :mocked_tables, :mocked_client

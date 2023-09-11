@@ -232,6 +232,10 @@ def bigtable_kms_key
   ENV["BIGTABLE_TEST_KMS_KEY"] || "projects/helical-zone-771/locations/us-east1/keyRings/bigtable-test/cryptoKeys/bigtable-test-1"
 end
 
+def bigtable_read_table
+  $bigtable.table bigtable_instance_id, $bigtable_read_table_id
+end
+
 create_test_instance(
   bigtable_instance_id,
   bigtable_cluster_id,

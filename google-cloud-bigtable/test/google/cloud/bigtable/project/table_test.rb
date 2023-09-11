@@ -81,14 +81,13 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     mock.expect :get_table, get_res_1, name: table_path(instance_id, table_id_1), view: :FULL
     mock.expect :get_table, get_res_2, name: table_path(instance_id, table_id_2), view: :FULL
     bigtable.service.mocked_tables = mock
-    bigtable.service.instance_variable_set(:@bigtable_clients, {})
+    bigtable.service.instance_variable_set(:@bigtable_clients, ::Gapic::LruHash.new(10))
 
     bigtable.table instance_id, table_id_1, view: :FULL, perform_lookup: true, app_profile_id: app_profile_id
     bigtable.table instance_id, table_id_2, view: :FULL, perform_lookup: true, app_profile_id: app_profile_id
 
-    assert_equal 2, bigtable.service.instance_variable_get(:@bigtable_clients).size
-    assert bigtable.service.instance_variable_get(:@bigtable_clients).key? client_id_1
-    assert bigtable.service.instance_variable_get(:@bigtable_clients).key? client_id_2
+    assert bigtable.service.instance_variable_get(:@bigtable_clients).instance_variable_get(:@cache).key? client_id_1
+    assert bigtable.service.instance_variable_get(:@bigtable_clients).instance_variable_get(:@cache).key? client_id_2
     mock.verify
   end
 
