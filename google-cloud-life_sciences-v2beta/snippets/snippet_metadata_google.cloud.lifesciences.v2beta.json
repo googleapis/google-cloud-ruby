@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-life_sciences-v2beta",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
