@@ -1,0 +1,18 @@
+{
+    "api_id": "recommendationengine.googleapis.com",
+    "api_shortname": "recommendationengine",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest",
+    "distribution_name": "google-cloud-recommendation_engine-v1beta1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "recommendationengine",
+    "name_pretty": "Recommendations AI V1beta1 API",
+    "product_documentation": "https://cloud.google.com/recommendations-ai/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Recommendations AI enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems. Note that google-cloud-recommendation_engine-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-recommendation_engine instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "RECOMMENDATION_ENGINE",
+    "ruby-cloud-product-url": "https://cloud.google.com/recommendations-ai/",
+    "library_type": "GAPIC_AUTO"
+}

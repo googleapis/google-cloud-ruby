@@ -1,0 +1,18 @@
+{
+    "api_id": "cloudprivatecatalog.googleapis.com",
+    "api_shortname": "cloudprivatecatalog",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-private_catalog/latest",
+    "distribution_name": "google-cloud-private_catalog",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudprivatecatalog",
+    "name_pretty": "Private Catalog API",
+    "product_documentation": "https://cloud.google.com/private-catalog/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.",
+    "ruby-cloud-env-prefix": "PRIVATE_CATALOG",
+    "ruby-cloud-product-url": "https://cloud.google.com/private-catalog/",
+    "library_type": "GAPIC_AUTO"
+}
