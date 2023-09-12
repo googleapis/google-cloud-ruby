@@ -511,7 +511,7 @@
   "google-cloud-recommender-v1+FILLER": "0.0.0",
   "google-cloud-redis": "1.4.0",
   "google-cloud-redis+FILLER": "0.0.0",
-  "google-cloud-redis-v1": "0.11.1",
+  "google-cloud-redis-v1": "0.12.0",
   "google-cloud-redis-v1+FILLER": "0.0.0",
   "google-cloud-redis-v1beta1": "0.11.0",
   "google-cloud-redis-v1beta1+FILLER": "0.0.0",
