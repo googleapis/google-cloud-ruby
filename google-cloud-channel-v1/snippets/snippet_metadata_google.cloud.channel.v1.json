@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-channel-v1",
-    "version": "0.21.0",
+    "version": "0.22.0",
     "language": "RUBY",
     "apis": [
       {
