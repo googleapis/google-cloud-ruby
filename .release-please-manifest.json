@@ -405,7 +405,7 @@
   "google-cloud-metastore+FILLER": "0.0.0",
   "google-cloud-metastore-v1": "0.9.0",
   "google-cloud-metastore-v1+FILLER": "0.0.0",
-  "google-cloud-metastore-v1beta": "0.9.0",
+  "google-cloud-metastore-v1beta": "0.10.0",
   "google-cloud-metastore-v1beta+FILLER": "0.0.0",
   "google-cloud-monitoring": "1.6.1",
   "google-cloud-monitoring+FILLER": "0.0.0",
