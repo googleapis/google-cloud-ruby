@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-functions-v1", path: "../google-cloud-functions-v1"
