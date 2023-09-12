@@ -529,7 +529,7 @@
   "google-cloud-retail-v2+FILLER": "0.0.0",
   "google-cloud-run-client": "1.0.0",
   "google-cloud-run-client+FILLER": "0.0.0",
-  "google-cloud-run-v2": "0.10.1",
+  "google-cloud-run-v2": "0.11.0",
   "google-cloud-run-v2+FILLER": "0.0.0",
   "google-cloud-scheduler": "2.4.0",
   "google-cloud-scheduler+FILLER": "0.0.0",
