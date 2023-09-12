@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Workflows
       module V1beta
-        VERSION = "0.6.1"
+        VERSION = "0.7.0"
       end
     end
   end
