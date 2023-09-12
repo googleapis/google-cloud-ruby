@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.21.0 (2023-09-12)
+
+#### Features
+
+* Support for AGENT_TRANSITION_ROUTE_GROUP resources 
+* Support for Gen App Builder settings for agents 
+* Support for get_generative_settings and update_generative_settings calls ([#22878](https://github.com/googleapis/google-cloud-ruby/issues/22878)) 
+* Support for Knowledge Connector settings for flows and pages 
+* Support for the description field of TransitionRoute 
+* Support for the endpointing_timeout field of CloudConversationDebuggingInfo 
+* Support for the knowledge_info_card field of ResponseMessage 
+* Support for the retention_strategy field of SecuritySettings 
+* Support for channel pool configuration ([#22919](https://github.com/googleapis/google-cloud-ruby/issues/22919)) 
+#### Bug Fixes
+
+* Fixed the namespace for ImportStrategy 
+
 ### 0.20.0 (2023-08-15)
 
 #### Features
