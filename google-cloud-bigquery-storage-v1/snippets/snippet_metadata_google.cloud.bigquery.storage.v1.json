@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-storage-v1",
-    "version": "0.22.0",
+    "version": "0.23.0",
     "language": "RUBY",
     "apis": [
       {
