@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-private_catalog-v1beta1", path: "../google-cloud-private_catalog-v1beta1"
