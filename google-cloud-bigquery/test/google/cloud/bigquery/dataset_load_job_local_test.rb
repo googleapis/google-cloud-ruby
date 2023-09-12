@@ -16,7 +16,6 @@ require "helper"
 
 describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
-  let(:session_id) { "mysessionid" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
