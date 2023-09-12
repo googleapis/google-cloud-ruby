@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-area120-tables-v1alpha1",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
