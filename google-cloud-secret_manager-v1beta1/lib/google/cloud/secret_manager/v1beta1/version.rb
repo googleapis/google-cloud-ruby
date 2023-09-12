@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecretManager
       module V1beta1
-        VERSION = "0.12.2"
+        VERSION = "0.13.0"
       end
     end
   end
