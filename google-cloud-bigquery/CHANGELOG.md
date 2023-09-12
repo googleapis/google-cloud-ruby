@@ -1,5 +1,11 @@
 # Release History
 
+### 1.44.2 (2023-09-12)
+
+#### Bug Fixes
+
+* Avoid dataset reload when accessing location ([#22905](https://github.com/googleapis/google-cloud-ruby/issues/22905)) 
+
 ### 1.44.1 (2023-09-08)
 
 #### Bug Fixes
