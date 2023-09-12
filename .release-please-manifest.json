@@ -715,7 +715,7 @@
   "google-iam-client+FILLER": "0.0.0",
   "google-iam-credentials": "1.2.0",
   "google-iam-credentials+FILLER": "0.0.0",
-  "google-iam-credentials-v1": "0.6.1",
+  "google-iam-credentials-v1": "0.7.0",
   "google-iam-credentials-v1+FILLER": "0.0.0",
   "google-iam-v1": "0.6.0",
   "google-iam-v1+FILLER": "0.0.0",
