@@ -307,7 +307,7 @@
   "google-cloud-eventarc-v1+FILLER": "0.0.0",
   "google-cloud-filestore": "1.2.1",
   "google-cloud-filestore+FILLER": "0.0.0",
-  "google-cloud-filestore-v1": "0.5.0",
+  "google-cloud-filestore-v1": "0.6.0",
   "google-cloud-filestore-v1+FILLER": "0.0.0",
   "google-cloud-firestore": "2.13.1",
   "google-cloud-firestore+FILLER": "0.0.0",
