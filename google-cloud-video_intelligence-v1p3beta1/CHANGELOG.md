@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22925](https://github.com/googleapis/google-cloud-ruby/issues/22925)) 
+
 ### 0.4.1 (2023-06-06)
 
 #### Bug Fixes
