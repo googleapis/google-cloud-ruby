@@ -22,6 +22,16 @@ module Google
     module DocumentAI
       module V1beta3
         # Options for Process API
+        # @!attribute [rw] individual_page_selector
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions::IndividualPageSelector]
+        #     Which pages to process (1-indexed).
+        # @!attribute [rw] from_start
+        #   @return [::Integer]
+        #     Only process certain pages from the start, process all if the document
+        #     has less pages.
+        # @!attribute [rw] from_end
+        #   @return [::Integer]
+        #     Only process certain pages from the end, same as above.
         # @!attribute [rw] ocr_config
         #   @return [::Google::Cloud::DocumentAI::V1beta3::OcrConfig]
         #     Only applicable to `OCR_PROCESSOR`. Returns error if set on other
@@ -29,6 +39,15 @@ module Google
         class ProcessOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A list of individual page numbers.
+          # @!attribute [rw] pages
+          #   @return [::Array<::Integer>]
+          #     Optional. Indices of the pages (starting from 1).
+          class IndividualPageSelector
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request message for the
