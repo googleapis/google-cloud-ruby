@@ -41,6 +41,8 @@ module Google
             # are expected / permitted for a notification channel of the given type.
             rpc :GetNotificationChannelDescriptor, ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest, ::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor
             # Lists the notification channels that have been created for the project.
+            # To list the types of notification channels that are supported, use
+            # the `ListNotificationChannelDescriptors` method.
             rpc :ListNotificationChannels, ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest, ::Google::Cloud::Monitoring::V3::ListNotificationChannelsResponse
             # Gets a single notification channel. The channel includes the relevant
             # configuration details with which the channel was created. However, the
@@ -50,11 +52,26 @@ module Google
             rpc :GetNotificationChannel, ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
             # Creates a new notification channel, representing a single notification
             # endpoint such as an email address, SMS number, or PagerDuty service.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # notification channels in a single project. This includes calls to
+            # CreateNotificationChannel, DeleteNotificationChannel and
+            # UpdateNotificationChannel.
             rpc :CreateNotificationChannel, ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
             # Updates a notification channel. Fields not specified in the field mask
             # remain unchanged.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # notification channels in a single project. This includes calls to
+            # CreateNotificationChannel, DeleteNotificationChannel and
+            # UpdateNotificationChannel.
             rpc :UpdateNotificationChannel, ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
             # Deletes a notification channel.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # notification channels in a single project. This includes calls to
+            # CreateNotificationChannel, DeleteNotificationChannel and
+            # UpdateNotificationChannel.
             rpc :DeleteNotificationChannel, ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest, ::Google::Protobuf::Empty
             # Causes a verification code to be delivered to the channel. The code
             # can then be supplied in `VerifyNotificationChannel` to verify the channel.
