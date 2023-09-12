@@ -703,7 +703,7 @@
   "google-cloud-web_security_scanner-v1beta+FILLER": "0.0.0",
   "google-cloud-workflows": "2.3.0",
   "google-cloud-workflows+FILLER": "0.0.0",
-  "google-cloud-workflows-executions-v1": "0.4.0",
+  "google-cloud-workflows-executions-v1": "0.5.0",
   "google-cloud-workflows-executions-v1+FILLER": "0.0.0",
   "google-cloud-workflows-executions-v1beta": "0.6.0",
   "google-cloud-workflows-executions-v1beta+FILLER": "0.0.0",
