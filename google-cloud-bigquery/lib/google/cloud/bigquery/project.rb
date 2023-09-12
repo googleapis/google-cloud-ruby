@@ -955,7 +955,7 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
-        # {LoadJob::Updater#location=} in a block passed to this method. 
+        # {LoadJob::Updater#location=} in a block passed to this method.
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
@@ -973,8 +973,8 @@ module Google
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
-        # @param [String] dataset_id The destination table to load the data into. 
-        #   For load job with session it defaults to "_SESSION" 
+        # @param [String] dataset_id The destination table to load the data into.
+        #   For load job with session it defaults to "_SESSION"
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
         #
@@ -1094,7 +1094,7 @@ module Google
         #   * Keys must start with a lowercase letter or international character.
         # @param [Boolean] create_session If set to true a new session will be created
         #   and the load job will happen in the table created within that session.
-        #   Note: This will work only for tables in _SESSION dataset 
+        #   Note: This will work only for tables in _SESSION dataset
         #         else the property will be ignored by the backend.
         # @param [string] session_id Session ID in which the load job must run.
         #
@@ -1120,12 +1120,13 @@ module Google
         #   load_job.wait_until_done!
         #   session_id = load_job.statistics["sessionInfo"]["sessionId"]
         #
-        def load_job table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
-          quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
-          quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-          null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, &block
+        def load_job table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil,
+                     projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
+                     delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                     skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, &block
           ensure_service!
-          
+
           session_dataset = dataset dataset_id, skip_lookup: true
           table = session_dataset.table table_id, skip_lookup: true
           table.load_job  files,
@@ -1136,7 +1137,6 @@ module Google
                           dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
                           autodetect: autodetect, null_marker: null_marker, create_session: create_session,
                           session_id: session_id, &block
-
         end
 
         ##
@@ -1180,8 +1180,8 @@ module Google
         #   * `needed` - Create the table if it does not exist.
         #   * `never` - The table must already exist. A 'notFound' error is
         #     raised if the table does not exist.
-        # @param [String] dataset_id The destination table to load the data into. 
-        #   For load job with session it defaults to "_SESSION" 
+        # @param [String] dataset_id The destination table to load the data into.
+        #   For load job with session it defaults to "_SESSION"
         # @param [String] write Specifies how to handle data already present in
         #   the table. The default value is `append`.
         #
@@ -1287,9 +1287,10 @@ module Google
         #
         # @!group Data
         #
-        def load table_id, files, dataset_id: nil, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
-              quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
-              quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
+        def load table_id, files, dataset_id: nil, format: nil, create: nil, write: nil,
+                 projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
+                 delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                 skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
           job = load_job table_id, files, dataset_id: dataset_id,
                         format: format, create: create, write: write, projection_fields: projection_fields,
                         jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,

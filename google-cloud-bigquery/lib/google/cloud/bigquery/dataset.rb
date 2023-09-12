@@ -2036,9 +2036,9 @@ module Google
         #   Deprecated.
         # @param [Boolean] create_session If set to true a new session will be created
         #   and the load job will happen in the table created within that session.
-        #   Note: This will work only for _SESSION dataset. 
+        #   Note: This will work only for _SESSION dataset.
         # @param [string] session_id Session ID in which the load job must run.
-        # 
+        #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a

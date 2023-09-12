@@ -2374,7 +2374,7 @@ module Google
         #   Deprecated.
         # @param [Boolean] create_session If set to true a new session will be created
         #   and the load job will happen in the table created within that session.
-        #   Note: This will work only for tables in _SESSION dataset 
+        #   Note: This will work only for tables in _SESSION dataset
         #         else the property will be ignored by the backend.
         # @param [string] session_id Session ID in which the load job must run.
         #
@@ -3122,7 +3122,7 @@ module Google
         def load_job_updater format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                              quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil,
                              max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
-                             prefix: nil, labels: nil, autodetect: nil, null_marker: nil, 
+                             prefix: nil, labels: nil, autodetect: nil, null_marker: nil,
                              create_session: nil, session_id: nil
           new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
