@@ -55,7 +55,7 @@
   "google-cloud-artifact_registry+FILLER": "0.0.0",
   "google-cloud-artifact_registry-v1": "0.9.1",
   "google-cloud-artifact_registry-v1+FILLER": "0.0.0",
-  "google-cloud-artifact_registry-v1beta2": "0.9.1",
+  "google-cloud-artifact_registry-v1beta2": "0.10.0",
   "google-cloud-artifact_registry-v1beta2+FILLER": "0.0.0",
   "google-cloud-asset": "1.5.0",
   "google-cloud-asset+FILLER": "0.0.0",
