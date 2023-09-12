@@ -1151,10 +1151,7 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
-        # {LoadJob::Updater#location=} in a block passed to this method. If the
-        # dataset is a full resource representation (see {#resource_full?}), the
-        # location of the job will be automatically set to the location of the
-        # dataset.
+        # {LoadJob::Updater#location=} in a block passed to this method. 
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
