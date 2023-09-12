@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-talent-v4", path: "../google-cloud-talent-v4"
-gem "google-cloud-talent-v4beta1", path: "../google-cloud-talent-v4beta1"
