@@ -1,0 +1,535 @@
+{
+  "client_library": {
+    "name": "google-cloud-speech-v1p1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.speech.v1p1beta1",
+        "version": "v1p1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "speech_v1p1beta1_generated_Speech_Recognize_sync",
+      "title": "Snippet for the recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Speech::Client#recognize. It may require modification in order to execute successfully.",
+      "file": "speech/recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "recognize",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Speech::Client#recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::RecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::RecognizeResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Speech::Client"
+        },
+        "method": {
+          "short_name": "Recognize",
+          "full_name": "google.cloud.speech.v1p1beta1.Speech.Recognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v1p1beta1.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Speech_LongRunningRecognize_sync",
+      "title": "Snippet for the long_running_recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Speech::Client#long_running_recognize. It may require modification in order to execute successfully.",
+      "file": "speech/long_running_recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "long_running_recognize",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Speech::Client#long_running_recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Speech::Client"
+        },
+        "method": {
+          "short_name": "LongRunningRecognize",
+          "full_name": "google.cloud.speech.v1p1beta1.Speech.LongRunningRecognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v1p1beta1.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Speech_StreamingRecognize_sync",
+      "title": "Snippet for the streaming_recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Speech::Client#streaming_recognize. It may require modification in order to execute successfully.",
+      "file": "speech/streaming_recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "streaming_recognize",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Speech::Client#streaming_recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Speech::Client"
+        },
+        "method": {
+          "short_name": "StreamingRecognize",
+          "full_name": "google.cloud.speech.v1p1beta1.Speech.StreamingRecognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v1p1beta1.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_sync",
+      "title": "Snippet for the create_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_phrase_set. It may require modification in order to execute successfully.",
+      "file": "adaptation/create_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::CreatePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::PhraseSet",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "CreatePhraseSet",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.CreatePhraseSet",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_GetPhraseSet_sync",
+      "title": "Snippet for the get_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#get_phrase_set. It may require modification in order to execute successfully.",
+      "file": "adaptation/get_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#get_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::GetPhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::PhraseSet",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "GetPhraseSet",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.GetPhraseSet",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_ListPhraseSet_sync",
+      "title": "Snippet for the list_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#list_phrase_set. It may require modification in order to execute successfully.",
+      "file": "adaptation/list_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#list_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::ListPhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::ListPhraseSetResponse",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "ListPhraseSet",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.ListPhraseSet",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_UpdatePhraseSet_sync",
+      "title": "Snippet for the update_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#update_phrase_set. It may require modification in order to execute successfully.",
+      "file": "adaptation/update_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#update_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::UpdatePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::PhraseSet",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "UpdatePhraseSet",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.UpdatePhraseSet",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_DeletePhraseSet_sync",
+      "title": "Snippet for the delete_phrase_set call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_phrase_set. It may require modification in order to execute successfully.",
+      "file": "adaptation/delete_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::DeletePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "DeletePhraseSet",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.DeletePhraseSet",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_CreateCustomClass_sync",
+      "title": "Snippet for the create_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_custom_class. It may require modification in order to execute successfully.",
+      "file": "adaptation/create_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_class",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::CustomClass",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomClass",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.CreateCustomClass",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_GetCustomClass_sync",
+      "title": "Snippet for the get_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#get_custom_class. It may require modification in order to execute successfully.",
+      "file": "adaptation/get_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_custom_class",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#get_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::GetCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::CustomClass",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "GetCustomClass",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.GetCustomClass",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_ListCustomClasses_sync",
+      "title": "Snippet for the list_custom_classes call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#list_custom_classes. It may require modification in order to execute successfully.",
+      "file": "adaptation/list_custom_classes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_classes",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#list_custom_classes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::ListCustomClassesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::ListCustomClassesResponse",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "ListCustomClasses",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.ListCustomClasses",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_UpdateCustomClass_sync",
+      "title": "Snippet for the update_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#update_custom_class. It may require modification in order to execute successfully.",
+      "file": "adaptation/update_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_custom_class",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#update_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::UpdateCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1p1beta1::CustomClass",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomClass",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.UpdateCustomClass",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1p1beta1_generated_Adaptation_DeleteCustomClass_sync",
+      "title": "Snippet for the delete_custom_class call in the Adaptation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_custom_class. It may require modification in order to execute successfully.",
+      "file": "adaptation/delete_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_custom_class",
+        "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1p1beta1::DeleteCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomClass",
+          "full_name": "google.cloud.speech.v1p1beta1.Adaptation.DeleteCustomClass",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1p1beta1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
