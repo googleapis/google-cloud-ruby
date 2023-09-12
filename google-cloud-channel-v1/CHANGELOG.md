@@ -1,5 +1,16 @@
 # Release History
 
+### 0.22.0 (2023-09-12)
+
+#### Features
+
+* Added billing_account field to CreateEntitlementPurchase and ChangeOfferPurchase 
+* Added CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU as a transfer ineligibility reason 
+* Support for boolean offer parameters 
+* Support for the query_eligible_billing_accounts RPC ([#22911](https://github.com/googleapis/google-cloud-ruby/issues/22911)) 
+* The list_transferable_offers and change_offer calls now take a billing_account argument 
+* Support for channel pool configuration ([#22918](https://github.com/googleapis/google-cloud-ruby/issues/22918)) 
+
 ### 0.21.0 (2023-06-16)
 
 #### Features
