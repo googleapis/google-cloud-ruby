@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-artifact_registry-v1beta2",
-    "version": "0.9.1",
+    "version": "0.10.0",
     "language": "RUBY",
     "apis": [
       {
