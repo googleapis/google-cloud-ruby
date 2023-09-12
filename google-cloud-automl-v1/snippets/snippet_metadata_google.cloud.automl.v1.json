@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-automl-v1",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "language": "RUBY",
     "apis": [
       {
