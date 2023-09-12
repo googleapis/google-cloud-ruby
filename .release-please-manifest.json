@@ -241,7 +241,7 @@
   "google-cloud-datastore+FILLER": "0.0.0",
   "google-cloud-datastore-admin": "0.2.1",
   "google-cloud-datastore-admin+FILLER": "0.0.0",
-  "google-cloud-datastore-admin-v1": "0.9.1",
+  "google-cloud-datastore-admin-v1": "0.10.0",
   "google-cloud-datastore-admin-v1+FILLER": "0.0.0",
   "google-cloud-datastore-v1": "0.14.0",
   "google-cloud-datastore-v1+FILLER": "0.0.0",
