@@ -389,7 +389,7 @@
   "google-cloud-logging-v2+FILLER": "0.0.0",
   "google-cloud-managed_identities": "1.1.0",
   "google-cloud-managed_identities+FILLER": "0.0.0",
-  "google-cloud-managed_identities-v1": "0.5.1",
+  "google-cloud-managed_identities-v1": "0.6.0",
   "google-cloud-managed_identities-v1+FILLER": "0.0.0",
   "google-cloud-media_translation": "0.3.0",
   "google-cloud-media_translation+FILLER": "0.0.0",
