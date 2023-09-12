@@ -21,7 +21,7 @@ module Google
   module Cloud
     module IDS
       module V1
-        VERSION = "0.4.0"
+        VERSION = "0.5.0"
       end
     end
   end
