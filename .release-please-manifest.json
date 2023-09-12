@@ -729,7 +729,7 @@
   "google-identity-access_context_manager-v1+FILLER": "0.0.0",
   "grafeas": "1.2.0",
   "grafeas+FILLER": "0.0.0",
-  "grafeas-v1": "0.12.1",
+  "grafeas-v1": "0.13.0",
   "grafeas-v1+FILLER": "0.0.0",
   "stackdriver": "0.21.1",
   "stackdriver+FILLER": "0.0.0",
