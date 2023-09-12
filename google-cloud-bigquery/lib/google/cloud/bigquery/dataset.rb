@@ -2031,15 +2031,20 @@ module Google
         #   * The key portion of a label must be unique. However, you can use the
         #     same key with multiple resources.
         #   * Keys must start with a lowercase letter or international character.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        # @param [Boolean] create_session If set to true a new session will be created
+        #   and the load job will happen in the table created within that session.
+        #   Note: This will work only for _SESSION dataset. 
+        # @param [string] session_id Session ID in which the load job must run.
+        # 
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
         #   Google Cloud Datastore backup.
         # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
         #   updater to modify the load job and its schema.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         #
         # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
@@ -2263,6 +2268,8 @@ module Google
         #   See {Project#schema} for the creation of the schema for use with
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
+        # @param [string] session_id Session ID in which the load job must run.
+        #
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted

@@ -2372,6 +2372,11 @@ module Google
         # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
         #   is undefined however for non-query jobs and may result in an error.
         #   Deprecated.
+        # @param [Boolean] create_session If set to true a new session will be created
+        #   and the load job will happen in the table created within that session.
+        #   Note: This will work only for tables in _SESSION dataset 
+        #         else the property will be ignored by the backend.
+        # @param [string] session_id Session ID in which the load job must run.
         #
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
@@ -2428,14 +2433,14 @@ module Google
         def load_job files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: nil
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil
           ensure_service!
 
           updater = load_job_updater format: format, create: create, write: write, projection_fields: projection_fields,
                                      jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                                      delimiter: delimiter, ignore_unknown: ignore_unknown,
                                      max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
-                                     dryrun: dryrun, job_id: job_id, prefix: prefix, schema: schema || self.schema, labels: labels,
+                                     dryrun: dryrun, job_id: job_id, prefix: prefix, schema: schema, labels: labels,
                                      autodetect: autodetect, null_marker: null_marker, create_session: create_session,
                                      session_id: session_id
 
@@ -2553,6 +2558,7 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [string] session_id Session ID in which the load job must run.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted

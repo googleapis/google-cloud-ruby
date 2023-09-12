@@ -955,10 +955,7 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
-        # {LoadJob::Updater#location=} in a block passed to this method. If the
-        # dataset is a full resource representation (see {#resource_full?}), the
-        # location of the job will be automatically set to the location of the
-        # dataset.
+        # {LoadJob::Updater#location=} in a block passed to this method. 
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
@@ -976,6 +973,8 @@ module Google
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
+        # @param [String] dataset_id The destination table to load the data into. 
+        #   For load job with session it defaults to "_SESSION" 
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
         #
@@ -1093,6 +1092,12 @@ module Google
         #   * The key portion of a label must be unique. However, you can use the
         #     same key with multiple resources.
         #   * Keys must start with a lowercase letter or international character.
+        # @param [Boolean] create_session If set to true a new session will be created
+        #   and the load job will happen in the table created within that session.
+        #   Note: This will work only for tables in _SESSION dataset 
+        #         else the property will be ignored by the backend.
+        # @param [string] session_id Session ID in which the load job must run.
+        #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
@@ -1175,6 +1180,8 @@ module Google
         #   * `needed` - Create the table if it does not exist.
         #   * `never` - The table must already exist. A 'notFound' error is
         #     raised if the table does not exist.
+        # @param [String] dataset_id The destination table to load the data into. 
+        #   For load job with session it defaults to "_SESSION" 
         # @param [String] write Specifies how to handle data already present in
         #   the table. The default value is `append`.
         #
@@ -1253,6 +1260,7 @@ module Google
         #   See {Project#schema} for the creation of the schema for use with
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
+        # @param [string] session_id Session ID in which the load job must run.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -1267,10 +1275,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
         #
         #   gs_url = "gs://my-bucket/file-name.csv"
-        #   dataset.load "my_new_table", gs_url do |schema|
+        #   bigquery.load "my_new_table", gs_url, dataset_id: "my_dataset" do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
