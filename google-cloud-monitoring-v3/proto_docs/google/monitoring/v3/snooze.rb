@@ -61,7 +61,7 @@ module Google
           #
           #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]
           #
-          #     There is a limit of 10 policies per snooze. This limit is checked during
+          #     There is a limit of 16 policies per snooze. This limit is checked during
           #     snooze creation.
           class Criteria
             include ::Google::Protobuf::MessageExts

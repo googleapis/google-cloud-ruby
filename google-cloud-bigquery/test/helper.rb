@@ -113,7 +113,8 @@ class MockBigquery < Minitest::Spec
         "datasetId" => id,
         "projectId" => project
       },
-      "friendlyName" => name
+      "friendlyName" => name,
+      "location": "US"
     }
   end
 

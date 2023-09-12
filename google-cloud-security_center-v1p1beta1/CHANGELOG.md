@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.12.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22923](https://github.com/googleapis/google-cloud-ruby/issues/22923)) 
+
 ### 0.11.2 (2023-08-04)
 
 #### Documentation

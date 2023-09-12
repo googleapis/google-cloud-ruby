@@ -72,7 +72,9 @@ module Google
         # @!attribute [rw] type
         #   @return [::String]
         #     The type of the notification channel. This field matches the
-        #     value of the {::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor#type NotificationChannelDescriptor.type} field.
+        #     value of the
+        #     {::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor#type NotificationChannelDescriptor.type}
+        #     field.
         # @!attribute [rw] name
         #   @return [::String]
         #     The full REST resource name for this channel. The format is:
@@ -95,8 +97,8 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Configuration fields that define the channel and its behavior. The
         #     permissible and required labels are specified in the
-        #     {::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor#labels NotificationChannelDescriptor.labels} of the
-        #     `NotificationChannelDescriptor` corresponding to the `type` field.
+        #     {::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor#labels NotificationChannelDescriptor.labels}
+        #     of the `NotificationChannelDescriptor` corresponding to the `type` field.
         # @!attribute [rw] user_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User-supplied key/value data that does not need to conform to

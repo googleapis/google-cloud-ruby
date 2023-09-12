@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22921](https://github.com/googleapis/google-cloud-ruby/issues/22921)) 
+
 ### 0.8.1 (2023-06-06)
 
 #### Bug Fixes

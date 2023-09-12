@@ -386,6 +386,8 @@ module Google
 
             ##
             # Lists the notification channels that have been created for the project.
+            # To list the types of notification channels that are supported, use
+            # the `ListNotificationChannelDescriptors` method.
             #
             # @overload list_notification_channels(request, options = nil)
             #   Pass arguments to `list_notification_channels` via a request object, either of type
@@ -403,8 +405,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -600,6 +603,11 @@ module Google
             # Creates a new notification channel, representing a single notification
             # endpoint such as an email address, SMS number, or PagerDuty service.
             #
+            # Design your application to single-thread API calls that modify the state of
+            # notification channels in a single project. This includes calls to
+            # CreateNotificationChannel, DeleteNotificationChannel and
+            # UpdateNotificationChannel.
+            #
             # @overload create_notification_channel(request, options = nil)
             #   Pass arguments to `create_notification_channel` via a request object, either of type
             #   {::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest} or an equivalent Hash.
@@ -616,8 +624,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -695,6 +704,11 @@ module Google
             ##
             # Updates a notification channel. Fields not specified in the field mask
             # remain unchanged.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # notification channels in a single project. This includes calls to
+            # CreateNotificationChannel, DeleteNotificationChannel and
+            # UpdateNotificationChannel.
             #
             # @overload update_notification_channel(request, options = nil)
             #   Pass arguments to `update_notification_channel` via a request object, either of type
@@ -785,6 +799,11 @@ module Google
 
             ##
             # Deletes a notification channel.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # notification channels in a single project. This includes calls to
+            # CreateNotificationChannel, DeleteNotificationChannel and
+            # UpdateNotificationChannel.
             #
             # @overload delete_notification_channel(request, options = nil)
             #   Pass arguments to `delete_notification_channel` via a request object, either of type
@@ -1000,9 +1019,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The notification channel for which a verification code is to be generated
-            #     and retrieved. This must name a channel that is already verified; if
-            #     the specified channel is not verified, the request will fail.
+            #     Required. The notification channel for which a verification code is to be
+            #     generated and retrieved. This must name a channel that is already verified;
+            #     if the specified channel is not verified, the request will fail.
             #   @param expire_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The desired expiration time. If specified, the API will guarantee that
             #     the returned code will not be valid after the specified timestamp;
