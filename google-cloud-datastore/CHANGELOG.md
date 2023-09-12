@@ -1,5 +1,11 @@
 # Release History
 
+### 2.8.0 (2023-09-12)
+
+#### Features
+
+* Support sum & avg aggregate functions ([#22884](https://github.com/googleapis/google-cloud-ruby/issues/22884)) 
+
 ### 2.7.1 (2023-05-18)
 
 #### Documentation
