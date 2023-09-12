@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-redis-v1beta1",
-    "version": "0.10.1",
+    "version": "0.11.0",
     "language": "RUBY",
     "apis": [
       {
