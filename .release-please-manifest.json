@@ -705,7 +705,7 @@
   "google-cloud-workflows+FILLER": "0.0.0",
   "google-cloud-workflows-executions-v1": "0.4.0",
   "google-cloud-workflows-executions-v1+FILLER": "0.0.0",
-  "google-cloud-workflows-executions-v1beta": "0.5.1",
+  "google-cloud-workflows-executions-v1beta": "0.6.0",
   "google-cloud-workflows-executions-v1beta+FILLER": "0.0.0",
   "google-cloud-workflows-v1": "0.6.0",
   "google-cloud-workflows-v1+FILLER": "0.0.0",
