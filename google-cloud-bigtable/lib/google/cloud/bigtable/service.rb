@@ -22,6 +22,7 @@ require "google/cloud/bigtable/v2"
 require "google/cloud/bigtable/admin/v2"
 require "google/cloud/bigtable/convert"
 require "gapic/lru_hash"
+require "concurrent"
 
 module Google
   module Cloud
@@ -61,6 +62,7 @@ module Google
           @channel_selection = channel_selection
           @channel_count = channel_count
           @bigtable_clients = ::Gapic::LruHash.new 10
+          @mutex = Mutex.new
         end
 
         def instances
@@ -92,11 +94,13 @@ module Google
         def client table_path, app_profile_id
           return mocked_client if mocked_client
           table_key = "#{table_path}_#{app_profile_id}"
-          if @bigtable_clients.get(table_key).nil?
-            bigtable_client = create_bigtable_client table_path, app_profile_id
-            @bigtable_clients.put table_key, bigtable_client
+          @mutex.synchronize do
+            if @bigtable_clients.get(table_key).nil?
+              bigtable_client = create_bigtable_client table_path, app_profile_id
+              @bigtable_clients.put table_key, bigtable_client
+            end
+            @bigtable_clients.get table_key
           end
-          @bigtable_clients.get table_key
         end
         attr_accessor :mocked_client
 

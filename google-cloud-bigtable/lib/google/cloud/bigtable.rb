@@ -74,6 +74,8 @@ module Google
       #
       #   client = Google::Cloud::Bigtable.new
       #
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/AbcSize
       def self.new project_id: nil,
                    credentials: nil,
                    emulator_host: nil,
@@ -81,14 +83,16 @@ module Google
                    endpoint: nil,
                    endpoint_admin: nil,
                    timeout: nil,
-                   channel_selection: configure.channel_selection,
-                   channel_count: configure.channel_count
+                   channel_selection: nil,
+                   channel_count: nil
         project_id ||= default_project_id
         scope ||= configure.scope
         timeout ||= configure.timeout
         emulator_host ||= configure.emulator_host
         endpoint ||= configure.endpoint
         endpoint_admin ||= configure.endpoint_admin
+        channel_selection ||= configure.channel_selection
+        channel_count ||= configure.channel_count
 
         return new_with_emulator project_id, emulator_host, timeout if emulator_host
 
@@ -102,6 +106,9 @@ module Google
                                         channel_count: channel_count
         Bigtable::Project.new service
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/AbcSize
+
 
       ##
       # Configure the Google Cloud Bigtable library.

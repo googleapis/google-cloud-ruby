@@ -19,7 +19,6 @@ source "https://rubygems.org"
 
 if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
   gem "google-cloud-bigtable", path: "../../google-cloud-bigtable"
-  gem "google-cloud-bigtable-v2", path: "../../google-cloud-bigtable-v2"
 else
   # [START bigtable_dependencies]
   gem "google-cloud-bigtable"
