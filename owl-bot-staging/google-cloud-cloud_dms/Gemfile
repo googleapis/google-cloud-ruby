@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-cloud_dms-v1", path: "../google-cloud-cloud_dms-v1"
