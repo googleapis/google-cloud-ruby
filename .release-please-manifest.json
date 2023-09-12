@@ -535,7 +535,7 @@
   "google-cloud-scheduler+FILLER": "0.0.0",
   "google-cloud-scheduler-v1": "0.8.1",
   "google-cloud-scheduler-v1+FILLER": "0.0.0",
-  "google-cloud-scheduler-v1beta1": "0.8.1",
+  "google-cloud-scheduler-v1beta1": "0.9.0",
   "google-cloud-scheduler-v1beta1+FILLER": "0.0.0",
   "google-cloud-secret_manager": "1.2.0",
   "google-cloud-secret_manager+FILLER": "0.0.0",
