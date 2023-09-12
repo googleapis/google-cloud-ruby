@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ApiKeys
       module V2
-        VERSION = "0.3.0"
+        VERSION = "0.4.0"
       end
     end
   end
