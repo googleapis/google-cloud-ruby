@@ -637,7 +637,7 @@
   "google-cloud-trace+FILLER": "0.0.0",
   "google-cloud-trace-v1": "0.6.1",
   "google-cloud-trace-v1+FILLER": "0.0.0",
-  "google-cloud-trace-v2": "0.6.1",
+  "google-cloud-trace-v2": "0.7.0",
   "google-cloud-trace-v2+FILLER": "0.0.0",
   "google-cloud-translate": "3.4.1",
   "google-cloud-translate+FILLER": "0.0.0",
