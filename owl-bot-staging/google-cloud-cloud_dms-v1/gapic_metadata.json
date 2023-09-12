@@ -1,0 +1,223 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.clouddms.v1",
+  "libraryPackage": "::Google::Cloud::CloudDMS::V1",
+  "services": {
+    "DataMigrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client",
+          "rpcs": {
+            "ListMigrationJobs": {
+              "methods": [
+                "list_migration_jobs"
+              ]
+            },
+            "GetMigrationJob": {
+              "methods": [
+                "get_migration_job"
+              ]
+            },
+            "CreateMigrationJob": {
+              "methods": [
+                "create_migration_job"
+              ]
+            },
+            "UpdateMigrationJob": {
+              "methods": [
+                "update_migration_job"
+              ]
+            },
+            "DeleteMigrationJob": {
+              "methods": [
+                "delete_migration_job"
+              ]
+            },
+            "StartMigrationJob": {
+              "methods": [
+                "start_migration_job"
+              ]
+            },
+            "StopMigrationJob": {
+              "methods": [
+                "stop_migration_job"
+              ]
+            },
+            "ResumeMigrationJob": {
+              "methods": [
+                "resume_migration_job"
+              ]
+            },
+            "PromoteMigrationJob": {
+              "methods": [
+                "promote_migration_job"
+              ]
+            },
+            "VerifyMigrationJob": {
+              "methods": [
+                "verify_migration_job"
+              ]
+            },
+            "RestartMigrationJob": {
+              "methods": [
+                "restart_migration_job"
+              ]
+            },
+            "GenerateSshScript": {
+              "methods": [
+                "generate_ssh_script"
+              ]
+            },
+            "GenerateTcpProxyScript": {
+              "methods": [
+                "generate_tcp_proxy_script"
+              ]
+            },
+            "ListConnectionProfiles": {
+              "methods": [
+                "list_connection_profiles"
+              ]
+            },
+            "GetConnectionProfile": {
+              "methods": [
+                "get_connection_profile"
+              ]
+            },
+            "CreateConnectionProfile": {
+              "methods": [
+                "create_connection_profile"
+              ]
+            },
+            "UpdateConnectionProfile": {
+              "methods": [
+                "update_connection_profile"
+              ]
+            },
+            "DeleteConnectionProfile": {
+              "methods": [
+                "delete_connection_profile"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "create_private_connection"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "get_private_connection"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "list_private_connections"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "delete_private_connection"
+              ]
+            },
+            "GetConversionWorkspace": {
+              "methods": [
+                "get_conversion_workspace"
+              ]
+            },
+            "ListConversionWorkspaces": {
+              "methods": [
+                "list_conversion_workspaces"
+              ]
+            },
+            "CreateConversionWorkspace": {
+              "methods": [
+                "create_conversion_workspace"
+              ]
+            },
+            "UpdateConversionWorkspace": {
+              "methods": [
+                "update_conversion_workspace"
+              ]
+            },
+            "DeleteConversionWorkspace": {
+              "methods": [
+                "delete_conversion_workspace"
+              ]
+            },
+            "CreateMappingRule": {
+              "methods": [
+                "create_mapping_rule"
+              ]
+            },
+            "DeleteMappingRule": {
+              "methods": [
+                "delete_mapping_rule"
+              ]
+            },
+            "ListMappingRules": {
+              "methods": [
+                "list_mapping_rules"
+              ]
+            },
+            "GetMappingRule": {
+              "methods": [
+                "get_mapping_rule"
+              ]
+            },
+            "SeedConversionWorkspace": {
+              "methods": [
+                "seed_conversion_workspace"
+              ]
+            },
+            "ImportMappingRules": {
+              "methods": [
+                "import_mapping_rules"
+              ]
+            },
+            "ConvertConversionWorkspace": {
+              "methods": [
+                "convert_conversion_workspace"
+              ]
+            },
+            "CommitConversionWorkspace": {
+              "methods": [
+                "commit_conversion_workspace"
+              ]
+            },
+            "RollbackConversionWorkspace": {
+              "methods": [
+                "rollback_conversion_workspace"
+              ]
+            },
+            "ApplyConversionWorkspace": {
+              "methods": [
+                "apply_conversion_workspace"
+              ]
+            },
+            "DescribeDatabaseEntities": {
+              "methods": [
+                "describe_database_entities"
+              ]
+            },
+            "SearchBackgroundJobs": {
+              "methods": [
+                "search_background_jobs"
+              ]
+            },
+            "DescribeConversionWorkspaceRevisions": {
+              "methods": [
+                "describe_conversion_workspace_revisions"
+              ]
+            },
+            "FetchStaticIps": {
+              "methods": [
+                "fetch_static_ips"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
