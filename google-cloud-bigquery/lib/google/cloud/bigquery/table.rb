@@ -2433,7 +2433,7 @@ module Google
         def load_job files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: self.schema
           ensure_service!
 
           updater = load_job_updater format: format, create: create, write: write, projection_fields: projection_fields,
@@ -2620,12 +2620,13 @@ module Google
         #
         def load files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                  quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
-                 quote: nil, skip_leading: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
+                 quote: nil, skip_leading: nil, autodetect: nil, null_marker: nil, session_id: nil,
+                 schema: self.schema, &block
           job = load_job files, format: format, create: create, write: write, projection_fields: projection_fields,
                                 jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                                 delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
                                 quote: quote, skip_leading: skip_leading, autodetect: autodetect,
-                                null_marker: null_marker, session_id: session_id, &block
+                                null_marker: null_marker, session_id: session_id, schema: schema, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job

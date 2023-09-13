@@ -1284,7 +1284,7 @@ module Google
         #
         # @!group Data
         #
-        def load table_id, files, dataset_id: nil, format: nil, create: nil, write: nil,
+        def load table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil,
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                  delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                  skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
