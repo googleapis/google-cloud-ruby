@@ -58,6 +58,39 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     end
   end
 
+  it "creates a new client for each table" do
+    table_id_1 = "my-table_1"
+    table_id_2 = "my-table_2"
+    app_profile_id = "my-app-profile"
+    client_id_1 = "projects/#{project_id}/instances/#{instance_id}/tables/#{table_id_1}_#{app_profile_id}"
+    client_id_2 = "projects/#{project_id}/instances/#{instance_id}/tables/#{table_id_2}_#{app_profile_id}"
+    get_res_1 = Google::Cloud::Bigtable::Admin::V2::Table.new(
+      table_hash(
+        name: table_path(instance_id, table_id_1),
+        granularity: :MILLIS,
+      )
+    )
+    get_res_2 = Google::Cloud::Bigtable::Admin::V2::Table.new(
+      table_hash(
+        name: table_path(instance_id, table_id_2),
+        granularity: :MILLIS,
+      )
+    )
+
+    mock = Minitest::Mock.new
+    mock.expect :get_table, get_res_1, name: table_path(instance_id, table_id_1), view: :FULL
+    mock.expect :get_table, get_res_2, name: table_path(instance_id, table_id_2), view: :FULL
+    bigtable.service.mocked_tables = mock
+    bigtable.service.instance_variable_set(:@bigtable_clients, ::Gapic::LruHash.new(10))
+
+    bigtable.table instance_id, table_id_1, view: :FULL, perform_lookup: true, app_profile_id: app_profile_id
+    bigtable.table instance_id, table_id_2, view: :FULL, perform_lookup: true, app_profile_id: app_profile_id
+
+    assert bigtable.service.instance_variable_get(:@bigtable_clients).instance_variable_get(:@cache).key? client_id_1
+    assert bigtable.service.instance_variable_get(:@bigtable_clients).instance_variable_get(:@cache).key? client_id_2
+    mock.verify
+  end
+
   it "returns nil when getting an non-existent table" do
     not_found_table_id = "not-found-table"
 
