@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2023-09-14)
+
+#### Features
+
+* Added feature flag for improved mutate rows throttling ([#23326](https://github.com/googleapis/google-cloud-ruby/issues/23326)) 
+
 ### 0.14.0 (2023-09-12)
 
 #### Features
