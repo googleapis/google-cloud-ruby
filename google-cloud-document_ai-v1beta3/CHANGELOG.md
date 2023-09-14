@@ -1,5 +1,11 @@
 # Release History
 
+### 0.28.0 (2023-09-14)
+
+#### Features
+
+* Support for Enterprise OCR add-ons ([#23321](https://github.com/googleapis/google-cloud-ruby/issues/23321)) 
+
 ### 0.27.0 (2023-09-12)
 
 #### Features
