@@ -21,13 +21,13 @@ module Google
   module Cloud
     module Bigtable
       module V2
-        # Feature flags supported by a client.
+        # Feature flags supported or enabled by a client.
         # This is intended to be sent as part of request metadata to assure the server
         # that certain behaviors are safe to enable. This proto is meant to be
         # serialized and websafe-base64 encoded under the `bigtable-features` metadata
         # key. The value will remain constant for the lifetime of a client and due to
         # HTTP2's HPACK compression, the request overhead will be tiny.
-        # This is an internal implementation detail and should not be used by endusers
+        # This is an internal implementation detail and should not be used by end users
         # directly.
         # @!attribute [rw] reverse_scans
         #   @return [::Boolean]
@@ -36,11 +36,17 @@ module Google
         # @!attribute [rw] mutate_rows_rate_limit
         #   @return [::Boolean]
         #     Notify the server that the client enables batch write flow control by
-        #     requesting RateLimitInfo from MutateRowsResponse.
+        #     requesting RateLimitInfo from MutateRowsResponse. Due to technical reasons,
+        #     this disables partial retries.
+        # @!attribute [rw] mutate_rows_rate_limit2
+        #   @return [::Boolean]
+        #     Notify the server that the client enables batch write flow control by
+        #     requesting RateLimitInfo from MutateRowsResponse. With partial retries
+        #     enabled.
         # @!attribute [rw] last_scanned_row_responses
         #   @return [::Boolean]
         #     Notify the server that the client supports the last_scanned_row field
-        #     in ReadRowsResponse for long-running sparse scans.
+        #     in ReadRowsResponse for long-running scans.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
