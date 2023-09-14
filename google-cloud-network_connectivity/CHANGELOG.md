@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2023-09-14)
+
+#### Features
+
+* Support for PolicyBasedRoutingService ([#23299](https://github.com/googleapis/google-cloud-ruby/issues/23299)) 
+
 ### 1.2.1 (2023-02-01)
 
 #### Bug Fixes
