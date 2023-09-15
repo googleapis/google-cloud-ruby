@@ -363,6 +363,11 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
         #     HostMaintenancePolicy contains the desired maintenance policy for the
         #     Google Compute Engine hosts.
+        # @!attribute [rw] enable_confidential_storage
+        #   @return [::Boolean]
+        #     Optional. Enable confidential storage on Hyperdisk.
+        #     boot_disk_kms_key is required when enable_confidential_storage is true.
+        #     This is only available for private preview.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1877,6 +1882,7 @@ module Google
         #     in autopilot clusters and node auto-provisioning enabled clusters.
         # @!attribute [rw] protect_config
         #   @return [::Google::Cloud::Container::V1beta1::ProtectConfig]
+        #     Deprecated: Use SecurityPostureConfig instead.
         #     Enable/Disable Protect API features for the cluster.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -2032,6 +2038,10 @@ module Google
 
             # Applies basic vulnerability scanning on the cluster.
             VULNERABILITY_BASIC = 2
+
+            # Applies the Security Posture's vulnerability on cluster Enterprise level
+            # features.
+            VULNERABILITY_ENTERPRISE = 3
           end
         end
 
@@ -2263,6 +2273,7 @@ module Google
         #     in autopilot clusters and node auto-provisioning enabled clusters.
         # @!attribute [rw] desired_protect_config
         #   @return [::Google::Cloud::Container::V1beta1::ProtectConfig]
+        #     Deprecated: Use DesiredSecurityPostureConfig instead.
         #     Enable/Disable Protect API features for the cluster.
         # @!attribute [rw] desired_gateway_api_config
         #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig]
