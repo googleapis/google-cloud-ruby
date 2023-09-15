@@ -974,7 +974,7 @@ module Google
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
         # @param [String] dataset_id The destination table to load the data into.
-        #   For load job with session it defaults to "_SESSION"
+        #   For load job with create_session/session_id it defaults to "_SESSION"
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
         #
@@ -1120,13 +1120,13 @@ module Google
         #   load_job.wait_until_done!
         #   session_id = load_job.statistics["sessionInfo"]["sessionId"]
         #
-        def load_job table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil,
+        def load_job table_id, files, dataset_id: nil, format: nil, create: nil, write: nil,
                      projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                      delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                      skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
                      null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, &block
           ensure_service!
-
+          dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
           session_dataset = dataset dataset_id, skip_lookup: true
           table = session_dataset.table table_id, skip_lookup: true
           table.load_job  files,
