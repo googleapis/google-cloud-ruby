@@ -1,0 +1,163 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.alloydb.v1",
+  "libraryPackage": "::Google::Cloud::AlloyDB::V1",
+  "services": {
+    "AlloyDBAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client",
+          "rpcs": {
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "PromoteCluster": {
+              "methods": [
+                "promote_cluster"
+              ]
+            },
+            "RestoreCluster": {
+              "methods": [
+                "restore_cluster"
+              ]
+            },
+            "CreateSecondaryCluster": {
+              "methods": [
+                "create_secondary_cluster"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "CreateSecondaryInstance": {
+              "methods": [
+                "create_secondary_instance"
+              ]
+            },
+            "BatchCreateInstances": {
+              "methods": [
+                "batch_create_instances"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "FailoverInstance": {
+              "methods": [
+                "failover_instance"
+              ]
+            },
+            "InjectFault": {
+              "methods": [
+                "inject_fault"
+              ]
+            },
+            "RestartInstance": {
+              "methods": [
+                "restart_instance"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "update_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "ListSupportedDatabaseFlags": {
+              "methods": [
+                "list_supported_database_flags"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "list_users"
+              ]
+            },
+            "GetUser": {
+              "methods": [
+                "get_user"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "create_user"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "update_user"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "delete_user"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
