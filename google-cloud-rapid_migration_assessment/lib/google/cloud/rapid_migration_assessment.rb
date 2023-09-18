@@ -59,7 +59,7 @@ module Google
       #
       # ## About RapidMigrationAssessment
       #
-      # Rapid Migration Assessment service
+      # Service describing handlers for resources.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
