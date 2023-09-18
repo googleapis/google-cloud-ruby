@@ -30,7 +30,7 @@ module Google
             ##
             # REST client for the RapidMigrationAssessment service.
             #
-            # Rapid Migration Assessment service
+            # Service describing handlers for resources.
             #
             class Client
               include Paths
@@ -730,6 +730,7 @@ module Google
 
               ##
               # Deletes a single Collector - changes state of collector to "Deleting".
+              # Background jobs does final deletion thorugh producer api.
               #
               # @overload delete_collector(request, options = nil)
               #   Pass arguments to `delete_collector` via a request object, either of type
