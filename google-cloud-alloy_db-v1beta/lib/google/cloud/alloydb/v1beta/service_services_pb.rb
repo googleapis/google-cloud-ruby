@@ -101,10 +101,10 @@ module Google
             # Lists SupportedDatabaseFlags for a given project and location.
             rpc :ListSupportedDatabaseFlags, ::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest, ::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsResponse
             # Generate a client certificate signed by a Cluster CA.
-            # The sole purpose of this endpoint is to support the Auth Proxy client and
-            # the endpoint's behavior is subject to change without notice, so do not rely
-            # on its behavior remaining constant. Future changes will not break the Auth
-            # Proxy client.
+            # The sole purpose of this endpoint is to support AlloyDB connectors and the
+            # Auth Proxy client. The endpoint's behavior is subject to change without
+            # notice, so do not rely on its behavior remaining constant. Future changes
+            # will not break AlloyDB connectors or the Auth Proxy client.
             rpc :GenerateClientCertificate, ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest, ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse
             # Get instance metadata used for a connection.
             rpc :GetConnectionInfo, ::Google::Cloud::AlloyDB::V1beta::GetConnectionInfoRequest, ::Google::Cloud::AlloyDB::V1beta::ConnectionInfo

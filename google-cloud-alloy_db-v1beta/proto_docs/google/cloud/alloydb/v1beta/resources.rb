@@ -254,9 +254,9 @@ module Google
         #     Whether ContinuousBackup is enabled.
         # @!attribute [rw] recovery_window_days
         #   @return [::Integer]
-        #     The number of days backups and logs will be retained, which determines the
-        #     window of time that data is recoverable for. If not set, it defaults to 14
-        #     days.
+        #     The number of days that are eligible to restore from using PITR. To support
+        #     the entire recovery window, backups and logs are retained for one day more
+        #     than the recovery window. If not set, defaults to 14 days.
         # @!attribute [rw] encryption_config
         #   @return [::Google::Cloud::AlloyDB::V1beta::EncryptionConfig]
         #     The encryption config can be specified to encrypt the
@@ -365,11 +365,12 @@ module Google
         #     populated at the Cluster creation time or the Cluster promotion
         #     time. The cluster type is determined by which RPC was used to create
         #     the cluster (i.e. `CreateCluster` vs. `CreateSecondaryCluster`
-        # @!attribute [r] database_version
+        # @!attribute [rw] database_version
         #   @return [::Google::Cloud::AlloyDB::V1beta::DatabaseVersion]
-        #     Output only. The database engine major version. This is an output-only
-        #     field and it's populated at the Cluster creation time. This field cannot be
-        #     changed after cluster creation.
+        #     Optional. The database engine major version. This is an optional field and
+        #     it is populated at the Cluster creation time. If a database version is not
+        #     supplied at cluster creation time, then a default database version will
+        #     be used.
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::AlloyDB::V1beta::Cluster::NetworkConfig]
         # @!attribute [rw] network
@@ -377,8 +378,8 @@ module Google
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
         #     must belong to the same project as the cluster. It is specified in the
-        #     form: "projects/\\{project_number}/global/networks/\\{network_id}". This is
-        #     required to create a cluster. It can be updated, but it cannot be removed.
+        #     form: "projects/\\{project}/global/networks/\\{network_id}". This is required
+        #     to create a cluster. Deprecated, use network_config.network instead.
         # @!attribute [rw] etag
         #   @return [::String]
         #     For Resource freshness validation (https://google.aip.dev/154)
@@ -444,12 +445,11 @@ module Google
           #     The network must belong to the same project as the cluster. It is
           #     specified in the form:
           #     "projects/\\{project_number}/global/networks/\\{network_id}". This is
-          #     required to create a cluster. It can be updated, but it cannot be
-          #     removed.
+          #     required to create a cluster.
           # @!attribute [rw] allocated_ip_range
           #   @return [::String]
-          #     Optional. The name of the allocated IP range for the private IP AlloyDB
-          #     cluster. For example: "google-managed-services-default". If set, the
+          #     Optional. Name of the allocated IP range for the private IP AlloyDB
+          #     cluster, for example: "google-managed-services-default". If set, the
           #     instance IPs for this cluster will be created in the allocated range. The
           #     range name must comply with RFC 1035. Specifically, the name must be 1-63
           #     characters long and match the regular expression
@@ -669,6 +669,9 @@ module Google
         #     This field is not persisted when you update the instance.
         #     To use a non-default update policy, you must
         #     specify explicitly specify the value in each update request.
+        # @!attribute [rw] client_connection_config
+        #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::ClientConnectionConfig]
+        #     Optional. Client connection specific configurations
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -757,6 +760,19 @@ module Google
               # incur a downtime.
               FORCE_APPLY = 2
             end
+          end
+
+          # Client connection configuration
+          # @!attribute [rw] require_connectors
+          #   @return [::Boolean]
+          #     Optional. Configuration to enforce connectors only (ex: AuthProxy)
+          #     connections to the database.
+          # @!attribute [rw] ssl_config
+          #   @return [::Google::Cloud::AlloyDB::V1beta::SslConfig]
+          #     Optional. SSL config option for this instance.
+          class ClientConnectionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
@@ -869,8 +885,9 @@ module Google
         #     This field currently has no semantic meaning.
         # @!attribute [r] ip_address
         #   @return [::String]
-        #     Output only. The IP address for the Instance.
-        #     This is the connection endpoint for an end-user application.
+        #     Output only. The private network IP address for the Instance. This is the
+        #     default IP for the instance and is always created (even if enable_public_ip
+        #     is set). This is the connection endpoint for an end-user application.
         # @!attribute [r] pem_certificate_chain
         #   @return [::Array<::String>]
         #     Output only. The pem-encoded chain that may be used to verify the X.509
@@ -962,9 +979,45 @@ module Google
         #     Output only. The time at which after the backup is eligible to be garbage
         #     collected. It is the duration specified by the backup's retention policy,
         #     added to the backup's create_time.
+        # @!attribute [r] expiry_quantity
+        #   @return [::Google::Cloud::AlloyDB::V1beta::Backup::QuantityBasedExpiry]
+        #     Output only. The QuantityBasedExpiry of the backup, specified by the
+        #     backup's retention policy. Once the expiry quantity is over retention, the
+        #     backup is eligible to be garbage collected.
+        # @!attribute [r] database_version
+        #   @return [::Google::Cloud::AlloyDB::V1beta::DatabaseVersion]
+        #     Output only. The database engine major version of the cluster this backup
+        #     was created from. Any restored cluster created from this backup will have
+        #     the same database version.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A backup's position in a quantity-based retention queue, of backups with
+          # the same source cluster and type, with length, retention, specified by the
+          # backup's retention policy.
+          # Once the position is greater than the retention, the backup is eligible to
+          # be garbage collected.
+          #
+          # Example: 5 backups from the same source cluster and type with a
+          # quantity-based retention of 3 and denoted by backup_id (position,
+          # retention).
+          #
+          # Safe: backup_5 (1, 3), backup_4, (2, 3), backup_3 (3, 3).
+          # Awaiting garbage collection: backup_2 (4, 3), backup_1 (5, 3)
+          # @!attribute [r] retention_count
+          #   @return [::Integer]
+          #     Output only. The backup's position among its backups with the same source
+          #     cluster and type, by descending chronological order create time(i.e.
+          #     newest first).
+          # @!attribute [r] total_retention_count
+          #   @return [::Integer]
+          #     Output only. The length of the quantity-based queue, specified by the
+          #     backup's retention policy.
+          class QuantityBasedExpiry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -1179,6 +1232,9 @@ module Google
 
           # The database version is Postgres 14.
           POSTGRES_14 = 2
+
+          # The database version is Postgres 15.
+          POSTGRES_15 = 3
         end
       end
     end
