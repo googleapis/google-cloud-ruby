@@ -1,5 +1,12 @@
 # Release History
 
+### 0.29.0 (2023-09-19)
+
+#### Features
+
+* Support enabling confidential storage on Hyperdisk ([#23332](https://github.com/googleapis/google-cloud-ruby/issues/23332)) 
+* Support for enterprise vulnerability mode 
+
 ### 0.28.0 (2023-09-12)
 
 #### Features
