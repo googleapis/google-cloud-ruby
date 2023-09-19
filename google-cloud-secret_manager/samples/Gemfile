@@ -19,7 +19,7 @@ master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 gem "google-cloud-secret_manager", path: master ? "../../google-cloud-secret_manager" : nil
 
 group :test do
-  gem "google-style", "~> 1.25.1"
+  gem "google-style", ">= 1.25.1", "< 1.27.1"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-rg", "~> 5.2"

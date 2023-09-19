@@ -20,7 +20,7 @@ gem "google-cloud-video-stitcher", path: master ? "../../google-cloud-video-stit
 gem "google-cloud-video-stitcher-v1", path: master ? "../../google-cloud-video-stitcher-v1" : nil
 
 group :test do
-  gem "google-style", "~> 1.26.1"
+  gem "google-style", ">= 1.26.1", "< 1.28"
   gem "minitest", "~> 5.16"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-rg", "~> 5.2"
