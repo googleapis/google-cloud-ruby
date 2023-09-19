@@ -241,7 +241,7 @@ module Google
         #     since access behavior is managed by IAM policies.
         # @!attribute [rw] programmatic_clients
         #   @return [::Array<::String>]
-        #     List of Oauth client IDs allowed to programmatically authenticate with IAP.
+        #     List of OAuth client IDs allowed to programmatically authenticate with IAP.
         class OAuthSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
