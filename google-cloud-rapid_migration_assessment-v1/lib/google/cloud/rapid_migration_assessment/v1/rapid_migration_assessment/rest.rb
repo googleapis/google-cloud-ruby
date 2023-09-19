@@ -33,7 +33,7 @@ module Google
     module RapidMigrationAssessment
       module V1
         ##
-        # Rapid Migration Assessment service
+        # Service describing handlers for resources.
         #
         # To load this service and instantiate a REST client:
         #
