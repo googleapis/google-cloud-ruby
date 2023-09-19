@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2023-09-19)
+
+#### Features
+
+* Added OAuthSettings#programmatic_clients ([#23335](https://github.com/googleapis/google-cloud-ruby/issues/23335)) 
+
 ### 0.9.0 (2023-09-12)
 
 #### Features
