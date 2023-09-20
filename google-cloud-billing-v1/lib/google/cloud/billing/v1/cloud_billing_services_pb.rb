@@ -63,7 +63,7 @@ module Google
             # typically given to billing account
             # [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
             # This method will return an error if the parent account has not been
-            # provisioned as a reseller account.
+            # provisioned for subaccounts.
             rpc :CreateBillingAccount, ::Google::Cloud::Billing::V1::CreateBillingAccountRequest, ::Google::Cloud::Billing::V1::BillingAccount
             # Lists the projects associated with a billing account. The current
             # authenticated user must have the `billing.resourceAssociations.list` IAM
