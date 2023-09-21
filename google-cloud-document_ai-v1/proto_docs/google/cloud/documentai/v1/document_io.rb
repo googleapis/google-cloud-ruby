@@ -29,6 +29,13 @@ module Google
         #   @return [::String]
         #     An IANA MIME type (RFC6838) indicating the nature and format of the
         #     {::Google::Cloud::DocumentAI::V1::RawDocument#content content}.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The display name of the document, it supports all Unicode characters except
+        #     the following:
+        #     `*`, `?`, `[`, `]`, `%`, `{`, `}`,`'`, `\"`, `,`
+        #     `~`, `=` and `:` are reserved.
+        #     If not specified, a default ID will be generated.
         class RawDocument
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -143,6 +150,7 @@ module Google
         # @!attribute [rw] compute_style_info
         #   @return [::Boolean]
         #     Turn on font id model and returns font style information.
+        #     Use PremiumFeatures.compute_style_info instead.
         class OcrConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

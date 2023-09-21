@@ -672,8 +672,8 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Training Method for CDE. TRAINING_METHOD_UNSPECIFIED will fallback to
-            # MODEL_BASED.
+            # Training Method for CDE. `TRAINING_METHOD_UNSPECIFIED` will fall back to
+            # `MODEL_BASED`.
             module TrainingMethod
               TRAINING_METHOD_UNSPECIFIED = 0
 
