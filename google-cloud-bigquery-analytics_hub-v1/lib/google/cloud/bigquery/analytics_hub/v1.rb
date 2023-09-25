@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/bigquery/analytics_hub/v1"
         #     client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/analytics_hub/v1"
+        #     client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new
+        #
         module V1
         end
       end

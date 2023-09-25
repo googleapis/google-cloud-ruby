@@ -69,6 +69,23 @@ module Google
               # Upon subscription to a listing for a BigQuery dataset, Analytics Hub
               # creates a linked dataset in the subscriber's project.
               rpc :SubscribeListing, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingResponse
+              # Creates a Subscription to a Data Exchange. This is a long-running operation
+              # as it will create one or more linked datasets.
+              rpc :SubscribeDataExchange, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest, ::Google::Longrunning::Operation
+              # Refreshes a Subscription to a Data Exchange. A Data Exchange can become
+              # stale when a publisher adds or removes data. This is a long-running
+              # operation as it may create many linked datasets.
+              rpc :RefreshSubscription, ::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest, ::Google::Longrunning::Operation
+              # Gets the details of a Subscription.
+              rpc :GetSubscription, ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription
+              # Lists all subscriptions in a given project and location.
+              rpc :ListSubscriptions, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsResponse
+              # Lists all subscriptions on a given Data Exchange or Listing.
+              rpc :ListSharedResourceSubscriptions, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsResponse
+              # Revokes a given subscription.
+              rpc :RevokeSubscription, ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse
+              # Deletes a subscription.
+              rpc :DeleteSubscription, ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest, ::Google::Longrunning::Operation
               # Gets the IAM policy.
               rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
               # Sets the IAM policy.

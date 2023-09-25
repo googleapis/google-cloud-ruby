@@ -24,7 +24,9 @@ require "google/cloud/bigquery/analytics_hub/v1/version"
 
 require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service/credentials"
 require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service/paths"
+require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service/operations"
 require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service/client"
+require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service/rest"
 
 module Google
   module Cloud
@@ -43,6 +45,11 @@ module Google
           #
           #     require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service"
           #     client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service/rest"
+          #     client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new
           #
           module AnalyticsHubService
           end

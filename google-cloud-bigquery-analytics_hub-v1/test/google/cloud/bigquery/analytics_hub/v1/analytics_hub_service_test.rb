@@ -785,6 +785,455 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
     end
   end
 
+  def test_subscribe_data_exchange
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination = "hello world"
+    subscription = "hello world"
+    subscriber_contact = "hello world"
+
+    subscribe_data_exchange_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :subscribe_data_exchange, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["destination"]
+      assert_equal "hello world", request["subscription"]
+      assert_equal "hello world", request["subscriber_contact"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, subscribe_data_exchange_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.subscribe_data_exchange({ name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.subscribe_data_exchange name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.subscribe_data_exchange ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.subscribe_data_exchange({ name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.subscribe_data_exchange(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, subscribe_data_exchange_client_stub.call_rpc_count
+    end
+  end
+
+  def test_refresh_subscription
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    refresh_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :refresh_subscription, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, refresh_subscription_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.refresh_subscription({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.refresh_subscription name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.refresh_subscription ::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.refresh_subscription({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.refresh_subscription(::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, refresh_subscription_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_subscription
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_subscription, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_subscription_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_subscription({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_subscription name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_subscription ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_subscription({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_subscription(::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_subscription_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_subscriptions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_subscriptions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_subscriptions, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_subscriptions_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_subscriptions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_subscriptions parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_subscriptions ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_subscriptions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_subscriptions(::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_subscriptions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_shared_resource_subscriptions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    include_deleted_subscriptions = true
+    page_size = 42
+    page_token = "hello world"
+
+    list_shared_resource_subscriptions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_shared_resource_subscriptions, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal true, request["include_deleted_subscriptions"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_shared_resource_subscriptions_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_shared_resource_subscriptions({ resource: resource, include_deleted_subscriptions: include_deleted_subscriptions, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_shared_resource_subscriptions resource: resource, include_deleted_subscriptions: include_deleted_subscriptions, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_shared_resource_subscriptions ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest.new(resource: resource, include_deleted_subscriptions: include_deleted_subscriptions, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_shared_resource_subscriptions({ resource: resource, include_deleted_subscriptions: include_deleted_subscriptions, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_shared_resource_subscriptions(::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest.new(resource: resource, include_deleted_subscriptions: include_deleted_subscriptions, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_shared_resource_subscriptions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_revoke_subscription
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    revoke_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :revoke_subscription, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, revoke_subscription_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.revoke_subscription({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.revoke_subscription name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.revoke_subscription ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.revoke_subscription({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.revoke_subscription(::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, revoke_subscription_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_subscription
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_subscription, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_subscription_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_subscription({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_subscription name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_subscription ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_subscription({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_subscription(::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_subscription_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_iam_policy
     # Create GRPC objects.
     grpc_response = ::Google::Iam::V1::Policy.new
@@ -983,5 +1432,18 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Operations, client.operations_client
   end
 end

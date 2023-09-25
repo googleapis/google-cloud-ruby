@@ -492,6 +492,286 @@
       ]
     },
     {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_sync",
+      "title": "Snippet for the subscribe_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#subscribe_data_exchange. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/subscribe_data_exchange.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "subscribe_data_exchange",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#subscribe_data_exchange",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "SubscribeDataExchange",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_RefreshSubscription_sync",
+      "title": "Snippet for the refresh_subscription call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#refresh_subscription. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/refresh_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "refresh_subscription",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#refresh_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "RefreshSubscription",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_GetSubscription_sync",
+      "title": "Snippet for the get_subscription call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_subscription. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/get_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_subscription",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "GetSubscription",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_sync",
+      "title": "Snippet for the list_subscriptions call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_subscriptions. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/list_subscriptions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subscriptions",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_subscriptions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ListSubscriptions",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_sync",
+      "title": "Snippet for the list_shared_resource_subscriptions call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_shared_resource_subscriptions. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/list_shared_resource_subscriptions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_shared_resource_subscriptions",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_shared_resource_subscriptions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ListSharedResourceSubscriptions",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_sync",
+      "title": "Snippet for the revoke_subscription call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#revoke_subscription. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/revoke_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "revoke_subscription",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#revoke_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "RevokeSubscription",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_DeleteSubscription_sync",
+      "title": "Snippet for the delete_subscription call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#delete_subscription. It may require modification in order to execute successfully.",
+      "file": "analytics_hub_service/delete_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_subscription",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#delete_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSubscription",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticshub_v1_generated_AnalyticsHubService_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the AnalyticsHubService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_iam_policy. It may require modification in order to execute successfully.",

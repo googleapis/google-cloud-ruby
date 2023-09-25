@@ -99,6 +99,25 @@ module Google
                 "projects/#{project}/locations/#{location}"
               end
 
+              ##
+              # Create a fully-qualified Subscription resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/subscriptions/{subscription}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param subscription [String]
+              #
+              # @return [::String]
+              def subscription_path project:, location:, subscription:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/subscriptions/#{subscription}"
+              end
+
               extend self
             end
           end
