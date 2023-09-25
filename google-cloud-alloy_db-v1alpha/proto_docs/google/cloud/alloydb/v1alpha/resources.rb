@@ -378,8 +378,8 @@ module Google
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
         #     must belong to the same project as the cluster. It is specified in the
-        #     form: "projects/\\{project_number}/global/networks/\\{network_id}". This is
-        #     required to create a cluster. It can be updated, but it cannot be removed.
+        #     form: "projects/\\{project}/global/networks/\\{network_id}". This is required
+        #     to create a cluster. Deprecated, use network_config.network instead.
         # @!attribute [rw] etag
         #   @return [::String]
         #     For Resource freshness validation (https://google.aip.dev/154)
@@ -448,12 +448,11 @@ module Google
           #     The network must belong to the same project as the cluster. It is
           #     specified in the form:
           #     "projects/\\{project_number}/global/networks/\\{network_id}". This is
-          #     required to create a cluster. It can be updated, but it cannot be
-          #     removed.
+          #     required to create a cluster.
           # @!attribute [rw] allocated_ip_range
           #   @return [::String]
-          #     Optional. The name of the allocated IP range for the private IP AlloyDB
-          #     cluster. For example: "google-managed-services-default". If set, the
+          #     Optional. Name of the allocated IP range for the private IP AlloyDB
+          #     cluster, for example: "google-managed-services-default". If set, the
           #     instance IPs for this cluster will be created in the allocated range. The
           #     range name must comply with RFC 1035. Specifically, the name must be 1-63
           #     characters long and match the regular expression
@@ -673,6 +672,9 @@ module Google
         #     This field is not persisted when you update the instance.
         #     To use a non-default update policy, you must
         #     specify explicitly specify the value in each update request.
+        # @!attribute [rw] client_connection_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ClientConnectionConfig]
+        #     Optional. Client connection specific configurations
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     Reserved for future use.
@@ -764,6 +766,19 @@ module Google
               # incur a downtime.
               FORCE_APPLY = 2
             end
+          end
+
+          # Client connection configuration
+          # @!attribute [rw] require_connectors
+          #   @return [::Boolean]
+          #     Optional. Configuration to enforce connectors only (ex: AuthProxy)
+          #     connections to the database.
+          # @!attribute [rw] ssl_config
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::SslConfig]
+          #     Optional. SSL config option for this instance.
+          class ClientConnectionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
@@ -876,8 +891,9 @@ module Google
         #     This field currently has no semantic meaning.
         # @!attribute [r] ip_address
         #   @return [::String]
-        #     Output only. The IP address for the Instance.
-        #     This is the connection endpoint for an end-user application.
+        #     Output only. The private network IP address for the Instance. This is the
+        #     default IP for the instance and is always created (even if enable_public_ip
+        #     is set). This is the connection endpoint for an end-user application.
         # @!attribute [r] pem_certificate_chain
         #   @return [::Array<::String>]
         #     Output only. The pem-encoded chain that may be used to verify the X.509
@@ -977,6 +993,11 @@ module Google
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     Reserved for future use.
+        # @!attribute [r] database_version
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
+        #     Output only. The database engine major version of the cluster this backup
+        #     was created from. Any restored cluster created from this backup will have
+        #     the same database version.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1220,6 +1241,9 @@ module Google
 
           # The database version is Postgres 14.
           POSTGRES_14 = 2
+
+          # The database version is Postgres 15.
+          POSTGRES_15 = 3
         end
       end
     end
