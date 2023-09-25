@@ -1123,7 +1123,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the parent resource whose repositories will be listed.
+            #     Required. The name of the parent resource whose repositories will be
+            #     listed.
             #   @param page_size [::Integer]
             #     The maximum number of repositories to return. Maximum page size is 1,000.
             #   @param page_token [::String]
@@ -1303,7 +1304,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the parent resource where the repository will be created.
+            #     Required. The name of the parent resource where the repository will be
+            #     created.
             #   @param repository_id [::String]
             #     The repository id to use for this repository.
             #   @param repository [::Google::Cloud::ArtifactRegistry::V1::Repository, ::Hash]

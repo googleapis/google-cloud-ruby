@@ -125,7 +125,8 @@ module Google
         # The request to list repositories.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the parent resource whose repositories will be listed.
+        #     Required. The name of the parent resource whose repositories will be
+        #     listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of repositories to return. Maximum page size is 1,000.
@@ -162,7 +163,8 @@ module Google
         # The request to create a new repository.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the parent resource where the repository will be created.
+        #     Required. The name of the parent resource where the repository will be
+        #     created.
         # @!attribute [rw] repository_id
         #   @return [::String]
         #     The repository id to use for this repository.
