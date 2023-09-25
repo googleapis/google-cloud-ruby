@@ -1,5 +1,11 @@
 # Release History
 
+### 1.45.0 (2023-09-25)
+
+#### Features
+
+* support load job with session ([#23320](https://github.com/googleapis/google-cloud-ruby/issues/23320)) 
+
 ### 1.44.2 (2023-09-12)
 
 #### Bug Fixes
