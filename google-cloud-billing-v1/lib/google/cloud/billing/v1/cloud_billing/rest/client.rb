@@ -293,9 +293,9 @@ module Google
               #     call. If unspecified, the first page of results is returned.
               #   @param filter [::String]
               #     Options for how to filter the returned billing accounts.
-              #     Currently this only supports filtering for
+              #     This only supports filtering for
               #     [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
-              #     single provided reseller billing account.
+              #     single provided parent billing account.
               #     (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
               #     Boolean algebra and other fields are not currently supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -465,7 +465,7 @@ module Google
               # typically given to billing account
               # [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
               # This method will return an error if the parent account has not been
-              # provisioned as a reseller account.
+              # provisioned for subaccounts.
               #
               # @overload create_billing_account(request, options = nil)
               #   Pass arguments to `create_billing_account` via a request object, either of type
