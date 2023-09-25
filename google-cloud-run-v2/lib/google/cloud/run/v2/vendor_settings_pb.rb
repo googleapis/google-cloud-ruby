@@ -4,10 +4,11 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n)google/cloud/run/v2/vendor_settings.proto\x12\x13google.cloud.run.v2\x1a\x19google/api/resource.proto\"\xd4\x01\n\tVpcAccess\x12:\n\tconnector\x18\x01 \x01(\tB\'\xfa\x41$\n\"vpcaccess.googleapis.com/Connector\x12\x38\n\x06\x65gress\x18\x02 \x01(\x0e\x32(.google.cloud.run.v2.VpcAccess.VpcEgress\"Q\n\tVpcEgress\x12\x1a\n\x16VPC_EGRESS_UNSPECIFIED\x10\x00\x12\x0f\n\x0b\x41LL_TRAFFIC\x10\x01\x12\x17\n\x13PRIVATE_RANGES_ONLY\x10\x02\"a\n\x13\x42inaryAuthorization\x12\x15\n\x0buse_default\x18\x01 \x01(\x08H\x00\x12 \n\x18\x62reakglass_justification\x18\x02 \x01(\tB\x11\n\x0f\x62inauthz_method\"I\n\x0fRevisionScaling\x12\x1a\n\x12min_instance_count\x18\x01 \x01(\x05\x12\x1a\n\x12max_instance_count\x18\x02 \x01(\x05*\x99\x01\n\x0eIngressTraffic\x12\x1f\n\x1bINGRESS_TRAFFIC_UNSPECIFIED\x10\x00\x12\x17\n\x13INGRESS_TRAFFIC_ALL\x10\x01\x12!\n\x1dINGRESS_TRAFFIC_INTERNAL_ONLY\x10\x02\x12*\n&INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER\x10\x03*}\n\x14\x45xecutionEnvironment\x12%\n!EXECUTION_ENVIRONMENT_UNSPECIFIED\x10\x00\x12\x1e\n\x1a\x45XECUTION_ENVIRONMENT_GEN1\x10\x01\x12\x1e\n\x1a\x45XECUTION_ENVIRONMENT_GEN2\x10\x02*p\n\x1d\x45ncryptionKeyRevocationAction\x12\x30\n,ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED\x10\x00\x12\x0f\n\x0bPREVENT_NEW\x10\x01\x12\x0c\n\x08SHUTDOWN\x10\x02\x42[\n\x17\x63om.google.cloud.run.v2B\x13VendorSettingsProtoP\x01Z)cloud.google.com/go/run/apiv2/runpb;runpbb\x06proto3"
+descriptor_data = "\n)google/cloud/run/v2/vendor_settings.proto\x12\x13google.cloud.run.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xe8\x02\n\tVpcAccess\x12:\n\tconnector\x18\x01 \x01(\tB\'\xfa\x41$\n\"vpcaccess.googleapis.com/Connector\x12\x38\n\x06\x65gress\x18\x02 \x01(\x0e\x32(.google.cloud.run.v2.VpcAccess.VpcEgress\x12K\n\x12network_interfaces\x18\x03 \x03(\x0b\x32/.google.cloud.run.v2.VpcAccess.NetworkInterface\x1a\x45\n\x10NetworkInterface\x12\x0f\n\x07network\x18\x01 \x01(\t\x12\x12\n\nsubnetwork\x18\x02 \x01(\t\x12\x0c\n\x04tags\x18\x03 \x03(\t\"Q\n\tVpcEgress\x12\x1a\n\x16VPC_EGRESS_UNSPECIFIED\x10\x00\x12\x0f\n\x0b\x41LL_TRAFFIC\x10\x01\x12\x17\n\x13PRIVATE_RANGES_ONLY\x10\x02\"a\n\x13\x42inaryAuthorization\x12\x15\n\x0buse_default\x18\x01 \x01(\x08H\x00\x12 \n\x18\x62reakglass_justification\x18\x02 \x01(\tB\x11\n\x0f\x62inauthz_method\"I\n\x0fRevisionScaling\x12\x1a\n\x12min_instance_count\x18\x01 \x01(\x05\x12\x1a\n\x12max_instance_count\x18\x02 \x01(\x05*\x99\x01\n\x0eIngressTraffic\x12\x1f\n\x1bINGRESS_TRAFFIC_UNSPECIFIED\x10\x00\x12\x17\n\x13INGRESS_TRAFFIC_ALL\x10\x01\x12!\n\x1dINGRESS_TRAFFIC_INTERNAL_ONLY\x10\x02\x12*\n&INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER\x10\x03*}\n\x14\x45xecutionEnvironment\x12%\n!EXECUTION_ENVIRONMENT_UNSPECIFIED\x10\x00\x12\x1e\n\x1a\x45XECUTION_ENVIRONMENT_GEN1\x10\x01\x12\x1e\n\x1a\x45XECUTION_ENVIRONMENT_GEN2\x10\x02*p\n\x1d\x45ncryptionKeyRevocationAction\x12\x30\n,ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED\x10\x00\x12\x0f\n\x0bPREVENT_NEW\x10\x01\x12\x0c\n\x08SHUTDOWN\x10\x02\x42[\n\x17\x63om.google.cloud.run.v2B\x13VendorSettingsProtoP\x01Z)cloud.google.com/go/run/apiv2/runpb;runpbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -38,6 +39,7 @@ module Google
     module Run
       module V2
         VpcAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.VpcAccess").msgclass
+        VpcAccess::NetworkInterface = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.VpcAccess.NetworkInterface").msgclass
         VpcAccess::VpcEgress = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.VpcAccess.VpcEgress").enummodule
         BinaryAuthorization = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.BinaryAuthorization").msgclass
         RevisionScaling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.RevisionScaling").msgclass

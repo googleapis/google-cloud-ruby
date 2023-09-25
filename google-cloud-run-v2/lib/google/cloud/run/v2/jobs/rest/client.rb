@@ -630,7 +630,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_job(name: nil, validate_only: nil, etag: nil)
+              # @overload run_job(name: nil, validate_only: nil, etag: nil, overrides: nil)
               #   Pass arguments to `run_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -645,6 +645,9 @@ module Google
               #   @param etag [::String]
               #     A system-generated fingerprint for this version of the
               #     resource. May be used to detect modification conflict during updates.
+              #   @param overrides [::Google::Cloud::Run::V2::RunJobRequest::Overrides, ::Hash]
+              #     Overrides specification for a given execution of a job. If provided,
+              #     overrides will be applied to update the execution or task spec.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

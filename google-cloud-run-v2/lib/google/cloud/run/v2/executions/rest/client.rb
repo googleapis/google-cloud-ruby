@@ -183,8 +183,8 @@ module Google
               #   @param name [::String]
               #     Required. The full name of the Execution.
               #     Format:
-              #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
-              #     where \\{project} can be project id or number.
+              #     `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+              #     where `{project}` can be project id or number.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Run::V2::Execution]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -264,8 +264,8 @@ module Google
               #   @param parent [::String]
               #     Required. The Execution from which the Executions should be listed.
               #     To list all Executions across Jobs, use "-" instead of Job name.
-              #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
-              #     can be project id or number.
+              #     Format: `projects/{project}/locations/{location}/jobs/{job}`, where
+              #     `{project}` can be project id or number.
               #   @param page_size [::Integer]
               #     Maximum number of Executions to return in this call.
               #   @param page_token [::String]
@@ -357,8 +357,8 @@ module Google
               #   @param name [::String]
               #     Required. The name of the Execution to delete.
               #     Format:
-              #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
-              #     where \\{project} can be project id or number.
+              #     `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+              #     where `{project}` can be project id or number.
               #   @param validate_only [::Boolean]
               #     Indicates that the request should be validated without actually
               #     deleting any resources.
@@ -423,6 +423,101 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @executions_stub.delete_execution request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Cancels an Execution.
+              #
+              # @overload cancel_execution(request, options = nil)
+              #   Pass arguments to `cancel_execution` via a request object, either of type
+              #   {::Google::Cloud::Run::V2::CancelExecutionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Run::V2::CancelExecutionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_execution(name: nil, validate_only: nil, etag: nil)
+              #   Pass arguments to `cancel_execution` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Execution to cancel.
+              #     Format:
+              #     `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+              #     where `{project}` can be project id or number.
+              #   @param validate_only [::Boolean]
+              #     Indicates that the request should be validated without actually
+              #     cancelling any resources.
+              #   @param etag [::String]
+              #     A system-generated fingerprint for this version of the resource.
+              #     This may be used to detect modification conflict during updates.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Executions::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Run::V2::CancelExecutionRequest.new
+              #
+              #   # Call the cancel_execution method.
+              #   result = client.cancel_execution request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def cancel_execution request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Run::V2::CancelExecutionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_execution.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Run::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_execution.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_execution.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @executions_stub.cancel_execution request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -571,6 +666,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_execution
+                  ##
+                  # RPC-specific configuration for `cancel_execution`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_execution
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -580,6 +680,8 @@ module Google
                     @list_executions = ::Gapic::Config::Method.new list_executions_config
                     delete_execution_config = parent_rpcs.delete_execution if parent_rpcs.respond_to? :delete_execution
                     @delete_execution = ::Gapic::Config::Method.new delete_execution_config
+                    cancel_execution_config = parent_rpcs.cancel_execution if parent_rpcs.respond_to? :cancel_execution
+                    @cancel_execution = ::Gapic::Config::Method.new cancel_execution_config
 
                     yield self if block_given?
                   end

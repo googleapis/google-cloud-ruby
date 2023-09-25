@@ -201,6 +201,9 @@ module Google
 
             # The execution is in the process of being cancelled.
             CANCELLING = 4
+
+            # The execution was deleted.
+            DELETED = 5
           end
         end
       end

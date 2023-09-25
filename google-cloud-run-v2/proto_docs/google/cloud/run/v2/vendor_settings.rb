@@ -21,21 +21,49 @@ module Google
   module Cloud
     module Run
       module V2
-        # VPC Access settings. For more information on creating a VPC Connector, visit
-        # https://cloud.google.com/vpc/docs/configure-serverless-vpc-access For
-        # information on how to configure Cloud Run with an existing VPC Connector,
-        # visit https://cloud.google.com/run/docs/configuring/connecting-vpc
+        # VPC Access settings. For more information on sending traffic to a VPC
+        # network, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
         # @!attribute [rw] connector
         #   @return [::String]
         #     VPC Access connector name.
         #     Format: projects/\\{project}/locations/\\{location}/connectors/\\{connector},
         #     where \\{project} can be project id or number.
+        #     For more information on sending traffic to a VPC network via a connector,
+        #     visit https://cloud.google.com/run/docs/configuring/vpc-connectors.
         # @!attribute [rw] egress
         #   @return [::Google::Cloud::Run::V2::VpcAccess::VpcEgress]
-        #     Traffic VPC egress settings.
+        #     Traffic VPC egress settings. If not provided, it defaults to
+        #     PRIVATE_RANGES_ONLY.
+        # @!attribute [rw] network_interfaces
+        #   @return [::Array<::Google::Cloud::Run::V2::VpcAccess::NetworkInterface>]
+        #     Direct VPC egress settings. Currently only single network interface is
+        #     supported.
         class VpcAccess
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Direct VPC egress settings.
+          # @!attribute [rw] network
+          #   @return [::String]
+          #     The VPC network that the Cloud Run resource will be able to send traffic
+          #     to. At least one of network or subnetwork must be specified. If both
+          #     network and subnetwork are specified, the given VPC subnetwork must
+          #     belong to the given VPC network. If network is not specified, it will be
+          #     looked up from the subnetwork.
+          # @!attribute [rw] subnetwork
+          #   @return [::String]
+          #     The VPC subnetwork that the Cloud Run resource will get IPs from. At
+          #     least one of network or subnetwork must be specified. If both
+          #     network and subnetwork are specified, the given VPC subnetwork must
+          #     belong to the given VPC network. If subnetwork is not specified, the
+          #     subnetwork with the same name with the network will be used.
+          # @!attribute [rw] tags
+          #   @return [::Array<::String>]
+          #     Network tags applied to this Cloud Run resource.
+          class NetworkInterface
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Egress options for VPC access.
           module VpcEgress

@@ -26,8 +26,8 @@ module Google
         #   @return [::String]
         #     Required. The full name of the Execution.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
-        #     where \\{project} can be project id or number.
+        #     `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+        #     where `{project}` can be project id or number.
         class GetExecutionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -38,8 +38,8 @@ module Google
         #   @return [::String]
         #     Required. The Execution from which the Executions should be listed.
         #     To list all Executions across Jobs, use "-" instead of Job name.
-        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
-        #     can be project id or number.
+        #     Format: `projects/{project}/locations/{location}/jobs/{job}`, where
+        #     `{project}` can be project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Executions to return in this call.
@@ -73,8 +73,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the Execution to delete.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
-        #     where \\{project} can be project id or number.
+        #     `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+        #     where `{project}` can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated without actually
@@ -84,6 +84,26 @@ module Google
         #     A system-generated fingerprint for this version of the resource.
         #     This may be used to detect modification conflict during updates.
         class DeleteExecutionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for deleting an Execution.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Execution to cancel.
+        #     Format:
+        #     `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+        #     where `{project}` can be project id or number.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Indicates that the request should be validated without actually
+        #     cancelling any resources.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     A system-generated fingerprint for this version of the resource.
+        #     This may be used to detect modification conflict during updates.
+        class CancelExecutionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

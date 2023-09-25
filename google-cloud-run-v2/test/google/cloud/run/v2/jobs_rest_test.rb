@@ -353,6 +353,7 @@ class ::Google::Cloud::Run::V2::Jobs::Rest::ClientTest < Minitest::Test
     name = "hello world"
     validate_only = true
     etag = "hello world"
+    overrides = {}
 
     run_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -368,27 +369,27 @@ class ::Google::Cloud::Run::V2::Jobs::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.run_job({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        client.run_job({ name: name, validate_only: validate_only, etag: etag, overrides: overrides }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_job name: name, validate_only: validate_only, etag: etag do |_result, response|
+        client.run_job name: name, validate_only: validate_only, etag: etag, overrides: overrides do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_job ::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        client.run_job ::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag, overrides: overrides) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_job({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        client.run_job({ name: name, validate_only: validate_only, etag: etag, overrides: overrides }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_job(::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        client.run_job(::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag, overrides: overrides), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

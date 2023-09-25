@@ -229,6 +229,62 @@ class ::Google::Cloud::Run::V2::Executions::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_cancel_execution
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    validate_only = true
+    etag = "hello world"
+
+    cancel_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Run::V2::Executions::Rest::ServiceStub.stub :transcode_cancel_execution_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_execution_client_stub do
+        # Create client
+        client = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.cancel_execution({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.cancel_execution name: name, validate_only: validate_only, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.cancel_execution ::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.cancel_execution({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.cancel_execution(::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_execution_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
