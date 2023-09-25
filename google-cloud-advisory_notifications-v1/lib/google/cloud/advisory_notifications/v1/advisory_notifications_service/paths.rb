@@ -60,6 +60,23 @@ module Google
               "organizations/#{organization}/locations/#{location}/notifications/#{notification}"
             end
 
+            ##
+            # Create a fully-qualified Settings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/locations/{location}/settings`
+            #
+            # @param organization [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def settings_path organization:, location:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/locations/#{location}/settings"
+            end
+
             extend self
           end
         end

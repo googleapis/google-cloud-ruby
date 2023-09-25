@@ -358,6 +358,178 @@ module Google
             end
 
             ##
+            # Get notification settings.
+            #
+            # @overload get_settings(request, options = nil)
+            #   Pass arguments to `get_settings` via a request object, either of type
+            #   {::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_settings(name: nil)
+            #   Pass arguments to `get_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the settings to retrieve.
+            #     Format:
+            #     organizations/\\{organization}/locations/\\{location}/settings.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AdvisoryNotifications::V1::Settings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AdvisoryNotifications::V1::Settings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/advisory_notifications/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new
+            #
+            #   # Call the get_settings method.
+            #   result = client.get_settings request
+            #
+            #   # The returned object is of type Google::Cloud::AdvisoryNotifications::V1::Settings.
+            #   p result
+            #
+            def get_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AdvisoryNotifications::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @advisory_notifications_service_stub.call_rpc :get_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update notification settings.
+            #
+            # @overload update_settings(request, options = nil)
+            #   Pass arguments to `update_settings` via a request object, either of type
+            #   {::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_settings(settings: nil)
+            #   Pass arguments to `update_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param settings [::Google::Cloud::AdvisoryNotifications::V1::Settings, ::Hash]
+            #     Required. New settings.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AdvisoryNotifications::V1::Settings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AdvisoryNotifications::V1::Settings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/advisory_notifications/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new
+            #
+            #   # Call the update_settings method.
+            #   result = client.update_settings request
+            #
+            #   # The returned object is of type Google::Cloud::AdvisoryNotifications::V1::Settings.
+            #   p result
+            #
+            def update_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AdvisoryNotifications::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.settings&.name
+                header_params["settings.name"] = request.settings.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @advisory_notifications_service_stub.call_rpc :update_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AdvisoryNotificationsService API.
             #
             # This class represents the configuration for AdvisoryNotificationsService,
@@ -512,6 +684,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_notification
+                ##
+                # RPC-specific configuration for `get_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_settings
+                ##
+                # RPC-specific configuration for `update_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_settings
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -519,6 +701,10 @@ module Google
                   @list_notifications = ::Gapic::Config::Method.new list_notifications_config
                   get_notification_config = parent_rpcs.get_notification if parent_rpcs.respond_to? :get_notification
                   @get_notification = ::Gapic::Config::Method.new get_notification_config
+                  get_settings_config = parent_rpcs.get_settings if parent_rpcs.respond_to? :get_settings
+                  @get_settings = ::Gapic::Config::Method.new get_settings_config
+                  update_settings_config = parent_rpcs.update_settings if parent_rpcs.respond_to? :update_settings
+                  @update_settings = ::Gapic::Config::Method.new update_settings_config
 
                   yield self if block_given?
                 end
