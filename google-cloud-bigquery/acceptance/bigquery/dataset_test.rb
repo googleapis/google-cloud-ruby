@@ -646,4 +646,19 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     _(data.first).wont_be :nil?
     _(data.first[:foo]).must_equal 17
   end
+
+  it "imports data from a local file with session enabled" do
+    temp_dataset = bigquery.dataset "_SESSION", skip_lookup: true
+
+    job = temp_dataset.load_job "temp_table", local_file, autodetect: true, create_session: true
+
+    job.wait_until_done!
+    _(job.output_rows).must_equal 3
+
+    session_id = job.statistics["sessionInfo"]["sessionId"]
+
+    temp_dataset.load "temp_table", local_file, autodetect: true, session_id: session_id
+    data = bigquery.query "SELECT * FROM _SESSION.temp_table;", session_id: session_id
+    _(data.count).must_equal 6
+  end
 end
