@@ -181,6 +181,8 @@
   "google-cloud-confidential_computing+FILLER": "0.0.0",
   "google-cloud-confidential_computing-v1": "0.5.0",
   "google-cloud-confidential_computing-v1+FILLER": "0.0.0",
+  "google-cloud-config_service": "0.0.1",
+  "google-cloud-config_service+FILLER": "0.0.0",
   "google-cloud-config_service-v1": "0.1.0",
   "google-cloud-config_service-v1+FILLER": "0.0.0",
   "google-cloud-contact_center_insights": "1.2.0",

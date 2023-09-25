@@ -375,6 +375,10 @@
       "component": "google-cloud-confidential_computing-v1",
       "version_file": "lib/google/cloud/confidential_computing/v1/version.rb"
     },
+    "google-cloud-config_service": {
+      "component": "google-cloud-config_service",
+      "version_file": "lib/google/cloud/config_service/version.rb"
+    },
     "google-cloud-config_service-v1": {
       "component": "google-cloud-config_service-v1",
       "version_file": "lib/google/cloud/config_service/v1/version.rb"
