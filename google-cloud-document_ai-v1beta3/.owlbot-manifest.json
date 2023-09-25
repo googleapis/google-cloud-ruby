@@ -107,6 +107,7 @@
     "snippets/document_service/get_dataset_schema.rb",
     "snippets/document_service/get_document.rb",
     "snippets/document_service/import_documents.rb",
+    "snippets/document_service/list_documents.rb",
     "snippets/document_service/update_dataset.rb",
     "snippets/document_service/update_dataset_schema.rb",
     "snippets/snippet_metadata_google.cloud.documentai.v1beta3.json",

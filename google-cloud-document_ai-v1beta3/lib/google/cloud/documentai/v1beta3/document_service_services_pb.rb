@@ -39,6 +39,8 @@ module Google
             rpc :ImportDocuments, ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest, ::Google::Longrunning::Operation
             # Returns relevant fields present in the requested document.
             rpc :GetDocument, ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest, ::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse
+            # Returns a list of documents present in the dataset.
+            rpc :ListDocuments, ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest, ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsResponse
             # Deletes a set of documents.
             rpc :BatchDeleteDocuments, ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest, ::Google::Longrunning::Operation
             # Gets the `DatasetSchema` of a `Dataset`.

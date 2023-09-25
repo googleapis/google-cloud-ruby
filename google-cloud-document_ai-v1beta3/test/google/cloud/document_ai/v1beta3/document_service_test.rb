@@ -241,6 +241,79 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::ClientTest < Minite
     end
   end
 
+  def test_list_documents
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    return_total_size = true
+    skip = 42
+
+    list_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_documents, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest, request
+      assert_equal "hello world", request["dataset"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal true, request["return_total_size"]
+      assert_equal 42, request["skip"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_documents_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_documents({ dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_documents dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_documents ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new(dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_documents({ dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_documents(::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new(dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_documents_client_stub.call_rpc_count
+    end
+  end
+
   def test_batch_delete_documents
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

@@ -21,10 +21,61 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        # Metadata for document summarization.
+        # @!attribute [rw] length
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::SummaryOptions::Length]
+        #     How long the summary should be.
+        # @!attribute [rw] format
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::SummaryOptions::Format]
+        #     The format the summary should be in.
+        class SummaryOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Length enum.
+          module Length
+            # Default.
+            LENGTH_UNSPECIFIED = 0
+
+            # A brief summary of one or two sentences.
+            BRIEF = 1
+
+            # A paragraph-length summary.
+            MODERATE = 2
+
+            # The longest option available.
+            COMPREHENSIVE = 3
+          end
+
+          # The Format enum.
+          module Format
+            # Default.
+            FORMAT_UNSPECIFIED = 0
+
+            # Format the output in paragraphs.
+            PARAGRAPH = 1
+
+            # Format the output in bullets.
+            BULLETS = 2
+          end
+        end
+
+        # Metadata for how this field value is extracted.
+        # @!attribute [rw] summary_options
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::SummaryOptions]
+        #     Summary options config.
+        class FieldExtractionMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Metadata about a property.
         # @!attribute [rw] inactive
         #   @return [::Boolean]
         #     Whether the property should be considered as "inactive".
+        # @!attribute [rw] field_extraction_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::FieldExtractionMetadata]
+        #     Field extraction metadata on the property.
         class PropertyMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
