@@ -1093,6 +1093,83 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     end
   end
 
+  def test_batch_write
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::V1::BatchWriteResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    session = "hello world"
+    request_options = {}
+    mutation_groups = [{}]
+
+    batch_write_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :batch_write, name
+      assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteRequest, request
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::RequestOptions), request["request_options"]
+      assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup, request["mutation_groups"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_write_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_write({ session: session, request_options: request_options, mutation_groups: mutation_groups }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_write session: session, request_options: request_options, mutation_groups: mutation_groups do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_write ::Google::Cloud::Spanner::V1::BatchWriteRequest.new(session: session, request_options: request_options, mutation_groups: mutation_groups) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_write({ session: session, request_options: request_options, mutation_groups: mutation_groups }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_write(::Google::Cloud::Spanner::V1::BatchWriteRequest.new(session: session, request_options: request_options, mutation_groups: mutation_groups), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_write_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

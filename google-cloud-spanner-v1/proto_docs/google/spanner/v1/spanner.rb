@@ -803,6 +803,49 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#batch_write BatchWrite}.
+        # @!attribute [rw] session
+        #   @return [::String]
+        #     Required. The session in which the batch request is to be run.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
+        #     Common options for this request.
+        # @!attribute [rw] mutation_groups
+        #   @return [::Array<::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup>]
+        #     Required. The groups of mutations to be applied.
+        class BatchWriteRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A group of mutations to be committed together. Related mutations should be
+          # placed in a group. For example, two mutations inserting rows with the same
+          # primary key prefix in both parent and child tables are related.
+          # @!attribute [rw] mutations
+          #   @return [::Array<::Google::Cloud::Spanner::V1::Mutation>]
+          #     Required. The mutations in this group.
+          class MutationGroup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The result of applying a batch of mutations.
+        # @!attribute [rw] indexes
+        #   @return [::Array<::Integer>]
+        #     The mutation groups applied in this batch. The values index into the
+        #     `mutation_groups` field in the corresponding `BatchWriteRequest`.
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     An `OK` status indicates success. Any other status indicates a failure.
+        # @!attribute [rw] commit_timestamp
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The commit timestamp of the transaction that applied this batch.
+        #     Present if `status` is `OK`, absent otherwise.
+        class BatchWriteResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
