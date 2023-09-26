@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.15.0 (2023-09-26)
+
+#### Features
+
+* support display_name for RawDocument feat(document_ai): support ProcessorVersionAlias 
+
 ### 0.14.0 (2023-09-12)
 
 #### Features
