@@ -364,7 +364,9 @@ module Google
           #   @return [::String]
           #     Local SSDs are available through both "SCSI" and "NVMe" interfaces.
           #     If not indicated, "NVMe" will be the default one for local ssds.
-          #     We only support "SCSI" for persistent disks now.
+          #     This field is ignored for persistent disks as the interface is chosen
+          #     automatically. See
+          #     https://cloud.google.com/compute/docs/disks/persistent-disks#choose_an_interface.
           class Disk
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
