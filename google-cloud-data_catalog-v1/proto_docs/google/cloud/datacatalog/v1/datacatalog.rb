@@ -528,6 +528,9 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::RoutineSpec]
         #     Specification that applies to a user-defined function or procedure. Valid
         #     only for entries with the `ROUTINE` type.
+        # @!attribute [rw] dataset_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::DatasetSpec]
+        #     Specification that applies to a dataset.
         # @!attribute [rw] fileset_spec
         #   @return [::Google::Cloud::DataCatalog::V1::FilesetSpec]
         #     Specification that applies to a fileset resource. Valid only
@@ -535,6 +538,9 @@ module Google
         # @!attribute [rw] service_spec
         #   @return [::Google::Cloud::DataCatalog::V1::ServiceSpec]
         #     Specification that applies to a Service resource.
+        # @!attribute [rw] model_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::ModelSpec]
+        #     Model specification.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of an entry.
@@ -750,6 +756,16 @@ module Google
           end
         end
 
+        # Specification that applies to a dataset. Valid only for
+        # entries with the `DATASET` type.
+        # @!attribute [rw] vertex_dataset_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::VertexDatasetSpec]
+        #     Vertex AI Dataset specific fields
+        class DatasetSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Specification that applies to
         # entries that are part `SQL_DATABASE` system
         # (user_specified_type)
@@ -857,6 +873,130 @@ module Google
         #     Specification that applies to Instance entries of `CLOUD_BIGTABLE`
         #     system.
         class ServiceSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Detail description of the source information of a Vertex model.
+        # @!attribute [rw] source_type
+        #   @return [::Google::Cloud::DataCatalog::V1::VertexModelSourceInfo::ModelSourceType]
+        #     Type of the model source.
+        # @!attribute [rw] copy
+        #   @return [::Boolean]
+        #     If this Model is copy of another Model. If true then
+        #     {::Google::Cloud::DataCatalog::V1::VertexModelSourceInfo#source_type source_type}
+        #     pertains to the original.
+        class VertexModelSourceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Source of the model.
+          module ModelSourceType
+            # Should not be used.
+            MODEL_SOURCE_TYPE_UNSPECIFIED = 0
+
+            # The Model is uploaded by automl training pipeline.
+            AUTOML = 1
+
+            # The Model is uploaded by user or custom training pipeline.
+            CUSTOM = 2
+
+            # The Model is registered and sync'ed from BigQuery ML.
+            BQML = 3
+
+            # The Model is saved or tuned from Model Garden.
+            MODEL_GARDEN = 4
+          end
+        end
+
+        # Specification for vertex model resources.
+        # @!attribute [rw] version_id
+        #   @return [::String]
+        #     The version ID of the model.
+        # @!attribute [rw] version_aliases
+        #   @return [::Array<::String>]
+        #     User provided version aliases so that a model version can be referenced via
+        #     alias
+        # @!attribute [rw] version_description
+        #   @return [::String]
+        #     The description of this version.
+        # @!attribute [rw] vertex_model_source_info
+        #   @return [::Google::Cloud::DataCatalog::V1::VertexModelSourceInfo]
+        #     Source of a Vertex model.
+        # @!attribute [rw] container_image_uri
+        #   @return [::String]
+        #     URI of the Docker image to be used as the custom container for serving
+        #     predictions.
+        class VertexModelSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification for vertex dataset resources.
+        # @!attribute [rw] data_item_count
+        #   @return [::Integer]
+        #     The number of DataItems in this Dataset. Only apply for non-structured
+        #     Dataset.
+        # @!attribute [rw] data_type
+        #   @return [::Google::Cloud::DataCatalog::V1::VertexDatasetSpec::DataType]
+        #     Type of the dataset.
+        class VertexDatasetSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of data stored in the dataset.
+          module DataType
+            # Should not be used.
+            DATA_TYPE_UNSPECIFIED = 0
+
+            # Structured data dataset.
+            TABLE = 1
+
+            # Image dataset which supports ImageClassification, ImageObjectDetection
+            # and ImageSegmentation problems.
+            IMAGE = 2
+
+            # Document dataset which supports TextClassification, TextExtraction and
+            # TextSentiment problems.
+            TEXT = 3
+
+            # Video dataset which supports VideoClassification, VideoObjectTracking and
+            # VideoActionRecognition problems.
+            VIDEO = 4
+
+            # Conversation dataset which supports conversation problems.
+            CONVERSATION = 5
+
+            # TimeSeries dataset.
+            TIME_SERIES = 6
+
+            # Document dataset which supports DocumentAnnotation problems.
+            DOCUMENT = 7
+
+            # TextToSpeech dataset which supports TextToSpeech problems.
+            TEXT_TO_SPEECH = 8
+
+            # Translation dataset which supports Translation problems.
+            TRANSLATION = 9
+
+            # Store Vision dataset which is used for HITL integration.
+            STORE_VISION = 10
+
+            # Enterprise Knowledge Graph dataset which is used for HITL labeling
+            # integration.
+            ENTERPRISE_KNOWLEDGE_GRAPH = 11
+
+            # Text prompt dataset which supports Large Language Models.
+            TEXT_PROMPT = 12
+          end
+        end
+
+        # Specification that applies to a model. Valid only for
+        # entries with the `MODEL` type.
+        # @!attribute [rw] vertex_model_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::VertexModelSpec]
+        #     Specification for vertex model resources.
+        class ModelSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
