@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-migration_center.gemspec",
+    "lib/google-cloud-migration_center.rb",
+    "lib/google/cloud/migration_center.rb",
+    "lib/google/cloud/migration_center/version.rb",
+    "test/google/cloud/migration_center/client_test.rb",
+    "test/google/cloud/migration_center/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
