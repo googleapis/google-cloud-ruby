@@ -50,6 +50,7 @@
     "snippets/Gemfile",
     "snippets/snippet_metadata_google.spanner.v1.json",
     "snippets/spanner/batch_create_sessions.rb",
+    "snippets/spanner/batch_write.rb",
     "snippets/spanner/begin_transaction.rb",
     "snippets/spanner/commit.rb",
     "snippets/spanner/create_session.rb",
