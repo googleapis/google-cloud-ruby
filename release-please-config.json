@@ -831,6 +831,10 @@
       "component": "google-cloud-metastore-v1beta",
       "version_file": "lib/google/cloud/metastore/v1beta/version.rb"
     },
+    "google-cloud-migration_center-v1": {
+      "component": "google-cloud-migration_center-v1",
+      "version_file": "lib/google/cloud/migration_center/v1/version.rb"
+    },
     "google-cloud-monitoring": {
       "component": "google-cloud-monitoring",
       "version_file": "lib/google/cloud/monitoring/version.rb"
