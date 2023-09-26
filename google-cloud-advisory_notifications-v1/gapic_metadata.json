@@ -19,6 +19,16 @@
               "methods": [
                 "get_notification"
               ]
+            },
+            "GetSettings": {
+              "methods": [
+                "get_settings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "update_settings"
+              ]
             }
           }
         }

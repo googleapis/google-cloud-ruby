@@ -178,6 +178,122 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
     end
   end
 
+  def test_get_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AdvisoryNotifications::V1::Settings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_settings, name
+      assert_kind_of ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_settings_client_stub do
+      # Create client
+      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_settings({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_settings name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_settings ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_settings({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_settings(::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AdvisoryNotifications::V1::Settings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    settings = {}
+
+    update_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_settings, name
+      assert_kind_of ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AdvisoryNotifications::V1::Settings), request["settings"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_settings_client_stub do
+      # Create client
+      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_settings({ settings: settings }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_settings settings: settings do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_settings ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_settings({ settings: settings }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_settings(::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_settings_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
