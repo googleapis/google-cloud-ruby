@@ -2341,7 +2341,7 @@ module Google
             #     The source processor version to import from. The source processor version
             #     and destination processor need to be in the same environment and region.
             #   @param external_processor_version_source [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource, ::Hash]
-            #     The source processor version to import from, and can be from different
+            #     The source processor version to import from. It can be from a different
             #     environment and region than the destination processor.
             #   @param parent [::String]
             #     Required. The destination processor name to create the processor version

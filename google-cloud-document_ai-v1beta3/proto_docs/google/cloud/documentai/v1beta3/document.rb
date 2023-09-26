@@ -1052,7 +1052,7 @@ module Google
 
           # Some predefined revision cases.
           module RevisionCase
-            # Unspecified case, fallback to read the LATEST_HUMAN_REVIEW.
+            # Unspecified case, fall back to read the `LATEST_HUMAN_REVIEW`.
             REVISION_CASE_UNSPECIFIED = 0
 
             # The latest revision made by a human.

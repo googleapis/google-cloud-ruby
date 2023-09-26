@@ -149,6 +149,11 @@
                 "get_document"
               ]
             },
+            "ListDocuments": {
+              "methods": [
+                "list_documents"
+              ]
+            },
             "BatchDeleteDocuments": {
               "methods": [
                 "batch_delete_documents"
