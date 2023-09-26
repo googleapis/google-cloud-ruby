@@ -139,9 +139,51 @@ module Google
         #   @return [::String]
         #     A system-generated fingerprint for this version of the
         #     resource. May be used to detect modification conflict during updates.
+        # @!attribute [rw] overrides
+        #   @return [::Google::Cloud::Run::V2::RunJobRequest::Overrides]
+        #     Overrides specification for a given execution of a job. If provided,
+        #     overrides will be applied to update the execution or task spec.
         class RunJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # RunJob Overrides that contains Execution fields to be overridden on the go.
+          # @!attribute [rw] container_overrides
+          #   @return [::Array<::Google::Cloud::Run::V2::RunJobRequest::Overrides::ContainerOverride>]
+          #     Per container override specification.
+          # @!attribute [rw] task_count
+          #   @return [::Integer]
+          #     Optional. The desired number of tasks the execution should run. Will
+          #     replace existing task_count value.
+          # @!attribute [rw] timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Duration in seconds the task may be active before the system will
+          #     actively try to mark it failed and kill associated containers. Will
+          #     replace existing timeout_seconds value.
+          class Overrides
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Per container override specification.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     The name of the container specified as a DNS_LABEL.
+            # @!attribute [rw] args
+            #   @return [::Array<::String>]
+            #     Optional. Arguments to the entrypoint. Will replace existing args for
+            #     override.
+            # @!attribute [rw] env
+            #   @return [::Array<::Google::Cloud::Run::V2::EnvVar>]
+            #     List of environment variables to set in the container. Will be merged
+            #     with existing env for override.
+            # @!attribute [rw] clear_args
+            #   @return [::Boolean]
+            #     Optional. True if the intention is to clear out existing args list.
+            class ContainerOverride
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # Job represents the configuration of a single job, which references a

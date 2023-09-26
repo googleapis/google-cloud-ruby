@@ -282,6 +282,11 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] traffic_tags_cleanup_threshold
+        #   @return [::Integer]
+        #     Optional. Override the traffic tag threshold limit. Garbage collection will
+        #     start cleaning up non-serving tagged traffic targets based on creation
+        #     item. The default value is 2000.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
         #     Output only. Returns true if the Service is currently being acted upon by

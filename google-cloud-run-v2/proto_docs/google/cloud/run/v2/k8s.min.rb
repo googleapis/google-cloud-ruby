@@ -24,7 +24,7 @@ module Google
         # A single application container.
         # This specifies both the container to run, the command to run in the container
         # and the arguments to supply to it.
-        # Note that additional arguments may be supplied by the system to the container
+        # Note that additional arguments can be supplied by the system to the container
         # at runtime.
         # @!attribute [rw] name
         #   @return [::String]
@@ -74,6 +74,9 @@ module Google
         #     All other probes are disabled if a startup probe is provided, until it
         #     succeeds. Container will not be added to service endpoints if the probe
         #     fails.
+        # @!attribute [rw] depends_on
+        #   @return [::Array<::String>]
+        #     Names of the containers that must start before this container.
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -116,7 +119,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the environment variable. Must be a C_IDENTIFIER, and
-        #     mnay not exceed 32768 characters.
+        #     must not exceed 32768 characters.
         # @!attribute [rw] value
         #   @return [::String]
         #     Variable references $(VAR_NAME) are expanded
@@ -203,6 +206,9 @@ module Google
         #     For Cloud SQL volumes, contains the specific instances that should be
         #     mounted. Visit https://cloud.google.com/sql/docs/mysql/connect-run for
         #     more information on how to connect Cloud SQL and Cloud Run.
+        # @!attribute [rw] empty_dir
+        #   @return [::Google::Cloud::Run::V2::EmptyDirVolumeSource]
+        #     Ephemeral storage used as a shared volume.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -297,6 +303,40 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # In memory (tmpfs) ephemeral storage.
+        # It is ephemeral in the sense that when the sandbox is taken down, the data is
+        # destroyed with it (it does not persist across sandbox runs).
+        # @!attribute [rw] medium
+        #   @return [::Google::Cloud::Run::V2::EmptyDirVolumeSource::Medium]
+        #     The medium on which the data is stored. Acceptable values today is only
+        #     MEMORY or none. When none, the default will currently be backed by memory
+        #     but could change over time. +optional
+        # @!attribute [rw] size_limit
+        #   @return [::String]
+        #     Limit on the storage usable by this EmptyDir volume.
+        #     The size limit is also applicable for memory medium.
+        #     The maximum usage on memory medium EmptyDir would be the minimum value
+        #     between the SizeLimit specified here and the sum of memory limits of all
+        #     containers. The default is nil which means that the limit is undefined.
+        #     More info:
+        #     https://cloud.google.com/run/docs/configuring/in-memory-volumes#configure-volume.
+        #     Info in Kubernetes:
+        #     https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+        class EmptyDirVolumeSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The different types of medium supported for EmptyDir.
+          module Medium
+            # When not specified, falls back to the default implementation which
+            # is currently in memory (this may change over time).
+            MEDIUM_UNSPECIFIED = 0
+
+            # Explicitly set the EmptyDir to be in memory. Uses tmpfs.
+            MEMORY = 1
+          end
+        end
+
         # Probe describes a health check to be performed against a container to
         # determine whether it is alive or ready to receive traffic.
         # @!attribute [rw] initial_delay_seconds
@@ -386,7 +426,7 @@ module Google
         # @!attribute [rw] service
         #   @return [::String]
         #     Service is the name of the service to place in the gRPC HealthCheckRequest
-        #     (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md). If
+        #     (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md ). If
         #     this is not specified, the default behavior is defined by gRPC.
         class GRPCAction
           include ::Google::Protobuf::MessageExts

@@ -106,6 +106,7 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
+    "snippets/executions/cancel_execution.rb",
     "snippets/executions/delete_execution.rb",
     "snippets/executions/get_execution.rb",
     "snippets/executions/list_executions.rb",

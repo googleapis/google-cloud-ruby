@@ -252,10 +252,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_job.timeout,
@@ -340,10 +343,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_job.timeout,
@@ -438,10 +444,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_jobs.timeout,
@@ -538,10 +547,13 @@ module Google
 
               header_params = {}
               if request.job&.name
-                header_params["job.name"] = request.job.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.job.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_job.timeout,
@@ -639,10 +651,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_job.timeout,
@@ -675,7 +690,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_job(name: nil, validate_only: nil, etag: nil)
+            # @overload run_job(name: nil, validate_only: nil, etag: nil, overrides: nil)
             #   Pass arguments to `run_job` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -690,6 +705,9 @@ module Google
             #   @param etag [::String]
             #     A system-generated fingerprint for this version of the
             #     resource. May be used to detect modification conflict during updates.
+            #   @param overrides [::Google::Cloud::Run::V2::RunJobRequest::Overrides, ::Hash]
+            #     Overrides specification for a given execution of a job. If provided,
+            #     overrides will be applied to update the execution or task spec.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -740,10 +758,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_job.timeout,

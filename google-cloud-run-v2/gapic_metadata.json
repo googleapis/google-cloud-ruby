@@ -24,6 +24,11 @@
               "methods": [
                 "delete_execution"
               ]
+            },
+            "CancelExecution": {
+              "methods": [
+                "cancel_execution"
+              ]
             }
           }
         }

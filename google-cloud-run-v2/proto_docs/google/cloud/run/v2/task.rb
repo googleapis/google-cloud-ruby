@@ -96,8 +96,13 @@ module Google
         #     when modifying objects.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the task was created by the job
-        #     controller. It is not guaranteed to be set in happens-before order across
+        #     Output only. Represents time when the task was created by the system.
+        #     It is not guaranteed to be set in happens-before order across separate
+        #     operations.
+        # @!attribute [r] scheduled_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Represents time when the task was scheduled to run by the
+        #     system. It is not guaranteed to be set in happens-before order across
         #     separate operations.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
