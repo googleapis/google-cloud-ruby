@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.12.0 (2023-09-26)
+
+#### Features
+
+* additional HTTP bindings for IAM methods ([#23353](https://github.com/googleapis/google-cloud-ruby/issues/23353)) 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features
