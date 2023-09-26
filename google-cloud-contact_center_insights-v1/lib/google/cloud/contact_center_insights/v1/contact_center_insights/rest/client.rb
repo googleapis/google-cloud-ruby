@@ -255,7 +255,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload upload_conversation(parent: nil, conversation: nil, conversation_id: nil, redaction_config: nil)
+              # @overload upload_conversation(parent: nil, conversation: nil, conversation_id: nil, redaction_config: nil, speech_config: nil)
               #   Pass arguments to `upload_conversation` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -273,6 +273,9 @@ module Google
               #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
               #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
               #     Optional. DLP settings for transcript redaction. Optional, will default to
+              #     the config specified in Settings.
+              #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
+              #     Optional. Default Speech-to-Text configuration. Optional, will default to
               #     the config specified in Settings.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
@@ -1133,7 +1136,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param gcs_source [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource, ::Hash]
-              #     A cloud storage bucket source.
+              #     A cloud storage bucket source. Note that any previously ingested objects
+              #     from the source will be skipped to avoid duplication.
               #   @param transcript_object_config [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::TranscriptObjectConfig, ::Hash]
               #     Configuration for when `source` contains conversation transcripts.
               #   @param parent [::String]

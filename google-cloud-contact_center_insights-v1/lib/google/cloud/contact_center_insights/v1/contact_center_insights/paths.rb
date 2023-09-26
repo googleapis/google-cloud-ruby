@@ -205,6 +205,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Recognizer resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/recognizers/{recognizer}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param recognizer [String]
+            #
+            # @return [::String]
+            def recognizer_path project:, location:, recognizer:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/recognizers/#{recognizer}"
+            end
+
+            ##
             # Create a fully-qualified Settings resource string.
             #
             # The resource will be in the following format:

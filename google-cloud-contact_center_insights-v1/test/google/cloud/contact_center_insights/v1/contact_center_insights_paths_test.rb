@@ -122,6 +122,18 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
     end
   end
 
+  def test_recognizer_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.recognizer_path project: "value0", location: "value1", recognizer: "value2"
+      assert_equal "projects/value0/locations/value1/recognizers/value2", path
+    end
+  end
+
   def test_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

@@ -130,6 +130,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     conversation = {}
     conversation_id = "hello world"
     redaction_config = {}
+    speech_config = {}
 
     upload_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -145,27 +146,27 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
         end
 
         # Use hash object
-        client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config }) do |_result, response|
+        client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config do |_result, response|
+        client.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config) do |_result, response|
+        client.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config }, call_options) do |_result, response|
+        client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config), call_options) do |_result, response|
+        client.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
