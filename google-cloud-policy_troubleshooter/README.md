@@ -16,7 +16,8 @@ for this library, google-cloud-policy_troubleshooter, to see the convenience met
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest).
+[google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest),
+[google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest).
 
 See also the [Product Documentation](https://cloud.google.com/iam/docs/troubleshooting-access)
 for more usage information.
