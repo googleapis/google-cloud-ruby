@@ -360,6 +360,144 @@ class ::Google::Cloud::Dialogflow::CX::V3::Intents::ClientTest < Minitest::Test
     end
   end
 
+  def test_import_intents
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    intents_uri = "hello world"
+    merge_option = :MERGE_OPTION_UNSPECIFIED
+
+    import_intents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_intents, name
+      assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["intents_uri"]
+      assert_equal :intents_uri, request.intents
+      assert_equal :MERGE_OPTION_UNSPECIFIED, request["merge_option"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_intents_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_intents({ parent: parent, intents_uri: intents_uri, merge_option: merge_option }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_intents parent: parent, intents_uri: intents_uri, merge_option: merge_option do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_intents ::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest.new(parent: parent, intents_uri: intents_uri, merge_option: merge_option) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_intents({ parent: parent, intents_uri: intents_uri, merge_option: merge_option }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_intents(::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest.new(parent: parent, intents_uri: intents_uri, merge_option: merge_option), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_intents_client_stub.call_rpc_count
+    end
+  end
+
+  def test_export_intents
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    intents = ["hello world"]
+    intents_uri = "hello world"
+    data_format = :DATA_FORMAT_UNSPECIFIED
+
+    export_intents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_intents, name
+      assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["intents"]
+      assert_equal "hello world", request["intents_uri"]
+      assert_equal :intents_uri, request.destination
+      assert_equal :DATA_FORMAT_UNSPECIFIED, request["data_format"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_intents_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_intents({ parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_intents parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_intents ::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest.new(parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_intents({ parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_intents(::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest.new(parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_intents_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -376,5 +514,18 @@ class ::Google::Cloud::Dialogflow::CX::V3::Intents::ClientTest < Minitest::Test
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::Intents::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::Intents::Operations, client.operations_client
   end
 end

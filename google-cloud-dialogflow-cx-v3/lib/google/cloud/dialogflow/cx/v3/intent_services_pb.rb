@@ -56,6 +56,28 @@ module Google
               # [training
               # documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
               rpc :DeleteIntent, ::Google::Cloud::Dialogflow::CX::V3::DeleteIntentRequest, ::Google::Protobuf::Empty
+              # Imports the specified intents into the agent.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`:
+              # [ImportIntentsMetadata][google.cloud.dialogflow.cx.v3.ImportIntentsMetadata]
+              # - `response`:
+              # [ImportIntentsResponse][google.cloud.dialogflow.cx.v3.ImportIntentsResponse]
+              rpc :ImportIntents, ::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest, ::Google::Longrunning::Operation
+              # Exports the selected intents.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`:
+              # [ExportIntentsMetadata][google.cloud.dialogflow.cx.v3.ExportIntentsMetadata]
+              # - `response`:
+              # [ExportIntentsResponse][google.cloud.dialogflow.cx.v3.ExportIntentsResponse]
+              rpc :ExportIntents, ::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

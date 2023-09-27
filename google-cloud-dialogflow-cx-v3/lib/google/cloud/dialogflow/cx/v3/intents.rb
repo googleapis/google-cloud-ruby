@@ -24,6 +24,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 
 require "google/cloud/dialogflow/cx/v3/intents/credentials"
 require "google/cloud/dialogflow/cx/v3/intents/paths"
+require "google/cloud/dialogflow/cx/v3/intents/operations"
 require "google/cloud/dialogflow/cx/v3/intents/client"
 require "google/cloud/dialogflow/cx/v3/intents/rest"
 

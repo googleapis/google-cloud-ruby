@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/bindings_override"
 
 require "google/cloud/dialogflow/cx/v3/intents/credentials"
 require "google/cloud/dialogflow/cx/v3/intents/paths"
+require "google/cloud/dialogflow/cx/v3/intents/rest/operations"
 require "google/cloud/dialogflow/cx/v3/intents/rest/client"
 
 module Google

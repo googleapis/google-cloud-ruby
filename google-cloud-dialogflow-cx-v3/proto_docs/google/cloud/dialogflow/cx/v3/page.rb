@@ -106,6 +106,10 @@ module Google
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::EventHandler>]
           #     Handlers associated with the page to handle events such as webhook errors,
           #     no match or no input.
+          # @!attribute [rw] advanced_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
+          #     Hierarchical advanced settings for this page. The settings exposed at the
+          #     lower level overrides the settings exposed at the higher level.
           # @!attribute [rw] knowledge_connector_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::KnowledgeConnectorSettings]
           #     Optional. Knowledge connector configuration.
@@ -163,6 +167,10 @@ module Google
             #     Note: the parameter content is subject to redaction if either parameter
             #     level redaction or [entity type level
             #     redaction][google.cloud.dialogflow.cx.v3.EntityType.redact] is enabled.
+            # @!attribute [rw] advanced_settings
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
+            #     Hierarchical advanced settings for this parameter. The settings exposed
+            #     at the lower level overrides the settings exposed at the higher level.
             class Parameter
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
