@@ -1,0 +1,658 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.dialogflow.cx.v3",
+  "libraryPackage": "::Google::Cloud::Dialogflow::CX::V3",
+  "services": {
+    "Pages": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Pages::Client",
+          "rpcs": {
+            "ListPages": {
+              "methods": [
+                "list_pages"
+              ]
+            },
+            "GetPage": {
+              "methods": [
+                "get_page"
+              ]
+            },
+            "CreatePage": {
+              "methods": [
+                "create_page"
+              ]
+            },
+            "UpdatePage": {
+              "methods": [
+                "update_page"
+              ]
+            },
+            "DeletePage": {
+              "methods": [
+                "delete_page"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Flows": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Flows::Client",
+          "rpcs": {
+            "CreateFlow": {
+              "methods": [
+                "create_flow"
+              ]
+            },
+            "DeleteFlow": {
+              "methods": [
+                "delete_flow"
+              ]
+            },
+            "ListFlows": {
+              "methods": [
+                "list_flows"
+              ]
+            },
+            "GetFlow": {
+              "methods": [
+                "get_flow"
+              ]
+            },
+            "UpdateFlow": {
+              "methods": [
+                "update_flow"
+              ]
+            },
+            "TrainFlow": {
+              "methods": [
+                "train_flow"
+              ]
+            },
+            "ValidateFlow": {
+              "methods": [
+                "validate_flow"
+              ]
+            },
+            "GetFlowValidationResult": {
+              "methods": [
+                "get_flow_validation_result"
+              ]
+            },
+            "ImportFlow": {
+              "methods": [
+                "import_flow"
+              ]
+            },
+            "ExportFlow": {
+              "methods": [
+                "export_flow"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Agents": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Agents::Client",
+          "rpcs": {
+            "ListAgents": {
+              "methods": [
+                "list_agents"
+              ]
+            },
+            "GetAgent": {
+              "methods": [
+                "get_agent"
+              ]
+            },
+            "CreateAgent": {
+              "methods": [
+                "create_agent"
+              ]
+            },
+            "UpdateAgent": {
+              "methods": [
+                "update_agent"
+              ]
+            },
+            "DeleteAgent": {
+              "methods": [
+                "delete_agent"
+              ]
+            },
+            "ExportAgent": {
+              "methods": [
+                "export_agent"
+              ]
+            },
+            "RestoreAgent": {
+              "methods": [
+                "restore_agent"
+              ]
+            },
+            "ValidateAgent": {
+              "methods": [
+                "validate_agent"
+              ]
+            },
+            "GetAgentValidationResult": {
+              "methods": [
+                "get_agent_validation_result"
+              ]
+            },
+            "GetGenerativeSettings": {
+              "methods": [
+                "get_generative_settings"
+              ]
+            },
+            "UpdateGenerativeSettings": {
+              "methods": [
+                "update_generative_settings"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Changelogs": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client",
+          "rpcs": {
+            "ListChangelogs": {
+              "methods": [
+                "list_changelogs"
+              ]
+            },
+            "GetChangelog": {
+              "methods": [
+                "get_changelog"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Deployments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Deployments::Client",
+          "rpcs": {
+            "ListDeployments": {
+              "methods": [
+                "list_deployments"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "get_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EntityTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client",
+          "rpcs": {
+            "ListEntityTypes": {
+              "methods": [
+                "list_entity_types"
+              ]
+            },
+            "GetEntityType": {
+              "methods": [
+                "get_entity_type"
+              ]
+            },
+            "CreateEntityType": {
+              "methods": [
+                "create_entity_type"
+              ]
+            },
+            "UpdateEntityType": {
+              "methods": [
+                "update_entity_type"
+              ]
+            },
+            "DeleteEntityType": {
+              "methods": [
+                "delete_entity_type"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Intents": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Intents::Client",
+          "rpcs": {
+            "ListIntents": {
+              "methods": [
+                "list_intents"
+              ]
+            },
+            "GetIntent": {
+              "methods": [
+                "get_intent"
+              ]
+            },
+            "CreateIntent": {
+              "methods": [
+                "create_intent"
+              ]
+            },
+            "UpdateIntent": {
+              "methods": [
+                "update_intent"
+              ]
+            },
+            "DeleteIntent": {
+              "methods": [
+                "delete_intent"
+              ]
+            },
+            "ImportIntents": {
+              "methods": [
+                "import_intents"
+              ]
+            },
+            "ExportIntents": {
+              "methods": [
+                "export_intents"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionEntityTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client",
+          "rpcs": {
+            "ListSessionEntityTypes": {
+              "methods": [
+                "list_session_entity_types"
+              ]
+            },
+            "GetSessionEntityType": {
+              "methods": [
+                "get_session_entity_type"
+              ]
+            },
+            "CreateSessionEntityType": {
+              "methods": [
+                "create_session_entity_type"
+              ]
+            },
+            "UpdateSessionEntityType": {
+              "methods": [
+                "update_session_entity_type"
+              ]
+            },
+            "DeleteSessionEntityType": {
+              "methods": [
+                "delete_session_entity_type"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Sessions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Sessions::Client",
+          "rpcs": {
+            "DetectIntent": {
+              "methods": [
+                "detect_intent"
+              ]
+            },
+            "StreamingDetectIntent": {
+              "methods": [
+                "streaming_detect_intent"
+              ]
+            },
+            "MatchIntent": {
+              "methods": [
+                "match_intent"
+              ]
+            },
+            "FulfillIntent": {
+              "methods": [
+                "fulfill_intent"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TransitionRouteGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client",
+          "rpcs": {
+            "ListTransitionRouteGroups": {
+              "methods": [
+                "list_transition_route_groups"
+              ]
+            },
+            "GetTransitionRouteGroup": {
+              "methods": [
+                "get_transition_route_group"
+              ]
+            },
+            "CreateTransitionRouteGroup": {
+              "methods": [
+                "create_transition_route_group"
+              ]
+            },
+            "UpdateTransitionRouteGroup": {
+              "methods": [
+                "update_transition_route_group"
+              ]
+            },
+            "DeleteTransitionRouteGroup": {
+              "methods": [
+                "delete_transition_route_group"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TestCases": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::TestCases::Client",
+          "rpcs": {
+            "ListTestCases": {
+              "methods": [
+                "list_test_cases"
+              ]
+            },
+            "BatchDeleteTestCases": {
+              "methods": [
+                "batch_delete_test_cases"
+              ]
+            },
+            "GetTestCase": {
+              "methods": [
+                "get_test_case"
+              ]
+            },
+            "CreateTestCase": {
+              "methods": [
+                "create_test_case"
+              ]
+            },
+            "UpdateTestCase": {
+              "methods": [
+                "update_test_case"
+              ]
+            },
+            "RunTestCase": {
+              "methods": [
+                "run_test_case"
+              ]
+            },
+            "BatchRunTestCases": {
+              "methods": [
+                "batch_run_test_cases"
+              ]
+            },
+            "CalculateCoverage": {
+              "methods": [
+                "calculate_coverage"
+              ]
+            },
+            "ImportTestCases": {
+              "methods": [
+                "import_test_cases"
+              ]
+            },
+            "ExportTestCases": {
+              "methods": [
+                "export_test_cases"
+              ]
+            },
+            "ListTestCaseResults": {
+              "methods": [
+                "list_test_case_results"
+              ]
+            },
+            "GetTestCaseResult": {
+              "methods": [
+                "get_test_case_result"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Webhooks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client",
+          "rpcs": {
+            "ListWebhooks": {
+              "methods": [
+                "list_webhooks"
+              ]
+            },
+            "GetWebhook": {
+              "methods": [
+                "get_webhook"
+              ]
+            },
+            "CreateWebhook": {
+              "methods": [
+                "create_webhook"
+              ]
+            },
+            "UpdateWebhook": {
+              "methods": [
+                "update_webhook"
+              ]
+            },
+            "DeleteWebhook": {
+              "methods": [
+                "delete_webhook"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Environments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Environments::Client",
+          "rpcs": {
+            "ListEnvironments": {
+              "methods": [
+                "list_environments"
+              ]
+            },
+            "GetEnvironment": {
+              "methods": [
+                "get_environment"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "create_environment"
+              ]
+            },
+            "UpdateEnvironment": {
+              "methods": [
+                "update_environment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "delete_environment"
+              ]
+            },
+            "LookupEnvironmentHistory": {
+              "methods": [
+                "lookup_environment_history"
+              ]
+            },
+            "RunContinuousTest": {
+              "methods": [
+                "run_continuous_test"
+              ]
+            },
+            "ListContinuousTestResults": {
+              "methods": [
+                "list_continuous_test_results"
+              ]
+            },
+            "DeployFlow": {
+              "methods": [
+                "deploy_flow"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Experiments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Experiments::Client",
+          "rpcs": {
+            "ListExperiments": {
+              "methods": [
+                "list_experiments"
+              ]
+            },
+            "GetExperiment": {
+              "methods": [
+                "get_experiment"
+              ]
+            },
+            "CreateExperiment": {
+              "methods": [
+                "create_experiment"
+              ]
+            },
+            "UpdateExperiment": {
+              "methods": [
+                "update_experiment"
+              ]
+            },
+            "DeleteExperiment": {
+              "methods": [
+                "delete_experiment"
+              ]
+            },
+            "StartExperiment": {
+              "methods": [
+                "start_experiment"
+              ]
+            },
+            "StopExperiment": {
+              "methods": [
+                "stop_experiment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SecuritySettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client",
+          "rpcs": {
+            "CreateSecuritySettings": {
+              "methods": [
+                "create_security_settings"
+              ]
+            },
+            "GetSecuritySettings": {
+              "methods": [
+                "get_security_settings"
+              ]
+            },
+            "UpdateSecuritySettings": {
+              "methods": [
+                "update_security_settings"
+              ]
+            },
+            "ListSecuritySettings": {
+              "methods": [
+                "list_security_settings"
+              ]
+            },
+            "DeleteSecuritySettings": {
+              "methods": [
+                "delete_security_settings"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Versions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Versions::Client",
+          "rpcs": {
+            "ListVersions": {
+              "methods": [
+                "list_versions"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "get_version"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "create_version"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "update_version"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "delete_version"
+              ]
+            },
+            "LoadVersion": {
+              "methods": [
+                "load_version"
+              ]
+            },
+            "CompareVersions": {
+              "methods": [
+                "compare_versions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
