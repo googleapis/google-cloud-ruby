@@ -103,6 +103,16 @@ module Google
                   initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.generate_client_certificate.timeout = 60.0
+                default_config.rpcs.generate_client_certificate.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_connection_info.timeout = 60.0
+                default_config.rpcs.get_connection_info.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -2876,6 +2886,218 @@ module Google
             end
 
             ##
+            # Generate a client certificate signed by a Cluster CA.
+            # The sole purpose of this endpoint is to support AlloyDB connectors and the
+            # Auth Proxy client. The endpoint's behavior is subject to change without
+            # notice, so do not rely on its behavior remaining constant. Future changes
+            # will not break AlloyDB connectors or the Auth Proxy client.
+            #
+            # @overload generate_client_certificate(request, options = nil)
+            #   Pass arguments to `generate_client_certificate` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_client_certificate(parent: nil, request_id: nil, cert_duration: nil, public_key: nil)
+            #   Pass arguments to `generate_client_certificate` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the parent resource. The required format is:
+            #      * projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param cert_duration [::Google::Protobuf::Duration, ::Hash]
+            #     Optional. An optional hint to the endpoint to generate the client
+            #     certificate with the requested duration. The duration can be from 1 hour to
+            #     24 hours. The endpoint may or may not honor the hint. If the hint is left
+            #     unspecified or is not honored, then the endpoint will pick an appropriate
+            #     default duration.
+            #   @param public_key [::String]
+            #     Optional. The public key from the client.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AlloyDB::V1::GenerateClientCertificateResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AlloyDB::V1::GenerateClientCertificateResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new
+            #
+            #   # Call the generate_client_certificate method.
+            #   result = client.generate_client_certificate request
+            #
+            #   # The returned object is of type Google::Cloud::AlloyDB::V1::GenerateClientCertificateResponse.
+            #   p result
+            #
+            def generate_client_certificate request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_client_certificate.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_client_certificate.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_client_certificate.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :generate_client_certificate, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get instance metadata used for a connection.
+            #
+            # @overload get_connection_info(request, options = nil)
+            #   Pass arguments to `get_connection_info` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_connection_info(parent: nil, request_id: nil)
+            #   Pass arguments to `get_connection_info` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the parent resource. The required format is:
+            #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/instances/\\{instance}
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AlloyDB::V1::ConnectionInfo]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AlloyDB::V1::ConnectionInfo]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest.new
+            #
+            #   # Call the get_connection_info method.
+            #   result = client.get_connection_info request
+            #
+            #   # The returned object is of type Google::Cloud::AlloyDB::V1::ConnectionInfo.
+            #   p result
+            #
+            def get_connection_info request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_connection_info.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_connection_info.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_connection_info.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :get_connection_info, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists Users in a given project and location.
             #
             # @overload list_users(request, options = nil)
@@ -3645,6 +3867,16 @@ module Google
                 #
                 attr_reader :list_supported_database_flags
                 ##
+                # RPC-specific configuration for `generate_client_certificate`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_client_certificate
+                ##
+                # RPC-specific configuration for `get_connection_info`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_connection_info
+                ##
                 # RPC-specific configuration for `list_users`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3720,6 +3952,10 @@ module Google
                   @delete_backup = ::Gapic::Config::Method.new delete_backup_config
                   list_supported_database_flags_config = parent_rpcs.list_supported_database_flags if parent_rpcs.respond_to? :list_supported_database_flags
                   @list_supported_database_flags = ::Gapic::Config::Method.new list_supported_database_flags_config
+                  generate_client_certificate_config = parent_rpcs.generate_client_certificate if parent_rpcs.respond_to? :generate_client_certificate
+                  @generate_client_certificate = ::Gapic::Config::Method.new generate_client_certificate_config
+                  get_connection_info_config = parent_rpcs.get_connection_info if parent_rpcs.respond_to? :get_connection_info
+                  @get_connection_info = ::Gapic::Config::Method.new get_connection_info_config
                   list_users_config = parent_rpcs.list_users if parent_rpcs.respond_to? :list_users
                   @list_users = ::Gapic::Config::Method.new list_users_config
                   get_user_config = parent_rpcs.get_user if parent_rpcs.respond_to? :get_user
