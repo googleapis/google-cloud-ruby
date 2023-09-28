@@ -1612,6 +1612,86 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v3_generated_Intents_ImportIntents_sync",
+      "title": "Snippet for the import_intents call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#import_intents. It may require modification in order to execute successfully.",
+      "file": "intents/import_intents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_intents",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Intents::Client#import_intents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Intents::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Intents::Client"
+        },
+        "method": {
+          "short_name": "ImportIntents",
+          "full_name": "google.cloud.dialogflow.cx.v3.Intents.ImportIntents",
+          "service": {
+            "short_name": "Intents",
+            "full_name": "google.cloud.dialogflow.cx.v3.Intents"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Intents_ExportIntents_sync",
+      "title": "Snippet for the export_intents call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#export_intents. It may require modification in order to execute successfully.",
+      "file": "intents/export_intents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_intents",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Intents::Client#export_intents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Intents::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Intents::Client"
+        },
+        "method": {
+          "short_name": "ExportIntents",
+          "full_name": "google.cloud.dialogflow.cx.v3.Intents.ExportIntents",
+          "service": {
+            "short_name": "Intents",
+            "full_name": "google.cloud.dialogflow.cx.v3.Intents"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v3_generated_SessionEntityTypes_ListSessionEntityTypes_sync",
       "title": "Snippet for the list_session_entity_types call in the SessionEntityTypes service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#list_session_entity_types. It may require modification in order to execute successfully.",

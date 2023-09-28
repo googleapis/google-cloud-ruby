@@ -145,6 +145,10 @@ module Google
           # @!attribute [rw] nlu_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::NluSettings]
           #     NLU related settings of the flow.
+          # @!attribute [rw] advanced_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
+          #     Hierarchical advanced settings for this flow. The settings exposed at the
+          #     lower level overrides the settings exposed at the higher level.
           # @!attribute [rw] knowledge_connector_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::KnowledgeConnectorSettings]
           #     Optional. Knowledge connector configuration.

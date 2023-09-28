@@ -40,6 +40,14 @@ module Google
           #     Exposed at the following levels:
           #     - Agent level
           #     - Flow level
+          # @!attribute [rw] dtmf_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings::DtmfSettings]
+          #     Settings for DTMF.
+          #     Exposed at the following levels:
+          #     - Agent level
+          #     - Flow level
+          #     - Page level
+          #     - Parameter level.
           # @!attribute [rw] logging_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings::LoggingSettings]
           #     Settings for logging.
@@ -50,6 +58,26 @@ module Google
           class AdvancedSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Define behaviors for DTMF (dual tone multi frequency).
+            # @!attribute [rw] enabled
+            #   @return [::Boolean]
+            #     If true, incoming audio is processed for DTMF (dual tone multi frequency)
+            #     events. For example, if the caller presses a button on their telephone
+            #     keypad and DTMF processing is enabled, Dialogflow will detect the
+            #     event (e.g. a "3" was pressed) in the incoming audio and pass the event
+            #     to the bot to drive business logic (e.g. when 3 is pressed, return the
+            #     account balance).
+            # @!attribute [rw] max_digits
+            #   @return [::Integer]
+            #     Max length of DTMF digits.
+            # @!attribute [rw] finish_digit
+            #   @return [::String]
+            #     The digit that terminates a DTMF digit sequence.
+            class DtmfSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Define behaviors on logging.
             # @!attribute [rw] enable_stackdriver_logging
