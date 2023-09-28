@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.18.0 (2023-09-28)
+
+#### Features
+
+* add optional SpeechConfig to UploadConversationRequest  
+* support recognizer path 
+
 ### 0.17.0 (2023-09-12)
 
 #### Features
