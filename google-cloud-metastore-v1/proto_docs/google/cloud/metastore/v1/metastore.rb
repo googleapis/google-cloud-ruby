@@ -345,6 +345,8 @@ module Google
         end
 
         # Network configuration for the Dataproc Metastore service.
+        #
+        # Next available ID: 4
         # @!attribute [rw] consumers
         #   @return [::Array<::Google::Cloud::Metastore::V1::NetworkConfig::Consumer>]
         #     Immutable. The consumer-side network configuration for the Dataproc
@@ -354,6 +356,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Contains information of the customer's network configurations.
+          #
+          # Next available ID: 5
           # @!attribute [rw] subnetwork
           #   @return [::String]
           #     Immutable. The subnetwork of the customer project from which an IP
@@ -368,6 +372,10 @@ module Google
           #   @return [::String]
           #     Output only. The URI of the endpoint used to access the metastore
           #     service.
+          # @!attribute [r] endpoint_location
+          #   @return [::String]
+          #     Output only. The location of the endpoint URI. Format:
+          #     `projects/{project}/locations/{location}`.
           class Consumer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
