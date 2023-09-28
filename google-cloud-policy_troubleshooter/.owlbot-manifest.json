@@ -13,12 +13,17 @@
     "google-cloud-policy_troubleshooter.gemspec",
     "lib/google-cloud-policy_troubleshooter.rb",
     "lib/google/cloud/policy_troubleshooter.rb",
+    "lib/google/cloud/policy_troubleshooter/iam.rb",
+    "lib/google/cloud/policy_troubleshooter/iam/version.rb",
     "lib/google/cloud/policy_troubleshooter/version.rb",
     "test/google/cloud/policy_troubleshooter/client_test.rb",
+    "test/google/cloud/policy_troubleshooter/iam/client_test.rb",
+    "test/google/cloud/policy_troubleshooter/iam/version_test.rb",
     "test/google/cloud/policy_troubleshooter/version_test.rb",
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }
