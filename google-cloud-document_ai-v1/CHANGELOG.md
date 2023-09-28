@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.16.0 (2023-09-28)
+
+#### Features
+
+* support PremiumFeatures and IndividualPageSelector 
+
 ### 0.15.0 (2023-09-26)
 
 #### Features
