@@ -147,7 +147,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # RunJob Overrides that contains Execution fields to be overridden on the go.
+          # RunJob Overrides that contains Execution fields to be overridden.
           # @!attribute [rw] container_overrides
           #   @return [::Array<::Google::Cloud::Run::V2::RunJobRequest::Overrides::ContainerOverride>]
           #     Per container override specification.
@@ -164,7 +164,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Per container override specification.
+            # Per-container override specification.
             # @!attribute [rw] name
             #   @return [::String]
             #     The name of the container specified as a DNS_LABEL.

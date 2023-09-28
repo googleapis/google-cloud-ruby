@@ -118,8 +118,8 @@ module Google
         # EnvVar represents an environment variable present in a Container.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the environment variable. Must be a C_IDENTIFIER, and
-        #     must not exceed 32768 characters.
+        #     Required. Name of the environment variable. Must not exceed 32768
+        #     characters.
         # @!attribute [rw] value
         #   @return [::String]
         #     Variable references $(VAR_NAME) are expanded
