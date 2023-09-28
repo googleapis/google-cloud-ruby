@@ -130,6 +130,16 @@
                 "list_supported_database_flags"
               ]
             },
+            "GenerateClientCertificate": {
+              "methods": [
+                "generate_client_certificate"
+              ]
+            },
+            "GetConnectionInfo": {
+              "methods": [
+                "get_connection_info"
+              ]
+            },
             "ListUsers": {
               "methods": [
                 "list_users"

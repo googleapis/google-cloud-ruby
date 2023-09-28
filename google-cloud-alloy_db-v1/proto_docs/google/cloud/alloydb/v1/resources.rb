@@ -848,6 +848,26 @@ module Google
           end
         end
 
+        # ConnectionInfo singleton resource.
+        # https://google.aip.dev/156
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the ConnectionInfo singleton resource, e.g.:
+        #     projects/\\{project}/locations/\\{location}/clusters/*/instances/*/connectionInfo
+        #     This field currently has no semantic meaning.
+        # @!attribute [r] ip_address
+        #   @return [::String]
+        #     Output only. The private network IP address for the Instance. This is the
+        #     default IP for the instance and is always created (even if enable_public_ip
+        #     is set). This is the connection endpoint for an end-user application.
+        # @!attribute [r] instance_uid
+        #   @return [::String]
+        #     Output only. The unique ID of the Instance.
+        class ConnectionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message describing Backup object
         # @!attribute [r] name
         #   @return [::String]
