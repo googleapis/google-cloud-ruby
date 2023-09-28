@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-09-28)
+
+#### Features
+
+* support subscription services 
+
 ### 0.3.0 (2023-09-12)
 
 #### Features
