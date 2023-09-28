@@ -1,5 +1,13 @@
 # Release History
 
+### 0.29.0 (2023-09-28)
+
+#### Features
+
+* add schema_override to ProcessOptions and field_Extraction_metadata to Property Metadata 
+* support list documents 
+* support SummaryOptions 
+
 ### 0.28.0 (2023-09-14)
 
 #### Features
