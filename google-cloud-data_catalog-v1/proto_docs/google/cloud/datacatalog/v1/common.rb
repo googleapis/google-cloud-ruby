@@ -61,6 +61,9 @@ module Google
 
           # Looker
           LOOKER = 9
+
+          # Vertex AI
+          VERTEX_AI = 10
         end
 
         # This enum describes all the systems that manage
