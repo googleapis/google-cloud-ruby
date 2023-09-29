@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.1 (2023-09-29)
+
+#### Documentation
+
+* update batch PD interface support ([#23379](https://github.com/googleapis/google-cloud-ruby/issues/23379)) 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features
