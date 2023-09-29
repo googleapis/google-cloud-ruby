@@ -46,6 +46,10 @@ module Google
             rpc :UpdateHub, ::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest, ::Google::Longrunning::Operation
             # Deletes a Network Connectivity Center hub.
             rpc :DeleteHub, ::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest, ::Google::Longrunning::Operation
+            # Lists the Network Connectivity Center spokes associated with a
+            # specified hub and location. The list includes both spokes that are attached
+            # to the hub and spokes that have been proposed but not yet accepted.
+            rpc :ListHubSpokes, ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesResponse
             # Lists the Network Connectivity Center spokes in a specified project and
             # location.
             rpc :ListSpokes, ::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListSpokesResponse
@@ -55,8 +59,28 @@ module Google
             rpc :CreateSpoke, ::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest, ::Google::Longrunning::Operation
             # Updates the parameters of a Network Connectivity Center spoke.
             rpc :UpdateSpoke, ::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest, ::Google::Longrunning::Operation
+            # Rejects a Network Connectivity Center spoke from being attached to a hub.
+            # If the spoke was previously in the `ACTIVE` state, it
+            # transitions to the `INACTIVE` state and is no longer able to
+            # connect to other spokes that are attached to the hub.
+            rpc :RejectHubSpoke, ::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest, ::Google::Longrunning::Operation
+            # Accepts a proposal to attach a Network Connectivity Center spoke
+            # to a hub.
+            rpc :AcceptHubSpoke, ::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest, ::Google::Longrunning::Operation
             # Deletes a Network Connectivity Center spoke.
             rpc :DeleteSpoke, ::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest, ::Google::Longrunning::Operation
+            # Gets details about a Network Connectivity Center route table.
+            rpc :GetRouteTable, ::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest, ::Google::Cloud::NetworkConnectivity::V1::RouteTable
+            # Gets details about the specified route.
+            rpc :GetRoute, ::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest, ::Google::Cloud::NetworkConnectivity::V1::Route
+            # Lists routes in a given project.
+            rpc :ListRoutes, ::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListRoutesResponse
+            # Lists route tables in a given project.
+            rpc :ListRouteTables, ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesResponse
+            # Gets details about a Network Connectivity Center group.
+            rpc :GetGroup, ::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest, ::Google::Cloud::NetworkConnectivity::V1::Group
+            # Lists groups in a given hub.
+            rpc :ListGroups, ::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest, ::Google::Cloud::NetworkConnectivity::V1::ListGroupsResponse
           end
 
           Stub = Service.rpc_stub_class

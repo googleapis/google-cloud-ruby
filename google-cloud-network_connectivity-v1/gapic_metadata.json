@@ -35,6 +35,11 @@
                 "delete_hub"
               ]
             },
+            "ListHubSpokes": {
+              "methods": [
+                "list_hub_spokes"
+              ]
+            },
             "ListSpokes": {
               "methods": [
                 "list_spokes"
@@ -55,9 +60,49 @@
                 "update_spoke"
               ]
             },
+            "RejectHubSpoke": {
+              "methods": [
+                "reject_hub_spoke"
+              ]
+            },
+            "AcceptHubSpoke": {
+              "methods": [
+                "accept_hub_spoke"
+              ]
+            },
             "DeleteSpoke": {
               "methods": [
                 "delete_spoke"
+              ]
+            },
+            "GetRouteTable": {
+              "methods": [
+                "get_route_table"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "get_route"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "list_routes"
+              ]
+            },
+            "ListRouteTables": {
+              "methods": [
+                "list_route_tables"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "get_group"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "list_groups"
               ]
             }
           }

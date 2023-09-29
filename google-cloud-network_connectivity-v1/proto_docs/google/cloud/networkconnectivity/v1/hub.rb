@@ -21,11 +21,12 @@ module Google
   module Cloud
     module NetworkConnectivity
       module V1
-        # A Network Connectivity Center hub is a collection of spokes. A single hub
-        # can contain spokes from multiple regions. However, if any of a hub's spokes
-        # use the data transfer feature, the resources associated with those spokes
-        # must all reside in the same VPC network. Spokes that do not use data
-        # transfer can be associated with any VPC network in your project.
+        # A Network Connectivity Center hub is a global management resource to which
+        # you attach spokes. A single hub can contain spokes from multiple regions.
+        # However, if any of a hub's spokes use the site-to-site data transfer feature,
+        # the resources associated with those spokes must all be in the same VPC
+        # network. Spokes that do not use site-to-site data transfer can be associated
+        # with any VPC network in your project.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The name of the hub. Hub names must be unique. They use the
@@ -39,8 +40,8 @@ module Google
         #     Output only. The time the hub was last updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional labels in key:value format. For more information about labels, see
-        #     [Requirements for
+        #     Optional labels in key-value pair format. For more information about
+        #     labels, see [Requirements for
         #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
         # @!attribute [rw] description
         #   @return [::String]
@@ -59,6 +60,21 @@ module Google
         #
         #     This field is read-only. Network Connectivity Center automatically
         #     populates it based on the set of spokes attached to the hub.
+        # @!attribute [r] route_tables
+        #   @return [::Array<::String>]
+        #     Output only. The route tables that belong to this hub. They use the
+        #     following form:
+        #        `projects/{project_number}/locations/global/hubs/{hub_id}/routeTables/{route_table_id}`
+        #
+        #     This field is read-only. Network Connectivity Center automatically
+        #     populates it based on the route tables nested under the hub.
+        # @!attribute [r] spoke_summary
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::SpokeSummary]
+        #     Output only. A summary of the spokes associated with a hub. The
+        #     summary includes a count of spokes according to type
+        #     and according to state. If any spokes are inactive,
+        #     the summary also lists the reasons they are inactive,
+        #     including a count for each reason.
         class Hub
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,15 +106,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Network Connectivity Center spoke represents a connection between your
-        # Google Cloud network resources and a non-Google-Cloud network.
+        # A Network Connectivity Center spoke represents one or more network
+        # connectivity resources.
         #
-        # When you create a spoke, you associate it with a hub. You must also identify
-        # a value for exactly one of the following fields:
+        # When you create a spoke, you associate it with a hub. You must also
+        # identify a value for exactly one of the following fields:
         #
         # * linked_vpn_tunnels
         # * linked_interconnect_attachments
         # * linked_router_appliance_instances
+        # * linked_vpc_network
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The name of the spoke. Spoke names must be unique. They use the
@@ -112,8 +129,8 @@ module Google
         #     Output only. The time the spoke was last updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional labels in key:value format. For more information about labels, see
-        #     [Requirements for
+        #     Optional labels in key-value pair format. For more information about
+        #     labels, see [Requirements for
         #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
         # @!attribute [rw] description
         #   @return [::String]
@@ -121,6 +138,9 @@ module Google
         # @!attribute [rw] hub
         #   @return [::String]
         #     Immutable. The name of the hub that this spoke is attached to.
+        # @!attribute [rw] group
+        #   @return [::String]
+        #     Optional. The name of the group that this spoke is associated with.
         # @!attribute [rw] linked_vpn_tunnels
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedVpnTunnels]
         #     VPN tunnels that are associated with the spoke.
@@ -130,15 +150,207 @@ module Google
         # @!attribute [rw] linked_router_appliance_instances
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedRouterApplianceInstances]
         #     Router appliance instances that are associated with the spoke.
+        # @!attribute [rw] linked_vpc_network
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedVpcNetwork]
+        #     Optional. VPC network that is associated with the spoke.
         # @!attribute [r] unique_id
         #   @return [::String]
         #     Output only. The Google-generated UUID for the spoke. This value is unique
         #     across all spoke resources. If a spoke is deleted and another with the same
-        #     name is created, the new spoke is assigned a different unique_id.
+        #     name is created, the new spoke is assigned a different `unique_id`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
         #     Output only. The current lifecycle state of this spoke.
+        # @!attribute [r] reasons
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Spoke::StateReason>]
+        #     Output only. The reasons for current state of the spoke. Only present when
+        #     the spoke is in the `INACTIVE` state.
+        # @!attribute [r] spoke_type
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::SpokeType]
+        #     Output only. The type of resource associated with the spoke.
         class Spoke
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The reason a spoke is inactive.
+          # @!attribute [rw] code
+          #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke::StateReason::Code]
+          #     The code associated with this reason.
+          # @!attribute [rw] message
+          #   @return [::String]
+          #     Human-readable details about this reason.
+          # @!attribute [rw] user_details
+          #   @return [::String]
+          #     Additional information provided by the user in the RejectSpoke call.
+          class StateReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The Code enum represents the various reasons a state can be `INACTIVE`.
+            module Code
+              # No information available.
+              CODE_UNSPECIFIED = 0
+
+              # The proposed spoke is pending review.
+              PENDING_REVIEW = 1
+
+              # The proposed spoke has been rejected by the hub administrator.
+              REJECTED = 2
+
+              # The spoke has been deactivated internally.
+              PAUSED = 3
+
+              # Network Connectivity Center encountered errors while accepting
+              # the spoke.
+              FAILED = 4
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. The name of the route table. Route table names must be unique.
+        #     They use the following form:
+        #          `projects/{project_number}/locations/global/hubs/{hub}/routeTables/{route_table_id}`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the route table was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the route table was last updated.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional labels in key-value pair format. For more information about
+        #     labels, see [Requirements for
+        #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of the route table.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. The Google-generated UUID for the route table. This value is
+        #     unique across all route table resources. If a route table is deleted and
+        #     another with the same name is created, the new route table is assigned
+        #     a different `uid`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
+        #     Output only. The current lifecycle state of this route table.
+        class RouteTable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A route defines a path from VM instances within a spoke to a specific
+        # destination resource. Only VPC spokes have routes.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. The name of the route. Route names must be unique. Route names
+        #     use the following form:
+        #          `projects/{project_number}/locations/global/hubs/{hub}/routeTables/{route_table_id}/routes/{route_id}`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the route was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the route was last updated.
+        # @!attribute [rw] ip_cidr_range
+        #   @return [::String]
+        #     The destination IP address range.
+        # @!attribute [r] type
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::RouteType]
+        #     Output only. The route's type. Its type is determined by the properties of
+        #     its IP address range.
+        # @!attribute [rw] next_hop_vpc_network
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::NextHopVpcNetwork]
+        #     Immutable. The destination VPC network for packets on this route.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional labels in key-value pair format. For more information about
+        #     labels, see [Requirements for
+        #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of the route.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. The Google-generated UUID for the route. This value is unique
+        #     across all Network Connectivity Center route resources. If a
+        #     route is deleted and another with the same name is created,
+        #     the new route is assigned a different `uid`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
+        #     Output only. The current lifecycle state of the route.
+        # @!attribute [rw] spoke
+        #   @return [::String]
+        #     Immutable. The spoke that this route leads to.
+        #     Example: projects/12345/locations/global/spokes/SPOKE
+        # @!attribute [r] location
+        #   @return [::String]
+        #     Output only. The location of the route.
+        #     Uses the following form: "projects/\\{project}/locations/\\{location}"
+        #     Example: projects/1234/locations/us-central1
+        class Route
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A group represents a subset of spokes attached to a hub.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. The name of the group. Group names must be unique. They
+        #     use the following form:
+        #          `projects/{project_number}/locations/global/hubs/{hub}/groups/{group_id}`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the group was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the group was last updated.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Labels in key-value pair format. For more information about
+        #     labels, see [Requirements for
+        #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. The description of the group.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. The Google-generated UUID for the group. This value is unique
+        #     across all group resources. If a group is deleted and
+        #     another with the same name is created, the new route table is assigned
+        #     a different unique_id.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
+        #     Output only. The current lifecycle state of this group.
+        class Group
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
@@ -160,13 +372,13 @@ module Google
         #     Required. The parent resource's name.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of results per page that should be returned.
+        #     The maximum number of results per page to return.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     An expression that filters the results listed in the response.
+        #     An expression that filters the list of results.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Sort the results by a certain order.
@@ -183,8 +395,9 @@ module Google
         #     The requested hubs.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     The next pagination token in the List response. It should be used as
-        #     page_token for the following request. An empty value means no more result.
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
@@ -218,11 +431,11 @@ module Google
         #     Required. The initial values for a new hub.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can
-        #     use it in cases when you need to retry your request. When you need to
-        #     retry, this ID lets the server know that it can ignore the request if it
-        #     has already been completed. The server guarantees that for at least 60
-        #     minutes after the first request.
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -252,11 +465,11 @@ module Google
         #     Required. The state that the hub should be in after the update.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can
-        #     use it in cases when you need to retry your request. When you need to
-        #     retry, this ID lets the server know that it can ignore the request if it
-        #     has already been completed. The server guarantees that for at least 60
-        #     minutes after the first request.
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -278,11 +491,11 @@ module Google
         #     Required. The name of the hub to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can
-        #     use it in cases when you need to retry your request. When you need to
-        #     retry, this ID lets the server know that it can ignore the request if it
-        #     has already been completed. The server guarantees that for at least 60
-        #     minutes after the first request.
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -298,19 +511,92 @@ module Google
         end
 
         # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hub_spokes HubService.ListHubSpokes}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the hub.
+        # @!attribute [rw] spoke_locations
+        #   @return [::Array<::String>]
+        #     A list of locations.
+        #     Specify one of the following: `[global]`, a single region (for
+        #     example, `[us-central1]`), or a combination of
+        #     values (for example, `[global, us-central1, us-west1]`).
+        #     If the spoke_locations field is populated, the list of results
+        #     includes only spokes in the specified location.
+        #     If the spoke_locations field is not populated, the list of results
+        #     includes spokes in all locations.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return per page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     An expression that filters the list of results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sort the results by name or create_time.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest::SpokeView]
+        #     The view of the spoke to return.
+        #     The view that you use determines which spoke fields are included in the
+        #     response.
+        class ListHubSpokesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that controls which spoke fields are included in the response.
+          module SpokeView
+            # The spoke view is unspecified. When the spoke view is unspecified, the
+            # API returns the same fields as the `BASIC` view.
+            SPOKE_VIEW_UNSPECIFIED = 0
+
+            # Includes `name`, `create_time`, `hub`, `unique_id`, `state`, `reasons`,
+            # and `spoke_type`. This is the default value.
+            BASIC = 1
+
+            # Includes all spoke fields except `labels`.
+            # You can use the `DETAILED` view only when you set the `spoke_locations`
+            # field to `[global]`.
+            DETAILED = 2
+          end
+        end
+
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hub_spokes HubService.ListHubSpokes}.
+        # @!attribute [rw] spokes
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Spoke>]
+        #     The requested spokes.
+        #     The spoke fields can be partially populated based on the `view` field in
+        #     the request message.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListHubSpokesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
         # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes HubService.ListSpokes}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of results per page that should be returned.
+        #     The maximum number of results to return per page.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     An expression that filters the results listed in the response.
+        #     An expression that filters the list of results.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Sort the results by a certain order.
@@ -326,8 +612,9 @@ module Google
         #     The requested spokes.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     The next pagination token in the List response. It should be used as
-        #     page_token for the following request. An empty value means no more result.
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
@@ -359,11 +646,11 @@ module Google
         #     Required. The initial values for a new spoke.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can
-        #     use it in cases when you need to retry your request. When you need to
-        #     retry, this ID lets the server know that it can ignore the request if it
-        #     has already been completed. The server guarantees that for at least 60
-        #     minutes after the first request.
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -393,11 +680,11 @@ module Google
         #     Required. The state that the spoke should be in after the update.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can
-        #     use it in cases when you need to retry your request. When you need to
-        #     retry, this ID lets the server know that it can ignore the request if it
-        #     has already been completed. The server guarantees that for at least 60
-        #     minutes after the first request.
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -419,11 +706,11 @@ module Google
         #     Required. The name of the spoke to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can
-        #     use it in cases when you need to retry your request. When you need to
-        #     retry, this ID lets the server know that it can ignore the request if it
-        #     has already been completed. The server guarantees that for at least 60
-        #     minutes after the first request.
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -434,6 +721,233 @@ module Google
         #     The request ID must be a valid UUID, with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteSpokeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_hub_spoke HubService.AcceptHubSpoke}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the hub into which to accept the spoke.
+        # @!attribute [rw] spoke_uri
+        #   @return [::String]
+        #     Required. The URI of the spoke to accept into the hub.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check to see whether the original operation
+        #     was received. If it was, the server ignores the second request. This
+        #     behavior prevents clients from mistakenly creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID, with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class AcceptHubSpokeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_hub_spoke HubService.AcceptHubSpoke}.
+        # @!attribute [rw] spoke
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke]
+        #     The spoke that was operated on.
+        class AcceptHubSpokeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_hub_spoke HubService.RejectHubSpoke}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the hub from which to reject the spoke.
+        # @!attribute [rw] spoke_uri
+        #   @return [::String]
+        #     Required. The URI of the spoke to reject from the hub.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check to see whether the original operation
+        #     was received. If it was, the server ignores the second request. This
+        #     behavior prevents clients from mistakenly creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID, with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] details
+        #   @return [::String]
+        #     Optional. Additional information provided by the hub administrator.
+        class RejectHubSpokeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_hub_spoke HubService.RejectHubSpoke}.
+        # @!attribute [rw] spoke
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke]
+        #     The spoke that was operated on.
+        class RejectHubSpokeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route_table HubService.GetRouteTable}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the route table resource.
+        class GetRouteTableRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route HubService.GetRoute}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the route resource.
+        class GetRouteRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_routes HubService.ListRoutes}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource's name.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return per page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     An expression that filters the list of results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sort the results by a certain order.
+        class ListRoutesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_routes HubService.ListRoutes}
+        # method.
+        # @!attribute [rw] routes
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Route>]
+        #     The requested routes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     RouteTables that could not be reached.
+        class ListRoutesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_route_tables HubService.ListRouteTables}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource's name.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return per page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     An expression that filters the list of results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sort the results by a certain order.
+        class ListRouteTablesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_route_tables HubService.ListRouteTables}
+        # method.
+        # @!attribute [rw] route_tables
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::RouteTable>]
+        #     The requested route tables.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Hubs that could not be reached.
+        class ListRouteTablesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_groups HubService.ListGroups}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource's name.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return per page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     An expression that filters the list of results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sort the results by a certain order.
+        class ListGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_groups HubService.ListGroups}
+        # method.
+        # @!attribute [rw] groups
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Group>]
+        #     The requested groups.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Hubs that could not be reached.
+        class ListGroupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -499,6 +1013,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # An existing VPC network.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Required. The URI of the VPC network resource.
+        # @!attribute [rw] exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges encompassing the subnets to be excluded from peering.
+        class LinkedVpcNetwork
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A router appliance instance is a Compute Engine virtual machine (VM) instance
         # that acts as a BGP speaker. A router appliance instance is specified by the
         # URI of the VM and the internal IP address of one of the VM's network
@@ -523,6 +1049,88 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the VPC network resource
+        class NextHopVpcNetwork
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Summarizes information about the spokes associated with a hub.
+        # The summary includes a count of spokes according to type
+        # and according to state. If any spokes are inactive,
+        # the summary also lists the reasons they are inactive,
+        # including a count for each reason.
+        # @!attribute [r] spoke_type_counts
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::SpokeSummary::SpokeTypeCount>]
+        #     Output only. Counts the number of spokes of each type that are
+        #     associated with a specific hub.
+        # @!attribute [r] spoke_state_counts
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::SpokeSummary::SpokeStateCount>]
+        #     Output only. Counts the number of spokes that are in each state
+        #     and associated with a given hub.
+        # @!attribute [r] spoke_state_reason_counts
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::SpokeSummary::SpokeStateReasonCount>]
+        #     Output only. Counts the number of spokes that are inactive for each
+        #     possible reason and associated with a given hub.
+        class SpokeSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The number of spokes of a given type that are associated
+          # with a specific hub. The type indicates what kind of
+          # resource is associated with the spoke.
+          # @!attribute [r] spoke_type
+          #   @return [::Google::Cloud::NetworkConnectivity::V1::SpokeType]
+          #     Output only. The type of the spokes.
+          # @!attribute [r] count
+          #   @return [::Integer]
+          #     Output only. The total number of spokes of this type that are
+          #     associated with the hub.
+          class SpokeTypeCount
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The number of spokes that are in a particular state
+          # and associated with a given hub.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
+          #     Output only. The state of the spokes.
+          # @!attribute [r] count
+          #   @return [::Integer]
+          #     Output only. The total number of spokes that are in this state
+          #     and associated with a given hub.
+          class SpokeStateCount
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The number of spokes in the hub that are inactive for this reason.
+          # @!attribute [r] state_reason_code
+          #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke::StateReason::Code]
+          #     Output only. The reason that a spoke is inactive.
+          # @!attribute [r] count
+          #   @return [::Integer]
+          #     Output only. The total number of spokes that are inactive for a
+          #     particular reason and associated with a given hub.
+          class SpokeStateReasonCount
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_group HubService.GetGroup}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the route table resource.
+        class GetGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Supported features for a location
         module LocationFeature
           # No publicly supported feature in this location
@@ -535,23 +1143,69 @@ module Google
           SITE_TO_SITE_SPOKES = 2
         end
 
+        # The route's type
+        module RouteType
+          # No route type information specified
+          ROUTE_TYPE_UNSPECIFIED = 0
+
+          # The route leads to a destination within the primary address range of the
+          # VPC network's subnet.
+          VPC_PRIMARY_SUBNET = 1
+
+          # The route leads to a destination within the secondary address range of the
+          # VPC network's subnet.
+          VPC_SECONDARY_SUBNET = 2
+        end
+
         # The State enum represents the lifecycle stage of a Network Connectivity
         # Center resource.
         module State
           # No state information available
           STATE_UNSPECIFIED = 0
 
-          # The resource's create operation is in progress
+          # The resource's create operation is in progress.
           CREATING = 1
 
           # The resource is active
           ACTIVE = 2
 
-          # The resource's Delete operation is in progress
+          # The resource's delete operation is in progress.
           DELETING = 3
 
-          # The resource's Update operation is in progress
+          # The resource's accept operation is in progress.
+          ACCEPTING = 8
+
+          # The resource's reject operation is in progress.
+          REJECTING = 9
+
+          # The resource's update operation is in progress.
           UPDATING = 6
+
+          # The resource is inactive.
+          INACTIVE = 7
+
+          # The hub associated with this spoke resource has been deleted.
+          # This state applies to spoke resources only.
+          OBSOLETE = 10
+        end
+
+        # The SpokeType enum represents the type of spoke. The type
+        # reflects the kind of resource that a spoke is associated with.
+        module SpokeType
+          # Unspecified spoke type.
+          SPOKE_TYPE_UNSPECIFIED = 0
+
+          # Spokes associated with VPN tunnels.
+          VPN_TUNNEL = 1
+
+          # Spokes associated with VLAN attachments.
+          INTERCONNECT_ATTACHMENT = 2
+
+          # Spokes associated with router appliance instances.
+          ROUTER_APPLIANCE = 3
+
+          # Spokes associated with VPC networks.
+          VPC_NETWORK = 4
         end
       end
     end

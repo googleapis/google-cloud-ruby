@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/network_connectivity/v1/hub_service"
 
 class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientPathsTest < Minitest::Test
+  def test_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.group_path project: "value0", hub: "value1", group: "value2"
+      assert_equal "projects/value0/locations/global/hubs/value1/groups/value2", path
+    end
+  end
+
   def test_hub_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -32,6 +44,18 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientPathsTest < Mi
 
       path = client.hub_path project: "value0", hub: "value1"
       assert_equal "projects/value0/locations/global/hubs/value1", path
+    end
+  end
+
+  def test_hub_route_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.hub_route_path project: "value0", hub: "value1", route_table: "value2", route: "value3"
+      assert_equal "projects/value0/locations/global/hubs/value1/routeTables/value2/routes/value3", path
     end
   end
 
@@ -80,6 +104,18 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientPathsTest < Mi
 
       path = client.network_path project: "value0", resource_id: "value1"
       assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
+  def test_route_table_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.route_table_path project: "value0", hub: "value1", route_table: "value2"
+      assert_equal "projects/value0/locations/global/hubs/value1/routeTables/value2", path
     end
   end
 
