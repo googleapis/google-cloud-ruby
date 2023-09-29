@@ -173,6 +173,9 @@ module Google
         # @!attribute [rw] web_authn
         #   @return [::Google::Cloud::OsLogin::V1beta::WebAuthn]
         #     The Web Authentication protocol type.
+        # @!attribute [rw] device_nickname
+        #   @return [::String]
+        #     The security key nickname explicitly set by the user.
         class SecurityKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
