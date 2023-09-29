@@ -378,6 +378,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     query_params = {}
     assist_query_params = {}
     cx_parameters = {}
+    enable_extended_streaming = true
     enable_partial_automated_agent_reply = true
     enable_debugging_info = true
 
@@ -395,8 +396,8 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
+      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
       enum_input = [request_hash, request_proto].to_enum
       client.streaming_analyze_content enum_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -407,8 +408,8 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
+      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
       stream_input = Gapic::StreamInput.new
       client.streaming_analyze_content stream_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -422,8 +423,8 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
+      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
       enum_input = [request_hash, request_proto].to_enum
       client.streaming_analyze_content enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -434,8 +435,8 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
+      request_hash = { participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new participant: participant, audio_config: audio_config, reply_audio_config: reply_audio_config, input_audio: input_audio, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, enable_extended_streaming: enable_extended_streaming, enable_partial_automated_agent_reply: enable_partial_automated_agent_reply, enable_debugging_info: enable_debugging_info
       stream_input = Gapic::StreamInput.new
       client.streaming_analyze_content stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -462,6 +463,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), r["query_params"]
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::AssistQueryParameters), r["assist_query_params"]
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), r["cx_parameters"]
+          assert_equal true, r["enable_extended_streaming"]
           assert_equal true, r["enable_partial_automated_agent_reply"]
           assert_equal true, r["enable_debugging_info"]
         end

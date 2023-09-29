@@ -436,6 +436,27 @@ module Google
         #
         #     Note: this field should only be used if you are connecting to a Dialogflow
         #     CX agent.
+        # @!attribute [rw] enable_extended_streaming
+        #   @return [::Boolean]
+        #     Optional. Enable full bidirectional streaming. You can keep streaming the
+        #     audio until timeout, and there's no need to half close the stream to get
+        #     the response.
+        #
+        #     Restrictions:
+        #
+        #     - Timeout: 3 mins.
+        #     - Audio Encoding: only supports
+        #     {::Google::Cloud::Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_LINEAR_16 AudioEncoding.AUDIO_ENCODING_LINEAR_16}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_MULAW AudioEncoding.AUDIO_ENCODING_MULAW}
+        #     - Lifecycle: conversation should be in `Assist Stage`, go to
+        #       [Conversation.CreateConversation][] for more information.
+        #
+        #     InvalidArgument Error will be returned if the one of restriction checks
+        #     failed.
+        #
+        #     You can find more details in
+        #     https://cloud.google.com/agent-assist/docs/extended-streaming
         # @!attribute [rw] enable_partial_automated_agent_reply
         #   @return [::Boolean]
         #     Enable partial virtual agent responses. If this flag is not enabled,
