@@ -226,11 +226,11 @@ module Google
             #   @param parent [::String]
             #     Required. The parent resource's name.
             #   @param page_size [::Integer]
-            #     The maximum number of results per page that should be returned.
+            #     The maximum number of results per page to return.
             #   @param page_token [::String]
             #     The page token.
             #   @param filter [::String]
-            #     An expression that filters the results listed in the response.
+            #     An expression that filters the list of results.
             #   @param order_by [::String]
             #     Sort the results by a certain order.
             #
@@ -413,11 +413,11 @@ module Google
             #   @param hub [::Google::Cloud::NetworkConnectivity::V1::Hub, ::Hash]
             #     Required. The initial values for a new hub.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -528,11 +528,11 @@ module Google
             #   @param hub [::Google::Cloud::NetworkConnectivity::V1::Hub, ::Hash]
             #     Required. The state that the hub should be in after the update.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -636,11 +636,11 @@ module Google
             #   @param name [::String]
             #     Required. The name of the hub to delete.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -724,6 +724,119 @@ module Google
             end
 
             ##
+            # Lists the Network Connectivity Center spokes associated with a
+            # specified hub and location. The list includes both spokes that are attached
+            # to the hub and spokes that have been proposed but not yet accepted.
+            #
+            # @overload list_hub_spokes(request, options = nil)
+            #   Pass arguments to `list_hub_spokes` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_hub_spokes(name: nil, spoke_locations: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, view: nil)
+            #   Pass arguments to `list_hub_spokes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the hub.
+            #   @param spoke_locations [::Array<::String>]
+            #     A list of locations.
+            #     Specify one of the following: `[global]`, a single region (for
+            #     example, `[us-central1]`), or a combination of
+            #     values (for example, `[global, us-central1, us-west1]`).
+            #     If the spoke_locations field is populated, the list of results
+            #     includes only spokes in the specified location.
+            #     If the spoke_locations field is not populated, the list of results
+            #     includes spokes in all locations.
+            #   @param page_size [::Integer]
+            #     The maximum number of results to return per page.
+            #   @param page_token [::String]
+            #     The page token.
+            #   @param filter [::String]
+            #     An expression that filters the list of results.
+            #   @param order_by [::String]
+            #     Sort the results by name or create_time.
+            #   @param view [::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest::SpokeView]
+            #     The view of the spoke to return.
+            #     The view that you use determines which spoke fields are included in the
+            #     response.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::Spoke>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::Spoke>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest.new
+            #
+            #   # Call the list_hub_spokes method.
+            #   result = client.list_hub_spokes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkConnectivity::V1::Spoke.
+            #     p item
+            #   end
+            #
+            def list_hub_spokes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_hub_spokes.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_hub_spokes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_hub_spokes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :list_hub_spokes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @hub_service_stub, :list_hub_spokes, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the Network Connectivity Center spokes in a specified project and
             # location.
             #
@@ -745,11 +858,11 @@ module Google
             #   @param parent [::String]
             #     Required. The parent resource.
             #   @param page_size [::Integer]
-            #     The maximum number of results per page that should be returned.
+            #     The maximum number of results to return per page.
             #   @param page_token [::String]
             #     The page token.
             #   @param filter [::String]
-            #     An expression that filters the results listed in the response.
+            #     An expression that filters the list of results.
             #   @param order_by [::String]
             #     Sort the results by a certain order.
             #
@@ -932,11 +1045,11 @@ module Google
             #   @param spoke [::Google::Cloud::NetworkConnectivity::V1::Spoke, ::Hash]
             #     Required. The initial values for a new spoke.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -1046,11 +1159,11 @@ module Google
             #   @param spoke [::Google::Cloud::NetworkConnectivity::V1::Spoke, ::Hash]
             #     Required. The state that the spoke should be in after the update.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -1134,6 +1247,232 @@ module Google
             end
 
             ##
+            # Rejects a Network Connectivity Center spoke from being attached to a hub.
+            # If the spoke was previously in the `ACTIVE` state, it
+            # transitions to the `INACTIVE` state and is no longer able to
+            # connect to other spokes that are attached to the hub.
+            #
+            # @overload reject_hub_spoke(request, options = nil)
+            #   Pass arguments to `reject_hub_spoke` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload reject_hub_spoke(name: nil, spoke_uri: nil, request_id: nil, details: nil)
+            #   Pass arguments to `reject_hub_spoke` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the hub from which to reject the spoke.
+            #   @param spoke_uri [::String]
+            #     Required. The URI of the spoke to reject from the hub.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check to see whether the original operation
+            #     was received. If it was, the server ignores the second request. This
+            #     behavior prevents clients from mistakenly creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID, with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param details [::String]
+            #     Optional. Additional information provided by the hub administrator.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest.new
+            #
+            #   # Call the reject_hub_spoke method.
+            #   result = client.reject_hub_spoke request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def reject_hub_spoke request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.reject_hub_spoke.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.reject_hub_spoke.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.reject_hub_spoke.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :reject_hub_spoke, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Accepts a proposal to attach a Network Connectivity Center spoke
+            # to a hub.
+            #
+            # @overload accept_hub_spoke(request, options = nil)
+            #   Pass arguments to `accept_hub_spoke` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload accept_hub_spoke(name: nil, spoke_uri: nil, request_id: nil)
+            #   Pass arguments to `accept_hub_spoke` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the hub into which to accept the spoke.
+            #   @param spoke_uri [::String]
+            #     Required. The URI of the spoke to accept into the hub.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check to see whether the original operation
+            #     was received. If it was, the server ignores the second request. This
+            #     behavior prevents clients from mistakenly creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID, with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest.new
+            #
+            #   # Call the accept_hub_spoke method.
+            #   result = client.accept_hub_spoke request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def accept_hub_spoke request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.accept_hub_spoke.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.accept_hub_spoke.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.accept_hub_spoke.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :accept_hub_spoke, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a Network Connectivity Center spoke.
             #
             # @overload delete_spoke(request, options = nil)
@@ -1154,11 +1493,11 @@ module Google
             #   @param name [::String]
             #     Required. The name of the spoke to delete.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -1234,6 +1573,555 @@ module Google
 
               @hub_service_stub.call_rpc :delete_spoke, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details about a Network Connectivity Center route table.
+            #
+            # @overload get_route_table(request, options = nil)
+            #   Pass arguments to `get_route_table` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_route_table(name: nil)
+            #   Pass arguments to `get_route_table` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the route table resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkConnectivity::V1::RouteTable]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkConnectivity::V1::RouteTable]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest.new
+            #
+            #   # Call the get_route_table method.
+            #   result = client.get_route_table request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkConnectivity::V1::RouteTable.
+            #   p result
+            #
+            def get_route_table request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_route_table.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_route_table.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_route_table.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :get_route_table, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details about the specified route.
+            #
+            # @overload get_route(request, options = nil)
+            #   Pass arguments to `get_route` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_route(name: nil)
+            #   Pass arguments to `get_route` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the route resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkConnectivity::V1::Route]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkConnectivity::V1::Route]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::GetRouteRequest.new
+            #
+            #   # Call the get_route method.
+            #   result = client.get_route request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkConnectivity::V1::Route.
+            #   p result
+            #
+            def get_route request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_route.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_route.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_route.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :get_route, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists routes in a given project.
+            #
+            # @overload list_routes(request, options = nil)
+            #   Pass arguments to `list_routes` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_routes(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_routes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource's name.
+            #   @param page_size [::Integer]
+            #     The maximum number of results to return per page.
+            #   @param page_token [::String]
+            #     The page token.
+            #   @param filter [::String]
+            #     An expression that filters the list of results.
+            #   @param order_by [::String]
+            #     Sort the results by a certain order.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::Route>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::Route>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest.new
+            #
+            #   # Call the list_routes method.
+            #   result = client.list_routes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkConnectivity::V1::Route.
+            #     p item
+            #   end
+            #
+            def list_routes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_routes.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_routes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_routes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :list_routes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @hub_service_stub, :list_routes, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists route tables in a given project.
+            #
+            # @overload list_route_tables(request, options = nil)
+            #   Pass arguments to `list_route_tables` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_route_tables(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_route_tables` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource's name.
+            #   @param page_size [::Integer]
+            #     The maximum number of results to return per page.
+            #   @param page_token [::String]
+            #     The page token.
+            #   @param filter [::String]
+            #     An expression that filters the list of results.
+            #   @param order_by [::String]
+            #     Sort the results by a certain order.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::RouteTable>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::RouteTable>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest.new
+            #
+            #   # Call the list_route_tables method.
+            #   result = client.list_route_tables request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkConnectivity::V1::RouteTable.
+            #     p item
+            #   end
+            #
+            def list_route_tables request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_route_tables.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_route_tables.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_route_tables.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :list_route_tables, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @hub_service_stub, :list_route_tables, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details about a Network Connectivity Center group.
+            #
+            # @overload get_group(request, options = nil)
+            #   Pass arguments to `get_group` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_group(name: nil)
+            #   Pass arguments to `get_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the route table resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkConnectivity::V1::Group]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkConnectivity::V1::Group]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::GetGroupRequest.new
+            #
+            #   # Call the get_group method.
+            #   result = client.get_group request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkConnectivity::V1::Group.
+            #   p result
+            #
+            def get_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_group.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :get_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists groups in a given hub.
+            #
+            # @overload list_groups(request, options = nil)
+            #   Pass arguments to `list_groups` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_groups(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_groups` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource's name.
+            #   @param page_size [::Integer]
+            #     The maximum number of results to return per page.
+            #   @param page_token [::String]
+            #     The page token.
+            #   @param filter [::String]
+            #     An expression that filters the list of results.
+            #   @param order_by [::String]
+            #     Sort the results by a certain order.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::Group>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkConnectivity::V1::Group>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest.new
+            #
+            #   # Call the list_groups method.
+            #   result = client.list_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkConnectivity::V1::Group.
+            #     p item
+            #   end
+            #
+            def list_groups request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_groups.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_groups.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_groups.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :list_groups, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @hub_service_stub, :list_groups, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -1412,6 +2300,11 @@ module Google
                 #
                 attr_reader :delete_hub
                 ##
+                # RPC-specific configuration for `list_hub_spokes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_hub_spokes
+                ##
                 # RPC-specific configuration for `list_spokes`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1432,10 +2325,50 @@ module Google
                 #
                 attr_reader :update_spoke
                 ##
+                # RPC-specific configuration for `reject_hub_spoke`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :reject_hub_spoke
+                ##
+                # RPC-specific configuration for `accept_hub_spoke`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :accept_hub_spoke
+                ##
                 # RPC-specific configuration for `delete_spoke`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_spoke
+                ##
+                # RPC-specific configuration for `get_route_table`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_route_table
+                ##
+                # RPC-specific configuration for `get_route`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_route
+                ##
+                # RPC-specific configuration for `list_routes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_routes
+                ##
+                # RPC-specific configuration for `list_route_tables`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_route_tables
+                ##
+                # RPC-specific configuration for `get_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_group
+                ##
+                # RPC-specific configuration for `list_groups`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_groups
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1449,6 +2382,8 @@ module Google
                   @update_hub = ::Gapic::Config::Method.new update_hub_config
                   delete_hub_config = parent_rpcs.delete_hub if parent_rpcs.respond_to? :delete_hub
                   @delete_hub = ::Gapic::Config::Method.new delete_hub_config
+                  list_hub_spokes_config = parent_rpcs.list_hub_spokes if parent_rpcs.respond_to? :list_hub_spokes
+                  @list_hub_spokes = ::Gapic::Config::Method.new list_hub_spokes_config
                   list_spokes_config = parent_rpcs.list_spokes if parent_rpcs.respond_to? :list_spokes
                   @list_spokes = ::Gapic::Config::Method.new list_spokes_config
                   get_spoke_config = parent_rpcs.get_spoke if parent_rpcs.respond_to? :get_spoke
@@ -1457,8 +2392,24 @@ module Google
                   @create_spoke = ::Gapic::Config::Method.new create_spoke_config
                   update_spoke_config = parent_rpcs.update_spoke if parent_rpcs.respond_to? :update_spoke
                   @update_spoke = ::Gapic::Config::Method.new update_spoke_config
+                  reject_hub_spoke_config = parent_rpcs.reject_hub_spoke if parent_rpcs.respond_to? :reject_hub_spoke
+                  @reject_hub_spoke = ::Gapic::Config::Method.new reject_hub_spoke_config
+                  accept_hub_spoke_config = parent_rpcs.accept_hub_spoke if parent_rpcs.respond_to? :accept_hub_spoke
+                  @accept_hub_spoke = ::Gapic::Config::Method.new accept_hub_spoke_config
                   delete_spoke_config = parent_rpcs.delete_spoke if parent_rpcs.respond_to? :delete_spoke
                   @delete_spoke = ::Gapic::Config::Method.new delete_spoke_config
+                  get_route_table_config = parent_rpcs.get_route_table if parent_rpcs.respond_to? :get_route_table
+                  @get_route_table = ::Gapic::Config::Method.new get_route_table_config
+                  get_route_config = parent_rpcs.get_route if parent_rpcs.respond_to? :get_route
+                  @get_route = ::Gapic::Config::Method.new get_route_config
+                  list_routes_config = parent_rpcs.list_routes if parent_rpcs.respond_to? :list_routes
+                  @list_routes = ::Gapic::Config::Method.new list_routes_config
+                  list_route_tables_config = parent_rpcs.list_route_tables if parent_rpcs.respond_to? :list_route_tables
+                  @list_route_tables = ::Gapic::Config::Method.new list_route_tables_config
+                  get_group_config = parent_rpcs.get_group if parent_rpcs.respond_to? :get_group
+                  @get_group = ::Gapic::Config::Method.new get_group_config
+                  list_groups_config = parent_rpcs.list_groups if parent_rpcs.respond_to? :list_groups
+                  @list_groups = ::Gapic::Config::Method.new list_groups_config
 
                   yield self if block_given?
                 end
