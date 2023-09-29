@@ -407,7 +407,7 @@
   "google-cloud-metastore+FILLER": "0.0.0",
   "google-cloud-metastore-v1": "0.10.0",
   "google-cloud-metastore-v1+FILLER": "0.0.0",
-  "google-cloud-metastore-v1beta": "0.10.0",
+  "google-cloud-metastore-v1beta": "0.11.0",
   "google-cloud-metastore-v1beta+FILLER": "0.0.0",
   "google-cloud-migration_center": "0.1.0",
   "google-cloud-migration_center+FILLER": "0.0.0",
