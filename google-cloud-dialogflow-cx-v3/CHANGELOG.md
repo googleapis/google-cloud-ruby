@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.22.0 (2023-09-29)
+
+#### Features
+
+* support advanced_settings and enable_generative_fallback for Fulfillment 
+* support import and export intent  
+
 ### 0.21.0 (2023-09-12)
 
 #### Features
