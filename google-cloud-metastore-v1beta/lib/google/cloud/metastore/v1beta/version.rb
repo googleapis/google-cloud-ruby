@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Metastore
       module V1beta
-        VERSION = "0.10.0"
+        VERSION = "0.11.0"
       end
     end
   end
