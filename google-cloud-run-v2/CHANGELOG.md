@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.12.0 (2023-09-29)
+
+#### Features
+
+* support cancel execution 
+* support container overrides 
+* support for Direct VPC egress setting 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features
