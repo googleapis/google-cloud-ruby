@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.0 (2023-09-29)
+
+#### Features
+
+* add dataset_spec and model_spec to Entry and enable vertex AI ingestion to dataplex 
+
 ### 0.19.0 (2023-09-12)
 
 #### Features
