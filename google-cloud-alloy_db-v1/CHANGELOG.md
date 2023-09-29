@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2023-09-29)
+
+#### Features
+
+* support generate client certificate and get connection info for auth proxy 
+
 ### 0.5.0 (2023-09-22)
 
 #### Features
