@@ -1,0 +1,935 @@
+{
+  "client_library": {
+    "name": "google-cloud-network_connectivity-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.networkconnectivity.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_ListHubs_sync",
+      "title": "Snippet for the list_hubs call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs. It may require modification in order to execute successfully.",
+      "file": "hub_service/list_hubs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hubs",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListHubsResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListHubs",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.ListHubs",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_GetHub_sync",
+      "title": "Snippet for the get_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_hub. It may require modification in order to execute successfully.",
+      "file": "hub_service/get_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::Hub",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetHub",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.GetHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_CreateHub_sync",
+      "title": "Snippet for the create_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_hub. It may require modification in order to execute successfully.",
+      "file": "hub_service/create_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "CreateHub",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.CreateHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_UpdateHub_sync",
+      "title": "Snippet for the update_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_hub. It may require modification in order to execute successfully.",
+      "file": "hub_service/update_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateHub",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.UpdateHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_DeleteHub_sync",
+      "title": "Snippet for the delete_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_hub. It may require modification in order to execute successfully.",
+      "file": "hub_service/delete_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteHub",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.DeleteHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_ListHubSpokes_sync",
+      "title": "Snippet for the list_hub_spokes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hub_spokes. It may require modification in order to execute successfully.",
+      "file": "hub_service/list_hub_spokes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hub_spokes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hub_spokes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListHubSpokes",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.ListHubSpokes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_ListSpokes_sync",
+      "title": "Snippet for the list_spokes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes. It may require modification in order to execute successfully.",
+      "file": "hub_service/list_spokes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_spokes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListSpokesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListSpokes",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.ListSpokes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_GetSpoke_sync",
+      "title": "Snippet for the get_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_spoke. It may require modification in order to execute successfully.",
+      "file": "hub_service/get_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::Spoke",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.GetSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_CreateSpoke_sync",
+      "title": "Snippet for the create_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_spoke. It may require modification in order to execute successfully.",
+      "file": "hub_service/create_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "CreateSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.CreateSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_UpdateSpoke_sync",
+      "title": "Snippet for the update_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_spoke. It may require modification in order to execute successfully.",
+      "file": "hub_service/update_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.UpdateSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_RejectHubSpoke_sync",
+      "title": "Snippet for the reject_hub_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_hub_spoke. It may require modification in order to execute successfully.",
+      "file": "hub_service/reject_hub_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reject_hub_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_hub_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "RejectHubSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.RejectHubSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_AcceptHubSpoke_sync",
+      "title": "Snippet for the accept_hub_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_hub_spoke. It may require modification in order to execute successfully.",
+      "file": "hub_service/accept_hub_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "accept_hub_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_hub_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "AcceptHubSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.AcceptHubSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_DeleteSpoke_sync",
+      "title": "Snippet for the delete_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_spoke. It may require modification in order to execute successfully.",
+      "file": "hub_service/delete_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.DeleteSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_GetRouteTable_sync",
+      "title": "Snippet for the get_route_table call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route_table. It may require modification in order to execute successfully.",
+      "file": "hub_service/get_route_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_route_table",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::RouteTable",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetRouteTable",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.GetRouteTable",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_GetRoute_sync",
+      "title": "Snippet for the get_route call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route. It may require modification in order to execute successfully.",
+      "file": "hub_service/get_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::Route",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetRoute",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.GetRoute",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_ListRoutes_sync",
+      "title": "Snippet for the list_routes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_routes. It may require modification in order to execute successfully.",
+      "file": "hub_service/list_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_routes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListRoutesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListRoutes",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.ListRoutes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_ListRouteTables_sync",
+      "title": "Snippet for the list_route_tables call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_route_tables. It may require modification in order to execute successfully.",
+      "file": "hub_service/list_route_tables.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_route_tables",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_route_tables",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListRouteTables",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.ListRouteTables",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_GetGroup_sync",
+      "title": "Snippet for the get_group call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_group. It may require modification in order to execute successfully.",
+      "file": "hub_service/get_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_group",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::Group",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetGroup",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.GetGroup",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_ListGroups_sync",
+      "title": "Snippet for the list_groups call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_groups. It may require modification in order to execute successfully.",
+      "file": "hub_service/list_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_groups",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListGroupsResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListGroups",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.ListGroups",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_PolicyBasedRoutingService_ListPolicyBasedRoutes_sync",
+      "title": "Snippet for the list_policy_based_routes call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#list_policy_based_routes. It may require modification in order to execute successfully.",
+      "file": "policy_based_routing_service/list_policy_based_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_policy_based_routes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#list_policy_based_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListPolicyBasedRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListPolicyBasedRoutesResponse",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "ListPolicyBasedRoutes",
+          "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.ListPolicyBasedRoutes",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_PolicyBasedRoutingService_GetPolicyBasedRoute_sync",
+      "title": "Snippet for the get_policy_based_route call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#get_policy_based_route. It may require modification in order to execute successfully.",
+      "file": "policy_based_routing_service/get_policy_based_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy_based_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#get_policy_based_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetPolicyBasedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "GetPolicyBasedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.GetPolicyBasedRoute",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_PolicyBasedRoutingService_CreatePolicyBasedRoute_sync",
+      "title": "Snippet for the create_policy_based_route call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#create_policy_based_route. It may require modification in order to execute successfully.",
+      "file": "policy_based_routing_service/create_policy_based_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_policy_based_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#create_policy_based_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreatePolicyBasedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "CreatePolicyBasedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.CreatePolicyBasedRoute",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_sync",
+      "title": "Snippet for the delete_policy_based_route call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#delete_policy_based_route. It may require modification in order to execute successfully.",
+      "file": "policy_based_routing_service/delete_policy_based_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_policy_based_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#delete_policy_based_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeletePolicyBasedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "DeletePolicyBasedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.DeletePolicyBasedRoute",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
