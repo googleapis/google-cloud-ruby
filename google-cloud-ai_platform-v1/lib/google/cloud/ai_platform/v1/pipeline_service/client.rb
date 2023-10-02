@@ -711,7 +711,7 @@ module Google
             #     generated.
             #
             #     This value should be less than 128 characters, and valid characters
-            #     are /[a-z][0-9]-/.
+            #     are `/[a-z][0-9]-/`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::PipelineJob]

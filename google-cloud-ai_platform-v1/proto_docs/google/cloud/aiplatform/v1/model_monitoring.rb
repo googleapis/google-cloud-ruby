@@ -215,6 +215,11 @@ module Google
         #     [google.cloud.aiplatform.logging.ModelMonitoringAnomaliesLogEntry][].
         #     This can be further sinked to Pub/Sub or any other services supported
         #     by Cloud Logging.
+        # @!attribute [rw] notification_channels
+        #   @return [::Array<::String>]
+        #     Resource names of the NotificationChannels to send alert.
+        #     Must be of the format
+        #     `projects/<project_id_or_number>/notificationChannels/<channel_id>`
         class ModelMonitoringAlertConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

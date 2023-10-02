@@ -221,7 +221,7 @@ module Google
         #     final component of the Tensorboard experiment's resource name.
         #
         #     This value should be 1-128 characters, and valid characters
-        #     are /[a-z][0-9]-/.
+        #     are `/[a-z][0-9]-/`.
         class CreateTensorboardExperimentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -367,7 +367,7 @@ module Google
         #     component of the Tensorboard run's resource name.
         #
         #     This value should be 1-128 characters, and valid characters
-        #     are /[a-z][0-9]-/.
+        #     are `/[a-z][0-9]-/`.
         class CreateTensorboardRunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

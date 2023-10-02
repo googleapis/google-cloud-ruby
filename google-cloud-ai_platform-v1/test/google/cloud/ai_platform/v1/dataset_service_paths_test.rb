@@ -59,6 +59,18 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
     end
   end
 
+  def test_dataset_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dataset_version_path project: "value0", location: "value1", dataset: "value2", dataset_version: "value3"
+      assert_equal "projects/value0/locations/value1/datasets/value2/datasetVersions/value3", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
