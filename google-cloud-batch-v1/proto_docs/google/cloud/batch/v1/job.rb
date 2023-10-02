@@ -329,6 +329,7 @@ module Google
           #     * `batch-centos`: use Batch CentOS images.
           #     * `batch-cos`: use Batch Container-Optimized images.
           #     * `batch-hpc-centos`: use Batch HPC CentOS images.
+          #     * `batch-hpc-rocky`: use Batch HPC Rocky Linux images.
           # @!attribute [rw] snapshot
           #   @return [::String]
           #     Name of a snapshot used as the data source.
@@ -443,6 +444,10 @@ module Google
           #     A non-boot disk is a disk that can be of a device with a
           #     file system or a raw storage drive that is not ready for data
           #     storage and accessing.
+          # @!attribute [rw] reservation
+          #   @return [::String]
+          #     Optional. If specified, VMs will consume only the specified reservation.
+          #     If not specified (default), VMs will consume any applicable reservation.
           class InstancePolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
