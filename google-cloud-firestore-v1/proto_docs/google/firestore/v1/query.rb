@@ -330,11 +330,12 @@ module Google
           # A reference to a field in a document, ex: `stats.operations`.
           # @!attribute [rw] field_path
           #   @return [::String]
-          #     The relative path of the document being referenced.
+          #     A reference to a field in a document.
           #
           #     Requires:
           #
-          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name}
+          #     * MUST be a dot-delimited (`.`) string of segments, where each segment
+          #     conforms to {::Google::Cloud::Firestore::V1::Document#fields document field name}
           #     limitations.
           class FieldReference
             include ::Google::Protobuf::MessageExts
