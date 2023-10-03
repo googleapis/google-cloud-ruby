@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.8.0 (2023-10-03)
+
+#### Features
+
+* support accept_hub_spoke, list_hub_spokes, reject_hub_spoke apis 
+* support list_groups, get_group, get_route, get_route_table, list_route_tables, list_routes apis 
+
 ### 0.7.0 (2023-09-12)
 
 #### Features
