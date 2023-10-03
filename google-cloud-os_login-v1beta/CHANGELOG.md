@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2023-10-03)
+
+#### Features
+
+* add device_nickname for SecurityKey 
+
 ### 0.10.0 (2023-09-12)
 
 #### Features
