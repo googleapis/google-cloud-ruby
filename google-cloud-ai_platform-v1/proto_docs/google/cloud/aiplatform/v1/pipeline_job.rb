@@ -114,7 +114,9 @@ module Google
         #   @return [::String]
         #     A template uri from where the
         #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec},
-        #     if empty, will be downloaded.
+        #     if empty, will be downloaded. Currently, only uri from Vertex Template
+        #     Registry & Gallery is supported. Reference to
+        #     https://cloud.google.com/vertex-ai/docs/pipelines/create-pipeline-template.
         # @!attribute [r] template_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineTemplateMetadata]
         #     Output only. Pipeline template metadata. Will fill up fields if

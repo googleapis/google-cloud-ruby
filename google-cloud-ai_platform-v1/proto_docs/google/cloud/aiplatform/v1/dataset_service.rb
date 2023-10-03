@@ -219,8 +219,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#create_dataset_version DatasetService.CreateDatasetVersion}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the Dataset resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}`
+        # @!attribute [rw] dataset_version
+        #   @return [::Google::Cloud::AIPlatform::V1::DatasetVersion]
+        #     Required. The version to be created. The same CMEK policies with the
+        #     original Dataset will be applied the dataset version. So here we don't need
+        #     to specify the EncryptionSpecType here.
+        class CreateDatasetVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Runtime operation information for
-        # [DatasetService.CreateDatasetVersion][google.cloud.aiplatform.v1.DatasetService.CreateDatasetVersion].
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#create_dataset_version DatasetService.CreateDatasetVersion}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The common part of the operation metadata.
@@ -229,8 +246,88 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#delete_dataset_version DatasetService.DeleteDatasetVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Dataset version to delete.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+        class DeleteDatasetVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#get_dataset_version DatasetService.GetDatasetVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Dataset version to delete.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask specifying which fields to read.
+        class GetDatasetVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_dataset_versions DatasetService.ListDatasetVersions}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Dataset to list DatasetVersions from.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The standard list filter.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The standard list page token.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Mask specifying which fields to read.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields to order by, sorted in ascending
+        #     order. Use "desc" after a field name for descending.
+        class ListDatasetVersionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_dataset_versions DatasetService.ListDatasetVersions}.
+        # @!attribute [rw] dataset_versions
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::DatasetVersion>]
+        #     A list of DatasetVersions that matches the specified filter in the request.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The standard List next-page token.
+        class ListDatasetVersionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#restore_dataset_version DatasetService.RestoreDatasetVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DatasetVersion resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+        class RestoreDatasetVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Runtime operation information for
-        # [DatasetService.RestoreDatasetVersion][google.cloud.aiplatform.v1.DatasetService.RestoreDatasetVersion].
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#restore_dataset_version DatasetService.RestoreDatasetVersion}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The common part of the operation metadata.
