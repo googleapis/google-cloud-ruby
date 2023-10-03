@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Iap
       module V1
-        VERSION = "0.8.1"
+        VERSION = "0.10.1"
       end
     end
   end

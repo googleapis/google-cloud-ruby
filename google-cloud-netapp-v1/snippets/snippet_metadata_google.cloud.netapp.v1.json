@@ -1,0 +1,1455 @@
+{
+  "client_library": {
+    "name": "google-cloud-netapp-v1",
+    "version": "0.2.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.netapp.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListStoragePools_sync",
+      "title": "Snippet for the list_storage_pools call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_storage_pools. It may require modification in order to execute successfully.",
+      "file": "netapp/list_storage_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_storage_pools",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_storage_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListStoragePoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListStoragePoolsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListStoragePools",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListStoragePools",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateStoragePool_sync",
+      "title": "Snippet for the create_storage_pool call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_storage_pool. It may require modification in order to execute successfully.",
+      "file": "netapp/create_storage_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_storage_pool",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_storage_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateStoragePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateStoragePool",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateStoragePool",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetStoragePool_sync",
+      "title": "Snippet for the get_storage_pool call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_storage_pool. It may require modification in order to execute successfully.",
+      "file": "netapp/get_storage_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_storage_pool",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_storage_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetStoragePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::StoragePool",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetStoragePool",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetStoragePool",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateStoragePool_sync",
+      "title": "Snippet for the update_storage_pool call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_storage_pool. It may require modification in order to execute successfully.",
+      "file": "netapp/update_storage_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_storage_pool",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_storage_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateStoragePool",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateStoragePool",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteStoragePool_sync",
+      "title": "Snippet for the delete_storage_pool call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_storage_pool. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_storage_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_storage_pool",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_storage_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteStoragePool",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteStoragePool",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListVolumes_sync",
+      "title": "Snippet for the list_volumes call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_volumes. It may require modification in order to execute successfully.",
+      "file": "netapp/list_volumes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_volumes",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_volumes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListVolumesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListVolumesResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListVolumes",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListVolumes",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetVolume_sync",
+      "title": "Snippet for the get_volume call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_volume. It may require modification in order to execute successfully.",
+      "file": "netapp/get_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_volume",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::Volume",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetVolume",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetVolume",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateVolume_sync",
+      "title": "Snippet for the create_volume call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_volume. It may require modification in order to execute successfully.",
+      "file": "netapp/create_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_volume",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateVolume",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateVolume",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateVolume_sync",
+      "title": "Snippet for the update_volume call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_volume. It may require modification in order to execute successfully.",
+      "file": "netapp/update_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_volume",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateVolume",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateVolume",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteVolume_sync",
+      "title": "Snippet for the delete_volume call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_volume. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_volume",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteVolume",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteVolume",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_RevertVolume_sync",
+      "title": "Snippet for the revert_volume call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#revert_volume. It may require modification in order to execute successfully.",
+      "file": "netapp/revert_volume.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "revert_volume",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#revert_volume",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::RevertVolumeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "RevertVolume",
+          "full_name": "google.cloud.netapp.v1.NetApp.RevertVolume",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListSnapshots_sync",
+      "title": "Snippet for the list_snapshots call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_snapshots. It may require modification in order to execute successfully.",
+      "file": "netapp/list_snapshots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snapshots",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_snapshots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListSnapshotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListSnapshotsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListSnapshots",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListSnapshots",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetSnapshot_sync",
+      "title": "Snippet for the get_snapshot call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_snapshot. It may require modification in order to execute successfully.",
+      "file": "netapp/get_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snapshot",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::Snapshot",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetSnapshot",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetSnapshot",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateSnapshot_sync",
+      "title": "Snippet for the create_snapshot call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_snapshot. It may require modification in order to execute successfully.",
+      "file": "netapp/create_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_snapshot",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateSnapshot",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateSnapshot",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteSnapshot_sync",
+      "title": "Snippet for the delete_snapshot call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_snapshot. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_snapshot",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteSnapshot",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteSnapshot",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateSnapshot_sync",
+      "title": "Snippet for the update_snapshot call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_snapshot. It may require modification in order to execute successfully.",
+      "file": "netapp/update_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_snapshot",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateSnapshot",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateSnapshot",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListActiveDirectories_sync",
+      "title": "Snippet for the list_active_directories call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_active_directories. It may require modification in order to execute successfully.",
+      "file": "netapp/list_active_directories.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_active_directories",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_active_directories",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListActiveDirectoriesResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListActiveDirectories",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListActiveDirectories",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetActiveDirectory_sync",
+      "title": "Snippet for the get_active_directory call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_active_directory. It may require modification in order to execute successfully.",
+      "file": "netapp/get_active_directory.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_active_directory",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_active_directory",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ActiveDirectory",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetActiveDirectory",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetActiveDirectory",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateActiveDirectory_sync",
+      "title": "Snippet for the create_active_directory call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_active_directory. It may require modification in order to execute successfully.",
+      "file": "netapp/create_active_directory.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_active_directory",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_active_directory",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateActiveDirectory",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateActiveDirectory",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateActiveDirectory_sync",
+      "title": "Snippet for the update_active_directory call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_active_directory. It may require modification in order to execute successfully.",
+      "file": "netapp/update_active_directory.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_active_directory",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_active_directory",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateActiveDirectory",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateActiveDirectory",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteActiveDirectory_sync",
+      "title": "Snippet for the delete_active_directory call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_active_directory. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_active_directory.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_active_directory",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_active_directory",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteActiveDirectory",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteActiveDirectory",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListKmsConfigs_sync",
+      "title": "Snippet for the list_kms_configs call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_kms_configs. It may require modification in order to execute successfully.",
+      "file": "netapp/list_kms_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_kms_configs",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_kms_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListKmsConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListKmsConfigsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListKmsConfigs",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListKmsConfigs",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateKmsConfig_sync",
+      "title": "Snippet for the create_kms_config call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_kms_config. It may require modification in order to execute successfully.",
+      "file": "netapp/create_kms_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_kms_config",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_kms_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateKmsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateKmsConfig",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateKmsConfig",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetKmsConfig_sync",
+      "title": "Snippet for the get_kms_config call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_kms_config. It may require modification in order to execute successfully.",
+      "file": "netapp/get_kms_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_kms_config",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_kms_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetKmsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::KmsConfig",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetKmsConfig",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetKmsConfig",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateKmsConfig_sync",
+      "title": "Snippet for the update_kms_config call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_kms_config. It may require modification in order to execute successfully.",
+      "file": "netapp/update_kms_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_kms_config",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_kms_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateKmsConfig",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateKmsConfig",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_EncryptVolumes_sync",
+      "title": "Snippet for the encrypt_volumes call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#encrypt_volumes. It may require modification in order to execute successfully.",
+      "file": "netapp/encrypt_volumes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "encrypt_volumes",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#encrypt_volumes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::EncryptVolumesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "EncryptVolumes",
+          "full_name": "google.cloud.netapp.v1.NetApp.EncryptVolumes",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_VerifyKmsConfig_sync",
+      "title": "Snippet for the verify_kms_config call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#verify_kms_config. It may require modification in order to execute successfully.",
+      "file": "netapp/verify_kms_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_kms_config",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#verify_kms_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::VerifyKmsConfigResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "VerifyKmsConfig",
+          "full_name": "google.cloud.netapp.v1.NetApp.VerifyKmsConfig",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteKmsConfig_sync",
+      "title": "Snippet for the delete_kms_config call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_kms_config. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_kms_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_kms_config",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_kms_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteKmsConfig",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteKmsConfig",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListReplications_sync",
+      "title": "Snippet for the list_replications call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_replications. It may require modification in order to execute successfully.",
+      "file": "netapp/list_replications.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_replications",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_replications",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListReplicationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListReplicationsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListReplications",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListReplications",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetReplication_sync",
+      "title": "Snippet for the get_replication call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_replication. It may require modification in order to execute successfully.",
+      "file": "netapp/get_replication.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_replication",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_replication",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetReplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::Replication",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetReplication",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetReplication",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateReplication_sync",
+      "title": "Snippet for the create_replication call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_replication. It may require modification in order to execute successfully.",
+      "file": "netapp/create_replication.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_replication",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_replication",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateReplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateReplication",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateReplication",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteReplication_sync",
+      "title": "Snippet for the delete_replication call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_replication. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_replication.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_replication",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_replication",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteReplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteReplication",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteReplication",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateReplication_sync",
+      "title": "Snippet for the update_replication call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_replication. It may require modification in order to execute successfully.",
+      "file": "netapp/update_replication.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_replication",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_replication",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateReplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateReplication",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateReplication",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_StopReplication_sync",
+      "title": "Snippet for the stop_replication call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#stop_replication. It may require modification in order to execute successfully.",
+      "file": "netapp/stop_replication.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_replication",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#stop_replication",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::StopReplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "StopReplication",
+          "full_name": "google.cloud.netapp.v1.NetApp.StopReplication",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ResumeReplication_sync",
+      "title": "Snippet for the resume_replication call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#resume_replication. It may require modification in order to execute successfully.",
+      "file": "netapp/resume_replication.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_replication",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#resume_replication",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ResumeReplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ResumeReplication",
+          "full_name": "google.cloud.netapp.v1.NetApp.ResumeReplication",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ReverseReplicationDirection_sync",
+      "title": "Snippet for the reverse_replication_direction call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#reverse_replication_direction. It may require modification in order to execute successfully.",
+      "file": "netapp/reverse_replication_direction.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reverse_replication_direction",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#reverse_replication_direction",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ReverseReplicationDirection",
+          "full_name": "google.cloud.netapp.v1.NetApp.ReverseReplicationDirection",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

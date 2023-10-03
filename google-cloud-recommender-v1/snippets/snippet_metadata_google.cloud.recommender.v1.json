@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-recommender-v1",
-    "version": "0.13.1",
+    "version": "0.15.0",
     "language": "RUBY",
     "apis": [
       {
@@ -195,6 +195,46 @@
         "method": {
           "short_name": "GetRecommendation",
           "full_name": "google.cloud.recommender.v1.Recommender.GetRecommendation",
+          "service": {
+            "short_name": "Recommender",
+            "full_name": "google.cloud.recommender.v1.Recommender"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "recommender_v1_generated_Recommender_MarkRecommendationDismissed_sync",
+      "title": "Snippet for the mark_recommendation_dismissed call in the Recommender service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_dismissed. It may require modification in order to execute successfully.",
+      "file": "recommender/mark_recommendation_dismissed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_recommendation_dismissed",
+        "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_dismissed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Recommender::V1::Recommendation",
+        "client": {
+          "short_name": "Recommender::Client",
+          "full_name": "::Google::Cloud::Recommender::V1::Recommender::Client"
+        },
+        "method": {
+          "short_name": "MarkRecommendationDismissed",
+          "full_name": "google.cloud.recommender.v1.Recommender.MarkRecommendationDismissed",
           "service": {
             "short_name": "Recommender",
             "full_name": "google.cloud.recommender.v1.Recommender"

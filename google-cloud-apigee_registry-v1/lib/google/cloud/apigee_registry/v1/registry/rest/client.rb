@@ -376,6 +376,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::Api>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListApisRequest.new
+              #
+              #   # Call the list_apis method.
+              #   result = client.list_apis request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::Api.
+              #     p item
+              #   end
+              #
               def list_apis request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -440,6 +460,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::Api]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetApiRequest.new
+              #
+              #   # Call the get_api method.
+              #   result = client.get_api request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Api.
+              #   p result
+              #
               def get_api request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -513,6 +549,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::Api]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new
+              #
+              #   # Call the create_api method.
+              #   result = client.create_api request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Api.
+              #   p result
+              #
               def create_api request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -586,6 +638,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::Api]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::UpdateApiRequest.new
+              #
+              #   # Call the update_api method.
+              #   result = client.update_api request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Api.
+              #   p result
+              #
               def update_api request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -653,6 +721,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new
+              #
+              #   # Call the delete_api method.
+              #   result = client.delete_api request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_api request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -730,6 +814,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::ApiVersion>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListApiVersionsRequest.new
+              #
+              #   # Call the list_api_versions method.
+              #   result = client.list_api_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::ApiVersion.
+              #     p item
+              #   end
+              #
               def list_api_versions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -794,6 +898,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new
+              #
+              #   # Call the get_api_version method.
+              #   result = client.get_api_version request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiVersion.
+              #   p result
+              #
               def get_api_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -867,6 +987,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::CreateApiVersionRequest.new
+              #
+              #   # Call the create_api_version method.
+              #   result = client.create_api_version request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiVersion.
+              #   p result
+              #
               def create_api_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -940,6 +1076,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiVersion]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::UpdateApiVersionRequest.new
+              #
+              #   # Call the update_api_version method.
+              #   result = client.update_api_version request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiVersion.
+              #   p result
+              #
               def update_api_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1007,6 +1159,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new
+              #
+              #   # Call the delete_api_version method.
+              #   result = client.delete_api_version request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_api_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1084,6 +1252,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::ApiSpec>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListApiSpecsRequest.new
+              #
+              #   # Call the list_api_specs method.
+              #   result = client.list_api_specs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #     p item
+              #   end
+              #
               def list_api_specs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1148,6 +1336,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetApiSpecRequest.new
+              #
+              #   # Call the get_api_spec method.
+              #   result = client.get_api_spec request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #   p result
+              #
               def get_api_spec request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1214,6 +1418,22 @@ module Google
               # @return [::Google::Api::HttpBody]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetApiSpecContentsRequest.new
+              #
+              #   # Call the get_api_spec_contents method.
+              #   result = client.get_api_spec_contents request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def get_api_spec_contents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1287,6 +1507,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::CreateApiSpecRequest.new
+              #
+              #   # Call the create_api_spec method.
+              #   result = client.create_api_spec request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #   p result
+              #
               def create_api_spec request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1360,6 +1596,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::UpdateApiSpecRequest.new
+              #
+              #   # Call the update_api_spec method.
+              #   result = client.update_api_spec request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #   p result
+              #
               def update_api_spec request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1427,6 +1679,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRequest.new
+              #
+              #   # Call the delete_api_spec method.
+              #   result = client.delete_api_spec request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_api_spec request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1492,6 +1760,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::TagApiSpecRevisionRequest.new
+              #
+              #   # Call the tag_api_spec_revision method.
+              #   result = client.tag_api_spec_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #   p result
+              #
               def tag_api_spec_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1560,6 +1844,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::ApiSpec>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListApiSpecRevisionsRequest.new
+              #
+              #   # Call the list_api_spec_revisions method.
+              #   result = client.list_api_spec_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #     p item
+              #   end
+              #
               def list_api_spec_revisions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1629,6 +1933,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::RollbackApiSpecRequest.new
+              #
+              #   # Call the rollback_api_spec method.
+              #   result = client.rollback_api_spec request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #   p result
+              #
               def rollback_api_spec request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1695,6 +2015,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRevisionRequest.new
+              #
+              #   # Call the delete_api_spec_revision method.
+              #   result = client.delete_api_spec_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiSpec.
+              #   p result
+              #
               def delete_api_spec_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1772,6 +2108,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::ApiDeployment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentsRequest.new
+              #
+              #   # Call the list_api_deployments method.
+              #   result = client.list_api_deployments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #     p item
+              #   end
+              #
               def list_api_deployments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1836,6 +2192,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetApiDeploymentRequest.new
+              #
+              #   # Call the get_api_deployment method.
+              #   result = client.get_api_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #   p result
+              #
               def get_api_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1909,6 +2281,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::CreateApiDeploymentRequest.new
+              #
+              #   # Call the create_api_deployment method.
+              #   result = client.create_api_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #   p result
+              #
               def create_api_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1982,6 +2370,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new
+              #
+              #   # Call the update_api_deployment method.
+              #   result = client.update_api_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #   p result
+              #
               def update_api_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2049,6 +2453,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRequest.new
+              #
+              #   # Call the delete_api_deployment method.
+              #   result = client.delete_api_deployment request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_api_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2115,6 +2535,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new
+              #
+              #   # Call the tag_api_deployment_revision method.
+              #   result = client.tag_api_deployment_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #   p result
+              #
               def tag_api_deployment_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2183,6 +2619,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::ApiDeployment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentRevisionsRequest.new
+              #
+              #   # Call the list_api_deployment_revisions method.
+              #   result = client.list_api_deployment_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #     p item
+              #   end
+              #
               def list_api_deployment_revisions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2252,6 +2708,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::RollbackApiDeploymentRequest.new
+              #
+              #   # Call the rollback_api_deployment method.
+              #   result = client.rollback_api_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #   p result
+              #
               def rollback_api_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2318,6 +2790,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRevisionRequest.new
+              #
+              #   # Call the delete_api_deployment_revision method.
+              #   result = client.delete_api_deployment_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+              #   p result
+              #
               def delete_api_deployment_revision request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2395,6 +2883,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApigeeRegistry::V1::Artifact>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ListArtifactsRequest.new
+              #
+              #   # Call the list_artifacts method.
+              #   result = client.list_artifacts request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApigeeRegistry::V1::Artifact.
+              #     p item
+              #   end
+              #
               def list_artifacts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2459,6 +2967,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::Artifact]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetArtifactRequest.new
+              #
+              #   # Call the get_artifact method.
+              #   result = client.get_artifact request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Artifact.
+              #   p result
+              #
               def get_artifact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2525,6 +3049,22 @@ module Google
               # @return [::Google::Api::HttpBody]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::GetArtifactContentsRequest.new
+              #
+              #   # Call the get_artifact_contents method.
+              #   result = client.get_artifact_contents request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def get_artifact_contents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2598,6 +3138,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::Artifact]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new
+              #
+              #   # Call the create_artifact method.
+              #   result = client.create_artifact request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Artifact.
+              #   p result
+              #
               def create_artifact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2663,6 +3219,22 @@ module Google
               # @return [::Google::Cloud::ApigeeRegistry::V1::Artifact]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::ReplaceArtifactRequest.new
+              #
+              #   # Call the replace_artifact method.
+              #   result = client.replace_artifact request
+              #
+              #   # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Artifact.
+              #   p result
+              #
               def replace_artifact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2726,6 +3298,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/apigee_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApigeeRegistry::V1::Registry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApigeeRegistry::V1::DeleteArtifactRequest.new
+              #
+              #   # Call the delete_artifact method.
+              #   result = client.delete_artifact request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_artifact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

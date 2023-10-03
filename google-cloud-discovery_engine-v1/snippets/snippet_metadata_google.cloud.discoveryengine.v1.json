@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-discovery_engine-v1",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -47,6 +47,286 @@
         {
           "start": 20,
           "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SearchService_Search_sync",
+      "title": "Snippet for the search call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search. It may require modification in order to execute successfully.",
+      "file": "search_service/search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
+        },
+        "method": {
+          "short_name": "Search",
+          "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_ConverseConversation_sync",
+      "title": "Snippet for the converse_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#converse_conversation. It may require modification in order to execute successfully.",
+      "file": "conversational_search_service/converse_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "converse_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#converse_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ConverseConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ConverseConversationResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "ConverseConversation",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.ConverseConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_CreateConversation_sync",
+      "title": "Snippet for the create_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#create_conversation. It may require modification in order to execute successfully.",
+      "file": "conversational_search_service/create_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#create_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::CreateConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::Conversation",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "CreateConversation",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.CreateConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_DeleteConversation_sync",
+      "title": "Snippet for the delete_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#delete_conversation. It may require modification in order to execute successfully.",
+      "file": "conversational_search_service/delete_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#delete_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::DeleteConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversation",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.DeleteConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_UpdateConversation_sync",
+      "title": "Snippet for the update_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#update_conversation. It may require modification in order to execute successfully.",
+      "file": "conversational_search_service/update_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#update_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::UpdateConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::Conversation",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "UpdateConversation",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.UpdateConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_GetConversation_sync",
+      "title": "Snippet for the get_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#get_conversation. It may require modification in order to execute successfully.",
+      "file": "conversational_search_service/get_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#get_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::GetConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::Conversation",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "GetConversation",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.GetConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_ListConversations_sync",
+      "title": "Snippet for the list_conversations call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#list_conversations. It may require modification in order to execute successfully.",
+      "file": "conversational_search_service/list_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversations",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#list_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListConversationsResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "ListConversations",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.ListConversations",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -527,46 +807,6 @@
         {
           "start": 20,
           "end": 48,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "discoveryengine_v1_generated_SearchService_Search_sync",
-      "title": "Snippet for the search call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search. It may require modification in order to execute successfully.",
-      "file": "search_service/search.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search",
-        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
-        "client": {
-          "short_name": "SearchService::Client",
-          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
-        },
-        "method": {
-          "short_name": "Search",
-          "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
-          "service": {
-            "short_name": "SearchService",
-            "full_name": "google.cloud.discoveryengine.v1.SearchService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
           "type": "FULL"
         }
       ]

@@ -19,7 +19,7 @@ client gems:
 [google-cloud-discovery_engine-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1/latest),
 [google-cloud-discovery_engine-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1beta/latest).
 
-See also the [Product Documentation](https://cloud.google.com/discovery-engine/media/docs)
+See also the [Product Documentation](https://cloud.google.com/generative-ai-app-builder/docs)
 for more usage information.
 
 ## Quick Start

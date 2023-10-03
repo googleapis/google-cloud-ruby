@@ -203,6 +203,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest.new
+              #
+              #   # Call the create_os_policy_assignment method.
+              #   result = client.create_os_policy_assignment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_os_policy_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -277,6 +300,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest.new
+              #
+              #   # Call the update_os_policy_assignment method.
+              #   result = client.update_os_policy_assignment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_os_policy_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -347,6 +393,22 @@ module Google
               # @return [::Google::Cloud::OsConfig::V1::OSPolicyAssignment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest.new
+              #
+              #   # Call the get_os_policy_assignment method.
+              #   result = client.get_os_policy_assignment request
+              #
+              #   # The returned object is of type Google::Cloud::OsConfig::V1::OSPolicyAssignment.
+              #   p result
+              #
               def get_os_policy_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -417,6 +479,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest.new
+              #
+              #   # Call the list_os_policy_assignments method.
+              #   result = client.list_os_policy_assignments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OsConfig::V1::OSPolicyAssignment.
+              #     p item
+              #   end
+              #
               def list_os_policy_assignments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -486,6 +568,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest.new
+              #
+              #   # Call the list_os_policy_assignment_revisions method.
+              #   result = client.list_os_policy_assignment_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OsConfig::V1::OSPolicyAssignment.
+              #     p item
+              #   end
+              #
               def list_os_policy_assignment_revisions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -560,6 +662,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest.new
+              #
+              #   # Call the delete_os_policy_assignment method.
+              #   result = client.delete_os_policy_assignment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_os_policy_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -632,6 +757,22 @@ module Google
               # @return [::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest.new
+              #
+              #   # Call the get_os_policy_assignment_report method.
+              #   result = client.get_os_policy_assignment_report request
+              #
+              #   # The returned object is of type Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport.
+              #   p result
+              #
               def get_os_policy_assignment_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -724,6 +865,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest.new
+              #
+              #   # Call the list_os_policy_assignment_reports method.
+              #   result = client.list_os_policy_assignment_reports request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport.
+              #     p item
+              #   end
+              #
               def list_os_policy_assignment_reports request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -798,6 +959,22 @@ module Google
               # @return [::Google::Cloud::OsConfig::V1::Inventory]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::GetInventoryRequest.new
+              #
+              #   # Call the get_inventory method.
+              #   result = client.get_inventory request
+              #
+              #   # The returned object is of type Google::Cloud::OsConfig::V1::Inventory.
+              #   p result
+              #
               def get_inventory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -876,6 +1053,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OsConfig::V1::Inventory>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::ListInventoriesRequest.new
+              #
+              #   # Call the list_inventories method.
+              #   result = client.list_inventories request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OsConfig::V1::Inventory.
+              #     p item
+              #   end
+              #
               def list_inventories request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -947,6 +1144,22 @@ module Google
               # @return [::Google::Cloud::OsConfig::V1::VulnerabilityReport]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::GetVulnerabilityReportRequest.new
+              #
+              #   # Call the get_vulnerability_report method.
+              #   result = client.get_vulnerability_report request
+              #
+              #   # The returned object is of type Google::Cloud::OsConfig::V1::VulnerabilityReport.
+              #   p result
+              #
               def get_vulnerability_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1022,6 +1235,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OsConfig::V1::VulnerabilityReport>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_config/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsConfig::V1::ListVulnerabilityReportsRequest.new
+              #
+              #   # Call the list_vulnerability_reports method.
+              #   result = client.list_vulnerability_reports request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OsConfig::V1::VulnerabilityReport.
+              #     p item
+              #   end
+              #
               def list_vulnerability_reports request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

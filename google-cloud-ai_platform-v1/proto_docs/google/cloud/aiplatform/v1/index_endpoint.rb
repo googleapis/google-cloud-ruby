@@ -102,6 +102,11 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#public_endpoint_enabled public_endpoint_enabled}
         #     is true, this field will be populated with the domain name to use for this
         #     index endpoint.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Immutable. Customer-managed encryption key spec for an IndexEndpoint. If
+        #     set, this IndexEndpoint and all sub-resources of this IndexEndpoint will be
+        #     secured by this key.
         class IndexEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

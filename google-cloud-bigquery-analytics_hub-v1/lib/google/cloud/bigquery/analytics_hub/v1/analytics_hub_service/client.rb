@@ -144,14 +144,28 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @analytics_hub_service_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Stub,
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
-                  interceptors: @config.interceptors
+                  interceptors: @config.interceptors,
+                  channel_pool_config: @config.channel_pool
                 )
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Operations]
+              #
+              attr_reader :operations_client
 
               # Service calls
 
@@ -272,8 +286,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param organization [::String]
-              #     Required. The organization resource path of the projects containing DataExchanges.
-              #     e.g. `organizations/myorg/locations/US`.
+              #     Required. The organization resource path of the projects containing
+              #     DataExchanges. e.g. `organizations/myorg/locations/US`.
               #   @param page_size [::Integer]
               #     The maximum number of results to return in a single response page. Leverage
               #     the page tokens to iterate through the entire collection.
@@ -638,8 +652,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The full name of the data exchange resource that you want to delete.
-              #     For example, `projects/myproject/locations/US/dataExchanges/123`.
+              #     Required. The full name of the data exchange resource that you want to
+              #     delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -1001,9 +1015,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Field mask specifies the fields to update in the listing resource. The
-              #     fields specified in the `updateMask` are relative to the resource and are
-              #     not a full request.
+              #     Required. Field mask specifies the fields to update in the listing
+              #     resource. The fields specified in the `updateMask` are relative to the
+              #     resource and are not a full request.
               #   @param listing [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing, ::Hash]
               #     Required. The listing to update.
               #
@@ -1243,6 +1257,668 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @analytics_hub_service_stub.call_rpc :subscribe_listing, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Subscription to a Data Exchange. This is a long-running operation
+              # as it will create one or more linked datasets.
+              #
+              # @overload subscribe_data_exchange(request, options = nil)
+              #   Pass arguments to `subscribe_data_exchange` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload subscribe_data_exchange(name: nil, destination: nil, subscription: nil, subscriber_contact: nil)
+              #   Pass arguments to `subscribe_data_exchange` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the Data Exchange.
+              #     e.g. `projects/publisherproject/locations/US/dataExchanges/123`
+              #   @param destination [::String]
+              #     Required. The parent resource path of the Subscription.
+              #     e.g. `projects/subscriberproject/locations/US`
+              #   @param subscription [::String]
+              #     Required. Name of the subscription to create.
+              #     e.g. `subscription1`
+              #   @param subscriber_contact [::String]
+              #     Email of the subscriber.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new
+              #
+              #   # Call the subscribe_data_exchange method.
+              #   result = client.subscribe_data_exchange request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def subscribe_data_exchange request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.subscribe_data_exchange.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.subscribe_data_exchange.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.subscribe_data_exchange.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :subscribe_data_exchange, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Refreshes a Subscription to a Data Exchange. A Data Exchange can become
+              # stale when a publisher adds or removes data. This is a long-running
+              # operation as it may create many linked datasets.
+              #
+              # @overload refresh_subscription(request, options = nil)
+              #   Pass arguments to `refresh_subscription` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload refresh_subscription(name: nil)
+              #   Pass arguments to `refresh_subscription` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the Subscription to refresh.
+              #     e.g. `projects/subscriberproject/locations/US/subscriptions/123`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest.new
+              #
+              #   # Call the refresh_subscription method.
+              #   result = client.refresh_subscription request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def refresh_subscription request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::RefreshSubscriptionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.refresh_subscription.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.refresh_subscription.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.refresh_subscription.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :refresh_subscription, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the details of a Subscription.
+              #
+              # @overload get_subscription(request, options = nil)
+              #   Pass arguments to `get_subscription` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_subscription(name: nil)
+              #   Pass arguments to `get_subscription` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the subscription.
+              #     e.g. projects/123/locations/US/subscriptions/456
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest.new
+              #
+              #   # Call the get_subscription method.
+              #   result = client.get_subscription request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription.
+              #   p result
+              #
+              def get_subscription request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetSubscriptionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_subscription.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_subscription.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_subscription.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :get_subscription, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all subscriptions in a given project and location.
+              #
+              # @overload list_subscriptions(request, options = nil)
+              #   Pass arguments to `list_subscriptions` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_subscriptions(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_subscriptions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource path of the subscription.
+              #     e.g. projects/myproject/locations/US
+              #   @param filter [::String]
+              #     The filter expression may be used to filter by Data Exchange or Listing.
+              #   @param page_size [::Integer]
+              #     The maximum number of results to return in a single response page.
+              #   @param page_token [::String]
+              #     Page token, returned by a previous call.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest.new
+              #
+              #   # Call the list_subscriptions method.
+              #   result = client.list_subscriptions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription.
+              #     p item
+              #   end
+              #
+              def list_subscriptions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_subscriptions.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_subscriptions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_subscriptions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :list_subscriptions, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @analytics_hub_service_stub, :list_subscriptions, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all subscriptions on a given Data Exchange or Listing.
+              #
+              # @overload list_shared_resource_subscriptions(request, options = nil)
+              #   Pass arguments to `list_shared_resource_subscriptions` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_shared_resource_subscriptions(resource: nil, include_deleted_subscriptions: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_shared_resource_subscriptions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     Required. Resource name of the requested target. This resource may be
+              #     either a Listing or a DataExchange. e.g.
+              #     projects/123/locations/US/dataExchanges/456 OR e.g.
+              #     projects/123/locations/US/dataExchanges/456/listings/789
+              #   @param include_deleted_subscriptions [::Boolean]
+              #     If selected, includes deleted subscriptions in the response
+              #     (up to 63 days after deletion).
+              #   @param page_size [::Integer]
+              #     The maximum number of results to return in a single response page.
+              #   @param page_token [::String]
+              #     Page token, returned by a previous call.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest.new
+              #
+              #   # Call the list_shared_resource_subscriptions method.
+              #   result = client.list_shared_resource_subscriptions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription.
+              #     p item
+              #   end
+              #
+              def list_shared_resource_subscriptions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_shared_resource_subscriptions.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.resource
+                  header_params["resource"] = request.resource
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_shared_resource_subscriptions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_shared_resource_subscriptions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :list_shared_resource_subscriptions, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @analytics_hub_service_stub, :list_shared_resource_subscriptions, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Revokes a given subscription.
+              #
+              # @overload revoke_subscription(request, options = nil)
+              #   Pass arguments to `revoke_subscription` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload revoke_subscription(name: nil)
+              #   Pass arguments to `revoke_subscription` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the subscription to revoke.
+              #     e.g. projects/123/locations/US/subscriptions/456
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new
+              #
+              #   # Call the revoke_subscription method.
+              #   result = client.revoke_subscription request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse.
+              #   p result
+              #
+              def revoke_subscription request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.revoke_subscription.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.revoke_subscription.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.revoke_subscription.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :revoke_subscription, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a subscription.
+              #
+              # @overload delete_subscription(request, options = nil)
+              #   Pass arguments to `delete_subscription` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_subscription(name: nil)
+              #   Pass arguments to `delete_subscription` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the subscription to delete.
+              #     e.g. projects/123/locations/US/subscriptions/456
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest.new
+              #
+              #   # Call the delete_subscription method.
+              #   result = client.delete_subscription request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_subscription request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteSubscriptionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_subscription.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_subscription.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_subscription.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :delete_subscription, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1647,6 +2323,14 @@ module Google
                 end
 
                 ##
+                # Configuration for the channel pool
+                # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+                #
+                def channel_pool
+                  @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+                end
+
+                ##
                 # Configuration RPC class for the AnalyticsHubService API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
@@ -1725,6 +2409,41 @@ module Google
                   #
                   attr_reader :subscribe_listing
                   ##
+                  # RPC-specific configuration for `subscribe_data_exchange`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :subscribe_data_exchange
+                  ##
+                  # RPC-specific configuration for `refresh_subscription`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :refresh_subscription
+                  ##
+                  # RPC-specific configuration for `get_subscription`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_subscription
+                  ##
+                  # RPC-specific configuration for `list_subscriptions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_subscriptions
+                  ##
+                  # RPC-specific configuration for `list_shared_resource_subscriptions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_shared_resource_subscriptions
+                  ##
+                  # RPC-specific configuration for `revoke_subscription`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :revoke_subscription
+                  ##
+                  # RPC-specific configuration for `delete_subscription`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_subscription
+                  ##
                   # RPC-specific configuration for `get_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1766,6 +2485,20 @@ module Google
                     @delete_listing = ::Gapic::Config::Method.new delete_listing_config
                     subscribe_listing_config = parent_rpcs.subscribe_listing if parent_rpcs.respond_to? :subscribe_listing
                     @subscribe_listing = ::Gapic::Config::Method.new subscribe_listing_config
+                    subscribe_data_exchange_config = parent_rpcs.subscribe_data_exchange if parent_rpcs.respond_to? :subscribe_data_exchange
+                    @subscribe_data_exchange = ::Gapic::Config::Method.new subscribe_data_exchange_config
+                    refresh_subscription_config = parent_rpcs.refresh_subscription if parent_rpcs.respond_to? :refresh_subscription
+                    @refresh_subscription = ::Gapic::Config::Method.new refresh_subscription_config
+                    get_subscription_config = parent_rpcs.get_subscription if parent_rpcs.respond_to? :get_subscription
+                    @get_subscription = ::Gapic::Config::Method.new get_subscription_config
+                    list_subscriptions_config = parent_rpcs.list_subscriptions if parent_rpcs.respond_to? :list_subscriptions
+                    @list_subscriptions = ::Gapic::Config::Method.new list_subscriptions_config
+                    list_shared_resource_subscriptions_config = parent_rpcs.list_shared_resource_subscriptions if parent_rpcs.respond_to? :list_shared_resource_subscriptions
+                    @list_shared_resource_subscriptions = ::Gapic::Config::Method.new list_shared_resource_subscriptions_config
+                    revoke_subscription_config = parent_rpcs.revoke_subscription if parent_rpcs.respond_to? :revoke_subscription
+                    @revoke_subscription = ::Gapic::Config::Method.new revoke_subscription_config
+                    delete_subscription_config = parent_rpcs.delete_subscription if parent_rpcs.respond_to? :delete_subscription
+                    @delete_subscription = ::Gapic::Config::Method.new delete_subscription_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy

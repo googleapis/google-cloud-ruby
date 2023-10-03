@@ -310,6 +310,181 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#import_intents Intents.ImportIntents}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The agent to import the intents into.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          # @!attribute [rw] intents_uri
+          #   @return [::String]
+          #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+          #     to import intents from. The format of this URI must be
+          #     `gs://<bucket-name>/<object-name>`.
+          #
+          #     Dialogflow performs a read operation for the Cloud Storage object
+          #     on the caller's behalf, so your request authentication must
+          #     have read permissions for the object. For more information, see
+          #     [Dialogflow access
+          #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          # @!attribute [rw] intents_content
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::InlineSource]
+          #     Uncompressed byte content of intents.
+          # @!attribute [rw] merge_option
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest::MergeOption]
+          #     Merge option for importing intents. If not specified, `REJECT` is assumed.
+          class ImportIntentsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Merge option when display name conflicts exist during import.
+            module MergeOption
+              # Unspecified. Should not be used.
+              MERGE_OPTION_UNSPECIFIED = 0
+
+              # DEPRECATED: Please use
+              # [REPORT_CONFLICT][ImportIntentsRequest.REPORT_CONFLICT] instead.
+              # Fail the request if there are intents whose display names conflict with
+              # the display names of intents in the agent.
+              REJECT = 1
+
+              # Replace the original intent in the agent with the new intent when display
+              # name conflicts exist.
+              REPLACE = 2
+
+              # Merge the original intent with the new intent when display name conflicts
+              # exist.
+              MERGE = 3
+
+              # Create new intents with new display names to differentiate them from the
+              # existing intents when display name conflicts exist.
+              RENAME = 4
+
+              # Report conflict information if display names conflict is detected.
+              # Otherwise, import intents.
+              REPORT_CONFLICT = 5
+
+              # Keep the original intent and discard the conflicting new intent when
+              # display name conflicts exist.
+              KEEP = 6
+            end
+          end
+
+          # The response message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#import_intents Intents.ImportIntents}.
+          # @!attribute [rw] intents
+          #   @return [::Array<::String>]
+          #     The unique identifier of the imported intents.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/intents/<Intent ID>`.
+          # @!attribute [rw] conflicting_resources
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportIntentsResponse::ConflictingResources]
+          #     Info which resources have conflicts when
+          #     [REPORT_CONFLICT][ImportIntentsResponse.REPORT_CONFLICT] merge_option is
+          #     set in ImportIntentsRequest.
+          class ImportIntentsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Conflicting resources detected during the import process. Only filled when
+            # [REPORT_CONFLICT][ImportIntentsResponse.REPORT_CONFLICT] is set in the
+            # request and there are conflicts in the display names.
+            # @!attribute [rw] intent_display_names
+            #   @return [::Array<::String>]
+            #     Display names of conflicting intents.
+            # @!attribute [rw] entity_display_names
+            #   @return [::Array<::String>]
+            #     Display names of conflicting entities.
+            class ConflictingResources
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Metadata returned for the
+          # {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#import_intents Intents.ImportIntents}
+          # long running operation.
+          class ImportIntentsMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#export_intents Intents.ExportIntents}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The name of the parent agent to export intents.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>`.
+          # @!attribute [rw] intents
+          #   @return [::Array<::String>]
+          #     Required. The name of the intents to export.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/intents/<Intent ID>`.
+          # @!attribute [rw] intents_uri
+          #   @return [::String]
+          #     Optional. The [Google Cloud
+          #     Storage](https://cloud.google.com/storage/docs/) URI to export the
+          #     intents to. The format of this URI must be
+          #     `gs://<bucket-name>/<object-name>`.
+          #
+          #     Dialogflow performs a write operation for the Cloud Storage object
+          #     on the caller's behalf, so your request authentication must
+          #     have write permissions for the object. For more information, see
+          #     [Dialogflow access
+          #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          # @!attribute [rw] intents_content_inline
+          #   @return [::Boolean]
+          #     Optional. The option to return the serialized intents inline.
+          # @!attribute [rw] data_format
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest::DataFormat]
+          #     Optional. The data format of the exported intents. If not specified, `BLOB`
+          #     is assumed.
+          class ExportIntentsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Data format of the exported intents.
+            module DataFormat
+              # Unspecified format. Treated as `BLOB`.
+              DATA_FORMAT_UNSPECIFIED = 0
+
+              # Intents will be exported as raw bytes.
+              BLOB = 1
+
+              # Intents will be exported in JSON format.
+              JSON = 2
+
+              # Intents will be exported in CSV format.
+              CSV = 3
+            end
+          end
+
+          # The response message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#export_intents Intents.ExportIntents}.
+          # @!attribute [rw] intents_uri
+          #   @return [::String]
+          #     The URI to a file containing the exported intents. This field is
+          #     populated only if `intents_uri` is specified in
+          #     {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest ExportIntentsRequest}.
+          # @!attribute [rw] intents_content
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::InlineDestination]
+          #     Uncompressed byte content for intents. This field is populated only if
+          #     `intents_content_inline` is set to true in
+          #     {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest ExportIntentsRequest}.
+          class ExportIntentsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata returned for the
+          # {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#export_intents Intents.ExportIntents}
+          # long running operation.
+          class ExportIntentsMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents the options for views of an intent.
           # An intent can be a sizable object. Therefore, we provide a resource view that
           # does not return training phrases in the response.

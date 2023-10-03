@@ -48,9 +48,40 @@ module Google
         # @!attribute [rw] safe_search
         #   @return [::Boolean]
         #     Whether to turn on safe search.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The user labels applied to a resource must meet the following requirements:
+        #
+        #     * Each resource can have multiple labels, up to a maximum of 64.
+        #     * Each label must be a key-value pair.
+        #     * Keys have a minimum length of 1 character and a maximum length of 63
+        #       characters and cannot be empty. Values can be empty and have a maximum
+        #       length of 63 characters.
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #       underscores, and dashes. All characters must use UTF-8 encoding, and
+        #       international characters are allowed.
+        #     * The key portion of a label must be unique. However, you can use the same
+        #       key with multiple resources.
+        #     * Keys must start with a lowercase letter or international character.
+        #
+        #     See [Google Cloud
+        #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+        #     for more details.
+        # @!attribute [rw] summary_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec]
+        #     A specification for configuring the summary returned in the response.
         class ConverseConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for
@@ -62,6 +93,9 @@ module Google
         # @!attribute [rw] conversation
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Conversation]
         #     Updated conversation including the answer.
+        # @!attribute [rw] related_questions
+        #   @return [::Array<::String>]
+        #     Suggested related questions.
         # @!attribute [rw] search_results
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult>]
         #     Search Results.

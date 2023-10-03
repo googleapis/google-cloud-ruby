@@ -136,6 +136,8 @@ module Google
                   initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.batch_write.timeout = 3600.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -210,7 +212,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -2001,6 +2004,112 @@ module Google
             end
 
             ##
+            # Batches the supplied mutation groups in a collection of efficient
+            # transactions. All mutations in a group are committed atomically. However,
+            # mutations across groups can be committed non-atomically in an unspecified
+            # order and thus, they must be independent of each other. Partial failure is
+            # possible, i.e., some groups may have been committed successfully, while
+            # some may have failed. The results of individual batches are streamed into
+            # the response as the batches are applied.
+            #
+            # BatchWrite requests are not replay protected, meaning that each mutation
+            # group may be applied more than once. Replays of non-idempotent mutations
+            # may have undesirable effects. For example, replays of an insert mutation
+            # may produce an already exists error or if you use generated or commit
+            # timestamp-based keys, it may result in additional rows being added to the
+            # mutation's table. We recommend structuring your mutation groups to be
+            # idempotent to avoid this issue.
+            #
+            # @overload batch_write(request, options = nil)
+            #   Pass arguments to `batch_write` via a request object, either of type
+            #   {::Google::Cloud::Spanner::V1::BatchWriteRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Spanner::V1::BatchWriteRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_write(session: nil, request_options: nil, mutation_groups: nil)
+            #   Pass arguments to `batch_write` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param session [::String]
+            #     Required. The session in which the batch request is to be run.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
+            #   @param mutation_groups [::Array<::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup, ::Hash>]
+            #     Required. The groups of mutations to be applied.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::BatchWriteResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Spanner::V1::BatchWriteResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::BatchWriteRequest.new
+            #
+            #   # Call the batch_write method to start streaming.
+            #   output = client.batch_write request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::BatchWriteResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def batch_write request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::V1::BatchWriteRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_write.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Spanner::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_write.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_write.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @spanner_stub.call_rpc :batch_write, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Spanner API.
             #
             # This class represents the configuration for Spanner,
@@ -2120,6 +2229,14 @@ module Google
               end
 
               ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+              end
+
+              ##
               # Configuration RPC class for the Spanner API.
               #
               # Includes fields providing the configuration for each RPC in this service.
@@ -2212,6 +2329,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :partition_read
+                ##
+                # RPC-specific configuration for `batch_write`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_write
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2245,6 +2367,8 @@ module Google
                   @partition_query = ::Gapic::Config::Method.new partition_query_config
                   partition_read_config = parent_rpcs.partition_read if parent_rpcs.respond_to? :partition_read
                   @partition_read = ::Gapic::Config::Method.new partition_read_config
+                  batch_write_config = parent_rpcs.batch_write if parent_rpcs.respond_to? :batch_write
+                  @batch_write = ::Gapic::Config::Method.new batch_write_config
 
                   yield self if block_given?
                 end

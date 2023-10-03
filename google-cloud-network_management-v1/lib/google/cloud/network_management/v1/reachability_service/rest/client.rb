@@ -210,6 +210,26 @@ module Google
               # @return [::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest.new
+              #
+              #   # Call the list_connectivity_tests method.
+              #   result = client.list_connectivity_tests request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetworkManagement::V1::ConnectivityTest.
+              #     p item
+              #   end
+              #
               def list_connectivity_tests request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,6 +293,22 @@ module Google
               # @return [::Google::Cloud::NetworkManagement::V1::ConnectivityTest]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new
+              #
+              #   # Call the get_connectivity_test method.
+              #   result = client.get_connectivity_test request
+              #
+              #   # The returned object is of type Google::Cloud::NetworkManagement::V1::ConnectivityTest.
+              #   p result
+              #
               def get_connectivity_test request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -359,6 +395,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest.new
+              #
+              #   # Call the create_connectivity_test method.
+              #   result = client.create_connectivity_test request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_connectivity_test request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -438,6 +497,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest.new
+              #
+              #   # Call the update_connectivity_test method.
+              #   result = client.update_connectivity_test request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_connectivity_test request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -513,6 +595,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest.new
+              #
+              #   # Call the rerun_connectivity_test method.
+              #   result = client.rerun_connectivity_test request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def rerun_connectivity_test request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -577,6 +682,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest.new
+              #
+              #   # Call the delete_connectivity_test method.
+              #   result = client.delete_connectivity_test request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_connectivity_test request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

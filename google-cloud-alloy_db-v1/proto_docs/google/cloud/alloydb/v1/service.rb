@@ -934,6 +934,80 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for requests to generate a client certificate signed by the Cluster
+        # CA.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent resource. The required format is:
+        #      * projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] cert_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. An optional hint to the endpoint to generate the client
+        #     certificate with the requested duration. The duration can be from 1 hour to
+        #     24 hours. The endpoint may or may not honor the hint. If the hint is left
+        #     unspecified or is not honored, then the endpoint will pick an appropriate
+        #     default duration.
+        # @!attribute [rw] public_key
+        #   @return [::String]
+        #     Optional. The public key from the client.
+        class GenerateClientCertificateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message returned by a GenerateClientCertificate operation.
+        # @!attribute [r] pem_certificate_chain
+        #   @return [::Array<::String>]
+        #     Output only. The pem-encoded chain that may be used to verify the X.509
+        #     certificate. Expected to be in issuer-to-root order according to RFC 5246.
+        # @!attribute [rw] ca_cert
+        #   @return [::String]
+        #     Optional. The pem-encoded cluster ca X.509 certificate.
+        class GenerateClientCertificateResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetConnectionInfo.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent resource. The required format is:
+        #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/instances/\\{instance}
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class GetConnectionInfoRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the metadata of the long-running operation.
         # @!attribute [r] batch_create_instances_metadata
         #   @return [::Google::Cloud::AlloyDB::V1::BatchCreateInstancesMetadata]

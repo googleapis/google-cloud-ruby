@@ -491,6 +491,74 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     end
   end
 
+  def test_search_knowledge
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    query = {}
+    conversation_profile = "hello world"
+    session_id = "hello world"
+    conversation = "hello world"
+    latest_message = "hello world"
+
+    search_knowledge_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_knowledge, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::TextInput), request["query"]
+      assert_equal "hello world", request["conversation_profile"]
+      assert_equal "hello world", request["session_id"]
+      assert_equal "hello world", request["conversation"]
+      assert_equal "hello world", request["latest_message"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_knowledge_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.search_knowledge({ parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.search_knowledge parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.search_knowledge ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new(parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.search_knowledge({ parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.search_knowledge(::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new(parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_knowledge_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

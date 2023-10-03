@@ -124,6 +124,9 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextToSpeechSettings]
           #     Settings on instructing the speech synthesizer on how to generate the
           #     output audio content.
+          # @!attribute [rw] gen_app_builder_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Agent::GenAppBuilderSettings]
+          #     Gen App Builder-related agent-level settings.
           class Agent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +160,17 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Settings for Gen App Builder.
+            # @!attribute [rw] engine
+            #   @return [::String]
+            #     Required. The full name of the Gen App Builder engine related to this
+            #     agent if there is one. Format: `projects/{Project ID}/locations/{Location
+            #     ID}/collections/\\{Collection ID}/engines/\\{Engine ID}`
+            class GenAppBuilderSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
@@ -422,6 +436,36 @@ module Google
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::FlowValidationResult>]
           #     Contains all flow validation results.
           class AgentValidationResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for
+          # {::Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_generative_settings GetGenerativeSettings}
+          # RPC.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Format: `projects/<Project ID>/locations/<Location
+          #     ID>/agents/<Agent ID>/generativeSettings`.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     Required. Language code of the generative settings.
+          class GetGenerativeSettingsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for
+          # {::Google::Cloud::Dialogflow::CX::V3::Agents::Client#update_generative_settings UpdateGenerativeSettings}
+          # RPC.
+          # @!attribute [rw] generative_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings]
+          #     Required. Generative settings to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The mask to control which fields get updated. If the mask is not
+          #     present, all fields will be updated.
+          class UpdateGenerativeSettingsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

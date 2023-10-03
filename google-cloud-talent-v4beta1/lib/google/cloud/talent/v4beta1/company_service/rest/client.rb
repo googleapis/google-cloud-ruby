@@ -187,6 +187,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4beta1::Company]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4beta1::CreateCompanyRequest.new
+              #
+              #   # Call the create_company method.
+              #   result = client.create_company request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4beta1::Company.
+              #   p result
+              #
               def create_company request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +272,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4beta1::Company]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4beta1::GetCompanyRequest.new
+              #
+              #   # Call the get_company method.
+              #   result = client.get_company request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4beta1::Company.
+              #   p result
+              #
               def get_company request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -331,6 +363,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4beta1::Company]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4beta1::UpdateCompanyRequest.new
+              #
+              #   # Call the update_company method.
+              #   result = client.update_company request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4beta1::Company.
+              #   p result
+              #
               def update_company request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -401,6 +449,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4beta1::DeleteCompanyRequest.new
+              #
+              #   # Call the delete_company method.
+              #   result = client.delete_company request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_company request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -482,6 +546,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Company>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4beta1::ListCompaniesRequest.new
+              #
+              #   # Call the list_companies method.
+              #   result = client.list_companies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Talent::V4beta1::Company.
+              #     p item
+              #   end
+              #
               def list_companies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

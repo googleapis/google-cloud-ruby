@@ -71,6 +71,17 @@ module Google
           # @!attribute [rw] conditional_cases
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Fulfillment::ConditionalCases>]
           #     Conditional cases for this fulfillment.
+          # @!attribute [rw] advanced_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
+          #     Hierarchical advanced settings for this fulfillment. The settings exposed
+          #     at the lower level overrides the settings exposed at the higher level.
+          # @!attribute [rw] enable_generative_fallback
+          #   @return [::Boolean]
+          #     If the flag is true, the agent will utilize LLM to generate a text
+          #     response. If LLM generation fails, the defined
+          #     {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#messages responses} in the
+          #     fulfillment will be respected. This flag is only useful for fulfillments
+          #     associated with no-match event handlers.
           class Fulfillment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

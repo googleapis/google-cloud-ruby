@@ -77,6 +77,37 @@ module Google
       end
 
       ##
+      # Create a new client object for PolicyBasedRoutingService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity-v1/latest/Google-Cloud-NetworkConnectivity-V1-PolicyBasedRoutingService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the PolicyBasedRoutingService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About PolicyBasedRoutingService
+      #
+      # Policy-Based Routing allows GCP customers to specify flexibile routing
+      # policies for Layer 4 traffic traversing through the connected service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.policy_based_routing_service version: :v1, &block
+        require "google/cloud/network_connectivity/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::NetworkConnectivity
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::NetworkConnectivity.const_get(package_name).const_get(:PolicyBasedRoutingService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Configure the google-cloud-network_connectivity library.
       #
       # The following configuration parameters are supported:

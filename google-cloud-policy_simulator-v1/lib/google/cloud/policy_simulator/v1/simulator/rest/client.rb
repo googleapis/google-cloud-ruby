@@ -207,6 +207,22 @@ module Google
               # @return [::Google::Cloud::PolicySimulator::V1::Replay]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/policy_simulator/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::PolicySimulator::V1::GetReplayRequest.new
+              #
+              #   # Call the get_replay method.
+              #   result = client.get_replay request
+              #
+              #   # The returned object is of type Google::Cloud::PolicySimulator::V1::Replay.
+              #   p result
+              #
               def get_replay request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -277,6 +293,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/policy_simulator/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new
+              #
+              #   # Call the create_replay method.
+              #   result = client.create_replay request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_replay request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -361,6 +400,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PolicySimulator::V1::ReplayResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/policy_simulator/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new
+              #
+              #   # Call the list_replay_results method.
+              #   result = client.list_replay_results request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::PolicySimulator::V1::ReplayResult.
+              #     p item
+              #   end
+              #
               def list_replay_results request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

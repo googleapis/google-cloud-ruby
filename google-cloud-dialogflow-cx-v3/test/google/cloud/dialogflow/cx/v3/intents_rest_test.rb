@@ -341,6 +341,119 @@ class ::Google::Cloud::Dialogflow::CX::V3::Intents::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_import_intents
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    intents_uri = "hello world"
+    merge_option = :MERGE_OPTION_UNSPECIFIED
+
+    import_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dialogflow::CX::V3::Intents::Rest::ServiceStub.stub :transcode_import_intents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_intents_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_intents({ parent: parent, intents_uri: intents_uri, merge_option: merge_option }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_intents parent: parent, intents_uri: intents_uri, merge_option: merge_option do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_intents ::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest.new(parent: parent, intents_uri: intents_uri, merge_option: merge_option) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_intents({ parent: parent, intents_uri: intents_uri, merge_option: merge_option }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_intents(::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest.new(parent: parent, intents_uri: intents_uri, merge_option: merge_option), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_intents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_export_intents
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    intents = ["hello world"]
+    intents_uri = "hello world"
+    data_format = :DATA_FORMAT_UNSPECIFIED
+
+    export_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dialogflow::CX::V3::Intents::Rest::ServiceStub.stub :transcode_export_intents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, export_intents_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dialogflow::CX::V3::Intents::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.export_intents({ parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.export_intents parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.export_intents ::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest.new(parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.export_intents({ parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.export_intents(::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest.new(parent: parent, intents: intents, intents_uri: intents_uri, data_format: data_format), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, export_intents_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

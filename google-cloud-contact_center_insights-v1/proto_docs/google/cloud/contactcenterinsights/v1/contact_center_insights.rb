@@ -192,6 +192,10 @@ module Google
         #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
         #     Optional. DLP settings for transcript redaction. Optional, will default to
         #     the config specified in Settings.
+        # @!attribute [rw] speech_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig]
+        #     Optional. Default Speech-to-Text configuration. Optional, will default to
+        #     the config specified in Settings.
         class UploadConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -301,7 +305,8 @@ module Google
         # The request to ingest conversations.
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource]
-        #     A cloud storage bucket source.
+        #     A cloud storage bucket source. Note that any previously ingested objects
+        #     from the source will be skipped to avoid duplication.
         # @!attribute [rw] transcript_object_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::TranscriptObjectConfig]
         #     Configuration for when `source` contains conversation transcripts.

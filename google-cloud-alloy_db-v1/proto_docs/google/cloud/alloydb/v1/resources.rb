@@ -254,9 +254,9 @@ module Google
         #     Whether ContinuousBackup is enabled.
         # @!attribute [rw] recovery_window_days
         #   @return [::Integer]
-        #     The number of days backups and logs will be retained, which determines the
-        #     window of time that data is recoverable for. If not set, it defaults to 14
-        #     days.
+        #     The number of days that are eligible to restore from using PITR. To support
+        #     the entire recovery window, backups and logs are retained for one day more
+        #     than the recovery window. If not set, defaults to 14 days.
         # @!attribute [rw] encryption_config
         #   @return [::Google::Cloud::AlloyDB::V1::EncryptionConfig]
         #     The encryption config can be specified to encrypt the
@@ -365,18 +365,21 @@ module Google
         #     populated at the Cluster creation time or the Cluster promotion
         #     time. The cluster type is determined by which RPC was used to create
         #     the cluster (i.e. `CreateCluster` vs. `CreateSecondaryCluster`
-        # @!attribute [r] database_version
+        # @!attribute [rw] database_version
         #   @return [::Google::Cloud::AlloyDB::V1::DatabaseVersion]
-        #     Output only. The database engine major version. This is an output-only
-        #     field and it's populated at the Cluster creation time. This field cannot be
-        #     changed after cluster creation.
+        #     Optional. The database engine major version. This is an optional field and
+        #     it is populated at the Cluster creation time. If a database version is not
+        #     supplied at cluster creation time, then a default database version will
+        #     be used.
+        # @!attribute [rw] network_config
+        #   @return [::Google::Cloud::AlloyDB::V1::Cluster::NetworkConfig]
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
         #     must belong to the same project as the cluster. It is specified in the
-        #     form: "projects/\\{project_number}/global/networks/\\{network_id}". This is
-        #     required to create a cluster. It can be updated, but it cannot be removed.
+        #     form: "projects/\\{project}/global/networks/\\{network_id}". This is required
+        #     to create a cluster. Deprecated, use network_config.network instead.
         # @!attribute [rw] etag
         #   @return [::String]
         #     For Resource freshness validation (https://google.aip.dev/154)
@@ -433,6 +436,29 @@ module Google
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Metadata related to network configuration.
+          # @!attribute [rw] network
+          #   @return [::String]
+          #     Required. The resource link for the VPC network in which cluster
+          #     resources are created and from which they are accessible via Private IP.
+          #     The network must belong to the same project as the cluster. It is
+          #     specified in the form:
+          #     "projects/\\{project_number}/global/networks/\\{network_id}". This is
+          #     required to create a cluster.
+          # @!attribute [rw] allocated_ip_range
+          #   @return [::String]
+          #     Optional. Name of the allocated IP range for the private IP AlloyDB
+          #     cluster, for example: "google-managed-services-default". If set, the
+          #     instance IPs for this cluster will be created in the allocated range. The
+          #     range name must comply with RFC 1035. Specifically, the name must be 1-63
+          #     characters long and match the regular expression
+          #     [a-z]([-a-z0-9]*[a-z0-9])?.
+          #     Field name is intended to be consistent with CloudSQL.
+          class NetworkConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Configuration information for the secondary cluster. This should be set
           # if and only if the cluster is of type SECONDARY.
@@ -637,6 +663,9 @@ module Google
         #     Annotations to allow client tools to store small amount of arbitrary data.
         #     This is distinct from labels.
         #     https://google.aip.dev/128
+        # @!attribute [rw] client_connection_config
+        #   @return [::Google::Cloud::AlloyDB::V1::Instance::ClientConnectionConfig]
+        #     Optional. Client connection specific configurations
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -701,6 +730,19 @@ module Google
           #   @return [::Integer]
           #     Read capacity, i.e. number of nodes in a read pool instance.
           class ReadPoolConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Client connection configuration
+          # @!attribute [rw] require_connectors
+          #   @return [::Boolean]
+          #     Optional. Configuration to enforce connectors only (ex: AuthProxy)
+          #     connections to the database.
+          # @!attribute [rw] ssl_config
+          #   @return [::Google::Cloud::AlloyDB::V1::SslConfig]
+          #     Optional. SSL config option for this instance.
+          class ClientConnectionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -806,6 +848,26 @@ module Google
           end
         end
 
+        # ConnectionInfo singleton resource.
+        # https://google.aip.dev/156
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the ConnectionInfo singleton resource, e.g.:
+        #     projects/\\{project}/locations/\\{location}/clusters/*/instances/*/connectionInfo
+        #     This field currently has no semantic meaning.
+        # @!attribute [r] ip_address
+        #   @return [::String]
+        #     Output only. The private network IP address for the Instance. This is the
+        #     default IP for the instance and is always created (even if enable_public_ip
+        #     is set). This is the connection endpoint for an end-user application.
+        # @!attribute [r] instance_uid
+        #   @return [::String]
+        #     Output only. The unique ID of the Instance.
+        class ConnectionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message describing Backup object
         # @!attribute [r] name
         #   @return [::String]
@@ -885,9 +947,45 @@ module Google
         #     Output only. The time at which after the backup is eligible to be garbage
         #     collected. It is the duration specified by the backup's retention policy,
         #     added to the backup's create_time.
+        # @!attribute [r] expiry_quantity
+        #   @return [::Google::Cloud::AlloyDB::V1::Backup::QuantityBasedExpiry]
+        #     Output only. The QuantityBasedExpiry of the backup, specified by the
+        #     backup's retention policy. Once the expiry quantity is over retention, the
+        #     backup is eligible to be garbage collected.
+        # @!attribute [r] database_version
+        #   @return [::Google::Cloud::AlloyDB::V1::DatabaseVersion]
+        #     Output only. The database engine major version of the cluster this backup
+        #     was created from. Any restored cluster created from this backup will have
+        #     the same database version.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A backup's position in a quantity-based retention queue, of backups with
+          # the same source cluster and type, with length, retention, specified by the
+          # backup's retention policy.
+          # Once the position is greater than the retention, the backup is eligible to
+          # be garbage collected.
+          #
+          # Example: 5 backups from the same source cluster and type with a
+          # quantity-based retention of 3 and denoted by backup_id (position,
+          # retention).
+          #
+          # Safe: backup_5 (1, 3), backup_4, (2, 3), backup_3 (3, 3).
+          # Awaiting garbage collection: backup_2 (4, 3), backup_1 (5, 3)
+          # @!attribute [r] retention_count
+          #   @return [::Integer]
+          #     Output only. The backup's position among its backups with the same source
+          #     cluster and type, by descending chronological order create time(i.e.
+          #     newest first).
+          # @!attribute [r] total_retention_count
+          #   @return [::Integer]
+          #     Output only. The length of the quantity-based queue, specified by the
+          #     backup's retention policy.
+          class QuantityBasedExpiry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

@@ -269,7 +269,6 @@ module Google
         #
         def location
           return nil if reference?
-          ensure_full_data!
           @gapi.location
         end
 
@@ -2031,15 +2030,20 @@ module Google
         #   * The key portion of a label must be unique. However, you can use the
         #     same key with multiple resources.
         #   * Keys must start with a lowercase letter or international character.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        # @param [Boolean] create_session If set to true a new session will be created
+        #   and the load job will happen in the table created within that session.
+        #   Note: This will work only for _SESSION dataset.
+        # @param [string] session_id Session ID in which the load job must run.
+        #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
         #   Google Cloud Datastore backup.
         # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
         #   updater to modify the load job and its schema.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         #
         # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
@@ -2127,7 +2131,7 @@ module Google
         def load_job table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil
           ensure_service!
 
           updater = load_job_updater table_id,
@@ -2136,7 +2140,8 @@ module Google
                                      delimiter: delimiter, ignore_unknown: ignore_unknown,
                                      max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
                                      dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
-                                     autodetect: autodetect, null_marker: null_marker
+                                     autodetect: autodetect, null_marker: null_marker, create_session: create_session,
+                                     session_id: session_id
 
           yield updater if block_given?
 
@@ -2262,6 +2267,8 @@ module Google
         #   See {Project#schema} for the creation of the schema for use with
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
+        # @param [string] session_id Session ID in which the load job must run.
+        #
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -2354,13 +2361,13 @@ module Google
         #
         def load table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                  quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
-                 quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, &block
+                 quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
           job = load_job table_id, files,
                          format: format, create: create, write: write, projection_fields: projection_fields,
                          jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                          delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
                          quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
-                         null_marker: null_marker, &block
+                         null_marker: null_marker, session_id: session_id, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -2904,7 +2911,8 @@ module Google
         def load_job_updater table_id, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                              quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil,
                              max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
-                             prefix: nil, labels: nil, autodetect: nil, null_marker: nil
+                             prefix: nil, labels: nil, autodetect: nil, null_marker: nil, create_session: nil,
+                             session_id: nil
           new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
             job.location = location if location # may be dataset reference
@@ -2913,6 +2921,8 @@ module Google
             job.schema = schema unless schema.nil?
             job.autodetect = autodetect unless autodetect.nil?
             job.labels = labels unless labels.nil?
+            job.create_session = create_session unless create_session.nil?
+            job.session_id = session_id unless session_id.nil?
             load_job_file_options! job, format:            format,
                                         projection_fields: projection_fields,
                                         jagged_rows:       jagged_rows,

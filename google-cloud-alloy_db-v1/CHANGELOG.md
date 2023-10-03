@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.6.0 (2023-09-29)
+
+#### Features
+
+* support generate client certificate and get connection info for auth proxy 
+
+### 0.5.0 (2023-09-22)
+
+#### Features
+
+* Add NetworkConfig, ClientConnectionConfig, QuantityBasedExpiry, DatabaseVersion 
+* Add NetworkConfig, ClientConnectionConfig, QuantityBasedExpiry, DatabaseVersion ([#23341](https://github.com/googleapis/google-cloud-ruby/issues/23341)) 
+#### Documentation
+
+* Change description for recovery_window_days in ContinuousBackupConfig 
+
+### 0.4.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22916](https://github.com/googleapis/google-cloud-ruby/issues/22916)) 
+
 ### 0.3.0 (2023-06-19)
 
 #### Features

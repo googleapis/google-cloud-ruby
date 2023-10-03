@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.12.0 (2023-09-29)
+
+#### Features
+
+* support cancel execution 
+* support container overrides 
+* support for Direct VPC egress setting 
+
+### 0.11.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22923](https://github.com/googleapis/google-cloud-ruby/issues/22923)) 
+
 ### 0.10.1 (2023-08-04)
 
 #### Documentation

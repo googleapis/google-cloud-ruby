@@ -175,6 +175,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKey>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/kms/inventory/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Kms::Inventory::V1::ListCryptoKeysRequest.new
+                #
+                #   # Call the list_crypto_keys method.
+                #   result = client.list_crypto_keys request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Kms::V1::CryptoKey.
+                #     p item
+                #   end
+                #
                 def list_crypto_keys request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

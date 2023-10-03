@@ -217,6 +217,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::CreateConversationRequest.new
+              #
+              #   # Call the create_conversation method.
+              #   result = client.create_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+              #   p result
+              #
               def create_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -303,6 +319,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Conversation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ListConversationsRequest.new
+              #
+              #   # Call the list_conversations method.
+              #   result = client.list_conversations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Conversation.
+              #     p item
+              #   end
+              #
               def list_conversations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -368,6 +404,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::GetConversationRequest.new
+              #
+              #   # Call the get_conversation method.
+              #   result = client.get_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+              #   p result
+              #
               def get_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -433,6 +485,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::Conversation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::CompleteConversationRequest.new
+              #
+              #   # Call the complete_conversation method.
+              #   result = client.complete_conversation request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+              #   p result
+              #
               def complete_conversation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -515,6 +583,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Message>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::ListMessagesRequest.new
+              #
+              #   # Call the list_messages method.
+              #   result = client.list_messages request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Message.
+              #     p item
+              #   end
+              #
               def list_messages request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -595,6 +683,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new
+              #
+              #   # Call the suggest_conversation_summary method.
+              #   result = client.suggest_conversation_summary request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse.
+              #   p result
+              #
               def suggest_conversation_summary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -672,6 +776,22 @@ module Google
               # @return [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest.new
+              #
+              #   # Call the generate_stateless_summary method.
+              #   result = client.generate_stateless_summary request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse.
+              #   p result
+              #
               def generate_stateless_summary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -700,6 +820,109 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @conversations_stub.generate_stateless_summary request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get answers for the given query based on knowledge documents.
+              #
+              # @overload search_knowledge(request, options = nil)
+              #   Pass arguments to `search_knowledge` via a request object, either of type
+              #   {::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload search_knowledge(parent: nil, query: nil, conversation_profile: nil, session_id: nil, conversation: nil, latest_message: nil)
+              #   Pass arguments to `search_knowledge` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     The parent resource contains the conversation profile
+              #     Format: 'projects/<Project ID>' or `projects/<Project
+              #     ID>/locations/<Location ID>`.
+              #   @param query [::Google::Cloud::Dialogflow::V2::TextInput, ::Hash]
+              #     Required. The natural language text query for knowledge search.
+              #   @param conversation_profile [::String]
+              #     Required. The conversation profile used to configure the search.
+              #     Format: `projects/<Project ID>/locations/<Location
+              #     ID>/conversationProfiles/<Conversation Profile ID>`.
+              #   @param session_id [::String]
+              #     The ID of the search session.
+              #     The session_id can be combined with Dialogflow V3 Agent ID retrieved from
+              #     conversation profile or on its own to identify a search session. The search
+              #     history of the same session will impact the search result. It's up to the
+              #     API caller to choose an appropriate `Session ID`. It can be a random number
+              #     or some type of session identifiers (preferably hashed). The length must
+              #     not exceed 36 characters.
+              #   @param conversation [::String]
+              #     The conversation (between human agent and end user) where the search
+              #     request is triggered. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/conversations/<Conversation ID>`.
+              #   @param latest_message [::String]
+              #     The name of the latest conversation message when the request is
+              #     triggered.
+              #     Format: `projects/<Project ID>/locations/<Location
+              #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new
+              #
+              #   # Call the search_knowledge method.
+              #   result = client.search_knowledge request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse.
+              #   p result
+              #
+              def search_knowledge request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.search_knowledge.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.search_knowledge.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.search_knowledge.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @conversations_stub.search_knowledge request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -874,6 +1097,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :generate_stateless_summary
+                  ##
+                  # RPC-specific configuration for `search_knowledge`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_knowledge
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -891,6 +1119,8 @@ module Google
                     @suggest_conversation_summary = ::Gapic::Config::Method.new suggest_conversation_summary_config
                     generate_stateless_summary_config = parent_rpcs.generate_stateless_summary if parent_rpcs.respond_to? :generate_stateless_summary
                     @generate_stateless_summary = ::Gapic::Config::Method.new generate_stateless_summary_config
+                    search_knowledge_config = parent_rpcs.search_knowledge if parent_rpcs.respond_to? :search_knowledge
+                    @search_knowledge = ::Gapic::Config::Method.new search_knowledge_config
 
                     yield self if block_given?
                   end

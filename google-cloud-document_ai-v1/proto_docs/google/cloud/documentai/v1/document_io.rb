@@ -29,6 +29,13 @@ module Google
         #   @return [::String]
         #     An IANA MIME type (RFC6838) indicating the nature and format of the
         #     {::Google::Cloud::DocumentAI::V1::RawDocument#content content}.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The display name of the document, it supports all Unicode characters except
+        #     the following:
+        #     `*`, `?`, `[`, `]`, `%`, `{`, `}`,`'`, `\"`, `,`
+        #     `~`, `=` and `:` are reserved.
+        #     If not specified, a default ID is generated.
         class RawDocument
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,7 +149,17 @@ module Google
         #     Includes symbol level OCR information if set to true.
         # @!attribute [rw] compute_style_info
         #   @return [::Boolean]
-        #     Turn on font id model and returns font style information.
+        #     Turn on font identification model and return font style information.
+        #     Deprecated, use
+        #     {::Google::Cloud::DocumentAI::V1::OcrConfig::PremiumFeatures#compute_style_info PremiumFeatures.compute_style_info}
+        #     instead.
+        # @!attribute [rw] disable_character_boxes_detection
+        #   @return [::Boolean]
+        #     Turn off character box detector in OCR engine. Character box detection is
+        #     enabled by default in OCR 2.0+ processors.
+        # @!attribute [rw] premium_features
+        #   @return [::Google::Cloud::DocumentAI::V1::OcrConfig::PremiumFeatures]
+        #     Configurations for premium OCR features.
         class OcrConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +174,22 @@ module Google
           #     image is known, setting a hint will help get better results (although it
           #     will be a significant hindrance if the hint is wrong).
           class Hints
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configurations for premium OCR features.
+          # @!attribute [rw] enable_selection_mark_detection
+          #   @return [::Boolean]
+          #     Turn on selection mark detector in OCR engine. Only available in OCR 2.0+
+          #     processors.
+          # @!attribute [rw] compute_style_info
+          #   @return [::Boolean]
+          #     Turn on font identification model and return font style information.
+          # @!attribute [rw] enable_math_ocr
+          #   @return [::Boolean]
+          #     Turn on the model that can extract LaTeX math formulas.
+          class PremiumFeatures
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

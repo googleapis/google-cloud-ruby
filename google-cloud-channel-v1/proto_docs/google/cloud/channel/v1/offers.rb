@@ -104,6 +104,9 @@ module Google
 
             # Double type.
             DOUBLE = 3
+
+            # Boolean type.
+            BOOLEAN = 4
           end
         end
 

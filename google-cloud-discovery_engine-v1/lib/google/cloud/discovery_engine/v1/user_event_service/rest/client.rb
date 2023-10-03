@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1/user_event_service_pb"
 require "google/cloud/discovery_engine/v1/user_event_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -146,6 +147,12 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @user_event_service_stub = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -155,6 +162,13 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -188,6 +202,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::UserEvent]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new
+              #
+              #   # Call the write_user_event method.
+              #   result = client.write_user_event request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::UserEvent.
+              #   p result
+              #
               def write_user_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -225,7 +255,7 @@ module Google
 
               ##
               # Writes a single user event from the browser. This uses a GET request to
-              # due to browser restriction of POST-ing to a 3rd party domain.
+              # due to browser restriction of POST-ing to a third-party domain.
               #
               # This method is used only by the Discovery Engine API JavaScript pixel and
               # Google Tag Manager. Users should not call this method directly.
@@ -254,7 +284,7 @@ module Google
               #   @param uri [::String]
               #     The URL including cgi-parameters but excluding the hash fragment with a
               #     length limit of 5,000 characters. This is often more useful than the
-              #     referer URL, because many browsers only send the domain for 3rd party
+              #     referer URL, because many browsers only send the domain for third-party
               #     requests.
               #   @param ets [::Integer]
               #     The event timestamp in milliseconds. This prevents browser caching of
@@ -267,6 +297,22 @@ module Google
               # @return [::Google::Api::HttpBody]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest.new
+              #
+              #   # Call the collect_user_event method.
+              #   result = client.collect_user_event request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def collect_user_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -327,11 +373,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest::InlineSource, ::Hash]
-              #     Required. The Inline source for the input content for UserEvents.
+              #     The Inline source for the input content for UserEvents.
               #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
-              #     Required. Cloud Storage location for the input content.
+              #     Cloud Storage location for the input content.
               #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1::BigQuerySource, ::Hash]
-              #     Required. BigQuery input source.
+              #     BigQuery input source.
               #   @param parent [::String]
               #     Required. Parent DataStore resource name, of the form
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
@@ -345,6 +391,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest.new
+              #
+              #   # Call the import_user_events method.
+              #   result = client.import_user_events request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_user_events request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

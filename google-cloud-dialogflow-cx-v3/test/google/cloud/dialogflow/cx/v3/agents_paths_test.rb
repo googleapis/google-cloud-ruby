@@ -35,6 +35,18 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::ClientPathsTest < Minitest::T
     end
   end
 
+  def test_agent_generative_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.agent_generative_settings_path project: "value0", location: "value1", agent: "value2"
+      assert_equal "projects/value0/locations/value1/agents/value2/generativeSettings", path
+    end
+  end
+
   def test_agent_validation_result_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

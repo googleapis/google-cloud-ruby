@@ -147,6 +147,16 @@
               "methods": [
                 "get_agent_validation_result"
               ]
+            },
+            "GetGenerativeSettings": {
+              "methods": [
+                "get_generative_settings"
+              ]
+            },
+            "UpdateGenerativeSettings": {
+              "methods": [
+                "update_generative_settings"
+              ]
             }
           }
         }
@@ -252,6 +262,16 @@
             "DeleteIntent": {
               "methods": [
                 "delete_intent"
+              ]
+            },
+            "ImportIntents": {
+              "methods": [
+                "import_intents"
+              ]
+            },
+            "ExportIntents": {
+              "methods": [
+                "export_intents"
               ]
             }
           }

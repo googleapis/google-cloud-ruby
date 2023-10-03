@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.6.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22919](https://github.com/googleapis/google-cloud-ruby/issues/22919)) 
+
+### 0.5.0 (2023-09-07)
+
+#### Features
+
+* Support embedding_spec field in search request ([#22869](https://github.com/googleapis/google-cloud-ruby/issues/22869)) 
+* Support Local Client ([#22869](https://github.com/googleapis/google-cloud-ruby/issues/22869)) 
+* Support user_labels in converse conversations ([#22869](https://github.com/googleapis/google-cloud-ruby/issues/22869)) 
+
 ### 0.4.0 (2023-07-28)
 
 #### Features

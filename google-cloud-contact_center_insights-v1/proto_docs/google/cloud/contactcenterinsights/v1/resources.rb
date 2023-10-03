@@ -1008,6 +1008,10 @@ module Google
         #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
         #     Default DLP redaction resources to be applied while ingesting
         #     conversations.
+        # @!attribute [rw] speech_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig]
+        #     Optional. Default Speech-to-Text resources to be used while ingesting audio
+        #     files. Optional, CCAI Insights will create a default if not provided.
         class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1052,6 +1056,17 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/inspectTemplates/{template}`
         class RedactionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Speech-to-Text configuration.
+        # @!attribute [rw] speech_recognizer
+        #   @return [::String]
+        #     The fully-qualified Speech Recognizer resource name.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/recognizer/{recognizer}`
+        class SpeechConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

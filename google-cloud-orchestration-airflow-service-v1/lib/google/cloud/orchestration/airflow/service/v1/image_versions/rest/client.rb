@@ -169,6 +169,26 @@ module Google
                   # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersion>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new
+                  #
+                  #   # Call the list_image_versions method.
+                  #   result = client.list_image_versions request
+                  #
+                  #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                  #   # over elements, and API calls will be issued to fetch pages as needed.
+                  #   result.each do |item|
+                  #     # Each element is of type ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersion.
+                  #     p item
+                  #   end
+                  #
                   def list_image_versions request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 

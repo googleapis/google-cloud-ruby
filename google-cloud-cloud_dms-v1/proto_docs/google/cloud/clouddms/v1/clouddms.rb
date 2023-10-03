@@ -98,8 +98,8 @@ module Google
         #     object.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique ID used to identify the request. If the server receives two
-        #     requests with the same ID, then the second request is ignored.
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
@@ -159,6 +159,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the migration job resource to start.
+        # @!attribute [rw] skip_validation
+        #   @return [::Boolean]
+        #     Optional. Start the migration job without running prior configuration
+        #     verification. Defaults to `false`.
         class StartMigrationJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,6 +199,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the migration job resource to verify.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the changed fields to be verified.
+        #     It will not update the migration job.
+        # @!attribute [rw] migration_job
+        #   @return [::Google::Cloud::CloudDMS::V1::MigrationJob]
+        #     Optional. The changed migration job parameters to verify.
+        #     It will not update the migration job.
         class VerifyMigrationJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -204,6 +216,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the migration job resource to restart.
+        # @!attribute [rw] skip_validation
+        #   @return [::Boolean]
+        #     Optional. Restart the migration job without running prior configuration
+        #     verification. Defaults to `false`.
         class RestartMigrationJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -259,6 +275,42 @@ module Google
         #   @return [::String]
         #     The ssh configuration script.
         class SshScript
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GenerateTcpProxyScript' request.
+        # @!attribute [rw] migration_job
+        #   @return [::String]
+        #     Name of the migration job resource to generate the TCP Proxy script.
+        # @!attribute [rw] vm_name
+        #   @return [::String]
+        #     Required. The name of the Compute instance that will host the proxy.
+        # @!attribute [rw] vm_machine_type
+        #   @return [::String]
+        #     Required. The type of the Compute instance that will host the proxy.
+        # @!attribute [rw] vm_zone
+        #   @return [::String]
+        #     Optional. The Google Cloud Platform zone to create the VM in. The fully
+        #     qualified name of the zone must be specified, including the region name,
+        #     for example "us-central1-b". If not specified, uses the "-b" zone of the
+        #     destination Connection Profile's region.
+        # @!attribute [rw] vm_subnet
+        #   @return [::String]
+        #     Required. The name of the subnet the Compute instance will use for private
+        #     connectivity. Must be supplied in the form of
+        #     projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}.
+        #     Note: the region for the subnet must match the Compute instance region.
+        class GenerateTcpProxyScriptRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'GenerateTcpProxyScript' request.
+        # @!attribute [rw] script
+        #   @return [::String]
+        #     The TCP Proxy configuration script.
+        class TcpProxyScript
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -664,6 +716,10 @@ module Google
         #
         #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Force delete the conversion workspace, even if there's a running migration
+        #     that is using the workspace.
         class DeleteConversionWorkspaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -700,10 +756,70 @@ module Google
         #   @return [::String]
         #     Filter which entities to apply. Leaving this field empty will apply all of
         #     the entities. Supports Google AIP 160 based filtering.
+        # @!attribute [rw] dry_run
+        #   @return [::Boolean]
+        #     Optional. Only validates the apply process, but doesn't change the
+        #     destination database. Only works for PostgreSQL destination connection
+        #     profile.
+        # @!attribute [rw] auto_commit
+        #   @return [::Boolean]
+        #     Optional. Specifies whether the conversion workspace is to be committed
+        #     automatically after the apply.
         # @!attribute [rw] connection_profile
         #   @return [::String]
-        #     Fully qualified (Uri) name of the destination connection profile.
+        #     Optional. Fully qualified (Uri) name of the destination connection
+        #     profile.
         class ApplyConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retrieve a list of all mapping rules in a given conversion workspace.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource whose mapping rules are
+        #     listed in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of rules to return. The service may return
+        #     fewer than this value.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The nextPageToken value received in the previous call to
+        #     mappingRules.list, used in the subsequent request to retrieve the next
+        #     page of results. On first call this should be left blank. When paginating,
+        #     all other parameters provided to mappingRules.list must match the call
+        #     that provided the page token.
+        class ListMappingRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListMappingRulesRequest' request.
+        # @!attribute [rw] mapping_rules
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::MappingRule>]
+        #     The list of conversion workspace mapping rules.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListMappingRulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GetMappingRule' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the mapping rule resource to get.
+        #     Example: conversionWorkspaces/123/mappingRules/rule123
+        #
+        #     In order to retrieve a previous revision of the mapping rule, also provide
+        #     the revision ID.
+        #     Example:
+        #     conversionWorkspace/123/mappingRules/rule123@c7cfa2a8c7cfa2a8c7cfa2a8c7cfa2a8
+        class GetMappingRuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -720,10 +836,11 @@ module Google
         #     seed operation.
         # @!attribute [rw] source_connection_profile
         #   @return [::String]
-        #     Fully qualified (Uri) name of the source connection profile.
+        #     Optional. Fully qualified (Uri) name of the source connection profile.
         # @!attribute [rw] destination_connection_profile
         #   @return [::String]
-        #     Fully qualified (Uri) name of the destination connection profile.
+        #     Optional. Fully qualified (Uri) name of the destination connection
+        #     profile.
         class SeedConversionWorkspaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -736,12 +853,17 @@ module Google
         #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
         # @!attribute [rw] auto_commit
         #   @return [::Boolean]
-        #     Specifies whether the conversion workspace is to be committed automatically
-        #     after the conversion.
+        #     Optional. Specifies whether the conversion workspace is to be committed
+        #     automatically after the conversion.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter the entities to convert. Leaving this field empty will convert all
-        #     of the entities. Supports Google AIP-160 style filtering.
+        #     Optional. Filter the entities to convert. Leaving this field empty will
+        #     convert all of the entities. Supports Google AIP-160 style filtering.
+        # @!attribute [rw] convert_full_path
+        #   @return [::Boolean]
+        #     Optional. Automatically convert the full entity path for each entity
+        #     specified by the filter. For example, if the filter specifies a table, that
+        #     table schema (and database if there is one) will also be converted.
         class ConvertConversionWorkspaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -755,14 +877,14 @@ module Google
         #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
         # @!attribute [rw] rules_format
         #   @return [::Google::Cloud::CloudDMS::V1::ImportRulesFileFormat]
-        #     The format of the rules content file.
+        #     Required. The format of the rules content file.
         # @!attribute [rw] rules_files
         #   @return [::Array<::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest::RulesFile>]
-        #     One or more rules files.
+        #     Required. One or more rules files.
         # @!attribute [rw] auto_commit
         #   @return [::Boolean]
-        #     Should the conversion workspace be committed automatically after the
-        #     import operation.
+        #     Required. Should the conversion workspace be committed automatically after
+        #     the import operation.
         class ImportMappingRulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -770,12 +892,12 @@ module Google
           # Details of a single rules file.
           # @!attribute [rw] rules_source_filename
           #   @return [::String]
-          #     The filename of the rules that needs to be converted. The filename is
-          #     used mainly so that future logs of the import rules job contain it, and
-          #     can therefore be searched by it.
+          #     Required. The filename of the rules that needs to be converted. The
+          #     filename is used mainly so that future logs of the import rules job
+          #     contain it, and can therefore be searched by it.
           # @!attribute [rw] rules_content
           #   @return [::String]
-          #     The text content of the rules that needs to be converted.
+          #     Required. The text content of the rules that needs to be converted.
           class RulesFile
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -790,11 +912,11 @@ module Google
         #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of entities to return. The service may return
+        #     Optional. The maximum number of entities to return. The service may return
         #     fewer entities than the value specifies.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The nextPageToken value received in the previous call to
+        #     Optional. The nextPageToken value received in the previous call to
         #     conversionWorkspace.describeDatabaseEntities, used in the subsequent
         #     request to retrieve the next page of results. On first call this should be
         #     left blank. When paginating, all other parameters provided to
@@ -802,18 +924,22 @@ module Google
         #     provided the page token.
         # @!attribute [rw] tree
         #   @return [::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest::DBTreeType]
-        #     The tree to fetch.
+        #     Required. The tree to fetch.
         # @!attribute [rw] uncommitted
         #   @return [::Boolean]
-        #     Whether to retrieve the latest committed version of the entities or the
-        #     latest version. This field is ignored if a specific commit_id is specified.
+        #     Optional. Whether to retrieve the latest committed version of the entities
+        #     or the latest version. This field is ignored if a specific commit_id is
+        #     specified.
         # @!attribute [rw] commit_id
         #   @return [::String]
-        #     Request a specific commit ID. If not specified, the entities from the
-        #     latest commit are returned.
+        #     Optional. Request a specific commit ID. If not specified, the entities from
+        #     the latest commit are returned.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter the returned entities based on AIP-160 standard.
+        #     Optional. Filter the returned entities based on AIP-160 standard.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::CloudDMS::V1::DatabaseEntityView]
+        #     Optional. Results view based on AIP-157
         class DescribeDatabaseEntitiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -903,6 +1029,50 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for 'CreateMappingRule' command.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent which owns this collection of mapping rules.
+        # @!attribute [rw] mapping_rule_id
+        #   @return [::String]
+        #     Required. The ID of the rule to create.
+        # @!attribute [rw] mapping_rule
+        #   @return [::Google::Cloud::CloudDMS::V1::MappingRule]
+        #     Required. Represents a [mapping rule]
+        #     (https://cloud.google.com/database-migration/reference/rest/v1/projects.locations.mappingRules)
+        #     object.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        class CreateMappingRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'DeleteMappingRule' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the mapping rule resource to delete.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        class DeleteMappingRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for 'FetchStaticIps' request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -930,6 +1100,25 @@ module Google
         class FetchStaticIpsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AIP-157 Partial Response view for Database Entity.
+        module DatabaseEntityView
+          # Unspecified view. Defaults to basic view.
+          DATABASE_ENTITY_VIEW_UNSPECIFIED = 0
+
+          # Default view. Does not return DDLs or Issues.
+          DATABASE_ENTITY_VIEW_BASIC = 1
+
+          # Return full entity details including mappings, ddl and issues.
+          DATABASE_ENTITY_VIEW_FULL = 2
+
+          # Top-most (Database, Schema) nodes which are returned contains summary
+          # details for their decendents such as the number of entities per type and
+          # issues rollups. When this view is used, only a single page of result is
+          # returned and the page_size property of the request is ignored. The
+          # returned page will only include the top-most node types.
+          DATABASE_ENTITY_VIEW_ROOT_SUMMARY = 3
         end
       end
     end

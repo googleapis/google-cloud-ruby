@@ -239,6 +239,9 @@ module Google
         #     https://developers.google.com/identity/protocols/OpenIDConnect#hd-param
         #     Note: IAP does not verify that the id token's hd claim matches this value
         #     since access behavior is managed by IAM policies.
+        # @!attribute [rw] programmatic_clients
+        #   @return [::Array<::String>]
+        #     List of OAuth client IDs allowed to programmatically authenticate with IAP.
         class OAuthSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

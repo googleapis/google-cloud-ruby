@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1/search_service_pb"
 require "google/cloud/discovery_engine/v1/search_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -135,8 +136,21 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @search_service_stub = ::Google::Cloud::DiscoveryEngine::V1::SearchService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -153,7 +167,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, page_size: nil, page_token: nil, offset: nil, user_info: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -171,10 +185,12 @@ module Google
               #     documents under the default branch.
               #   @param query [::String]
               #     Raw search query.
+              #   @param image_query [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ImageQuery, ::Hash]
+              #     Raw image query.
               #   @param page_size [::Integer]
               #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1::Document Document}s to
               #     return. If unspecified, defaults to a reasonable value. The maximum allowed
-              #     value is 100. Values above 100 will be coerced to 100.
+              #     value is 100. Values above 100 are coerced to 100.
               #
               #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
               #   @param page_token [::String]
@@ -195,10 +211,31 @@ module Google
               #     unset.
               #
               #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+              #   @param filter [::String]
+              #     The filter syntax consists of an expression language for constructing a
+              #     predicate from one or more fields of the documents being filtered. Filter
+              #     expression is case-sensitive.
+              #
+              #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+              #   @param order_by [::String]
+              #     The order in which documents are returned. Documents can be ordered by
+              #     a field in an {::Google::Cloud::DiscoveryEngine::V1::Document Document} object.
+              #     Leave it unset if ordered by relevance. `order_by` expression is
+              #     case-sensitive.
+              #
+              #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
               #   @param user_info [::Google::Cloud::DiscoveryEngine::V1::UserInfo, ::Hash]
               #     Information about the end user.
-              #     Highly recommended for analytics. The user_agent string in UserInfo will
-              #     be used to deduce device_type for analytics.
+              #     Highly recommended for analytics.
+              #     {::Google::Cloud::DiscoveryEngine::V1::UserInfo#user_agent UserInfo.user_agent}
+              #     is used to deduce `device_type` for analytics.
+              #   @param facet_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::FacetSpec, ::Hash>]
+              #     Facet specifications for faceted search. If empty, no facets are returned.
+              #
+              #     A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+              #     error is returned.
+              #   @param boost_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec, ::Hash]
+              #     Boost specification to boost certain documents.
               #   @param params [::Hash{::String => ::Google::Protobuf::Value, ::Hash}]
               #     Additional search parameters.
               #
@@ -211,10 +248,10 @@ module Google
               #       which enables image searching.
               #   @param query_expansion_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::QueryExpansionSpec, ::Hash]
               #     The query expansion specification that specifies the conditions under which
-              #     query expansion will occur.
+              #     query expansion occurs.
               #   @param spell_correction_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SpellCorrectionSpec, ::Hash]
               #     The spell correction specification that specifies the mode under
-              #     which spell correction will take effect.
+              #     which spell correction takes effect.
               #   @param user_pseudo_id [::String]
               #     A unique identifier for tracking visitors. For example, this could be
               #     implemented with an HTTP cookie, which should be able to uniquely identify
@@ -231,11 +268,10 @@ module Google
               #     The field must be a UTF-8 encoded string with a length limit of 128
               #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
               #   @param content_search_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec, ::Hash]
-              #     The content search spec that configs the desired behavior of content
-              #     search.
+              #     A specification for configuring the behavior of content search.
               #   @param safe_search [::Boolean]
               #     Whether to turn on safe search. This is only supported for
-              #     [ContentConfig.PUBLIC_WEBSITE][].
+              #     website search.
               #   @param user_labels [::Hash{::String => ::String}]
               #     The user labels applied to a resource must meet the following requirements:
               #
@@ -255,12 +291,32 @@ module Google
               #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
               #     for more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
+              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
+              # @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::SearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::SearchRequest.new
+              #
+              #   # Call the search method.
+              #   result = client.search request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult.
+              #     p item
+              #   end
+              #
               def search request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -289,7 +345,6 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @search_service_stub.search request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @search_service_stub, :search, "results", request, result, options
                   yield result, operation if block_given?
                   return result
                 end

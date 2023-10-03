@@ -283,6 +283,10 @@ module Google
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
+        # @!attribute [rw] use_timeout_based_endpointing
+        #   @return [::Boolean]
+        #     Use timeout based endpointing, interpreting endpointer sensitivy as
+        #     seconds of timeout value.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

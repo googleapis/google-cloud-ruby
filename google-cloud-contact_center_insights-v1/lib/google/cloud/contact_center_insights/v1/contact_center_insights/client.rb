@@ -149,7 +149,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -271,7 +272,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload upload_conversation(parent: nil, conversation: nil, conversation_id: nil, redaction_config: nil)
+            # @overload upload_conversation(parent: nil, conversation: nil, conversation_id: nil, redaction_config: nil, speech_config: nil)
             #   Pass arguments to `upload_conversation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -289,6 +290,9 @@ module Google
             #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
             #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
             #     Optional. DLP settings for transcript redaction. Optional, will default to
+            #     the config specified in Settings.
+            #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
+            #     Optional. Default Speech-to-Text configuration. Optional, will default to
             #     the config specified in Settings.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1219,7 +1223,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param gcs_source [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource, ::Hash]
-            #     A cloud storage bucket source.
+            #     A cloud storage bucket source. Note that any previously ingested objects
+            #     from the source will be skipped to avoid duplication.
             #   @param transcript_object_config [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::TranscriptObjectConfig, ::Hash]
             #     Configuration for when `source` contains conversation transcripts.
             #   @param parent [::String]
@@ -3735,6 +3740,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

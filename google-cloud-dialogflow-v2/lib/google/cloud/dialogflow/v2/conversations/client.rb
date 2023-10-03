@@ -151,7 +151,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -885,6 +886,116 @@ module Google
             end
 
             ##
+            # Get answers for the given query based on knowledge documents.
+            #
+            # @overload search_knowledge(request, options = nil)
+            #   Pass arguments to `search_knowledge` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_knowledge(parent: nil, query: nil, conversation_profile: nil, session_id: nil, conversation: nil, latest_message: nil)
+            #   Pass arguments to `search_knowledge` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The parent resource contains the conversation profile
+            #     Format: 'projects/<Project ID>' or `projects/<Project
+            #     ID>/locations/<Location ID>`.
+            #   @param query [::Google::Cloud::Dialogflow::V2::TextInput, ::Hash]
+            #     Required. The natural language text query for knowledge search.
+            #   @param conversation_profile [::String]
+            #     Required. The conversation profile used to configure the search.
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversationProfiles/<Conversation Profile ID>`.
+            #   @param session_id [::String]
+            #     The ID of the search session.
+            #     The session_id can be combined with Dialogflow V3 Agent ID retrieved from
+            #     conversation profile or on its own to identify a search session. The search
+            #     history of the same session will impact the search result. It's up to the
+            #     API caller to choose an appropriate `Session ID`. It can be a random number
+            #     or some type of session identifiers (preferably hashed). The length must
+            #     not exceed 36 characters.
+            #   @param conversation [::String]
+            #     The conversation (between human agent and end user) where the search
+            #     request is triggered. Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversations/<Conversation ID>`.
+            #   @param latest_message [::String]
+            #     The name of the latest conversation message when the request is
+            #     triggered.
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new
+            #
+            #   # Call the search_knowledge method.
+            #   result = client.search_knowledge request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse.
+            #   p result
+            #
+            def search_knowledge request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_knowledge.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_knowledge.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_knowledge.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conversations_stub.call_rpc :search_knowledge, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Conversations API.
             #
             # This class represents the configuration for Conversations,
@@ -1004,6 +1115,14 @@ module Google
               end
 
               ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+              end
+
+              ##
               # Configuration RPC class for the Conversations API.
               #
               # Includes fields providing the configuration for each RPC in this service.
@@ -1056,6 +1175,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :generate_stateless_summary
+                ##
+                # RPC-specific configuration for `search_knowledge`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_knowledge
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1073,6 +1197,8 @@ module Google
                   @suggest_conversation_summary = ::Gapic::Config::Method.new suggest_conversation_summary_config
                   generate_stateless_summary_config = parent_rpcs.generate_stateless_summary if parent_rpcs.respond_to? :generate_stateless_summary
                   @generate_stateless_summary = ::Gapic::Config::Method.new generate_stateless_summary_config
+                  search_knowledge_config = parent_rpcs.search_knowledge if parent_rpcs.respond_to? :search_knowledge
+                  @search_knowledge = ::Gapic::Config::Method.new search_knowledge_config
 
                   yield self if block_given?
                 end

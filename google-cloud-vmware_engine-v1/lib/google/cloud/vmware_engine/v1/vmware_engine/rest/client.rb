@@ -352,6 +352,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListPrivateCloudsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListPrivateCloudsRequest.new
+              #
+              #   # Call the list_private_clouds method.
+              #   result = client.list_private_clouds request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::PrivateCloud.
+              #     p item
+              #   end
+              #
               def list_private_clouds request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -418,6 +438,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::PrivateCloud]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetPrivateCloudRequest.new
+              #
+              #   # Call the get_private_cloud method.
+              #   result = client.get_private_cloud request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::PrivateCloud.
+              #   p result
+              #
               def get_private_cloud request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -510,6 +546,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreatePrivateCloudRequest.new
+              #
+              #   # Call the create_private_cloud method.
+              #   result = client.create_private_cloud request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_private_cloud request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -589,6 +648,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdatePrivateCloudRequest.new
+              #
+              #   # Call the update_private_cloud method.
+              #   result = client.update_private_cloud request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_private_cloud request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -688,6 +770,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeletePrivateCloudRequest.new
+              #
+              #   # Call the delete_private_cloud method.
+              #   result = client.delete_private_cloud request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_private_cloud request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -761,6 +866,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UndeletePrivateCloudRequest.new
+              #
+              #   # Call the undelete_private_cloud method.
+              #   result = client.undelete_private_cloud request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def undelete_private_cloud request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -859,6 +987,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListClustersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListClustersRequest.new
+              #
+              #   # Call the list_clusters method.
+              #   result = client.list_clusters request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::Cluster.
+              #     p item
+              #   end
+              #
               def list_clusters request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -925,6 +1073,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::Cluster]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetClusterRequest.new
+              #
+              #   # Call the get_cluster method.
+              #   result = client.get_cluster request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::Cluster.
+              #   p result
+              #
               def get_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1014,6 +1178,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateClusterRequest.new
+              #
+              #   # Call the create_cluster method.
+              #   result = client.create_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1096,6 +1283,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateClusterRequest.new
+              #
+              #   # Call the update_cluster method.
+              #   result = client.update_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1169,6 +1379,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteClusterRequest.new
+              #
+              #   # Call the delete_cluster method.
+              #   result = client.delete_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1248,6 +1481,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListSubnetsRequest.new
+              #
+              #   # Call the list_subnets method.
+              #   result = client.list_subnets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::Subnet.
+              #     p item
+              #   end
+              #
               def list_subnets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1314,6 +1567,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::Subnet]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetSubnetRequest.new
+              #
+              #   # Call the get_subnet method.
+              #   result = client.get_subnet request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::Subnet.
+              #   p result
+              #
               def get_subnet request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1387,6 +1656,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest.new
+              #
+              #   # Call the update_subnet method.
+              #   result = client.update_subnet request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_subnet request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1491,6 +1783,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListNodeTypesRequest.new
+              #
+              #   # Call the list_node_types method.
+              #   result = client.list_node_types request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::NodeType.
+              #     p item
+              #   end
+              #
               def list_node_types request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1557,6 +1869,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::NodeType]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetNodeTypeRequest.new
+              #
+              #   # Call the get_node_type method.
+              #   result = client.get_node_type request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::NodeType.
+              #   p result
+              #
               def get_node_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1624,6 +1952,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::Credentials]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ShowNsxCredentialsRequest.new
+              #
+              #   # Call the show_nsx_credentials method.
+              #   result = client.show_nsx_credentials request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::Credentials.
+              #   p result
+              #
               def show_nsx_credentials request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1691,6 +2035,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::Credentials]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest.new
+              #
+              #   # Call the show_vcenter_credentials method.
+              #   result = client.show_vcenter_credentials request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::Credentials.
+              #   p result
+              #
               def show_vcenter_credentials request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1773,6 +2133,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ResetNsxCredentialsRequest.new
+              #
+              #   # Call the reset_nsx_credentials method.
+              #   result = client.reset_nsx_credentials request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def reset_nsx_credentials request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1856,6 +2239,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest.new
+              #
+              #   # Call the reset_vcenter_credentials method.
+              #   result = client.reset_vcenter_credentials request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def reset_vcenter_credentials request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1953,6 +2359,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateHcxActivationKeyRequest.new
+              #
+              #   # Call the create_hcx_activation_key method.
+              #   result = client.create_hcx_activation_key request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_hcx_activation_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2033,6 +2462,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListHcxActivationKeysResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListHcxActivationKeysRequest.new
+              #
+              #   # Call the list_hcx_activation_keys method.
+              #   result = client.list_hcx_activation_keys request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::HcxActivationKey.
+              #     p item
+              #   end
+              #
               def list_hcx_activation_keys request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2099,6 +2548,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::HcxActivationKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetHcxActivationKeyRequest.new
+              #
+              #   # Call the get_hcx_activation_key method.
+              #   result = client.get_hcx_activation_key request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::HcxActivationKey.
+              #   p result
+              #
               def get_hcx_activation_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2165,6 +2630,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::NetworkPolicy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetNetworkPolicyRequest.new
+              #
+              #   # Call the get_network_policy method.
+              #   result = client.get_network_policy request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::NetworkPolicy.
+              #   p result
+              #
               def get_network_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2274,6 +2755,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListNetworkPoliciesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListNetworkPoliciesRequest.new
+              #
+              #   # Call the list_network_policies method.
+              #   result = client.list_network_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::NetworkPolicy.
+              #     p item
+              #   end
+              #
               def list_network_policies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2373,6 +2874,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateNetworkPolicyRequest.new
+              #
+              #   # Call the create_network_policy method.
+              #   result = client.create_network_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_network_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2468,6 +2992,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateNetworkPolicyRequest.new
+              #
+              #   # Call the update_network_policy method.
+              #   result = client.update_network_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_network_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2552,6 +3099,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteNetworkPolicyRequest.new
+              #
+              #   # Call the delete_network_policy method.
+              #   result = client.delete_network_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_network_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2653,6 +3223,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateVmwareEngineNetworkRequest.new
+              #
+              #   # Call the create_vmware_engine_network method.
+              #   result = client.create_vmware_engine_network request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_vmware_engine_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2740,6 +3333,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateVmwareEngineNetworkRequest.new
+              #
+              #   # Call the update_vmware_engine_network method.
+              #   result = client.update_vmware_engine_network request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_vmware_engine_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2830,6 +3446,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteVmwareEngineNetworkRequest.new
+              #
+              #   # Call the delete_vmware_engine_network method.
+              #   result = client.delete_vmware_engine_network request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_vmware_engine_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2900,6 +3539,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetVmwareEngineNetworkRequest.new
+              #
+              #   # Call the get_vmware_engine_network method.
+              #   result = client.get_vmware_engine_network request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork.
+              #   p result
+              #
               def get_vmware_engine_network request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3008,6 +3663,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksRequest.new
+              #
+              #   # Call the list_vmware_engine_networks method.
+              #   result = client.list_vmware_engine_networks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork.
+              #     p item
+              #   end
+              #
               def list_vmware_engine_networks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3104,6 +3779,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest.new
+              #
+              #   # Call the create_private_connection method.
+              #   result = client.create_private_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3173,6 +3871,22 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest.new
+              #
+              #   # Call the get_private_connection method.
+              #   result = client.get_private_connection request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::PrivateConnection.
+              #   p result
+              #
               def get_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3281,6 +3995,26 @@ module Google
               # @return [::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest.new
+              #
+              #   # Call the list_private_connections method.
+              #   result = client.list_private_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::PrivateConnection.
+              #     p item
+              #   end
+              #
               def list_private_connections request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3366,6 +4100,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest.new
+              #
+              #   # Call the update_private_connection method.
+              #   result = client.update_private_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3450,6 +4207,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest.new
+              #
+              #   # Call the delete_private_connection method.
+              #   result = client.delete_private_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3526,6 +4306,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest.new
+              #
+              #   # Call the list_private_connection_peering_routes method.
+              #   result = client.list_private_connection_peering_routes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::PeeringRoute.
+              #     p item
+              #   end
+              #
               def list_private_connection_peering_routes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

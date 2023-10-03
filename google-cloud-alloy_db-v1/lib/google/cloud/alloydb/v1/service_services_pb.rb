@@ -100,6 +100,14 @@ module Google
             rpc :DeleteBackup, ::Google::Cloud::AlloyDB::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
             # Lists SupportedDatabaseFlags for a given project and location.
             rpc :ListSupportedDatabaseFlags, ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest, ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsResponse
+            # Generate a client certificate signed by a Cluster CA.
+            # The sole purpose of this endpoint is to support AlloyDB connectors and the
+            # Auth Proxy client. The endpoint's behavior is subject to change without
+            # notice, so do not rely on its behavior remaining constant. Future changes
+            # will not break AlloyDB connectors or the Auth Proxy client.
+            rpc :GenerateClientCertificate, ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest, ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateResponse
+            # Get instance metadata used for a connection.
+            rpc :GetConnectionInfo, ::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest, ::Google::Cloud::AlloyDB::V1::ConnectionInfo
             # Lists Users in a given project and location.
             rpc :ListUsers, ::Google::Cloud::AlloyDB::V1::ListUsersRequest, ::Google::Cloud::AlloyDB::V1::ListUsersResponse
             # Gets details of a single User.

@@ -209,6 +209,26 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new
+              #
+              #   # Call the list_repositories method.
+              #   result = client.list_repositories request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::Repository.
+              #     p item
+              #   end
+              #
               def list_repositories request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -271,6 +291,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::Repository]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new
+              #
+              #   # Call the get_repository method.
+              #   result = client.get_repository request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Repository.
+              #   p result
+              #
               def get_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -339,6 +375,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::Repository]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new
+              #
+              #   # Call the create_repository method.
+              #   result = client.create_repository request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Repository.
+              #   p result
+              #
               def create_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -404,6 +456,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::Repository]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new
+              #
+              #   # Call the update_repository method.
+              #   result = client.update_repository request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Repository.
+              #   p result
+              #
               def update_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -470,6 +538,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new
+              #
+              #   # Call the delete_repository method.
+              #   result = client.delete_repository request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -532,6 +616,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new
+              #
+              #   # Call the fetch_remote_branches method.
+              #   result = client.fetch_remote_branches request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesResponse.
+              #   p result
+              #
               def fetch_remote_branches request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -611,6 +711,26 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::ListWorkspacesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new
+              #
+              #   # Call the list_workspaces method.
+              #   result = client.list_workspaces request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::Workspace.
+              #     p item
+              #   end
+              #
               def list_workspaces request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -673,6 +793,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::Workspace]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new
+              #
+              #   # Call the get_workspace method.
+              #   result = client.get_workspace request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Workspace.
+              #   p result
+              #
               def get_workspace request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -741,6 +877,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::Workspace]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new
+              #
+              #   # Call the create_workspace method.
+              #   result = client.create_workspace request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Workspace.
+              #   p result
+              #
               def create_workspace request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -803,6 +955,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new
+              #
+              #   # Call the delete_workspace method.
+              #   result = client.delete_workspace request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_workspace request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -865,6 +1033,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new
+              #
+              #   # Call the install_npm_packages method.
+              #   result = client.install_npm_packages request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse.
+              #   p result
+              #
               def install_npm_packages request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -933,6 +1117,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new
+              #
+              #   # Call the pull_git_commits method.
+              #   result = client.pull_git_commits request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def pull_git_commits request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -998,6 +1198,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new
+              #
+              #   # Call the push_git_commits method.
+              #   result = client.push_git_commits request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def push_git_commits request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1060,6 +1276,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new
+              #
+              #   # Call the fetch_file_git_statuses method.
+              #   result = client.fetch_file_git_statuses request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesResponse.
+              #   p result
+              #
               def fetch_file_git_statuses request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1126,6 +1358,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new
+              #
+              #   # Call the fetch_git_ahead_behind method.
+              #   result = client.fetch_git_ahead_behind request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindResponse.
+              #   p result
+              #
               def fetch_git_ahead_behind request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1195,6 +1443,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new
+              #
+              #   # Call the commit_workspace_changes method.
+              #   result = client.commit_workspace_changes request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def commit_workspace_changes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1262,6 +1526,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new
+              #
+              #   # Call the reset_workspace_changes method.
+              #   result = client.reset_workspace_changes request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def reset_workspace_changes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1326,6 +1606,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::FetchFileDiffResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new
+              #
+              #   # Call the fetch_file_diff method.
+              #   result = client.fetch_file_diff request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchFileDiffResponse.
+              #   p result
+              #
               def fetch_file_diff request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1402,6 +1698,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsResponse::DirectoryEntry>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new
+              #
+              #   # Call the query_directory_contents method.
+              #   result = client.query_directory_contents request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsResponse::DirectoryEntry.
+              #     p item
+              #   end
+              #
               def query_directory_contents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1468,6 +1784,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::MakeDirectoryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new
+              #
+              #   # Call the make_directory method.
+              #   result = client.make_directory request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::MakeDirectoryResponse.
+              #   p result
+              #
               def make_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1533,6 +1865,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new
+              #
+              #   # Call the remove_directory method.
+              #   result = client.remove_directory request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def remove_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1602,6 +1950,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::MoveDirectoryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new
+              #
+              #   # Call the move_directory method.
+              #   result = client.move_directory request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::MoveDirectoryResponse.
+              #   p result
+              #
               def move_directory request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1666,6 +2030,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::ReadFileResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::ReadFileRequest.new
+              #
+              #   # Call the read_file method.
+              #   result = client.read_file request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::ReadFileResponse.
+              #   p result
+              #
               def read_file request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1730,6 +2110,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new
+              #
+              #   # Call the remove_file method.
+              #   result = client.remove_file request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def remove_file request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1796,6 +2192,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::MoveFileResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::MoveFileRequest.new
+              #
+              #   # Call the move_file method.
+              #   result = client.move_file request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::MoveFileResponse.
+              #   p result
+              #
               def move_file request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1862,6 +2274,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::WriteFileResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::WriteFileRequest.new
+              #
+              #   # Call the write_file method.
+              #   result = client.write_file request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::WriteFileResponse.
+              #   p result
+              #
               def write_file request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1935,6 +2363,26 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::ListCompilationResultsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new
+              #
+              #   # Call the list_compilation_results method.
+              #   result = client.list_compilation_results request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::CompilationResult.
+              #     p item
+              #   end
+              #
               def list_compilation_results request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1997,6 +2445,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::CompilationResult]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new
+              #
+              #   # Call the get_compilation_result method.
+              #   result = client.get_compilation_result request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::CompilationResult.
+              #   p result
+              #
               def get_compilation_result request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2062,6 +2526,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::CompilationResult]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new
+              #
+              #   # Call the create_compilation_result method.
+              #   result = client.create_compilation_result request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::CompilationResult.
+              #   p result
+              #
               def create_compilation_result request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2138,6 +2618,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::CompilationResultAction>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new
+              #
+              #   # Call the query_compilation_result_actions method.
+              #   result = client.query_compilation_result_actions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::CompilationResultAction.
+              #     p item
+              #   end
+              #
               def query_compilation_result_actions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2212,6 +2712,26 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new
+              #
+              #   # Call the list_workflow_invocations method.
+              #   result = client.list_workflow_invocations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::WorkflowInvocation.
+              #     p item
+              #   end
+              #
               def list_workflow_invocations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2274,6 +2794,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new
+              #
+              #   # Call the get_workflow_invocation method.
+              #   result = client.get_workflow_invocation request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::WorkflowInvocation.
+              #   p result
+              #
               def get_workflow_invocation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2339,6 +2875,22 @@ module Google
               # @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new
+              #
+              #   # Call the create_workflow_invocation method.
+              #   result = client.create_workflow_invocation request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::WorkflowInvocation.
+              #   p result
+              #
               def create_workflow_invocation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2401,6 +2953,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new
+              #
+              #   # Call the delete_workflow_invocation method.
+              #   result = client.delete_workflow_invocation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_workflow_invocation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2463,6 +3031,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new
+              #
+              #   # Call the cancel_workflow_invocation method.
+              #   result = client.cancel_workflow_invocation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def cancel_workflow_invocation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2536,6 +3120,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new
+              #
+              #   # Call the query_workflow_invocation_actions method.
+              #   result = client.query_workflow_invocation_actions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction.
+              #     p item
+              #   end
+              #
               def query_workflow_invocation_actions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

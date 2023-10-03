@@ -158,7 +158,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -418,6 +419,7 @@ module Google
             #         * A key including a space must be quoted. `labels."a key"`.
             #
             #     Some examples:
+            #
             #       * `endpoint=1`
             #       * `displayName="myDisplayName"`
             #       * `labels.myKey="myValue"`
@@ -436,6 +438,7 @@ module Google
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
             #     Supported fields:
+            #
             #       * `display_name`
             #       * `create_time`
             #       * `update_time`
@@ -1146,6 +1149,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

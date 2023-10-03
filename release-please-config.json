@@ -375,9 +375,13 @@
       "component": "google-cloud-confidential_computing-v1",
       "version_file": "lib/google/cloud/confidential_computing/v1/version.rb"
     },
-    "google-cloud-config-v1": {
-      "component": "google-cloud-config-v1",
-      "version_file": "lib/google/cloud/config/v1/version.rb"
+    "google-cloud-config_service": {
+      "component": "google-cloud-config_service",
+      "version_file": "lib/google/cloud/config_service/version.rb"
+    },
+    "google-cloud-config_service-v1": {
+      "component": "google-cloud-config_service-v1",
+      "version_file": "lib/google/cloud/config_service/v1/version.rb"
     },
     "google-cloud-contact_center_insights": {
       "component": "google-cloud-contact_center_insights",
@@ -827,6 +831,14 @@
       "component": "google-cloud-metastore-v1beta",
       "version_file": "lib/google/cloud/metastore/v1beta/version.rb"
     },
+    "google-cloud-migration_center": {
+      "component": "google-cloud-migration_center",
+      "version_file": "lib/google/cloud/migration_center/version.rb"
+    },
+    "google-cloud-migration_center-v1": {
+      "component": "google-cloud-migration_center-v1",
+      "version_file": "lib/google/cloud/migration_center/v1/version.rb"
+    },
     "google-cloud-monitoring": {
       "component": "google-cloud-monitoring",
       "version_file": "lib/google/cloud/monitoring/version.rb"
@@ -842,6 +854,14 @@
     "google-cloud-monitoring-v3": {
       "component": "google-cloud-monitoring-v3",
       "version_file": "lib/google/cloud/monitoring/v3/version.rb"
+    },
+    "google-cloud-netapp": {
+      "component": "google-cloud-netapp",
+      "version_file": "lib/google/cloud/netapp/version.rb"
+    },
+    "google-cloud-netapp-v1": {
+      "component": "google-cloud-netapp-v1",
+      "version_file": "lib/google/cloud/netapp/v1/version.rb"
     },
     "google-cloud-network_connectivity": {
       "component": "google-cloud-network_connectivity",

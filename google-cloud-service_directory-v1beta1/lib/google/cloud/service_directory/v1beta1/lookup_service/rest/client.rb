@@ -225,6 +225,22 @@ module Google
               # @return [::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/service_directory/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new
+              #
+              #   # Call the resolve_service method.
+              #   result = client.resolve_service request
+              #
+              #   # The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse.
+              #   p result
+              #
               def resolve_service request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

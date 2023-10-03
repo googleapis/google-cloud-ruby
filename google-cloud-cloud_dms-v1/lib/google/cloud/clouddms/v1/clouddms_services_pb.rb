@@ -63,6 +63,9 @@ module Google
             # Generate a SSH configuration script to configure the reverse SSH
             # connectivity.
             rpc :GenerateSshScript, ::Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest, ::Google::Cloud::CloudDMS::V1::SshScript
+            # Generate a TCP Proxy configuration script to configure a cloud-hosted VM
+            # running a TCP Proxy.
+            rpc :GenerateTcpProxyScript, ::Google::Cloud::CloudDMS::V1::GenerateTcpProxyScriptRequest, ::Google::Cloud::CloudDMS::V1::TcpProxyScript
             # Retrieves a list of all connection profiles in a given project and
             # location.
             rpc :ListConnectionProfiles, ::Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest, ::Google::Cloud::CloudDMS::V1::ListConnectionProfilesResponse
@@ -94,6 +97,14 @@ module Google
             rpc :UpdateConversionWorkspace, ::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest, ::Google::Longrunning::Operation
             # Deletes a single conversion workspace.
             rpc :DeleteConversionWorkspace, ::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest, ::Google::Longrunning::Operation
+            # Creates a new mapping rule for a given conversion workspace.
+            rpc :CreateMappingRule, ::Google::Cloud::CloudDMS::V1::CreateMappingRuleRequest, ::Google::Cloud::CloudDMS::V1::MappingRule
+            # Deletes a single mapping rule.
+            rpc :DeleteMappingRule, ::Google::Cloud::CloudDMS::V1::DeleteMappingRuleRequest, ::Google::Protobuf::Empty
+            # Lists the mapping rules for a specific conversion workspace.
+            rpc :ListMappingRules, ::Google::Cloud::CloudDMS::V1::ListMappingRulesRequest, ::Google::Cloud::CloudDMS::V1::ListMappingRulesResponse
+            # Gets the details of a mapping rule.
+            rpc :GetMappingRule, ::Google::Cloud::CloudDMS::V1::GetMappingRuleRequest, ::Google::Cloud::CloudDMS::V1::MappingRule
             # Imports a snapshot of the source database into the
             # conversion workspace.
             rpc :SeedConversionWorkspace, ::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest, ::Google::Longrunning::Operation

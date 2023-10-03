@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.16.0 (2023-09-28)
+
+#### Features
+
+* support PremiumFeatures and IndividualPageSelector 
+
+### 0.15.0 (2023-09-26)
+
+#### Features
+
+* support display_name for RawDocument feat(document_ai): support ProcessorVersionAlias 
+
+### 0.14.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22919](https://github.com/googleapis/google-cloud-ruby/issues/22919)) 
+
 ### 0.13.0 (2023-06-20)
 
 #### Features

@@ -162,7 +162,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -654,7 +655,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload suggest_trials(parent: nil, suggestion_count: nil, client_id: nil)
+            # @overload suggest_trials(parent: nil, suggestion_count: nil, client_id: nil, contexts: nil)
             #   Pass arguments to `suggest_trials` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -670,6 +671,43 @@ module Google
             #     If multiple SuggestTrialsRequests have the same `client_id`,
             #     the service will return the identical suggested Trial if the Trial is
             #     pending, and provide a new Trial if the last suggested Trial was completed.
+            #   @param contexts [::Array<::Google::Cloud::AIPlatform::V1::TrialContext, ::Hash>]
+            #     Optional. This allows you to specify the "context" for a Trial; a context
+            #     is a slice (a subspace) of the search space.
+            #
+            #     Typical uses for contexts:
+            #     1) You are using Vizier to tune a server for best performance, but there's
+            #       a strong weekly cycle.  The context specifies the day-of-week.
+            #       This allows Tuesday to generalize from Wednesday without assuming that
+            #       everything is identical.
+            #     2) Imagine you're optimizing some medical treatment for people.
+            #       As they walk in the door, you know certain facts about them
+            #       (e.g. sex, weight, height, blood-pressure).  Put that information in the
+            #       context, and Vizier will adapt its suggestions to the patient.
+            #     3) You want to do a fair A/B test efficiently.  Specify the "A" and "B"
+            #       conditions as contexts, and Vizier will generalize between "A" and "B"
+            #       conditions.  If they are similar, this will allow Vizier to converge
+            #       to the optimum faster than if "A" and "B" were separate Studies.
+            #       NOTE: You can also enter contexts as REQUESTED Trials, e.g. via the
+            #       CreateTrial() RPC; that's the asynchronous option where you don't need a
+            #       close association between contexts and suggestions.
+            #
+            #     NOTE: All the Parameters you set in a context MUST be defined in the
+            #       Study.
+            #     NOTE: You must supply 0 or $suggestion_count contexts.
+            #       If you don't supply any contexts, Vizier will make suggestions
+            #       from the full search space specified in the StudySpec; if you supply
+            #       a full set of context, each suggestion will match the corresponding
+            #       context.
+            #     NOTE: A Context with no features set matches anything, and allows
+            #       suggestions from the full search space.
+            #     NOTE: Contexts MUST lie within the search space specified in the
+            #       StudySpec.  It's an error if they don't.
+            #     NOTE: Contexts preferentially match ACTIVE then REQUESTED trials before
+            #       new suggestions are generated.
+            #     NOTE: Generation of suggestions involves a match between a Context and
+            #       (optionally) a REQUESTED trial; if that match is not fully specified, a
+            #       suggestion will be geneated in the merged subspace.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1679,6 +1717,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

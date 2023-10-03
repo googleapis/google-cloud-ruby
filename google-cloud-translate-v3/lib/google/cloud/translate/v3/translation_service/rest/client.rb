@@ -267,6 +267,22 @@ module Google
               # @return [::Google::Cloud::Translate::V3::TranslateTextResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::TranslateTextRequest.new
+              #
+              #   # Call the translate_text method.
+              #   result = client.translate_text request
+              #
+              #   # The returned object is of type Google::Cloud::Translate::V3::TranslateTextResponse.
+              #   p result
+              #
               def translate_text request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -364,6 +380,22 @@ module Google
               # @return [::Google::Cloud::Translate::V3::DetectLanguageResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::DetectLanguageRequest.new
+              #
+              #   # Call the detect_language method.
+              #   result = client.detect_language request
+              #
+              #   # The returned object is of type Google::Cloud::Translate::V3::DetectLanguageResponse.
+              #   p result
+              #
               def detect_language request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -456,6 +488,22 @@ module Google
               # @return [::Google::Cloud::Translate::V3::SupportedLanguages]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new
+              #
+              #   # Call the get_supported_languages method.
+              #   result = client.get_supported_languages request
+              #
+              #   # The returned object is of type Google::Cloud::Translate::V3::SupportedLanguages.
+              #   p result
+              #
               def get_supported_languages request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -591,6 +639,22 @@ module Google
               # @return [::Google::Cloud::Translate::V3::TranslateDocumentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::TranslateDocumentRequest.new
+              #
+              #   # Call the translate_document method.
+              #   result = client.translate_document request
+              #
+              #   # The returned object is of type Google::Cloud::Translate::V3::TranslateDocumentResponse.
+              #   p result
+              #
               def translate_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -709,6 +773,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::BatchTranslateTextRequest.new
+              #
+              #   # Call the batch_translate_text method.
+              #   result = client.batch_translate_text request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_translate_text request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -843,6 +930,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new
+              #
+              #   # Call the batch_translate_document method.
+              #   result = client.batch_translate_document request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_translate_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -909,6 +1019,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::CreateGlossaryRequest.new
+              #
+              #   # Call the create_glossary method.
+              #   result = client.create_glossary request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_glossary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -998,6 +1131,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Translate::V3::Glossary>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::ListGlossariesRequest.new
+              #
+              #   # Call the list_glossaries method.
+              #   result = client.list_glossaries request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Translate::V3::Glossary.
+              #     p item
+              #   end
+              #
               def list_glossaries request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1062,6 +1215,22 @@ module Google
               # @return [::Google::Cloud::Translate::V3::Glossary]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::GetGlossaryRequest.new
+              #
+              #   # Call the get_glossary method.
+              #   result = client.get_glossary request
+              #
+              #   # The returned object is of type Google::Cloud::Translate::V3::Glossary.
+              #   p result
+              #
               def get_glossary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1126,6 +1295,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/translate/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Translate::V3::DeleteGlossaryRequest.new
+              #
+              #   # Call the delete_glossary method.
+              #   result = client.delete_glossary request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_glossary request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

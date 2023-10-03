@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-v2",
-    "version": "0.27.0",
+    "version": "0.29.0",
     "language": "RUBY",
     "apis": [
       {
@@ -2555,6 +2555,46 @@
         "method": {
           "short_name": "GenerateStatelessSummary",
           "full_name": "google.cloud.dialogflow.v2.Conversations.GenerateStatelessSummary",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_SearchKnowledge_sync",
+      "title": "Snippet for the search_knowledge call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#search_knowledge. It may require modification in order to execute successfully.",
+      "file": "conversations/search_knowledge.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_knowledge",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#search_knowledge",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "SearchKnowledge",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.SearchKnowledge",
           "service": {
             "short_name": "Conversations",
             "full_name": "google.cloud.dialogflow.v2.Conversations"

@@ -1,5 +1,17 @@
 # Release History
 
+### 0.17.0 (2023-09-28)
+
+#### Features
+
+* support BatchWrite API 
+
+### 0.16.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22924](https://github.com/googleapis/google-cloud-ruby/issues/22924)) 
+
 ### 0.15.1 (2023-06-06)
 
 #### Bug Fixes

@@ -59,6 +59,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
     query = "hello world"
     query_model = "hello world"
     user_pseudo_id = "hello world"
+    include_tail_suggestions = true
 
     complete_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :complete_query, name
@@ -67,6 +68,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
       assert_equal "hello world", request["query"]
       assert_equal "hello world", request["query_model"]
       assert_equal "hello world", request["user_pseudo_id"]
+      assert_equal true, request["include_tail_suggestions"]
       refute_nil options
     end
 
@@ -77,31 +79,31 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
       end
 
       # Use hash object
-      client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id }) do |response, operation|
+      client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.complete_query data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id do |response, operation|
+      client.complete_query data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.complete_query ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id) do |response, operation|
+      client.complete_query ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id }, grpc_options) do |response, operation|
+      client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.complete_query(::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id), grpc_options) do |response, operation|
+      client.complete_query(::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

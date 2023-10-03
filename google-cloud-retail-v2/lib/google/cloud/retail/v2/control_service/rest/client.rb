@@ -188,6 +188,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Control]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ControlService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::CreateControlRequest.new
+              #
+              #   # Call the create_control method.
+              #   result = client.create_control request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Control.
+              #   p result
+              #
               def create_control request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -254,6 +270,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ControlService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::DeleteControlRequest.new
+              #
+              #   # Call the delete_control method.
+              #   result = client.delete_control request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_control request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -329,6 +361,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Control]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ControlService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::UpdateControlRequest.new
+              #
+              #   # Call the update_control method.
+              #   result = client.update_control request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Control.
+              #   p result
+              #
               def update_control request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -392,6 +440,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Control]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ControlService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::GetControlRequest.new
+              #
+              #   # Call the get_control method.
+              #   result = client.get_control request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Control.
+              #   p result
+              #
               def get_control request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -469,6 +533,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Retail::V2::Control>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ControlService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ListControlsRequest.new
+              #
+              #   # Call the list_controls method.
+              #   result = client.list_controls request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Retail::V2::Control.
+              #     p item
+              #   end
+              #
               def list_controls request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

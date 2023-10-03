@@ -103,8 +103,11 @@ module Google
             #
             # Possible error codes:
             #
-            # * PERMISSION_DENIED: The reseller account making the request is different
-            # from the reseller account in the API request.
+            # * PERMISSION_DENIED:
+            #     * The reseller account making the request is different from the
+            #     reseller account in the API request.
+            #     * You are not authorized to create a customer. See
+            #     https://support.google.com/channelservices/answer/9759265
             # * INVALID_ARGUMENT:
             #     * Required request parameters are missing or invalid.
             #     * Domain field value doesn't match the primary email domain.
@@ -144,8 +147,11 @@ module Google
             #
             # Possible error codes:
             #
-            # * PERMISSION_DENIED: The reseller account making the request is different
-            # from the reseller account in the API request.
+            # * PERMISSION_DENIED:
+            #     * The reseller account making the request is different from the
+            #     reseller account in the API request.
+            #     * You are not authorized to import the customer. See
+            #     https://support.google.com/channelservices/answer/9759265
             # * NOT_FOUND: Cloud Identity doesn't exist or was deleted.
             # * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is
             # expired or invalid.
@@ -160,7 +166,10 @@ module Google
             #
             # Possible error codes:
             #
-            # *  PERMISSION_DENIED: The customer doesn't belong to the reseller.
+            # *  PERMISSION_DENIED:
+            #      * The customer doesn't belong to the reseller.
+            #      * You are not authorized to provision cloud identity id. See
+            #      https://support.google.com/channelservices/answer/9759265
             # *  INVALID_ARGUMENT: Required request parameters are missing or invalid.
             # *  NOT_FOUND: The customer was not found.
             # *  ALREADY_EXISTS: The customer's primary email already exists. Retry
@@ -224,6 +233,8 @@ module Google
             #     auth token.
             #     * The reseller account making the request is different
             #     from the reseller account in the query.
+            #     * The reseller is not authorized to transact on this Product. See
+            #     https://support.google.com/channelservices/answer/9759265
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
@@ -246,7 +257,10 @@ module Google
             #
             # Possible error codes:
             #
-            # * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+            # * PERMISSION_DENIED:
+            #     * The customer doesn't belong to the reseller.
+            #     * The reseller is not authorized to transact on this Product. See
+            #     https://support.google.com/channelservices/answer/9759265
             # * INVALID_ARGUMENT:
             #     * Required request parameters are missing or invalid.
             #     * There is already a customer entitlement for a SKU from the same
@@ -455,7 +469,10 @@ module Google
             #
             # Possible error codes:
             #
-            # * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+            # * PERMISSION_DENIED:
+            #     * The customer doesn't belong to the reseller.
+            #     * The reseller is not authorized to transact on this Product. See
+            #     https://support.google.com/channelservices/answer/9759265
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             # * NOT_FOUND: The customer or offer resource was not found.
             # * ALREADY_EXISTS: The SKU was already transferred for the customer.
@@ -648,12 +665,12 @@ module Google
             # * The new config will not modify exports used with other configs.
             # Changes to the config may be immediate, but may take up to 24 hours.
             # * There is a limit of ten configs for any
-            # [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement]
-            # or
+            # [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement],
+            # for any
             # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
             # * The contained
             # [CustomerRepricingConfig.repricing_config][google.cloud.channel.v1.CustomerRepricingConfig.repricing_config]
-            # vaule must be different from the value used in the current config for a
+            # value must be different from the value used in the current config for a
             # [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement].
             #
             # Possible Error Codes:
@@ -786,10 +803,12 @@ module Google
             # * The new config will not modify exports used with other configs.
             # Changes to the config may be immediate, but may take up to 24 hours.
             # * There is a limit of ten configs for any ChannelPartner or
+            # [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement],
+            # for any
             # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
             # * The contained
             # [ChannelPartnerRepricingConfig.repricing_config][google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config]
-            # vaule must be different from the value used in the current config for a
+            # value must be different from the value used in the current config for a
             # ChannelPartner.
             #
             # Possible Error Codes:
@@ -947,9 +966,25 @@ module Google
             #
             # Possible error codes:
             #
-            # * PERMISSION_DENIED: The customer doesn't belong to the reseller
+            # * PERMISSION_DENIED:
+            #     * The customer doesn't belong to the reseller
+            #     * The reseller is not authorized to transact on this Product. See
+            #     https://support.google.com/channelservices/answer/9759265
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             rpc :ListPurchasableOffers, ::Google::Cloud::Channel::V1::ListPurchasableOffersRequest, ::Google::Cloud::Channel::V1::ListPurchasableOffersResponse
+            # Lists the billing accounts that are eligible to purchase particular SKUs
+            # for a given customer.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+            # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+            #
+            # Return value:
+            # Based on the provided list of SKUs, returns a list of SKU groups that must
+            # be purchased using the same billing account and the billing accounts
+            # eligible to purchase each SKU group.
+            rpc :QueryEligibleBillingAccounts, ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest, ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse
             # Registers a service account with subscriber privileges on the Cloud Pub/Sub
             # topic for this Channel Services account. After you create a
             # subscriber, you get the events through

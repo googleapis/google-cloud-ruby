@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n3google/cloud/dialogflow/cx/v3/import_strategy.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3*\xc4\x01\n\x0eImportStrategy\x12\x1f\n\x1bIMPORT_STRATEGY_UNSPECIFIED\x10\x00\x12\x1e\n\x1aIMPORT_STRATEGY_CREATE_NEW\x10\x01\x12\x1b\n\x17IMPORT_STRATEGY_REPLACE\x10\x02\x12\x18\n\x14IMPORT_STRATEGY_KEEP\x10\x03\x12\x19\n\x15IMPORT_STRATEGY_MERGE\x10\x04\x12\x1f\n\x1bIMPORT_STRATEGY_THROW_ERROR\x10\x05\x42\x95\x01\n!com.google.cloud.dialogflow.cx.v3B\x13ImportStrategyProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3b\x06proto3"
+descriptor_data = "\n3google/cloud/dialogflow/cx/v3/import_strategy.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3*\xc4\x01\n\x0eImportStrategy\x12\x1f\n\x1bIMPORT_STRATEGY_UNSPECIFIED\x10\x00\x12\x1e\n\x1aIMPORT_STRATEGY_CREATE_NEW\x10\x01\x12\x1b\n\x17IMPORT_STRATEGY_REPLACE\x10\x02\x12\x18\n\x14IMPORT_STRATEGY_KEEP\x10\x03\x12\x19\n\x15IMPORT_STRATEGY_MERGE\x10\x04\x12\x1f\n\x1bIMPORT_STRATEGY_THROW_ERROR\x10\x05\x42\xb9\x01\n!com.google.cloud.dialogflow.cx.v3B\x13ImportStrategyProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3\xea\x02!Google::Cloud::Dialogflow::CX::V3b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -34,7 +34,7 @@ end
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           ImportStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ImportStrategy").enummodule
         end

@@ -140,6 +140,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
@@ -151,9 +157,17 @@ module Google
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
-                  interceptors: @config.interceptors
+                  interceptors: @config.interceptors,
+                  channel_pool_config: @config.channel_pool
                 )
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::Dialogflow::CX::V3::Intents::Operations]
+              #
+              attr_reader :operations_client
 
               ##
               # Get the associated client for mix-in of the Locations.
@@ -667,6 +681,247 @@ module Google
               end
 
               ##
+              # Imports the specified intents into the agent.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportIntentsMetadata ImportIntentsMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportIntentsResponse ImportIntentsResponse}
+              #
+              # @overload import_intents(request, options = nil)
+              #   Pass arguments to `import_intents` via a request object, either of type
+              #   {::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload import_intents(parent: nil, intents_uri: nil, intents_content: nil, merge_option: nil)
+              #   Pass arguments to `import_intents` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The agent to import the intents into.
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #   @param intents_uri [::String]
+              #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+              #     to import intents from. The format of this URI must be
+              #     `gs://<bucket-name>/<object-name>`.
+              #
+              #     Dialogflow performs a read operation for the Cloud Storage object
+              #     on the caller's behalf, so your request authentication must
+              #     have read permissions for the object. For more information, see
+              #     [Dialogflow access
+              #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #   @param intents_content [::Google::Cloud::Dialogflow::CX::V3::InlineSource, ::Hash]
+              #     Uncompressed byte content of intents.
+              #   @param merge_option [::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest::MergeOption]
+              #     Merge option for importing intents. If not specified, `REJECT` is assumed.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest.new
+              #
+              #   # Call the import_intents method.
+              #   result = client.import_intents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def import_intents request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.import_intents.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.import_intents.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.import_intents.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @intents_stub.call_rpc :import_intents, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Exports the selected intents.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsMetadata ExportIntentsMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsResponse ExportIntentsResponse}
+              #
+              # @overload export_intents(request, options = nil)
+              #   Pass arguments to `export_intents` via a request object, either of type
+              #   {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload export_intents(parent: nil, intents: nil, intents_uri: nil, intents_content_inline: nil, data_format: nil)
+              #   Pass arguments to `export_intents` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The name of the parent agent to export intents.
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>`.
+              #   @param intents [::Array<::String>]
+              #     Required. The name of the intents to export.
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/intents/<Intent ID>`.
+              #   @param intents_uri [::String]
+              #     Optional. The [Google Cloud
+              #     Storage](https://cloud.google.com/storage/docs/) URI to export the
+              #     intents to. The format of this URI must be
+              #     `gs://<bucket-name>/<object-name>`.
+              #
+              #     Dialogflow performs a write operation for the Cloud Storage object
+              #     on the caller's behalf, so your request authentication must
+              #     have write permissions for the object. For more information, see
+              #     [Dialogflow access
+              #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #   @param intents_content_inline [::Boolean]
+              #     Optional. The option to return the serialized intents inline.
+              #   @param data_format [::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest::DataFormat]
+              #     Optional. The data format of the exported intents. If not specified, `BLOB`
+              #     is assumed.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Intents::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest.new
+              #
+              #   # Call the export_intents method.
+              #   result = client.export_intents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def export_intents request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.export_intents.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.export_intents.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.export_intents.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @intents_stub.call_rpc :export_intents, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Intents API.
               #
               # This class represents the configuration for Intents,
@@ -786,6 +1041,14 @@ module Google
                 end
 
                 ##
+                # Configuration for the channel pool
+                # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+                #
+                def channel_pool
+                  @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+                end
+
+                ##
                 # Configuration RPC class for the Intents API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
@@ -828,6 +1091,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_intent
+                  ##
+                  # RPC-specific configuration for `import_intents`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :import_intents
+                  ##
+                  # RPC-specific configuration for `export_intents`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_intents
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -841,6 +1114,10 @@ module Google
                     @update_intent = ::Gapic::Config::Method.new update_intent_config
                     delete_intent_config = parent_rpcs.delete_intent if parent_rpcs.respond_to? :delete_intent
                     @delete_intent = ::Gapic::Config::Method.new delete_intent_config
+                    import_intents_config = parent_rpcs.import_intents if parent_rpcs.respond_to? :import_intents
+                    @import_intents = ::Gapic::Config::Method.new import_intents_config
+                    export_intents_config = parent_rpcs.export_intents if parent_rpcs.respond_to? :export_intents
+                    @export_intents = ::Gapic::Config::Method.new export_intents_config
 
                     yield self if block_given?
                   end

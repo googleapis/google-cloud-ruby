@@ -1409,6 +1409,196 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+              #   A result object deserialized from the server's reply
+              def get_sk_ad_network_conversion_value_schema request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_sk_ad_network_conversion_value_schema_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+              #   A result object deserialized from the server's reply
+              def create_sk_ad_network_conversion_value_schema request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_sk_ad_network_conversion_value_schema_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_sk_ad_network_conversion_value_schema request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_sk_ad_network_conversion_value_schema_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+              #   A result object deserialized from the server's reply
+              def update_sk_ad_network_conversion_value_schema request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_sk_ad_network_conversion_value_schema_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_sk_ad_network_conversion_value_schemas REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse]
+              #   A result object deserialized from the server's reply
+              def list_sk_ad_network_conversion_value_schemas request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_sk_ad_network_conversion_value_schemas_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the search_change_history_events REST call
               #
               # @param request_pb [::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest]
@@ -5547,6 +5737,113 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["property", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_sk_ad_network_conversion_value_schema_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/dataStreams/[^/]+/sKAdNetworkConversionValueSchema/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_sk_ad_network_conversion_value_schema_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{parent}/sKAdNetworkConversionValueSchema",
+                                                          body: "skadnetwork_conversion_value_schema",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/dataStreams/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_sk_ad_network_conversion_value_schema_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/dataStreams/[^/]+/sKAdNetworkConversionValueSchema/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_sk_ad_network_conversion_value_schema REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_sk_ad_network_conversion_value_schema_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1alpha/{skadnetwork_conversion_value_schema.name}",
+                                                          body: "skadnetwork_conversion_value_schema",
+                                                          matches: [
+                                                            ["skadnetwork_conversion_value_schema.name", %r{^properties/[^/]+/dataStreams/[^/]+/sKAdNetworkConversionValueSchema/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_sk_ad_network_conversion_value_schemas REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_sk_ad_network_conversion_value_schemas_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{parent}/sKAdNetworkConversionValueSchema",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/dataStreams/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

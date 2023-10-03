@@ -1,5 +1,23 @@
 # Release History
 
+### 1.45.0 (2023-09-25)
+
+#### Features
+
+* support load job with session ([#23320](https://github.com/googleapis/google-cloud-ruby/issues/23320)) 
+
+### 1.44.2 (2023-09-12)
+
+#### Bug Fixes
+
+* Avoid dataset reload when accessing location ([#22905](https://github.com/googleapis/google-cloud-ruby/issues/22905)) 
+
+### 1.44.1 (2023-09-08)
+
+#### Bug Fixes
+
+* remove unnecessary warning ([#22904](https://github.com/googleapis/google-cloud-ruby/issues/22904)) 
+
 ### 1.44.0 (2023-09-04)
 
 #### Features

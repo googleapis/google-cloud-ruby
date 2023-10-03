@@ -274,6 +274,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Tasks::V2beta3::Queue>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::ListQueuesRequest.new
+              #
+              #   # Call the list_queues method.
+              #   result = client.list_queues request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Tasks::V2beta3::Queue.
+              #     p item
+              #   end
+              #
               def list_queues request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -343,6 +363,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Queue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::GetQueueRequest.new
+              #
+              #   # Call the get_queue method.
+              #   result = client.get_queue request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+              #   p result
+              #
               def get_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -426,6 +462,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Queue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::CreateQueueRequest.new
+              #
+              #   # Call the create_queue method.
+              #   result = client.create_queue request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+              #   p result
+              #
               def create_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -514,6 +566,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Queue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::UpdateQueueRequest.new
+              #
+              #   # Call the update_queue method.
+              #   result = client.update_queue request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+              #   p result
+              #
               def update_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -589,6 +657,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::DeleteQueueRequest.new
+              #
+              #   # Call the delete_queue method.
+              #   result = client.delete_queue request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -657,6 +741,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Queue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::PurgeQueueRequest.new
+              #
+              #   # Call the purge_queue method.
+              #   result = client.purge_queue request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+              #   p result
+              #
               def purge_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -727,6 +827,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Queue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::PauseQueueRequest.new
+              #
+              #   # Call the pause_queue method.
+              #   result = client.pause_queue request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+              #   p result
+              #
               def pause_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -804,6 +920,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Queue]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::ResumeQueueRequest.new
+              #
+              #   # Call the resume_queue method.
+              #   result = client.resume_queue request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+              #   p result
+              #
               def resume_queue request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -878,6 +1010,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -962,6 +1110,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1037,6 +1201,22 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1141,6 +1321,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Tasks::V2beta3::Task>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::ListTasksRequest.new
+              #
+              #   # Call the list_tasks method.
+              #   result = client.list_tasks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Tasks::V2beta3::Task.
+              #     p item
+              #   end
+              #
               def list_tasks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1219,6 +1419,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Task]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::GetTaskRequest.new
+              #
+              #   # Call the get_task method.
+              #   result = client.get_task request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Task.
+              #   p result
+              #
               def get_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1336,6 +1552,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Task]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::CreateTaskRequest.new
+              #
+              #   # Call the create_task method.
+              #   result = client.create_task request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Task.
+              #   p result
+              #
               def create_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1403,6 +1635,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::DeleteTaskRequest.new
+              #
+              #   # Call the delete_task method.
+              #   result = client.delete_task request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1506,6 +1754,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::Task]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::RunTaskRequest.new
+              #
+              #   # Call the run_task method.
+              #   result = client.run_task request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::Task.
+              #   p result
+              #
               def run_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1589,6 +1853,22 @@ module Google
               # @return [::Google::Cloud::Tasks::V2beta3::BufferTaskResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::BufferTaskRequest.new
+              #
+              #   # Call the buffer_task method.
+              #   result = client.buffer_task request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::BufferTaskResponse.
+              #   p result
+              #
               def buffer_task request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

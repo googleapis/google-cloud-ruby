@@ -182,7 +182,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -1103,7 +1104,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload diagnose_cluster(project_id: nil, region: nil, cluster_name: nil)
+            # @overload diagnose_cluster(project_id: nil, region: nil, cluster_name: nil, tarball_gcs_dir: nil, diagnosis_interval: nil, jobs: nil, yarn_application_ids: nil)
             #   Pass arguments to `diagnose_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1115,6 +1116,19 @@ module Google
             #     Required. The Dataproc region in which to handle the request.
             #   @param cluster_name [::String]
             #     Required. The cluster name.
+            #   @param tarball_gcs_dir [::String]
+            #     Optional. The output Cloud Storage directory for the diagnostic
+            #     tarball. If not specified, a task-specific directory in the cluster's
+            #     staging bucket will be used.
+            #   @param diagnosis_interval [::Google::Type::Interval, ::Hash]
+            #     Optional. Time interval in which diagnosis should be carried out on the
+            #     cluster.
+            #   @param jobs [::Array<::String>]
+            #     Optional. Specifies a list of jobs on which diagnosis is to be performed.
+            #     Format: projects/\\{project}/regions/\\{region}/jobs/\\{job}
+            #   @param yarn_application_ids [::Array<::String>]
+            #     Optional. Specifies a list of yarn applications on which diagnosis is to be
+            #     performed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1311,6 +1325,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

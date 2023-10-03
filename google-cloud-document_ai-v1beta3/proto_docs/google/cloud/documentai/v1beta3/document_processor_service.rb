@@ -22,13 +22,39 @@ module Google
     module DocumentAI
       module V1beta3
         # Options for Process API
+        # @!attribute [rw] individual_page_selector
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions::IndividualPageSelector]
+        #     Which pages to process (1-indexed).
+        # @!attribute [rw] from_start
+        #   @return [::Integer]
+        #     Only process certain pages from the start. Process all if the document
+        #     has fewer pages.
+        # @!attribute [rw] from_end
+        #   @return [::Integer]
+        #     Only process certain pages from the end, same as above.
         # @!attribute [rw] ocr_config
         #   @return [::Google::Cloud::DocumentAI::V1beta3::OcrConfig]
         #     Only applicable to `OCR_PROCESSOR`. Returns error if set on other
         #     processor types.
+        # @!attribute [rw] schema_override
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema]
+        #     Optional. Override the schema of the
+        #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}. Will
+        #     return an Invalid Argument error if this field is set when the underlying
+        #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}
+        #     doesn't support schema override.
         class ProcessOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A list of individual page numbers.
+          # @!attribute [rw] pages
+          #   @return [::Array<::Integer>]
+          #     Optional. Indices of the pages (starting from 1).
+          class IndividualPageSelector
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request message for the
@@ -727,8 +753,8 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Training Method for CDE. TRAINING_METHOD_UNSPECIFIED will fallback to
-            # MODEL_BASED.
+            # Training Method for CDE. `TRAINING_METHOD_UNSPECIFIED` will fall back to
+            # `MODEL_BASED`.
             module TrainingMethod
               TRAINING_METHOD_UNSPECIFIED = 0
 
@@ -991,9 +1017,9 @@ module Google
 
         # The request message for the
         # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#import_processor_version ImportProcessorVersion}
-        # method. Requirements:
+        # method.
         #
-        # - The Document AI [Service
+        # The Document AI [Service
         # Agent](https://cloud.google.com/iam/docs/service-agents) of the destination
         # project must have [Document AI Editor
         # role](https://cloud.google.com/document-ai/docs/access-control/iam-roles) on
@@ -1002,15 +1028,17 @@ module Google
         # The destination project is specified as part of the
         # {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest#parent parent}
         # field. The source project is specified as part of the
-        # [source][ImportProcessorVersionRequest.processor_version_source or
-        # ImportProcessorVersionRequest.external_processor_version_source] field.
+        # {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest#processor_version_source source}
+        # or
+        # {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest#external_processor_version_source external_processor_version_source}
+        # field.
         # @!attribute [rw] processor_version_source
         #   @return [::String]
         #     The source processor version to import from. The source processor version
         #     and destination processor need to be in the same environment and region.
         # @!attribute [rw] external_processor_version_source
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource]
-        #     The source processor version to import from, and can be from different
+        #     The source processor version to import from. It can be from a different
         #     environment and region than the destination processor.
         # @!attribute [rw] parent
         #   @return [::String]

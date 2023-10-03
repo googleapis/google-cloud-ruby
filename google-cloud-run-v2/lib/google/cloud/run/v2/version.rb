@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Run
       module V2
-        VERSION = "0.10.1"
+        VERSION = "0.12.0"
       end
     end
   end

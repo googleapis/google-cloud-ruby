@@ -186,6 +186,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4::Tenant]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4::TenantService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4::CreateTenantRequest.new
+              #
+              #   # Call the create_tenant method.
+              #   result = client.create_tenant request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4::Tenant.
+              #   p result
+              #
               def create_tenant request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -251,6 +267,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4::Tenant]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4::TenantService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4::GetTenantRequest.new
+              #
+              #   # Call the get_tenant method.
+              #   result = client.get_tenant request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4::Tenant.
+              #   p result
+              #
               def get_tenant request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -324,6 +356,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4::Tenant]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4::TenantService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4::UpdateTenantRequest.new
+              #
+              #   # Call the update_tenant method.
+              #   result = client.update_tenant request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4::Tenant.
+              #   p result
+              #
               def update_tenant request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -389,6 +437,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4::TenantService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4::DeleteTenantRequest.new
+              #
+              #   # Call the delete_tenant method.
+              #   result = client.delete_tenant request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_tenant request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -459,6 +523,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Talent::V4::Tenant>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4::TenantService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4::ListTenantsRequest.new
+              #
+              #   # Call the list_tenants method.
+              #   result = client.list_tenants request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Talent::V4::Tenant.
+              #     p item
+              #   end
+              #
               def list_tenants request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

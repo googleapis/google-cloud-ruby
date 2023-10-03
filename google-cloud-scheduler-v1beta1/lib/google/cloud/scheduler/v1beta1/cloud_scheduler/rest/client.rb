@@ -241,6 +241,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Scheduler::V1beta1::Job>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new
+              #
+              #   # Call the list_jobs method.
+              #   result = client.list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Scheduler::V1beta1::Job.
+              #     p item
+              #   end
+              #
               def list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -305,6 +325,22 @@ module Google
               # @return [::Google::Cloud::Scheduler::V1beta1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::GetJobRequest.new
+              #
+              #   # Call the get_job method.
+              #   result = client.get_job request
+              #
+              #   # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+              #   p result
+              #
               def get_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -375,6 +411,22 @@ module Google
               # @return [::Google::Cloud::Scheduler::V1beta1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::CreateJobRequest.new
+              #
+              #   # Call the create_job method.
+              #   result = client.create_job request
+              #
+              #   # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+              #   p result
+              #
               def create_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -452,6 +504,22 @@ module Google
               # @return [::Google::Cloud::Scheduler::V1beta1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::UpdateJobRequest.new
+              #
+              #   # Call the update_job method.
+              #   result = client.update_job request
+              #
+              #   # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+              #   p result
+              #
               def update_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -519,6 +587,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new
+              #
+              #   # Call the delete_job method.
+              #   result = client.delete_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -592,6 +676,22 @@ module Google
               # @return [::Google::Cloud::Scheduler::V1beta1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new
+              #
+              #   # Call the pause_job method.
+              #   result = client.pause_job request
+              #
+              #   # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+              #   p result
+              #
               def pause_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -665,6 +765,22 @@ module Google
               # @return [::Google::Cloud::Scheduler::V1beta1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new
+              #
+              #   # Call the resume_job method.
+              #   result = client.resume_job request
+              #
+              #   # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+              #   p result
+              #
               def resume_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -735,6 +851,22 @@ module Google
               # @return [::Google::Cloud::Scheduler::V1beta1::Job]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/scheduler/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Scheduler::V1beta1::RunJobRequest.new
+              #
+              #   # Call the run_job method.
+              #   result = client.run_job request
+              #
+              #   # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+              #   p result
+              #
               def run_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

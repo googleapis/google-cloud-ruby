@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.5.0 (2023-09-19)
+
+#### Features
+
+* Support for HTTP/REST transport ([#23338](https://github.com/googleapis/google-cloud-ruby/issues/23338)) 
+
+### 0.4.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22924](https://github.com/googleapis/google-cloud-ruby/issues/22924)) 
+
 ### 0.3.1 (2023-06-06)
 
 #### Bug Fixes

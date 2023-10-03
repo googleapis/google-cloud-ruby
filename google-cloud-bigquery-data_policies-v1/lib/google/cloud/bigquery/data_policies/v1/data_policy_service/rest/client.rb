@@ -213,6 +213,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::DataPolicies::V1::CreateDataPolicyRequest.new
+                #
+                #   # Call the create_data_policy method.
+                #   result = client.create_data_policy request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy.
+                #   p result
+                #
                 def create_data_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -286,6 +302,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::DataPolicies::V1::UpdateDataPolicyRequest.new
+                #
+                #   # Call the update_data_policy method.
+                #   result = client.update_data_policy request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy.
+                #   p result
+                #
                 def update_data_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -351,6 +383,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::DataPolicies::V1::RenameDataPolicyRequest.new
+                #
+                #   # Call the rename_data_policy method.
+                #   result = client.rename_data_policy request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy.
+                #   p result
+                #
                 def rename_data_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -414,6 +462,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::DataPolicies::V1::DeleteDataPolicyRequest.new
+                #
+                #   # Call the delete_data_policy method.
+                #   result = client.delete_data_policy request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_data_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -477,6 +541,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::DataPolicies::V1::GetDataPolicyRequest.new
+                #
+                #   # Call the get_data_policy method.
+                #   result = client.get_data_policy request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy.
+                #   p result
+                #
                 def get_data_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -556,6 +636,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::DataPolicies::V1::ListDataPoliciesRequest.new
+                #
+                #   # Call the list_data_policies method.
+                #   result = client.list_data_policies request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy.
+                #     p item
+                #   end
+                #
                 def list_data_policies request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -623,6 +723,22 @@ module Google
                 # @return [::Google::Iam::V1::Policy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::GetIamPolicyRequest.new
+                #
+                #   # Call the get_iam_policy method.
+                #   result = client.get_iam_policy request
+                #
+                #   # The returned object is of type Google::Iam::V1::Policy.
+                #   p result
+                #
                 def get_iam_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -697,6 +813,22 @@ module Google
                 # @return [::Google::Iam::V1::Policy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::SetIamPolicyRequest.new
+                #
+                #   # Call the set_iam_policy method.
+                #   result = client.set_iam_policy request
+                #
+                #   # The returned object is of type Google::Iam::V1::Policy.
+                #   p result
+                #
                 def set_iam_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -765,6 +897,22 @@ module Google
                 # @return [::Google::Iam::V1::TestIamPermissionsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/data_policies/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+                #
+                #   # Call the test_iam_permissions method.
+                #   result = client.test_iam_permissions request
+                #
+                #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+                #   p result
+                #
                 def test_iam_permissions request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

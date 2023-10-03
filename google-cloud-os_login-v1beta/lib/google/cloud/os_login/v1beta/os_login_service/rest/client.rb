@@ -197,6 +197,22 @@ module Google
               # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::CreateSshPublicKeyRequest.new
+              #
+              #   # Call the create_ssh_public_key method.
+              #   result = client.create_ssh_public_key request
+              #
+              #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+              #   p result
+              #
               def create_ssh_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -261,6 +277,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new
+              #
+              #   # Call the delete_posix_account method.
+              #   result = client.delete_posix_account request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_posix_account request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -325,6 +357,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest.new
+              #
+              #   # Call the delete_ssh_public_key method.
+              #   result = client.delete_ssh_public_key request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_ssh_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -394,6 +442,22 @@ module Google
               # @return [::Google::Cloud::OsLogin::V1beta::LoginProfile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest.new
+              #
+              #   # Call the get_login_profile method.
+              #   result = client.get_login_profile request
+              #
+              #   # The returned object is of type Google::Cloud::OsLogin::V1beta::LoginProfile.
+              #   p result
+              #
               def get_login_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,6 +522,22 @@ module Google
               # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new
+              #
+              #   # Call the get_ssh_public_key method.
+              #   result = client.get_ssh_public_key request
+              #
+              #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+              #   p result
+              #
               def get_ssh_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -528,6 +608,22 @@ module Google
               # @return [::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new
+              #
+              #   # Call the import_ssh_public_key method.
+              #   result = client.import_ssh_public_key request
+              #
+              #   # The returned object is of type Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse.
+              #   p result
+              #
               def import_ssh_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -597,6 +693,22 @@ module Google
               # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest.new
+              #
+              #   # Call the update_ssh_public_key method.
+              #   result = client.update_ssh_public_key request
+              #
+              #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+              #   p result
+              #
               def update_ssh_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -664,6 +776,22 @@ module Google
               # @return [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/os_login/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest.new
+              #
+              #   # Call the sign_ssh_public_key method.
+              #   result = client.sign_ssh_public_key request
+              #
+              #   # The returned object is of type Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse.
+              #   p result
+              #
               def sign_ssh_public_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.6.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22918](https://github.com/googleapis/google-cloud-ruby/issues/22918)) 
+
+### 0.5.0 (2023-09-05)
+
+#### Features
+
+* Support GenerateTcpProxyScript ([#22882](https://github.com/googleapis/google-cloud-ruby/issues/22882)) 
+* Support mapping rules ([#22882](https://github.com/googleapis/google-cloud-ruby/issues/22882)) 
+
 ### 0.4.0 (2023-06-06)
 
 #### Features

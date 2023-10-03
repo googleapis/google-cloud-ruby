@@ -206,6 +206,9 @@ module Google
         # @!attribute [rw] summarization_feedback
         #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::SummarizationFeedback]
         #     Optional. Feedback for conversation summarization.
+        # @!attribute [rw] knowledge_search_feedback
+        #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::KnowledgeSearchFeedback]
+        #     Optional. Feedback for knowledge search.
         class AgentAssistantFeedback
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,6 +224,25 @@ module Google
           #   @return [::String]
           #     Text of actual submitted summary.
           class SummarizationFeedback
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Feedback for knowledge search.
+          # @!attribute [rw] answer_copied
+          #   @return [::Boolean]
+          #     Whether the answer was copied by the human agent or not.
+          #     If the value is set to be true,
+          #     {::Google::Cloud::Dialogflow::V2::AnswerFeedback#clicked AnswerFeedback.clicked}
+          #     will be updated to be true.
+          # @!attribute [rw] clicked_uris
+          #   @return [::Array<::String>]
+          #     The URIs clicked by the human agent. The value is appended for each
+          #     {::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest UpdateAnswerRecordRequest}.
+          #     If the value is not empty,
+          #     {::Google::Cloud::Dialogflow::V2::AnswerFeedback#clicked AnswerFeedback.clicked}
+          #     will be updated to be true.
+          class KnowledgeSearchFeedback
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -269,6 +291,9 @@ module Google
         # @!attribute [r] faq_answer
         #   @return [::Google::Cloud::Dialogflow::V2::FaqAnswer]
         #     Output only. The FAQ answer.
+        # @!attribute [r] dialogflow_assist_answer
+        #   @return [::Google::Cloud::Dialogflow::V2::DialogflowAssistAnswer]
+        #     Output only. Dialogflow assist answer.
         class AgentAssistantRecord
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

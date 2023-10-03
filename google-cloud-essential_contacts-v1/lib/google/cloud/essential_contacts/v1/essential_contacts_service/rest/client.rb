@@ -187,6 +187,22 @@ module Google
               # @return [::Google::Cloud::EssentialContacts::V1::Contact]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::CreateContactRequest.new
+              #
+              #   # Call the create_contact method.
+              #   result = client.create_contact request
+              #
+              #   # The returned object is of type Google::Cloud::EssentialContacts::V1::Contact.
+              #   p result
+              #
               def create_contact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -255,6 +271,22 @@ module Google
               # @return [::Google::Cloud::EssentialContacts::V1::Contact]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new
+              #
+              #   # Call the update_contact method.
+              #   result = client.update_contact request
+              #
+              #   # The returned object is of type Google::Cloud::EssentialContacts::V1::Contact.
+              #   p result
+              #
               def update_contact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -329,6 +361,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EssentialContacts::V1::Contact>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::ListContactsRequest.new
+              #
+              #   # Call the list_contacts method.
+              #   result = client.list_contacts request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::EssentialContacts::V1::Contact.
+              #     p item
+              #   end
+              #
               def list_contacts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -395,6 +447,22 @@ module Google
               # @return [::Google::Cloud::EssentialContacts::V1::Contact]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::GetContactRequest.new
+              #
+              #   # Call the get_contact method.
+              #   result = client.get_contact request
+              #
+              #   # The returned object is of type Google::Cloud::EssentialContacts::V1::Contact.
+              #   p result
+              #
               def get_contact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -460,6 +528,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new
+              #
+              #   # Call the delete_contact method.
+              #   result = client.delete_contact request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_contact request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -540,6 +624,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EssentialContacts::V1::Contact>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new
+              #
+              #   # Call the compute_contacts method.
+              #   result = client.compute_contacts request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::EssentialContacts::V1::Contact.
+              #     p item
+              #   end
+              #
               def compute_contacts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -616,6 +720,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/essential_contacts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new
+              #
+              #   # Call the send_test_message method.
+              #   result = client.send_test_message request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def send_test_message request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-alloy_db-v1",
-    "version": "0.3.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -967,6 +967,86 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GenerateClientCertificate_sync",
+      "title": "Snippet for the generate_client_certificate call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#generate_client_certificate. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/generate_client_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_client_certificate",
+        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#generate_client_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1::GenerateClientCertificateResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GenerateClientCertificate",
+          "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin.GenerateClientCertificate",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GetConnectionInfo_sync",
+      "title": "Snippet for the get_connection_info call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_connection_info. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/get_connection_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connection_info",
+        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_connection_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1::ConnectionInfo",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetConnectionInfo",
+          "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin.GetConnectionInfo",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

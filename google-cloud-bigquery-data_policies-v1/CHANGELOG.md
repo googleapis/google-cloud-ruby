@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.6.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22917](https://github.com/googleapis/google-cloud-ruby/issues/22917)) 
+
+### 0.5.0 (2023-09-05)
+
+#### Features
+
+* support using custom UDF in the data policy ([#22860](https://github.com/googleapis/google-cloud-ruby/issues/22860)) 
+
 ### 0.4.0 (2023-08-15)
 
 #### Features

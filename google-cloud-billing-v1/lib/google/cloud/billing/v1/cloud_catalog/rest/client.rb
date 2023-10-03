@@ -172,6 +172,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Billing::V1::Service>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/billing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Billing::V1::CloudCatalog::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Billing::V1::ListServicesRequest.new
+              #
+              #   # Call the list_services method.
+              #   result = client.list_services request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Billing::V1::Service.
+              #     p item
+              #   end
+              #
               def list_services request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,6 +280,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Billing::V1::Sku>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/billing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Billing::V1::CloudCatalog::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Billing::V1::ListSkusRequest.new
+              #
+              #   # Call the list_skus method.
+              #   result = client.list_skus request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Billing::V1::Sku.
+              #     p item
+              #   end
+              #
               def list_skus request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

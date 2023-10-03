@@ -206,6 +206,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::TestCase>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListTestCasesRequest.new
+                #
+                #   # Call the list_test_cases method.
+                #   result = client.list_test_cases request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TestCase.
+                #     p item
+                #   end
+                #
                 def list_test_cases request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,6 +293,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::BatchDeleteTestCasesRequest.new
+                #
+                #   # Call the batch_delete_test_cases method.
+                #   result = client.batch_delete_test_cases request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def batch_delete_test_cases request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -337,6 +373,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TestCase]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetTestCaseRequest.new
+                #
+                #   # Call the get_test_case method.
+                #   result = client.get_test_case request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TestCase.
+                #   p result
+                #
                 def get_test_case request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -402,6 +454,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TestCase]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateTestCaseRequest.new
+                #
+                #   # Call the create_test_case method.
+                #   result = client.create_test_case request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TestCase.
+                #   p result
+                #
                 def create_test_case request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -469,6 +537,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TestCase]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateTestCaseRequest.new
+                #
+                #   # Call the update_test_case method.
+                #   result = client.update_test_case request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TestCase.
+                #   p result
+                #
                 def update_test_case request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -545,6 +629,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::RunTestCaseRequest.new
+                #
+                #   # Call the run_test_case method.
+                #   result = client.run_test_case request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def run_test_case request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -625,6 +732,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesRequest.new
+                #
+                #   # Call the batch_run_test_cases method.
+                #   result = client.batch_run_test_cases request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def batch_run_test_cases request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -691,6 +821,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::CalculateCoverageResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CalculateCoverageRequest.new
+                #
+                #   # Call the calculate_coverage method.
+                #   result = client.calculate_coverage request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::CalculateCoverageResponse.
+                #   p result
+                #
                 def calculate_coverage request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -777,6 +923,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ImportTestCasesRequest.new
+                #
+                #   # Call the import_test_cases method.
+                #   result = client.import_test_cases request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def import_test_cases request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -876,6 +1045,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ExportTestCasesRequest.new
+                #
+                #   # Call the export_test_cases method.
+                #   result = client.export_test_cases request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def export_test_cases request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -973,6 +1165,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::TestCaseResult>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListTestCaseResultsRequest.new
+                #
+                #   # Call the list_test_case_results method.
+                #   result = client.list_test_case_results request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TestCaseResult.
+                #     p item
+                #   end
+                #
                 def list_test_case_results request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1038,6 +1250,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::TestCaseResult]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetTestCaseResultRequest.new
+                #
+                #   # Call the get_test_case_result method.
+                #   result = client.get_test_case_result request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TestCaseResult.
+                #   p result
+                #
                 def get_test_case_result request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

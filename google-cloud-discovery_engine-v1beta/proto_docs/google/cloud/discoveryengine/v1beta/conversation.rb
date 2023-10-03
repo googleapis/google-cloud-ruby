@@ -61,10 +61,14 @@ module Google
         # Defines a reply message to user.
         # @!attribute [rw] reply
         #   @return [::String]
+        #     DEPRECATED: use `summary` instead.
         #     Text reply.
         # @!attribute [rw] references
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Reply::Reference>]
         #     References in the reply.
+        # @!attribute [rw] summary
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary]
+        #     Summary based on search results.
         class Reply
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

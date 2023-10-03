@@ -270,6 +270,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::CompleteQueryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CompletionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::CompleteQueryRequest.new
+              #
+              #   # Call the complete_query method.
+              #   result = client.complete_query request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::CompleteQueryResponse.
+              #   p result
+              #
               def complete_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -350,6 +366,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CompletionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ImportCompletionDataRequest.new
+              #
+              #   # Call the import_completion_data method.
+              #   result = client.import_completion_data request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_completion_data request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

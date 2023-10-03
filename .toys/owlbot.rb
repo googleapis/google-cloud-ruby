@@ -251,7 +251,7 @@ def verify_staging gems
   gems.each do |name|
     staging_dir = File.join STAGING_DIR_NAME, name
     error "Gem #{name} did not output a staging directory" unless File.directory? staging_dir
-    error "Gem #{name} staging directory is empty" if Dir.children(staging_dir).empty?
+    error "Gem #{name} staging directory is empty" if Dir.empty? staging_dir
   end
 end
 

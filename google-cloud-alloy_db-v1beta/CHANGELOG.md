@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.5.0 (2023-09-25)
+
+#### Features
+
+* Add ClientConnectionConfig, QuantityBasedExpiry, DatabaseVersion 
+* Add enum value for PG15 
+* Add enum value for PG15 ([#23344](https://github.com/googleapis/google-cloud-ruby/issues/23344)) 
+* Change description for recovery_window_days in ContinuousBackupConfig 
+* Deprecate network field in favor of network_config.network 
+
+### 0.4.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22916](https://github.com/googleapis/google-cloud-ruby/issues/22916)) 
+
 ### 0.3.0 (2023-06-16)
 
 #### Features

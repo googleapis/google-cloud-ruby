@@ -239,6 +239,26 @@ module Google
               # @return [::Google::Cloud::Metastore::V1::ListFederationsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/metastore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Metastore::V1::ListFederationsRequest.new
+              #
+              #   # Call the list_federations method.
+              #   result = client.list_federations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Metastore::V1::Federation.
+              #     p item
+              #   end
+              #
               def list_federations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,6 +324,22 @@ module Google
               # @return [::Google::Cloud::Metastore::V1::Federation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/metastore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Metastore::V1::GetFederationRequest.new
+              #
+              #   # Call the get_federation method.
+              #   result = client.get_federation request
+              #
+              #   # The returned object is of type Google::Cloud::Metastore::V1::Federation.
+              #   p result
+              #
               def get_federation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -393,6 +429,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/metastore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Metastore::V1::CreateFederationRequest.new
+              #
+              #   # Call the create_federation method.
+              #   result = client.create_federation request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_federation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -478,6 +537,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/metastore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Metastore::V1::UpdateFederationRequest.new
+              #
+              #   # Call the update_federation method.
+              #   result = client.update_federation request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_federation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -557,6 +639,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/metastore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Metastore::V1::DeleteFederationRequest.new
+              #
+              #   # Call the delete_federation method.
+              #   result = client.delete_federation request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_federation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

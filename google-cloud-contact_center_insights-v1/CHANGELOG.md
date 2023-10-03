@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.18.0 (2023-09-28)
+
+#### Features
+
+* add optional SpeechConfig to UploadConversationRequest  
+* support recognizer path 
+
+### 0.17.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22918](https://github.com/googleapis/google-cloud-ruby/issues/22918)) 
+
 ### 0.16.0 (2023-07-10)
 
 #### Features

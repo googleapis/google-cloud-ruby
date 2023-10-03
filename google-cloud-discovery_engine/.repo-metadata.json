@@ -7,11 +7,11 @@
     "language": "ruby",
     "name": "discoveryengine",
     "name_pretty": "Discovery Engine API",
-    "product_documentation": "https://cloud.google.com/discovery-engine/media/docs",
+    "product_documentation": "https://cloud.google.com/generative-ai-app-builder/docs",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Discovery Engine API.",
-    "ruby-cloud-product-url": "https://cloud.google.com/discovery-engine/media/docs",
+    "ruby-cloud-product-url": "https://cloud.google.com/generative-ai-app-builder/docs",
     "library_type": "GAPIC_MANUAL"
 }

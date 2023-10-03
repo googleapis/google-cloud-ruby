@@ -28,7 +28,7 @@ module Google
           ##
           # Client for the RapidMigrationAssessment service.
           #
-          # Rapid Migration Assessment service
+          # Service describing handlers for resources.
           #
           class Client
             include Paths
@@ -180,7 +180,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -781,6 +782,7 @@ module Google
 
             ##
             # Deletes a single Collector - changes state of collector to "Deleting".
+            # Background jobs does final deletion thorugh producer api.
             #
             # @overload delete_collector(request, options = nil)
             #   Pass arguments to `delete_collector` via a request object, either of type
@@ -1324,6 +1326,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

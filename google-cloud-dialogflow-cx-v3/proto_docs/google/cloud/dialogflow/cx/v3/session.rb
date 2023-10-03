@@ -234,7 +234,10 @@ module Google
           #     beginning of the stream.
           # @!attribute [rw] no_speech_timeout
           #   @return [::Google::Protobuf::Duration]
-          #     No speech timeout settings observed at runtime.
+          #     No speech timeout settings for the stream.
+          # @!attribute [rw] endpointing_timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Speech endpointing timeout settings for the stream.
           # @!attribute [rw] is_input_text
           #   @return [::Boolean]
           #     Whether the streaming terminates with an injected text query.
@@ -678,6 +681,13 @@ module Google
           #     [`analyze_query_text_sentiment`]
           #     [google.cloud.dialogflow.cx.v3.QueryParameters.analyze_query_text_sentiment],
           #     specified in the request.
+          # @!attribute [rw] advanced_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
+          #     Returns the current advanced settings including IVR settings. Even though
+          #     the operations configured by these settings are performed by Dialogflow,
+          #     the client may need to perform special logic at the moment. For example, if
+          #     Dialogflow exports audio to Google Cloud Storage, then the client may need
+          #     to wait for the resulting object to appear in the bucket before proceeding.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

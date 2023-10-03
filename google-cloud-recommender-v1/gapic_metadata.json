@@ -35,6 +35,11 @@
                 "get_recommendation"
               ]
             },
+            "MarkRecommendationDismissed": {
+              "methods": [
+                "mark_recommendation_dismissed"
+              ]
+            },
             "MarkRecommendationClaimed": {
               "methods": [
                 "mark_recommendation_claimed"

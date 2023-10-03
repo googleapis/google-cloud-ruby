@@ -273,6 +273,26 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::ListClustersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::ListClustersRequest.new
+              #
+              #   # Call the list_clusters method.
+              #   result = client.list_clusters request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AlloyDB::V1beta::Cluster.
+              #     p item
+              #   end
+              #
               def list_clusters request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -339,6 +359,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::Cluster]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::GetClusterRequest.new
+              #
+              #   # Call the get_cluster method.
+              #   result = client.get_cluster request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::Cluster.
+              #   p result
+              #
               def get_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -424,6 +460,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::CreateClusterRequest.new
+              #
+              #   # Call the create_cluster method.
+              #   result = client.create_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -514,6 +573,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::UpdateClusterRequest.new
+              #
+              #   # Call the update_cluster method.
+              #   result = client.update_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -601,6 +683,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::DeleteClusterRequest.new
+              #
+              #   # Call the delete_cluster method.
+              #   result = client.delete_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -689,6 +794,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::PromoteClusterRequest.new
+              #
+              #   # Call the promote_cluster method.
+              #   result = client.promote_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def promote_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -782,6 +910,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::RestoreClusterRequest.new
+              #
+              #   # Call the restore_cluster method.
+              #   result = client.restore_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def restore_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -869,6 +1020,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::CreateSecondaryClusterRequest.new
+              #
+              #   # Call the create_secondary_cluster method.
+              #   result = client.create_secondary_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_secondary_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -946,6 +1120,26 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::ListInstancesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::ListInstancesRequest.new
+              #
+              #   # Call the list_instances method.
+              #   result = client.list_instances request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AlloyDB::V1beta::Instance.
+              #     p item
+              #   end
+              #
               def list_instances request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1011,6 +1205,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::Instance]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::GetInstanceRequest.new
+              #
+              #   # Call the get_instance method.
+              #   result = client.get_instance request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::Instance.
+              #   p result
+              #
               def get_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1096,6 +1306,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::CreateInstanceRequest.new
+              #
+              #   # Call the create_instance method.
+              #   result = client.create_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1182,6 +1415,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::CreateSecondaryInstanceRequest.new
+              #
+              #   # Call the create_secondary_instance method.
+              #   result = client.create_secondary_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_secondary_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1270,6 +1526,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::BatchCreateInstancesRequest.new
+              #
+              #   # Call the batch_create_instances method.
+              #   result = client.batch_create_instances request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_create_instances request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1360,6 +1639,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::UpdateInstanceRequest.new
+              #
+              #   # Call the update_instance method.
+              #   result = client.update_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1445,6 +1747,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::DeleteInstanceRequest.new
+              #
+              #   # Call the delete_instance method.
+              #   result = client.delete_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1528,6 +1853,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::FailoverInstanceRequest.new
+              #
+              #   # Call the failover_instance method.
+              #   result = client.failover_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def failover_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1613,6 +1961,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::InjectFaultRequest.new
+              #
+              #   # Call the inject_fault method.
+              #   result = client.inject_fault request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def inject_fault request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1695,6 +2066,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest.new
+              #
+              #   # Call the restart_instance method.
+              #   result = client.restart_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def restart_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1767,6 +2161,26 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::ListBackupsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::ListBackupsRequest.new
+              #
+              #   # Call the list_backups method.
+              #   result = client.list_backups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AlloyDB::V1beta::Backup.
+              #     p item
+              #   end
+              #
               def list_backups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1829,6 +2243,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::Backup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::GetBackupRequest.new
+              #
+              #   # Call the get_backup method.
+              #   result = client.get_backup request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::Backup.
+              #   p result
+              #
               def get_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1912,6 +2342,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::CreateBackupRequest.new
+              #
+              #   # Call the create_backup method.
+              #   result = client.create_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2001,6 +2454,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::UpdateBackupRequest.new
+              #
+              #   # Call the update_backup method.
+              #   result = client.update_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2086,6 +2562,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::DeleteBackupRequest.new
+              #
+              #   # Call the delete_backup method.
+              #   result = client.delete_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_backup request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2160,6 +2659,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1beta::SupportedDatabaseFlag>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest.new
+              #
+              #   # Call the list_supported_database_flags method.
+              #   result = client.list_supported_database_flags request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AlloyDB::V1beta::SupportedDatabaseFlag.
+              #     p item
+              #   end
+              #
               def list_supported_database_flags request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2198,10 +2717,10 @@ module Google
 
               ##
               # Generate a client certificate signed by a Cluster CA.
-              # The sole purpose of this endpoint is to support the Auth Proxy client and
-              # the endpoint's behavior is subject to change without notice, so do not rely
-              # on its behavior remaining constant. Future changes will not break the Auth
-              # Proxy client.
+              # The sole purpose of this endpoint is to support AlloyDB connectors and the
+              # Auth Proxy client. The endpoint's behavior is subject to change without
+              # notice, so do not rely on its behavior remaining constant. Future changes
+              # will not break AlloyDB connectors or the Auth Proxy client.
               #
               # @overload generate_client_certificate(request, options = nil)
               #   Pass arguments to `generate_client_certificate` via a request object, either of type
@@ -2213,7 +2732,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_client_certificate(parent: nil, request_id: nil, pem_csr: nil, cert_duration: nil, public_key: nil)
+              # @overload generate_client_certificate(parent: nil, request_id: nil, pem_csr: nil, cert_duration: nil, public_key: nil, use_metadata_exchange: nil)
               #   Pass arguments to `generate_client_certificate` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2245,6 +2764,10 @@ module Google
               #     default duration.
               #   @param public_key [::String]
               #     Optional. The public key from the client.
+              #   @param use_metadata_exchange [::Boolean]
+              #     Optional. An optional hint to the endpoint to generate a client
+              #     ceritificate that can be used by AlloyDB connectors to exchange additional
+              #     metadata with the server after TLS handshake.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2252,6 +2775,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new
+              #
+              #   # Call the generate_client_certificate method.
+              #   result = client.generate_client_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse.
+              #   p result
+              #
               def generate_client_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2329,6 +2868,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::ConnectionInfo]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::GetConnectionInfoRequest.new
+              #
+              #   # Call the get_connection_info method.
+              #   result = client.get_connection_info request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::ConnectionInfo.
+              #   p result
+              #
               def get_connection_info request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2400,6 +2955,26 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::ListUsersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::ListUsersRequest.new
+              #
+              #   # Call the list_users method.
+              #   result = client.list_users request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AlloyDB::V1beta::User.
+              #     p item
+              #   end
+              #
               def list_users request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2463,6 +3038,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::User]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::GetUserRequest.new
+              #
+              #   # Call the get_user method.
+              #   result = client.get_user request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::User.
+              #   p result
+              #
               def get_user request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2546,6 +3137,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::User]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::CreateUserRequest.new
+              #
+              #   # Call the create_user method.
+              #   result = client.create_user request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::User.
+              #   p result
+              #
               def create_user request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2633,6 +3240,22 @@ module Google
               # @return [::Google::Cloud::AlloyDB::V1beta::User]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::UpdateUserRequest.new
+              #
+              #   # Call the update_user method.
+              #   result = client.update_user request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1beta::User.
+              #   p result
+              #
               def update_user request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2713,6 +3336,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1beta::DeleteUserRequest.new
+              #
+              #   # Call the delete_user method.
+              #   result = client.delete_user request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_user request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

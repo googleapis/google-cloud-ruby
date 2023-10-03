@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.32.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22916](https://github.com/googleapis/google-cloud-ruby/issues/22916)) 
+
+### 0.31.0 (2023-09-07)
+
+#### Features
+
+* Add field "encryption_spec" to Index ([#22903](https://github.com/googleapis/google-cloud-ruby/issues/22903)) 
+* Support contexts for a Trial ([#22903](https://github.com/googleapis/google-cloud-ruby/issues/22903)) 
+
 ### 0.30.0 (2023-08-15)
 
 #### Features

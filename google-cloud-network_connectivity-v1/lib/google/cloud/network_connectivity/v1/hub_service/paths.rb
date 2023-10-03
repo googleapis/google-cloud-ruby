@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the HubService API.
           module Paths
             ##
+            # Create a fully-qualified Group resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/global/hubs/{hub}/groups/{group}`
+            #
+            # @param project [String]
+            # @param hub [String]
+            # @param group [String]
+            #
+            # @return [::String]
+            def group_path project:, hub:, group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "hub cannot contain /" if hub.to_s.include? "/"
+
+              "projects/#{project}/locations/global/hubs/#{hub}/groups/#{group}"
+            end
+
+            ##
             # Create a fully-qualified Hub resource string.
             #
             # The resource will be in the following format:
@@ -39,6 +58,27 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/global/hubs/#{hub}"
+            end
+
+            ##
+            # Create a fully-qualified HubRoute resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}/routes/{route}`
+            #
+            # @param project [String]
+            # @param hub [String]
+            # @param route_table [String]
+            # @param route [String]
+            #
+            # @return [::String]
+            def hub_route_path project:, hub:, route_table:, route:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "hub cannot contain /" if hub.to_s.include? "/"
+              raise ::ArgumentError, "route_table cannot contain /" if route_table.to_s.include? "/"
+
+              "projects/#{project}/locations/global/hubs/#{hub}/routeTables/#{route_table}/routes/#{route}"
             end
 
             ##
@@ -111,6 +151,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/global/networks/#{resource_id}"
+            end
+
+            ##
+            # Create a fully-qualified RouteTable resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}`
+            #
+            # @param project [String]
+            # @param hub [String]
+            # @param route_table [String]
+            #
+            # @return [::String]
+            def route_table_path project:, hub:, route_table:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "hub cannot contain /" if hub.to_s.include? "/"
+
+              "projects/#{project}/locations/global/hubs/#{hub}/routeTables/#{route_table}"
             end
 
             ##

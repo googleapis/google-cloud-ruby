@@ -165,7 +165,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -190,8 +191,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
-            #     whose alert policies are to be listed. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+            #     alert policies are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -379,6 +381,10 @@ module Google
             ##
             # Creates a new alerting policy.
             #
+            # Design your application to single-thread API calls that modify the state of
+            # alerting policies in a single project. This includes calls to
+            # CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
+            #
             # @overload create_alert_policy(request, options = nil)
             #   Pass arguments to `create_alert_policy` via a request object, either of type
             #   {::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest} or an equivalent Hash.
@@ -395,8 +401,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
-            #     which to create the alerting policy. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+            #     to create the alerting policy. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -408,9 +415,9 @@ module Google
             #     the form `/alertPolicies/[ALERT_POLICY_ID]`, identifying the policy in the
             #     container.
             #   @param alert_policy [::Google::Cloud::Monitoring::V3::AlertPolicy, ::Hash]
-            #     Required. The requested alerting policy. You should omit the `name` field in this
-            #     policy. The name will be returned in the new policy, including
-            #     a new `[ALERT_POLICY_ID]` value.
+            #     Required. The requested alerting policy. You should omit the `name` field
+            #     in this policy. The name will be returned in the new policy, including a
+            #     new `[ALERT_POLICY_ID]` value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Monitoring::V3::AlertPolicy]
@@ -478,6 +485,10 @@ module Google
 
             ##
             # Deletes an alerting policy.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # alerting policies in a single project. This includes calls to
+            # CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
             #
             # @overload delete_alert_policy(request, options = nil)
             #   Pass arguments to `delete_alert_policy` via a request object, either of type
@@ -570,6 +581,10 @@ module Google
             # a new one or replace only certain fields in the current alerting policy by
             # specifying the fields to be updated via `updateMask`. Returns the
             # updated alerting policy.
+            #
+            # Design your application to single-thread API calls that modify the state of
+            # alerting policies in a single project. This includes calls to
+            # CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
             #
             # @overload update_alert_policy(request, options = nil)
             #   Pass arguments to `update_alert_policy` via a request object, either of type
@@ -795,6 +810,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

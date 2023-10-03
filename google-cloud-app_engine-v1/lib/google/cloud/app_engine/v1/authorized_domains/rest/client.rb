@@ -166,6 +166,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppEngine::V1::AuthorizedDomain>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppEngine::V1::AuthorizedDomains::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new
+              #
+              #   # Call the list_authorized_domains method.
+              #   result = client.list_authorized_domains request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AppEngine::V1::AuthorizedDomain.
+              #     p item
+              #   end
+              #
               def list_authorized_domains request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -1446,6 +1446,7 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
     pem_csr = "hello world"
     cert_duration = {}
     public_key = "hello world"
+    use_metadata_exchange = true
 
     generate_client_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1461,27 +1462,27 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key }) do |_result, response|
+        client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_client_certificate parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key do |_result, response|
+        client.generate_client_certificate parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_client_certificate ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key) do |_result, response|
+        client.generate_client_certificate ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key }, call_options) do |_result, response|
+        client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_client_certificate(::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key), call_options) do |_result, response|
+        client.generate_client_certificate(::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

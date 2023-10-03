@@ -410,6 +410,11 @@
               "methods": [
                 "generate_stateless_summary"
               ]
+            },
+            "SearchKnowledge": {
+              "methods": [
+                "search_knowledge"
+              ]
             }
           }
         }

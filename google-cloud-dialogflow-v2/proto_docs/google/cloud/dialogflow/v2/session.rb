@@ -473,7 +473,10 @@ module Google
         #     beginning of the stream.
         # @!attribute [rw] no_speech_timeout
         #   @return [::Google::Protobuf::Duration]
-        #     No speech timeout settings observed at runtime.
+        #     No speech timeout settings for the stream.
+        # @!attribute [rw] endpointing_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Speech endpointing timeout settings for the stream.
         # @!attribute [rw] is_input_text
         #   @return [::Boolean]
         #     Whether the streaming terminates with an injected text query.

@@ -204,6 +204,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Retail::V2::Catalog>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ListCatalogsRequest.new
+              #
+              #   # Call the list_catalogs method.
+              #   result = client.list_catalogs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Retail::V2::Catalog.
+              #     p item
+              #   end
+              #
               def list_catalogs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -280,6 +300,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::Catalog]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::UpdateCatalogRequest.new
+              #
+              #   # Call the update_catalog method.
+              #   result = client.update_catalog request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::Catalog.
+              #   p result
+              #
               def update_catalog request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -395,6 +431,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::SetDefaultBranchRequest.new
+              #
+              #   # Call the set_default_branch method.
+              #   result = client.set_default_branch request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def set_default_branch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -460,6 +512,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::GetDefaultBranchResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::GetDefaultBranchRequest.new
+              #
+              #   # Call the get_default_branch method.
+              #   result = client.get_default_branch request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::GetDefaultBranchResponse.
+              #   p result
+              #
               def get_default_branch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -523,6 +591,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::CompletionConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::GetCompletionConfigRequest.new
+              #
+              #   # Call the get_completion_config method.
+              #   result = client.get_completion_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::CompletionConfig.
+              #   p result
+              #
               def get_completion_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -604,6 +688,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::CompletionConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::UpdateCompletionConfigRequest.new
+              #
+              #   # Call the update_completion_config method.
+              #   result = client.update_completion_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::CompletionConfig.
+              #   p result
+              #
               def update_completion_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -667,6 +767,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::AttributesConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::GetAttributesConfigRequest.new
+              #
+              #   # Call the get_attributes_config method.
+              #   result = client.get_attributes_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+              #   p result
+              #
               def get_attributes_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -745,6 +861,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::AttributesConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::UpdateAttributesConfigRequest.new
+              #
+              #   # Call the update_attributes_config method.
+              #   result = client.update_attributes_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+              #   p result
+              #
               def update_attributes_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -816,6 +948,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::AttributesConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::AddCatalogAttributeRequest.new
+              #
+              #   # Call the add_catalog_attribute method.
+              #   result = client.add_catalog_attribute request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+              #   p result
+              #
               def add_catalog_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -887,6 +1035,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::AttributesConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new
+              #
+              #   # Call the remove_catalog_attribute method.
+              #   result = client.remove_catalog_attribute request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+              #   p result
+              #
               def remove_catalog_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -968,6 +1132,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::AttributesConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new
+              #
+              #   # Call the replace_catalog_attribute method.
+              #   result = client.replace_catalog_attribute request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+              #   p result
+              #
               def replace_catalog_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

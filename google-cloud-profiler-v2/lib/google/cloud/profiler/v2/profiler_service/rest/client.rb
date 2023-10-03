@@ -194,6 +194,22 @@ module Google
               # @return [::Google::Cloud::Profiler::V2::Profile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/profiler/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Profiler::V2::ProfilerService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Profiler::V2::CreateProfileRequest.new
+              #
+              #   # Call the create_profile method.
+              #   result = client.create_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+              #   p result
+              #
               def create_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,6 +276,22 @@ module Google
               # @return [::Google::Cloud::Profiler::V2::Profile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/profiler/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Profiler::V2::ProfilerService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new
+              #
+              #   # Call the create_offline_profile method.
+              #   result = client.create_offline_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+              #   p result
+              #
               def create_offline_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -330,6 +362,22 @@ module Google
               # @return [::Google::Cloud::Profiler::V2::Profile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/profiler/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Profiler::V2::ProfilerService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Profiler::V2::UpdateProfileRequest.new
+              #
+              #   # Call the update_profile method.
+              #   result = client.update_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+              #   p result
+              #
               def update_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

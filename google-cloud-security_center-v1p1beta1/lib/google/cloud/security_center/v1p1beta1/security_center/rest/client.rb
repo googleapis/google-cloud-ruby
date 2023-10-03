@@ -258,6 +258,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest.new
+              #
+              #   # Call the create_source method.
+              #   result = client.create_source request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Source.
+              #   p result
+              #
               def create_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -327,6 +343,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest.new
+              #
+              #   # Call the create_finding method.
+              #   result = client.create_finding request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Finding.
+              #   p result
+              #
               def create_finding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -397,6 +429,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest.new
+              #
+              #   # Call the create_notification_config method.
+              #   result = client.create_notification_config request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig.
+              #   p result
+              #
               def create_notification_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -460,6 +508,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new
+              #
+              #   # Call the delete_notification_config method.
+              #   result = client.delete_notification_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_notification_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -526,6 +590,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -589,6 +669,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest.new
+              #
+              #   # Call the get_notification_config method.
+              #   result = client.get_notification_config request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig.
+              #   p result
+              #
               def get_notification_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -652,6 +748,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest.new
+              #
+              #   # Call the get_organization_settings method.
+              #   result = client.get_organization_settings request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings.
+              #   p result
+              #
               def get_organization_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -715,6 +827,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new
+              #
+              #   # Call the get_source method.
+              #   result = client.get_source request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Source.
+              #   p result
+              #
               def get_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -902,6 +1030,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new
+              #
+              #   # Call the group_assets method.
+              #   result = client.group_assets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult.
+              #     p item
+              #   end
+              #
               def group_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1089,6 +1237,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new
+              #
+              #   # Call the group_findings method.
+              #   result = client.group_findings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult.
+              #     p item
+              #   end
+              #
               def group_findings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1280,6 +1448,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse::ListAssetsResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new
+              #
+              #   # Call the list_assets method.
+              #   result = client.list_assets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse::ListAssetsResult.
+              #     p item
+              #   end
+              #
               def list_assets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1468,6 +1656,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse::ListFindingsResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new
+              #
+              #   # Call the list_findings method.
+              #   result = client.list_findings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse::ListFindingsResult.
+              #     p item
+              #   end
+              #
               def list_findings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1539,6 +1747,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest.new
+              #
+              #   # Call the list_notification_configs method.
+              #   result = client.list_notification_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig.
+              #     p item
+              #   end
+              #
               def list_notification_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1611,6 +1839,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::Source>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest.new
+              #
+              #   # Call the list_sources method.
+              #   result = client.list_sources request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::Source.
+              #     p item
+              #   end
+              #
               def list_sources request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1680,6 +1928,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest.new
+              #
+              #   # Call the run_asset_discovery method.
+              #   result = client.run_asset_discovery request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def run_asset_discovery request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1750,6 +2021,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new
+              #
+              #   # Call the set_finding_state method.
+              #   result = client.set_finding_state request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Finding.
+              #   p result
+              #
               def set_finding_state request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1824,6 +2111,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1892,6 +2195,22 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1968,6 +2287,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest.new
+              #
+              #   # Call the update_finding method.
+              #   result = client.update_finding request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Finding.
+              #   p result
+              #
               def update_finding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2035,6 +2370,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest.new
+              #
+              #   # Call the update_notification_config method.
+              #   result = client.update_notification_config request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig.
+              #   p result
+              #
               def update_notification_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2101,6 +2452,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new
+              #
+              #   # Call the update_organization_settings method.
+              #   result = client.update_organization_settings request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings.
+              #   p result
+              #
               def update_organization_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2167,6 +2534,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest.new
+              #
+              #   # Call the update_source method.
+              #   result = client.update_source request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Source.
+              #   p result
+              #
               def update_source request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2239,6 +2622,22 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center/v1p1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest.new
+              #
+              #   # Call the update_security_marks method.
+              #   result = client.update_security_marks request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks.
+              #   p result
+              #
               def update_security_marks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

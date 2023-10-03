@@ -214,6 +214,22 @@ module Google
               # @return [::Google::Iam::Credentials::V1::GenerateAccessTokenResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/iam/credentials/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new
+              #
+              #   # Call the generate_access_token method.
+              #   result = client.generate_access_token request
+              #
+              #   # The returned object is of type Google::Iam::Credentials::V1::GenerateAccessTokenResponse.
+              #   p result
+              #
               def generate_access_token request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -296,6 +312,22 @@ module Google
               # @return [::Google::Iam::Credentials::V1::GenerateIdTokenResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/iam/credentials/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::Credentials::V1::GenerateIdTokenRequest.new
+              #
+              #   # Call the generate_id_token method.
+              #   result = client.generate_id_token request
+              #
+              #   # The returned object is of type Google::Iam::Credentials::V1::GenerateIdTokenResponse.
+              #   p result
+              #
               def generate_id_token request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -374,6 +406,22 @@ module Google
               # @return [::Google::Iam::Credentials::V1::SignBlobResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/iam/credentials/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::Credentials::V1::SignBlobRequest.new
+              #
+              #   # Call the sign_blob method.
+              #   result = client.sign_blob request
+              #
+              #   # The returned object is of type Google::Iam::Credentials::V1::SignBlobResponse.
+              #   p result
+              #
               def sign_blob request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -452,6 +500,22 @@ module Google
               # @return [::Google::Iam::Credentials::V1::SignJwtResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/iam/credentials/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::Credentials::V1::SignJwtRequest.new
+              #
+              #   # Call the sign_jwt method.
+              #   result = client.sign_jwt request
+              #
+              #   # The returned object is of type Google::Iam::Credentials::V1::SignJwtResponse.
+              #   p result
+              #
               def sign_jwt request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

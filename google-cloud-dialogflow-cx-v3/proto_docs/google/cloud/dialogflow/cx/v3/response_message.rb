@@ -81,6 +81,10 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::TelephonyTransferCall]
           #     A signal that the client should transfer the phone call connected to
           #     this agent to a third-party endpoint.
+          # @!attribute [rw] knowledge_info_card
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::KnowledgeInfoCard]
+          #     Represents info card for knowledge answers, to be better rendered in
+          #     Dialogflow Messenger.
           # @!attribute [rw] response_type
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::ResponseType]
           #     Response type.
@@ -238,6 +242,16 @@ module Google
             #     Transfer the call to a phone number
             #     in [E.164 format](https://en.wikipedia.org/wiki/E.164).
             class TelephonyTransferCall
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Represents info card response. If the response contains generative
+            # knowledge prediction, Dialogflow will return a payload with Infobot
+            # Messenger compatible info card.
+            #
+            # Otherwise, the info card response is skipped.
+            class KnowledgeInfoCard
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

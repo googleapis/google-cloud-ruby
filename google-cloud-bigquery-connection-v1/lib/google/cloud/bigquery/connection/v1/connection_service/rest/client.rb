@@ -193,6 +193,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::Connection::V1::Connection]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new
+                #
+                #   # Call the create_connection method.
+                #   result = client.create_connection request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::Connection::V1::Connection.
+                #   p result
+                #
                 def create_connection request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +272,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::Connection::V1::Connection]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new
+                #
+                #   # Call the get_connection method.
+                #   result = client.get_connection request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::Connection::V1::Connection.
+                #   p result
+                #
                 def get_connection request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -323,6 +355,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Bigquery::Connection::V1::Connection>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new
+                #
+                #   # Call the list_connections method.
+                #   result = client.list_connections request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Bigquery::Connection::V1::Connection.
+                #     p item
+                #   end
+                #
                 def list_connections request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -392,6 +444,22 @@ module Google
                 # @return [::Google::Cloud::Bigquery::Connection::V1::Connection]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new
+                #
+                #   # Call the update_connection method.
+                #   result = client.update_connection request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::Connection::V1::Connection.
+                #   p result
+                #
                 def update_connection request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -455,6 +523,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new
+                #
+                #   # Call the delete_connection method.
+                #   result = client.delete_connection request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_connection request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -523,6 +607,22 @@ module Google
                 # @return [::Google::Iam::V1::Policy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::GetIamPolicyRequest.new
+                #
+                #   # Call the get_iam_policy method.
+                #   result = client.get_iam_policy request
+                #
+                #   # The returned object is of type Google::Iam::V1::Policy.
+                #   p result
+                #
                 def get_iam_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -600,6 +700,22 @@ module Google
                 # @return [::Google::Iam::V1::Policy]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::SetIamPolicyRequest.new
+                #
+                #   # Call the set_iam_policy method.
+                #   result = client.set_iam_policy request
+                #
+                #   # The returned object is of type Google::Iam::V1::Policy.
+                #   p result
+                #
                 def set_iam_policy request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -674,6 +790,22 @@ module Google
                 # @return [::Google::Iam::V1::TestIamPermissionsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/connection/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+                #
+                #   # Call the test_iam_permissions method.
+                #   result = client.test_iam_permissions request
+                #
+                #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+                #   p result
+                #
                 def test_iam_permissions request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

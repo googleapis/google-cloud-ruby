@@ -181,6 +181,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::Taxonomy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::CreateTaxonomyRequest.new
+              #
+              #   # Call the create_taxonomy method.
+              #   result = client.create_taxonomy request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::Taxonomy.
+              #   p result
+              #
               def create_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -245,6 +261,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::DeleteTaxonomyRequest.new
+              #
+              #   # Call the delete_taxonomy method.
+              #   result = client.delete_taxonomy request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -313,6 +345,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::Taxonomy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::UpdateTaxonomyRequest.new
+              #
+              #   # Call the update_taxonomy method.
+              #   result = client.update_taxonomy request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::Taxonomy.
+              #   p result
+              #
               def update_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -385,6 +433,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1beta1::Taxonomy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::ListTaxonomiesRequest.new
+              #
+              #   # Call the list_taxonomies method.
+              #   result = client.list_taxonomies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DataCatalog::V1beta1::Taxonomy.
+              #     p item
+              #   end
+              #
               def list_taxonomies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -448,6 +516,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::Taxonomy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::GetTaxonomyRequest.new
+              #
+              #   # Call the get_taxonomy method.
+              #   result = client.get_taxonomy request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::Taxonomy.
+              #   p result
+              #
               def get_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -512,6 +596,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::PolicyTag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::CreatePolicyTagRequest.new
+              #
+              #   # Call the create_policy_tag method.
+              #   result = client.create_policy_tag request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::PolicyTag.
+              #   p result
+              #
               def create_policy_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -575,6 +675,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::DeletePolicyTagRequest.new
+              #
+              #   # Call the delete_policy_tag method.
+              #   result = client.delete_policy_tag request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_policy_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -646,6 +762,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::PolicyTag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::UpdatePolicyTagRequest.new
+              #
+              #   # Call the update_policy_tag method.
+              #   result = client.update_policy_tag request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::PolicyTag.
+              #   p result
+              #
               def update_policy_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,6 +846,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1beta1::PolicyTag>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::ListPolicyTagsRequest.new
+              #
+              #   # Call the list_policy_tags method.
+              #   result = client.list_policy_tags request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DataCatalog::V1beta1::PolicyTag.
+              #     p item
+              #   end
+              #
               def list_policy_tags request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -777,6 +929,22 @@ module Google
               # @return [::Google::Cloud::DataCatalog::V1beta1::PolicyTag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DataCatalog::V1beta1::GetPolicyTagRequest.new
+              #
+              #   # Call the get_policy_tag method.
+              #   result = client.get_policy_tag request
+              #
+              #   # The returned object is of type Google::Cloud::DataCatalog::V1beta1::PolicyTag.
+              #   p result
+              #
               def get_policy_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -843,6 +1011,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -917,6 +1101,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -986,6 +1186,22 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/data_catalog/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -198,6 +198,66 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Settings for Advisory Notifications.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of the settings to retrieve.
+        #     Format:
+        #     organizations/\\{organization}/locations/\\{location}/settings.
+        # @!attribute [rw] notification_settings
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AdvisoryNotifications::V1::NotificationSettings}]
+        #     Required. Map of each notification type and its settings to get/set all
+        #     settings at once. The server will validate the value for each notification
+        #     type.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Required. Fingerprint for optimistic concurrency returned in Get requests.
+        #     Must be provided for Update requests. If the value provided does not match
+        #     the value known to the server, ABORTED will be thrown, and the client
+        #     should retry the read-modify-write cycle.
+        class Settings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AdvisoryNotifications::V1::NotificationSettings]
+          class NotificationSettingsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Settings for each NotificationType.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the associated NotificationType is enabled.
+        class NotificationSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request of GetSettings endpoint.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the settings to retrieve.
+        #     Format:
+        #     organizations/\\{organization}/locations/\\{location}/settings.
+        class GetSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request of UpdateSettings endpoint.
+        # @!attribute [rw] settings
+        #   @return [::Google::Cloud::AdvisoryNotifications::V1::Settings]
+        #     Required. New settings.
+        class UpdateSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Notification view.
         module NotificationView
           # Not specified, equivalent to BASIC.

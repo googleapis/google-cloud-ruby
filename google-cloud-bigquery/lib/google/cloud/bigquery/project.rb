@@ -943,6 +943,364 @@ module Google
         end
 
         ##
+        # Loads data into the provided destination table using an asynchronous
+        # method. In this method, a {LoadJob} is immediately returned. The
+        # caller may poll the service by repeatedly calling {Job#reload!} and
+        # {Job#done?} to detect when the job is done, or simply block until the
+        # job is done by calling #{Job#wait_until_done!}. See also {#load}.
+        #
+        # For the source of the data, you can pass a google-cloud storage file
+        # path or a google-cloud-storage `File` instance. Or, you can upload a
+        # file directly. See [Loading Data with a POST
+        # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method.
+        #
+        # @param [String] table_id The destination table to load the data into.
+        # @param [File, Google::Cloud::Storage::File, String, URI,
+        #   Array<Google::Cloud::Storage::File, String, URI>] files
+        #   A file or the URI of a Google Cloud Storage file, or an Array of
+        #   those, containing data to load into the table.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+        #   * `parquet` - [Parquet](https://parquet.apache.org/)
+        #   * `datastore_backup` - Cloud Datastore backup
+        # @param [String] dataset_id The destination table to load the data into.
+        #   For load job with create_session/session_id it defaults to "_SESSION"
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the table. The default value is `append`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the table already contains
+        #     data.
+        # @param [Array<String>] projection_fields If the `format` option is set
+        #   to `datastore_backup`, indicates which entity properties to load
+        #   from a Cloud Datastore backup. Property names are case sensitive and
+        #   must be top-level properties. If not set, BigQuery loads all
+        #   properties. If any named property isn't found in the Cloud Datastore
+        #   backup, an invalid error is returned.
+        # @param [Boolean] jagged_rows Accept rows that are missing trailing
+        #   optional columns. The missing values are treated as nulls. If
+        #   `false`, records with missing trailing columns are treated as bad
+        #   records, and if there are too many bad records, an invalid error is
+        #   returned in the job result. The default value is `false`. Only
+        #   applicable to CSV, ignored for other formats.
+        # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
+        #   quoted data sections that contain newline characters in a CSV file.
+        #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
+        # @param [String] encoding The character encoding of the data. The
+        #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
+        #   `UTF-8`.
+        # @param [String] delimiter Specifices the separator for fields in a CSV
+        #   file. BigQuery converts the string to `ISO-8859-1` encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. Default is <code>,</code>.
+        # @param [Boolean] ignore_unknown Indicates if BigQuery should allow
+        #   extra values that are not represented in the table schema. If true,
+        #   the extra values are ignored. If false, records with extra columns
+        #   are treated as bad records, and if there are too many bad records,
+        #   an invalid error is returned in the job result. The default value is
+        #   `false`.
+        #
+        #   The `format` property determines what BigQuery treats as an extra
+        #   value:
+        #
+        #   * `CSV`: Trailing columns
+        #   * `JSON`: Named values that don't match any column names
+        # @param [Integer] max_bad_records The maximum number of bad records
+        #   that BigQuery can ignore when running the job. If the number of bad
+        #   records exceeds this value, an invalid error is returned in the job
+        #   result. The default value is `0`, which requires that all records
+        #   are valid.
+        # @param [String] null_marker Specifies a string that represents a null
+        #   value in a CSV file. For example, if you specify `\N`, BigQuery
+        #   interprets `\N` as a null value when loading a CSV file. The default
+        #   value is the empty string. If you set this property to a custom
+        #   value, BigQuery throws an error if an empty string is present for
+        #   all data types except for STRING and BYTE. For STRING and BYTE
+        #   columns, BigQuery interprets the empty string as an empty value.
+        # @param [String] quote The value that is used to quote data sections in
+        #   a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. The default value is a double-quote
+        #   <code>"</code>. If your data does not contain quoted sections, set
+        #   the property value to an empty string. If your data contains quoted
+        #   newline characters, you must also set the allowQuotedNewlines
+        #   property to true.
+        # @param [Integer] skip_leading The number of rows at the top of a CSV
+        #   file that BigQuery will skip when loading the data. The default
+        #   value is `0`. This property is useful if you have header rows in the
+        #   file that should be skipped.
+        # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
+        #   destination table. Optional. The schema can be omitted if the
+        #   destination table already exists, or if you're loading data from a
+        #   Google Cloud Datastore backup.
+        #
+        #   See {Project#schema} for the creation of the schema for use with
+        #   this option. Also note that for most use cases, the block yielded by
+        #   this method is a more convenient way to configure the schema.
+        # @param [String] job_id A user-defined ID for the load job. The ID
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
+        # @param [Boolean] create_session If set to true a new session will be created
+        #   and the load job will happen in the table created within that session.
+        #   Note: This will work only for tables in _SESSION dataset
+        #         else the property will be ignored by the backend.
+        # @param [string] session_id Session ID in which the load job must run.
+        #
+        # @yield [updater] A block for setting the schema and other
+        #   options for the destination table. The schema can be omitted if the
+        #   destination table already exists, or if you're loading data from a
+        #   Google Cloud Datastore backup.
+        # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
+        #   updater to modify the load job and its schema.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        #
+        # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   gs_url = "gs://my-bucket/file-name.csv"
+        #   load_job = bigquery.load_job "temp_table", gs_url, autodetect: true, create_session: true
+        #   load_job.wait_until_done!
+        #   session_id = load_job.statistics["sessionInfo"]["sessionId"]
+        #
+        def load_job table_id, files, dataset_id: nil, format: nil, create: nil, write: nil,
+                     projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
+                     delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                     skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, &block
+          ensure_service!
+          dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
+          session_dataset = dataset dataset_id, skip_lookup: true
+          table = session_dataset.table table_id, skip_lookup: true
+          table.load_job  files,
+                          format: format, create: create, write: write, projection_fields: projection_fields,
+                          jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
+                          delimiter: delimiter, ignore_unknown: ignore_unknown,
+                          max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
+                          dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
+                          autodetect: autodetect, null_marker: null_marker, create_session: create_session,
+                          session_id: session_id, &block
+        end
+
+        ##
+        # Loads data into the provided destination table using a synchronous
+        # method that blocks for a response. Timeouts and transient errors are
+        # generally handled as needed to complete the job. See also
+        # {#load_job}.
+        #
+        # For the source of the data, you can pass a google-cloud storage file
+        # path or a google-cloud-storage `File` instance. Or, you can upload a
+        # file directly. See [Loading Data with a POST
+        # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method.
+        #
+        # @param [String] table_id The destination table to load the data into.
+        # @param [File, Google::Cloud::Storage::File, String, URI,
+        #   Array<Google::Cloud::Storage::File, String, URI>] files
+        #   A file or the URI of a Google Cloud Storage file, or an Array of
+        #   those, containing data to load into the table.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+        #   * `parquet` - [Parquet](https://parquet.apache.org/)
+        #   * `datastore_backup` - Cloud Datastore backup
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] dataset_id The destination table to load the data into.
+        #   For load job with session it defaults to "_SESSION"
+        # @param [String] write Specifies how to handle data already present in
+        #   the table. The default value is `append`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the table already contains
+        #     data.
+        # @param [Array<String>] projection_fields If the `format` option is set
+        #   to `datastore_backup`, indicates which entity properties to load
+        #   from a Cloud Datastore backup. Property names are case sensitive and
+        #   must be top-level properties. If not set, BigQuery loads all
+        #   properties. If any named property isn't found in the Cloud Datastore
+        #   backup, an invalid error is returned.
+        # @param [Boolean] jagged_rows Accept rows that are missing trailing
+        #   optional columns. The missing values are treated as nulls. If
+        #   `false`, records with missing trailing columns are treated as bad
+        #   records, and if there are too many bad records, an invalid error is
+        #   returned in the job result. The default value is `false`. Only
+        #   applicable to CSV, ignored for other formats.
+        # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
+        #   quoted data sections that contain newline characters in a CSV file.
+        #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
+        # @param [String] encoding The character encoding of the data. The
+        #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
+        #   `UTF-8`.
+        # @param [String] delimiter Specifices the separator for fields in a CSV
+        #   file. BigQuery converts the string to `ISO-8859-1` encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. Default is <code>,</code>.
+        # @param [Boolean] ignore_unknown Indicates if BigQuery should allow
+        #   extra values that are not represented in the table schema. If true,
+        #   the extra values are ignored. If false, records with extra columns
+        #   are treated as bad records, and if there are too many bad records,
+        #   an invalid error is returned in the job result. The default value is
+        #   `false`.
+        #
+        #   The `format` property determines what BigQuery treats as an extra
+        #   value:
+        #
+        #   * `CSV`: Trailing columns
+        #   * `JSON`: Named values that don't match any column names
+        # @param [Integer] max_bad_records The maximum number of bad records
+        #   that BigQuery can ignore when running the job. If the number of bad
+        #   records exceeds this value, an invalid error is returned in the job
+        #   result. The default value is `0`, which requires that all records
+        #   are valid.
+        # @param [String] null_marker Specifies a string that represents a null
+        #   value in a CSV file. For example, if you specify `\N`, BigQuery
+        #   interprets `\N` as a null value when loading a CSV file. The default
+        #   value is the empty string. If you set this property to a custom
+        #   value, BigQuery throws an error if an empty string is present for
+        #   all data types except for STRING and BYTE. For STRING and BYTE
+        #   columns, BigQuery interprets the empty string as an empty value.
+        # @param [String] quote The value that is used to quote data sections in
+        #   a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. The default value is a double-quote
+        #   <code>"</code>. If your data does not contain quoted sections, set
+        #   the property value to an empty string. If your data contains quoted
+        #   newline characters, you must also set the allowQuotedNewlines
+        #   property to true.
+        # @param [Integer] skip_leading The number of rows at the top of a CSV
+        #   file that BigQuery will skip when loading the data. The default
+        #   value is `0`. This property is useful if you have header rows in the
+        #   file that should be skipped.
+        # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
+        #   destination table. Optional. The schema can be omitted if the
+        #   destination table already exists, or if you're loading data from a
+        #   Google Cloud Datastore backup.
+        #
+        #   See {Project#schema} for the creation of the schema for use with
+        #   this option. Also note that for most use cases, the block yielded by
+        #   this method is a more convenient way to configure the schema.
+        # @param [string] session_id Session ID in which the load job must run.
+        #
+        # @yield [updater] A block for setting the schema of the destination
+        #   table and other options for the load job. The schema can be omitted
+        #   if the destination table already exists, or if you're loading data
+        #   from a Google Cloud Datastore backup.
+        # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
+        #   updater to modify the load job and its schema.
+        #
+        # @return [Boolean] Returns `true` if the load job was successful.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   gs_url = "gs://my-bucket/file-name.csv"
+        #   bigquery.load "my_new_table", gs_url, dataset_id: "my_dataset" do |schema|
+        #     schema.string "first_name", mode: :required
+        #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+        #       nested_schema.string "place", mode: :required
+        #       nested_schema.integer "number_of_years", mode: :required
+        #     end
+        #   end
+        #
+        # @!group Data
+        #
+        def load table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil,
+                 projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
+                 delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                 skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
+          job = load_job table_id, files, dataset_id: dataset_id,
+                        format: format, create: create, write: write, projection_fields: projection_fields,
+                        jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
+                        delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
+                        quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
+                        null_marker: null_marker, session_id: session_id, &block
+
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
+        end
+
+        ##
         # Creates a new External::DataSource (or subclass) object that
         # represents the external data source that can be queried from directly,
         # even though the data is not stored in BigQuery. Instead of loading or

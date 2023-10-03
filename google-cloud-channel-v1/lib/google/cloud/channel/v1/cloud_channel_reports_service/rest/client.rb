@@ -223,6 +223,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::RunReportJobRequest.new
+              #
+              #   # Call the run_report_job method.
+              #   result = client.run_report_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def run_report_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -307,6 +330,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Row>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::FetchReportResultsRequest.new
+              #
+              #   # Call the fetch_report_results method.
+              #   result = client.fetch_report_results request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Row.
+              #     p item
+              #   end
+              #
               def fetch_report_results request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -388,6 +431,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Report>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/channel/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Channel::V1::ListReportsRequest.new
+              #
+              #   # Call the list_reports method.
+              #   result = client.list_reports request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Channel::V1::Report.
+              #     p item
+              #   end
+              #
               def list_reports request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

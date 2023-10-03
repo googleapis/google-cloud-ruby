@@ -244,6 +244,9 @@ module Google
         # @!attribute [rw] event_input
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     An input event to send to Dialogflow.
+        # @!attribute [rw] suggestion_input
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionInput]
+        #     An input representing the selection of a suggestion.
         # @!attribute [rw] reply_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Speech synthesis configuration.
@@ -412,7 +415,7 @@ module Google
         #     The UTF-8 encoded natural language text to be processed. Must be sent if
         #     `text_config` is set in the first message. Text length must not exceed
         #     256 bytes for virtual agent interactions. The `input_text` field can be
-        #     only sent once.
+        #     only sent once, and would cancel the speech recognition if any ongoing.
         # @!attribute [rw] input_dtmf
         #   @return [::Google::Cloud::Dialogflow::V2::TelephonyDtmfEvents]
         #     The DTMF digits used to invoke intent and fill in parameter value.
@@ -433,6 +436,27 @@ module Google
         #
         #     Note: this field should only be used if you are connecting to a Dialogflow
         #     CX agent.
+        # @!attribute [rw] enable_extended_streaming
+        #   @return [::Boolean]
+        #     Optional. Enable full bidirectional streaming. You can keep streaming the
+        #     audio until timeout, and there's no need to half close the stream to get
+        #     the response.
+        #
+        #     Restrictions:
+        #
+        #     - Timeout: 3 mins.
+        #     - Audio Encoding: only supports
+        #     {::Google::Cloud::Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_LINEAR_16 AudioEncoding.AUDIO_ENCODING_LINEAR_16}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_MULAW AudioEncoding.AUDIO_ENCODING_MULAW}
+        #     - Lifecycle: conversation should be in `Assist Stage`, go to
+        #       [Conversation.CreateConversation][] for more information.
+        #
+        #     InvalidArgument Error will be returned if the one of restriction checks
+        #     failed.
+        #
+        #     You can find more details in
+        #     https://cloud.google.com/agent-assist/docs/extended-streaming
         # @!attribute [rw] enable_partial_automated_agent_reply
         #   @return [::Boolean]
         #     Enable partial virtual agent responses. If this flag is not enabled,
@@ -837,6 +861,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents an intent suggestion.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The display name of the intent.
+        # @!attribute [rw] intent_v2
+        #   @return [::String]
+        #     The unique identifier of this
+        #     {::Google::Cloud::Dialogflow::V2::Intent intent}. Format: `projects/<Project
+        #     ID>/locations/<Location ID>/agent/intents/<Intent ID>`.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Human readable description for better understanding an intent like its
+        #     scope, content, result etc. Maximum character limit: 140 characters.
+        class IntentSuggestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a Dialogflow assist answer.
+        # @!attribute [rw] query_result
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryResult]
+        #     Result from v2 agent.
+        # @!attribute [rw] intent_suggestion
+        #   @return [::Google::Cloud::Dialogflow::V2::IntentSuggestion]
+        #     An intent suggestion generated from conversation.
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     The name of answer record, in the format of
+        #     "projects/<Project ID>/locations/<Location ID>/answerRecords/<Answer Record
+        #     ID>"
+        class DialogflowAssistAnswer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # One response of different type of suggestion response which is used in
         # the response of
         # {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
@@ -911,6 +970,20 @@ module Google
         #   @return [::Boolean]
         #     Indicates whether the text message contains entities.
         class MessageAnnotation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the selection of a suggestion.
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     Required. The ID of a suggestion selected by the human agent.
+        #     The suggestion(s) were generated in a previous call to
+        #     request Dialogflow assist.
+        #     The format is:
+        #     `projects/<Project ID>/locations/<Location ID>/answerRecords/<Answer Record
+        #     ID>` where <Answer Record ID> is an alphanumeric string.
+        class SuggestionInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

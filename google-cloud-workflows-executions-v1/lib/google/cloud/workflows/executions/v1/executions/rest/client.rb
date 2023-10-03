@@ -196,6 +196,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workflows::Executions::V1::Execution>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/workflows/executions/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new
+                #
+                #   # Call the list_executions method.
+                #   result = client.list_executions request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Workflows::Executions::V1::Execution.
+                #     p item
+                #   end
+                #
                 def list_executions request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -263,6 +283,22 @@ module Google
                 # @return [::Google::Cloud::Workflows::Executions::V1::Execution]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/workflows/executions/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Workflows::Executions::V1::CreateExecutionRequest.new
+                #
+                #   # Call the create_execution method.
+                #   result = client.create_execution request
+                #
+                #   # The returned object is of type Google::Cloud::Workflows::Executions::V1::Execution.
+                #   p result
+                #
                 def create_execution request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -330,6 +366,22 @@ module Google
                 # @return [::Google::Cloud::Workflows::Executions::V1::Execution]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/workflows/executions/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Workflows::Executions::V1::GetExecutionRequest.new
+                #
+                #   # Call the get_execution method.
+                #   result = client.get_execution request
+                #
+                #   # The returned object is of type Google::Cloud::Workflows::Executions::V1::Execution.
+                #   p result
+                #
                 def get_execution request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -394,6 +446,22 @@ module Google
                 # @return [::Google::Cloud::Workflows::Executions::V1::Execution]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/workflows/executions/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Workflows::Executions::V1::CancelExecutionRequest.new
+                #
+                #   # Call the cancel_execution method.
+                #   result = client.cancel_execution request
+                #
+                #   # The returned object is of type Google::Cloud::Workflows::Executions::V1::Execution.
+                #   p result
+                #
                 def cancel_execution request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

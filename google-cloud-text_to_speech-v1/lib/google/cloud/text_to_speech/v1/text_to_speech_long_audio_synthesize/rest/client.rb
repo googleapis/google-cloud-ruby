@@ -189,6 +189,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/text_to_speech/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::TextToSpeech::V1::SynthesizeLongAudioRequest.new
+              #
+              #   # Call the synthesize_long_audio method.
+              #   result = client.synthesize_long_audio request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def synthesize_long_audio request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

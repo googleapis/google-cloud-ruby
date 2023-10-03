@@ -251,6 +251,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::PredictResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::PredictRequest.new
+              #
+              #   # Call the predict method.
+              #   result = client.predict request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::PredictResponse.
+              #   p result
+              #
               def predict request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -416,6 +432,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::BatchPredictRequest.new
+              #
+              #   # Call the batch_predict method.
+              #   result = client.batch_predict request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_predict request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

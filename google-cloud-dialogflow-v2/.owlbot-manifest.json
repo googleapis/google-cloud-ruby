@@ -272,6 +272,7 @@
     "snippets/conversations/get_conversation.rb",
     "snippets/conversations/list_conversations.rb",
     "snippets/conversations/list_messages.rb",
+    "snippets/conversations/search_knowledge.rb",
     "snippets/conversations/suggest_conversation_summary.rb",
     "snippets/documents/create_document.rb",
     "snippets/documents/delete_document.rb",

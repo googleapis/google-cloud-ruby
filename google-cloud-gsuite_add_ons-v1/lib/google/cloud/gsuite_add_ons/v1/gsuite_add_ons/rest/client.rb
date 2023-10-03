@@ -203,6 +203,22 @@ module Google
               # @return [::Google::Cloud::GSuiteAddOns::V1::Authorization]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new
+              #
+              #   # Call the get_authorization method.
+              #   result = client.get_authorization request
+              #
+              #   # The returned object is of type Google::Cloud::GSuiteAddOns::V1::Authorization.
+              #   p result
+              #
               def get_authorization request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -272,6 +288,22 @@ module Google
               # @return [::Google::Cloud::GSuiteAddOns::V1::Deployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new
+              #
+              #   # Call the create_deployment method.
+              #   result = client.create_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::GSuiteAddOns::V1::Deployment.
+              #   p result
+              #
               def create_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -334,6 +366,22 @@ module Google
               # @return [::Google::Cloud::GSuiteAddOns::V1::Deployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new
+              #
+              #   # Call the replace_deployment method.
+              #   result = client.replace_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::GSuiteAddOns::V1::Deployment.
+              #   p result
+              #
               def replace_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -398,6 +446,22 @@ module Google
               # @return [::Google::Cloud::GSuiteAddOns::V1::Deployment]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new
+              #
+              #   # Call the get_deployment method.
+              #   result = client.get_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::GSuiteAddOns::V1::Deployment.
+              #   p result
+              #
               def get_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -473,6 +537,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GSuiteAddOns::V1::Deployment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new
+              #
+              #   # Call the list_deployments method.
+              #   result = client.list_deployments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GSuiteAddOns::V1::Deployment.
+              #     p item
+              #   end
+              #
               def list_deployments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -541,6 +625,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new
+              #
+              #   # Call the delete_deployment method.
+              #   result = client.delete_deployment request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -607,6 +707,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new
+              #
+              #   # Call the install_deployment method.
+              #   result = client.install_deployment request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def install_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -673,6 +789,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new
+              #
+              #   # Call the uninstall_deployment method.
+              #   result = client.uninstall_deployment request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def uninstall_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -737,6 +869,22 @@ module Google
               # @return [::Google::Cloud::GSuiteAddOns::V1::InstallStatus]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gsuite_add_ons/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new
+              #
+              #   # Call the get_install_status method.
+              #   result = client.get_install_status request
+              #
+              #   # The returned object is of type Google::Cloud::GSuiteAddOns::V1::InstallStatus.
+              #   p result
+              #
               def get_install_status request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

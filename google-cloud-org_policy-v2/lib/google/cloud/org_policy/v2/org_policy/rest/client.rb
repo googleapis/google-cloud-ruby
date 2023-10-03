@@ -228,6 +228,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OrgPolicy::V2::Constraint>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new
+              #
+              #   # Call the list_constraints method.
+              #   result = client.list_constraints request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Constraint.
+              #     p item
+              #   end
+              #
               def list_constraints request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,6 +324,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OrgPolicy::V2::Policy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new
+              #
+              #   # Call the list_policies method.
+              #   result = client.list_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Policy.
+              #     p item
+              #   end
+              #
               def list_policies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -372,6 +412,22 @@ module Google
               # @return [::Google::Cloud::OrgPolicy::V2::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new
+              #
+              #   # Call the get_policy method.
+              #   result = client.get_policy request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+              #   p result
+              #
               def get_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -439,6 +495,22 @@ module Google
               # @return [::Google::Cloud::OrgPolicy::V2::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new
+              #
+              #   # Call the get_effective_policy method.
+              #   result = client.get_effective_policy request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+              #   p result
+              #
               def get_effective_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -513,6 +585,22 @@ module Google
               # @return [::Google::Cloud::OrgPolicy::V2::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new
+              #
+              #   # Call the create_policy method.
+              #   result = client.create_policy request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+              #   p result
+              #
               def create_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -587,6 +675,22 @@ module Google
               # @return [::Google::Cloud::OrgPolicy::V2::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new
+              #
+              #   # Call the update_policy method.
+              #   result = client.update_policy request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+              #   p result
+              #
               def update_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -653,6 +757,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new
+              #
+              #   # Call the delete_policy method.
+              #   result = client.delete_policy request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -239,6 +239,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::EkmConnection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new
+              #
+              #   # Call the list_ekm_connections method.
+              #   result = client.list_ekm_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::EkmConnection.
+              #     p item
+              #   end
+              #
               def list_ekm_connections request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,6 +324,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::EkmConnection]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetEkmConnectionRequest.new
+              #
+              #   # Call the get_ekm_connection method.
+              #   result = client.get_ekm_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::EkmConnection.
+              #   p result
+              #
               def get_ekm_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -375,6 +411,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::EkmConnection]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new
+              #
+              #   # Call the create_ekm_connection method.
+              #   result = client.create_ekm_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::EkmConnection.
+              #   p result
+              #
               def create_ekm_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -440,6 +492,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::EkmConnection]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new
+              #
+              #   # Call the update_ekm_connection method.
+              #   result = client.update_ekm_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::EkmConnection.
+              #   p result
+              #
               def update_ekm_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -504,6 +572,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::EkmConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetEkmConfigRequest.new
+              #
+              #   # Call the get_ekm_config method.
+              #   result = client.get_ekm_config request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::EkmConfig.
+              #   p result
+              #
               def get_ekm_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -569,6 +653,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::EkmConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new
+              #
+              #   # Call the update_ekm_config method.
+              #   result = client.update_ekm_config request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::EkmConfig.
+              #   p result
+              #
               def update_ekm_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -636,6 +736,22 @@ module Google
               # @return [::Google::Cloud::Kms::V1::VerifyConnectivityResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::VerifyConnectivityRequest.new
+              #
+              #   # Call the verify_connectivity method.
+              #   result = client.verify_connectivity request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::VerifyConnectivityResponse.
+              #   p result
+              #
               def verify_connectivity request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

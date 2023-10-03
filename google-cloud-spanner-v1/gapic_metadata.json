@@ -84,6 +84,11 @@
               "methods": [
                 "partition_read"
               ]
+            },
+            "BatchWrite": {
+              "methods": [
+                "batch_write"
+              ]
             }
           }
         }

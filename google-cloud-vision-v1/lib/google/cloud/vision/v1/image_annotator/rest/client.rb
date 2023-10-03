@@ -210,6 +210,22 @@ module Google
               # @return [::Google::Cloud::Vision::V1::BatchAnnotateImagesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vision/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new
+              #
+              #   # Call the batch_annotate_images method.
+              #   result = client.batch_annotate_images request
+              #
+              #   # The returned object is of type Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.
+              #   p result
+              #
               def batch_annotate_images request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -292,6 +308,22 @@ module Google
               # @return [::Google::Cloud::Vision::V1::BatchAnnotateFilesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vision/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new
+              #
+              #   # Call the batch_annotate_files method.
+              #   result = client.batch_annotate_files request
+              #
+              #   # The returned object is of type Google::Cloud::Vision::V1::BatchAnnotateFilesResponse.
+              #   p result
+              #
               def batch_annotate_files request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -377,6 +409,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vision/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new
+              #
+              #   # Call the async_batch_annotate_images method.
+              #   result = client.async_batch_annotate_images request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def async_batch_annotate_images request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,6 +513,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vision/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new
+              #
+              #   # Call the async_batch_annotate_files method.
+              #   result = client.async_batch_annotate_files request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def async_batch_annotate_files request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

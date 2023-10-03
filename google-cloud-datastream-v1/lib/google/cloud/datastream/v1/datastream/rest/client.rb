@@ -244,6 +244,26 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::ListConnectionProfilesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::ListConnectionProfilesRequest.new
+              #
+              #   # Call the list_connection_profiles method.
+              #   result = client.list_connection_profiles request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Datastream::V1::ConnectionProfile.
+              #     p item
+              #   end
+              #
               def list_connection_profiles request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -306,6 +326,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::ConnectionProfile]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::GetConnectionProfileRequest.new
+              #
+              #   # Call the get_connection_profile method.
+              #   result = client.get_connection_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::ConnectionProfile.
+              #   p result
+              #
               def get_connection_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -391,6 +427,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::CreateConnectionProfileRequest.new
+              #
+              #   # Call the create_connection_profile method.
+              #   result = client.create_connection_profile request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_connection_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -479,6 +538,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::UpdateConnectionProfileRequest.new
+              #
+              #   # Call the update_connection_profile method.
+              #   result = client.update_connection_profile request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_connection_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -556,6 +638,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::DeleteConnectionProfileRequest.new
+              #
+              #   # Call the delete_connection_profile method.
+              #   result = client.delete_connection_profile request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_connection_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -638,6 +743,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new
+              #
+              #   # Call the discover_connection_profile method.
+              #   result = client.discover_connection_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse.
+              #   p result
+              #
               def discover_connection_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,6 +835,26 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::ListStreamsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::ListStreamsRequest.new
+              #
+              #   # Call the list_streams method.
+              #   result = client.list_streams request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Datastream::V1::Stream.
+              #     p item
+              #   end
+              #
               def list_streams request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -776,6 +917,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::Stream]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::GetStreamRequest.new
+              #
+              #   # Call the get_stream method.
+              #   result = client.get_stream request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::Stream.
+              #   p result
+              #
               def get_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -861,6 +1018,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::CreateStreamRequest.new
+              #
+              #   # Call the create_stream method.
+              #   result = client.create_stream request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -949,6 +1129,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::UpdateStreamRequest.new
+              #
+              #   # Call the update_stream method.
+              #   result = client.update_stream request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1026,6 +1229,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::DeleteStreamRequest.new
+              #
+              #   # Call the delete_stream method.
+              #   result = client.delete_stream request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1089,6 +1315,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::StreamObject]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::GetStreamObjectRequest.new
+              #
+              #   # Call the get_stream_object method.
+              #   result = client.get_stream_object request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::StreamObject.
+              #   p result
+              #
               def get_stream_object request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1153,6 +1395,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::StreamObject]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::LookupStreamObjectRequest.new
+              #
+              #   # Call the lookup_stream_object method.
+              #   result = client.lookup_stream_object request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::StreamObject.
+              #   p result
+              #
               def lookup_stream_object request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1225,6 +1483,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::StreamObject>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new
+              #
+              #   # Call the list_stream_objects method.
+              #   result = client.list_stream_objects request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Datastream::V1::StreamObject.
+              #     p item
+              #   end
+              #
               def list_stream_objects request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1289,6 +1567,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::StartBackfillJobResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::StartBackfillJobRequest.new
+              #
+              #   # Call the start_backfill_job method.
+              #   result = client.start_backfill_job request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::StartBackfillJobResponse.
+              #   p result
+              #
               def start_backfill_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1352,6 +1646,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::StopBackfillJobResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::StopBackfillJobRequest.new
+              #
+              #   # Call the stop_backfill_job method.
+              #   result = client.stop_backfill_job request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::StopBackfillJobResponse.
+              #   p result
+              #
               def stop_backfill_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1421,6 +1731,22 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::String>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::FetchStaticIpsRequest.new
+              #
+              #   # Call the fetch_static_ips method.
+              #   result = client.fetch_static_ips request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::FetchStaticIpsResponse.
+              #   p result
+              #
               def fetch_static_ips request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1504,6 +1830,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new
+              #
+              #   # Call the create_private_connection method.
+              #   result = client.create_private_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1567,6 +1916,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::PrivateConnection]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::GetPrivateConnectionRequest.new
+              #
+              #   # Call the get_private_connection method.
+              #   result = client.get_private_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::PrivateConnection.
+              #   p result
+              #
               def get_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1647,6 +2012,26 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::ListPrivateConnectionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::ListPrivateConnectionsRequest.new
+              #
+              #   # Call the list_private_connections method.
+              #   result = client.list_private_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Datastream::V1::PrivateConnection.
+              #     p item
+              #   end
+              #
               def list_private_connections request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1726,6 +2111,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::DeletePrivateConnectionRequest.new
+              #
+              #   # Call the delete_private_connection method.
+              #   result = client.delete_private_connection request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_private_connection request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1808,6 +2216,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::CreateRouteRequest.new
+              #
+              #   # Call the create_route method.
+              #   result = client.create_route request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_route request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1871,6 +2302,22 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::Route]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::GetRouteRequest.new
+              #
+              #   # Call the get_route method.
+              #   result = client.get_route request
+              #
+              #   # The returned object is of type Google::Cloud::Datastream::V1::Route.
+              #   p result
+              #
               def get_route request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1950,6 +2397,26 @@ module Google
               # @return [::Google::Cloud::Datastream::V1::ListRoutesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::ListRoutesRequest.new
+              #
+              #   # Call the list_routes method.
+              #   result = client.list_routes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Datastream::V1::Route.
+              #     p item
+              #   end
+              #
               def list_routes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2026,6 +2493,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::DeleteRouteRequest.new
+              #
+              #   # Call the delete_route method.
+              #   result = client.delete_route request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_route request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

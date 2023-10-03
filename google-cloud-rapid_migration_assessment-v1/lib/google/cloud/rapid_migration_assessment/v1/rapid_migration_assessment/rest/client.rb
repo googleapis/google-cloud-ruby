@@ -30,7 +30,7 @@ module Google
             ##
             # REST client for the RapidMigrationAssessment service.
             #
-            # Rapid Migration Assessment service
+            # Service describing handlers for resources.
             #
             class Client
               include Paths
@@ -226,6 +226,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::CreateCollectorRequest.new
+              #
+              #   # Call the create_collector method.
+              #   result = client.create_collector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -293,6 +316,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::CreateAnnotationRequest.new
+              #
+              #   # Call the create_annotation method.
+              #   result = client.create_annotation request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_annotation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,6 +402,22 @@ module Google
               # @return [::Google::Cloud::RapidMigrationAssessment::V1::Annotation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::GetAnnotationRequest.new
+              #
+              #   # Call the get_annotation method.
+              #   result = client.get_annotation request
+              #
+              #   # The returned object is of type Google::Cloud::RapidMigrationAssessment::V1::Annotation.
+              #   p result
+              #
               def get_annotation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -427,6 +489,26 @@ module Google
               # @return [::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsRequest.new
+              #
+              #   # Call the list_collectors method.
+              #   result = client.list_collectors request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::RapidMigrationAssessment::V1::Collector.
+              #     p item
+              #   end
+              #
               def list_collectors request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -489,6 +571,22 @@ module Google
               # @return [::Google::Cloud::RapidMigrationAssessment::V1::Collector]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::GetCollectorRequest.new
+              #
+              #   # Call the get_collector method.
+              #   result = client.get_collector request
+              #
+              #   # The returned object is of type Google::Cloud::RapidMigrationAssessment::V1::Collector.
+              #   p result
+              #
               def get_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -571,6 +669,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::UpdateCollectorRequest.new
+              #
+              #   # Call the update_collector method.
+              #   result = client.update_collector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -609,6 +730,7 @@ module Google
 
               ##
               # Deletes a single Collector - changes state of collector to "Deleting".
+              # Background jobs does final deletion thorugh producer api.
               #
               # @overload delete_collector(request, options = nil)
               #   Pass arguments to `delete_collector` via a request object, either of type
@@ -648,6 +770,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::DeleteCollectorRequest.new
+              #
+              #   # Call the delete_collector method.
+              #   result = client.delete_collector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -725,6 +870,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::ResumeCollectorRequest.new
+              #
+              #   # Call the resume_collector method.
+              #   result = client.resume_collector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def resume_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -802,6 +970,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::RegisterCollectorRequest.new
+              #
+              #   # Call the register_collector method.
+              #   result = client.register_collector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def register_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -879,6 +1070,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/rapid_migration_assessment/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::RapidMigrationAssessment::V1::PauseCollectorRequest.new
+              #
+              #   # Call the pause_collector method.
+              #   result = client.pause_collector request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def pause_collector request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

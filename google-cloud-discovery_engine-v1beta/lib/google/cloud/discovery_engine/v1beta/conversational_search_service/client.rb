@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1beta/conversational_search_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -138,14 +139,28 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @conversational_search_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -162,7 +177,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil)
+            # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil, user_labels: nil, summary_spec: nil)
             #   Pass arguments to `converse_conversation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -186,6 +201,26 @@ module Google
             #     session.
             #   @param safe_search [::Boolean]
             #     Whether to turn on safe search.
+            #   @param user_labels [::Hash{::String => ::String}]
+            #     The user labels applied to a resource must meet the following requirements:
+            #
+            #     * Each resource can have multiple labels, up to a maximum of 64.
+            #     * Each label must be a key-value pair.
+            #     * Keys have a minimum length of 1 character and a maximum length of 63
+            #       characters and cannot be empty. Values can be empty and have a maximum
+            #       length of 63 characters.
+            #     * Keys and values can contain only lowercase letters, numeric characters,
+            #       underscores, and dashes. All characters must use UTF-8 encoding, and
+            #       international characters are allowed.
+            #     * The key portion of a label must be unique. However, you can use the same
+            #       key with multiple resources.
+            #     * Keys must start with a lowercase letter or international character.
+            #
+            #     See [Google Cloud
+            #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+            #     for more details.
+            #   @param summary_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec, ::Hash]
+            #     A specification for configuring the summary returned in the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationResponse]
@@ -847,6 +882,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

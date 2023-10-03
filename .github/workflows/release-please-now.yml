@@ -18,7 +18,7 @@ jobs:
       RELEASE_PLEASE_DISABLE: ${{ secrets.RELEASE_PLEASE_DISABLE }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
       - name: Install Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-pubsub-v1",
-    "version": "0.17.4",
+    "version": "0.18.0",
     "language": "RUBY",
     "apis": [
       {

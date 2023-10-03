@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1beta/search_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -138,14 +139,28 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @search_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -162,7 +177,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
+            # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -264,6 +279,35 @@ module Google
             #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
             #   @param content_search_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec, ::Hash]
             #     A specification for configuring the behavior of content search.
+            #   @param embedding_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec, ::Hash]
+            #     Uses the provided embedding to do additional semantic document retrieval.
+            #     The retrieval is based on the dot product of
+            #     [SearchRequest.embedding_spec.embedding_vectors.vector][] and the document
+            #     embedding that is provided in
+            #     [SearchRequest.embedding_spec.embedding_vectors.field_path][].
+            #
+            #     If [SearchRequest.embedding_spec.embedding_vectors.field_path][] is not
+            #     provided, it will use [ServingConfig.embedding_config.field_paths][].
+            #   @param ranking_expression [::String]
+            #     The ranking expression controls the customized ranking on retrieval
+            #     documents. This overrides [ServingConfig.ranking_expression][].
+            #     The ranking expression is a single function or multiple functions that are
+            #     joint by "+".
+            #       * ranking_expression = function, { " + ", function };
+            #     Supported functions:
+            #       * double * relevance_score
+            #       * double * dotProduct(embedding_field_path)
+            #     Function variables:
+            #       `relevance_score`: pre-defined keywords, used for measure relevance
+            #       between query and document.
+            #       `embedding_field_path`: the document embedding field
+            #       used with query embedding vector.
+            #       `dotProduct`: embedding function between embedding_field_path and query
+            #       embedding vector.
+            #
+            #      Example ranking expression:
+            #        If document has an embedding field doc_embedding, the ranking expression
+            #        could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
             #   @param safe_search [::Boolean]
             #     Whether to turn on safe search. This is only supported for
             #     website search.
@@ -472,6 +516,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

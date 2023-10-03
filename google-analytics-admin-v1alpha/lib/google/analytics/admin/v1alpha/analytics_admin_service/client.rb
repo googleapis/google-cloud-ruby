@@ -203,7 +203,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -3511,6 +3512,460 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :acknowledge_user_data_collection, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Looks up a single SKAdNetworkConversionValueSchema.
+            #
+            # @overload get_sk_ad_network_conversion_value_schema(request, options = nil)
+            #   Pass arguments to `get_sk_ad_network_conversion_value_schema` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_sk_ad_network_conversion_value_schema(name: nil)
+            #   Pass arguments to `get_sk_ad_network_conversion_value_schema` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of SKAdNetwork conversion value schema to look
+            #     up. Format:
+            #     properties/\\{property}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema/\\{skadnetwork_conversion_value_schema}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest.new
+            #
+            #   # Call the get_sk_ad_network_conversion_value_schema method.
+            #   result = client.get_sk_ad_network_conversion_value_schema request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+            #   p result
+            #
+            def get_sk_ad_network_conversion_value_schema request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_sk_ad_network_conversion_value_schema.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_sk_ad_network_conversion_value_schema.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_sk_ad_network_conversion_value_schema.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a SKAdNetworkConversionValueSchema.
+            #
+            # @overload create_sk_ad_network_conversion_value_schema(request, options = nil)
+            #   Pass arguments to `create_sk_ad_network_conversion_value_schema` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_sk_ad_network_conversion_value_schema(parent: nil, skadnetwork_conversion_value_schema: nil)
+            #   Pass arguments to `create_sk_ad_network_conversion_value_schema` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource where this schema will be created.
+            #     Format: properties/\\{property}/dataStreams/\\{dataStream}
+            #   @param skadnetwork_conversion_value_schema [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema, ::Hash]
+            #     Required. SKAdNetwork conversion value schema to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest.new
+            #
+            #   # Call the create_sk_ad_network_conversion_value_schema method.
+            #   result = client.create_sk_ad_network_conversion_value_schema request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+            #   p result
+            #
+            def create_sk_ad_network_conversion_value_schema request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_sk_ad_network_conversion_value_schema.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_sk_ad_network_conversion_value_schema.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_sk_ad_network_conversion_value_schema.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes target SKAdNetworkConversionValueSchema.
+            #
+            # @overload delete_sk_ad_network_conversion_value_schema(request, options = nil)
+            #   Pass arguments to `delete_sk_ad_network_conversion_value_schema` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_sk_ad_network_conversion_value_schema(name: nil)
+            #   Pass arguments to `delete_sk_ad_network_conversion_value_schema` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the SKAdNetworkConversionValueSchema to delete.
+            #     Format:
+            #     properties/\\{property}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema/\\{skadnetwork_conversion_value_schema}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest.new
+            #
+            #   # Call the delete_sk_ad_network_conversion_value_schema method.
+            #   result = client.delete_sk_ad_network_conversion_value_schema request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_sk_ad_network_conversion_value_schema request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_sk_ad_network_conversion_value_schema.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_sk_ad_network_conversion_value_schema.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_sk_ad_network_conversion_value_schema.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a SKAdNetworkConversionValueSchema.
+            #
+            # @overload update_sk_ad_network_conversion_value_schema(request, options = nil)
+            #   Pass arguments to `update_sk_ad_network_conversion_value_schema` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_sk_ad_network_conversion_value_schema(skadnetwork_conversion_value_schema: nil, update_mask: nil)
+            #   Pass arguments to `update_sk_ad_network_conversion_value_schema` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param skadnetwork_conversion_value_schema [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema, ::Hash]
+            #     Required. SKAdNetwork conversion value schema to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest.new
+            #
+            #   # Call the update_sk_ad_network_conversion_value_schema method.
+            #   result = client.update_sk_ad_network_conversion_value_schema request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+            #   p result
+            #
+            def update_sk_ad_network_conversion_value_schema request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_sk_ad_network_conversion_value_schema.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.skadnetwork_conversion_value_schema&.name
+                header_params["skadnetwork_conversion_value_schema.name"] = request.skadnetwork_conversion_value_schema.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_sk_ad_network_conversion_value_schema.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_sk_ad_network_conversion_value_schema.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists SKAdNetworkConversionValueSchema on a stream.
+            # Properties can have at most one SKAdNetworkConversionValueSchema.
+            #
+            # @overload list_sk_ad_network_conversion_value_schemas(request, options = nil)
+            #   Pass arguments to `list_sk_ad_network_conversion_value_schemas` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_sk_ad_network_conversion_value_schemas(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_sk_ad_network_conversion_value_schemas` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Format:
+            #     properties/\\{property_id}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema
+            #     Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return. The service may return
+            #     fewer than this value, even if there are additional pages.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200; (higher values will be coerced to the maximum)
+            #   @param page_token [::String]
+            #     A page token, received from a previous
+            #     `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
+            #     subsequent page. When paginating, all other parameters provided to
+            #     `ListSKAdNetworkConversionValueSchema` must match the call that provided
+            #     the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest.new
+            #
+            #   # Call the list_sk_ad_network_conversion_value_schemas method.
+            #   result = client.list_sk_ad_network_conversion_value_schemas request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema.
+            #     p item
+            #   end
+            #
+            def list_sk_ad_network_conversion_value_schemas request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_sk_ad_network_conversion_value_schemas.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_sk_ad_network_conversion_value_schemas.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_sk_ad_network_conversion_value_schemas.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_sk_ad_network_conversion_value_schemas, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_sk_ad_network_conversion_value_schemas, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -11562,6 +12017,14 @@ module Google
               end
 
               ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
+              end
+
+              ##
               # Configuration RPC class for the AnalyticsAdminService API.
               #
               # Includes fields providing the configuration for each RPC in this service.
@@ -11759,6 +12222,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :acknowledge_user_data_collection
+                ##
+                # RPC-specific configuration for `get_sk_ad_network_conversion_value_schema`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_sk_ad_network_conversion_value_schema
+                ##
+                # RPC-specific configuration for `create_sk_ad_network_conversion_value_schema`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_sk_ad_network_conversion_value_schema
+                ##
+                # RPC-specific configuration for `delete_sk_ad_network_conversion_value_schema`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_sk_ad_network_conversion_value_schema
+                ##
+                # RPC-specific configuration for `update_sk_ad_network_conversion_value_schema`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_sk_ad_network_conversion_value_schema
+                ##
+                # RPC-specific configuration for `list_sk_ad_network_conversion_value_schemas`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_sk_ad_network_conversion_value_schemas
                 ##
                 # RPC-specific configuration for `search_change_history_events`
                 # @return [::Gapic::Config::Method]
@@ -12269,6 +12757,16 @@ module Google
                   @update_measurement_protocol_secret = ::Gapic::Config::Method.new update_measurement_protocol_secret_config
                   acknowledge_user_data_collection_config = parent_rpcs.acknowledge_user_data_collection if parent_rpcs.respond_to? :acknowledge_user_data_collection
                   @acknowledge_user_data_collection = ::Gapic::Config::Method.new acknowledge_user_data_collection_config
+                  get_sk_ad_network_conversion_value_schema_config = parent_rpcs.get_sk_ad_network_conversion_value_schema if parent_rpcs.respond_to? :get_sk_ad_network_conversion_value_schema
+                  @get_sk_ad_network_conversion_value_schema = ::Gapic::Config::Method.new get_sk_ad_network_conversion_value_schema_config
+                  create_sk_ad_network_conversion_value_schema_config = parent_rpcs.create_sk_ad_network_conversion_value_schema if parent_rpcs.respond_to? :create_sk_ad_network_conversion_value_schema
+                  @create_sk_ad_network_conversion_value_schema = ::Gapic::Config::Method.new create_sk_ad_network_conversion_value_schema_config
+                  delete_sk_ad_network_conversion_value_schema_config = parent_rpcs.delete_sk_ad_network_conversion_value_schema if parent_rpcs.respond_to? :delete_sk_ad_network_conversion_value_schema
+                  @delete_sk_ad_network_conversion_value_schema = ::Gapic::Config::Method.new delete_sk_ad_network_conversion_value_schema_config
+                  update_sk_ad_network_conversion_value_schema_config = parent_rpcs.update_sk_ad_network_conversion_value_schema if parent_rpcs.respond_to? :update_sk_ad_network_conversion_value_schema
+                  @update_sk_ad_network_conversion_value_schema = ::Gapic::Config::Method.new update_sk_ad_network_conversion_value_schema_config
+                  list_sk_ad_network_conversion_value_schemas_config = parent_rpcs.list_sk_ad_network_conversion_value_schemas if parent_rpcs.respond_to? :list_sk_ad_network_conversion_value_schemas
+                  @list_sk_ad_network_conversion_value_schemas = ::Gapic::Config::Method.new list_sk_ad_network_conversion_value_schemas_config
                   search_change_history_events_config = parent_rpcs.search_change_history_events if parent_rpcs.respond_to? :search_change_history_events
                   @search_change_history_events = ::Gapic::Config::Method.new search_change_history_events_config
                   get_google_signals_settings_config = parent_rpcs.get_google_signals_settings if parent_rpcs.respond_to? :get_google_signals_settings

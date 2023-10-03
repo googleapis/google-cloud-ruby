@@ -70,6 +70,11 @@
                 "generate_ssh_script"
               ]
             },
+            "GenerateTcpProxyScript": {
+              "methods": [
+                "generate_tcp_proxy_script"
+              ]
+            },
             "ListConnectionProfiles": {
               "methods": [
                 "list_connection_profiles"
@@ -138,6 +143,26 @@
             "DeleteConversionWorkspace": {
               "methods": [
                 "delete_conversion_workspace"
+              ]
+            },
+            "CreateMappingRule": {
+              "methods": [
+                "create_mapping_rule"
+              ]
+            },
+            "DeleteMappingRule": {
+              "methods": [
+                "delete_mapping_rule"
+              ]
+            },
+            "ListMappingRules": {
+              "methods": [
+                "list_mapping_rules"
+              ]
+            },
+            "GetMappingRule": {
+              "methods": [
+                "get_mapping_rule"
               ]
             },
             "SeedConversionWorkspace": {

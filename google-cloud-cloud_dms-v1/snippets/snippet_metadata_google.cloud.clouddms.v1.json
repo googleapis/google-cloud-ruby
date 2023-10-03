@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-cloud_dms-v1",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -475,6 +475,46 @@
         "method": {
           "short_name": "GenerateSshScript",
           "full_name": "google.cloud.clouddms.v1.DataMigrationService.GenerateSshScript",
+          "service": {
+            "short_name": "DataMigrationService",
+            "full_name": "google.cloud.clouddms.v1.DataMigrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamigration_v1_generated_DataMigrationService_GenerateTcpProxyScript_sync",
+      "title": "Snippet for the generate_tcp_proxy_script call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#generate_tcp_proxy_script. It may require modification in order to execute successfully.",
+      "file": "data_migration_service/generate_tcp_proxy_script.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_tcp_proxy_script",
+        "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client#generate_tcp_proxy_script",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudDMS::V1::GenerateTcpProxyScriptRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudDMS::V1::TcpProxyScript",
+        "client": {
+          "short_name": "DataMigrationService::Client",
+          "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client"
+        },
+        "method": {
+          "short_name": "GenerateTcpProxyScript",
+          "full_name": "google.cloud.clouddms.v1.DataMigrationService.GenerateTcpProxyScript",
           "service": {
             "short_name": "DataMigrationService",
             "full_name": "google.cloud.clouddms.v1.DataMigrationService"
@@ -1047,6 +1087,166 @@
         {
           "start": 20,
           "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamigration_v1_generated_DataMigrationService_CreateMappingRule_sync",
+      "title": "Snippet for the create_mapping_rule call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#create_mapping_rule. It may require modification in order to execute successfully.",
+      "file": "data_migration_service/create_mapping_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_mapping_rule",
+        "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client#create_mapping_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudDMS::V1::CreateMappingRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudDMS::V1::MappingRule",
+        "client": {
+          "short_name": "DataMigrationService::Client",
+          "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client"
+        },
+        "method": {
+          "short_name": "CreateMappingRule",
+          "full_name": "google.cloud.clouddms.v1.DataMigrationService.CreateMappingRule",
+          "service": {
+            "short_name": "DataMigrationService",
+            "full_name": "google.cloud.clouddms.v1.DataMigrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamigration_v1_generated_DataMigrationService_DeleteMappingRule_sync",
+      "title": "Snippet for the delete_mapping_rule call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#delete_mapping_rule. It may require modification in order to execute successfully.",
+      "file": "data_migration_service/delete_mapping_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_mapping_rule",
+        "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client#delete_mapping_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudDMS::V1::DeleteMappingRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataMigrationService::Client",
+          "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMappingRule",
+          "full_name": "google.cloud.clouddms.v1.DataMigrationService.DeleteMappingRule",
+          "service": {
+            "short_name": "DataMigrationService",
+            "full_name": "google.cloud.clouddms.v1.DataMigrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamigration_v1_generated_DataMigrationService_ListMappingRules_sync",
+      "title": "Snippet for the list_mapping_rules call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#list_mapping_rules. It may require modification in order to execute successfully.",
+      "file": "data_migration_service/list_mapping_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_mapping_rules",
+        "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client#list_mapping_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudDMS::V1::ListMappingRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudDMS::V1::ListMappingRulesResponse",
+        "client": {
+          "short_name": "DataMigrationService::Client",
+          "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client"
+        },
+        "method": {
+          "short_name": "ListMappingRules",
+          "full_name": "google.cloud.clouddms.v1.DataMigrationService.ListMappingRules",
+          "service": {
+            "short_name": "DataMigrationService",
+            "full_name": "google.cloud.clouddms.v1.DataMigrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamigration_v1_generated_DataMigrationService_GetMappingRule_sync",
+      "title": "Snippet for the get_mapping_rule call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#get_mapping_rule. It may require modification in order to execute successfully.",
+      "file": "data_migration_service/get_mapping_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_mapping_rule",
+        "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client#get_mapping_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudDMS::V1::GetMappingRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudDMS::V1::MappingRule",
+        "client": {
+          "short_name": "DataMigrationService::Client",
+          "full_name": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client"
+        },
+        "method": {
+          "short_name": "GetMappingRule",
+          "full_name": "google.cloud.clouddms.v1.DataMigrationService.GetMappingRule",
+          "service": {
+            "short_name": "DataMigrationService",
+            "full_name": "google.cloud.clouddms.v1.DataMigrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

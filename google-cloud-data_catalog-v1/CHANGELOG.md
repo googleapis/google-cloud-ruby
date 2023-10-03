@@ -1,5 +1,17 @@
 # Release History
 
+### 0.20.0 (2023-09-29)
+
+#### Features
+
+* add dataset_spec and model_spec to Entry and enable vertex AI ingestion to dataplex 
+
+### 0.19.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22918](https://github.com/googleapis/google-cloud-ruby/issues/22918)) 
+
 ### 0.18.1 (2023-09-04)
 
 #### Documentation

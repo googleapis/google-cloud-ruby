@@ -2440,6 +2440,24 @@ module Google
         # @!attribute [rw] windows_node_config
         #   @return [::Google::Cloud::Container::V1::WindowsNodeConfig]
         #     Parameters that can be configured on Windows nodes.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Optional. The desired [Google Compute Engine machine
+        #     type](https://cloud.google.com/compute/docs/machine-types) for nodes in the
+        #     node pool. Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified machine type.
+        # @!attribute [rw] disk_type
+        #   @return [::String]
+        #     Optional. The desired disk type (e.g. 'pd-standard', 'pd-ssd' or
+        #     'pd-balanced') for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified disk type.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Optional. The desired disk size for nodes in the node pool specified in GB.
+        #     The smallest allowed disk size is 10GB.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified disk size.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3281,6 +3299,10 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Container::V1::NodePool::PlacementPolicy::Type]
           #     The type of placement.
+          # @!attribute [rw] tpu_topology
+          #   @return [::String]
+          #     Optional. TPU placement topology for pod slice node pool.
+          #     https://cloud.google.com/tpu/docs/types-topologies#tpu_topologies
           # @!attribute [rw] policy_name
           #   @return [::String]
           #     If set, refers to the name of a custom resource policy supplied by the

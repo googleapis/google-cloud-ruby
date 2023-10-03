@@ -43,11 +43,15 @@ module Google
         #     document must
         #       have a valid {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id}.
         #     * `content`: Unstructured data (e.g. PDF, HTML). Each file matched by
-        #       `input_uris` will become a document, with the ID set to the first 128
+        #       `input_uris` becomes a document, with the ID set to the first 128
         #       bits of SHA256(URI) encoded as a hex string.
         #     * `custom`: One custom data JSON per row in arbitrary format that conforms
-        #       the defined {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} of the data
-        #       store. This can only be used by the GENERIC Data Store vertical.
+        #       to the defined {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} of the
+        #       data store. This can only be used by Gen App Builder.
+        #     * `csv`: A CSV file with header conforming to the defined
+        #     {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} of the
+        #       data store. Each entry after the header is imported as a Document.
+        #       This can only be used by Gen App Builder.
         #
         #     Supported values for user even imports:
         #
@@ -98,9 +102,9 @@ module Google
         #       {::Google::Cloud::DiscoveryEngine::V1::Document#json_data Document.json_data}
         #       or
         #       {::Google::Cloud::DiscoveryEngine::V1::Document#struct_data Document.struct_data}.
-        #     * `custom`: One custom data per row in arbitrary format that conforms the
-        #       defined {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} of the data
-        #       store. This can only be used by the GENERIC Data Store vertical.
+        #     * `custom`: One custom data per row in arbitrary format that conforms to
+        #       the defined {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} of the data
+        #       store. This can only be used by Gen App Builder.
         class BigQuerySource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,7 +114,7 @@ module Google
         # @!attribute [rw] gcs_prefix
         #   @return [::String]
         #     Cloud Storage prefix for import errors. This must be an empty,
-        #     existing Cloud Storage directory. Import errors will be written to
+        #     existing Cloud Storage directory. Import errors are written to
         #     sharded files in this directory, one per line, as a JSON-encoded
         #     `google.rpc.Status` message.
         class ImportErrorConfig
@@ -121,13 +125,13 @@ module Google
         # Request message for the ImportUserEvents request.
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest::InlineSource]
-        #     Required. The Inline source for the input content for UserEvents.
+        #     The Inline source for the input content for UserEvents.
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1::GcsSource]
-        #     Required. Cloud Storage location for the input content.
+        #     Cloud Storage location for the input content.
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1::BigQuerySource]
-        #     Required. BigQuery input source.
+        #     BigQuery input source.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent DataStore resource name, of the form
@@ -172,7 +176,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata related to the progress of the Import operation. This will be
+        # Metadata related to the progress of the Import operation. This is
         # returned by the google.longrunning.Operation.metadata field.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -192,8 +196,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata related to the progress of the ImportDocuments operation. This will
-        # be returned by the google.longrunning.Operation.metadata field.
+        # Metadata related to the progress of the ImportDocuments operation. This is
+        # returned by the google.longrunning.Operation.metadata field.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Operation create time.
@@ -248,7 +252,7 @@ module Google
         #     `false`, {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id}s have
         #     to be specified using
         #     {::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest#id_field id_field},
-        #     otherwises, documents without IDs will fail to be imported.
+        #     otherwise, documents without IDs fail to be imported.
         #
         #     Only set this field when using
         #     {::Google::Cloud::DiscoveryEngine::V1::GcsSource GcsSource} or
@@ -256,7 +260,7 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1::GcsSource#data_schema GcsSource.data_schema}
         #     or
         #     {::Google::Cloud::DiscoveryEngine::V1::BigQuerySource#data_schema BigQuerySource.data_schema}
-        #     is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
         # @!attribute [rw] id_field
         #   @return [::String]
         #     The field in the Cloud Storage and BigQuery sources that indicates the
@@ -267,12 +271,12 @@ module Google
         #     For {::Google::Cloud::DiscoveryEngine::V1::BigQuerySource BigQuerySource} it is
         #     the column name of the BigQuery table where the unique ids are stored.
         #
-        #     The values of the JSON field or the BigQuery column will be used as the
+        #     The values of the JSON field or the BigQuery column are used as the
         #     {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id}s. The JSON field
         #     or the BigQuery column must be of string type, and the values must be set
         #     as valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-        #     with 1-63 characters. Otherwise, documents without valid IDs will fail to
-        #     be imported.
+        #     with 1-63 characters. Otherwise, documents without valid IDs fail to be
+        #     imported.
         #
         #     Only set this field when using
         #     {::Google::Cloud::DiscoveryEngine::V1::GcsSource GcsSource} or
@@ -304,7 +308,7 @@ module Google
           # Indicates how imported documents are reconciled with the existing documents
           # created or imported before.
           module ReconciliationMode
-            # Defaults to INCREMENTAL.
+            # Defaults to `INCREMENTAL`.
             RECONCILIATION_MODE_UNSPECIFIED = 0
 
             # Inserts new documents or updates existing documents.

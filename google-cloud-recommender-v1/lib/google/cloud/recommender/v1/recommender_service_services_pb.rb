@@ -55,6 +55,16 @@ module Google
             # Gets the requested recommendation. Requires the recommender.*.get
             # IAM permission for the specified recommender.
             rpc :GetRecommendation, ::Google::Cloud::Recommender::V1::GetRecommendationRequest, ::Google::Cloud::Recommender::V1::Recommendation
+            # Mark the Recommendation State as Dismissed. Users can use this method to
+            # indicate to the Recommender API that an ACTIVE recommendation has to
+            # be marked back as DISMISSED.
+            #
+            # MarkRecommendationDismissed can be applied to recommendations in ACTIVE
+            # state.
+            #
+            # Requires the recommender.*.update IAM permission for the specified
+            # recommender.
+            rpc :MarkRecommendationDismissed, ::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest, ::Google::Cloud::Recommender::V1::Recommendation
             # Marks the Recommendation State as Claimed. Users can use this method to
             # indicate to the Recommender API that they are starting to apply the
             # recommendation themselves. This stops the recommendation content from being

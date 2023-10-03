@@ -40,6 +40,17 @@ module Google
         #
         class AggregateQueryResults
           ##
+          # @private Object of type [Hash{String => Object}].
+          #
+          # String can have the following values:
+          #   - an aggregate literal "sum", "avg", or "count"
+          #   - a custom aggregate alias
+          # Object can have the following types:
+          #   - Integer
+          #   - Float
+          attr_reader :aggregate_fields
+
+          ##
           # Read timestamp the query was done on the database at.
           #
           # @return Google::Protobuf::Timestamp
@@ -52,7 +63,8 @@ module Google
           #   the aggregate value. For an AggregateQuery with a
           #   single aggregate field, this parameter can be omitted.
           #
-          # @return [Integer] The aggregate value.
+          # @return [Integer, Float, nil] The aggregate value. Returns `nil`
+          # if the aggregate_alias does not exist.
           #
           # @example
           #   require "google/cloud/datastore"
@@ -101,8 +113,15 @@ module Google
                                .batch
                                .aggregation_results[0]
                                .aggregate_properties
+                               .map do |aggregate_alias, value|
+                                 if value.has_integer_value?
+                                   [aggregate_alias, value.integer_value]
+                                 else
+                                   [aggregate_alias, value.double_value]
+                                 end
+                               end
                                .to_h
-                               .transform_values { |v| v[:integer_value] }
+
             new.tap do |s|
               s.instance_variable_set :@aggregate_fields, aggregate_fields
               s.instance_variable_set :@read_time, aggregate_query_response.batch.read_time

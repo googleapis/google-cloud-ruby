@@ -161,7 +161,7 @@ module Google
         #   @return [::String]
         #     Output only. Provisioning ID of the entitlement. For Google Workspace, this
         #     is the underlying Subscription ID. For Google Cloud, this is the Billing
-        #     Account ID of the billing subaccount."
+        #     Account ID of the billing subaccount.
         # @!attribute [r] product_id
         #   @return [::String]
         #     Output only. The product pertaining to the provisioning resource as
@@ -272,6 +272,10 @@ module Google
 
             # SKU subscription is suspended
             SKU_SUSPENDED = 3
+
+            # The reseller is not authorized to transact on this Product. See
+            # https://support.google.com/channelservices/answer/9759265
+            CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU = 4
           end
         end
       end

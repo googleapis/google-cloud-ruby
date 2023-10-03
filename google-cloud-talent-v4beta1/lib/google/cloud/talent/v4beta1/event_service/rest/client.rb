@@ -177,6 +177,22 @@ module Google
               # @return [::Google::Cloud::Talent::V4beta1::ClientEvent]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/talent/v4beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Talent::V4beta1::EventService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new
+              #
+              #   # Call the create_client_event method.
+              #   result = client.create_client_event request
+              #
+              #   # The returned object is of type Google::Cloud::Talent::V4beta1::ClientEvent.
+              #   p result
+              #
               def create_client_event request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

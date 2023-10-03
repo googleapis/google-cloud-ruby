@@ -1,5 +1,17 @@
 # Release History
 
+### 0.21.0 (2023-09-19)
+
+#### Features
+
+* Support tarball_gcs_dir, diagnosis_interval, jos, and yarn_application_ids arguments to the diagnose_cluster call ([#23331](https://github.com/googleapis/google-cloud-ruby/issues/23331)) 
+
+### 0.20.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22919](https://github.com/googleapis/google-cloud-ruby/issues/22919)) 
+
 ### 0.19.0 (2023-09-04)
 
 #### Features

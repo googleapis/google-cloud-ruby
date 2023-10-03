@@ -44,15 +44,6 @@ module Google
         # @!attribute [rw] solving_mode
         #   @return [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SolvingMode]
         #     By default, the solving mode is `DEFAULT_SOLVE` (0).
-        # @!attribute [rw] max_validation_errors
-        #   @return [::Integer]
-        #     Truncates the number of validation errors returned. These errors are
-        #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
-        #     error detail (https://cloud.google.com/apis/design/errors#error_details),
-        #     unless solving_mode=VALIDATE_ONLY: see the
-        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#validation_errors OptimizeToursResponse.validation_errors}
-        #     field.
-        #     This defaults to 100 and is capped at 10,000.
         # @!attribute [rw] search_mode
         #   @return [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SearchMode]
         #     Search mode used to solve the request.
@@ -218,6 +209,15 @@ module Google
         #     When `use_geodesic_distances` is true, this field must be set and defines
         #     the speed applied to compute travel times. Its value must be at least 1.0
         #     meters/seconds.
+        # @!attribute [rw] max_validation_errors
+        #   @return [::Integer]
+        #     Truncates the number of validation errors returned. These errors are
+        #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
+        #     error detail (https://cloud.google.com/apis/design/errors#error_details),
+        #     unless solving_mode=VALIDATE_ONLY: see the
+        #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#validation_errors OptimizeToursResponse.validation_errors}
+        #     field.
+        #     This defaults to 100 and is capped at 10,000.
         # @!attribute [rw] label
         #   @return [::String]
         #     Label that may be used to identify this request, reported back in the
@@ -249,12 +249,20 @@ module Google
             VALIDATE_ONLY = 1
 
             # Only populates
+            # {::Google::Cloud::Optimization::V1::OptimizeToursResponse#validation_errors OptimizeToursResponse.validation_errors}
+            # or
             # {::Google::Cloud::Optimization::V1::OptimizeToursResponse#skipped_shipments OptimizeToursResponse.skipped_shipments},
             # and doesn't actually solve the rest of the request (`status` and `routes`
             # are unset in the response).
+            # If infeasibilities in `injected_solution_constraint` routes are detected
+            # they are populated in the
+            # {::Google::Cloud::Optimization::V1::OptimizeToursResponse#validation_errors OptimizeToursResponse.validation_errors}
+            # field and
+            # {::Google::Cloud::Optimization::V1::OptimizeToursResponse#skipped_shipments OptimizeToursResponse.skipped_shipments}
+            # is left empty.
             #
             # *IMPORTANT*: not all infeasible shipments are returned here, but only the
-            # ones that are detected as infeasible as a preprocessing.
+            # ones that are detected as infeasible during preprocessing.
             DETECT_SOME_INFEASIBLE_SHIPMENTS = 2
           end
 
@@ -1458,6 +1466,9 @@ module Google
 
             # Travel mode corresponding to driving directions (car, ...).
             DRIVING = 1
+
+            # Travel mode corresponding to walking directions.
+            WALKING = 2
           end
 
           # Policy on how a vehicle can be unloaded. Applies only to shipments having
@@ -1587,6 +1598,15 @@ module Google
         #
         #     If defined soft_max_meters must be less than max_meters and must be
         #     nonnegative.
+        # @!attribute [rw] cost_per_kilometer_below_soft_max
+        #   @return [::Float]
+        #     Cost per kilometer incurred, increasing up to `soft_max_meters`, with
+        #     formula:
+        #     ```
+        #       min(distance_meters, soft_max_meters) / 1000.0 *
+        #       cost_per_kilometer_below_soft_max.
+        #     ```
+        #     This cost is not supported in `route_distance_limit`.
         # @!attribute [rw] cost_per_kilometer_above_soft_max
         #   @return [::Float]
         #     Cost per kilometer incurred if distance is above `soft_max_meters` limit.
@@ -2563,7 +2583,8 @@ module Google
                 RELAX_VISIT_TIMES_AFTER_THRESHOLD = 1
 
                 # Same as `RELAX_VISIT_TIMES_AFTER_THRESHOLD`, but the visit sequence
-                # is also relaxed: visits remain simply bound to their vehicle.
+                # is also relaxed: visits can only be performed by this vehicle, but
+                # can potentially become unperformed.
                 RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD = 2
 
                 # Same as `RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD`, but the
@@ -2628,6 +2649,7 @@ module Google
         #         * INJECTED_SOLUTION_CONCURRENT_SOLUTION_TYPES = 2005;
         #         * INJECTED_SOLUTION_MORE_THAN_ONE_PER_TYPE = 2006;
         #         * INJECTED_SOLUTION_REFRESH_WITHOUT_POPULATE = 2008;
+        #         * INJECTED_SOLUTION_CONSTRAINED_ROUTE_PORTION_INFEASIBLE = 2010;
         #     * SHIPMENT_MODEL_ERROR = 22;
         #         * SHIPMENT_MODEL_TOO_LARGE = 2200;
         #         * SHIPMENT_MODEL_TOO_MANY_CAPACITY_TYPES = 2201;

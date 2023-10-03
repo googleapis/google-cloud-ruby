@@ -191,6 +191,22 @@ module Google
                 # @return [::Google::Cloud::Billing::Budgets::V1::Budget]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new
+                #
+                #   # Call the create_budget method.
+                #   result = client.create_budget request
+                #
+                #   # The returned object is of type Google::Cloud::Billing::Budgets::V1::Budget.
+                #   p result
+                #
                 def create_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -265,6 +281,22 @@ module Google
                 # @return [::Google::Cloud::Billing::Budgets::V1::Budget]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new
+                #
+                #   # Call the update_budget method.
+                #   result = client.update_budget request
+                #
+                #   # The returned object is of type Google::Cloud::Billing::Budgets::V1::Budget.
+                #   p result
+                #
                 def update_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -333,6 +365,22 @@ module Google
                 # @return [::Google::Cloud::Billing::Budgets::V1::Budget]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new
+                #
+                #   # Call the get_budget method.
+                #   result = client.get_budget request
+                #
+                #   # The returned object is of type Google::Cloud::Billing::Budgets::V1::Budget.
+                #   p result
+                #
                 def get_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -415,6 +463,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Billing::Budgets::V1::Budget>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new
+                #
+                #   # Call the list_budgets method.
+                #   result = client.list_budgets request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Billing::Budgets::V1::Budget.
+                #     p item
+                #   end
+                #
                 def list_budgets request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -479,6 +547,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/billing/budgets/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new
+                #
+                #   # Call the delete_budget method.
+                #   result = client.delete_budget request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_budget request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

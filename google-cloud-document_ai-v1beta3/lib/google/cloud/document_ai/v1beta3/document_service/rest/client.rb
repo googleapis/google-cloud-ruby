@@ -193,6 +193,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest.new
+              #
+              #   # Call the update_dataset method.
+              #   result = client.update_dataset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -261,6 +284,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new
+              #
+              #   # Call the import_documents method.
+              #   result = client.import_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -334,6 +380,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new
+              #
+              #   # Call the get_document method.
+              #   result = client.get_document request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse.
+              #   p result
+              #
               def get_document request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -362,6 +424,134 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @document_service_stub.get_document request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns a list of documents present in the dataset.
+              #
+              # @overload list_documents(request, options = nil)
+              #   Pass arguments to `list_documents` via a request object, either of type
+              #   {::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_documents(dataset: nil, page_size: nil, page_token: nil, filter: nil, return_total_size: nil, skip: nil)
+              #   Pass arguments to `list_documents` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param dataset [::String]
+              #     Required. The resource name of the dataset to be listed.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+              #   @param page_size [::Integer]
+              #     The maximum number of documents to return. The service may return
+              #     fewer than this value.
+              #     If unspecified, at most 20 documents will be returned.
+              #     The maximum value is 100; values above 100 will be coerced to 100.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListDocuments` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListDocuments`
+              #     must match the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. Query to filter the documents based on
+              #     https://google.aip.dev/160.
+              #     ## Currently support query strings are:
+              #
+              #     `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+              #     - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+              #     - `DisplayName=\"file_name.pdf\"`
+              #     - `EntityType=abc/def`
+              #     - `TagName=\"auto-labeling-running\"|\"sampled\"`
+              #
+              #     Note:
+              #     - Only `AND`, `=` and `!=` are supported.
+              #         e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+              #     - Wildcard `*` is supported only in `DisplayName` filter
+              #     - No duplicate filter keys are allowed,
+              #         e.g. `EntityType=a AND EntityType=b` is NOT supported.
+              #     - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+              #   @param return_total_size [::Boolean]
+              #     Optional. Controls if the ListDocuments request requires a total size
+              #     of matched documents. See ListDocumentsResponse.total_size.
+              #
+              #     Enabling this flag may adversely impact performance.
+              #
+              #     Defaults to false.
+              #   @param skip [::Integer]
+              #     Optional. Number of results to skip beginning from the `page_token` if
+              #     provided. https://google.aip.dev/158#skipping-results. It must be a
+              #     non-negative integer. Negative values wil be rejected. Note that this is
+              #     not the number of pages to skip. If this value causes the cursor to move
+              #     past the end of results, `ListDocumentsResponse.document_metadata` and
+              #     `ListDocumentsResponse.next_page_token` will be empty.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DocumentAI::V1beta3::DocumentMetadata>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DocumentAI::V1beta3::DocumentMetadata>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new
+              #
+              #   # Call the list_documents method.
+              #   result = client.list_documents request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::DocumentMetadata.
+              #     p item
+              #   end
+              #
+              def list_documents request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_documents.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_documents.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_documents.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @document_service_stub.list_documents request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @document_service_stub, :list_documents, "document_metadata", request, result, options
                   yield result, operation if block_given?
                   return result
                 end
@@ -403,6 +593,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new
+              #
+              #   # Call the batch_delete_documents method.
+              #   result = client.batch_delete_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def batch_delete_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -470,6 +683,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1beta3::DatasetSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest.new
+              #
+              #   # Call the get_dataset_schema method.
+              #   result = client.get_dataset_schema request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::DatasetSchema.
+              #   p result
+              #
               def get_dataset_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -535,6 +764,22 @@ module Google
               # @return [::Google::Cloud::DocumentAI::V1beta3::DatasetSchema]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/document_ai/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DocumentAI::V1beta3::UpdateDatasetSchemaRequest.new
+              #
+              #   # Call the update_dataset_schema method.
+              #   result = client.update_dataset_schema request
+              #
+              #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::DatasetSchema.
+              #   p result
+              #
               def update_dataset_schema request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -718,6 +963,11 @@ module Google
                   #
                   attr_reader :get_document
                   ##
+                  # RPC-specific configuration for `list_documents`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_documents
+                  ##
                   # RPC-specific configuration for `batch_delete_documents`
                   # @return [::Gapic::Config::Method]
                   #
@@ -741,6 +991,8 @@ module Google
                     @import_documents = ::Gapic::Config::Method.new import_documents_config
                     get_document_config = parent_rpcs.get_document if parent_rpcs.respond_to? :get_document
                     @get_document = ::Gapic::Config::Method.new get_document_config
+                    list_documents_config = parent_rpcs.list_documents if parent_rpcs.respond_to? :list_documents
+                    @list_documents = ::Gapic::Config::Method.new list_documents_config
                     batch_delete_documents_config = parent_rpcs.batch_delete_documents if parent_rpcs.respond_to? :batch_delete_documents
                     @batch_delete_documents = ::Gapic::Config::Method.new batch_delete_documents_config
                     get_dataset_schema_config = parent_rpcs.get_dataset_schema if parent_rpcs.respond_to? :get_dataset_schema

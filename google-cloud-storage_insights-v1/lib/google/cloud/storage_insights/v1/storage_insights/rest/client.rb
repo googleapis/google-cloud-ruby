@@ -208,6 +208,26 @@ module Google
               # @return [::Google::Cloud::StorageInsights::V1::ListReportConfigsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::ListReportConfigsRequest.new
+              #
+              #   # Call the list_report_configs method.
+              #   result = client.list_report_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::StorageInsights::V1::ReportConfig.
+              #     p item
+              #   end
+              #
               def list_report_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -270,6 +290,22 @@ module Google
               # @return [::Google::Cloud::StorageInsights::V1::ReportConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::GetReportConfigRequest.new
+              #
+              #   # Call the get_report_config method.
+              #   result = client.get_report_config request
+              #
+              #   # The returned object is of type Google::Cloud::StorageInsights::V1::ReportConfig.
+              #   p result
+              #
               def get_report_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -348,6 +384,22 @@ module Google
               # @return [::Google::Cloud::StorageInsights::V1::ReportConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::CreateReportConfigRequest.new
+              #
+              #   # Call the create_report_config method.
+              #   result = client.create_report_config request
+              #
+              #   # The returned object is of type Google::Cloud::StorageInsights::V1::ReportConfig.
+              #   p result
+              #
               def create_report_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -430,6 +482,22 @@ module Google
               # @return [::Google::Cloud::StorageInsights::V1::ReportConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::UpdateReportConfigRequest.new
+              #
+              #   # Call the update_report_config method.
+              #   result = client.update_report_config request
+              #
+              #   # The returned object is of type Google::Cloud::StorageInsights::V1::ReportConfig.
+              #   p result
+              #
               def update_report_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -508,6 +576,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::DeleteReportConfigRequest.new
+              #
+              #   # Call the delete_report_config method.
+              #   result = client.delete_report_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_report_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -579,6 +663,26 @@ module Google
               # @return [::Google::Cloud::StorageInsights::V1::ListReportDetailsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::ListReportDetailsRequest.new
+              #
+              #   # Call the list_report_details method.
+              #   result = client.list_report_details request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::StorageInsights::V1::ReportDetail.
+              #     p item
+              #   end
+              #
               def list_report_details request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -641,6 +745,22 @@ module Google
               # @return [::Google::Cloud::StorageInsights::V1::ReportDetail]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::StorageInsights::V1::GetReportDetailRequest.new
+              #
+              #   # Call the get_report_detail method.
+              #   result = client.get_report_detail request
+              #
+              #   # The returned object is of type Google::Cloud::StorageInsights::V1::ReportDetail.
+              #   p result
+              #
               def get_report_detail request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

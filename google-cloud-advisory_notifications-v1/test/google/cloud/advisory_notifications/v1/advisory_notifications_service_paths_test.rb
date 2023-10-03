@@ -46,4 +46,16 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
       assert_equal "organizations/value0/locations/value1/notifications/value2", path
     end
   end
+
+  def test_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.settings_path organization: "value0", location: "value1"
+      assert_equal "organizations/value0/locations/value1/settings", path
+    end
+  end
 end

@@ -388,6 +388,7 @@ class ::Google::Cloud::Run::V2::Jobs::ClientTest < Minitest::Test
     name = "hello world"
     validate_only = true
     etag = "hello world"
+    overrides = {}
 
     run_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_job, name
@@ -395,6 +396,7 @@ class ::Google::Cloud::Run::V2::Jobs::ClientTest < Minitest::Test
       assert_equal "hello world", request["name"]
       assert_equal true, request["validate_only"]
       assert_equal "hello world", request["etag"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Run::V2::RunJobRequest::Overrides), request["overrides"]
       refute_nil options
     end
 
@@ -405,35 +407,35 @@ class ::Google::Cloud::Run::V2::Jobs::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_job({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      client.run_job({ name: name, validate_only: validate_only, etag: etag, overrides: overrides }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_job name: name, validate_only: validate_only, etag: etag do |response, operation|
+      client.run_job name: name, validate_only: validate_only, etag: etag, overrides: overrides do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_job ::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      client.run_job ::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag, overrides: overrides) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_job({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      client.run_job({ name: name, validate_only: validate_only, etag: etag, overrides: overrides }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_job(::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      client.run_job(::Google::Cloud::Run::V2::RunJobRequest.new(name: name, validate_only: validate_only, etag: etag, overrides: overrides), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -39,6 +39,8 @@ module Google
             rpc :ListExecutions, ::Google::Cloud::Run::V2::ListExecutionsRequest, ::Google::Cloud::Run::V2::ListExecutionsResponse
             # Deletes an Execution.
             rpc :DeleteExecution, ::Google::Cloud::Run::V2::DeleteExecutionRequest, ::Google::Longrunning::Operation
+            # Cancels an Execution.
+            rpc :CancelExecution, ::Google::Cloud::Run::V2::CancelExecutionRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -180,6 +180,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new
+                  #
+                  #   # Call the create_environment method.
+                  #   result = client.create_environment request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def create_environment request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -244,6 +267,22 @@ module Google
                   # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::Environment]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest.new
+                  #
+                  #   # Call the get_environment method.
+                  #   result = client.get_environment request
+                  #
+                  #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::Environment.
+                  #   p result
+                  #
                   def get_environment request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -311,6 +350,26 @@ module Google
                   # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::Environment>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest.new
+                  #
+                  #   # Call the list_environments method.
+                  #   result = client.list_environments request
+                  #
+                  #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                  #   # over elements, and API calls will be issued to fetch pages as needed.
+                  #   result.each do |item|
+                  #     # Each element is of type ::Google::Cloud::Orchestration::Airflow::Service::V1::Environment.
+                  #     p item
+                  #   end
+                  #
                   def list_environments request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -502,6 +561,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest.new
+                  #
+                  #   # Call the update_environment method.
+                  #   result = client.update_environment request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def update_environment request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -566,6 +648,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest.new
+                  #
+                  #   # Call the delete_environment method.
+                  #   result = client.delete_environment request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def delete_environment request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -639,6 +744,22 @@ module Google
                   # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new
+                  #
+                  #   # Call the execute_airflow_command method.
+                  #   result = client.execute_airflow_command request
+                  #
+                  #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse.
+                  #   p result
+                  #
                   def execute_airflow_command request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -711,6 +832,22 @@ module Google
                   # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new
+                  #
+                  #   # Call the stop_airflow_command method.
+                  #   result = client.stop_airflow_command request
+                  #
+                  #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse.
+                  #   p result
+                  #
                   def stop_airflow_command request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -782,6 +919,22 @@ module Google
                   # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new
+                  #
+                  #   # Call the poll_airflow_command method.
+                  #   result = client.poll_airflow_command request
+                  #
+                  #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse.
+                  #   p result
+                  #
                   def poll_airflow_command request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -851,6 +1004,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new
+                  #
+                  #   # Call the save_snapshot method.
+                  #   result = client.save_snapshot request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def save_snapshot request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -933,6 +1109,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new
+                  #
+                  #   # Call the load_snapshot method.
+                  #   result = client.load_snapshot request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def load_snapshot request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -997,6 +1196,29 @@ module Google
                   # @return [::Gapic::Operation]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new
+                  #
+                  #   # Call the database_failover method.
+                  #   result = client.database_failover request
+                  #
+                  #   # The returned object is of type Gapic::Operation. You can use it to
+                  #   # check the status of an operation, cancel it, or wait for results.
+                  #   # Here is how to wait for a response.
+                  #   result.wait_until_done! timeout: 60
+                  #   if result.response?
+                  #     p result.response
+                  #   else
+                  #     puts "No response received."
+                  #   end
+                  #
                   def database_failover request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1061,6 +1283,22 @@ module Google
                   # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  #
+                  # @example Basic example
+                  #   require "google/cloud/orchestration/airflow/service/v1"
+                  #
+                  #   # Create a client object. The client can be reused for multiple calls.
+                  #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
+                  #
+                  #   # Create a request. To set request fields, pass in keyword arguments.
+                  #   request = Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new
+                  #
+                  #   # Call the fetch_database_properties method.
+                  #   result = client.fetch_database_properties request
+                  #
+                  #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse.
+                  #   p result
+                  #
                   def fetch_database_properties request, options = nil
                     raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -359,6 +359,13 @@ module Google
         #     Optional. The BCP-47 language code. For example, "en-US". The
         #     response will localize in the corresponding language code, if specified.
         #     The default value is "en-US".
+        # @!attribute [rw] billing_account
+        #   @return [::String]
+        #     Optional. The Billing Account to look up Offers for. Format:
+        #     accounts/\\{account_id}/billingAccounts/\\{billing_account_id}.
+        #
+        #     This field is only relevant for multi-currency accounts. It should be left
+        #     empty for single currency accounts.
         class ListTransferableOffersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1016,6 +1023,13 @@ module Google
         #     The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
         #     with the exception that zero UUID is not supported
         #     (`00000000-0000-0000-0000-000000000000`).
+        # @!attribute [rw] billing_account
+        #   @return [::String]
+        #     Optional. The billing account resource name that is used to pay for this
+        #     entitlement when setting up billing on a trial subscription.
+        #
+        #     This field is only relevant for multi-currency accounts. It should be
+        #     left empty for single currency accounts.
         class ChangeOfferRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1384,6 +1398,10 @@ module Google
           #   @return [::String]
           #     Required. SKU that the result should be restricted to.
           #     Format: products/\\{product_id}/skus/\\{sku_id}.
+          # @!attribute [rw] billing_account
+          #   @return [::String]
+          #     Optional. Billing account that the result should be restricted to.
+          #     Format: accounts/\\{account_id}/billingAccounts/\\{billing_account_id}.
           class CreateEntitlementPurchase
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1400,6 +1418,14 @@ module Google
           #     Optional. Resource name of the new target SKU. Provide this SKU when
           #     upgrading or downgrading an entitlement. Format:
           #     products/\\{product_id}/skus/\\{sku_id}
+          # @!attribute [rw] billing_account
+          #   @return [::String]
+          #     Optional. Resource name of the new target Billing Account. Provide this
+          #     Billing Account when setting up billing for a trial subscription. Format:
+          #     accounts/\\{account_id}/billingAccounts/\\{billing_account_id}.
+          #
+          #     This field is only relevant for multi-currency accounts. It should be
+          #     left empty for single currency accounts.
           class ChangeOfferPurchase
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1424,6 +1450,55 @@ module Google
         #   @return [::Google::Cloud::Channel::V1::Offer]
         #     Offer.
         class PurchasableOffer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for QueryEligibleBillingAccounts.
+        # @!attribute [rw] customer
+        #   @return [::String]
+        #     Required. The resource name of the customer to list eligible billing
+        #     accounts for. Format: accounts/\\{account_id}/customers/\\{customer_id}.
+        # @!attribute [rw] skus
+        #   @return [::Array<::String>]
+        #     Required. List of SKUs to list eligible billing accounts for. At least one
+        #     SKU is required. Format: products/\\{product_id}/skus/\\{sku_id}.
+        class QueryEligibleBillingAccountsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for QueryEligibleBillingAccounts.
+        # @!attribute [rw] sku_purchase_groups
+        #   @return [::Array<::Google::Cloud::Channel::V1::SkuPurchaseGroup>]
+        #     List of SKU purchase groups where each group represents a set of SKUs that
+        #     must be purchased using the same billing account. Each SKU from
+        #     [QueryEligibleBillingAccountsRequest.skus] will appear in exactly one SKU
+        #     group.
+        class QueryEligibleBillingAccountsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a set of SKUs that must be purchased using the same billing
+        # account.
+        # @!attribute [rw] skus
+        #   @return [::Array<::String>]
+        #     Resource names of the SKUs included in this group.
+        #     Format: products/\\{product_id}/skus/\\{sku_id}.
+        # @!attribute [rw] billing_account_purchase_infos
+        #   @return [::Array<::Google::Cloud::Channel::V1::BillingAccountPurchaseInfo>]
+        #     List of billing accounts that are eligible to purhcase these SKUs.
+        class SkuPurchaseGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a billing account that can be used to make a purchase.
+        # @!attribute [rw] billing_account
+        #   @return [::Google::Cloud::Channel::V1::BillingAccount]
+        #     The billing account resource.
+        class BillingAccountPurchaseInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

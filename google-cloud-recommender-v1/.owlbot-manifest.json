@@ -53,6 +53,7 @@
     "snippets/recommender/list_recommendations.rb",
     "snippets/recommender/mark_insight_accepted.rb",
     "snippets/recommender/mark_recommendation_claimed.rb",
+    "snippets/recommender/mark_recommendation_dismissed.rb",
     "snippets/recommender/mark_recommendation_failed.rb",
     "snippets/recommender/mark_recommendation_succeeded.rb",
     "snippets/recommender/update_insight_type_config.rb",

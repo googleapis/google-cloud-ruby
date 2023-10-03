@@ -21,3 +21,5 @@ require "simplecov"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
+
+require "grpc"

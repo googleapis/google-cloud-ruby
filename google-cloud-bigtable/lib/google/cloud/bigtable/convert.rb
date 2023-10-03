@@ -17,6 +17,13 @@
 
 require "time"
 require "date"
+require "gapic/protobuf"
+require "gapic/call_options"
+require "gapic/headers"
+require "google/cloud/bigtable/version"
+require "google/cloud/bigtable/v2/version"
+require "google/bigtable/v2/bigtable_pb"
+require "google/cloud/bigtable/admin/v2"
 
 module Google
   module Cloud
@@ -88,6 +95,33 @@ module Google
         def integer_to_signed_be_64 value
           return [value].pack "q>" if value.is_a? Integer
           value
+        end
+
+        def ping_and_warm_request table_path, app_profile_id, timeout
+          request = {
+            name: table_path.split("/").slice(0, 4).join("/"),
+            app_profile_id: app_profile_id
+          }
+          request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::PingAndWarmRequest
+
+          header_params = {}
+          if request.name && %r{^projects/[^/]+/instances/[^/]+/?$}.match?(request.name)
+            header_params["name"] = request.name
+          end
+          if request.app_profile_id && !request.app_profile_id.empty?
+            header_params["app_profile_id"] = request.app_profile_id
+          end
+          request_params_header = URI.encode_www_form header_params
+          metadata = {
+            "x-goog-request-params": request_params_header,
+            "x-goog-api-client":
+              ::Gapic::Headers.x_goog_api_client(lib_name: "gccl",
+                                                 lib_version: ::Google::Cloud::Bigtable::VERSION,
+                                                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION),
+            "google-cloud-resource-prefix": "projects/#{table_path.split('/')[1]}"
+          }
+          options = ::Gapic::CallOptions.new timeout: timeout, metadata: metadata
+          [request, options]
         end
       end
     end

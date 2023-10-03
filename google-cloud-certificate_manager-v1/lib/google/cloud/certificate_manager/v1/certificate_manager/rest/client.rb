@@ -348,6 +348,26 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::ListCertificatesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::ListCertificatesRequest.new
+              #
+              #   # Call the list_certificates method.
+              #   result = client.list_certificates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::CertificateManager::V1::Certificate.
+              #     p item
+              #   end
+              #
               def list_certificates request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -411,6 +431,22 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::Certificate]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::GetCertificateRequest.new
+              #
+              #   # Call the get_certificate method.
+              #   result = client.get_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::CertificateManager::V1::Certificate.
+              #   p result
+              #
               def get_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -478,6 +514,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::CreateCertificateRequest.new
+              #
+              #   # Call the create_certificate method.
+              #   result = client.create_certificate request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -545,6 +604,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::UpdateCertificateRequest.new
+              #
+              #   # Call the update_certificate method.
+              #   result = client.update_certificate request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -609,6 +691,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::DeleteCertificateRequest.new
+              #
+              #   # Call the delete_certificate method.
+              #   result = client.delete_certificate request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -685,6 +790,26 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::ListCertificateMapsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::ListCertificateMapsRequest.new
+              #
+              #   # Call the list_certificate_maps method.
+              #   result = client.list_certificate_maps request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMap.
+              #     p item
+              #   end
+              #
               def list_certificate_maps request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -748,6 +873,22 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::CertificateMap]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::GetCertificateMapRequest.new
+              #
+              #   # Call the get_certificate_map method.
+              #   result = client.get_certificate_map request
+              #
+              #   # The returned object is of type Google::Cloud::CertificateManager::V1::CertificateMap.
+              #   p result
+              #
               def get_certificate_map request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -815,6 +956,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::CreateCertificateMapRequest.new
+              #
+              #   # Call the create_certificate_map method.
+              #   result = client.create_certificate_map request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_certificate_map request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -882,6 +1046,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::UpdateCertificateMapRequest.new
+              #
+              #   # Call the update_certificate_map method.
+              #   result = client.update_certificate_map request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_certificate_map request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -948,6 +1135,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::DeleteCertificateMapRequest.new
+              #
+              #   # Call the delete_certificate_map method.
+              #   result = client.delete_certificate_map request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_certificate_map request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1029,6 +1239,26 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesRequest.new
+              #
+              #   # Call the list_certificate_map_entries method.
+              #   result = client.list_certificate_map_entries request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMapEntry.
+              #     p item
+              #   end
+              #
               def list_certificate_map_entries request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1092,6 +1322,22 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::CertificateMapEntry]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::GetCertificateMapEntryRequest.new
+              #
+              #   # Call the get_certificate_map_entry method.
+              #   result = client.get_certificate_map_entry request
+              #
+              #   # The returned object is of type Google::Cloud::CertificateManager::V1::CertificateMapEntry.
+              #   p result
+              #
               def get_certificate_map_entry request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1159,6 +1405,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::CreateCertificateMapEntryRequest.new
+              #
+              #   # Call the create_certificate_map_entry method.
+              #   result = client.create_certificate_map_entry request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_certificate_map_entry request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1226,6 +1495,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::UpdateCertificateMapEntryRequest.new
+              #
+              #   # Call the update_certificate_map_entry method.
+              #   result = client.update_certificate_map_entry request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_certificate_map_entry request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1290,6 +1582,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::DeleteCertificateMapEntryRequest.new
+              #
+              #   # Call the delete_certificate_map_entry method.
+              #   result = client.delete_certificate_map_entry request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_certificate_map_entry request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1366,6 +1681,26 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::ListDnsAuthorizationsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::ListDnsAuthorizationsRequest.new
+              #
+              #   # Call the list_dns_authorizations method.
+              #   result = client.list_dns_authorizations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::CertificateManager::V1::DnsAuthorization.
+              #     p item
+              #   end
+              #
               def list_dns_authorizations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1429,6 +1764,22 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::DnsAuthorization]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::GetDnsAuthorizationRequest.new
+              #
+              #   # Call the get_dns_authorization method.
+              #   result = client.get_dns_authorization request
+              #
+              #   # The returned object is of type Google::Cloud::CertificateManager::V1::DnsAuthorization.
+              #   p result
+              #
               def get_dns_authorization request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1496,6 +1847,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::CreateDnsAuthorizationRequest.new
+              #
+              #   # Call the create_dns_authorization method.
+              #   result = client.create_dns_authorization request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_dns_authorization request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1563,6 +1937,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::UpdateDnsAuthorizationRequest.new
+              #
+              #   # Call the update_dns_authorization method.
+              #   result = client.update_dns_authorization request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_dns_authorization request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1627,6 +2024,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::DeleteDnsAuthorizationRequest.new
+              #
+              #   # Call the delete_dns_authorization method.
+              #   result = client.delete_dns_authorization request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_dns_authorization request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1704,6 +2124,26 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest.new
+              #
+              #   # Call the list_certificate_issuance_configs method.
+              #   result = client.list_certificate_issuance_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
+              #     p item
+              #   end
+              #
               def list_certificate_issuance_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1767,6 +2207,22 @@ module Google
               # @return [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest.new
+              #
+              #   # Call the get_certificate_issuance_config method.
+              #   result = client.get_certificate_issuance_config request
+              #
+              #   # The returned object is of type Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
+              #   p result
+              #
               def get_certificate_issuance_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1834,6 +2290,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest.new
+              #
+              #   # Call the create_certificate_issuance_config method.
+              #   result = client.create_certificate_issuance_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_certificate_issuance_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1898,6 +2377,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest.new
+              #
+              #   # Call the delete_certificate_issuance_config method.
+              #   result = client.delete_certificate_issuance_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_certificate_issuance_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-web_security_scanner-v1",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "language": "RUBY",
     "apis": [
       {

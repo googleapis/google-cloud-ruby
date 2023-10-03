@@ -207,6 +207,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupStats>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/error_reporting/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new
+              #
+              #   # Call the list_group_stats method.
+              #   result = client.list_group_stats request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupStats.
+              #     p item
+              #   end
+              #
               def list_group_stats request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -289,6 +309,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/error_reporting/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new
+              #
+              #   # Call the list_events method.
+              #   result = client.list_events request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent.
+              #     p item
+              #   end
+              #
               def list_events request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -357,6 +397,22 @@ module Google
               # @return [::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/error_reporting/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new
+              #
+              #   # Call the delete_events method.
+              #   result = client.delete_events request
+              #
+              #   # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse.
+              #   p result
+              #
               def delete_events request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

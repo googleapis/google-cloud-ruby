@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-analytics-admin-v1alpha",
-    "version": "0.23.0",
+    "version": "0.25.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1447,6 +1447,206 @@
         {
           "start": 20,
           "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSKAdNetworkConversionValueSchema_sync",
+      "title": "Snippet for the get_sk_ad_network_conversion_value_schema call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_sk_ad_network_conversion_value_schema. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_sk_ad_network_conversion_value_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sk_ad_network_conversion_value_schema",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_sk_ad_network_conversion_value_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetSKAdNetworkConversionValueSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetSKAdNetworkConversionValueSchema",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetSKAdNetworkConversionValueSchema",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSKAdNetworkConversionValueSchema_sync",
+      "title": "Snippet for the create_sk_ad_network_conversion_value_schema call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_sk_ad_network_conversion_value_schema. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_sk_ad_network_conversion_value_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sk_ad_network_conversion_value_schema",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_sk_ad_network_conversion_value_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateSKAdNetworkConversionValueSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateSKAdNetworkConversionValueSchema",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSKAdNetworkConversionValueSchema",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSKAdNetworkConversionValueSchema_sync",
+      "title": "Snippet for the delete_sk_ad_network_conversion_value_schema call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_sk_ad_network_conversion_value_schema. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_sk_ad_network_conversion_value_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sk_ad_network_conversion_value_schema",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_sk_ad_network_conversion_value_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteSKAdNetworkConversionValueSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSKAdNetworkConversionValueSchema",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSKAdNetworkConversionValueSchema",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSKAdNetworkConversionValueSchema_sync",
+      "title": "Snippet for the update_sk_ad_network_conversion_value_schema call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_sk_ad_network_conversion_value_schema. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/update_sk_ad_network_conversion_value_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_sk_ad_network_conversion_value_schema",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_sk_ad_network_conversion_value_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateSKAdNetworkConversionValueSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSKAdNetworkConversionValueSchema",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSKAdNetworkConversionValueSchema",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSKAdNetworkConversionValueSchemas_sync",
+      "title": "Snippet for the list_sk_ad_network_conversion_value_schemas call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_sk_ad_network_conversion_value_schemas. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/list_sk_ad_network_conversion_value_schemas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sk_ad_network_conversion_value_schemas",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_sk_ad_network_conversion_value_schemas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListSKAdNetworkConversionValueSchemas",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListSKAdNetworkConversionValueSchemas",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]

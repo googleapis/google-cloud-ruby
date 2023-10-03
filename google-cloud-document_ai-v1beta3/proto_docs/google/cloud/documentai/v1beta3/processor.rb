@@ -104,6 +104,18 @@ module Google
           end
         end
 
+        # Contains the alias and the aliased resource name of processor version.
+        # @!attribute [rw] alias
+        #   @return [::String]
+        #     The alias in the form of `processor_version` resource name.
+        # @!attribute [rw] processor_version
+        #   @return [::String]
+        #     The resource name of aliased processor version.
+        class ProcessorVersionAlias
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The first-class citizen for Document AI. Each processor defines how to
         # extract structural information from a document.
         # @!attribute [r] name
@@ -124,6 +136,9 @@ module Google
         # @!attribute [rw] default_processor_version
         #   @return [::String]
         #     The default processor version.
+        # @!attribute [r] processor_version_aliases
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::ProcessorVersionAlias>]
+        #     Output only. The processor version aliases.
         # @!attribute [r] process_endpoint
         #   @return [::String]
         #     Output only. Immutable. The http endpoint that can be called to invoke

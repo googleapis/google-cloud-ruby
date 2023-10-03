@@ -191,6 +191,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::Process]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest.new
+                #
+                #   # Call the create_process method.
+                #   result = client.create_process request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::Process.
+                #   p result
+                #
                 def create_process request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,6 +276,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::Process]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new
+                #
+                #   # Call the update_process method.
+                #   result = client.update_process request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::Process.
+                #   p result
+                #
                 def update_process request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -322,6 +354,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::Process]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::GetProcessRequest.new
+                #
+                #   # Call the get_process method.
+                #   result = client.get_process request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::Process.
+                #   p result
+                #
                 def get_process request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -397,6 +445,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::Lineage::V1::Process>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::ListProcessesRequest.new
+                #
+                #   # Call the list_processes method.
+                #   result = client.list_processes request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::DataCatalog::Lineage::V1::Process.
+                #     p item
+                #   end
+                #
                 def list_processes request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -463,6 +531,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::DeleteProcessRequest.new
+                #
+                #   # Call the delete_process method.
+                #   result = client.delete_process request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_process request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -532,6 +623,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::Run]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::CreateRunRequest.new
+                #
+                #   # Call the create_run method.
+                #   result = client.create_run request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::Run.
+                #   p result
+                #
                 def create_run request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -602,6 +709,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::Run]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new
+                #
+                #   # Call the update_run method.
+                #   result = client.update_run request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::Run.
+                #   p result
+                #
                 def update_run request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -664,6 +787,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::Run]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::GetRunRequest.new
+                #
+                #   # Call the get_run method.
+                #   result = client.get_run request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::Run.
+                #   p result
+                #
                 def get_run request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -738,6 +877,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::Lineage::V1::Run>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::ListRunsRequest.new
+                #
+                #   # Call the list_runs method.
+                #   result = client.list_runs request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::DataCatalog::Lineage::V1::Run.
+                #     p item
+                #   end
+                #
                 def list_runs request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -804,6 +963,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::DeleteRunRequest.new
+                #
+                #   # Call the delete_run method.
+                #   result = client.delete_run request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_run request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -873,6 +1055,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::CreateLineageEventRequest.new
+                #
+                #   # Call the create_lineage_event method.
+                #   result = client.create_lineage_event request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::LineageEvent.
+                #   p result
+                #
                 def create_lineage_event request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -935,6 +1133,22 @@ module Google
                 # @return [::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::GetLineageEventRequest.new
+                #
+                #   # Call the get_lineage_event method.
+                #   result = client.get_lineage_event request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::LineageEvent.
+                #   p result
+                #
                 def get_lineage_event request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1011,6 +1225,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsRequest.new
+                #
+                #   # Call the list_lineage_events method.
+                #   result = client.list_lineage_events request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent.
+                #     p item
+                #   end
+                #
                 def list_lineage_events request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1077,6 +1311,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::DeleteLineageEventRequest.new
+                #
+                #   # Call the delete_lineage_event method.
+                #   result = client.delete_lineage_event request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_lineage_event request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1166,6 +1416,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::Lineage::V1::Link>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest.new
+                #
+                #   # Call the search_links method.
+                #   result = client.search_links request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::DataCatalog::Lineage::V1::Link.
+                #     p item
+                #   end
+                #
                 def search_links request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1260,6 +1530,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::Lineage::V1::ProcessLinks>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest.new
+                #
+                #   # Call the batch_search_link_processes method.
+                #   result = client.batch_search_link_processes request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::DataCatalog::Lineage::V1::ProcessLinks.
+                #     p item
+                #   end
+                #
                 def batch_search_link_processes request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

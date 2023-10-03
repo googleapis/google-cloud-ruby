@@ -264,6 +264,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::RunReportResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::RunReportRequest.new
+              #
+              #   # Call the run_report method.
+              #   result = client.run_report request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::RunReportResponse.
+              #   p result
+              #
               def run_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,6 +398,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::RunPivotReportResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::RunPivotReportRequest.new
+              #
+              #   # Call the run_pivot_report method.
+              #   result = client.run_pivot_report request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::RunPivotReportResponse.
+              #   p result
+              #
               def run_pivot_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -456,6 +488,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::BatchRunReportsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::BatchRunReportsRequest.new
+              #
+              #   # Call the batch_run_reports method.
+              #   result = client.batch_run_reports request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::BatchRunReportsResponse.
+              #   p result
+              #
               def batch_run_reports request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -530,6 +578,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::BatchRunPivotReportsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::BatchRunPivotReportsRequest.new
+              #
+              #   # Call the batch_run_pivot_reports method.
+              #   result = client.batch_run_pivot_reports request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::BatchRunPivotReportsResponse.
+              #   p result
+              #
               def batch_run_pivot_reports request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -611,6 +675,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::Metadata]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::GetMetadataRequest.new
+              #
+              #   # Call the get_metadata method.
+              #   result = client.get_metadata request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::Metadata.
+              #   p result
+              #
               def get_metadata request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -719,6 +799,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::RunRealtimeReportResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new
+              #
+              #   # Call the run_realtime_report method.
+              #   result = client.run_realtime_report request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::RunRealtimeReportResponse.
+              #   p result
+              #
               def run_realtime_report request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -811,6 +907,22 @@ module Google
               # @return [::Google::Analytics::Data::V1beta::CheckCompatibilityResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new
+              #
+              #   # Call the check_compatibility method.
+              #   result = client.check_compatibility request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::CheckCompatibilityResponse.
+              #   p result
+              #
               def check_compatibility request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

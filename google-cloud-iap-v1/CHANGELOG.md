@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.10.1 (2023-09-25)
+
+#### Documentation
+
+* fix Oauth typo ([#23345](https://github.com/googleapis/google-cloud-ruby/issues/23345)) 
+
+### 0.10.0 (2023-09-19)
+
+#### Features
+
+* Added OAuthSettings#programmatic_clients ([#23335](https://github.com/googleapis/google-cloud-ruby/issues/23335)) 
+
+### 0.9.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22920](https://github.com/googleapis/google-cloud-ruby/issues/22920)) 
+
 ### 0.8.1 (2023-08-04)
 
 #### Documentation

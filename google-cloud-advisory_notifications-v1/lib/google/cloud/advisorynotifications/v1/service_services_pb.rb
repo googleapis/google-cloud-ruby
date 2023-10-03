@@ -37,6 +37,10 @@ module Google
             rpc :ListNotifications, ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest, ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsResponse
             # Gets a notification.
             rpc :GetNotification, ::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest, ::Google::Cloud::AdvisoryNotifications::V1::Notification
+            # Get notification settings.
+            rpc :GetSettings, ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest, ::Google::Cloud::AdvisoryNotifications::V1::Settings
+            # Update notification settings.
+            rpc :UpdateSettings, ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest, ::Google::Cloud::AdvisoryNotifications::V1::Settings
           end
 
           Stub = Service.rpc_stub_class

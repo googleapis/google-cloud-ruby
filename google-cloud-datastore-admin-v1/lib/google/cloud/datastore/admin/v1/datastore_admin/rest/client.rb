@@ -268,6 +268,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/datastore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new
+                #
+                #   # Call the export_entities method.
+                #   result = client.export_entities request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def export_entities request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -357,6 +380,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/datastore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new
+                #
+                #   # Call the import_entities method.
+                #   result = client.import_entities request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def import_entities request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -436,6 +482,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/datastore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new
+                #
+                #   # Call the create_index method.
+                #   result = client.create_index request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_index request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -511,6 +580,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/datastore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new
+                #
+                #   # Call the delete_index method.
+                #   result = client.delete_index request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_index request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -576,6 +668,22 @@ module Google
                 # @return [::Google::Cloud::Datastore::Admin::V1::Index]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/datastore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new
+                #
+                #   # Call the get_index method.
+                #   result = client.get_index request
+                #
+                #   # The returned object is of type Google::Cloud::Datastore::Admin::V1::Index.
+                #   p result
+                #
                 def get_index request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -646,6 +754,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastore::Admin::V1::Index>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/datastore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new
+                #
+                #   # Call the list_indexes method.
+                #   result = client.list_indexes request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Datastore::Admin::V1::Index.
+                #     p item
+                #   end
+                #
                 def list_indexes request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

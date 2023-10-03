@@ -113,7 +113,8 @@ class MockBigquery < Minitest::Spec
         "datasetId" => id,
         "projectId" => project
       },
-      "friendlyName" => name
+      "friendlyName" => name,
+      "location": "US"
     }
   end
 
@@ -1070,8 +1071,10 @@ class MockBigquery < Minitest::Spec
   def load_job_gapi table_reference,
                     source_format = "NEWLINE_DELIMITED_JSON",
                     job_id: "job_9876543210",
-                    location: "US"
-    Google::Apis::BigqueryV2::Job.new(
+                    location: "US",
+                    create_session: nil,
+                    session_id: nil
+    job = Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
         load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
@@ -1081,6 +1084,12 @@ class MockBigquery < Minitest::Spec
         dry_run: nil
       )
     )
+    unless session_id.nil?
+      prop = Google::Apis::BigqueryV2::ConnectionProperty.new key: "session_id", value: session_id
+      job.configuration.load.connection_properties = [prop] 
+    end
+    job.configuration.load.create_session = create_session unless create_session.nil?
+    job
   end
 
   def load_job_csv_options_gapi table_reference, job_id: "job_9876543210"
@@ -1134,7 +1143,8 @@ class MockBigquery < Minitest::Spec
                          labels: nil,
                          source_format: nil,
                          hive_partitioning_options: nil,
-                         parquet_options: nil
+                         parquet_options: nil,
+                         session_id: nil
     hash = random_job_hash job_id, location: location
     hash["configuration"]["load"] = {
       "sourceFormat" => source_format,
@@ -1143,8 +1153,9 @@ class MockBigquery < Minitest::Spec
         "projectId" => table.project_id,
         "datasetId" => table.dataset_id,
         "tableId" => table.table_id
-      }
+      },
     }
+    hash["statistics"]["sessionInfo"] = { "sessionId": session_id } if session_id
     resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
     resp.status = status "done"
     resp.configuration.labels = labels if labels

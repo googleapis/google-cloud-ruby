@@ -292,6 +292,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ImportAptArtifactsRequest.new
+              #
+              #   # Call the import_apt_artifacts method.
+              #   result = client.import_apt_artifacts request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_apt_artifacts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -360,6 +383,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ImportYumArtifactsRequest.new
+              #
+              #   # Call the import_yum_artifacts method.
+              #   result = client.import_yum_artifacts request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_yum_artifacts request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -427,6 +473,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::Repository>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest.new
+              #
+              #   # Call the list_repositories method.
+              #   result = client.list_repositories request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1beta2::Repository.
+              #     p item
+              #   end
+              #
               def list_repositories request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -490,6 +556,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Repository]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::GetRepositoryRequest.new
+              #
+              #   # Call the get_repository method.
+              #   result = client.get_repository request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Repository.
+              #   p result
+              #
               def get_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -557,6 +639,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::CreateRepositoryRequest.new
+              #
+              #   # Call the create_repository method.
+              #   result = client.create_repository request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -624,6 +729,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Repository]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::UpdateRepositoryRequest.new
+              #
+              #   # Call the update_repository method.
+              #   result = client.update_repository request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Repository.
+              #   p result
+              #
               def update_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -688,6 +809,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::DeleteRepositoryRequest.new
+              #
+              #   # Call the delete_repository method.
+              #   result = client.delete_repository request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_repository request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -756,6 +900,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::Package>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ListPackagesRequest.new
+              #
+              #   # Call the list_packages method.
+              #   result = client.list_packages request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1beta2::Package.
+              #     p item
+              #   end
+              #
               def list_packages request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -819,6 +983,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Package]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::GetPackageRequest.new
+              #
+              #   # Call the get_package method.
+              #   result = client.get_package request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Package.
+              #   p result
+              #
               def get_package request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -882,6 +1062,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::DeletePackageRequest.new
+              #
+              #   # Call the delete_package method.
+              #   result = client.delete_package request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_package request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -953,6 +1156,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::Version>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ListVersionsRequest.new
+              #
+              #   # Call the list_versions method.
+              #   result = client.list_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1beta2::Version.
+              #     p item
+              #   end
+              #
               def list_versions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1018,6 +1241,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Version]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::GetVersionRequest.new
+              #
+              #   # Call the get_version method.
+              #   result = client.get_version request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Version.
+              #   p result
+              #
               def get_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1084,6 +1323,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::DeleteVersionRequest.new
+              #
+              #   # Call the delete_version method.
+              #   result = client.delete_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1165,6 +1427,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::File>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ListFilesRequest.new
+              #
+              #   # Call the list_files method.
+              #   result = client.list_files request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1beta2::File.
+              #     p item
+              #   end
+              #
               def list_files request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1228,6 +1510,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::File]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::GetFileRequest.new
+              #
+              #   # Call the get_file method.
+              #   result = client.get_file request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::File.
+              #   p result
+              #
               def get_file request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1304,6 +1602,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::Tag>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::ListTagsRequest.new
+              #
+              #   # Call the list_tags method.
+              #   result = client.list_tags request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1beta2::Tag.
+              #     p item
+              #   end
+              #
               def list_tags request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1367,6 +1685,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Tag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::GetTagRequest.new
+              #
+              #   # Call the get_tag method.
+              #   result = client.get_tag request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Tag.
+              #   p result
+              #
               def get_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1433,6 +1767,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Tag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::CreateTagRequest.new
+              #
+              #   # Call the create_tag method.
+              #   result = client.create_tag request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Tag.
+              #   p result
+              #
               def create_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1499,6 +1849,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::Tag]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::UpdateTagRequest.new
+              #
+              #   # Call the update_tag method.
+              #   result = client.update_tag request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::Tag.
+              #   p result
+              #
               def update_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1561,6 +1927,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::DeleteTagRequest.new
+              #
+              #   # Call the delete_tag method.
+              #   result = client.delete_tag request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_tag request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1635,6 +2017,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1701,6 +2099,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1769,6 +2183,22 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1831,6 +2261,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::ProjectSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::GetProjectSettingsRequest.new
+              #
+              #   # Call the get_project_settings method.
+              #   result = client.get_project_settings request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::ProjectSettings.
+              #   p result
+              #
               def get_project_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1895,6 +2341,22 @@ module Google
               # @return [::Google::Cloud::ArtifactRegistry::V1beta2::ProjectSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1beta2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1beta2::UpdateProjectSettingsRequest.new
+              #
+              #   # Call the update_project_settings method.
+              #   result = client.update_project_settings request
+              #
+              #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::ProjectSettings.
+              #   p result
+              #
               def update_project_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

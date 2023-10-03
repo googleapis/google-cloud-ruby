@@ -185,6 +185,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/assured_workloads/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new
+              #
+              #   # Call the create_workload method.
+              #   result = client.create_workload request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_workload request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +279,22 @@ module Google
               # @return [::Google::Cloud::AssuredWorkloads::V1::Workload]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/assured_workloads/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AssuredWorkloads::V1::UpdateWorkloadRequest.new
+              #
+              #   # Call the update_workload method.
+              #   result = client.update_workload request
+              #
+              #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1::Workload.
+              #   p result
+              #
               def update_workload request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -329,6 +368,22 @@ module Google
               # @return [::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/assured_workloads/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest.new
+              #
+              #   # Call the restrict_allowed_resources method.
+              #   result = client.restrict_allowed_resources request
+              #
+              #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesResponse.
+              #   p result
+              #
               def restrict_allowed_resources request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -398,6 +453,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/assured_workloads/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new
+              #
+              #   # Call the delete_workload method.
+              #   result = client.delete_workload request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_workload request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -464,6 +535,22 @@ module Google
               # @return [::Google::Cloud::AssuredWorkloads::V1::Workload]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/assured_workloads/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new
+              #
+              #   # Call the get_workload method.
+              #   result = client.get_workload request
+              #
+              #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1::Workload.
+              #   p result
+              #
               def get_workload request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -536,6 +623,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AssuredWorkloads::V1::Workload>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/assured_workloads/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new
+              #
+              #   # Call the list_workloads method.
+              #   result = client.list_workloads request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AssuredWorkloads::V1::Workload.
+              #     p item
+              #   end
+              #
               def list_workloads request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

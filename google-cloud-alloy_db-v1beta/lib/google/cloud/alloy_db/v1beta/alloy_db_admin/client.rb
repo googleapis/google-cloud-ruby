@@ -215,7 +215,8 @@ module Google
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
 
@@ -2896,10 +2897,10 @@ module Google
 
             ##
             # Generate a client certificate signed by a Cluster CA.
-            # The sole purpose of this endpoint is to support the Auth Proxy client and
-            # the endpoint's behavior is subject to change without notice, so do not rely
-            # on its behavior remaining constant. Future changes will not break the Auth
-            # Proxy client.
+            # The sole purpose of this endpoint is to support AlloyDB connectors and the
+            # Auth Proxy client. The endpoint's behavior is subject to change without
+            # notice, so do not rely on its behavior remaining constant. Future changes
+            # will not break AlloyDB connectors or the Auth Proxy client.
             #
             # @overload generate_client_certificate(request, options = nil)
             #   Pass arguments to `generate_client_certificate` via a request object, either of type
@@ -2911,7 +2912,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_client_certificate(parent: nil, request_id: nil, pem_csr: nil, cert_duration: nil, public_key: nil)
+            # @overload generate_client_certificate(parent: nil, request_id: nil, pem_csr: nil, cert_duration: nil, public_key: nil, use_metadata_exchange: nil)
             #   Pass arguments to `generate_client_certificate` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2943,6 +2944,10 @@ module Google
             #     default duration.
             #   @param public_key [::String]
             #     Optional. The public key from the client.
+            #   @param use_metadata_exchange [::Boolean]
+            #     Optional. An optional hint to the endpoint to generate a client
+            #     ceritificate that can be used by AlloyDB connectors to exchange additional
+            #     metadata with the server after TLS handshake.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse]
@@ -3729,6 +3734,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

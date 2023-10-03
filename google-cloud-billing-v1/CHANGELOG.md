@@ -1,5 +1,23 @@
 # Release History
 
+### 0.15.1 (2023-09-26)
+
+#### Documentation
+
+* update service documentation ([#23359](https://github.com/googleapis/google-cloud-ruby/issues/23359)) 
+
+### 0.15.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22918](https://github.com/googleapis/google-cloud-ruby/issues/22918)) 
+
+### 0.14.0 (2023-09-07)
+
+#### Features
+
+* Add project_path() method to Paths module ([#22901](https://github.com/googleapis/google-cloud-ruby/issues/22901)) 
+
 ### 0.13.2 (2023-09-04)
 
 #### Documentation

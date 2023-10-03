@@ -38,6 +38,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     d
   end
   let(:dataset_with_access_id) { "#{prefix}_dataset_with_access" }
+  let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:model_id) { "model_#{SecureRandom.hex(4)}" }
   let :model_sql do
     model_sql = <<~MODEL_SQL
@@ -283,5 +284,31 @@ describe Google::Cloud::Bigquery, :bigquery do
       j.location = "US"
     end
     _(result).must_equal true
+  end
+
+  it "imports data from a local file with session enabled" do
+    job = bigquery.load_job "temp_table", local_file, autodetect: true, create_session: true
+
+    job.wait_until_done!
+    _(job.output_rows).must_equal 3
+
+    session_id = job.statistics["sessionInfo"]["sessionId"]
+
+    bigquery.load "temp_table", local_file, autodetect: true, session_id: session_id
+    data = bigquery.query "SELECT * FROM _SESSION.temp_table;", session_id: session_id
+    _(data.count).must_equal 6
+  end
+
+  it "imports data from a local file with dataset_id" do
+    job = bigquery.load_job "temp_table", local_file, dataset_id: dataset_id, autodetect: true, create_session: true
+
+    job.wait_until_done!
+    _(job.output_rows).must_equal 3
+
+    session_id = job.statistics["sessionInfo"]["sessionId"]
+
+    bigquery.load "temp_table", local_file, dataset_id: dataset_id, autodetect: true, session_id: session_id
+    data = bigquery.query "SELECT * FROM #{dataset_id}.temp_table;", session_id: session_id
+    _(data.count).must_equal 6
   end
 end

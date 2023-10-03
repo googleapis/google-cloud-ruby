@@ -24,8 +24,9 @@ module Google
         # The protocol for the `CreateAlertPolicy` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
-        #     which to create the alerting policy. The format is:
+        #     Required. The
+        #     [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+        #     to create the alerting policy. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #
@@ -38,9 +39,9 @@ module Google
         #     container.
         # @!attribute [rw] alert_policy
         #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy]
-        #     Required. The requested alerting policy. You should omit the `name` field in this
-        #     policy. The name will be returned in the new policy, including
-        #     a new `[ALERT_POLICY_ID]` value.
+        #     Required. The requested alerting policy. You should omit the `name` field
+        #     in this policy. The name will be returned in the new policy, including a
+        #     new `[ALERT_POLICY_ID]` value.
         class CreateAlertPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -60,8 +61,9 @@ module Google
         # The protocol for the `ListAlertPolicies` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
-        #     whose alert policies are to be listed. The format is:
+        #     Required. The
+        #     [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+        #     alert policies are to be listed. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #

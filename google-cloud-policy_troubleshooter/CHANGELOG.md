@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2023-09-29)
+
+#### Features
+
+* include the client for the IAM policy troubleshooter ([#23401](https://github.com/googleapis/google-cloud-ruby/issues/23401)) 
+
 ### 1.3.0 (2023-03-09)
 
 #### Features

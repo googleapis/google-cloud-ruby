@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1/completion_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -138,14 +139,28 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @completion_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
-                interceptors: @config.interceptors
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -162,7 +177,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload complete_query(data_store: nil, query: nil, query_model: nil, user_pseudo_id: nil)
+            # @overload complete_query(data_store: nil, query: nil, query_model: nil, user_pseudo_id: nil, include_tail_suggestions: nil)
             #   Pass arguments to `complete_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -184,13 +199,14 @@ module Google
             #     API calls. Do not use it when there is no traffic for Search API.
             #     * `user-event` - Using suggestions generated from user-imported search
             #     events.
+            #     * `document-completable` - Using suggestions taken directly from
+            #     user-imported document fields marked as completable.
             #
             #     Default values:
             #
             #     * `document` is the default model for regular dataStores.
             #     * `search-history` is the default model for
-            #     [IndustryVertical.SITE_SEARCH][google.cloud.discoveryengine.v1.IndustryVertical.SITE_SEARCH]
-            #     dataStores.
+            #     [IndustryVertical.SITE_SEARCH][] dataStores.
             #   @param user_pseudo_id [::String]
             #     A unique identifier for tracking visitors. For example, this could be
             #     implemented with an HTTP cookie, which should be able to uniquely identify
@@ -206,6 +222,11 @@ module Google
             #
             #     The field must be a UTF-8 encoded string with a length limit of 128
             #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+            #   @param include_tail_suggestions [::Boolean]
+            #     Indicates if tail suggestions should be returned if there are no
+            #     suggestions that match the full query. Even if set to true, if there are
+            #     suggestions that match the full query, those are returned and no
+            #     tail suggestions are returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse]
@@ -388,6 +409,14 @@ module Google
                   parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
+              end
+
+              ##
+              # Configuration for the channel pool
+              # @return [::Gapic::ServiceStub::ChannelPool::Configuration]
+              #
+              def channel_pool
+                @channel_pool ||= ::Gapic::ServiceStub::ChannelPool::Configuration.new
               end
 
               ##

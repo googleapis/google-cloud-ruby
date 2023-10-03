@@ -189,6 +189,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::ServingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::CreateServingConfigRequest.new
+              #
+              #   # Call the create_serving_config method.
+              #   result = client.create_serving_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+              #   p result
+              #
               def create_serving_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -254,6 +270,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::DeleteServingConfigRequest.new
+              #
+              #   # Call the delete_serving_config method.
+              #   result = client.delete_serving_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_serving_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -324,6 +356,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::ServingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::UpdateServingConfigRequest.new
+              #
+              #   # Call the update_serving_config method.
+              #   result = client.update_serving_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+              #   p result
+              #
               def update_serving_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -389,6 +437,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::ServingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::GetServingConfigRequest.new
+              #
+              #   # Call the get_serving_config method.
+              #   result = client.get_serving_config request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+              #   p result
+              #
               def get_serving_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -459,6 +523,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Retail::V2::ServingConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::ListServingConfigsRequest.new
+              #
+              #   # Call the list_serving_configs method.
+              #   result = client.list_serving_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Retail::V2::ServingConfig.
+              #     p item
+              #   end
+              #
               def list_serving_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -532,6 +616,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::ServingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::AddControlRequest.new
+              #
+              #   # Call the add_control method.
+              #   result = client.add_control request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+              #   p result
+              #
               def add_control request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -601,6 +701,22 @@ module Google
               # @return [::Google::Cloud::Retail::V2::ServingConfig]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::RemoveControlRequest.new
+              #
+              #   # Call the remove_control method.
+              #   result = client.remove_control request
+              #
+              #   # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+              #   p result
+              #
               def remove_control request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

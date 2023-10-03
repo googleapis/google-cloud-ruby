@@ -270,6 +270,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::Certificate]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new
+                #
+                #   # Call the create_certificate method.
+                #   result = client.create_certificate request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::Certificate.
+                #   p result
+                #
                 def create_certificate request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -334,6 +350,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::Certificate]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::GetCertificateRequest.new
+                #
+                #   # Call the get_certificate method.
+                #   result = client.get_certificate request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::Certificate.
+                #   p result
+                #
                 def get_certificate request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -418,6 +450,26 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificatesResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::ListCertificatesRequest.new
+                #
+                #   # Call the list_certificates method.
+                #   result = client.list_certificates request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::Certificate.
+                #     p item
+                #   end
+                #
                 def list_certificates request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -500,6 +552,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::Certificate]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new
+                #
+                #   # Call the revoke_certificate method.
+                #   result = client.revoke_certificate request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::Certificate.
+                #   p result
+                #
                 def revoke_certificate request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -581,6 +649,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::Certificate]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRequest.new
+                #
+                #   # Call the update_certificate method.
+                #   result = client.update_certificate request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::Certificate.
+                #   p result
+                #
                 def update_certificate request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -674,6 +758,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::ActivateCertificateAuthorityRequest.new
+                #
+                #   # Call the activate_certificate_authority method.
+                #   result = client.activate_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def activate_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -763,6 +870,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::CreateCertificateAuthorityRequest.new
+                #
+                #   # Call the create_certificate_authority method.
+                #   result = client.create_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -848,6 +978,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new
+                #
+                #   # Call the disable_certificate_authority method.
+                #   result = client.disable_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def disable_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -928,6 +1081,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::EnableCertificateAuthorityRequest.new
+                #
+                #   # Call the enable_certificate_authority method.
+                #   result = client.enable_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def enable_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1003,6 +1179,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrRequest.new
+                #
+                #   # Call the fetch_certificate_authority_csr method.
+                #   result = client.fetch_certificate_authority_csr request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrResponse.
+                #   p result
+                #
                 def fetch_certificate_authority_csr request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1069,6 +1261,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::GetCertificateAuthorityRequest.new
+                #
+                #   # Call the get_certificate_authority method.
+                #   result = client.get_certificate_authority request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::CertificateAuthority.
+                #   p result
+                #
                 def get_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1151,6 +1359,26 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new
+                #
+                #   # Call the list_certificate_authorities method.
+                #   result = client.list_certificate_authorities request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority.
+                #     p item
+                #   end
+                #
                 def list_certificate_authorities request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1231,6 +1459,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::UndeleteCertificateAuthorityRequest.new
+                #
+                #   # Call the undelete_certificate_authority method.
+                #   result = client.undelete_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def undelete_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1323,6 +1574,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new
+                #
+                #   # Call the delete_certificate_authority method.
+                #   result = client.delete_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1405,6 +1679,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::UpdateCertificateAuthorityRequest.new
+                #
+                #   # Call the update_certificate_authority method.
+                #   result = client.update_certificate_authority request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_certificate_authority request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1490,6 +1787,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::CreateCaPoolRequest.new
+                #
+                #   # Call the create_ca_pool method.
+                #   result = client.create_ca_pool request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_ca_pool request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1570,6 +1890,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::UpdateCaPoolRequest.new
+                #
+                #   # Call the update_ca_pool method.
+                #   result = client.update_ca_pool request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_ca_pool request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1634,6 +1977,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::CaPool]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new
+                #
+                #   # Call the get_ca_pool method.
+                #   result = client.get_ca_pool request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::CaPool.
+                #   p result
+                #
                 def get_ca_pool request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1713,6 +2072,26 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::ListCaPoolsRequest.new
+                #
+                #   # Call the list_ca_pools method.
+                #   result = client.list_ca_pools request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::CaPool.
+                #     p item
+                #   end
+                #
                 def list_ca_pools request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1796,6 +2175,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new
+                #
+                #   # Call the delete_ca_pool method.
+                #   result = client.delete_ca_pool request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_ca_pool request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1879,6 +2281,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::FetchCaCertsRequest.new
+                #
+                #   # Call the fetch_ca_certs method.
+                #   result = client.fetch_ca_certs request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::FetchCaCertsResponse.
+                #   p result
+                #
                 def fetch_ca_certs request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1946,6 +2364,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::GetCertificateRevocationListRequest.new
+                #
+                #   # Call the get_certificate_revocation_list method.
+                #   result = client.get_certificate_revocation_list request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList.
+                #   p result
+                #
                 def get_certificate_revocation_list request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2027,6 +2461,26 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsRequest.new
+                #
+                #   # Call the list_certificate_revocation_lists method.
+                #   result = client.list_certificate_revocation_lists request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList.
+                #     p item
+                #   end
+                #
                 def list_certificate_revocation_lists request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2108,6 +2562,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRevocationListRequest.new
+                #
+                #   # Call the update_certificate_revocation_list method.
+                #   result = client.update_certificate_revocation_list request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_certificate_revocation_list request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2196,6 +2673,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::CreateCertificateTemplateRequest.new
+                #
+                #   # Call the create_certificate_template method.
+                #   result = client.create_certificate_template request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def create_certificate_template request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2276,6 +2776,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::DeleteCertificateTemplateRequest.new
+                #
+                #   # Call the delete_certificate_template method.
+                #   result = client.delete_certificate_template request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def delete_certificate_template request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2343,6 +2866,22 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new
+                #
+                #   # Call the get_certificate_template method.
+                #   result = client.get_certificate_template request
+                #
+                #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1::CertificateTemplate.
+                #   p result
+                #
                 def get_certificate_template request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2424,6 +2963,26 @@ module Google
                 # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesResponse]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesRequest.new
+                #
+                #   # Call the list_certificate_templates method.
+                #   result = client.list_certificate_templates request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate.
+                #     p item
+                #   end
+                #
                 def list_certificate_templates request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2505,6 +3064,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/security/private_ca/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Security::PrivateCA::V1::UpdateCertificateTemplateRequest.new
+                #
+                #   # Call the update_certificate_template method.
+                #   result = client.update_certificate_template request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def update_certificate_template request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

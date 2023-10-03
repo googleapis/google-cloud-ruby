@@ -20,6 +20,9 @@ require "google/cloud/bigtable/errors"
 require "google/cloud/bigtable/credentials"
 require "google/cloud/bigtable/v2"
 require "google/cloud/bigtable/admin/v2"
+require "google/cloud/bigtable/convert"
+require "gapic/lru_hash"
+require "concurrent"
 
 module Google
   module Cloud
@@ -49,12 +52,17 @@ module Google
         # @param timeout [Integer]
         #   The default timeout, in seconds, for calls made through this client.
         #
-        def initialize project_id, credentials, host: nil, host_admin: nil, timeout: nil
+        def initialize project_id, credentials, host: nil, host_admin: nil, timeout: nil,
+                       channel_selection: nil, channel_count: nil
           @project_id = project_id
           @credentials = credentials
           @host = host
           @host_admin = host_admin
           @timeout = timeout
+          @channel_selection = channel_selection
+          @channel_count = channel_count
+          @bigtable_clients = ::Gapic::LruHash.new 10
+          @mutex = Mutex.new
         end
 
         def instances
@@ -83,15 +91,15 @@ module Google
         end
         attr_accessor :mocked_tables
 
-        def client
+        def client table_path, app_profile_id
           return mocked_client if mocked_client
-          @client ||= V2::Bigtable::Client.new do |config|
-            config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
-            config.endpoint = host if host
-            config.lib_name = "gccl"
-            config.lib_version = Google::Cloud::Bigtable::VERSION
-            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
+          table_key = "#{table_path}_#{app_profile_id}"
+          @mutex.synchronize do
+            if @bigtable_clients.get(table_key).nil?
+              bigtable_client = create_bigtable_client table_path, app_profile_id
+              @bigtable_clients.put table_key, bigtable_client
+            end
+            @bigtable_clients.get table_key
           end
         end
         attr_accessor :mocked_client
@@ -649,7 +657,7 @@ module Google
         end
 
         def read_rows instance_id, table_id, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil
-          client.read_rows(
+          client(table_path(instance_id, table_id), app_profile_id).read_rows(
             **{
               table_name:     table_path(instance_id, table_id),
               rows:           rows,
@@ -661,11 +669,11 @@ module Google
         end
 
         def sample_row_keys table_name, app_profile_id: nil
-          client.sample_row_keys table_name: table_name, app_profile_id: app_profile_id
+          client(table_name, app_profile_id).sample_row_keys table_name: table_name, app_profile_id: app_profile_id
         end
 
         def mutate_row table_name, row_key, mutations, app_profile_id: nil
-          client.mutate_row(
+          client(table_name, app_profile_id).mutate_row(
             **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
@@ -676,7 +684,7 @@ module Google
         end
 
         def mutate_rows table_name, entries, app_profile_id: nil
-          client.mutate_rows(
+          client(table_name, app_profile_id).mutate_rows(
             **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
@@ -691,7 +699,7 @@ module Google
                                  predicate_filter: nil,
                                  true_mutations: nil,
                                  false_mutations: nil
-          client.check_and_mutate_row(
+          client(table_name, app_profile_id).check_and_mutate_row(
             **{
               table_name:       table_name,
               app_profile_id:   app_profile_id,
@@ -704,7 +712,7 @@ module Google
         end
 
         def read_modify_write_row table_name, row_key, rules, app_profile_id: nil
-          client.read_modify_write_row(
+          client(table_name, app_profile_id).read_modify_write_row(
             **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
@@ -884,6 +892,23 @@ module Google
         #
         def inspect
           "#{self.class}(#{@project_id})"
+        end
+
+        def create_bigtable_client table_path, app_profile_id
+          V2::Bigtable::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::Bigtable::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
+            config.channel_pool.channel_selection = @channel_selection
+            config.channel_pool.channel_count = @channel_count
+            request, options = Convert.ping_and_warm_request table_path, app_profile_id, timeout
+            config.channel_pool.on_channel_create = proc do |channel|
+              channel.call_rpc :ping_and_warm, request, options: options
+            end
+          end
         end
       end
     end

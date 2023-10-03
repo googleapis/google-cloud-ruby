@@ -220,6 +220,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateDataTaxonomyRequest.new
+              #
+              #   # Call the create_data_taxonomy method.
+              #   result = client.create_data_taxonomy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_data_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -288,6 +311,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateDataTaxonomyRequest.new
+              #
+              #   # Call the update_data_taxonomy method.
+              #   result = client.update_data_taxonomy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_data_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,6 +402,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteDataTaxonomyRequest.new
+              #
+              #   # Call the delete_data_taxonomy method.
+              #   result = client.delete_data_taxonomy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_data_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -435,6 +504,26 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::ListDataTaxonomiesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListDataTaxonomiesRequest.new
+              #
+              #   # Call the list_data_taxonomies method.
+              #   result = client.list_data_taxonomies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::DataTaxonomy.
+              #     p item
+              #   end
+              #
               def list_data_taxonomies request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -498,6 +587,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::DataTaxonomy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetDataTaxonomyRequest.new
+              #
+              #   # Call the get_data_taxonomy method.
+              #   result = client.get_data_taxonomy request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::DataTaxonomy.
+              #   p result
+              #
               def get_data_taxonomy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -573,6 +678,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateDataAttributeBindingRequest.new
+              #
+              #   # Call the create_data_attribute_binding method.
+              #   result = client.create_data_attribute_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_data_attribute_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -641,6 +769,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateDataAttributeBindingRequest.new
+              #
+              #   # Call the update_data_attribute_binding method.
+              #   result = client.update_data_attribute_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_data_attribute_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -712,6 +863,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteDataAttributeBindingRequest.new
+              #
+              #   # Call the delete_data_attribute_binding method.
+              #   result = client.delete_data_attribute_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_data_attribute_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -794,6 +968,26 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListDataAttributeBindingsRequest.new
+              #
+              #   # Call the list_data_attribute_bindings method.
+              #   result = client.list_data_attribute_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::DataAttributeBinding.
+              #     p item
+              #   end
+              #
               def list_data_attribute_bindings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -857,6 +1051,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::DataAttributeBinding]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetDataAttributeBindingRequest.new
+              #
+              #   # Call the get_data_attribute_binding method.
+              #   result = client.get_data_attribute_binding request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::DataAttributeBinding.
+              #   p result
+              #
               def get_data_attribute_binding request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -932,6 +1142,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateDataAttributeRequest.new
+              #
+              #   # Call the create_data_attribute method.
+              #   result = client.create_data_attribute request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_data_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1000,6 +1233,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateDataAttributeRequest.new
+              #
+              #   # Call the update_data_attribute method.
+              #   result = client.update_data_attribute request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_data_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1067,6 +1323,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteDataAttributeRequest.new
+              #
+              #   # Call the delete_data_attribute method.
+              #   result = client.delete_data_attribute request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_data_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1145,6 +1424,26 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::ListDataAttributesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListDataAttributesRequest.new
+              #
+              #   # Call the list_data_attributes method.
+              #   result = client.list_data_attributes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::DataAttribute.
+              #     p item
+              #   end
+              #
               def list_data_attributes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1208,6 +1507,22 @@ module Google
               # @return [::Google::Cloud::Dataplex::V1::DataAttribute]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetDataAttributeRequest.new
+              #
+              #   # Call the get_data_attribute method.
+              #   result = client.get_data_attribute request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::DataAttribute.
+              #   p result
+              #
               def get_data_attribute request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

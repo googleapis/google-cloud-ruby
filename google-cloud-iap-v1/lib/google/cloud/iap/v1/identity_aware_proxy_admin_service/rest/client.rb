@@ -179,6 +179,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -248,6 +264,22 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -319,6 +351,22 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -383,6 +431,22 @@ module Google
               # @return [::Google::Cloud::Iap::V1::IapSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::GetIapSettingsRequest.new
+              #
+              #   # Call the get_iap_settings method.
+              #   result = client.get_iap_settings request
+              #
+              #   # The returned object is of type Google::Cloud::Iap::V1::IapSettings.
+              #   p result
+              #
               def get_iap_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -455,6 +519,22 @@ module Google
               # @return [::Google::Cloud::Iap::V1::IapSettings]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::UpdateIapSettingsRequest.new
+              #
+              #   # Call the update_iap_settings method.
+              #   result = client.update_iap_settings request
+              #
+              #   # The returned object is of type Google::Cloud::Iap::V1::IapSettings.
+              #   p result
+              #
               def update_iap_settings request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -534,6 +614,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Iap::V1::TunnelDestGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new
+              #
+              #   # Call the list_tunnel_dest_groups method.
+              #   result = client.list_tunnel_dest_groups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Iap::V1::TunnelDestGroup.
+              #     p item
+              #   end
+              #
               def list_tunnel_dest_groups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -607,6 +707,22 @@ module Google
               # @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest.new
+              #
+              #   # Call the create_tunnel_dest_group method.
+              #   result = client.create_tunnel_dest_group request
+              #
+              #   # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+              #   p result
+              #
               def create_tunnel_dest_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -671,6 +787,22 @@ module Google
               # @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new
+              #
+              #   # Call the get_tunnel_dest_group method.
+              #   result = client.get_tunnel_dest_group request
+              #
+              #   # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+              #   p result
+              #
               def get_tunnel_dest_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -735,6 +867,22 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest.new
+              #
+              #   # Call the delete_tunnel_dest_group method.
+              #   result = client.delete_tunnel_dest_group request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_tunnel_dest_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -801,6 +949,22 @@ module Google
               # @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/iap/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest.new
+              #
+              #   # Call the update_tunnel_dest_group method.
+              #   result = client.update_tunnel_dest_group request
+              #
+              #   # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+              #   p result
+              #
               def update_tunnel_dest_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

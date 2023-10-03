@@ -216,6 +216,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Flow]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::CreateFlowRequest.new
+                #
+                #   # Call the create_flow method.
+                #   result = client.create_flow request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Flow.
+                #   p result
+                #
                 def create_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -291,6 +307,22 @@ module Google
                 # @return [::Google::Protobuf::Empty]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DeleteFlowRequest.new
+                #
+                #   # Call the delete_flow method.
+                #   result = client.delete_flow request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
                 def delete_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -373,6 +405,26 @@ module Google
                 # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::Flow>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListFlowsRequest.new
+                #
+                #   # Call the list_flows method.
+                #   result = client.list_flows request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Flow.
+                #     p item
+                #   end
+                #
                 def list_flows request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -452,6 +504,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Flow]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new
+                #
+                #   # Call the get_flow method.
+                #   result = client.get_flow request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Flow.
+                #   p result
+                #
                 def get_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -534,6 +602,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::Flow]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::UpdateFlowRequest.new
+                #
+                #   # Call the update_flow method.
+                #   result = client.update_flow request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Flow.
+                #   p result
+                #
                 def update_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -612,6 +696,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::TrainFlowRequest.new
+                #
+                #   # Call the train_flow method.
+                #   result = client.train_flow request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def train_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -681,6 +788,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::FlowValidationResult]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ValidateFlowRequest.new
+                #
+                #   # Call the validate_flow method.
+                #   result = client.validate_flow request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::FlowValidationResult.
+                #   p result
+                #
                 def validate_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -748,6 +871,22 @@ module Google
                 # @return [::Google::Cloud::Dialogflow::CX::V3::FlowValidationResult]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::GetFlowValidationResultRequest.new
+                #
+                #   # Call the get_flow_validation_result method.
+                #   result = client.get_flow_validation_result request
+                #
+                #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::FlowValidationResult.
+                #   p result
+                #
                 def get_flow_validation_result request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -841,6 +980,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new
+                #
+                #   # Call the import_flow method.
+                #   result = client.import_flow request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def import_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -931,6 +1093,29 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ExportFlowRequest.new
+                #
+                #   # Call the export_flow method.
+                #   result = client.export_flow request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
                 def export_flow request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 

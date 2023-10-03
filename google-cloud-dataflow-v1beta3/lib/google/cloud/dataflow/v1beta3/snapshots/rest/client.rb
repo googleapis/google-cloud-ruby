@@ -166,6 +166,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::Snapshot]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Snapshots::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new
+              #
+              #   # Call the get_snapshot method.
+              #   result = client.get_snapshot request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::Snapshot.
+              #   p result
+              #
               def get_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -232,6 +248,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Snapshots::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::DeleteSnapshotRequest.new
+              #
+              #   # Call the delete_snapshot method.
+              #   result = client.delete_snapshot request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::DeleteSnapshotResponse.
+              #   p result
+              #
               def delete_snapshot request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -298,6 +330,22 @@ module Google
               # @return [::Google::Cloud::Dataflow::V1beta3::ListSnapshotsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataflow/v1beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataflow::V1beta3::Snapshots::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataflow::V1beta3::ListSnapshotsRequest.new
+              #
+              #   # Call the list_snapshots method.
+              #   result = client.list_snapshots request
+              #
+              #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::ListSnapshotsResponse.
+              #   p result
+              #
               def list_snapshots request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

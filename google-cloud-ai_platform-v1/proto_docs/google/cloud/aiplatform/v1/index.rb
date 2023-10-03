@@ -87,6 +87,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::Index::IndexUpdateMethod]
         #     Immutable. The update method to use with this Index. If not set,
         #     BATCH_UPDATE will be used by default.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Immutable. Customer-managed encryption key spec for an Index. If set, this
+        #     Index and all sub-resources of this Index will be secured by this key.
         class Index
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

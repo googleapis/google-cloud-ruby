@@ -121,6 +121,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     conversation = {}
     conversation_id = "hello world"
     redaction_config = {}
+    speech_config = {}
 
     upload_conversation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upload_conversation, name
@@ -129,6 +130,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::Conversation), request["conversation"]
       assert_equal "hello world", request["conversation_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::RedactionConfig), request["redaction_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::SpeechConfig), request["speech_config"]
       refute_nil options
     end
 
@@ -139,35 +141,35 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
       end
 
       # Use hash object
-      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config }) do |response, operation|
+      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config do |response, operation|
+      client.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config) do |response, operation|
+      client.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config }, grpc_options) do |response, operation|
+      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config), grpc_options) do |response, operation|
+      client.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

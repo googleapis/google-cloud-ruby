@@ -204,6 +204,26 @@ module Google
               # @return [::Google::Cloud::IDS::V1::ListEndpointsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ids/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::IDS::V1::IDS::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::IDS::V1::ListEndpointsRequest.new
+              #
+              #   # Call the list_endpoints method.
+              #   result = client.list_endpoints request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::IDS::V1::Endpoint.
+              #     p item
+              #   end
+              #
               def list_endpoints request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -267,6 +287,22 @@ module Google
               # @return [::Google::Cloud::IDS::V1::Endpoint]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ids/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::IDS::V1::IDS::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::IDS::V1::GetEndpointRequest.new
+              #
+              #   # Call the get_endpoint method.
+              #   result = client.get_endpoint request
+              #
+              #   # The returned object is of type Google::Cloud::IDS::V1::Endpoint.
+              #   p result
+              #
               def get_endpoint request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -352,6 +388,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ids/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::IDS::V1::IDS::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::IDS::V1::CreateEndpointRequest.new
+              #
+              #   # Call the create_endpoint method.
+              #   result = client.create_endpoint request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_endpoint request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -429,6 +488,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ids/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::IDS::V1::IDS::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::IDS::V1::DeleteEndpointRequest.new
+              #
+              #   # Call the delete_endpoint method.
+              #   result = client.delete_endpoint request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_endpoint request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

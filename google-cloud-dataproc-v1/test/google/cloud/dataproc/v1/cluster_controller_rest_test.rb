@@ -479,6 +479,10 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     project_id = "hello world"
     region = "hello world"
     cluster_name = "hello world"
+    tarball_gcs_dir = "hello world"
+    diagnosis_interval = {}
+    jobs = ["hello world"]
+    yarn_application_ids = ["hello world"]
 
     diagnose_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -494,27 +498,27 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
         end
 
         # Use hash object
-        client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name }) do |_result, response|
+        client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_cluster project_id: project_id, region: region, cluster_name: cluster_name do |_result, response|
+        client.diagnose_cluster project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_cluster ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name) do |_result, response|
+        client.diagnose_cluster ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name }, call_options) do |_result, response|
+        client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_cluster(::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), call_options) do |_result, response|
+        client.diagnose_cluster(::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

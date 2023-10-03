@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/discoveryengine/v1/completion_service_pb"
 require "google/cloud/discovery_engine/v1/completion_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -135,8 +136,21 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @completion_service_stub = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -153,7 +167,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload complete_query(data_store: nil, query: nil, query_model: nil, user_pseudo_id: nil)
+              # @overload complete_query(data_store: nil, query: nil, query_model: nil, user_pseudo_id: nil, include_tail_suggestions: nil)
               #   Pass arguments to `complete_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -175,13 +189,14 @@ module Google
               #     API calls. Do not use it when there is no traffic for Search API.
               #     * `user-event` - Using suggestions generated from user-imported search
               #     events.
+              #     * `document-completable` - Using suggestions taken directly from
+              #     user-imported document fields marked as completable.
               #
               #     Default values:
               #
               #     * `document` is the default model for regular dataStores.
               #     * `search-history` is the default model for
-              #     [IndustryVertical.SITE_SEARCH][google.cloud.discoveryengine.v1.IndustryVertical.SITE_SEARCH]
-              #     dataStores.
+              #     [IndustryVertical.SITE_SEARCH][] dataStores.
               #   @param user_pseudo_id [::String]
               #     A unique identifier for tracking visitors. For example, this could be
               #     implemented with an HTTP cookie, which should be able to uniquely identify
@@ -197,6 +212,11 @@ module Google
               #
               #     The field must be a UTF-8 encoded string with a length limit of 128
               #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+              #   @param include_tail_suggestions [::Boolean]
+              #     Indicates if tail suggestions should be returned if there are no
+              #     suggestions that match the full query. Even if set to true, if there are
+              #     suggestions that match the full query, those are returned and no
+              #     tail suggestions are returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -204,6 +224,22 @@ module Google
               # @return [::Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::CompletionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new
+              #
+              #   # Call the complete_query method.
+              #   result = client.complete_query request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse.
+              #   p result
+              #
               def complete_query request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -253,6 +253,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::CreateDatasetRequest.new
+              #
+              #   # Call the create_dataset method.
+              #   result = client.create_dataset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -316,6 +339,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::Dataset]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::GetDatasetRequest.new
+              #
+              #   # Call the get_dataset method.
+              #   result = client.get_dataset request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::Dataset.
+              #   p result
+              #
               def get_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -394,6 +433,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AutoML::V1::Dataset>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::ListDatasetsRequest.new
+              #
+              #   # Call the list_datasets method.
+              #   result = client.list_datasets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AutoML::V1::Dataset.
+              #     p item
+              #   end
+              #
               def list_datasets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -459,6 +518,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::Dataset]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::UpdateDatasetRequest.new
+              #
+              #   # Call the update_dataset method.
+              #   result = client.update_dataset request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::Dataset.
+              #   p result
+              #
               def update_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -525,6 +600,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::DeleteDatasetRequest.new
+              #
+              #   # Call the delete_dataset method.
+              #   result = client.delete_dataset request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_dataset request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -600,6 +698,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::ImportDataRequest.new
+              #
+              #   # Call the import_data method.
+              #   result = client.import_data request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def import_data request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -667,6 +788,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::ExportDataRequest.new
+              #
+              #   # Call the export_data method.
+              #   result = client.export_data request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def export_data request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -730,6 +874,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::AnnotationSpec]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new
+              #
+              #   # Call the get_annotation_spec method.
+              #   result = client.get_annotation_spec request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::AnnotationSpec.
+              #   p result
+              #
               def get_annotation_spec request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -798,6 +958,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::CreateModelRequest.new
+              #
+              #   # Call the create_model method.
+              #   result = client.create_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -861,6 +1044,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::Model]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::GetModelRequest.new
+              #
+              #   # Call the get_model method.
+              #   result = client.get_model request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::Model.
+              #   p result
+              #
               def get_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -940,6 +1139,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AutoML::V1::Model>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::ListModelsRequest.new
+              #
+              #   # Call the list_models method.
+              #   result = client.list_models request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AutoML::V1::Model.
+              #     p item
+              #   end
+              #
               def list_models request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1007,6 +1226,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::DeleteModelRequest.new
+              #
+              #   # Call the delete_model method.
+              #   result = client.delete_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def delete_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1072,6 +1314,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::Model]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::UpdateModelRequest.new
+              #
+              #   # Call the update_model method.
+              #   result = client.update_model request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::Model.
+              #   p result
+              #
               def update_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1148,6 +1406,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::DeployModelRequest.new
+              #
+              #   # Call the deploy_model method.
+              #   result = client.deploy_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def deploy_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1217,6 +1498,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::UndeployModelRequest.new
+              #
+              #   # Call the undeploy_model method.
+              #   result = client.undeploy_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def undeploy_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1288,6 +1592,29 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::ExportModelRequest.new
+              #
+              #   # Call the export_model method.
+              #   result = client.export_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def export_model request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1351,6 +1678,22 @@ module Google
               # @return [::Google::Cloud::AutoML::V1::ModelEvaluation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new
+              #
+              #   # Call the get_model_evaluation method.
+              #   result = client.get_model_evaluation request
+              #
+              #   # The returned object is of type Google::Cloud::AutoML::V1::ModelEvaluation.
+              #   p result
+              #
               def get_model_evaluation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1434,6 +1777,26 @@ module Google
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AutoML::V1::ModelEvaluation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/automl/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new
+              #
+              #   # Call the list_model_evaluations method.
+              #   result = client.list_model_evaluations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AutoML::V1::ModelEvaluation.
+              #     p item
+              #   end
+              #
               def list_model_evaluations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 

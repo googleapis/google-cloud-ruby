@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-channel-v1",
-    "version": "0.21.0",
+    "version": "0.22.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1887,6 +1887,46 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_QueryEligibleBillingAccounts_sync",
+      "title": "Snippet for the query_eligible_billing_accounts call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#query_eligible_billing_accounts. It may require modification in order to execute successfully.",
+      "file": "cloud_channel_service/query_eligible_billing_accounts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_eligible_billing_accounts",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#query_eligible_billing_accounts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "QueryEligibleBillingAccounts",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.QueryEligibleBillingAccounts",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

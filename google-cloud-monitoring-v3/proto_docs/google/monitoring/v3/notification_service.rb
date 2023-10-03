@@ -80,8 +80,9 @@ module Google
         # The `CreateNotificationChannel` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-        #     which to execute the request. The format is:
+        #     Required. The
+        #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+        #     to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #
@@ -100,8 +101,9 @@ module Google
         # The `ListNotificationChannels` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-        #     which to execute the request. The format is:
+        #     Required. The
+        #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+        #     to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #
@@ -215,9 +217,9 @@ module Google
         # The `GetNotificationChannelVerificationCode` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The notification channel for which a verification code is to be generated
-        #     and retrieved. This must name a channel that is already verified; if
-        #     the specified channel is not verified, the request will fail.
+        #     Required. The notification channel for which a verification code is to be
+        #     generated and retrieved. This must name a channel that is already verified;
+        #     if the specified channel is not verified, the request will fail.
         # @!attribute [rw] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The desired expiration time. If specified, the API will guarantee that
