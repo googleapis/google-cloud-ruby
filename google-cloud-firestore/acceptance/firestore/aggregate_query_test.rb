@@ -211,189 +211,172 @@ describe "Aggregate Query", :firestore_acceptance do
   end
 
   describe "SUM" do
-    focus; it "returns count for non-zero records" do
+    focus
+    it "returns count for non-zero records" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
       rand_query_col.add({foo: 1})
       rand_query_col.add({foo: 2})
-      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
                          .add_sum('foo')
 
       snapshot = aq.get.first
-      _(snapshot.get).must_equal 3
+      _(snapshot.get).must_equal 6
     end
 
+    focus
     it "returns 0 for no records" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
 
       aq = rand_query_col.aggregate_query
-                         .add_count
+                         .add_sum('foo')
 
       snapshot = aq.get.first
       _(snapshot.get).must_equal 0
     end
 
+    focus
     it "returns count on filter" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
-      query = rand_query_col.where(:foo, :==, :a)
+      query = rand_query_col.where(:foo, :>, 1)
 
       aq = query.aggregate_query
-                .add_count
+                .add_sum('foo')
 
       snapshot = aq.get.first
-      _(snapshot.get).must_equal 1
+      _(snapshot.get).must_equal 5
     end
 
+    focus
     it "returns count on limit" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       query = rand_query_col.limit 2
 
       aq = query.aggregate_query
-                .add_count
-
-      snapshot = aq.get.first
-      _(snapshot.get).must_equal 2
-    end
-
-    it "returns count with a custom alias" do
-      rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
-
-      aq = rand_query_col.aggregate_query
-                         .add_count aggregate_alias: 'one'
+                .add_sum('foo')
 
       snapshot = aq.get.first
       _(snapshot.get).must_equal 3
-      _(snapshot.get('one')).must_equal 3
     end
 
-    it "returns count with multiple custom aliases" do
+    focus
+    it "returns count with a custom alias" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
-                         .add_count(aggregate_alias: 'one')
-                         .add_count(aggregate_alias: 'two')
+                         .add_sum('foo', aggregate_alias: 'bar')
 
       snapshot = aq.get.first
-      _(snapshot.get('one')).must_equal 3
-      _(snapshot.get('two')).must_equal 3
+      _(snapshot.get).must_equal 6
+      _(snapshot.get('bar')).must_equal 6
     end
 
-    it "returns nil for unspecified alias" do
+    focus
+    it "returns count with multiple custom aliases" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
-                         .add_count
+                         .add_sum('foo', aggregate_alias: 'one')
+                         .add_sum('foo', aggregate_alias: 'two')
+
+      snapshot = aq.get.first
+      _(snapshot.get('one')).must_equal 6
+      _(snapshot.get('two')).must_equal 6
+    end
+
+    focus
+    it "returns nil for unspecified alias" do
+      rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
+
+      aq = rand_query_col.aggregate_query
+                         .add_sum('foo')
 
       snapshot = aq.get.first
       _(snapshot.get('unspecified_alias')).must_be :nil?
     end
 
+    focus
     it "throws error when custom alias isn't specified for multiple aliases" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
-                         .add_count(aggregate_alias: 'one')
-                         .add_count(aggregate_alias: 'two')
+                         .add_sum('foo', aggregate_alias: 'one')
+                         .add_sum('foo', aggregate_alias: 'two')
 
       snapshot = aq.get.first
       expect { snapshot.get }.must_raise ArgumentError
     end
 
+    focus
     it "throws error when duplicating aliases" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
-                         .add_count(aggregate_alias: 'one')
-                         .add_count(aggregate_alias: 'one')
+                         .add_sum('foo', aggregate_alias: 'one')
+                         .add_sum('foo', aggregate_alias: 'one')
 
       expect { snapshot = aq.get.first }.must_raise expected_error_class
     end
 
-
-    it "returns count for multiple requests" do
-      rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
-
-      aq = rand_query_col.aggregate_query
-                         .add_count
-
-      snapshot = aq.get.first
-      _(snapshot.get).must_equal 3
-
-      snapshot = aq.get.first
-      _(snapshot.get).must_equal 3
-    end
-
+    focus
     it "returns different count when data changes" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
-                         .add_count
+                         .add_sum('foo')
 
       snapshot = aq.get.first
-      _(snapshot.get).must_equal 3
+      _(snapshot.get).must_equal 6
 
-      rand_query_col.doc("doc4").create({foo: "d"})
+      rand_query_col.doc("doc4").create({foo: 4})
 
       snapshot = aq.get.first
-      _(snapshot.get).must_equal 4
+      _(snapshot.get).must_equal 10
     end
 
-    it "throws error when no aggregate is added" do
-      rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
-
-      # aggregate object with no added aggregate (ex: aq.add_count)
-      aq = rand_query_col.aggregate_query
-
-      expect { snapshot = aq.get.first }.must_raise expected_error_class
-    end
-
+    focus
     it "returns count inside a transaction" do
       rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-      rand_query_col.add({foo: "a"})
-      rand_query_col.add({bar: "b"})
-      rand_query_col.add({qux: "c"})
+      rand_query_col.add({foo: 1})
+      rand_query_col.add({foo: 2})
+      rand_query_col.add({foo: 3})
 
       aq = rand_query_col.aggregate_query
-                         .add_count
+                         .add_sum('foo')
 
       results = firestore.transaction do |tx|
         tx.get_aggregate(aq).to_a
       end
 
       snapshot = results.first
-      _(snapshot.get).must_equal 3
+      _(snapshot.get).must_equal 6
     end
   end
 end
