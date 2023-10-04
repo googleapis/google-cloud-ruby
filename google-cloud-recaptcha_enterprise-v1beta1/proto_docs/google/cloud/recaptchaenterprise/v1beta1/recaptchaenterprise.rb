@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the project in which the assessment will be created,
-        #     in the format "projects/\\{project_number}".
+        #     in the format `projects/{project_number}`.
         # @!attribute [rw] assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment]
         #     Required. The assessment details.
@@ -159,7 +159,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Assessment, in the format
-        #     "projects/\\{project_number}/assessments/\\{assessment_id}".
+        #     `projects/{project_number}/assessments/{assessment_id}`.
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
         #     Optional. The annotation that will be assigned to the Event. This field can
@@ -301,7 +301,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for the Assessment in the format
-        #     "projects/\\{project_number}/assessments/\\{assessment_id}".
+        #     `projects/{project_number}/assessments/{assessment_id}`.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Event]
         #     The event being assessed.
@@ -617,6 +617,9 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::CardTestingVerdict]
         #     Assessment of this transaction for risk of being part of a card testing
         #     attack.
+        # @!attribute [rw] behavioral_trust_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::BehavioralTrustVerdict]
+        #     Assessment of this transaction for behavioral trust.
         class FraudPreventionAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -639,6 +642,16 @@ module Google
           #     Probability (0-1) of this transaction attempt being part of a card
           #     testing attack.
           class CardTestingVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information about behavioral trust of the transaction.
+          # @!attribute [rw] trust
+          #   @return [::Float]
+          #     Probability (0-1) of this transaction attempt being executed in a
+          #     behaviorally trustworthy way.
+          class BehavioralTrustVerdict
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

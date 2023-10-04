@@ -159,7 +159,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The name of the project in which the assessment will be created,
-              #     in the format "projects/\\{project_number}".
+              #     in the format `projects/{project_number}`.
               #   @param assessment [::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment, ::Hash]
               #     Required. The assessment details.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -241,7 +241,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. The resource name of the Assessment, in the format
-              #     "projects/\\{project_number}/assessments/\\{assessment_id}".
+              #     `projects/{project_number}/assessments/{assessment_id}`.
               #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
               #     Optional. The annotation that will be assigned to the Event. This field can
               #     be left empty to provide reasons that apply to an event without concluding
