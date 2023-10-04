@@ -42,6 +42,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified FirewallPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/firewallpolicies/{firewallpolicy}`
+            #
+            # @param project [String]
+            # @param firewallpolicy [String]
+            #
+            # @return [::String]
+            def firewall_policy_path project:, firewallpolicy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/firewallpolicies/#{firewallpolicy}"
+            end
+
+            ##
             # Create a fully-qualified Key resource string.
             #
             # The resource will be in the following format:
