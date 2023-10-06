@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.12.0 (2023-10-06)
+
+#### Features
+
+* add InstancePolicy.reservation field for restricting jobs to a specific reservation ([#23419](https://github.com/googleapis/google-cloud-ruby/issues/23419)) 
+
 ### 0.11.1 (2023-09-29)
 
 #### Documentation
