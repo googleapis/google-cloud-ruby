@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.33.0 (2023-10-06)
+
+#### Features
+
+* Support create_dataset_version, delete_dataset_version, get_dataset_version, list_dataset_versions, restore_dataset_version ([#23418](https://github.com/googleapis/google-cloud-ruby/issues/23418)) 
+
 ### 0.32.0 (2023-09-12)
 
 #### Features
