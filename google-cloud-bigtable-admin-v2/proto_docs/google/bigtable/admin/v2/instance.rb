@@ -57,9 +57,9 @@ module Google
           #     * Keys and values must both be under 128 bytes.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. A server-assigned timestamp representing when this Instance was created.
-          #     For instances created before this field was added (August 2021), this value
-          #     is `seconds: 0, nanos: 1`.
+          #     Output only. A server-assigned timestamp representing when this Instance
+          #     was created. For instances created before this field was added (August
+          #     2021), this value is `seconds: 0, nanos: 1`.
           # @!attribute [r] satisfies_pzs
           #   @return [::Boolean]
           #     Output only. Reserved for future use.
@@ -118,7 +118,7 @@ module Google
           #   @return [::Integer]
           #     The storage utilization that the Autoscaler should be trying to achieve.
           #     This number is limited between 2560 (2.5TiB) and 5120 (5TiB) for a SSD
-          #     cluster and between 8192 (8TiB) and 16384 (16TiB) for an HDD cluster;
+          #     cluster and between 8192 (8TiB) and 16384 (16TiB) for an HDD cluster,
           #     otherwise it will return INVALID_ARGUMENT error. If this value is set to 0,
           #     it will be treated as if it were set to the default value: 2560 for SSD,
           #     8192 for HDD.
@@ -148,8 +148,8 @@ module Google
           #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
           # @!attribute [rw] location
           #   @return [::String]
-          #     Immutable. The location where this cluster's nodes and storage reside. For best
-          #     performance, clients should be located as close as possible to this
+          #     Immutable. The location where this cluster's nodes and storage reside. For
+          #     best performance, clients should be located as close as possible to this
           #     cluster. Currently only zones are supported, so values should be of the
           #     form `projects/{project}/locations/{zone}`.
           # @!attribute [r] state
@@ -264,6 +264,16 @@ module Google
           # @!attribute [rw] single_cluster_routing
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
           #     Use a single-cluster routing policy.
+          # @!attribute [rw] priority
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::Priority]
+          #     This field has been deprecated in favor of `standard_isolation.priority`.
+          #     If you set this field, `standard_isolation.priority` will be set instead.
+          #
+          #     The priority of requests sent using this app profile.
+          # @!attribute [rw] standard_isolation
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::StandardIsolation]
+          #     The standard options used for isolating this app profile's traffic from
+          #     other use cases.
           class AppProfile
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -297,6 +307,30 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Standard options for isolating this app profile's traffic from other use
+            # cases.
+            # @!attribute [rw] priority
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::Priority]
+            #     The priority of requests sent using this app profile.
+            class StandardIsolation
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Possible priorities for an app profile. Note that higher priority writes
+            # can sometimes queue behind lower priority writes to the same tablet, as
+            # writes must be strictly sequenced in the durability log.
+            module Priority
+              # Default value. Mapped to PRIORITY_HIGH (the legacy behavior) on creation.
+              PRIORITY_UNSPECIFIED = 0
+
+              PRIORITY_LOW = 1
+
+              PRIORITY_MEDIUM = 2
+
+              PRIORITY_HIGH = 3
+            end
           end
 
           # A tablet is a defined by a start and end key and is explained in
@@ -326,10 +360,10 @@ module Google
           #     Tablet End Key (inclusive).
           # @!attribute [r] node_cpu_usage_percent
           #   @return [::Float]
-          #     Output only. The average CPU usage spent by a node on this tablet over the start_time to
-          #     end_time time range. The percentage is the amount of CPU used by the node
-          #     to serve the tablet, from 0% (tablet was not interacted with) to 100% (the
-          #     node spent all cycles serving the hot tablet).
+          #     Output only. The average CPU usage spent by a node on this tablet over the
+          #     start_time to end_time time range. The percentage is the amount of CPU used
+          #     by the node to serve the tablet, from 0% (tablet was not interacted with)
+          #     to 100% (the node spent all cycles serving the hot tablet).
           class HotTablet
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
