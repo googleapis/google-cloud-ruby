@@ -175,10 +175,25 @@ module Google
 
         # DataQualityDimensionResult provides a more detailed, per-dimension view of
         # the results.
+        # @!attribute [r] dimension
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityDimension]
+        #     Output only. The dimension config specified in the DataQualitySpec, as is.
         # @!attribute [rw] passed
         #   @return [::Boolean]
         #     Whether the dimension passed or failed.
         class DataQualityDimensionResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A dimension captures data quality intent about a defined subset of the rules
+        # specified.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The dimension name a rule belongs to. Supported dimensions are
+        #     ["COMPLETENESS", "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS",
+        #     "INTEGRITY"]
+        class DataQualityDimension
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
