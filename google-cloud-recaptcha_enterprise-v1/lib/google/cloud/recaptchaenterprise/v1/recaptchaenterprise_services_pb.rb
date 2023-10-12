@@ -55,13 +55,25 @@ module Google
             # Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
             # Once a key is migrated, it can be used from either product. SiteVerify
             # requests are billed as CreateAssessment calls. You must be
-            # authenticated as one of the current owners of the reCAPTCHA Site Key, and
+            # authenticated as one of the current owners of the reCAPTCHA Key, and
             # your user must have the reCAPTCHA Enterprise Admin IAM role in the
             # destination project.
             rpc :MigrateKey, ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Get some aggregated metrics for a Key. This data can be used to build
             # dashboards.
             rpc :GetMetrics, ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Metrics
+            # Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
+            # Enterprise actions can be executed.
+            # A project may have a maximum of 1000 policies.
+            rpc :CreateFirewallPolicy, ::Google::Cloud::RecaptchaEnterprise::V1::CreateFirewallPolicyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy
+            # Returns the list of all firewall policies that belong to a project.
+            rpc :ListFirewallPolicies, ::Google::Cloud::RecaptchaEnterprise::V1::ListFirewallPoliciesRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListFirewallPoliciesResponse
+            # Returns the specified firewall policy.
+            rpc :GetFirewallPolicy, ::Google::Cloud::RecaptchaEnterprise::V1::GetFirewallPolicyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy
+            # Updates the specified firewall policy.
+            rpc :UpdateFirewallPolicy, ::Google::Cloud::RecaptchaEnterprise::V1::UpdateFirewallPolicyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy
+            # Deletes the specified firewall policy.
+            rpc :DeleteFirewallPolicy, ::Google::Cloud::RecaptchaEnterprise::V1::DeleteFirewallPolicyRequest, ::Google::Protobuf::Empty
             # List groups of related accounts.
             rpc :ListRelatedAccountGroups, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsResponse
             # Get memberships in a group of related accounts.
