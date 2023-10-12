@@ -265,11 +265,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the project in which to create the new instance.
-              #     Values are of the form `projects/{project}`.
+              #     Required. The unique name of the project in which to create the new
+              #     instance. Values are of the form `projects/{project}`.
               #   @param instance_id [::String]
-              #     Required. The ID to be used when referring to the new instance within its project,
-              #     e.g., just `myinstance` rather than
+              #     Required. The ID to be used when referring to the new instance within its
+              #     project, e.g., just `myinstance` rather than
               #     `projects/myproject/instances/myinstance`.
               #   @param instance [::Google::Cloud::Bigtable::Admin::V2::Instance, ::Hash]
               #     Required. The instance to create.
@@ -458,8 +458,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the project for which a list of instances is requested.
-              #     Values are of the form `projects/{project}`.
+              #     Required. The unique name of the project for which a list of instances is
+              #     requested. Values are of the form `projects/{project}`.
               #   @param page_token [::String]
               #     DEPRECATED: This field is unused and ignored.
               #
@@ -844,12 +844,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the instance in which to create the new cluster.
-              #     Values are of the form
-              #     `projects/{project}/instances/{instance}`.
+              #     Required. The unique name of the instance in which to create the new
+              #     cluster. Values are of the form `projects/{project}/instances/{instance}`.
               #   @param cluster_id [::String]
-              #     Required. The ID to be used when referring to the new cluster within its instance,
-              #     e.g., just `mycluster` rather than
+              #     Required. The ID to be used when referring to the new cluster within its
+              #     instance, e.g., just `mycluster` rather than
               #     `projects/myproject/instances/myinstance/clusters/mycluster`.
               #   @param cluster [::Google::Cloud::Bigtable::Admin::V2::Cluster, ::Hash]
               #     Required. The cluster to be created.
@@ -1032,10 +1031,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the instance for which a list of clusters is requested.
-              #     Values are of the form `projects/{project}/instances/{instance}`.
-              #     Use `{instance} = '-'` to list Clusters for all Instances in a project,
-              #     e.g., `projects/myproject/instances/-`.
+              #     Required. The unique name of the instance for which a list of clusters is
+              #     requested. Values are of the form
+              #     `projects/{project}/instances/{instance}`. Use `{instance} = '-'` to list
+              #     Clusters for all Instances in a project, e.g.,
+              #     `projects/myproject/instances/-`.
               #   @param page_token [::String]
               #     DEPRECATED: This field is unused and ignored.
               #
@@ -1129,8 +1129,8 @@ module Google
               #     The unique name of the cluster. Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
               #   @param location [::String]
-              #     Immutable. The location where this cluster's nodes and storage reside. For best
-              #     performance, clients should be located as close as possible to this
+              #     Immutable. The location where this cluster's nodes and storage reside. For
+              #     best performance, clients should be located as close as possible to this
               #     cluster. Currently only zones are supported, so values should be of the
               #     form `projects/{project}/locations/{zone}`.
               #   @param serve_nodes [::Integer]
@@ -1246,8 +1246,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param cluster [::Google::Cloud::Bigtable::Admin::V2::Cluster, ::Hash]
-              #     Required. The Cluster which contains the partial updates to be applied, subject to
-              #     the update_mask.
+              #     Required. The Cluster which contains the partial updates to be applied,
+              #     subject to the update_mask.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. The subset of Cluster fields which should be replaced.
               #
@@ -1342,8 +1342,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the cluster to be deleted. Values are of the form
-              #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+              #     Required. The unique name of the cluster to be deleted. Values are of the
+              #     form `projects/{project}/instances/{instance}/clusters/{cluster}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -1428,12 +1428,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the instance in which to create the new app profile.
-              #     Values are of the form
-              #     `projects/{project}/instances/{instance}`.
+              #     Required. The unique name of the instance in which to create the new app
+              #     profile. Values are of the form `projects/{project}/instances/{instance}`.
               #   @param app_profile_id [::String]
-              #     Required. The ID to be used when referring to the new app profile within its
-              #     instance, e.g., just `myprofile` rather than
+              #     Required. The ID to be used when referring to the new app profile within
+              #     its instance, e.g., just `myprofile` rather than
               #     `projects/myproject/instances/myinstance/appProfiles/myprofile`.
               #   @param app_profile [::Google::Cloud::Bigtable::Admin::V2::AppProfile, ::Hash]
               #     Required. The app profile to be created.
@@ -1524,8 +1523,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the requested app profile. Values are of the form
-              #     `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
+              #     Required. The unique name of the requested app profile. Values are of the
+              #     form `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::AppProfile]
@@ -1610,8 +1609,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the instance for which a list of app profiles is
-              #     requested. Values are of the form
+              #     Required. The unique name of the instance for which a list of app profiles
+              #     is requested. Values are of the form
               #     `projects/{project}/instances/{instance}`.
               #     Use `{instance} = '-'` to list AppProfiles for all Instances in a project,
               #     e.g., `projects/myproject/instances/-`.
@@ -1814,7 +1813,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the app profile to be deleted. Values are of the form
+              #     Required. The unique name of the app profile to be deleted. Values are of
+              #     the form
               #     `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
               #   @param ignore_warnings [::Boolean]
               #     Required. If true, ignore safety checks when deleting the app profile.
