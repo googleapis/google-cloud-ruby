@@ -1114,6 +1114,35 @@ module Google
           end
         end
 
+        # Encapsulates a set of optional conditions to satisfy when calculating
+        # vehicle routes. This is similar to `RouteModifiers` in the Google Maps
+        # Platform API; see:
+        # https://developers.google.com/maps/documentation/routes/reference/rest/v2/RouteModifiers.
+        # @!attribute [rw] avoid_tolls
+        #   @return [::Boolean]
+        #     Specifies whether to avoid toll roads where reasonable. Preference will be
+        #     given to routes not containing toll roads. Applies only to motorized travel
+        #     modes.
+        # @!attribute [rw] avoid_highways
+        #   @return [::Boolean]
+        #     Specifies whether to avoid highways where reasonable. Preference will be
+        #     given to routes not containing highways. Applies only to motorized travel
+        #     modes.
+        # @!attribute [rw] avoid_ferries
+        #   @return [::Boolean]
+        #     Specifies whether to avoid ferries where reasonable. Preference will be
+        #     given to routes not containing travel by ferries. Applies only to motorized
+        #     travel modes.
+        # @!attribute [rw] avoid_indoor
+        #   @return [::Boolean]
+        #     Optional. Specifies whether to avoid navigating indoors where reasonable.
+        #     Preference will be given to routes not containing indoor navigation.
+        #     Applies only to the `WALKING` travel mode.
+        class RouteModifiers
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Models a vehicle in a shipment problem. Solving a shipment problem will
         # build a route starting from `start_location` and ending at `end_location`
         # for this vehicle. A route is a sequence of visits (see `ShipmentRoute`).
@@ -1121,6 +1150,10 @@ module Google
         #   @return [::Google::Cloud::Optimization::V1::Vehicle::TravelMode]
         #     The travel mode which affects the roads usable by the vehicle and its
         #     speed. See also `travel_duration_multiple`.
+        # @!attribute [rw] route_modifiers
+        #   @return [::Google::Cloud::Optimization::V1::RouteModifiers]
+        #     Optional. A set of conditions to satisfy that affect the way routes are
+        #     calculated for the given vehicle.
         # @!attribute [rw] start_location
         #   @return [::Google::Type::LatLng]
         #     Geographic location where the vehicle starts before picking up any
@@ -2791,6 +2824,13 @@ module Google
         #         * VISIT_REQUEST_DURATION_NEGATIVE_OR_NAN = 4404;
         #         * VISIT_REQUEST_DURATION_EXCEEDS_GLOBAL_DURATION = 4405;
         #     * PRECEDENCE_ERROR = 46;
+        #         * PRECEDENCE_RULE_MISSING_FIRST_INDEX = 4600;
+        #         * PRECEDENCE_RULE_MISSING_SECOND_INDEX = 4601;
+        #         * PRECEDENCE_RULE_FIRST_INDEX_OUT_OF_BOUNDS = 4602;
+        #         * PRECEDENCE_RULE_SECOND_INDEX_OUT_OF_BOUNDS = 4603;
+        #         * PRECEDENCE_RULE_DUPLICATE_INDEX = 4604;
+        #         * PRECEDENCE_RULE_INEXISTENT_FIRST_VISIT_REQUEST = 4605;
+        #         * PRECEDENCE_RULE_INEXISTENT_SECOND_VISIT_REQUEST = 4606;
         #     * BREAK_ERROR = 48;
         #         * BREAK_RULE_EMPTY = 4800;
         #         * BREAK_REQUEST_UNSPECIFIED_DURATION = 4801;
