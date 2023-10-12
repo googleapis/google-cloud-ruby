@@ -296,8 +296,48 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The key and value for a
+        # [tag](https://cloud.google.com/resource-manager/docs/tags/tags-overview),
+        # @!attribute [rw] tag_key
+        #   @return [::String]
+        #     TagKey namespaced name, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
+        # @!attribute [rw] tag_value
+        #   @return [::String]
+        #     TagValue namespaced name, in the format of
+        #     \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}/\\{TAG_VALUE_SHORT_NAME}.
+        # @!attribute [rw] tag_value_id
+        #   @return [::String]
+        #     TagValue ID, in the format of tagValues/\\{TAG_VALUE_ID}.
+        class Tag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The effective tags and the ancestor resources from which they were inherited.
+        # @!attribute [rw] attached_resource
+        #   @return [::String]
+        #     The [full resource
+        #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
+        #     of the ancestor from which an [effective_tag][] is inherited, according to
+        #     [tag
+        #     inheritance](https://cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance).
+        # @!attribute [rw] effective_tags
+        #   @return [::Array<::Google::Cloud::Asset::V1::Tag>]
+        #     The effective tags inherited from the
+        #     {::Google::Cloud::Asset::V1::EffectiveTagDetails#attached_resource attached_resource}.
+        #     Note that tags with the same key but different values may attach to
+        #     resources at a different hierarchy levels. The lower hierarchy tag value
+        #     will overwrite the higher hierarchy tag value of the same tag key. In this
+        #     case, the tag value at the higher hierarchy level will be removed. For more
+        #     information, see [tag
+        #     inheritance](https://cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance).
+        class EffectiveTagDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A result of Resource Search, containing information of a cloud resource.
-        # Next ID: 32
+        # Next ID: 34
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
@@ -546,6 +586,9 @@ module Google
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#supported_relationship_types).
         # @!attribute [rw] tag_keys
         #   @return [::Array<::String>]
+        #     This field is only present for the purpose of backward compatibility.
+        #     Please use the `tags` field instead.
+        #
         #     TagKey namespaced names, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
         #     To search against the `tagKeys`:
         #
@@ -558,6 +601,9 @@ module Google
         #         - `env`
         # @!attribute [rw] tag_values
         #   @return [::Array<::String>]
+        #     This field is only present for the purpose of backward compatibility.
+        #     Please use the `tags` field instead.
+        #
         #     TagValue namespaced names, in the format of
         #     \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}/\\{TAG_VALUE_SHORT_NAME}.
         #     To search against the `tagValues`:
@@ -572,15 +618,53 @@ module Google
         #         - `prod`
         # @!attribute [rw] tag_value_ids
         #   @return [::Array<::String>]
+        #     This field is only present for the purpose of backward compatibility.
+        #     Please use the `tags` field instead.
+        #
         #     TagValue IDs, in the format of tagValues/\\{TAG_VALUE_ID}.
         #     To search against the `tagValueIds`:
         #
         #     * Use a field query. Example:
-        #         - `tagValueIds:"456"`
         #         - `tagValueIds="tagValues/456"`
         #
         #     * Use a free text query. Example:
         #         - `456`
+        # @!attribute [rw] tags
+        #   @return [::Array<::Google::Cloud::Asset::V1::Tag>]
+        #     The tags directly attached to this resource.
+        #
+        #     To search against the `tags`:
+        #
+        #     * Use a field query. Example:
+        #         - `tagKeys:"123456789/env*"`
+        #         - `tagKeys="123456789/env"`
+        #         - `tagKeys:"env"`
+        #         - `tagValues:"env"`
+        #         - `tagValues:"env/prod"`
+        #         - `tagValues:"123456789/env/prod*"`
+        #         - `tagValues="123456789/env/prod"`
+        #         - `tagValueIds="tagValues/456"`
+        #
+        #     * Use a free text query. Example:
+        #         - `env/prod`
+        # @!attribute [rw] effective_tags
+        #   @return [::Array<::Google::Cloud::Asset::V1::EffectiveTagDetails>]
+        #     The effective tags on this resource. All of the tags that are both attached
+        #     to and inherited by a resource are collectively called the effective
+        #     tags. For more information, see [tag
+        #     inheritance](https://cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance).
+        #
+        #     To search against the `effective_tags`:
+        #
+        #     * Use a field query. Example:
+        #         - `effectiveTagKeys:"123456789/env*"`
+        #         - `effectiveTagKeys="123456789/env"`
+        #         - `effectiveTagKeys:"env"`
+        #         - `effectiveTagValues:"env"`
+        #         - `effectiveTagValues:"env/prod"`
+        #         - `effectiveTagValues:"123456789/env/prod*"`
+        #         - `effectiveTagValues="123456789/env/prod"`
+        #         - `effectiveTagValueIds="tagValues/456"`
         # @!attribute [rw] parent_asset_type
         #   @return [::String]
         #     The type of this resource's immediate parent, if there is one.
@@ -591,6 +675,21 @@ module Google
         #     `parentAssetType:"cloudresourcemanager.googleapis.com/Project"`
         #     * Use a free text query. Example:
         #     `cloudresourcemanager.googleapis.com/Project`
+        # @!attribute [rw] scc_security_marks
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The actual content of Security Command Center security marks associated
+        #     with the asset.
+        #
+        #
+        #     Note that both staging & prod SecurityMarks are attached on prod resources.
+        #     In CAS preprod/prod, both staging & prod SecurityMarks are ingested and
+        #     returned in the following `security_marks` map. In that case, the prefix
+        #     "staging." will be added to the keys of all the staging marks.
+        #     To search against SCC SecurityMarks field:
+        #
+        #       * Use a field query:
+        #         - query by a given key value pair. Example: `sccSecurityMarks.foo=bar`
+        #         - query by a given key's existence. Example: `sccSecurityMarks.foo:*`
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -609,6 +708,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Cloud::Asset::V1::RelatedResources]
           class RelationshipsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class SccSecurityMarksEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -905,17 +1013,17 @@ module Google
           # An identity under analysis.
           # @!attribute [rw] name
           #   @return [::String]
-          #     The identity name in any form of members appear in
+          #     The identity of members, formatted as appear in an
           #     [IAM policy
-          #     binding](https://cloud.google.com/iam/reference/rest/v1/Binding), such
-          #     as:
+          #     binding](https://cloud.google.com/iam/reference/rest/v1/Binding). For
+          #     example, they might be formatted like the following:
+          #
           #     - user:foo@google.com
           #     - group:group1@google.com
           #     - serviceAccount:s1@prj1.iam.gserviceaccount.com
           #     - projectOwner:some_project_id
           #     - domain:google.com
           #     - allUsers
-          #     - etc.
           # @!attribute [rw] analysis_state
           #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisState]
           #     The analysis state of this identity.

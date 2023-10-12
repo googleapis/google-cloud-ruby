@@ -98,8 +98,7 @@ module Google
             # resource migration takes place.
             rpc :AnalyzeMove, ::Google::Cloud::Asset::V1::AnalyzeMoveRequest, ::Google::Cloud::Asset::V1::AnalyzeMoveResponse
             # Issue a job that queries assets using a SQL statement compatible with
-            # [BigQuery Standard
-            # SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+            # [BigQuery SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
             #
             # If the query execution finishes within timeout and there's no pagination,
             # the full query results will be returned in the `QueryAssetsResponse`.
@@ -108,9 +107,8 @@ module Google
             # with the `job_reference` from the a previous `QueryAssets` call.
             #
             # Note, the query result has approximately 10 GB limitation enforced by
-            # BigQuery
-            # https://cloud.google.com/bigquery/docs/best-practices-performance-output,
-            # queries return larger results will result in errors.
+            # [BigQuery](https://cloud.google.com/bigquery/docs/best-practices-performance-output).
+            # Queries return larger results will result in errors.
             rpc :QueryAssets, ::Google::Cloud::Asset::V1::QueryAssetsRequest, ::Google::Cloud::Asset::V1::QueryAssetsResponse
             # Creates a saved query in a parent project/folder/organization.
             rpc :CreateSavedQuery, ::Google::Cloud::Asset::V1::CreateSavedQueryRequest, ::Google::Cloud::Asset::V1::SavedQuery
