@@ -1,0 +1,575 @@
+{
+  "client_library": {
+    "name": "google-cloud-spanner-admin-instance-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.spanner.admin.instance.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstanceConfigs_sync",
+      "title": "Snippet for the list_instance_configs call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_configs. It may require modification in order to execute successfully.",
+      "file": "instance_admin/list_instance_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instance_configs",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstanceConfigs",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.ListInstanceConfigs",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_GetInstanceConfig_sync",
+      "title": "Snippet for the get_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_config. It may require modification in order to execute successfully.",
+      "file": "instance_admin/get_instance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance_config",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetInstanceConfig",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.GetInstanceConfig",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_CreateInstanceConfig_sync",
+      "title": "Snippet for the create_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_config. It may require modification in order to execute successfully.",
+      "file": "instance_admin/create_instance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance_config",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateInstanceConfig",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.CreateInstanceConfig",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_UpdateInstanceConfig_sync",
+      "title": "Snippet for the update_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_config. It may require modification in order to execute successfully.",
+      "file": "instance_admin/update_instance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance_config",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstanceConfig",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.UpdateInstanceConfig",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_DeleteInstanceConfig_sync",
+      "title": "Snippet for the delete_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_config. It may require modification in order to execute successfully.",
+      "file": "instance_admin/delete_instance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance_config",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstanceConfig",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.DeleteInstanceConfig",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstanceConfigOperations_sync",
+      "title": "Snippet for the list_instance_config_operations call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_config_operations. It may require modification in order to execute successfully.",
+      "file": "instance_admin/list_instance_config_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instance_config_operations",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_config_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsResponse",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstanceConfigOperations",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.ListInstanceConfigOperations",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instances. It may require modification in order to execute successfully.",
+      "file": "instance_admin/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.ListInstances",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance. It may require modification in order to execute successfully.",
+      "file": "instance_admin/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::Instance",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.GetInstance",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance. It may require modification in order to execute successfully.",
+      "file": "instance_admin/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.CreateInstance",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_UpdateInstance_sync",
+      "title": "Snippet for the update_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance. It may require modification in order to execute successfully.",
+      "file": "instance_admin/update_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstance",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.UpdateInstance",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance. It may require modification in order to execute successfully.",
+      "file": "instance_admin/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.DeleteInstance",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "instance_admin/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.SetIamPolicy",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "instance_admin/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.GetIamPolicy",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "instance_admin/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.TestIamPermissions",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
