@@ -1,5 +1,17 @@
 # Release History
 
+### 0.16.0 (2023-10-16)
+
+#### Features
+
+* Added Apple developer ID and non-Google app store flag to mobile key settings 
+* Added behavioral trust verdict to FraudPreventionAssessment 
+* Added extended verdict reasons to RiskAnalysis 
+* Additional information about events being assessed, including request UI, headers, and flags for express requests, WAF token assessments, and policy evaluations 
+* Support firewall policy assessments 
+* Support FirewallPolicy management calls ([#23424](https://github.com/googleapis/google-cloud-ruby/issues/23424)) 
+* Support fraud signals in assessments 
+
 ### 0.15.0 (2023-09-12)
 
 #### Features
