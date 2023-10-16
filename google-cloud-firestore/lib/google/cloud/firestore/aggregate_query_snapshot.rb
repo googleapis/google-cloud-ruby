@@ -104,11 +104,23 @@ module Google
         # @private New AggregateQuerySnapshot from a
         # Google::Cloud::Firestore::V1::RunAggregationQueryResponse object.
         def self.from_run_aggregate_query_response response
+          # pp response
           aggregate_fields = response
                              .result
                              .aggregate_fields
+                             .map do |aggregate_alias, value|
+                               # puts value
+                               # puts value.double_value
+                               if value.has_integer_value?
+                                 [aggregate_alias, value.integer_value]
+                               elsif value.has_double_value?
+                                 [aggregate_alias, value.double_value]
+                               elsif value.has_null_value?
+                                 [aggregate_alias, nil]
+                               end
+                             end
                              .to_h # convert from protobuf to ruby map
-                             .transform_values { |v| v[:integer_value] }
+                             # .transform_values { |v| v[:integer_value] }
 
           new.tap do |s|
             s.instance_variable_set :@aggregate_fields, aggregate_fields
