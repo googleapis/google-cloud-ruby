@@ -220,6 +220,24 @@ describe "Aggregate Query", :firestore_acceptance do
     end
 
     focus
+    it "returns NaN avg for NaN records" do
+      @rand_query_col.add({foo: Float::NAN})
+      aq = @rand_query_col.aggregate_query
+                          .add_avg('foo')
+      snapshot = aq.get.first
+      _(snapshot.get.nan?).must_equal true
+    end
+
+    focus
+    it "returns Infinity for Infinite values in records" do
+      @rand_query_col.add({foo: Float::INFINITY})
+      aq = @rand_query_col.aggregate_query
+                          .add_avg('foo')
+      snapshot = aq.get.first
+      _(snapshot.get).must_equal Float::INFINITY
+    end
+
+    focus
     it "returns nil for no records" do
       @rand_query_col.list_documents.each(&:delete)
       aq = @rand_query_col.aggregate_query
