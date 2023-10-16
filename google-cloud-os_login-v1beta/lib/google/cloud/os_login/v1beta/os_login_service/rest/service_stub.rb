@@ -513,6 +513,14 @@ module Google
                                                             ["parent", %r{^users/[^/]+/projects/[^/]+/zones/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{parent}:signSshPublicKey",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^users/[^/]+/projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
             end
