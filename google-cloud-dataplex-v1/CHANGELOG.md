@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2023-10-16)
+
+#### Features
+
+* Added dimension to DataQualityDimensionResult ([#23427](https://github.com/googleapis/google-cloud-ruby/issues/23427)) 
+
 ### 0.12.0 (2023-09-26)
 
 #### Features
