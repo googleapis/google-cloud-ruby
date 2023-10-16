@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2023-10-16)
+
+#### Features
+
+* Added behavioral trust verdict to FraudPreventionAssessment ([#23423](https://github.com/googleapis/google-cloud-ruby/issues/23423)) 
+
 ### 0.10.0 (2023-09-12)
 
 #### Features
