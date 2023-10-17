@@ -589,7 +589,7 @@
   "google-cloud-shell-v1+FILLER": "0.0.0",
   "google-cloud-spanner-admin-database-v1": "0.15.0",
   "google-cloud-spanner-admin-database-v1+FILLER": "0.0.0",
-  "google-cloud-spanner-admin-instance-v1": "0.11.0",
+  "google-cloud-spanner-admin-instance-v1": "0.12.0",
   "google-cloud-spanner-admin-instance-v1+FILLER": "0.0.0",
   "google-cloud-spanner-v1": "0.17.0",
   "google-cloud-spanner-v1+FILLER": "0.0.0",
