@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2023-10-17)
+
+#### Features
+
+* add autoscaling config to the admin instance ([#23436](https://github.com/googleapis/google-cloud-ruby/issues/23436)) 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features

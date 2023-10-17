@@ -45,6 +45,31 @@
                 "export_data"
               ]
             },
+            "CreateDatasetVersion": {
+              "methods": [
+                "create_dataset_version"
+              ]
+            },
+            "DeleteDatasetVersion": {
+              "methods": [
+                "delete_dataset_version"
+              ]
+            },
+            "GetDatasetVersion": {
+              "methods": [
+                "get_dataset_version"
+              ]
+            },
+            "ListDatasetVersions": {
+              "methods": [
+                "list_dataset_versions"
+              ]
+            },
+            "RestoreDatasetVersion": {
+              "methods": [
+                "restore_dataset_version"
+              ]
+            },
             "ListDataItems": {
               "methods": [
                 "list_data_items"

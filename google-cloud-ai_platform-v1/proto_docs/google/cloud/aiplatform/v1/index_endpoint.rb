@@ -214,7 +214,10 @@ module Google
         #
         #     The value should be the name of the address
         #     (https://cloud.google.com/compute/docs/reference/rest/v1/addresses)
-        #     Example: 'vertex-ai-ip-range'.
+        #     Example: ['vertex-ai-ip-range'].
+        #
+        #     For more information about subnets and network IP ranges, please see
+        #     https://cloud.google.com/vpc/docs/subnets#manually_created_subnet_ip_ranges.
         # @!attribute [rw] deployment_group
         #   @return [::String]
         #     Optional. The deployment group can be no longer than 64 characters (eg:

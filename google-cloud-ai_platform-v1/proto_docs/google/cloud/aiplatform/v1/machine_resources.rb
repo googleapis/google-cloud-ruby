@@ -182,6 +182,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents the spec of [persistent
+        # disk][https://cloud.google.com/compute/docs/disks/persistent-disks] options.
+        # @!attribute [rw] disk_type
+        #   @return [::String]
+        #     Type of the disk (default is "pd-standard").
+        #     Valid values: "pd-ssd" (Persistent Disk Solid State Drive)
+        #     "pd-standard" (Persistent Disk Hard Disk Drive)
+        #     "pd-balanced" (Balanced Persistent Disk)
+        #     "pd-extreme" (Extreme Persistent Disk)
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Size in GB of the disk (default is 100GB).
+        class PersistentDiskSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a mount configuration for Network File System (NFS) to mount.
         # @!attribute [rw] server
         #   @return [::String]

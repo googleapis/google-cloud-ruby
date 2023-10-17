@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-10-16)
+
+#### Features
+
+* Support for vehicle route modifiers ([#23429](https://github.com/googleapis/google-cloud-ruby/issues/23429)) 
+
 ### 0.6.0 (2023-09-12)
 
 #### Features

@@ -149,7 +149,7 @@ module Google
         #     Immutable. The ID of the DeployedModel. If not provided upon deployment,
         #     Vertex AI will generate a value for this ID.
         #
-        #     This value should be 1-10 characters, and valid characters are /[0-9]/.
+        #     This value should be 1-10 characters, and valid characters are `/[0-9]/`.
         # @!attribute [rw] model
         #   @return [::String]
         #     Required. The resource name of the Model that this is the deployment of.

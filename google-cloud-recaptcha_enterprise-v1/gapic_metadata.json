@@ -60,6 +60,31 @@
                 "get_metrics"
               ]
             },
+            "CreateFirewallPolicy": {
+              "methods": [
+                "create_firewall_policy"
+              ]
+            },
+            "ListFirewallPolicies": {
+              "methods": [
+                "list_firewall_policies"
+              ]
+            },
+            "GetFirewallPolicy": {
+              "methods": [
+                "get_firewall_policy"
+              ]
+            },
+            "UpdateFirewallPolicy": {
+              "methods": [
+                "update_firewall_policy"
+              ]
+            },
+            "DeleteFirewallPolicy": {
+              "methods": [
+                "delete_firewall_policy"
+              ]
+            },
             "ListRelatedAccountGroups": {
               "methods": [
                 "list_related_account_groups"

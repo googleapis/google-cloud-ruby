@@ -150,7 +150,7 @@ module Google
         #     generated.
         #
         #     This value should be less than 128 characters, and valid characters
-        #     are /[a-z][0-9]-/.
+        #     are `/[a-z][0-9]-/`.
         class CreatePipelineJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

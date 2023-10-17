@@ -153,6 +153,12 @@ module Google
         # @!attribute [rw] barrier
         #   @return [::Google::Cloud::Batch::V1::Runnable::Barrier]
         #     Barrier runnable.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. DisplayName is an optional field that can be provided by the
+        #     caller. If provided, it will be used in logs and other outputs to identify
+        #     the script, making it easier for users to understand the logs. If not
+        #     provided the index of the runnable will be used for outputs.
         # @!attribute [rw] ignore_exit_status
         #   @return [::Boolean]
         #     Normally, a non-zero exit status causes the Task to fail. This flag allows
@@ -203,6 +209,14 @@ module Google
           #     Volumes to mount (bind mount) from the host machine files or directories
           #     into the container, formatted to match docker run's --volume option,
           #     e.g. /foo:/bar, or /foo:/bar:ro
+          #
+          #     If the `TaskSpec.Volumes` field is specified but this field is not, Batch
+          #     will mount each volume from the host machine to the container with the
+          #     same mount path by default. In this case, the default mount option for
+          #     containers will be read-only (ro) for existing persistent disks and
+          #     read-write (rw) for other volume types, regardless of the original mount
+          #     options specified in `TaskSpec.Volumes`. If you need different mount
+          #     settings, you can explicitly configure them in this field.
           # @!attribute [rw] options
           #   @return [::String]
           #     Arbitrary additional options to include in the "docker run" command when

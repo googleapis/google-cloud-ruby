@@ -298,6 +298,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NotificationChannel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/notificationChannels/{notification_channel}`
+            #
+            # @param project [String]
+            # @param notification_channel [String]
+            #
+            # @return [::String]
+            def notification_channel_path project:, notification_channel:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/notificationChannels/#{notification_channel}"
+            end
+
+            ##
             # Create a fully-qualified Tensorboard resource string.
             #
             # The resource will be in the following format:

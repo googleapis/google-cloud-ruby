@@ -110,7 +110,7 @@ module Google
             INDEX_UPDATE_METHOD_UNSPECIFIED = 0
 
             # BatchUpdate: user can call UpdateIndex with files on Cloud Storage of
-            # datapoints to update.
+            # Datapoints to update.
             BATCH_UPDATE = 1
 
             # StreamUpdate: user can call UpsertDatapoints/DeleteDatapoints to update
@@ -132,7 +132,7 @@ module Google
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint::Restriction>]
         #     Optional. List of Restrict of the datapoint, used to perform "restricted
         #     searches" where boolean rule are used to filter the subset of the database
-        #     eligible for matching. See:
+        #     eligible for matching. This uses categorical tokens. See:
         #     https://cloud.google.com/vertex-ai/docs/matching-engine/filtering
         # @!attribute [rw] crowding_tag
         #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::CrowdingTag]
@@ -146,13 +146,13 @@ module Google
           # of several attribute categories(namespaces).
           # @!attribute [rw] namespace
           #   @return [::String]
-          #     The namespace of this restriction. eg: color.
+          #     The namespace of this restriction. e.g.: color.
           # @!attribute [rw] allow_list
           #   @return [::Array<::String>]
-          #     The attributes to allow in this namespace. eg: 'red'
+          #     The attributes to allow in this namespace. e.g.: 'red'
           # @!attribute [rw] deny_list
           #   @return [::Array<::String>]
-          #     The attributes to deny in this namespace. eg: 'blue'
+          #     The attributes to deny in this namespace. e.g.: 'blue'
           class Restriction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2023-10-16)
+
+#### Features
+
+* Add standard isolation options to AppProfile ([#23425](https://github.com/googleapis/google-cloud-ruby/issues/23425)) 
+
 ### 0.18.0 (2023-09-12)
 
 #### Features

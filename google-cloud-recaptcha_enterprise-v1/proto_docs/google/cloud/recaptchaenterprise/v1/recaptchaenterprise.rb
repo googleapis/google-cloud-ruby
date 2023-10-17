@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the project in which the assessment will be created,
-        #     in the format "projects/\\{project}".
+        #     in the format `projects/{project}`.
         # @!attribute [rw] assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Assessment]
         #     Required. The assessment details.
@@ -159,7 +159,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Assessment, in the format
-        #     "projects/\\{project}/assessments/\\{assessment}".
+        #     `projects/{project}/assessments/{assessment}`.
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
         #     Optional. The annotation that will be assigned to the Event. This field can
@@ -392,7 +392,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for the Assessment in the format
-        #     "projects/\\{project}/assessments/\\{assessment}".
+        #     `projects/{project}/assessments/{assessment}`.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Event]
         #     The event being assessed.
@@ -414,9 +414,17 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PrivatePasswordLeakVerification]
         #     The private password leak verification field contains the parameters that
         #     are used to to check for leaks privately without sharing user credentials.
+        # @!attribute [rw] firewall_policy_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicyAssessment]
+        #     Assessment returned when firewall policies belonging to the project are
+        #     evaluated using the field firewall_policy_evaluation.
         # @!attribute [rw] fraud_prevention_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment]
         #     Assessment returned by Fraud Prevention when TransactionData is provided.
+        # @!attribute [r] fraud_signals
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudSignals]
+        #     Output only. Fraud Signals specific to the users involved in a payment
+        #     transaction.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,6 +456,30 @@ module Google
         #   @return [::String]
         #     Optional. Unique stable hashed user identifier for the request. The
         #     identifier must be hashed using hmac-sha256 with stable secret.
+        # @!attribute [rw] express
+        #   @return [::Boolean]
+        #     Optional. Flag for a reCAPTCHA express request for an assessment without a
+        #     token. If enabled, `site_key` must reference a SCORE key with WAF feature
+        #     set to EXPRESS.
+        # @!attribute [rw] requested_uri
+        #   @return [::String]
+        #     Optional. The URI resource the user requested that triggered an assessment.
+        # @!attribute [rw] waf_token_assessment
+        #   @return [::Boolean]
+        #     Optional. Flag for running WAF token assessment.
+        #     If enabled, the token must be specified, and have been created by a
+        #     WAF-enabled key.
+        # @!attribute [rw] ja3
+        #   @return [::String]
+        #     Optional. Optional JA3 fingerprint for SSL clients.
+        # @!attribute [rw] headers
+        #   @return [::Array<::String>]
+        #     Optional. HTTP header information about the request.
+        # @!attribute [rw] firewall_policy_evaluation
+        #   @return [::Boolean]
+        #     Optional. Flag for enabling firewall policy config assessment.
+        #     If this flag is enabled, the firewall policy will be evaluated and a
+        #     suggested firewall action will be returned in the response.
         # @!attribute [rw] transaction_data
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData]
         #     Optional. Data describing a payment transaction to be assessed. Sending
@@ -619,6 +651,10 @@ module Google
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::ClassificationReason>]
         #     Reasons contributing to the risk analysis verdict.
+        # @!attribute [rw] extended_verdict_reasons
+        #   @return [::Array<::String>]
+        #     Extended verdict reasons to be used for experimentation only. The set of
+        #     possible reasons is subject to change.
         class RiskAnalysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -714,8 +750,9 @@ module Google
         # Assessment for Fraud Prevention.
         # @!attribute [rw] transaction_risk
         #   @return [::Float]
-        #     Probability (0-1) of this transaction being fraudulent. Summarizes the
-        #     combined risk of attack vectors below.
+        #     Probability of this transaction being fraudulent. Summarizes the combined
+        #     risk of attack vectors below.
+        #     Values are from 0.0 (lowest) to 1.0 (highest).
         # @!attribute [rw] stolen_instrument_verdict
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::StolenInstrumentVerdict]
         #     Assessment of this transaction for risk of a stolen instrument.
@@ -723,6 +760,9 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::CardTestingVerdict]
         #     Assessment of this transaction for risk of being part of a card testing
         #     attack.
+        # @!attribute [rw] behavioral_trust_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::BehavioralTrustVerdict]
+        #     Assessment of this transaction for behavioral trust.
         class FraudPreventionAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -731,8 +771,8 @@ module Google
           # legitimate owner of the instrument being used for the purchase.
           # @!attribute [rw] risk
           #   @return [::Float]
-          #     Probability (0-1) of this transaction being executed with a stolen
-          #     instrument.
+          #     Probability of this transaction being executed with a stolen instrument.
+          #     Values are from 0.0 (lowest) to 1.0 (highest).
           class StolenInstrumentVerdict
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -742,11 +782,78 @@ module Google
           # fraudulently obtained cards or brute forcing their details.
           # @!attribute [rw] risk
           #   @return [::Float]
-          #     Probability (0-1) of this transaction attempt being part of a card
-          #     testing attack.
+          #     Probability of this transaction attempt being part of a card testing
+          #     attack.
+          #     Values are from 0.0 (lowest) to 1.0 (highest).
           class CardTestingVerdict
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information about behavioral trust of the transaction.
+          # @!attribute [rw] trust
+          #   @return [::Float]
+          #     Probability of this transaction attempt being executed in a behaviorally
+          #     trustworthy way.
+          #     Values are from 0.0 (lowest) to 1.0 (highest).
+          class BehavioralTrustVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Fraud signals describing users and cards involved in the transaction.
+        # @!attribute [r] user_signals
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudSignals::UserSignals]
+        #     Output only. Signals describing the end user in this transaction.
+        # @!attribute [r] card_signals
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudSignals::CardSignals]
+        #     Output only. Signals describing the payment card or cards used in this
+        #     transaction.
+        class FraudSignals
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Signals describing the user involved in this transaction.
+          # @!attribute [r] active_days_lower_bound
+          #   @return [::Integer]
+          #     Output only. This user (based on email, phone, and other identifiers) has
+          #     been seen on the internet for at least this number of days.
+          # @!attribute [r] synthetic_risk
+          #   @return [::Float]
+          #     Output only. Likelihood (from 0.0 to 1.0) this user includes synthetic
+          #     components in their identity, such as a randomly generated email address,
+          #     temporary phone number, or fake shipping address.
+          class UserSignals
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Signals describing the payment card used in this transaction.
+          # @!attribute [r] card_labels
+          #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::FraudSignals::CardSignals::CardLabel>]
+          #     Output only. The labels for the payment card in this transaction.
+          class CardSignals
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Risk labels describing the card being assessed, such as its funding
+            # mechanism.
+            module CardLabel
+              # No label specified.
+              CARD_LABEL_UNSPECIFIED = 0
+
+              # This card has been detected as prepaid.
+              PREPAID = 1
+
+              # This card has been detected as virtual, such as a card number generated
+              # for a single transaction or merchant.
+              VIRTUAL = 2
+
+              # This card has been detected as being used in an unexpected geographic
+              # location.
+              UNEXPECTED_LOCATION = 3
+            end
           end
         end
 
@@ -785,7 +892,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the project in which the key will be created, in the
-        #     format "projects/\\{project}".
+        #     format `projects/{project}`.
         # @!attribute [rw] key
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Key]
         #     Required. Information to create a reCAPTCHA Enterprise key.
@@ -798,7 +905,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the project that contains the keys that will be
-        #     listed, in the format "projects/\\{project}".
+        #     listed, in the format `projects/{project}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of keys to return. Default is 10. Max limit is
@@ -829,7 +936,7 @@ module Google
         # @!attribute [rw] key
         #   @return [::String]
         #     Required. The public key name linked to the requested secret key in the
-        #     format "projects/\\{project}/keys/\\{key}".
+        #     format `projects/{project}/keys/{key}`.
         class RetrieveLegacySecretKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -839,7 +946,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the requested key, in the format
-        #     "projects/\\{project}/keys/\\{key}".
+        #     `projects/{project}/keys/{key}`.
         class GetKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -862,8 +969,85 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the key to be deleted, in the format
-        #     "projects/\\{project}/keys/\\{key}".
+        #     `projects/{project}/keys/{key}`.
         class DeleteKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The create firewall policy request message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project this policy will apply to, in the format
+        #     `projects/{project}`.
+        # @!attribute [rw] firewall_policy
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy]
+        #     Required. Information to create the policy.
+        class CreateFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The list firewall policies request message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project to list the policies for, in the format
+        #     `projects/{project}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of policies to return. Default is 10. Max
+        #     limit is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The next_page_token value returned from a previous.
+        #     ListFirewallPoliciesRequest, if any.
+        class ListFirewallPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response to request to list firewall policies belonging to a key.
+        # @!attribute [rw] firewall_policies
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy>]
+        #     Policy details.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results. It is set to empty if no
+        #     policies remain in results.
+        class ListFirewallPoliciesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The get firewall policy request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the requested policy, in the format
+        #     `projects/{project}/firewallpolicies/{firewallpolicy}`.
+        class GetFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The update firewall policy request message.
+        # @!attribute [rw] firewall_policy
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy]
+        #     Required. The policy to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The mask to control which fields of the policy get updated. If
+        #     the mask is not present, all fields will be updated.
+        class UpdateFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The delete firewall policy request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the policy to be deleted, in the format
+        #     `projects/{project}/firewallpolicies/{firewallpolicy}`.
+        class DeleteFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -872,7 +1056,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the key to be migrated, in the format
-        #     "projects/\\{project}/keys/\\{key}".
+        #     `projects/{project}/keys/{key}`.
         # @!attribute [rw] skip_billing_check
         #   @return [::Boolean]
         #     Optional. If true, skips the billing check.
@@ -892,7 +1076,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the requested metrics, in the format
-        #     "projects/\\{project}/keys/\\{key}/metrics".
+        #     `projects/{project}/keys/{key}/metrics`.
         class GetMetricsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -902,7 +1086,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The name of the metrics, in the format
-        #     "projects/\\{project}/keys/\\{key}/metrics".
+        #     `projects/{project}/keys/{key}/metrics`.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Inclusive start time aligned to a day (UTC).
@@ -938,7 +1122,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name for the Key in the format
-        #     "projects/\\{project}/keys/\\{key}".
+        #     `projects/{project}/keys/{key}`.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Human-readable display name of this key. Modifiable by user.
@@ -953,11 +1137,11 @@ module Google
         #     Settings for keys that can be used by iOS apps.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
-        #     Creating and managing labels</a>.
+        #     See [Creating and managing labels]
+        #     (https://cloud.google.com/recaptcha-enterprise/docs/labels).
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp corresponding to the creation of this Key.
+        #     Output only. The timestamp corresponding to the creation of this key.
         # @!attribute [rw] testing_options
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions]
         #     Options for user acceptance testing.
@@ -1080,6 +1264,10 @@ module Google
         #   @return [::Array<::String>]
         #     Android package names of apps allowed to use the key.
         #     Example: 'com.companyname.appname'
+        # @!attribute [rw] support_non_google_app_store_distribution
+        #   @return [::Boolean]
+        #     Set to true for keys that are used in an Android application that is
+        #     available for download in app stores in addition to the Google Play Store.
         class AndroidKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1093,7 +1281,32 @@ module Google
         #   @return [::Array<::String>]
         #     iOS bundle ids of apps allowed to use the key.
         #     Example: 'com.companyname.productname.appname'
+        # @!attribute [rw] apple_developer_id
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AppleDeveloperId]
+        #     Apple Developer account details for the app that is protected by the
+        #     reCAPTCHA Key. reCAPTCHA Enterprise leverages platform-specific checks like
+        #     Apple App Attest and Apple DeviceCheck to protect your app from abuse.
+        #     Providing these fields allows reCAPTCHA Enterprise to get a better
+        #     assessment of the integrity of your app.
         class IOSKeySettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains fields that are required to perform Apple-specific integrity checks.
+        # @!attribute [rw] private_key
+        #   @return [::String]
+        #     Required. Input only. A private key (downloaded as a text file with a .p8
+        #     file extension) generated for your Apple Developer account. Ensure that
+        #     Apple DeviceCheck is enabled for the private key.
+        # @!attribute [rw] key_id
+        #   @return [::String]
+        #     Required. The Apple developer key ID (10-character string).
+        # @!attribute [rw] team_id
+        #   @return [::String]
+        #     Required. The Apple team ID (10-character string) owning the provisioning
+        #     profile used to build your application.
+        class AppleDeveloperId
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1162,6 +1375,132 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Policy config assessment.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     If the processing of a policy config fails, an error will be populated
+        #     and the firewall_policy will be left empty.
+        # @!attribute [r] firewall_policy
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy]
+        #     Output only. The policy that matched the request. If more than one policy
+        #     may match, this is the first match. If no policy matches the incoming
+        #     request, the policy field will be left empty.
+        class FirewallPolicyAssessment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An individual action. Each action represents what to do if a policy
+        # matches.
+        # @!attribute [rw] allow
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::AllowAction]
+        #     The user request did not match any policy and should be allowed
+        #     access to the requested resource.
+        # @!attribute [rw] block
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::BlockAction]
+        #     This action will deny access to a given page. The user will get an HTTP
+        #     error code.
+        # @!attribute [rw] redirect
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::RedirectAction]
+        #     This action will redirect the request to a ReCaptcha interstitial to
+        #     attach a token.
+        # @!attribute [rw] substitute
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::SubstituteAction]
+        #     This action will transparently serve a different page to an offending
+        #     user.
+        # @!attribute [rw] set_header
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::SetHeaderAction]
+        #     This action will set a custom header but allow the request to continue
+        #     to the customer backend.
+        class FirewallAction
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # An allow action continues processing a request unimpeded.
+          class AllowAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A block action serves an HTTP error code a prevents the request from
+          # hitting the backend.
+          class BlockAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A redirect action returns a 307 (temporary redirect) response, pointing
+          # the user to a ReCaptcha interstitial page to attach a token.
+          class RedirectAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A substitute action transparently serves a different page than the one
+          # requested.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     The address to redirect to. The target is a relative path in the
+          #     current host. Example: "/blog/404.html".
+          class SubstituteAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A set header action sets a header and forwards the request to the
+          # backend. This can be used to trigger custom protection implemented on the
+          # backend.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     The header key to set in the request to the backend server.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The header value to set in the request to the backend server.
+          class SetHeaderAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A FirewallPolicy represents a single matching pattern and resulting actions
+        # to take.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name for the FirewallPolicy in the format
+        #     `projects/{project}/firewallpolicies/{firewallpolicy}`.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     A description of what this policy aims to achieve, for convenience
+        #     purposes. The description can at most include 256 UTF-8 characters.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     The path for which this policy applies, specified as a glob pattern.
+        #     For more information on glob, see the [manual
+        #     page](https://man7.org/linux/man-pages/man7/glob.7.html).
+        #     A path has a max length of 200 characters.
+        # @!attribute [rw] condition
+        #   @return [::String]
+        #     A CEL (Common Expression Language) conditional expression that specifies if
+        #     this policy applies to an incoming user request. If this condition
+        #     evaluates to true and the requested path matched the path pattern, the
+        #     associated actions should be executed by the caller. The condition string
+        #     is checked for CEL syntax correctness on creation. For more information,
+        #     see the [CEL spec](https://github.com/google/cel-spec) and its [language
+        #     definition](https://github.com/google/cel-spec/blob/master/doc/langdef.md).
+        #     A condition has a max length of 500 characters.
+        # @!attribute [rw] actions
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction>]
+        #     The actions that the caller should take regarding user access.
+        #     There should be at most one terminal action. A terminal action is any
+        #     action that forces a response, such as `AllowAction`,
+        #     `BlockAction` or `SubstituteAction`.
+        #     Zero or more non-terminal actions such as `SetHeader` might be
+        #     specified. A single policy can contain up to 16 actions.
+        class FirewallPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request message to list memberships in a related account group.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1202,7 +1541,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the project to list related account groups from, in
-        #     the format "projects/\\{project}".
+        #     the format `projects/{project}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of groups to return. The service might return
@@ -1239,11 +1578,11 @@ module Google
         #   @return [::String]
         #     Required. The name of the project to search related account group
         #     memberships from. Specify the project name in the following format:
-        #     "projects/\\{project}".
+        #     `projects/{project}`.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. The unique stable hashed user identifier we should search
-        #     connections to. The identifier should correspond to a `hashed_account_id`
+        #     Optional. The unique stable hashed user identifier used to search
+        #     connections. The identifier should correspond to a `hashed_account_id`
         #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -1329,6 +1668,10 @@ module Google
 
             # Use reCAPTCHA action-tokens to protect user actions.
             ACTION_TOKEN = 3
+
+            # Use reCAPTCHA WAF express protection to protect any content other than
+            # web pages, like APIs and IoT devices.
+            EXPRESS = 5
           end
 
           # Web Application Firewalls supported by reCAPTCHA Enterprise.
@@ -1338,6 +1681,9 @@ module Google
 
             # Cloud Armor
             CA = 1
+
+            # Fastly
+            FASTLY = 3
           end
         end
       end

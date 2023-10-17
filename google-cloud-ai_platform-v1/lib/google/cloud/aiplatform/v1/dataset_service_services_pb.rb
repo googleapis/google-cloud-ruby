@@ -47,6 +47,16 @@ module Google
             rpc :ImportData, ::Google::Cloud::AIPlatform::V1::ImportDataRequest, ::Google::Longrunning::Operation
             # Exports data from a Dataset.
             rpc :ExportData, ::Google::Cloud::AIPlatform::V1::ExportDataRequest, ::Google::Longrunning::Operation
+            # Create a version from a Dataset.
+            rpc :CreateDatasetVersion, ::Google::Cloud::AIPlatform::V1::CreateDatasetVersionRequest, ::Google::Longrunning::Operation
+            # Deletes a Dataset version.
+            rpc :DeleteDatasetVersion, ::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest, ::Google::Longrunning::Operation
+            # Gets a Dataset version.
+            rpc :GetDatasetVersion, ::Google::Cloud::AIPlatform::V1::GetDatasetVersionRequest, ::Google::Cloud::AIPlatform::V1::DatasetVersion
+            # Lists DatasetVersions in a Dataset.
+            rpc :ListDatasetVersions, ::Google::Cloud::AIPlatform::V1::ListDatasetVersionsRequest, ::Google::Cloud::AIPlatform::V1::ListDatasetVersionsResponse
+            # Restores a dataset version.
+            rpc :RestoreDatasetVersion, ::Google::Cloud::AIPlatform::V1::RestoreDatasetVersionRequest, ::Google::Longrunning::Operation
             # Lists DataItems in a Dataset.
             rpc :ListDataItems, ::Google::Cloud::AIPlatform::V1::ListDataItemsRequest, ::Google::Cloud::AIPlatform::V1::ListDataItemsResponse
             # Searches DataItems in a Dataset.
