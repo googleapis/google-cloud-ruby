@@ -153,6 +153,12 @@ module Google
         # @!attribute [rw] barrier
         #   @return [::Google::Cloud::Batch::V1::Runnable::Barrier]
         #     Barrier runnable.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. DisplayName is an optional field that can be provided by the
+        #     caller. If provided, it will be used in logs and other outputs to identify
+        #     the script, making it easier for users to understand the logs. If not
+        #     provided the index of the runnable will be used for outputs.
         # @!attribute [rw] ignore_exit_status
         #   @return [::Boolean]
         #     Normally, a non-zero exit status causes the Task to fail. This flag allows
