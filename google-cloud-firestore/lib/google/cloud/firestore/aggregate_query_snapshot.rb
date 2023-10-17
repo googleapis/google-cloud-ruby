@@ -119,10 +119,11 @@ module Google
         # @private New AggregateQuerySnapshot from a
         # Google::Cloud::Firestore::V1::RunAggregationQueryResponse object.
         def self.from_run_aggregate_query_response response
+          # rubocop:disable Style/MapToHash
           aggregate_fields = response
                              .result
                              .aggregate_fields
-                             .map do |aggregate_alias, value|
+                             .map do |aggregate_alias, value| # convert from protobuf to ruby map
                                if value.has_integer_value?
                                  [aggregate_alias, value.integer_value]
                                elsif value.has_double_value?
@@ -131,7 +132,8 @@ module Google
                                  [aggregate_alias, nil]
                                end
                              end
-                             .to_h # convert from protobuf to ruby map
+                             .to_h
+          # rubocop:enable Style/MapToHash
 
           new.tap do |s|
             s.instance_variable_set :@aggregate_fields, aggregate_fields
