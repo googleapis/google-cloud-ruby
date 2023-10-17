@@ -207,7 +207,7 @@ module Google
 
             ##
             # Creates the given topic with the given name. See the [resource name rules]
-            # (https://cloud.google.com/pubsub/docs/admin#resource_names).
+            # (https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
             #
             # @overload create_topic(request, options = nil)
             #   Pass arguments to `create_topic` via a request object, either of type
