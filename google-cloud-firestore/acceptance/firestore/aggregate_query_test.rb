@@ -122,15 +122,12 @@ describe "Aggregate Query", :firestore_acceptance do
 
     focus
     it "returns double sum for double records" do
-      @rand_query_col.list_documents.each(&:delete)
-      @rand_query_col.add({foo: 1.0})
-      @rand_query_col.add({foo: 2.0})
-      @rand_query_col.add({foo: 3.0})
+      @rand_query_col.add({foo: 4.0})
       aq = @rand_query_col.aggregate_query
                           .add_sum('foo')
       snapshot = aq.get.first
       _(snapshot.get).must_be_kind_of Float
-      _(snapshot.get).must_equal 6.0
+      _(snapshot.get).must_equal 10.0
     end
 
     focus
