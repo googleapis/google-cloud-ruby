@@ -103,7 +103,7 @@ describe "Document", :firestore_acceptance do
 
     doc_ref.set({nullField: nil}, merge: true)
     doc_snp = doc_ref.get
-    _(doc_snp[:nullField]).must_equal nil
+    _(doc_snp[:nullField]).must_be :nil?
   end
 
   it "supports server timestamps" do
