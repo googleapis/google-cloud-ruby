@@ -19,7 +19,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   let(:query) { Google::Cloud::Firestore::Query.start(nil, "#{firestore.path}/documents", firestore).select(:score) }
 
   describe "Common" do
-    focus
     it "creates empty AggregateQuery object" do
       aggregate_query = query.aggregate_query
 
@@ -39,7 +38,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   end
 
   describe "COUNT" do
-    focus
     it "creates COUNT aggregate with default alias" do
       aggregate_query = query.aggregate_query
                              .add_count
@@ -63,7 +61,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations.first.count).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count
     end
 
-    focus
     it "creates COUNT aggregate with custom alias" do
       aggregate_query = query.aggregate_query
                              .add_count aggregate_alias: 'total'
@@ -87,7 +84,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations.first.count).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count
     end
 
-    focus
     it "creates multiple COUNT aggregates" do
       aggregate_query = query.aggregate_query
                              .add_count(aggregate_alias: 'total_1')
@@ -121,7 +117,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations[2].count).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count
     end
 
-    focus
     it "does not mutate existing AggregateQuery object on adding more aggregates" do
       aggregate_query_1 = query.aggregate_query
                                .add_count(aggregate_alias: 'total_1')
@@ -137,7 +132,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
                                              .to_grpc)
     end
 
-    focus
     it "gets an aggregate query with custom alias" do
       expected_params = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
         parent: parent,
@@ -180,7 +174,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   end
 
   describe "SUM" do
-    focus
     it "creates SUM aggregate with default alias" do
       aggregate_query = query.aggregate_query
                              .add_sum('score')
@@ -204,7 +197,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations.first.sum).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum
     end
 
-    focus
     it "creates SUM aggregate with custom alias" do
       aggregate_query = query.aggregate_query
                              .add_sum 'score', aggregate_alias: 'total'
@@ -228,7 +220,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations.first.sum).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum
     end
 
-    focus
     it "creates multiple SUM aggregates" do
       aggregate_query = query.aggregate_query
                              .add_sum('score', aggregate_alias: 'total_1')
@@ -262,7 +253,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations[2].sum).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum
     end
 
-    focus
     it "does not mutate existing AggregateQuery object on adding more aggregates" do
       aggregate_query_1 = query.aggregate_query
                                .add_sum('score', aggregate_alias: 'total_1')
@@ -278,7 +268,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
                                              .to_grpc)
     end
 
-    focus
     it "gets an aggregate query with custom alias" do
       expected_params = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
         parent: parent,
@@ -323,7 +312,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   end
 
   describe "AVG" do
-    focus
     it "creates AVG aggregate with default alias" do
       aggregate_query = query.aggregate_query
                              .add_avg('score')
@@ -347,7 +335,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations.first.avg).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg
     end
 
-    focus
     it "creates AVG aggregate with custom alias" do
       aggregate_query = query.aggregate_query
                              .add_avg 'score', aggregate_alias: 'avg_score'
@@ -371,7 +358,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations.first.avg).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg
     end
 
-    focus
     it "creates multiple AVG aggregates" do
       aggregate_query = query.aggregate_query
                              .add_avg('score', aggregate_alias: 'score_1')
@@ -405,7 +391,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
       _(grpc.aggregations[2].avg).must_be_kind_of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg
     end
 
-    focus
     it "does not mutate existing AggregateQuery object on adding more aggregates" do
       aggregate_query_1 = query.aggregate_query
                                .add_avg('score', aggregate_alias: 'score_1')
@@ -421,7 +406,6 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
                                              .to_grpc)
     end
 
-    focus
     it "gets an aggregate query with custom alias" do
       expected_params = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
         parent: parent,
