@@ -1483,6 +1483,10 @@
       "component": "google-shopping-merchant-inventories-v1beta",
       "version_file": "lib/google/shopping/merchant/inventories/v1beta/version.rb"
     },
+    "google-shopping-merchant-reports": {
+      "component": "google-shopping-merchant-reports",
+      "version_file": "lib/google/shopping/merchant/reports/version.rb"
+    },
     "google-shopping-merchant-reports-v1beta": {
       "component": "google-shopping-merchant-reports-v1beta",
       "version_file": "lib/google/shopping/merchant/reports/v1beta/version.rb"
