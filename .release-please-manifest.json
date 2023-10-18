@@ -733,6 +733,8 @@
   "google-identity-access_context_manager+FILLER": "0.0.0",
   "google-identity-access_context_manager-v1": "0.6.0",
   "google-identity-access_context_manager-v1+FILLER": "0.0.0",
+  "google-shopping-merchant-inventories-v1beta": "0.0.1",
+  "google-shopping-merchant-inventories-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-reports-v1beta": "0.0.1",
   "google-shopping-merchant-reports-v1beta+FILLER": "0.0.0",
   "grafeas": "1.2.0",
