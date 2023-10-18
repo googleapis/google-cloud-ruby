@@ -1,0 +1,148 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.deploy.v1",
+  "libraryPackage": "::Google::Cloud::Deploy::V1",
+  "services": {
+    "CloudDeploy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Deploy::V1::CloudDeploy::Client",
+          "rpcs": {
+            "ListDeliveryPipelines": {
+              "methods": [
+                "list_delivery_pipelines"
+              ]
+            },
+            "GetDeliveryPipeline": {
+              "methods": [
+                "get_delivery_pipeline"
+              ]
+            },
+            "CreateDeliveryPipeline": {
+              "methods": [
+                "create_delivery_pipeline"
+              ]
+            },
+            "UpdateDeliveryPipeline": {
+              "methods": [
+                "update_delivery_pipeline"
+              ]
+            },
+            "DeleteDeliveryPipeline": {
+              "methods": [
+                "delete_delivery_pipeline"
+              ]
+            },
+            "ListTargets": {
+              "methods": [
+                "list_targets"
+              ]
+            },
+            "GetTarget": {
+              "methods": [
+                "get_target"
+              ]
+            },
+            "CreateTarget": {
+              "methods": [
+                "create_target"
+              ]
+            },
+            "UpdateTarget": {
+              "methods": [
+                "update_target"
+              ]
+            },
+            "DeleteTarget": {
+              "methods": [
+                "delete_target"
+              ]
+            },
+            "ListReleases": {
+              "methods": [
+                "list_releases"
+              ]
+            },
+            "GetRelease": {
+              "methods": [
+                "get_release"
+              ]
+            },
+            "CreateRelease": {
+              "methods": [
+                "create_release"
+              ]
+            },
+            "AbandonRelease": {
+              "methods": [
+                "abandon_release"
+              ]
+            },
+            "ApproveRollout": {
+              "methods": [
+                "approve_rollout"
+              ]
+            },
+            "AdvanceRollout": {
+              "methods": [
+                "advance_rollout"
+              ]
+            },
+            "CancelRollout": {
+              "methods": [
+                "cancel_rollout"
+              ]
+            },
+            "ListRollouts": {
+              "methods": [
+                "list_rollouts"
+              ]
+            },
+            "GetRollout": {
+              "methods": [
+                "get_rollout"
+              ]
+            },
+            "CreateRollout": {
+              "methods": [
+                "create_rollout"
+              ]
+            },
+            "IgnoreJob": {
+              "methods": [
+                "ignore_job"
+              ]
+            },
+            "RetryJob": {
+              "methods": [
+                "retry_job"
+              ]
+            },
+            "ListJobRuns": {
+              "methods": [
+                "list_job_runs"
+              ]
+            },
+            "GetJobRun": {
+              "methods": [
+                "get_job_run"
+              ]
+            },
+            "TerminateJobRun": {
+              "methods": [
+                "terminate_job_run"
+              ]
+            },
+            "GetConfig": {
+              "methods": [
+                "get_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
