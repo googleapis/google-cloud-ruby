@@ -1479,6 +1479,10 @@
       "component": "google-identity-access_context_manager-v1",
       "version_file": "lib/google/identity/access_context_manager/v1/version.rb"
     },
+    "google-shopping-merchant-inventories-v1beta": {
+      "component": "google-shopping-merchant-inventories-v1beta",
+      "version_file": "lib/google/shopping/merchant/inventories/v1beta/version.rb"
+    },
     "grafeas": {
       "component": "grafeas",
       "version_file": "lib/grafeas/version.rb"
