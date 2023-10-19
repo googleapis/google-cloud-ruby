@@ -70,9 +70,6 @@ module Google
           # @!attribute [rw] product_performance_view
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::ProductPerformanceView]
           #     Fields available for query in `product_performance_view` table.
-          # @!attribute [rw] non_product_performance_view
-          #   @return [::Google::Shopping::Merchant::Reports::V1beta::NonProductPerformanceView]
-          #     Fields available for query in `non_product_performance_view` table.
           # @!attribute [rw] product_view
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::ProductView]
           #     Fields available for query in `product_view` table.
@@ -136,25 +133,6 @@ module Google
           #
           #     If the customer country cannot be determined, a special 'ZZ' code is
           #     returned.
-          # @!attribute [rw] account_id
-          #   @return [::Integer]
-          #     Merchant Center account id of the seller of the offer. Segment.
-          #
-          #     Available only for multi-client accounts.
-          # @!attribute [rw] account_display_name
-          #   @return [::String]
-          #     Merchant Center account name of the seller of the offer. Segment.
-          #
-          #     Available only for multi-client accounts.
-          # @!attribute [rw] external_account_id
-          #   @return [::String]
-          #     [External account
-          #     id](https://support.google.com/merchants/answer/11537846?hl=en) submitted
-          #     in an offer feed by a multi-seller account to identify the seller of the
-          #     offer. Segment.
-          #
-          #     Available only for multi-client accounts. This field is non-empty only for
-          #     auto-seller accounts.
           # @!attribute [rw] offer_id
           #   @return [::String]
           #     Merchant-provided id of the product. Segment.
@@ -718,9 +696,6 @@ module Google
           #     Required in the `SELECT` clause. If a `WHERE` condition on
           #     `report_category_id` is not specified in the query, rankings for all
           #     top-level categories are returned.
-          # @!attribute [rw] id
-          #   @return [::String]
-          #     Google-assigned id of the product cluster.
           # @!attribute [rw] title
           #   @return [::String]
           #     Title of the product cluster.
@@ -850,9 +825,6 @@ module Google
           #     Required in the `SELECT` clause. If a `WHERE` condition on
           #     `report_category_id` is not specified in the query, rankings for all
           #     top-level categories are returned.
-          # @!attribute [rw] id
-          #   @return [::String]
-          #     Google-assigned id of the brand.
           # @!attribute [rw] brand
           #   @return [::String]
           #     Name of the brand.
@@ -875,45 +847,6 @@ module Google
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::RelativeDemandChangeType::RelativeDemandChangeTypeEnum]
           #     Change in the estimated demand. Whether it rose, sank or remained flat.
           class BestSellersBrandView
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Fields available for query in `non_product_performance_view` table.
-          #
-          # Performance data on images and website links leading to your non-product
-          # website pages. This includes performance metrics (for example, `clicks`)
-          # and dimensions according to which performance metrics are segmented (for
-          # example, `date`).
-          #
-          # Segment fields cannot be selected in queries without also selecting at least
-          # one metric field.
-          #
-          # Values are only set for fields requested explicitly in the request's search
-          # query.
-          # @!attribute [rw] date
-          #   @return [::Google::Type::Date]
-          #     Date in the merchant timezone to which metrics apply. Segment.
-          #
-          #     Condition on `date` is required in the `WHERE` clause.
-          # @!attribute [rw] week
-          #   @return [::Google::Type::Date]
-          #     First day of the week (Monday) of the metrics date in the merchant
-          #     timezone. Segment.
-          # @!attribute [rw] clicks
-          #   @return [::Integer]
-          #     Number of clicks on images and website links leading to your non-product
-          #     website pages. Metric.
-          # @!attribute [rw] impressions
-          #   @return [::Integer]
-          #     Number of times images and website links leading to your non-product
-          #     website pages were shown. Metric.
-          # @!attribute [rw] click_through_rate
-          #   @return [::Float]
-          #     Click-through rate - the number of clicks (`clicks`) divided by the number
-          #     of impressions (`impressions`) of images and website links leading to your
-          #     non-product website pages. Metric.
-          class NonProductPerformanceView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
