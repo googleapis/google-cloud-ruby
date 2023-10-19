@@ -58,8 +58,7 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::PropertyType]
         #     Immutable. The property type for this Property resource. When creating a
         #     property, if the type is "PROPERTY_TYPE_UNSPECIFIED", then
-        #     "ORDINARY_PROPERTY" will be implied. "SUBPROPERTY" and "ROLLUP_PROPERTY"
-        #     types cannot yet be created with the Google Analytics Admin API.
+        #     "ORDINARY_PROPERTY" will be implied.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the entity was originally created.
@@ -222,62 +221,6 @@ module Google
             # iOS app data stream.
             IOS_APP_DATA_STREAM = 3
           end
-        end
-
-        # A resource message representing a user's permissions on an Account or
-        # Property resource.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Example format: properties/1234/userLinks/5678
-        # @!attribute [rw] email_address
-        #   @return [::String]
-        #     Immutable. Email address of the user to link
-        # @!attribute [rw] direct_roles
-        #   @return [::Array<::String>]
-        #     Roles directly assigned to this user for this account or property.
-        #
-        #     Valid values:
-        #     predefinedRoles/viewer
-        #     predefinedRoles/analyst
-        #     predefinedRoles/editor
-        #     predefinedRoles/admin
-        #     predefinedRoles/no-cost-data
-        #     predefinedRoles/no-revenue-data
-        #
-        #     Excludes roles that are inherited from a higher-level entity, group,
-        #     or organization admin role.
-        #
-        #     A UserLink that is updated to have an empty list of direct_roles will be
-        #     deleted.
-        class UserLink
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Read-only resource used to summarize a principal's effective roles.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Example format: properties/1234/userLinks/5678
-        # @!attribute [rw] email_address
-        #   @return [::String]
-        #     Email address of the linked user
-        # @!attribute [rw] direct_roles
-        #   @return [::Array<::String>]
-        #     Roles directly assigned to this user for this entity.
-        #
-        #     Format: predefinedRoles/viewer
-        #
-        #     Excludes roles that are inherited from an account (if this is for a
-        #     property), group, or organization admin role.
-        # @!attribute [rw] effective_roles
-        #   @return [::Array<::String>]
-        #     Union of all permissions a user has at this account or property (includes
-        #     direct permissions, group-inherited permissions, etc.).
-        #
-        #     Format: predefinedRoles/viewer
-        class AuditUserLink
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A link between a GA4 property and a Firebase project.
@@ -688,6 +631,9 @@ module Google
           # @!attribute [rw] enhanced_measurement_settings
           #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
           #     A snapshot of EnhancedMeasurementSettings resource in change history.
+          # @!attribute [rw] data_redaction_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+          #     A snapshot of DataRedactionSettings resource in change history.
           # @!attribute [rw] skadnetwork_conversion_value_schema
           #   @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
           #     A snapshot of SKAdNetworkConversionValueSchema resource in change
@@ -1420,6 +1366,37 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Settings for client-side data redaction. Singleton resource under a Web
+        # Stream.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of this Data Redaction Settings resource.
+        #     Format:
+        #     properties/\\{property_id}/dataStreams/\\{data_stream}/dataRedactionSettings
+        #     Example: "properties/1000/dataStreams/2000/dataRedactionSettings"
+        # @!attribute [rw] email_redaction_enabled
+        #   @return [::Boolean]
+        #     If enabled, any event parameter or user property values that look like an
+        #     email will be redacted.
+        # @!attribute [rw] query_parameter_redaction_enabled
+        #   @return [::Boolean]
+        #     Query Parameter redaction removes the key and value portions of a
+        #     query parameter if it is in the configured set of query parameters.
+        #
+        #     If enabled, URL query replacement logic will be run for the Stream. Any
+        #     query parameters defined in query_parameter_keys will be redacted.
+        # @!attribute [rw] query_parameter_keys
+        #   @return [::Array<::String>]
+        #     The query parameter keys to apply redaction logic to if present in the URL.
+        #     Query parameter matching is case-insensitive.
+        #
+        #     Must contain at least one element if query_parameter_replacement_enabled
+        #     is true. Keys cannot contain commas.
+        class DataRedactionSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A link between a GA4 Property and an AdSense for Content ad client.
         # @!attribute [r] name
         #   @return [::String]
@@ -1431,6 +1408,23 @@ module Google
         #     Immutable. The AdSense ad client code that the GA4 property is linked to.
         #     Example format: "ca-pub-1234567890"
         class AdSenseLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A link that references a source property under the parent rollup property.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this RollupPropertySourceLink.
+        #     Format:
+        #     'properties/\\{property_id}/rollupPropertySourceLinks/\\{rollup_property_source_link}'
+        #     Format: 'properties/123/rollupPropertySourceLinks/456'
+        # @!attribute [rw] source_property
+        #   @return [::String]
+        #     Immutable. Resource name of the source property.
+        #     Format: properties/\\{property_id}
+        #     Example: "properties/789"
+        class RollupPropertySourceLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1620,6 +1614,9 @@ module Google
 
           # EnhancedMeasurementSettings resource
           ENHANCED_MEASUREMENT_SETTINGS = 24
+
+          # DataRedactionSettings resource
+          DATA_REDACTION_SETTINGS = 25
 
           # SKAdNetworkConversionValueSchema resource
           SKADNETWORK_CONVERSION_VALUE_SCHEMA = 26

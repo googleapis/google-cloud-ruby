@@ -452,406 +452,6 @@
       ]
     },
     {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetUserLink_sync",
-      "title": "Snippet for the get_user_link call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_user_link. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/get_user_link.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_user_link",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_user_link",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::GetUserLinkRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::UserLink",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "GetUserLink",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetUserLink",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_sync",
-      "title": "Snippet for the batch_get_user_links call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_get_user_links. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/batch_get_user_links.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "batch_get_user_links",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_get_user_links",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "BatchGetUserLinks",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.BatchGetUserLinks",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListUserLinks_sync",
-      "title": "Snippet for the list_user_links call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_user_links. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/list_user_links.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_user_links",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_user_links",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::ListUserLinksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::ListUserLinksResponse",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "ListUserLinks",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListUserLinks",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_AuditUserLinks_sync",
-      "title": "Snippet for the audit_user_links call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#audit_user_links. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/audit_user_links.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "audit_user_links",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#audit_user_links",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::AuditUserLinksResponse",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "AuditUserLinks",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.AuditUserLinks",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateUserLink_sync",
-      "title": "Snippet for the create_user_link call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_user_link. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/create_user_link.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_user_link",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_user_link",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::UserLink",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "CreateUserLink",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateUserLink",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchCreateUserLinks_sync",
-      "title": "Snippet for the batch_create_user_links call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_create_user_links. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/batch_create_user_links.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "batch_create_user_links",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_create_user_links",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "BatchCreateUserLinks",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.BatchCreateUserLinks",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateUserLink_sync",
-      "title": "Snippet for the update_user_link call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_user_link. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/update_user_link.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "update_user_link",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_user_link",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::UserLink",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "UpdateUserLink",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateUserLink",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchUpdateUserLinks_sync",
-      "title": "Snippet for the batch_update_user_links call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_update_user_links. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/batch_update_user_links.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "batch_update_user_links",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_update_user_links",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "BatchUpdateUserLinks",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.BatchUpdateUserLinks",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteUserLink_sync",
-      "title": "Snippet for the delete_user_link call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_user_link. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/delete_user_link.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_user_link",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_user_link",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Protobuf::Empty",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "DeleteUserLink",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteUserLink",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchDeleteUserLinks_sync",
-      "title": "Snippet for the batch_delete_user_links call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_delete_user_links. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/batch_delete_user_links.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "batch_delete_user_links",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_delete_user_links",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Protobuf::Empty",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "BatchDeleteUserLinks",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.BatchDeleteUserLinks",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateFirebaseLink_sync",
       "title": "Snippet for the create_firebase_link call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_firebase_link. It may require modification in order to execute successfully.",
@@ -5115,6 +4715,406 @@
         "method": {
           "short_name": "DeleteEventCreateRule",
           "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteEventCreateRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataRedactionSettings_sync",
+      "title": "Snippet for the update_data_redaction_settings call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_data_redaction_settings. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/update_data_redaction_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_redaction_settings",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_data_redaction_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::DataRedactionSettings",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataRedactionSettings",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateDataRedactionSettings",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataRedactionSettings_sync",
+      "title": "Snippet for the get_data_redaction_settings call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_data_redaction_settings. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_data_redaction_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_redaction_settings",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_data_redaction_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::DataRedactionSettings",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetDataRedactionSettings",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetDataRedactionSettings",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateRollupProperty_sync",
+      "title": "Snippet for the create_rollup_property call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_rollup_property. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_rollup_property.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rollup_property",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_rollup_property",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateRollupProperty",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateRollupProperty",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetRollupPropertySourceLink_sync",
+      "title": "Snippet for the get_rollup_property_source_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_rollup_property_source_link. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_rollup_property_source_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rollup_property_source_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_rollup_property_source_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetRollupPropertySourceLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetRollupPropertySourceLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetRollupPropertySourceLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListRollupPropertySourceLinks_sync",
+      "title": "Snippet for the list_rollup_property_source_links call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_rollup_property_source_links. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/list_rollup_property_source_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rollup_property_source_links",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_rollup_property_source_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListRollupPropertySourceLinks",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListRollupPropertySourceLinks",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateRollupPropertySourceLink_sync",
+      "title": "Snippet for the create_rollup_property_source_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_rollup_property_source_link. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_rollup_property_source_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rollup_property_source_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_rollup_property_source_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateRollupPropertySourceLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateRollupPropertySourceLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateRollupPropertySourceLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteRollupPropertySourceLink_sync",
+      "title": "Snippet for the delete_rollup_property_source_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_rollup_property_source_link. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_rollup_property_source_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_rollup_property_source_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_rollup_property_source_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteRollupPropertySourceLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteRollupPropertySourceLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSubproperty_sync",
+      "title": "Snippet for the create_subproperty call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_subproperty.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_subproperty",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateSubproperty",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSubproperty",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSubpropertyEventFilter_sync",
+      "title": "Snippet for the delete_subproperty_event_filter call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_subproperty_event_filter. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_subproperty_event_filter.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_subproperty_event_filter",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_subproperty_event_filter",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSubpropertyEventFilter",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSubpropertyEventFilter",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSubpropertyEventFilter_sync",
+      "title": "Snippet for the create_subproperty_event_filter call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty_event_filter. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_subproperty_event_filter.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_subproperty_event_filter",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty_event_filter",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateSubpropertyEventFilter",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSubpropertyEventFilter",
           "service": {
             "short_name": "AnalyticsAdminService",
             "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"

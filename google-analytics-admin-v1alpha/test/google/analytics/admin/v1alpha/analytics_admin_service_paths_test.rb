@@ -146,6 +146,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_data_redaction_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_redaction_settings_path property: "value0", data_stream: "value1"
+      assert_equal "properties/value0/dataStreams/value1/dataRedactionSettings", path
+    end
+  end
+
   def test_data_retention_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -314,6 +326,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_rollup_property_source_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.rollup_property_source_link_path property: "value0", rollup_property_source_link: "value1"
+      assert_equal "properties/value0/rollupPropertySourceLinks/value1", path
+    end
+  end
+
   def test_sk_ad_network_conversion_value_schema_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -338,18 +362,15 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
-  def test_user_link_path
+  def test_subproperty_event_filter_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.user_link_path account: "value0", user_link: "value1"
-      assert_equal "accounts/value0/userLinks/value1", path
-
-      path = client.user_link_path property: "value0", user_link: "value1"
-      assert_equal "properties/value0/userLinks/value1", path
+      path = client.subproperty_event_filter_path property: "value0", sub_property_event_filter: "value1"
+      assert_equal "properties/value0/subpropertyEventFilters/value1", path
     end
   end
 end
