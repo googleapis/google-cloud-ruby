@@ -48,7 +48,7 @@ module Google
             #
             # If the accounts are not restored before the expiration time, the account
             # and all child resources (eg: Properties, GoogleAdsLinks, Streams,
-            # UserLinks) will be permanently purged.
+            # AccessBindings) will be permanently purged.
             # https://support.google.com/analytics/answer/6154772
             #
             # Returns an error if the target is not found.
@@ -76,7 +76,7 @@ module Google
             # However, they can be restored using the Trash Can UI.
             #
             # If the properties are not restored before the expiration time, the Property
-            # and all child resources (eg: GoogleAdsLinks, Streams, UserLinks)
+            # and all child resources (eg: GoogleAdsLinks, Streams, AccessBindings)
             # will be permanently purged.
             # https://support.google.com/analytics/answer/6154772
             #
@@ -84,41 +84,6 @@ module Google
             rpc :DeleteProperty, ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Updates a property.
             rpc :UpdateProperty, ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
-            # Gets information about a user's link to an account or property.
-            rpc :GetUserLink, ::Google::Analytics::Admin::V1alpha::GetUserLinkRequest, ::Google::Analytics::Admin::V1alpha::UserLink
-            # Gets information about multiple users' links to an account or property.
-            rpc :BatchGetUserLinks, ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest, ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse
-            # Lists all user links on an account or property.
-            rpc :ListUserLinks, ::Google::Analytics::Admin::V1alpha::ListUserLinksRequest, ::Google::Analytics::Admin::V1alpha::ListUserLinksResponse
-            # Lists all user links on an account or property, including implicit ones
-            # that come from effective permissions granted by groups or organization
-            # admin roles.
-            #
-            # If a returned user link does not have direct permissions, they cannot
-            # be removed from the account or property directly with the DeleteUserLink
-            # command. They have to be removed from the group/etc that gives them
-            # permissions, which is currently only usable/discoverable in the GA or GMP
-            # UIs.
-            rpc :AuditUserLinks, ::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest, ::Google::Analytics::Admin::V1alpha::AuditUserLinksResponse
-            # Creates a user link on an account or property.
-            #
-            # If the user with the specified email already has permissions on the
-            # account or property, then the user's existing permissions will be unioned
-            # with the permissions specified in the new UserLink.
-            rpc :CreateUserLink, ::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest, ::Google::Analytics::Admin::V1alpha::UserLink
-            # Creates information about multiple users' links to an account or property.
-            #
-            # This method is transactional. If any UserLink cannot be created, none of
-            # the UserLinks will be created.
-            rpc :BatchCreateUserLinks, ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest, ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse
-            # Updates a user link on an account or property.
-            rpc :UpdateUserLink, ::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest, ::Google::Analytics::Admin::V1alpha::UserLink
-            # Updates information about multiple users' links to an account or property.
-            rpc :BatchUpdateUserLinks, ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest, ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse
-            # Deletes a user link on an account or property.
-            rpc :DeleteUserLink, ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest, ::Google::Protobuf::Empty
-            # Deletes information about multiple users' links to an account or property.
-            rpc :BatchDeleteUserLinks, ::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest, ::Google::Protobuf::Empty
             # Creates a FirebaseLink.
             #
             # Properties can have at most one FirebaseLink.
@@ -393,6 +358,35 @@ module Google
             rpc :UpdateEventCreateRule, ::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
             # Deletes an EventCreateRule.
             rpc :DeleteEventCreateRule, ::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest, ::Google::Protobuf::Empty
+            # Updates a DataRedactionSettings on a property.
+            rpc :UpdateDataRedactionSettings, ::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRedactionSettings
+            # Lookup for a single DataRedactionSettings.
+            rpc :GetDataRedactionSettings, ::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRedactionSettings
+            # Create a roll-up property and all roll-up property source links.
+            rpc :CreateRollupProperty, ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest, ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse
+            # Lookup for a single roll-up property source Link.
+            # Only roll-up properties can have source links, so this method will throw an
+            # error if used on other types of properties.
+            rpc :GetRollupPropertySourceLink, ::Google::Analytics::Admin::V1alpha::GetRollupPropertySourceLinkRequest, ::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink
+            # Lists roll-up property source Links on a property.
+            # Only roll-up properties can have source links, so this method will throw an
+            # error if used on other types of properties.
+            rpc :ListRollupPropertySourceLinks, ::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksRequest, ::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksResponse
+            # Creates a roll-up property source link.
+            # Only roll-up properties can have source links, so this method will throw an
+            # error if used on other types of properties.
+            rpc :CreateRollupPropertySourceLink, ::Google::Analytics::Admin::V1alpha::CreateRollupPropertySourceLinkRequest, ::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink
+            # Deletes a roll-up property source link.
+            # Only roll-up properties can have source links, so this method will throw an
+            # error if used on other types of properties.
+            rpc :DeleteRollupPropertySourceLink, ::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest, ::Google::Protobuf::Empty
+            # Create a subproperty and a subproperty event filter that applies to the
+            # created subproperty.
+            rpc :CreateSubproperty, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse
+            # Deletes a subproperty event filter.
+            rpc :DeleteSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, ::Google::Protobuf::Empty
+            # Creates a subproperty Event Filter.
+            rpc :CreateSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest, ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter
           end
 
           Stub = Service.rpc_stub_class
