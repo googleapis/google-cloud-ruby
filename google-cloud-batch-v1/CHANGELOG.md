@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2023-10-23)
+
+#### Features
+
+* expose display_name to batch v1 API ([#23443](https://github.com/googleapis/google-cloud-ruby/issues/23443)) 
+
 ### 0.12.0 (2023-10-06)
 
 #### Features
