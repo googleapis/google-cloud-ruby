@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-shopping-merchant-reports-v1beta",
-    "version": "",
+    "version": "0.1.0",
     "language": "RUBY",
     "apis": [
       {
