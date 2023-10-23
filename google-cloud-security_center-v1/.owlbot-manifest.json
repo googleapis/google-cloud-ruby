@@ -148,6 +148,7 @@
     "snippets/security_center/set_finding_state.rb",
     "snippets/security_center/set_iam_policy.rb",
     "snippets/security_center/set_mute.rb",
+    "snippets/security_center/simulate_security_health_analytics_custom_module.rb",
     "snippets/security_center/test_iam_permissions.rb",
     "snippets/security_center/update_big_query_export.rb",
     "snippets/security_center/update_external_system.rb",

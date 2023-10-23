@@ -1318,6 +1318,70 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message to simulate a CustomConfig against a given test resource.
+        # Maximum size of the request is 4 MB by default.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The relative resource name of the organization, project, or
+        #     folder. See:
+        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
+        #     An example is:
+        #     "organizations/\\{organization_id}".
+        # @!attribute [rw] custom_config
+        #   @return [::Google::Cloud::SecurityCenter::V1::CustomConfig]
+        #     Required. The user specified custom configuration to test.
+        # @!attribute [rw] resource
+        #   @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest::SimulatedResource]
+        #     Required. Resource data to simulate custom module against.
+        class SimulateSecurityHealthAnalyticsCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Manually constructed resource. If the custom module only evaluates against
+          # the resource data, the iam_policy_data field can be omitted, and vice
+          # versa.
+          # @!attribute [rw] resource_type
+          #   @return [::String]
+          #     Required. The type of the resource, e.g. `compute.googleapis.com/Disk`.
+          # @!attribute [rw] resource_data
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. A representation of the GCP resource. Should match the GCP
+          #     resource JSON format.
+          # @!attribute [rw] iam_policy_data
+          #   @return [::Google::Iam::V1::Policy]
+          #     Optional. A representation of the IAM policy.
+          class SimulatedResource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for simulating a SecurityHealthAnalyticsCustomModule against
+        # a given resource.
+        # @!attribute [rw] result
+        #   @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse::SimulatedResult]
+        #     Result for test case in the corresponding request.
+        class SimulateSecurityHealthAnalyticsCustomModuleResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible test result.
+          # @!attribute [rw] finding
+          #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
+          #     Finding that would be published for the test case,
+          #     if a violation is detected.
+          # @!attribute [rw] no_violation
+          #   @return [::Google::Protobuf::Empty]
+          #     Indicates that the test case does not trigger any violation.
+          # @!attribute [rw] error
+          #   @return [::Google::Rpc::Status]
+          #     Error encountered during the test.
+          class SimulatedResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request message for updating a ExternalSystem resource.
         # @!attribute [rw] external_system
         #   @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]

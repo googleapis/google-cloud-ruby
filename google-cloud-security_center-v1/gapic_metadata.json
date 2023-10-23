@@ -170,6 +170,11 @@
                 "test_iam_permissions"
               ]
             },
+            "SimulateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "simulate_security_health_analytics_custom_module"
+              ]
+            },
             "UpdateExternalSystem": {
               "methods": [
                 "update_external_system"

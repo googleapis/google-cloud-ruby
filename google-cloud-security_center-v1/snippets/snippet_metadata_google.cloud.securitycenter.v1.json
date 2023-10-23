@@ -1292,6 +1292,46 @@
       ]
     },
     {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_SimulateSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the simulate_security_health_analytics_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#simulate_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center/simulate_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "simulate_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#simulate_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "SimulateSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.SimulateSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateExternalSystem_sync",
       "title": "Snippet for the update_external_system call in the SecurityCenter service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_external_system. It may require modification in order to execute successfully.",
