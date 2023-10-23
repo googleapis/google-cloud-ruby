@@ -8,7 +8,7 @@
     "name": "merchantapi",
     "name_pretty": "Merchant API",
     "product_documentation": "https://developers.google.com/merchant/api",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Programmatically manage your Merchant Center accounts.",
