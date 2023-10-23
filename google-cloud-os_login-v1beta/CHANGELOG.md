@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2023-10-23)
+
+#### Features
+
+* location-based HTTP binding for SignSshPublicKey ([#23442](https://github.com/googleapis/google-cloud-ruby/issues/23442)) 
+
 ### 0.11.0 (2023-10-03)
 
 #### Features
