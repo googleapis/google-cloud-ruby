@@ -65,56 +65,6 @@
                 "update_property"
               ]
             },
-            "GetUserLink": {
-              "methods": [
-                "get_user_link"
-              ]
-            },
-            "BatchGetUserLinks": {
-              "methods": [
-                "batch_get_user_links"
-              ]
-            },
-            "ListUserLinks": {
-              "methods": [
-                "list_user_links"
-              ]
-            },
-            "AuditUserLinks": {
-              "methods": [
-                "audit_user_links"
-              ]
-            },
-            "CreateUserLink": {
-              "methods": [
-                "create_user_link"
-              ]
-            },
-            "BatchCreateUserLinks": {
-              "methods": [
-                "batch_create_user_links"
-              ]
-            },
-            "UpdateUserLink": {
-              "methods": [
-                "update_user_link"
-              ]
-            },
-            "BatchUpdateUserLinks": {
-              "methods": [
-                "batch_update_user_links"
-              ]
-            },
-            "DeleteUserLink": {
-              "methods": [
-                "delete_user_link"
-              ]
-            },
-            "BatchDeleteUserLinks": {
-              "methods": [
-                "batch_delete_user_links"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "create_firebase_link"
@@ -648,6 +598,56 @@
             "DeleteEventCreateRule": {
               "methods": [
                 "delete_event_create_rule"
+              ]
+            },
+            "UpdateDataRedactionSettings": {
+              "methods": [
+                "update_data_redaction_settings"
+              ]
+            },
+            "GetDataRedactionSettings": {
+              "methods": [
+                "get_data_redaction_settings"
+              ]
+            },
+            "CreateRollupProperty": {
+              "methods": [
+                "create_rollup_property"
+              ]
+            },
+            "GetRollupPropertySourceLink": {
+              "methods": [
+                "get_rollup_property_source_link"
+              ]
+            },
+            "ListRollupPropertySourceLinks": {
+              "methods": [
+                "list_rollup_property_source_links"
+              ]
+            },
+            "CreateRollupPropertySourceLink": {
+              "methods": [
+                "create_rollup_property_source_link"
+              ]
+            },
+            "DeleteRollupPropertySourceLink": {
+              "methods": [
+                "delete_rollup_property_source_link"
+              ]
+            },
+            "CreateSubproperty": {
+              "methods": [
+                "create_subproperty"
+              ]
+            },
+            "DeleteSubpropertyEventFilter": {
+              "methods": [
+                "delete_subproperty_event_filter"
+              ]
+            },
+            "CreateSubpropertyEventFilter": {
+              "methods": [
+                "create_subproperty_event_filter"
               ]
             }
           }

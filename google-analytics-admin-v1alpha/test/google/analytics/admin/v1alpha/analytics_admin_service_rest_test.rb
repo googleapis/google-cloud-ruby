@@ -665,557 +665,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     end
   end
 
-  def test_get_user_link
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::UserLink.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_user_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_user_link_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, get_user_link_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.get_user_link({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.get_user_link name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.get_user_link ::Google::Analytics::Admin::V1alpha::GetUserLinkRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.get_user_link({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.get_user_link(::Google::Analytics::Admin::V1alpha::GetUserLinkRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, get_user_link_client_stub.call_count
-      end
-    end
-  end
-
-  def test_batch_get_user_links
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    names = ["hello world"]
-
-    batch_get_user_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_batch_get_user_links_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, batch_get_user_links_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.batch_get_user_links({ parent: parent, names: names }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.batch_get_user_links parent: parent, names: names do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.batch_get_user_links ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest.new(parent: parent, names: names) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.batch_get_user_links({ parent: parent, names: names }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.batch_get_user_links(::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest.new(parent: parent, names: names), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, batch_get_user_links_client_stub.call_count
-      end
-    end
-  end
-
-  def test_list_user_links
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::ListUserLinksResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    list_user_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_list_user_links_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, list_user_links_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.list_user_links({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.list_user_links parent: parent, page_size: page_size, page_token: page_token do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.list_user_links ::Google::Analytics::Admin::V1alpha::ListUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.list_user_links({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.list_user_links(::Google::Analytics::Admin::V1alpha::ListUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, list_user_links_client_stub.call_count
-      end
-    end
-  end
-
-  def test_audit_user_links
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::AuditUserLinksResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    audit_user_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_audit_user_links_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, audit_user_links_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.audit_user_links({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.audit_user_links parent: parent, page_size: page_size, page_token: page_token do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.audit_user_links ::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.audit_user_links({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.audit_user_links(::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, audit_user_links_client_stub.call_count
-      end
-    end
-  end
-
-  def test_create_user_link
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::UserLink.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    notify_new_user = true
-    user_link = {}
-
-    create_user_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_user_link_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, create_user_link_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.create_user_link({ parent: parent, notify_new_user: notify_new_user, user_link: user_link }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.create_user_link parent: parent, notify_new_user: notify_new_user, user_link: user_link do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.create_user_link ::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new(parent: parent, notify_new_user: notify_new_user, user_link: user_link) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.create_user_link({ parent: parent, notify_new_user: notify_new_user, user_link: user_link }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.create_user_link(::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new(parent: parent, notify_new_user: notify_new_user, user_link: user_link), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, create_user_link_client_stub.call_count
-      end
-    end
-  end
-
-  def test_batch_create_user_links
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    notify_new_users = true
-    requests = [{}]
-
-    batch_create_user_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_batch_create_user_links_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, batch_create_user_links_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.batch_create_user_links({ parent: parent, notify_new_users: notify_new_users, requests: requests }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.batch_create_user_links parent: parent, notify_new_users: notify_new_users, requests: requests do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.batch_create_user_links ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest.new(parent: parent, notify_new_users: notify_new_users, requests: requests) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.batch_create_user_links({ parent: parent, notify_new_users: notify_new_users, requests: requests }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.batch_create_user_links(::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest.new(parent: parent, notify_new_users: notify_new_users, requests: requests), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, batch_create_user_links_client_stub.call_count
-      end
-    end
-  end
-
-  def test_update_user_link
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::UserLink.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    user_link = {}
-
-    update_user_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_user_link_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, update_user_link_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.update_user_link({ user_link: user_link }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.update_user_link user_link: user_link do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.update_user_link ::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest.new(user_link: user_link) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.update_user_link({ user_link: user_link }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.update_user_link(::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest.new(user_link: user_link), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, update_user_link_client_stub.call_count
-      end
-    end
-  end
-
-  def test_batch_update_user_links
-    # Create test objects.
-    client_result = ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    requests = [{}]
-
-    batch_update_user_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_batch_update_user_links_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, batch_update_user_links_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.batch_update_user_links({ parent: parent, requests: requests }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.batch_update_user_links parent: parent, requests: requests do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.batch_update_user_links ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest.new(parent: parent, requests: requests) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.batch_update_user_links({ parent: parent, requests: requests }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.batch_update_user_links(::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, batch_update_user_links_client_stub.call_count
-      end
-    end
-  end
-
-  def test_delete_user_link
-    # Create test objects.
-    client_result = ::Google::Protobuf::Empty.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_user_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_user_link_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, delete_user_link_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.delete_user_link({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.delete_user_link name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.delete_user_link ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.delete_user_link({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.delete_user_link(::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, delete_user_link_client_stub.call_count
-      end
-    end
-  end
-
-  def test_batch_delete_user_links
-    # Create test objects.
-    client_result = ::Google::Protobuf::Empty.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    requests = [{}]
-
-    batch_delete_user_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_batch_delete_user_links_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, batch_delete_user_links_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.batch_delete_user_links({ parent: parent, requests: requests }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.batch_delete_user_links parent: parent, requests: requests do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.batch_delete_user_links ::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new(parent: parent, requests: requests) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.batch_delete_user_links({ parent: parent, requests: requests }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.batch_delete_user_links(::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, batch_delete_user_links_client_stub.call_count
-      end
-    end
-  end
-
   def test_create_firebase_link
     # Create test objects.
     client_result = ::Google::Analytics::Admin::V1alpha::FirebaseLink.new
@@ -4965,6 +4414,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     time_zone = "hello world"
     order_bys = [{}]
     return_entity_quota = true
+    include_all_users = true
+    expand_groups = true
 
     run_access_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -4980,27 +4431,27 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
         end
 
         # Use hash object
-        client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota }) do |_result, response|
+        client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota, include_all_users: include_all_users, expand_groups: expand_groups }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_access_report entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota do |_result, response|
+        client.run_access_report entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota, include_all_users: include_all_users, expand_groups: expand_groups do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_access_report ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota) do |_result, response|
+        client.run_access_report ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota, include_all_users: include_all_users, expand_groups: expand_groups) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota }, call_options) do |_result, response|
+        client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota, include_all_users: include_all_users, expand_groups: expand_groups }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_access_report(::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota), call_options) do |_result, response|
+        client.run_access_report(::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota, include_all_users: include_all_users, expand_groups: expand_groups), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -7086,6 +6537,554 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
 
         # Verify method calls
         assert_equal 5, delete_event_create_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_data_redaction_settings
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::DataRedactionSettings.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    data_redaction_settings = {}
+    update_mask = {}
+
+    update_data_redaction_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_data_redaction_settings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_data_redaction_settings_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_data_redaction_settings({ data_redaction_settings: data_redaction_settings, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_data_redaction_settings data_redaction_settings: data_redaction_settings, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_data_redaction_settings ::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest.new(data_redaction_settings: data_redaction_settings, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_data_redaction_settings({ data_redaction_settings: data_redaction_settings, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_data_redaction_settings(::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest.new(data_redaction_settings: data_redaction_settings, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_data_redaction_settings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_data_redaction_settings
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::DataRedactionSettings.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_data_redaction_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_data_redaction_settings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_data_redaction_settings_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_data_redaction_settings({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_data_redaction_settings name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_data_redaction_settings ::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_data_redaction_settings({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_data_redaction_settings(::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_data_redaction_settings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_rollup_property
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    rollup_property = {}
+    source_properties = ["hello world"]
+
+    create_rollup_property_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_rollup_property_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_rollup_property_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_rollup_property({ rollup_property: rollup_property, source_properties: source_properties }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_rollup_property rollup_property: rollup_property, source_properties: source_properties do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_rollup_property ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest.new(rollup_property: rollup_property, source_properties: source_properties) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_rollup_property({ rollup_property: rollup_property, source_properties: source_properties }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_rollup_property(::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest.new(rollup_property: rollup_property, source_properties: source_properties), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_rollup_property_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_rollup_property_source_link
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_rollup_property_source_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_rollup_property_source_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_rollup_property_source_link_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_rollup_property_source_link({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_rollup_property_source_link name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_rollup_property_source_link ::Google::Analytics::Admin::V1alpha::GetRollupPropertySourceLinkRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_rollup_property_source_link({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_rollup_property_source_link(::Google::Analytics::Admin::V1alpha::GetRollupPropertySourceLinkRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_rollup_property_source_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_rollup_property_source_links
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_rollup_property_source_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_list_rollup_property_source_links_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_rollup_property_source_links_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_rollup_property_source_links({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_rollup_property_source_links parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_rollup_property_source_links ::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_rollup_property_source_links({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_rollup_property_source_links(::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_rollup_property_source_links_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_rollup_property_source_link
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rollup_property_source_link = {}
+
+    create_rollup_property_source_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_rollup_property_source_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_rollup_property_source_link_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_rollup_property_source_link({ parent: parent, rollup_property_source_link: rollup_property_source_link }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_rollup_property_source_link parent: parent, rollup_property_source_link: rollup_property_source_link do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_rollup_property_source_link ::Google::Analytics::Admin::V1alpha::CreateRollupPropertySourceLinkRequest.new(parent: parent, rollup_property_source_link: rollup_property_source_link) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_rollup_property_source_link({ parent: parent, rollup_property_source_link: rollup_property_source_link }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_rollup_property_source_link(::Google::Analytics::Admin::V1alpha::CreateRollupPropertySourceLinkRequest.new(parent: parent, rollup_property_source_link: rollup_property_source_link), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_rollup_property_source_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_rollup_property_source_link
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_rollup_property_source_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_rollup_property_source_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_rollup_property_source_link_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_rollup_property_source_link({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_rollup_property_source_link name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_rollup_property_source_link ::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_rollup_property_source_link({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_rollup_property_source_link(::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_rollup_property_source_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_subproperty
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    subproperty = {}
+    subproperty_event_filter = {}
+
+    create_subproperty_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_subproperty_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_subproperty_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_subproperty({ parent: parent, subproperty: subproperty, subproperty_event_filter: subproperty_event_filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_subproperty parent: parent, subproperty: subproperty, subproperty_event_filter: subproperty_event_filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_subproperty ::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest.new(parent: parent, subproperty: subproperty, subproperty_event_filter: subproperty_event_filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_subproperty({ parent: parent, subproperty: subproperty, subproperty_event_filter: subproperty_event_filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_subproperty(::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest.new(parent: parent, subproperty: subproperty, subproperty_event_filter: subproperty_event_filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_subproperty_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_subproperty_event_filter
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_subproperty_event_filter_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_subproperty_event_filter_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_subproperty_event_filter_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_subproperty_event_filter({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_subproperty_event_filter name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_subproperty_event_filter({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_subproperty_event_filter_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_subproperty_event_filter
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    subproperty_event_filter = {}
+
+    create_subproperty_event_filter_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_subproperty_event_filter_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_subproperty_event_filter_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_subproperty_event_filter({ parent: parent, subproperty_event_filter: subproperty_event_filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_subproperty_event_filter parent: parent, subproperty_event_filter: subproperty_event_filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest.new(parent: parent, subproperty_event_filter: subproperty_event_filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_subproperty_event_filter({ parent: parent, subproperty_event_filter: subproperty_event_filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest.new(parent: parent, subproperty_event_filter: subproperty_event_filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_subproperty_event_filter_client_stub.call_count
       end
     end
   end
