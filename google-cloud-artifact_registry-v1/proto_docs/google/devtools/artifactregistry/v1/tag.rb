@@ -44,7 +44,9 @@ module Google
         # The request to list tags.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the parent resource whose tags will be listed.
+        #     The name of the parent package whose tags will be listed.
+        #     For example:
+        #     `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression for filtering the results of the request. Filter rules are

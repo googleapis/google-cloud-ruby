@@ -98,6 +98,9 @@ module Google
             # Deletes a version and all of its content. The returned operation will
             # complete once the version has been deleted.
             rpc :DeleteVersion, ::Google::Cloud::ArtifactRegistry::V1::DeleteVersionRequest, ::Google::Longrunning::Operation
+            # Deletes multiple versions across a repository. The returned operation will
+            # complete once the versions have been deleted.
+            rpc :BatchDeleteVersions, ::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest, ::Google::Longrunning::Operation
             # Lists files.
             rpc :ListFiles, ::Google::Cloud::ArtifactRegistry::V1::ListFilesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse
             # Gets a file.

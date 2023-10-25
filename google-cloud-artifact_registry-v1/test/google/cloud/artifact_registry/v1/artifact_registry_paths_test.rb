@@ -131,6 +131,18 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientPathsTest <
     end
   end
 
+  def test_secret_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.secret_version_path project: "value0", secret: "value1", secret_version: "value2"
+      assert_equal "projects/value0/secrets/value1/versions/value2", path
+    end
+  end
+
   def test_tag_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -140,6 +152,18 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientPathsTest <
 
       path = client.tag_path project: "value0", location: "value1", repository: "value2", package: "value3", tag: "value4"
       assert_equal "projects/value0/locations/value1/repositories/value2/packages/value3/tags/value4", path
+    end
+  end
+
+  def test_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.version_path project: "value0", location: "value1", repository: "value2", package: "value3", version: "value4"
+      assert_equal "projects/value0/locations/value1/repositories/value2/packages/value3/versions/value4", path
     end
   end
 

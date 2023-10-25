@@ -1220,6 +1220,62 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     end
   end
 
+  def test_batch_delete_versions
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    validate_only = true
+
+    batch_delete_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_batch_delete_versions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_delete_versions_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_delete_versions({ parent: parent, names: names, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_delete_versions parent: parent, names: names, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_delete_versions ::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest.new(parent: parent, names: names, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_delete_versions({ parent: parent, names: names, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_delete_versions(::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest.new(parent: parent, names: names, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_delete_versions_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_files
     # Create test objects.
     client_result = ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse.new
