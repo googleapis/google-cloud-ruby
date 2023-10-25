@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.2.0 (2023-10-25)
+
+### ⚠ BREAKING CHANGES
+
+* non_product_performance_view table, seller segments in product_performance_view table, and entity ids in best_seller tables are removed ([#23463](https://github.com/googleapis/google-cloud-ruby/issues/23463))
+
+#### Bug Fixes
+
+* non_product_performance_view table, seller segments in product_performance_view table, and entity ids in best_seller tables are removed ([#23463](https://github.com/googleapis/google-cloud-ruby/issues/23463)) 
+
 ### 0.1.0 (2023-10-23)
 
 #### Features
