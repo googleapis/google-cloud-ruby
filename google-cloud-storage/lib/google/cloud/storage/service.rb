@@ -347,12 +347,12 @@ module Google
 
         ##
         # Retrieves a list of files matching the criteria.
-        def list_files bucket_name, delimiter: nil, max: nil, token: nil,
+        def list_files bucket_name, delimiter: nil, match_glob: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil,
                        options: {}
           execute do
             service.list_objects \
-              bucket_name, delimiter: delimiter, max_results: max,
+              bucket_name, delimiter: delimiter, match_glob: match_glob, max_results: max,
                            page_token: token, prefix: prefix,
                            versions: versions,
                            user_project: user_project(user_project),

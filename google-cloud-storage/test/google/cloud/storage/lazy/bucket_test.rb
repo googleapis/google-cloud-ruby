@@ -444,6 +444,24 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     end
   end
 
+  it "lists files with match_glob set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name], delimiter: nil, match_glob: "/foo/**/bar/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, options: {}
+    
+    files = bucket.files match_glob: "/foo/**/bar/"
+
+    mock.verify
+
+    _(files.count).must_equal 2
+    _(files.match_glob).must_equal "/foo/**/bar/"
+    files.each do |file|
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
+    end
+
+  end
+
   it "lists files with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
