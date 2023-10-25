@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2023-10-25)
+
+#### Features
+
+* add platform log RolloutUpdateEvent 
+
 ### 0.12.0 (2023-09-12)
 
 #### Features
