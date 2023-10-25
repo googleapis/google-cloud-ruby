@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.0 (2023-10-25)
+
+#### Features
+
+* Add SimulateSecurityHealthAnalyticsCustomModule API for testing SHA custom module 
+
 ### 0.32.0 (2023-09-12)
 
 #### Features
