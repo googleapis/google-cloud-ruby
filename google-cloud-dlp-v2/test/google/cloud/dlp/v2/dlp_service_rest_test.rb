@@ -1304,6 +1304,283 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_discovery_config
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::DiscoveryConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    discovery_config = {}
+    config_id = "hello world"
+
+    create_discovery_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_discovery_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_discovery_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_discovery_config parent: parent, discovery_config: discovery_config, config_id: config_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_discovery_config ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_discovery_config(::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_discovery_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_discovery_config
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::DiscoveryConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    discovery_config = {}
+    update_mask = {}
+
+    update_discovery_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_discovery_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_discovery_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_discovery_config name: name, discovery_config: discovery_config, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_discovery_config ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_discovery_config(::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_discovery_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_discovery_config
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::DiscoveryConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_discovery_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_discovery_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_discovery_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_discovery_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_discovery_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_discovery_config ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_discovery_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_discovery_config(::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_discovery_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_discovery_configs
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_token = "hello world"
+    page_size = 42
+    order_by = "hello world"
+
+    list_discovery_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_discovery_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_discovery_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_discovery_configs parent: parent, page_token: page_token, page_size: page_size, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_discovery_configs ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_discovery_configs(::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_discovery_configs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_discovery_config
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_discovery_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_discovery_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_discovery_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_discovery_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_discovery_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_discovery_config ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_discovery_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_discovery_config(::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_discovery_config_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_dlp_job
     # Create test objects.
     client_result = ::Google::Cloud::Dlp::V2::DlpJob.new
