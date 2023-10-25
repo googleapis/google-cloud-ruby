@@ -63,7 +63,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name], **get_bucket_args
     mock.expect :list_objects, list_files_gapi(num_files),
-      [bucket_name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, options: {}
+      [bucket_name], delimiter: nil, match_glob: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, options: {}
     anonymous_storage.service.mocked_service = mock
 
     bucket = anonymous_storage.bucket bucket_name
