@@ -64,6 +64,87 @@ module Google
                 body: nil
               )
             ]
+            default_config.bindings_override["google.iam.v1.IAMPolicy.GetIamPolicy"] = [
+
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1beta1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1beta1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1beta1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
+                ],
+                body: nil
+              )
+            ]
+            default_config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"] = [
+
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1beta1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1beta1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1beta1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/?$}, false]
+                ],
+                body: "*"
+              )
+            ]
+            default_config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"] = [
+
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1beta1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1beta1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1beta1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
+                ],
+                body: "*"
+              )
+            ]
             default_config
           end
           yield @configure if block_given?

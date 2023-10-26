@@ -39,7 +39,7 @@ def query_directory_contents
   # The returned object is of type Gapic::PagedEnumerable. You can iterate
   # over elements, and API calls will be issued to fetch pages as needed.
   result.each do |item|
-    # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsResponse::DirectoryEntry.
+    # Each element is of type ::Google::Cloud::Dataform::V1beta1::DirectoryEntry.
     p item
   end
 end
