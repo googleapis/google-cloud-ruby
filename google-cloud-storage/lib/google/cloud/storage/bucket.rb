@@ -1265,7 +1265,7 @@ module Google
         #   `prefixes` are omitted.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
-        # @param [String] matchGlob A glob pattern used to filter results returned in items (for example, foo*bar).
+        # @param [String] match_glob A glob pattern used to filter results returned in items (for example, foo*bar).
         #    The string value must be UTF-8 encoded. See:
         #    https://cloud.google.com/storage/docs/json_api/v1/objects/list#list-object-glob
         # @param [Integer] max Maximum number of items plus prefixes to return.
