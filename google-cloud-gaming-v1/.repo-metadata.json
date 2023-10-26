@@ -8,7 +8,7 @@
     "name": "gameservices",
     "name_pretty": "Cloud Gaming V1 API",
     "product_documentation": "https://cloud.google.com/game-servers",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "With Game Servers, studios and publishers can deploy and manage their game server infrastructure hosted on multiple Agones clusters around the world through a single interface. Note that google-cloud-gaming-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gaming instead. See the readme for more details.",
