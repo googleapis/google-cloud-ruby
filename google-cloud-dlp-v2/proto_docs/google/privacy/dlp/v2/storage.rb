@@ -32,36 +32,43 @@ module Google
         # @!attribute [rw] version
         #   @return [::String]
         #     Optional version name for this InfoType.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     Optional custom sensitivity for this InfoType.
+        #     This only applies to data profiling.
         class InfoType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Score is a summary of all elements in the data profile.
-        # A higher number means more sensitive.
+        # Score is calculated from of all elements in the data profile.
+        # A higher level means the data is more sensitive.
         # @!attribute [rw] score
         #   @return [::Google::Cloud::Dlp::V2::SensitivityScore::SensitivityScoreLevel]
-        #     The score applied to the resource.
+        #     The sensitivity score applied to the resource.
         class SensitivityScore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Various score levels for resources.
+          # Various sensitivity score levels for resources.
           module SensitivityScoreLevel
             # Unused.
             SENSITIVITY_SCORE_UNSPECIFIED = 0
 
-            # No sensitive information detected. Limited access.
+            # No sensitive information detected. The resource isn't publicly
+            # accessible.
             SENSITIVITY_LOW = 10
 
-            # Medium risk - PII, potentially sensitive data, or fields with free-text
-            # data that are at higher risk of having intermittent sensitive data.
-            # Consider limiting access.
+            # Medium risk. Contains personally identifiable information (PII),
+            # potentially sensitive data, or fields with free-text data that are at a
+            # higher risk of having intermittent sensitive data. Consider limiting
+            # access.
             SENSITIVITY_MODERATE = 20
 
-            # High risk – SPII may be present. Exfiltration of data may lead to user
-            # data loss. Re-identification of users may be possible. Consider limiting
-            # usage and or removing SPII.
+            # High risk. Sensitive personally identifiable information (SPII) can be
+            # present. Exfiltration of data can lead to user data loss.
+            # Re-identification of users might be possible. Consider limiting usage and
+            # or removing SPII.
             SENSITIVITY_HIGH = 30
           end
         end
@@ -119,6 +126,13 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::ExclusionType]
         #     If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
         #     to be returned. It still can be used for rules matching.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     Sensitivity for this CustomInfoType. If this CustomInfoType extends an
+        #     existing InfoType, the sensitivity here will take precedence over that of
+        #     the original InfoType. If unset for a CustomInfoType, it will default to
+        #     HIGH.
+        #     This only applies to data profiling.
         class CustomInfoType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -400,16 +414,22 @@ module Google
         # @!attribute [rw] bytes_limit_per_file
         #   @return [::Integer]
         #     Max number of bytes to scan from a file. If a scanned file's size is bigger
-        #     than this value then the rest of the bytes are omitted. Only one
-        #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
-        #     Cannot be set if de-identification is requested.
+        #     than this value then the rest of the bytes are omitted. Only one of
+        #     `bytes_limit_per_file` and `bytes_limit_per_file_percent` can be specified.
+        #     This field can't be set if de-identification is requested. For certain file
+        #     types, setting this field has no effect. For more information, see [Limits
+        #     on bytes scanned per
+        #     file](https://cloud.google.com/dlp/docs/supported-file-types#max-byte-size-per-file).
         # @!attribute [rw] bytes_limit_per_file_percent
         #   @return [::Integer]
         #     Max percentage of bytes to scan from a file. The rest are omitted. The
         #     number of bytes scanned is rounded down. Must be between 0 and 100,
-        #     inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
-        #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
-        #     Cannot be set if de-identification is requested.
+        #     inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one of
+        #     bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+        #     This field can't be set if de-identification is requested. For certain file
+        #     types, setting this field has no effect. For more information, see [Limits
+        #     on bytes scanned per
+        #     file](https://cloud.google.com/dlp/docs/supported-file-types#max-byte-size-per-file).
         # @!attribute [rw] file_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
@@ -517,9 +537,15 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     References to fields excluded from scanning. This allows you to skip
         #     inspection of entire columns which you know have no findings.
+        #     When inspecting a table, we recommend that you inspect all columns.
+        #     Otherwise, findings might be affected because hints from excluded columns
+        #     will not be used.
         # @!attribute [rw] included_fields
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     Limit scanning only to these fields.
+        #     When inspecting a table, we recommend that you inspect all columns.
+        #     Otherwise, findings might be affected because hints from excluded columns
+        #     will not be used.
         class BigQueryOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -814,23 +840,38 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Categorization of results based on how likely they are to represent a match,
-        # based on the number of elements they contain which imply a match.
+        # Coarse-grained confidence level of how well a particular finding
+        # satisfies the criteria to match a particular infoType.
+        #
+        # Likelihood is calculated based on the number of signals a
+        # finding has that implies that the finding matches the infoType. For
+        # example, a string that has an '@' and a '.com' is more likely to be a
+        # match for an email address than a string that only has an '@'.
+        #
+        # In general, the highest likelihood level has the strongest signals that
+        # indicate a match. That is, a finding with a high likelihood has a low chance
+        # of being a false positive.
+        #
+        # For more information about each likelihood level
+        # and how likelihood works, see [Match
+        # likelihood](https://cloud.google.com/dlp/docs/likelihood).
         module Likelihood
           # Default value; same as POSSIBLE.
           LIKELIHOOD_UNSPECIFIED = 0
 
-          # Few matching elements.
+          # Highest chance of a false positive.
           VERY_UNLIKELY = 1
 
+          # High chance of a false positive.
           UNLIKELY = 2
 
-          # Some matching elements.
+          # Some matching signals. The default value.
           POSSIBLE = 3
 
+          # Low chance of a false positive.
           LIKELY = 4
 
-          # Many matching elements.
+          # Confidence level is high. Lowest chance of a false positive.
           VERY_LIKELY = 5
         end
 
@@ -844,7 +885,7 @@ module Google
           # scanning attempts to convert the content of the file to utf_8 to scan
           # the file.
           # If you wish to avoid this fall back, specify one or more of the other
-          # FileType's in your storage scan.
+          # file types in your storage scan.
           BINARY_FILE = 1
 
           # Included file extensions:
@@ -857,19 +898,24 @@ module Google
           TEXT_FILE = 2
 
           # Included file extensions:
-          #   bmp, gif, jpg, jpeg, jpe, png.
-          # bytes_limit_per_file has no effect on image files.
-          # Image inspection is restricted to 'global', 'us', 'asia', and 'europe'.
+          #   bmp, gif, jpg, jpeg, jpe, png. Setting
+          # {::Google::Cloud::Dlp::V2::CloudStorageOptions#bytes_limit_per_file bytes_limit_per_file}
+          # or
+          # {::Google::Cloud::Dlp::V2::CloudStorageOptions#bytes_limit_per_file bytes_limit_per_file_percent}
+          # has no effect on image files. Image inspection is restricted to the
+          # `global`, `us`, `asia`, and `europe` regions.
           IMAGE = 3
 
-          # Word files >30 MB will be scanned as binary files.
+          # Microsoft Word files larger than 30 MB will be scanned as binary files.
           # Included file extensions:
-          #   docx, dotx, docm, dotm
+          #   docx, dotx, docm, dotm. Setting `bytes_limit_per_file` or
+          #   `bytes_limit_per_file_percent` has no effect on Word files.
           WORD = 5
 
-          # PDF files >30 MB will be scanned as binary files.
+          # PDF files larger than 30 MB will be scanned as binary files.
           # Included file extensions:
-          #   pdf
+          #   pdf. Setting `bytes_limit_per_file` or `bytes_limit_per_file_percent`
+          # has no effect on PDF files.
           PDF = 6
 
           # Included file extensions:
@@ -884,14 +930,16 @@ module Google
           #   tsv
           TSV = 9
 
-          # Powerpoint files >30 MB will be scanned as binary files.
-          # Included file extensions:
-          #   pptx, pptm, potx, potm, pot
+          # Microsoft PowerPoint files larger than 30 MB will be scanned as binary
+          # files. Included file extensions:
+          #   pptx, pptm, potx, potm, pot. Setting `bytes_limit_per_file` or
+          #   `bytes_limit_per_file_percent` has no effect on PowerPoint files.
           POWERPOINT = 11
 
-          # Excel files >30 MB will be scanned as binary files.
+          # Microsoft Excel files larger than 30 MB will be scanned as binary files.
           # Included file extensions:
-          #   xlsx, xlsm, xltx, xltm
+          #   xlsx, xlsm, xltx, xltm. Setting `bytes_limit_per_file` or
+          #   `bytes_limit_per_file_percent` has no effect on Excel files.
           EXCEL = 12
         end
       end

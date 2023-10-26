@@ -94,6 +94,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DiscoveryConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/discoveryConfigs/{discovery_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param discovery_config [String]
+            #
+            # @return [::String]
+            def discovery_config_path project:, location:, discovery_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/discoveryConfigs/#{discovery_config}"
+            end
+
+            ##
             # Create a fully-qualified DlpJob resource string.
             #
             # @overload dlp_job_path(project:, dlp_job:)
