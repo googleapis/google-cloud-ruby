@@ -201,6 +201,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SecretVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/secrets/{secret}/versions/{secret_version}`
+            #
+            # @param project [String]
+            # @param secret [String]
+            # @param secret_version [String]
+            #
+            # @return [::String]
+            def secret_version_path project:, secret:, secret_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
+
+              "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
+            end
+
+            ##
             # Create a fully-qualified Tag resource string.
             #
             # The resource will be in the following format:
@@ -221,6 +240,29 @@ module Google
               raise ::ArgumentError, "package cannot contain /" if package.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/repositories/#{repository}/packages/#{package}/tags/#{tag}"
+            end
+
+            ##
+            # Create a fully-qualified Version resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param package [String]
+            # @param version [String]
+            #
+            # @return [::String]
+            def version_path project:, location:, repository:, package:, version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+              raise ::ArgumentError, "package cannot contain /" if package.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/packages/#{package}/versions/#{version}"
             end
 
             ##

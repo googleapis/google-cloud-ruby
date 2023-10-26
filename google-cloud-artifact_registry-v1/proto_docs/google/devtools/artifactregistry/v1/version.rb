@@ -114,6 +114,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request to delete multiple versions across a repository.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     The name of the repository holding all requested versions.
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the versions to delete.
+        #     A maximum of 10000 versions can be deleted in a batch.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     If true, the request is performed without deleting data, following AIP-163.
+        class BatchDeleteVersionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The metadata of an LRO from deleting multiple versions.
         # @!attribute [rw] failed_versions
         #   @return [::Array<::String>]

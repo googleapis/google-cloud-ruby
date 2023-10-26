@@ -115,6 +115,11 @@
                 "delete_version"
               ]
             },
+            "BatchDeleteVersions": {
+              "methods": [
+                "batch_delete_versions"
+              ]
+            },
             "ListFiles": {
               "methods": [
                 "list_files"

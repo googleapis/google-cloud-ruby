@@ -852,6 +852,46 @@
       ]
     },
     {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_sync",
+      "title": "Snippet for the batch_delete_versions call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#batch_delete_versions. It may require modification in order to execute successfully.",
+      "file": "artifact_registry/batch_delete_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_versions",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#batch_delete_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteVersions",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.BatchDeleteVersions",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListFiles_sync",
       "title": "Snippet for the list_files call in the ArtifactRegistry service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_files. It may require modification in order to execute successfully.",
