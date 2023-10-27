@@ -1,5 +1,12 @@
 # Release History
 
+### 0.19.0 (2023-10-27)
+
+#### Features
+
+* support discovery API service 
+* support min_likelihood_per_info_type, deidentify options, sensitivity_score, last_modified, action_details, exclude_from_analysis 
+
 ### 0.18.0 (2023-09-12)
 
 #### Features
