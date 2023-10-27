@@ -481,7 +481,8 @@ module Google
         # configuration of the bucket.
         #
         def autoclass_terminal_storage_class= new_terminal_storage_class
-          self.autoclass_enabled = true unless autoclass_enabled
+          return if autoclass_enabled == false
+          self.autoclass_enabled = true if autoclass_enabled.nil?
           @gapi.autoclass.terminal_storage_class = new_terminal_storage_class
           patch_gapi! :autoclass
         end

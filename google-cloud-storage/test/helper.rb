@@ -67,7 +67,7 @@ class MockStorage < Minitest::Spec
                          location_type: "multi-region",
                          rpo: "DEFAULT",
                          autoclass_enabled: nil,
-                         autoclass_terminal_storage_class: 'NEARLINE'
+                         autoclass_terminal_storage_class: nil
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -95,7 +95,7 @@ class MockStorage < Minitest::Spec
   def autoclass_config_hash(enabled, terminal_storage_class)
     { "enabled"               => enabled,
       "terminalStorageClass"  => terminal_storage_class
-    }.delete_if { |_, v| v.nil? } if enabled || terminal_storage_class
+    }.delete_if { |_, v| v.nil? } if !enabled.nil? || terminal_storage_class
   end
 
   def logging_hash(bucket, prefix)
