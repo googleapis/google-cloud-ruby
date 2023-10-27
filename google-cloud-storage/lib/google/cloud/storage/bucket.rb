@@ -477,7 +477,7 @@ module Google
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/using-autoclass).
         #
-        # @param [BoolStringean] Terminal storage class for autoclass
+        # @param [String] Terminal storage class for autoclass
         # configuration of the bucket.
         #
         def autoclass_terminal_storage_class= new_terminal_storage_class
