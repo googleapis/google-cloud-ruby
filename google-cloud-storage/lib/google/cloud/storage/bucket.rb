@@ -477,13 +477,13 @@ module Google
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/using-autoclass).
         #
-        # @param [String] Terminal storage class for autoclass
+        # @param [String] terminal_storage_class for autoclass
         # configuration of the bucket.
         #
-        def autoclass_terminal_storage_class= new_terminal_storage_class
+        def autoclass_terminal_storage_class= terminal_storage_class
           return if autoclass_enabled == false
           self.autoclass_enabled = true if autoclass_enabled.nil?
-          @gapi.autoclass.terminal_storage_class = new_terminal_storage_class
+          @gapi.autoclass.terminal_storage_class = terminal_storage_class
           patch_gapi! :autoclass
         end
 
