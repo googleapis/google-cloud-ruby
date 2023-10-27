@@ -155,7 +155,15 @@ describe "Buckets Snippets" do
         get_autoclass bucket_name: bucket_name
       end
 
+      assert_output(/autoclass terminal storage class set to NEARLINE./) do
+        get_autoclass bucket_name: bucket_name
+      end
+
       assert_output(/autoclass config set to false./) do
+        set_autoclass bucket_name: bucket_name, toggle: false
+      end
+
+      assert_output(/autoclass terminal storage class set to ARCHIVE./) do
         set_autoclass bucket_name: bucket_name, toggle: false
       end
 

@@ -56,6 +56,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:bucket_requester_pays) { true }
   let(:bucket_labels) { { "env" => "production", "foo" => "bar" } }
   let(:bucket_autoclass_enabled) { true }
+  let(:bucket_autoclass_terminal_storage_class) { "NEARLINE" }
   let(:generation) { 1234567890 }
   let(:metageneration) { 6 }
   let :bucket_complete_hash do
@@ -63,7 +64,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                            location: bucket_location, storage_class: bucket_storage_class, versioning: bucket_versioning,
                            logging_bucket: bucket_logging_bucket, logging_prefix: bucket_logging_prefix, website_main: bucket_website_main,
                            website_404: bucket_website_404, cors: bucket_cors, requester_pays: bucket_requester_pays,
-                           lifecycle: bucket_lifecycle, autoclass_enabled: bucket_autoclass_enabled
+                           lifecycle: bucket_lifecycle, autoclass_enabled: bucket_autoclass_enabled,
+                           autoclass_terminal_storage_class: bucket_autoclass_terminal_storage_class
     h[:labels] = bucket_labels
     h
   end
@@ -97,6 +99,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "knows its autoclass config" do
     # a complete bucket has a autoclass config enabled
     _(bucket_complete.autoclass_enabled).must_equal bucket_autoclass_enabled
+    _(bucket_complete.autoclass_terminal_storage_class).must_equal bucket_autoclass_terminal_storage_class
   end
 
   it "returns frozen cors" do
@@ -1141,7 +1144,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket.name, file_name), [bucket.name, file_name], **get_object_args
-      
+
 
     bucket.service.mocked_service = mock
 

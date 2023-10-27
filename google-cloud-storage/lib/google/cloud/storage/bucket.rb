@@ -435,15 +435,30 @@ module Google
         end
 
         ##
+        # Terminal Storage class of the autoclass
+        #
+        # @return [String]
+        #
+        def autoclass_terminal_storage_class
+          @gapi.autoclass&.terminal_storage_class
+        end
+
+        ##
+        # Update time of the terminal storage class under autoclass
+        #
+        # @return [DateTime]
+        #
+        def autoclass_terminal_storage_class_update_time
+          @gapi.autoclass&.terminal_storage_class_update_time
+        end
+
+        ##
         # Updates bucket's autoclass configuration. This defines the default class for objects in the
         # bucket and down/up-grades the storage class of objects based on the access patterns.
         # Accepted values are `:false`, and `:true`.
         #
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/using-autoclass).
-        #
-        # Note: Only patch requests that disable autoclass are currently supported.
-        # To enable autoclass, you must set it at bucket creation time.
         #
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
@@ -452,6 +467,39 @@ module Google
           @gapi.autoclass.enabled = toggle
           patch_gapi! :autoclass
         end
+
+        ##
+        # Updates autoclass terminal storage class for the bucket.
+        # This down/up-grades the storage class of objects based on the
+        # access patterns.
+        # Accepted values are `'NEARLINE`, and `'ARCHIVE'`.
+        #
+        # For more information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/using-autoclass).
+        #
+        # @param [BoolStringean] Terminal storage class for autoclass
+        # configuration of the bucket.
+        #
+        def autoclass_terminal_storage_class= new_terminal_storage_class
+          self.autoclass_enabled = true unless autoclass_enabled
+          @gapi.autoclass.terminal_storage_class = new_terminal_storage_class
+          patch_gapi! :autoclass
+        end
+
+        ##
+        # Update method to update all attributes of autoclass of a bucket
+        # It accepts params as a Hash of attributes in the following format
+        # { enabled: 'true', terminal_storage_class: 'ARCHIVE' }
+        #
+        # @param [Hash(String => String)] of autoclass attributes
+        #
+        # def update_autoclass autoclass_attributes
+        #   @gapi.autoclass ||= API::Bucket::Autoclass.new
+        #   autoclass_attributes.each do |k, v|
+        #     @gapi.autoclass.send("#{k}=", v)
+        #   end
+        #   update_gapi! :autoclass
+        # end
 
         ##
         # Whether [Object
