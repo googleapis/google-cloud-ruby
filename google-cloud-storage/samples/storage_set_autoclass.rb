@@ -22,7 +22,7 @@ require "google/cloud/storage"
 # @param bucket_name [String] The ID of your GCS bucket (e.g. "your-unique-bucket-name")
 # @param toggle [Boolean] if true, enables Autoclass; if false, disables Autoclass
 #
-def set_autoclass bucket_name:, toggle:
+def set_autoclass bucket_name:, toggle:, terminal_storage_class: nil
   # Initialize client
   storage = Google::Cloud::Storage.new
 
@@ -31,7 +31,7 @@ def set_autoclass bucket_name:, toggle:
 
   # Update the autoclass configuration
   bucket.autoclass_enabled = toggle
-  bucket.autoclass_terminal_storage_class = "ARCHIVE"
+  bucket.autoclass_terminal_storage_class = terminal_storage_class
   terminal_class_update_time = bucket.autoclass_terminal_storage_class_update_time
 
   # Get autoclass config of the bucket

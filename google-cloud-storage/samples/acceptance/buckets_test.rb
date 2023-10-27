@@ -159,11 +159,11 @@ describe "Buckets Snippets" do
         get_autoclass bucket_name: bucket_name
       end
 
-      assert_output(/autoclass config set to false./) do
-        set_autoclass bucket_name: bucket_name, toggle: false
+      assert_output(/autoclass terminal storage class set to ARCHIVE./) do
+        set_autoclass bucket_name: bucket_name, toggle: true, terminal_storage_class: 'ARCHIVE'
       end
 
-      assert_output(/autoclass terminal storage class set to ARCHIVE./) do
+      assert_output(/autoclass config set to false./) do
         set_autoclass bucket_name: bucket_name, toggle: false
       end
 
