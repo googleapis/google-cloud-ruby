@@ -27,12 +27,13 @@ def get_autoclass bucket_name:
 
   # Fetch the GCS bucket
   bucket = storage.bucket bucket_name
+  terminal_class_update_time = bucket.autoclass_terminal_storage_class_update_time
 
   # Get autoclass config of the bucket
   puts "Bucket #{bucket.name} has autoclass config set to #{bucket.autoclass_enabled}."
   puts "Bucket #{bucket.name} has autoclass toggle time set to #{bucket.autoclass_toggle_time}."
   puts "Bucket #{bucket.name} has autoclass terminal storage class set to #{bucket.autoclass_terminal_storage_class}."
-  puts "Bucket #{bucket.name} has autoclass terminal storage class update time set to #{bucket.autoclass_terminal_storage_class_update_time}."
+  puts "Bucket #{bucket.name} has autoclass terminal storage class update time set to #{terminal_class_update_time}."
 end
 
 # [END storage_get_autoclass]
