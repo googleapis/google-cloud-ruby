@@ -338,6 +338,90 @@ module Google
           end
         end
 
+        # Payload associated with Governance related log events.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The log message.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::Dataplex::V1::GovernanceEvent::EventType]
+        #     The type of the event.
+        # @!attribute [rw] entity
+        #   @return [::Google::Cloud::Dataplex::V1::GovernanceEvent::Entity]
+        #     Entity resource information if the log event is associated with a
+        #     specific entity.
+        class GovernanceEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about Entity resource that the log event is associated with.
+          # @!attribute [rw] entity
+          #   @return [::String]
+          #     The Entity resource the log event is associated with.
+          #     Format:
+          #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`
+          # @!attribute [rw] entity_type
+          #   @return [::Google::Cloud::Dataplex::V1::GovernanceEvent::Entity::EntityType]
+          #     Type of entity.
+          class Entity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type of entity.
+            module EntityType
+              # An unspecified Entity type.
+              ENTITY_TYPE_UNSPECIFIED = 0
+
+              # Table entity type.
+              TABLE = 1
+
+              # Fileset entity type.
+              FILESET = 2
+            end
+          end
+
+          # Type of governance log event.
+          module EventType
+            # An unspecified event type.
+            EVENT_TYPE_UNSPECIFIED = 0
+
+            # Resource IAM policy update event.
+            RESOURCE_IAM_POLICY_UPDATE = 1
+
+            # BigQuery table create event.
+            BIGQUERY_TABLE_CREATE = 2
+
+            # BigQuery table update event.
+            BIGQUERY_TABLE_UPDATE = 3
+
+            # BigQuery table delete event.
+            BIGQUERY_TABLE_DELETE = 4
+
+            # BigQuery connection create event.
+            BIGQUERY_CONNECTION_CREATE = 5
+
+            # BigQuery connection update event.
+            BIGQUERY_CONNECTION_UPDATE = 6
+
+            # BigQuery connection delete event.
+            BIGQUERY_CONNECTION_DELETE = 7
+
+            # BigQuery taxonomy created.
+            BIGQUERY_TAXONOMY_CREATE = 10
+
+            # BigQuery policy tag created.
+            BIGQUERY_POLICY_TAG_CREATE = 11
+
+            # BigQuery policy tag deleted.
+            BIGQUERY_POLICY_TAG_DELETE = 12
+
+            # BigQuery set iam policy for policy tag.
+            BIGQUERY_POLICY_TAG_SET_IAM_POLICY = 13
+
+            # Access policy update event.
+            ACCESS_POLICY_UPDATE = 14
+          end
+        end
+
         # These messages contain information about the execution of a datascan.
         # The monitored resource is 'DataScan'
         # Next ID: 13
