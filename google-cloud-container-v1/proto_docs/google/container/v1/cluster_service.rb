@@ -353,6 +353,9 @@ module Google
         # @!attribute [rw] sole_tenant_config
         #   @return [::Google::Cloud::Container::V1::SoleTenantConfig]
         #     Parameters for node pools to be backed by shared sole tenant node groups.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
+        #     A map of resource manager tag keys and values to be attached to the nodes.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1725,6 +1728,10 @@ module Google
         #     valid sources or targets for network firewalls and are specified by
         #     the client during cluster creation. Each tag within the list
         #     must comply with RFC1035.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
+        #     Resource manager tag keys and values to be attached to the nodes
+        #     for managing Compute Engine firewalls using Network Firewall Policies.
         class NodePoolAutoConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1964,6 +1971,10 @@ module Google
         # @!attribute [rw] desired_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
         #     Desired Beta APIs to be enabled for cluster.
+        # @!attribute [rw] desired_node_pool_auto_config_resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
+        #     The desired resource manager tags that apply to all auto-provisioned node
+        #     pools in autopilot clusters and node auto-provisioning enabled clusters.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2208,6 +2219,10 @@ module Google
             # [documentation on
             # resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
             RESIZE_CLUSTER = 18
+
+            # Fleet features of GKE Enterprise are being upgraded. The cluster should
+            # be assumed to be blocked for other upgrades until the operation finishes.
+            FLEET_FEATURE_UPGRADE = 19
           end
         end
 
@@ -2458,6 +2473,11 @@ module Google
         #     The smallest allowed disk size is 10GB.
         #     Initiates an upgrade operation that migrates the nodes in the
         #     node pool to the specified disk size.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
+        #     Desired resource manager tag keys and values to be attached to the nodes
+        #     for managing Compute Engine firewalls using Network Firewall Policies.
+        #     Existing tags will be replaced with new values.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5193,35 +5213,81 @@ module Google
         end
 
         # LocalNvmeSsdBlockConfig contains configuration for using raw-block local
-        # NVMe SSD.
+        # NVMe SSDs
         # @!attribute [rw] local_ssd_count
         #   @return [::Integer]
-        #     The number of raw-block local NVMe SSD disks to be attached to the node.
-        #     Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe
-        #     SSD disks to be attached to the node.
-        #     The limit for this value is dependent upon the maximum number of
-        #     disks available on a machine per zone. See:
+        #     Number of local NVMe SSDs to use.  The limit for this value is dependent
+        #     upon the maximum number of disk available on a machine per zone. See:
         #     https://cloud.google.com/compute/docs/disks/local-ssd
         #     for more information.
+        #
+        #     A zero (or unset) value has different meanings depending on machine type
+        #     being used:
+        #     1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+        #     zero (or unset) means to disable using local SSDs as ephemeral storage.
+        #     2. For Gen3 machines which dictate a specific number of local ssds, zero
+        #     (or unset) means to use the default number of local ssds that goes with
+        #     that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+        #     ssds would be provisioned. For c3-standard-8 (which doesn't support local
+        #     ssds), 0 will be provisioned. See
+        #     https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+        #     for more info.
         class LocalNvmeSsdBlockConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral
-        # storage using Local SSD.
+        # storage using Local SSDs.
         # @!attribute [rw] local_ssd_count
         #   @return [::Integer]
         #     Number of local SSDs to use to back ephemeral storage. Uses NVMe
-        #     interfaces. Each local SSD is 375 GB in size.
-        #     If zero, it means to disable using local SSDs as ephemeral storage.
-        #     The limit for this value is dependent upon the maximum number of
-        #     disks available on a machine per zone. See:
+        #     interfaces.
+        #
+        #     A zero (or unset) value has different meanings depending on machine type
+        #     being used:
+        #     1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+        #     zero (or unset) means to disable using local SSDs as ephemeral storage. The
+        #     limit for this value is dependent upon the maximum number of disk
+        #     available on a machine per zone. See:
         #     https://cloud.google.com/compute/docs/disks/local-ssd
         #     for more information.
+        #     2. For Gen3 machines which dictate a specific number of local ssds, zero
+        #     (or unset) means to use the default number of local ssds that goes with
+        #     that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+        #     ssds would be provisioned. For c3-standard-8 (which doesn't support local
+        #     ssds), 0 will be provisioned. See
+        #     https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+        #     for more info.
         class EphemeralStorageLocalSsdConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A map of resource manager tag keys and values to be attached to the nodes
+        # for managing Compute Engine firewalls using Network Firewall Policies.
+        # Tags must be according to specifications in
+        # https://cloud.google.com/vpc/docs/tags-firewalls-overview#specifications.
+        # A maximum of 5 tag key-value pairs can be specified.
+        # Existing tags will be replaced with new values.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     TagKeyValue must be in one of the following formats ([KEY]=[VALUE])
+        #     1. `tagKeys/{tag_key_id}=tagValues/{tag_value_id}`
+        #     2. `{org_id}/{tag_key_name}={tag_value_name}`
+        #     3. `{project_id}/{tag_key_name}={tag_value_name}`
+        class ResourceManagerTags
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
