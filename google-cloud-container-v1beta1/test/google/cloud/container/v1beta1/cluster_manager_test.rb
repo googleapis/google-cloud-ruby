@@ -338,6 +338,7 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     machine_type = "hello world"
     disk_type = "hello world"
     disk_size_gb = 42
+    resource_manager_tags = {}
 
     update_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_node_pool, name
@@ -369,6 +370,7 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
       assert_equal "hello world", request["machine_type"]
       assert_equal "hello world", request["disk_type"]
       assert_equal 42, request["disk_size_gb"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::ResourceManagerTags), request["resource_manager_tags"]
       refute_nil options
     end
 
@@ -379,31 +381,31 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
       end
 
       # Use hash object
-      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb }) do |response, operation|
+      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_node_pool project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb do |response, operation|
+      client.update_node_pool project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_node_pool ::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb) do |response, operation|
+      client.update_node_pool ::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb }, grpc_options) do |response, operation|
+      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_node_pool(::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb), grpc_options) do |response, operation|
+      client.update_node_pool(::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
