@@ -63,6 +63,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ReleaseConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/releaseConfigs/{release_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param release_config [String]
+            #
+            # @return [::String]
+            def release_config_path project:, location:, repository:, release_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/releaseConfigs/#{release_config}"
+            end
+
+            ##
             # Create a fully-qualified Repository resource string.
             #
             # The resource will be in the following format:
@@ -98,6 +119,27 @@ module Google
               raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
 
               "projects/#{project}/secrets/#{secret}/versions/#{version}"
+            end
+
+            ##
+            # Create a fully-qualified WorkflowConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/workflowConfigs/{workflow_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param workflow_config [String]
+            #
+            # @return [::String]
+            def workflow_config_path project:, location:, repository:, workflow_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/workflowConfigs/#{workflow_config}"
             end
 
             ##
