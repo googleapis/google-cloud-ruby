@@ -29,6 +29,6 @@ jobs:
           ruby-version: '2.6'
       - run: ruby --version
       - run: bundle install
-      - run: export MT_COMPAT=true && bundle exec rake conformance
+      - run: bundle exec rake conformance
         env:
           STORAGE_EMULATOR_HOST: localhost:9000
