@@ -260,8 +260,12 @@ module Google
         #     characters or less.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Optional. Which model to use for recognition requests. Select the model
-        #     best suited to your domain to get best results.
+        #     Optional. This field is now deprecated. Prefer the
+        #     {::Google::Cloud::Speech::V2::RecognitionConfig#model `model`} field in the
+        #     {::Google::Cloud::Speech::V2::RecognitionConfig `RecognitionConfig`} message.
+        #
+        #     Which model to use for recognition requests. Select the model best suited
+        #     to your domain to get best results.
         #
         #     Guidance for choosing which model to use can be found in the [Transcription
         #     Models
@@ -271,7 +275,12 @@ module Google
         #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         # @!attribute [rw] language_codes
         #   @return [::Array<::String>]
-        #     Optional. The language of the supplied audio as a
+        #     Optional. This field is now deprecated. Prefer the
+        #     {::Google::Cloud::Speech::V2::RecognitionConfig#language_codes `language_codes`}
+        #     field in the
+        #     {::Google::Cloud::Speech::V2::RecognitionConfig `RecognitionConfig`} message.
+        #
+        #     The language of the supplied audio as a
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
         #
         #     Supported languages for each model are listed in the [Table of Supported
@@ -376,6 +385,8 @@ module Google
         # * OGG_OPUS: Opus audio frames in an Ogg container.
         #
         # * WEBM_OPUS: Opus audio frames in a WebM container.
+        #
+        # * M4A: M4A audio format.
         class AutoDetectDecodingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -522,6 +533,36 @@ module Google
           end
         end
 
+        # Transcription normalization configuration. Use transcription normalization
+        # to automatically replace parts of the transcript with phrases of your
+        # choosing. For StreamingRecognize, this normalization only applies to stable
+        # partial transcripts (stability > 0.8) and final transcripts.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Speech::V2::TranscriptNormalization::Entry>]
+        #     A list of replacement entries. We will perform replacement with one entry
+        #     at a time. For example, the second entry in ["cat" => "dog", "mountain cat"
+        #     => "mountain dog"] will never be applied because we will always process the
+        #     first entry before it. At most 100 entries.
+        class TranscriptNormalization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single replacement configuration.
+          # @!attribute [rw] search
+          #   @return [::String]
+          #     What to replace. Max length is 100 characters.
+          # @!attribute [rw] replace
+          #   @return [::String]
+          #     What to replace with. Max length is 100 characters.
+          # @!attribute [rw] case_sensitive
+          #   @return [::Boolean]
+          #     Whether the search is case sensitive.
+          class Entry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Provides "hints" to the speech recognizer to favor specific words and phrases
         # in the results. PhraseSets can be specified as an inline resource, or a
         # reference to an existing PhraseSet resource.
@@ -592,6 +633,12 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::SpeechAdaptation]
         #     Speech adaptation context that weights recognizer predictions for specific
         #     words and phrases.
+        # @!attribute [rw] transcript_normalization
+        #   @return [::Google::Cloud::Speech::V2::TranscriptNormalization]
+        #     Optional. Use transcription normalization to automatically replace parts of
+        #     the transcript with phrases of your choosing. For StreamingRecognize, this
+        #     normalization only applies to stable partial transcripts (stability > 0.8)
+        #     and final transcripts.
         class RecognitionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1006,21 +1053,49 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Final results for a single file.
+        # Final results written to Cloud Storage.
         # @!attribute [rw] uri
         #   @return [::String]
         #     The Cloud Storage URI to which recognition results were written.
+        class CloudStorageResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Final results returned inline in the recognition response.
+        # @!attribute [rw] transcript
+        #   @return [::Google::Cloud::Speech::V2::BatchRecognizeResults]
+        #     The transcript for the audio file.
+        class InlineResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Final results for a single file.
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     Error if one was encountered.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::Speech::V2::RecognitionResponseMetadata]
-        # @!attribute [rw] transcript
-        #   @return [::Google::Cloud::Speech::V2::BatchRecognizeResults]
-        #     The transcript for the audio file. This is populated only when
+        # @!attribute [rw] cloud_storage_result
+        #   @return [::Google::Cloud::Speech::V2::CloudStorageResult]
+        #     Recognition results written to Cloud Storage. This is
+        #     populated only when
+        #     {::Google::Cloud::Speech::V2::GcsOutputConfig GcsOutputConfig} is set in
+        #     the
+        #     [RecognitionOutputConfig][[google.cloud.speech.v2.RecognitionOutputConfig].
+        # @!attribute [rw] inline_result
+        #   @return [::Google::Cloud::Speech::V2::InlineResult]
+        #     Recognition results. This is populated only when
         #     {::Google::Cloud::Speech::V2::InlineOutputConfig InlineOutputConfig} is set in
         #     the
         #     [RecognitionOutputConfig][[google.cloud.speech.v2.RecognitionOutputConfig].
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Deprecated. Use `cloud_storage_result.native_format_uri` instead.
+        # @!attribute [rw] transcript
+        #   @return [::Google::Cloud::Speech::V2::BatchRecognizeResults]
+        #     Deprecated. Use `inline_result.transcript` instead.
         class BatchRecognizeFileResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
