@@ -363,6 +363,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
         #     HostMaintenancePolicy contains the desired maintenance policy for the
         #     Google Compute Engine hosts.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1beta1::ResourceManagerTags]
+        #     A map of resource manager tag keys and values to be attached to the nodes.
         # @!attribute [rw] enable_confidential_storage
         #   @return [::Boolean]
         #     Optional. Enable confidential storage on Hyperdisk.
@@ -592,8 +595,22 @@ module Google
         # @!attribute [rw] local_ssd_count
         #   @return [::Integer]
         #     Number of local SSDs to use to back ephemeral storage. Uses NVMe
-        #     interfaces. Each local SSD is 375 GB in size.
-        #     If zero, it means to disable using local SSDs as ephemeral storage.
+        #     interfaces. The limit for this value is dependent upon the maximum number
+        #     of disk available on a machine per zone. See:
+        #     https://cloud.google.com/compute/docs/disks/local-ssd
+        #     for more information.
+        #
+        #     A zero (or unset) value has different meanings depending on machine type
+        #     being used:
+        #     1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+        #     zero (or unset) means to disable using local SSDs as ephemeral storage.
+        #     2. For Gen3 machines which dictate a specific number of local ssds, zero
+        #     (or unset) means to use the default number of local ssds that goes with
+        #     that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+        #     ssds would be provisioned. For c3-standard-8 (which doesn't support local
+        #     ssds), 0 will be provisioned. See
+        #     https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+        #     for more info.
         class EphemeralStorageConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -603,13 +620,22 @@ module Google
         # NVMe SSDs
         # @!attribute [rw] local_ssd_count
         #   @return [::Integer]
-        #     The number of raw-block local NVMe SSD disks to be attached to the node.
-        #     Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe
-        #     SSD disks to be attached to the node.
-        #     The limit for this value is dependent upon the maximum number of
-        #     disks available on a machine per zone. See:
+        #     Number of local NVMe SSDs to use.  The limit for this value is dependent
+        #     upon the maximum number of disk available on a machine per zone. See:
         #     https://cloud.google.com/compute/docs/disks/local-ssd
         #     for more information.
+        #
+        #     A zero (or unset) value has different meanings depending on machine type
+        #     being used:
+        #     1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+        #     zero (or unset) means to disable using local SSDs as ephemeral storage.
+        #     2. For Gen3 machines which dictate a specific number of local ssds, zero
+        #     (or unset) means to use the default number of local ssds that goes with
+        #     that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+        #     ssds would be provisioned. For c3-standard-8 (which doesn't support local
+        #     ssds), 0 will be provisioned. See
+        #     https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+        #     for more info.
         class LocalNvmeSsdBlockConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -620,12 +646,23 @@ module Google
         # @!attribute [rw] local_ssd_count
         #   @return [::Integer]
         #     Number of local SSDs to use to back ephemeral storage. Uses NVMe
-        #     interfaces. Each local SSD is 375 GB in size.
-        #     If zero, it means to disable using local SSDs as ephemeral storage.
-        #     The limit for this value is dependent upon the maximum number of
-        #     disks available on a machine per zone. See:
+        #     interfaces.
+        #
+        #     A zero (or unset) value has different meanings depending on machine type
+        #     being used:
+        #     1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+        #     zero (or unset) means to disable using local SSDs as ephemeral storage. The
+        #     limit for this value is dependent upon the maximum number of disk
+        #     available on a machine per zone. See:
         #     https://cloud.google.com/compute/docs/disks/local-ssd
         #     for more information.
+        #     2. For Gen3 machines which dictate a specific number of local ssds, zero
+        #     (or unset) means to use the default number of local ssds that goes with
+        #     that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+        #     ssds would be provisioned. For c3-standard-8 (which doesn't support local
+        #     ssds), 0 will be provisioned. See
+        #     https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+        #     for more info.
         class EphemeralStorageLocalSsdConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -721,9 +758,34 @@ module Google
         # @!attribute [rw] maintenance_interval
         #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy::MaintenanceInterval]
         #     Specifies the frequency of planned maintenance events.
+        # @!attribute [rw] opportunistic_maintenance_strategy
+        #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy::OpportunisticMaintenanceStrategy]
+        #     Strategy that will trigger maintenance on behalf of the customer.
         class HostMaintenancePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Strategy that will trigger maintenance on behalf of the customer.
+          # @!attribute [rw] node_idle_time_window
+          #   @return [::Google::Protobuf::Duration]
+          #     The amount of time that a node can remain idle (no customer owned
+          #     workloads running), before triggering maintenance.
+          # @!attribute [rw] maintenance_availability_window
+          #   @return [::Google::Protobuf::Duration]
+          #     The window of time that opportunistic maintenance can run. Example: A
+          #     setting of 14 days implies that opportunistic maintenance can only be ran
+          #     in the 2 weeks leading up to the scheduled maintenance date. Setting 28
+          #     days allows opportunistic maintenance to run at any time in the scheduled
+          #     maintenance window (all `PERIODIC` maintenance is set 28 days in
+          #     advance).
+          # @!attribute [rw] min_nodes_per_pool
+          #   @return [::Integer]
+          #     The minimum nodes required to be available in a pool. Blocks maintenance
+          #     if it would cause the number of running nodes to dip below this value.
+          class OpportunisticMaintenanceStrategy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Allows selecting how infrastructure upgrades should be applied to the
           # cluster or node pool.
@@ -2078,6 +2140,10 @@ module Google
         #     valid sources or targets for network firewalls and are specified by
         #     the client during cluster creation. Each tag within the list
         #     must comply with RFC1035.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1beta1::ResourceManagerTags]
+        #     Resource manager tag keys and values to be attached to the nodes
+        #     for managing Compute Engine firewalls using Network Firewall Policies.
         class NodePoolAutoConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2325,6 +2391,13 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
         #     HostMaintenancePolicy contains the desired maintenance policy for the
         #     Google Compute Engine hosts.
+        # @!attribute [rw] desired_node_pool_auto_config_resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1beta1::ResourceManagerTags]
+        #     The desired resource manager tags that apply to all auto-provisioned node
+        #     pools in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] desired_in_transit_encryption_config
+        #   @return [::Google::Cloud::Container::V1beta1::InTransitEncryptionConfig]
+        #     Specify the details of in-transit encryption.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2570,6 +2643,10 @@ module Google
             # [documentation on
             # resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
             RESIZE_CLUSTER = 18
+
+            # Fleet features of GKE Enterprise are being upgraded. The cluster should
+            # be assumed to be blocked for other upgrades until the operation finishes.
+            FLEET_FEATURE_UPGRADE = 19
           end
         end
 
@@ -2817,6 +2894,11 @@ module Google
         #     Optional. The desired disk size for nodes in the node pool.
         #     Initiates an upgrade operation that migrates the nodes in the
         #     node pool to the specified disk size.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Cloud::Container::V1beta1::ResourceManagerTags]
+        #     Desired resource manager tag keys and values to be attached to the nodes
+        #     for managing Compute Engine firewalls using Network Firewall Policies.
+        #     Existing tags will be replaced with new values.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3706,6 +3788,9 @@ module Google
 
                 # Start cordoning blue pool nodes.
                 CORDONING_BLUE_POOL = 3
+
+                # Start waiting after cordoning the blue pool and before draining it.
+                WAITING_TO_DRAIN_BLUE_POOL = 8
 
                 # Start draining blue pool nodes.
                 DRAINING_BLUE_POOL = 4
@@ -4752,6 +4837,9 @@ module Google
         # @!attribute [rw] enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Whether FQDN Network Policy is enabled on this cluster.
+        # @!attribute [rw] in_transit_encryption_config
+        #   @return [::Google::Cloud::Container::V1beta1::InTransitEncryptionConfig]
+        #     Specify the details of in-transit encryption.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5765,6 +5853,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A map of resource manager tag keys and values to be attached to the nodes
+        # for managing Compute Engine firewalls using Network Firewall Policies.
+        # Tags must be according to specifications in
+        # https://cloud.google.com/vpc/docs/tags-firewalls-overview#specifications.
+        # A maximum of 5 tag key-value pairs can be specified.
+        # Existing tags will be replaced with new values.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Tags must be in one of the following formats ([KEY]=[VALUE])
+        #     1. `tagKeys/{tag_key_id}=tagValues/{tag_value_id}`
+        #     2. `{org_id}/{tag_key_name}={tag_value_name}`
+        #     3. `{project_id}/{tag_key_name}={tag_value_name}`
+        class ResourceManagerTags
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
         # with Google Services through gRPC over IPv6.
         module PrivateIPv6GoogleAccess
@@ -5834,6 +5948,19 @@ module Google
 
           # The value used if the cluster is a dual stack cluster
           IPV4_IPV6 = 2
+        end
+
+        # Options for in-transit encryption.
+        module InTransitEncryptionConfig
+          # Unspecified, will be inferred as default -
+          # IN_TRANSIT_ENCRYPTION_UNSPECIFIED.
+          IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED = 0
+
+          # In-transit encryption is disabled.
+          IN_TRANSIT_ENCRYPTION_DISABLED = 1
+
+          # Data in-transit is encrypted using inter-node transparent encryption.
+          IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT = 2
         end
       end
     end
