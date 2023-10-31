@@ -494,7 +494,7 @@ module Google
         # It accepts params as a Hash of attributes in the following format
         # { enabled: 'true', terminal_storage_class: 'ARCHIVE' }
         #
-        # @param [Hash(String => String)] of autoclass attributes
+        # @param [Hash(String => String)] autoclass_attributes
         #
         def update_autoclass autoclass_attributes
           @gapi.autoclass ||= API::Bucket::Autoclass.new
