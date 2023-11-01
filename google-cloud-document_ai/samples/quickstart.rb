@@ -26,7 +26,9 @@ require "google/cloud/document_ai"
 #
 def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   # Create the Document AI client.
-  client = Google::Cloud::DocumentAI.document_processor_service
+  client = ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new do |config|
+    config.endpoint = "#{location_id}-documentai.googleapis.com"
+  end
 
   # Build the resource name from the project.
   name = client.processor_path(
