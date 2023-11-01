@@ -227,6 +227,12 @@ module Google
         #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation)
         #     documentation.
         #     When speech adaptation is set it supersedes the `speech_contexts` field.
+        # @!attribute [rw] transcript_normalization
+        #   @return [::Google::Cloud::Speech::V1::TranscriptNormalization]
+        #     Optional. Use transcription normalization to automatically replace parts of
+        #     the transcript with phrases of your choosing. For StreamingRecognize, this
+        #     normalization only applies to stable partial transcripts (stability > 0.8)
+        #     and final transcripts.
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Speech::V1::SpeechContext>]
         #     Array of {::Google::Cloud::Speech::V1::SpeechContext SpeechContext}.
@@ -415,6 +421,12 @@ module Google
             # wideband is supported. `sample_rate_hertz` must be 16000.
             SPEEX_WITH_HEADER_BYTE = 7
 
+            # MP3 audio. MP3 encoding is a Beta feature and only available in
+            # v1p1beta1. Support all standard MP3 bitrates (which range from 32-320
+            # kbps). When using this encoding, `sample_rate_hertz` has to match the
+            # sample rate of the file being used.
+            MP3 = 8
+
             # Opus encoded audio frames in WebM container
             # ([OggOpus](https://wiki.xiph.org/OggOpus)). `sample_rate_hertz` must be
             # one of 8000, 12000, 16000, 24000, or 48000.
@@ -426,8 +438,8 @@ module Google
         # @!attribute [rw] enable_speaker_diarization
         #   @return [::Boolean]
         #     If 'true', enables speaker detection for each recognized word in
-        #     the top alternative of the recognition result using a speaker_tag provided
-        #     in the WordInfo.
+        #     the top alternative of the recognition result using a speaker_label
+        #     provided in the WordInfo.
         # @!attribute [rw] min_speaker_count
         #   @return [::Integer]
         #     Minimum number of speakers in the conversation. This range gives you more
@@ -945,8 +957,17 @@ module Google
         #     Output only. A distinct integer value is assigned for every speaker within
         #     the audio. This field specifies which one of those speakers was detected to
         #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
-        #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+        #     speaker_tag is set if enable_speaker_diarization = 'true' and only for the
         #     top alternative.
+        #     Note: Use speaker_label instead.
+        # @!attribute [r] speaker_label
+        #   @return [::String]
+        #     Output only. A label value assigned for every unique speaker within the
+        #     audio. This field specifies which speaker was detected to have spoken this
+        #     word. For some models, like medical_conversation this can be actual speaker
+        #     role, for example "patient" or "provider", but generally this would be a
+        #     number identifying a speaker. This field is only set if
+        #     enable_speaker_diarization = 'true' and only for the top alternative.
         class WordInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
