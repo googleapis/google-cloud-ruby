@@ -27,7 +27,7 @@ describe "Vertex AI Quickstart" do
   let(:model) { "text-bison@001" }
 
   it "generates text" do
-    sample = SampleLoader.load "quickstart.rb"
+    sample = SampleLoader.load "predict_text_prompt.rb"
 
     assert_output(/\S/) do
       sample.run project_id: project_id, location_id: location_id, publisher: publisher, model: model

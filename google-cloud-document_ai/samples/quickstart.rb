@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START documentai_quickstart]
-require "google/cloud/document_ai"
+require "google/cloud/document_ai/v1"
 
 ##
 # Document AI quickstart

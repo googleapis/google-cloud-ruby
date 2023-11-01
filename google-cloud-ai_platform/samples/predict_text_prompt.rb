@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START aiplatform_sdk_ideation]
-require "google/cloud/ai_platform"
+require "google/cloud/ai_platform/v1"
 
 ##
 # Vertex AI Predict Text Prompt
