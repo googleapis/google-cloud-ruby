@@ -73,9 +73,24 @@ module Google
         #   @return [::Integer]
         #     Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
+        # @!attribute [rw] source_fetcher
+        #   @return [::Google::Cloud::Build::V1::StorageSource::SourceFetcher]
+        #     Option to specify the tool to fetch the source file for the build.
         class StorageSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the tool to fetch the source file for the build.
+          module SourceFetcher
+            # Unspecified. Defaults to GSUTIL.
+            SOURCE_FETCHER_UNSPECIFIED = 0
+
+            # Use the "gsutil" tool to download the source file.
+            GSUTIL = 1
+
+            # Use the Cloud Storage Fetcher tool to download the source file.
+            GCS_FETCHER = 2
+          end
         end
 
         # Location of the source in any accessible Git repository.
