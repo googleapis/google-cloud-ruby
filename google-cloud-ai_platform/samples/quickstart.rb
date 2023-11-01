@@ -26,7 +26,7 @@ require "google/cloud/ai_platform"
 def predict_text_prompt project_id:, location_id:, publisher:, model:
   # Create the Vertex AI client.
   client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
-  config.endpoint = "#{location_id}-aiplatform.googleapis.com"
+    config.endpoint = "#{location_id}-aiplatform.googleapis.com"
   end
 
   # Build the resource name from the project.
@@ -62,13 +62,12 @@ def predict_text_prompt project_id:, location_id:, publisher:, model:
       }
     )
   )
-  
+
   # Make the prediction request
-  response = client.predict(endpoint: endpoint, instances: [instances], parameters: parameters)
+  response = client.predict endpoint: endpoint, instances: [instances], parameters: parameters
 
   # Handle the prediction response
   puts "Predict Response"
   puts response
-  return response
 end
 # [END aiplatform_sdk_ideation]
