@@ -1957,6 +1957,9 @@ module Google
         # @!attribute [rw] security_posture_config
         #   @return [::Google::Cloud::Container::V1beta1::SecurityPostureConfig]
         #     Enable/Disable Security Posture API features for the cluster.
+        # @!attribute [rw] enterprise_config
+        #   @return [::Google::Cloud::Container::V1beta1::EnterpriseConfig]
+        #     GKE Enterprise Configuration.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5876,6 +5879,28 @@ module Google
           class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # EnterpriseConfig is the cluster enterprise configuration.
+        # @!attribute [r] cluster_tier
+        #   @return [::Google::Cloud::Container::V1beta1::EnterpriseConfig::ClusterTier]
+        #     Output only. [Output only] cluster_tier specifies the premium tier of the
+        #     cluster.
+        class EnterpriseConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Premium tiers for GKE Cluster.
+          module ClusterTier
+            # CLUSTER_TIER_UNSPECIFIED is when cluster_tier is not set.
+            CLUSTER_TIER_UNSPECIFIED = 0
+
+            # STANDARD indicates a standard GKE cluster.
+            STANDARD = 1
+
+            # ENTERPRISE indicates a GKE Enterprise cluster.
+            ENTERPRISE = 2
           end
         end
 
