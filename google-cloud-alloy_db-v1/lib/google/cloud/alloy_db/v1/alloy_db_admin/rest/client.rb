@@ -2722,7 +2722,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_client_certificate(parent: nil, request_id: nil, cert_duration: nil, public_key: nil)
+              # @overload generate_client_certificate(parent: nil, request_id: nil, cert_duration: nil, public_key: nil, use_metadata_exchange: nil)
               #   Pass arguments to `generate_client_certificate` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2752,6 +2752,10 @@ module Google
               #     default duration.
               #   @param public_key [::String]
               #     Optional. The public key from the client.
+              #   @param use_metadata_exchange [::Boolean]
+              #     Optional. An optional hint to the endpoint to generate a client
+              #     ceritificate that can be used by AlloyDB connectors to exchange additional
+              #     metadata with the server after TLS handshake.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AlloyDB::V1::GenerateClientCertificateResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

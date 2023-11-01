@@ -453,8 +453,8 @@ module Google
           #     instance IPs for this cluster will be created in the allocated range. The
           #     range name must comply with RFC 1035. Specifically, the name must be 1-63
           #     characters long and match the regular expression
-          #     [a-z]([-a-z0-9]*[a-z0-9])?.
-          #     Field name is intended to be consistent with CloudSQL.
+          #     `[a-z]([-a-z0-9]*[a-z0-9])?`.
+          #     Field name is intended to be consistent with Cloud SQL.
           class NetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -643,7 +643,8 @@ module Google
         #     Configuration for query insights.
         # @!attribute [rw] read_pool_config
         #   @return [::Google::Cloud::AlloyDB::V1::Instance::ReadPoolConfig]
-        #     Read pool specific config.
+        #     Read pool instance configuration.
+        #     This is required if the value of instanceType is READ_POOL.
         # @!attribute [r] ip_address
         #   @return [::String]
         #     Output only. The IP address for the Instance.

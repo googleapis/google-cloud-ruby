@@ -965,6 +965,11 @@ module Google
         # @!attribute [rw] public_key
         #   @return [::String]
         #     Optional. The public key from the client.
+        # @!attribute [rw] use_metadata_exchange
+        #   @return [::Boolean]
+        #     Optional. An optional hint to the endpoint to generate a client
+        #     ceritificate that can be used by AlloyDB connectors to exchange additional
+        #     metadata with the server after TLS handshake.
         class GenerateClientCertificateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

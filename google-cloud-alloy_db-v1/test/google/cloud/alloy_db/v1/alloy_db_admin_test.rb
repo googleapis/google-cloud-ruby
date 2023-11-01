@@ -1707,6 +1707,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
     request_id = "hello world"
     cert_duration = {}
     public_key = "hello world"
+    use_metadata_exchange = true
 
     generate_client_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_client_certificate, name
@@ -1715,6 +1716,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
       assert_equal "hello world", request["request_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["cert_duration"]
       assert_equal "hello world", request["public_key"]
+      assert_equal true, request["use_metadata_exchange"]
       refute_nil options
     end
 
@@ -1725,31 +1727,31 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key }) do |response, operation|
+      client.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_client_certificate parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key do |response, operation|
+      client.generate_client_certificate parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_client_certificate ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key) do |response, operation|
+      client.generate_client_certificate ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key }, grpc_options) do |response, operation|
+      client.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_client_certificate(::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key), grpc_options) do |response, operation|
+      client.generate_client_certificate(::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
