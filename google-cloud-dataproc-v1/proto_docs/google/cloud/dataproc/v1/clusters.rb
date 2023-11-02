@@ -559,6 +559,10 @@ module Google
         #   @return [::Google::Cloud::Dataproc::V1::InstanceFlexibilityPolicy]
         #     Optional. Instance flexibility Policy allowing a mixture of VM shapes and
         #     provisioning models.
+        # @!attribute [rw] startup_config
+        #   @return [::Google::Cloud::Dataproc::V1::StartupConfig]
+        #     Optional. Configuration to handle the startup of instances during cluster
+        #     create and update process.
         class InstanceGroupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -593,6 +597,21 @@ module Google
             # provide additional features.
             SPOT = 3
           end
+        end
+
+        # Configuration to handle the startup of instances during cluster create and
+        # update process.
+        # @!attribute [rw] required_registration_fraction
+        #   @return [::Float]
+        #     Optional. The config setting to enable cluster creation/ updation to be
+        #     successful only after required_registration_fraction of instances are up
+        #     and running. This configuration is applicable to only secondary workers for
+        #     now. The cluster will fail if required_registration_fraction of instances
+        #     are not available. This will include instance creation, agent registration,
+        #     and service registration (if enabled).
+        class StartupConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A reference to a Compute Engine instance.
