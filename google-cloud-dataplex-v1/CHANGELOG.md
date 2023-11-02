@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2023-11-02)
+
+#### Features
+
+* Support GovernanceEvent ([#23489](https://github.com/googleapis/google-cloud-ruby/issues/23489)) 
+
 ### 0.13.0 (2023-10-16)
 
 #### Features
