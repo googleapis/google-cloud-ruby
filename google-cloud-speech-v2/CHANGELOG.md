@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.8.0 (2023-11-02)
+
+#### Features
+
+* Support m4a audio format ([#23487](https://github.com/googleapis/google-cloud-ruby/issues/23487)) 
+* Support transcript normalization ([#23487](https://github.com/googleapis/google-cloud-ruby/issues/23487)) 
+
 ### 0.7.0 (2023-09-12)
 
 #### Features
