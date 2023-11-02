@@ -289,10 +289,14 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(one_off_bucket_name)).wont_be :nil?
     _(one_off_bucket.user_project).must_equal true
     _(one_off_bucket.autoclass_enabled).must_equal true
+    _(one_off_bucket.autoclass_terminal_storage_class).must_equal 'NEARLINE'
+    _(one_off_bucket.autoclass_terminal_storage_class_update_time).wont_be :nil?
     prev_toggle_time = one_off_bucket.autoclass_toggle_time
+    prev_terminal_storage_class_update_time = one_off_bucket.autoclass_terminal_storage_class_update_time
 
     one_off_bucket.update do |b|
       b.autoclass_enabled= false
+      b.autoclass_terminal_storage_class = 'ARCHIVE'
     end
     _(one_off_bucket.autoclass_enabled).must_equal false
 
@@ -301,6 +305,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(one_off_bucket_copy.user_project).must_equal true
     _(one_off_bucket_copy.autoclass_enabled).must_equal false
     refute one_off_bucket_copy.autoclass_toggle_time == prev_toggle_time
+    refute one_off_bucket_copy.autoclass_terminal_storage_class_update_time == prev_terminal_storage_class_update_time
 
     one_off_bucket.files.all &:delete
     safe_gcs_execute { one_off_bucket.delete }

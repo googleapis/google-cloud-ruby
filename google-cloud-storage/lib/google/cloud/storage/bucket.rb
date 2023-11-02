@@ -435,6 +435,24 @@ module Google
         end
 
         ##
+        # Terminal Storage class of the autoclass
+        #
+        # @return [String]
+        #
+        def autoclass_terminal_storage_class
+          @gapi.autoclass&.terminal_storage_class
+        end
+
+        ##
+        # Update time at which the autoclass terminal storage class was last modified
+        #
+        # @return [DateTime]
+        #
+        def autoclass_terminal_storage_class_update_time
+          @gapi.autoclass&.terminal_storage_class_update_time
+        end
+
+        ##
         # Updates bucket's autoclass configuration. This defines the default class for objects in the
         # bucket and down/up-grades the storage class of objects based on the access patterns.
         # Accepted values are `:false`, and `:true`.
@@ -442,14 +460,30 @@ module Google
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/using-autoclass).
         #
-        # Note: Only patch requests that disable autoclass are currently supported.
-        # To enable autoclass, you must set it at bucket creation time.
-        #
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
         def autoclass_enabled= toggle
           @gapi.autoclass ||= API::Bucket::Autoclass.new
           @gapi.autoclass.enabled = toggle
+          patch_gapi! :autoclass
+        end
+
+        ##
+        # Update method to update all attributes of autoclass of a bucket
+        # It accepts params as a Hash of attributes in the following format:
+        #
+        #     { enabled: true, terminal_storage_class: "ARCHIVE" }
+        #
+        # terminal_storage_class field is optional. It defaults to `NEARLINE`.
+        # Valid terminal_storage_class values are `NEARLINE` and `ARCHIVE`.
+        #
+        # @param [Hash(String => String)] autoclass_attributes
+        #
+        def update_autoclass autoclass_attributes
+          @gapi.autoclass ||= API::Bucket::Autoclass.new
+          autoclass_attributes.each do |k, v|
+            @gapi.autoclass.send "#{k}=", v
+          end
           patch_gapi! :autoclass
         end
 

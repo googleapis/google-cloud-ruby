@@ -66,9 +66,9 @@ class MockStorage < Minitest::Spec
                          lifecycle: nil,
                          location_type: "multi-region",
                          rpo: "DEFAULT",
-                         autoclass_enabled: nil
+                         autoclass_enabled: nil,
+                         autoclass_terminal_storage_class: nil
     versioning_config = { "enabled" => versioning } if versioning
-    autoclass_config = { enabled: autoclass_enabled } unless autoclass_enabled.nil?
     { "kind" => "storage#bucket",
       "id" => name,
       "selfLink" => "#{url_root}/b/#{name}",
@@ -88,7 +88,14 @@ class MockStorage < Minitest::Spec
       "website" => website_hash(website_main, website_404),
       "billing" => billing_hash(requester_pays),
       "etag" => "CAE=",
-      "autoclass" => autoclass_config }.delete_if { |_, v| v.nil? }
+      "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class)
+    }.delete_if { |_, v| v.nil? }
+  end
+
+  def autoclass_config_hash(enabled, terminal_storage_class)
+    { "enabled"               => enabled,
+      "terminalStorageClass"  => terminal_storage_class
+    }.delete_if { |_, v| v.nil? } if !enabled.nil? || terminal_storage_class
   end
 
   def logging_hash(bucket, prefix)
@@ -249,7 +256,7 @@ class MockStorage < Minitest::Spec
   def update_bucket_args if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
                          predefined_acl: nil,
-                         predefined_default_object_acl: nil, 
+                         predefined_default_object_acl: nil,
                          user_project: nil,
                          options: {}
     {
