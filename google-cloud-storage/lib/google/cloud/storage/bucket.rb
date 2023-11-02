@@ -470,8 +470,9 @@ module Google
 
         ##
         # Update method to update all attributes of autoclass of a bucket
-        # It accepts params as a Hash of attributes in the following format
-        #   { enabled: true, terminal_storage_class: "ARCHIVE" }
+        # It accepts params as a Hash of attributes in the following format:
+        #
+        #     { enabled: true, terminal_storage_class: "ARCHIVE" }
         #
         # @param [Hash(String => String)] autoclass_attributes
         #
