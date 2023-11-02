@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.1 (2023-11-02)
+
+#### Documentation
+
+* Update docs for default max parallel tasks per job ([#23490](https://github.com/googleapis/google-cloud-ruby/issues/23490)) 
+
 ### 0.13.0 (2023-10-23)
 
 #### Features
