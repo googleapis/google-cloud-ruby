@@ -49,7 +49,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                        num_newer_versions: 3)
   end
   let(:bucket_lifecycle_hash) { JSON.parse bucket_lifecycle_gapi.to_json }
-  let(:bucket_hash) { random_bucket_hash name: bucket_name, url_root: bucket_url_root, location: bucket_location, storage_class: bucket_storage_class, autoclass_enabled: bucket_autoclass_enabled, autoclass_terminal_storage_class: "NEARLINE" }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name, url_root: bucket_url_root, location: bucket_location, storage_class: bucket_storage_class, autoclass_enabled: bucket_autoclass_enabled }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
@@ -75,23 +75,6 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     mock.verify
   end
 
-  it "updates its autoclass terminal storage class config" do
-    mock = Minitest::Mock.new
-    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new autoclass: { enabled: true, terminal_storage_class: "ARCHIVE" }
-    returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, logging_prefix: bucket_logging_prefix, autoclass_enabled: true, autoclass_terminal_storage_class: "ARCHIVE").to_json
-    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: { retries: 0 })
-
-    bucket.service.mocked_service = mock
-
-    _(bucket.autoclass_terminal_storage_class).must_equal "NEARLINE"
-    bucket.autoclass_terminal_storage_class = "ARCHIVE"
-    _(bucket.autoclass_terminal_storage_class).must_equal "ARCHIVE"
-    _(bucket.autoclass_enabled).must_equal true
-
-    mock.verify
-  end
-
   it "updates all autoclass configs: enabled & terminal storage class in one call" do
     mock = Minitest::Mock.new
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new autoclass: { enabled: true, terminal_storage_class: "ARCHIVE" }
@@ -101,9 +84,10 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    _(bucket.autoclass_terminal_storage_class).must_equal "NEARLINE"
+    _(bucket.autoclass_terminal_storage_class).must_be :nil?
     bucket.update_autoclass({ enabled: true, terminal_storage_class: 'ARCHIVE' })
     _(bucket.autoclass_terminal_storage_class).must_equal 'ARCHIVE'
+    _(bucket.autoclass_enabled).must_equal true
 
     mock.verify
   end

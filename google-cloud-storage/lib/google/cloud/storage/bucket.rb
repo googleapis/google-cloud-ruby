@@ -444,7 +444,7 @@ module Google
         end
 
         ##
-        # Update time of the terminal storage class under autoclass
+        # Update time at which the autoclass terminal storage class was last modified
         #
         # @return [DateTime]
         #
@@ -463,29 +463,8 @@ module Google
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
         def autoclass_enabled= toggle
-          if toggle == false || @gapi.autoclass.nil?
-            @gapi.autoclass = API::Bucket::Autoclass.new
-          end
+          @gapi.autoclass ||= API::Bucket::Autoclass.new
           @gapi.autoclass.enabled = toggle
-          patch_gapi! :autoclass
-        end
-
-        ##
-        # Updates autoclass terminal storage class for the bucket.
-        # This down/up-grades the storage class of objects based on the
-        # access patterns.
-        # Accepted values are `'NEARLINE`, and `'ARCHIVE'`.
-        #
-        # For more information, see [Storage
-        # Classes](https://cloud.google.com/storage/docs/using-autoclass).
-        #
-        # @param [String] terminal_storage_class for autoclass
-        # configuration of the bucket.
-        #
-        def autoclass_terminal_storage_class= terminal_storage_class
-          return if autoclass_enabled == false
-          self.autoclass_enabled = true if autoclass_enabled.nil?
-          @gapi.autoclass.terminal_storage_class = terminal_storage_class
           patch_gapi! :autoclass
         end
 
