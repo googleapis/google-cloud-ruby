@@ -167,7 +167,7 @@ module MethodMapping
 
   def self.insert_bucket client, _preconditions, **resources
     bucket_name = "new-bucket-" + Time.now.to_i.to_s + "-" + SecureRandom.hex(4)
-    new_bucket = Google::Apis::StorageV1::Bucket.new({name: bucket_name})
+    new_bucket = Google::Apis::StorageV1::Bucket.new name: bucket_name
     client.insert_bucket(new_bucket)
   end
 

@@ -1299,6 +1299,9 @@ module Google
         #   `prefixes` are omitted.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
+        # @param [String] match_glob A glob pattern used to filter results returned in items (e.g. `foo*bar`).
+        #    The string value must be UTF-8 encoded. See:
+        #    https://cloud.google.com/storage/docs/json_api/v1/objects/list#list-object-glob
         # @param [Integer] max Maximum number of items plus prefixes to return.
         #   As duplicate prefixes are omitted, fewer total results may be
         #   returned than requested. The default value of this parameter is
@@ -1334,14 +1337,17 @@ module Google
         #   end
         #
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
-                  versions: nil
+                  versions: nil, match_glob: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
                                           versions: versions,
-                                          user_project: user_project
+                                          user_project: user_project,
+                                          match_glob: match_glob
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
-                               versions, user_project: user_project
+                               versions,
+                               user_project: user_project,
+                               match_glob: match_glob
         end
         alias find_files files
 
