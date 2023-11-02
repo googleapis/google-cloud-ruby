@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2023-11-02)
+
+#### Features
+
+* Support ReleaseConfigs ([#23477](https://github.com/googleapis/google-cloud-ruby/issues/23477)) 
+* Support Repository APIs ([#23477](https://github.com/googleapis/google-cloud-ruby/issues/23477)) 
+
 ### 0.4.0 (2023-09-12)
 
 #### Features
