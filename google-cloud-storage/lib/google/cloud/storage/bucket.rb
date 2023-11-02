@@ -474,6 +474,9 @@ module Google
         #
         #     { enabled: true, terminal_storage_class: "ARCHIVE" }
         #
+        # terminal_storage_class field is optional. It defaults to `NEARLINE`.
+        # Valid terminal_storage_class values are `NEARLINE` and `ARCHIVE`.
+        #
         # @param [Hash(String => String)] autoclass_attributes
         #
         def update_autoclass autoclass_attributes
