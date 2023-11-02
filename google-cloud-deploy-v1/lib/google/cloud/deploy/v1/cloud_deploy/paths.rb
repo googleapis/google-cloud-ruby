@@ -25,6 +25,48 @@ module Google
           # Path helper methods for the CloudDeploy API.
           module Paths
             ##
+            # Create a fully-qualified Automation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automations/{automation}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param delivery_pipeline [String]
+            # @param automation [String]
+            #
+            # @return [::String]
+            def automation_path project:, location:, delivery_pipeline:, automation:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "delivery_pipeline cannot contain /" if delivery_pipeline.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deliveryPipelines/#{delivery_pipeline}/automations/#{automation}"
+            end
+
+            ##
+            # Create a fully-qualified AutomationRun resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param delivery_pipeline [String]
+            # @param automation_run [String]
+            #
+            # @return [::String]
+            def automation_run_path project:, location:, delivery_pipeline:, automation_run:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "delivery_pipeline cannot contain /" if delivery_pipeline.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deliveryPipelines/#{delivery_pipeline}/automationRuns/#{automation_run}"
+            end
+
+            ##
             # Create a fully-qualified Build resource string.
             #
             # The resource will be in the following format:
@@ -96,6 +138,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/deliveryPipelines/#{delivery_pipeline}"
+            end
+
+            ##
+            # Create a fully-qualified Job resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/jobs/{job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param job [String]
+            #
+            # @return [::String]
+            def job_path project:, location:, job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/jobs/#{job}"
             end
 
             ##

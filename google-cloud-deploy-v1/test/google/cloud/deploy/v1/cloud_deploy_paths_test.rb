@@ -23,6 +23,30 @@ require "gapic/grpc/service_stub"
 require "google/cloud/deploy/v1/cloud_deploy"
 
 class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientPathsTest < Minitest::Test
+  def test_automation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.automation_path project: "value0", location: "value1", delivery_pipeline: "value2", automation: "value3"
+      assert_equal "projects/value0/locations/value1/deliveryPipelines/value2/automations/value3", path
+    end
+  end
+
+  def test_automation_run_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.automation_run_path project: "value0", location: "value1", delivery_pipeline: "value2", automation_run: "value3"
+      assert_equal "projects/value0/locations/value1/deliveryPipelines/value2/automationRuns/value3", path
+    end
+  end
+
   def test_build_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -68,6 +92,18 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientPathsTest < Minitest::Test
 
       path = client.delivery_pipeline_path project: "value0", location: "value1", delivery_pipeline: "value2"
       assert_equal "projects/value0/locations/value1/deliveryPipelines/value2", path
+    end
+  end
+
+  def test_job_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.job_path project: "value0", location: "value1", job: "value2"
+      assert_equal "projects/value0/locations/value1/jobs/value2", path
     end
   end
 

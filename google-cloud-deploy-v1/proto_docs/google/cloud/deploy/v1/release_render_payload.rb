@@ -29,7 +29,10 @@ module Google
         #     details as rendering progresses through render states.
         # @!attribute [rw] release
         #   @return [::String]
-        #     The name of the `Release`.
+        #     The name of the release.
+        # @!attribute [rw] release_render_state
+        #   @return [::Google::Cloud::Deploy::V1::Release::RenderState]
+        #     The state of the release render.
         class ReleaseRenderEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -269,6 +269,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the rollback_target REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::RollbackTargetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::RollbackTargetResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::RollbackTargetResponse]
+              #   A result object deserialized from the server's reply
+              def rollback_target request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_rollback_target_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::RollbackTargetResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the get_target REST call
               #
               # @param request_pb [::Google::Cloud::Deploy::V1::GetTargetRequest]
@@ -1029,6 +1067,310 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::CreateAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_automation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_automation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::UpdateAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_automation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_automation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::DeleteAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_automation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_automation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::GetAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::Automation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::Automation]
+              #   A result object deserialized from the server's reply
+              def get_automation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_automation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::Automation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_automations REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::ListAutomationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::ListAutomationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::ListAutomationsResponse]
+              #   A result object deserialized from the server's reply
+              def list_automations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_automations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::ListAutomationsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_automation_run REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::GetAutomationRunRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::AutomationRun]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::AutomationRun]
+              #   A result object deserialized from the server's reply
+              def get_automation_run request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_automation_run_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::AutomationRun.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_automation_runs REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::ListAutomationRunsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::ListAutomationRunsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::ListAutomationRunsResponse]
+              #   A result object deserialized from the server's reply
+              def list_automation_runs request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_automation_runs_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::ListAutomationRunsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the cancel_automation_run REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::CancelAutomationRunRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::CancelAutomationRunResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::CancelAutomationRunResponse]
+              #   A result object deserialized from the server's reply
+              def cancel_automation_run request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_cancel_automation_run_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::CancelAutomationRunResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the list_delivery_pipelines REST call
@@ -1151,6 +1493,28 @@ module Google
                                                           uri_template: "/v1/{parent}/targets",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the rollback_target REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::RollbackTargetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_rollback_target_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:rollbackTarget",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1582,6 +1946,177 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/config/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::CreateAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_automation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/automations",
+                                                          body: "automation",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::UpdateAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_automation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{automation.name}",
+                                                          body: "automation",
+                                                          matches: [
+                                                            ["automation.name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/automations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::DeleteAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_automation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/automations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_automation REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::GetAutomationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_automation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/automations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_automations REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::ListAutomationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_automations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/automations",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_automation_run REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::GetAutomationRunRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_automation_run_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/automationRuns/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_automation_runs REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::ListAutomationRunsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_automation_runs_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/automationRuns",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the cancel_automation_run REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::CancelAutomationRunRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_cancel_automation_run_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/automationRuns/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
