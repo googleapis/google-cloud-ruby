@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2023-11-02)
+
+#### Features
+
+* Add PG_OID annotation for postgresql compatibility ([#23482](https://github.com/googleapis/google-cloud-ruby/issues/23482)) 
+
 ### 0.17.0 (2023-09-28)
 
 #### Features
