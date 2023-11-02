@@ -240,8 +240,8 @@ module Google
                           return_immediately: return_immediately
         end
 
-        def streaming_pull request_enum
-          subscriber.streaming_pull request_enum
+        def streaming_pull request_enum, options = {}
+          subscriber.streaming_pull request_enum, options
         end
 
         ##
