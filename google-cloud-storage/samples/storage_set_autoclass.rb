@@ -30,8 +30,7 @@ def set_autoclass bucket_name:, toggle:, terminal_storage_class: nil
   bucket = storage.bucket bucket_name
 
   # Update the autoclass configuration
-  bucket.autoclass_enabled = toggle
-  bucket.autoclass_terminal_storage_class = terminal_storage_class
+  bucket.update_autoclass({ enabled: toggle, terminal_storage_class: terminal_storage_class })
   terminal_class_update_time = bucket.autoclass_terminal_storage_class_update_time
 
   # Get autoclass config of the bucket
