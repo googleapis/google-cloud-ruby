@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-container-v1",
-    "version": "0.29.0",
+    "version": "0.30.0",
     "language": "RUBY",
     "apis": [
       {

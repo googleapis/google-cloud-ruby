@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dlp-v2",
-    "version": "0.18.0",
+    "version": "0.19.0",
     "language": "RUBY",
     "apis": [
       {
@@ -875,6 +875,206 @@
         "method": {
           "short_name": "ActivateJobTrigger",
           "full_name": "google.privacy.dlp.v2.DlpService.ActivateJobTrigger",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_CreateDiscoveryConfig_sync",
+      "title": "Snippet for the create_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_discovery_config. It may require modification in order to execute successfully.",
+      "file": "dlp_service/create_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#create_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::DiscoveryConfig",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "CreateDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.CreateDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_UpdateDiscoveryConfig_sync",
+      "title": "Snippet for the update_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_discovery_config. It may require modification in order to execute successfully.",
+      "file": "dlp_service/update_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#update_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::DiscoveryConfig",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.UpdateDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_GetDiscoveryConfig_sync",
+      "title": "Snippet for the get_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_discovery_config. It may require modification in order to execute successfully.",
+      "file": "dlp_service/get_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#get_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::DiscoveryConfig",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "GetDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.GetDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_ListDiscoveryConfigs_sync",
+      "title": "Snippet for the list_discovery_configs call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_discovery_configs. It may require modification in order to execute successfully.",
+      "file": "dlp_service/list_discovery_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_discovery_configs",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#list_discovery_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::ListDiscoveryConfigsResponse",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "ListDiscoveryConfigs",
+          "full_name": "google.privacy.dlp.v2.DlpService.ListDiscoveryConfigs",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_DeleteDiscoveryConfig_sync",
+      "title": "Snippet for the delete_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_discovery_config. It may require modification in order to execute successfully.",
+      "file": "dlp_service/delete_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#delete_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.DeleteDiscoveryConfig",
           "service": {
             "short_name": "DlpService",
             "full_name": "google.privacy.dlp.v2.DlpService"

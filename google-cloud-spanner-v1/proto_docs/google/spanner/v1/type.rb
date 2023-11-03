@@ -175,6 +175,11 @@ module Google
           # {::Google::Cloud::Spanner::V1::TypeCode::JSON JSON} when a client interacts with PostgreSQL-enabled
           # Spanner databases.
           PG_JSONB = 3
+
+          # PostgreSQL compatible OID type. This annotation can be used by a client
+          # interacting with PostgreSQL-enabled Spanner database to specify that a
+          # value should be treated using the semantics of the OID type.
+          PG_OID = 4
         end
       end
     end

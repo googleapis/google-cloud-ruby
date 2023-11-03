@@ -138,6 +138,16 @@ module Google
             # Activate a job trigger. Causes the immediate execute of a trigger
             # instead of waiting on the trigger event to occur.
             rpc :ActivateJobTrigger, ::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest, ::Google::Cloud::Dlp::V2::DlpJob
+            # Creates a config for discovery to scan and profile storage.
+            rpc :CreateDiscoveryConfig, ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest, ::Google::Cloud::Dlp::V2::DiscoveryConfig
+            # Updates a discovery configuration.
+            rpc :UpdateDiscoveryConfig, ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest, ::Google::Cloud::Dlp::V2::DiscoveryConfig
+            # Gets a discovery configuration.
+            rpc :GetDiscoveryConfig, ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest, ::Google::Cloud::Dlp::V2::DiscoveryConfig
+            # Lists discovery configurations.
+            rpc :ListDiscoveryConfigs, ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest, ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsResponse
+            # Deletes a discovery configuration.
+            rpc :DeleteDiscoveryConfig, ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest, ::Google::Protobuf::Empty
             # Creates a new job to inspect storage or calculate risk metrics.
             # See https://cloud.google.com/dlp/docs/inspecting-storage and
             # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.

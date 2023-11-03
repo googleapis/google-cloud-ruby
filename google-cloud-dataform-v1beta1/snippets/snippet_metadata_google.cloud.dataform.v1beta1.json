@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataform-v1beta1",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -195,6 +195,206 @@
         "method": {
           "short_name": "DeleteRepository",
           "full_name": "google.cloud.dataform.v1beta1.Dataform.DeleteRepository",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_sync",
+      "title": "Snippet for the commit_repository_changes call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#commit_repository_changes. It may require modification in order to execute successfully.",
+      "file": "dataform/commit_repository_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "commit_repository_changes",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#commit_repository_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "CommitRepositoryChanges",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.CommitRepositoryChanges",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_ReadRepositoryFile_sync",
+      "title": "Snippet for the read_repository_file call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#read_repository_file. It may require modification in order to execute successfully.",
+      "file": "dataform/read_repository_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_repository_file",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#read_repository_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "ReadRepositoryFile",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.ReadRepositoryFile",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_QueryRepositoryDirectoryContents_sync",
+      "title": "Snippet for the query_repository_directory_contents call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_repository_directory_contents. It may require modification in order to execute successfully.",
+      "file": "dataform/query_repository_directory_contents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_repository_directory_contents",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#query_repository_directory_contents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "QueryRepositoryDirectoryContents",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.QueryRepositoryDirectoryContents",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_FetchRepositoryHistory_sync",
+      "title": "Snippet for the fetch_repository_history call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_repository_history. It may require modification in order to execute successfully.",
+      "file": "dataform/fetch_repository_history.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_repository_history",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_repository_history",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "FetchRepositoryHistory",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.FetchRepositoryHistory",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_ComputeRepositoryAccessTokenStatus_sync",
+      "title": "Snippet for the compute_repository_access_token_status call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#compute_repository_access_token_status. It may require modification in order to execute successfully.",
+      "file": "dataform/compute_repository_access_token_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "compute_repository_access_token_status",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#compute_repository_access_token_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "ComputeRepositoryAccessTokenStatus",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.ComputeRepositoryAccessTokenStatus",
           "service": {
             "short_name": "Dataform",
             "full_name": "google.cloud.dataform.v1beta1.Dataform"
@@ -1052,6 +1252,206 @@
       ]
     },
     {
+      "region_tag": "dataform_v1beta1_generated_Dataform_ListReleaseConfigs_sync",
+      "title": "Snippet for the list_release_configs call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_release_configs. It may require modification in order to execute successfully.",
+      "file": "dataform/list_release_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_release_configs",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#list_release_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "ListReleaseConfigs",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.ListReleaseConfigs",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_GetReleaseConfig_sync",
+      "title": "Snippet for the get_release_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_release_config. It may require modification in order to execute successfully.",
+      "file": "dataform/get_release_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_release_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#get_release_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ReleaseConfig",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "GetReleaseConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.GetReleaseConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_CreateReleaseConfig_sync",
+      "title": "Snippet for the create_release_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_release_config. It may require modification in order to execute successfully.",
+      "file": "dataform/create_release_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_release_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#create_release_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ReleaseConfig",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "CreateReleaseConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.CreateReleaseConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_UpdateReleaseConfig_sync",
+      "title": "Snippet for the update_release_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#update_release_config. It may require modification in order to execute successfully.",
+      "file": "dataform/update_release_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_release_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#update_release_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ReleaseConfig",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "UpdateReleaseConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.UpdateReleaseConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_DeleteReleaseConfig_sync",
+      "title": "Snippet for the delete_release_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_release_config. It may require modification in order to execute successfully.",
+      "file": "dataform/delete_release_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_release_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_release_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "DeleteReleaseConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.DeleteReleaseConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataform_v1beta1_generated_Dataform_ListCompilationResults_sync",
       "title": "Snippet for the list_compilation_results call in the Dataform service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_compilation_results. It may require modification in order to execute successfully.",
@@ -1207,6 +1607,206 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_sync",
+      "title": "Snippet for the list_workflow_configs call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_workflow_configs. It may require modification in order to execute successfully.",
+      "file": "dataform/list_workflow_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workflow_configs",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#list_workflow_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "ListWorkflowConfigs",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowConfigs",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_GetWorkflowConfig_sync",
+      "title": "Snippet for the get_workflow_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_workflow_config. It may require modification in order to execute successfully.",
+      "file": "dataform/get_workflow_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workflow_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#get_workflow_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::WorkflowConfig",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "GetWorkflowConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_CreateWorkflowConfig_sync",
+      "title": "Snippet for the create_workflow_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_workflow_config. It may require modification in order to execute successfully.",
+      "file": "dataform/create_workflow_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workflow_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#create_workflow_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::WorkflowConfig",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkflowConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_sync",
+      "title": "Snippet for the update_workflow_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#update_workflow_config. It may require modification in order to execute successfully.",
+      "file": "dataform/update_workflow_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workflow_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#update_workflow_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::WorkflowConfig",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkflowConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.UpdateWorkflowConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_DeleteWorkflowConfig_sync",
+      "title": "Snippet for the delete_workflow_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_workflow_config. It may require modification in order to execute successfully.",
+      "file": "dataform/delete_workflow_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workflow_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_workflow_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkflowConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

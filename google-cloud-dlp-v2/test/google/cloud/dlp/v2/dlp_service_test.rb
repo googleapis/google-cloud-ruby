@@ -1446,6 +1446,315 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_discovery_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dlp::V2::DiscoveryConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    discovery_config = {}
+    config_id = "hello world"
+
+    create_discovery_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_discovery_config, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DiscoveryConfig), request["discovery_config"]
+      assert_equal "hello world", request["config_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_discovery_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_discovery_config parent: parent, discovery_config: discovery_config, config_id: config_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_discovery_config ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_discovery_config(::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_discovery_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_discovery_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dlp::V2::DiscoveryConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    discovery_config = {}
+    update_mask = {}
+
+    update_discovery_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_discovery_config, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DiscoveryConfig), request["discovery_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_discovery_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_discovery_config name: name, discovery_config: discovery_config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_discovery_config ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_discovery_config(::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_discovery_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_discovery_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dlp::V2::DiscoveryConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_discovery_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_discovery_config, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_discovery_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_discovery_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_discovery_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_discovery_config ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_discovery_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_discovery_config(::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_discovery_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_discovery_configs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_token = "hello world"
+    page_size = 42
+    order_by = "hello world"
+
+    list_discovery_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_discovery_configs, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_discovery_configs_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_discovery_configs parent: parent, page_token: page_token, page_size: page_size, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_discovery_configs ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_discovery_configs(::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_discovery_configs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_discovery_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_discovery_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_discovery_config, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_discovery_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_discovery_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_discovery_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_discovery_config ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_discovery_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_discovery_config(::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_discovery_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_dlp_job
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dlp::V2::DlpJob.new

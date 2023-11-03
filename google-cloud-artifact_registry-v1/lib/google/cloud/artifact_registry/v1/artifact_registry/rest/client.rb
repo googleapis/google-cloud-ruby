@@ -1214,9 +1214,9 @@ module Google
               #     Required. The name of the parent resource where the repository will be
               #     created.
               #   @param repository_id [::String]
-              #     The repository id to use for this repository.
+              #     Required. The repository id to use for this repository.
               #   @param repository [::Google::Cloud::ArtifactRegistry::V1::Repository, ::Hash]
-              #     The repository to be created.
+              #     Required. The repository to be created.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1967,6 +1967,98 @@ module Google
               end
 
               ##
+              # Deletes multiple versions across a repository. The returned operation will
+              # complete once the versions have been deleted.
+              #
+              # @overload batch_delete_versions(request, options = nil)
+              #   Pass arguments to `batch_delete_versions` via a request object, either of type
+              #   {::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_delete_versions(parent: nil, names: nil, validate_only: nil)
+              #   Pass arguments to `batch_delete_versions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     The name of the repository holding all requested versions.
+              #   @param names [::Array<::String>]
+              #     Required. The names of the versions to delete.
+              #     A maximum of 10000 versions can be deleted in a batch.
+              #   @param validate_only [::Boolean]
+              #     If true, the request is performed without deleting data, following AIP-163.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/artifact_registry/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest.new
+              #
+              #   # Call the batch_delete_versions method.
+              #   result = client.batch_delete_versions request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def batch_delete_versions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_delete_versions.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_versions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_delete_versions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @artifact_registry_stub.batch_delete_versions request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists files.
               #
               # @overload list_files(request, options = nil)
@@ -2166,7 +2258,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     The name of the parent resource whose tags will be listed.
+              #     The name of the parent package whose tags will be listed.
+              #     For example:
+              #     `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
               #   @param filter [::String]
               #     An expression for filtering the results of the request. Filter rules are
               #     case insensitive. The fields eligible for filtering are:
@@ -3374,6 +3468,11 @@ module Google
                   #
                   attr_reader :delete_version
                   ##
+                  # RPC-specific configuration for `batch_delete_versions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_versions
+                  ##
                   # RPC-specific configuration for `list_files`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3488,6 +3587,8 @@ module Google
                     @get_version = ::Gapic::Config::Method.new get_version_config
                     delete_version_config = parent_rpcs.delete_version if parent_rpcs.respond_to? :delete_version
                     @delete_version = ::Gapic::Config::Method.new delete_version_config
+                    batch_delete_versions_config = parent_rpcs.batch_delete_versions if parent_rpcs.respond_to? :batch_delete_versions
+                    @batch_delete_versions = ::Gapic::Config::Method.new batch_delete_versions_config
                     list_files_config = parent_rpcs.list_files if parent_rpcs.respond_to? :list_files
                     @list_files = ::Gapic::Config::Method.new list_files_config
                     get_file_config = parent_rpcs.get_file if parent_rpcs.respond_to? :get_file

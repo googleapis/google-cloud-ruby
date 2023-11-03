@@ -1,6 +1,6 @@
 # Ruby Client for the Dataform V1beta1 API
 
-API Client library for the Dataform V1beta1 API
+Service to develop, version control, and operationalize SQL pipelines in BigQuery.
 
 Dataform is a service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery.
 

@@ -67,6 +67,7 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
+    "snippets/artifact_registry/batch_delete_versions.rb",
     "snippets/artifact_registry/create_repository.rb",
     "snippets/artifact_registry/create_tag.rb",
     "snippets/artifact_registry/delete_package.rb",

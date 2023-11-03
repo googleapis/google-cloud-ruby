@@ -1,5 +1,11 @@
 # Release History
 
+### 0.30.0 (2023-11-02)
+
+#### Features
+
+* Support ResourceManagerTags API ([#23488](https://github.com/googleapis/google-cloud-ruby/issues/23488)) 
+
 ### 0.29.0 (2023-09-12)
 
 #### Features
