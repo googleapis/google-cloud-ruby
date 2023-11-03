@@ -64,7 +64,7 @@ def predict_text_prompt project_id:, location_id:, publisher:, model:
   )
 
   # Make the prediction request
-  response = client.predict endpoint: endpoint, instances: [instances], parameters: parameters
+  response = client.predict endpoint: endpoint, instances: instances, parameters: parameters
 
   # Handle the prediction response
   puts "Predict Response"
