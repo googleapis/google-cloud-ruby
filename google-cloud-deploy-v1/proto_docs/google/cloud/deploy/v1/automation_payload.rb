@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,19 +21,22 @@ module Google
   module Cloud
     module Deploy
       module V1
-        # Payload proto for "clouddeploy.googleapis.com/release_render"
-        # Platform Log event that describes the render status change.
+        # Payload proto for "clouddeploy.googleapis.com/automation"
+        # Platform Log event that describes the Automation related events.
         # @!attribute [rw] message
         #   @return [::String]
-        #     Debug message for when a render transition occurs. Provides further
-        #     details as rendering progresses through render states.
-        # @!attribute [rw] release
+        #     Debug message for when there is an update on the AutomationRun.
+        #     Provides further details about the resource creation or state change.
+        # @!attribute [rw] automation
         #   @return [::String]
-        #     The name of the release.
-        # @!attribute [rw] release_render_state
-        #   @return [::Google::Cloud::Deploy::V1::Release::RenderState]
-        #     The state of the release render.
-        class ReleaseRenderEvent
+        #     The name of the `AutomationRun`.
+        # @!attribute [rw] pipeline_uid
+        #   @return [::String]
+        #     Unique identifier of the `DeliveryPipeline`.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Deploy::V1::Type]
+        #     Type of this notification, e.g. for a Pub/Sub failure.
+        class AutomationEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

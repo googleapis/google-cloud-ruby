@@ -27,8 +27,8 @@ module Google
         # configuration can progress.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `DeliveryPipeline`. Format is projects/\\{project}/
-        #     locations/\\{location}/deliveryPipelines/[a-z][a-z0-9\-]\\{0,62}.
+        #     Optional. Name of the `DeliveryPipeline`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `DeliveryPipeline`.
@@ -180,7 +180,7 @@ module Google
         # Predeploy contains the predeploy job configuration information.
         # @!attribute [rw] actions
         #   @return [::Array<::String>]
-        #     Optional. A sequence of skaffold custom actions to invoke during execution
+        #     Optional. A sequence of Skaffold custom actions to invoke during execution
         #     of the predeploy job.
         class Predeploy
           include ::Google::Protobuf::MessageExts
@@ -190,7 +190,7 @@ module Google
         # Postdeploy contains the postdeploy job configuration information.
         # @!attribute [rw] actions
         #   @return [::Array<::String>]
-        #     Optional. A sequence of skaffold custom actions to invoke during execution
+        #     Optional. A sequence of Skaffold custom actions to invoke during execution
         #     of the postdeploy job.
         class Postdeploy
           include ::Google::Protobuf::MessageExts
@@ -245,11 +245,11 @@ module Google
         # @!attribute [rw] predeploy
         #   @return [::Google::Cloud::Deploy::V1::Predeploy]
         #     Optional. Configuration for the predeploy job of the first phase. If this
-        #     is not configured, predeploy job will not be present.
+        #     is not configured, there will be no predeploy job for this phase.
         # @!attribute [rw] postdeploy
         #   @return [::Google::Cloud::Deploy::V1::Postdeploy]
         #     Optional. Configuration for the postdeploy job of the last phase. If this
-        #     is not configured, postdeploy job will not be present.
+        #     is not configured, there will be no postdeploy job for this phase.
         class CanaryDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -288,11 +288,11 @@ module Google
           # @!attribute [rw] predeploy
           #   @return [::Google::Cloud::Deploy::V1::Predeploy]
           #     Optional. Configuration for the predeploy job of this phase. If this is
-          #     not configured, predeploy job will not be present for this phase.
+          #     not configured, there will be no predeploy job for this phase.
           # @!attribute [rw] postdeploy
           #   @return [::Google::Cloud::Deploy::V1::Postdeploy]
           #     Optional. Configuration for the postdeploy job of this phase. If this is
-          #     not configured, postdeploy job will not be present for this phase.
+          #     not configured, there will be no postdeploy job for this phase.
           class PhaseConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -400,7 +400,7 @@ module Google
         # @!attribute [rw] missing_targets
         #   @return [::Array<::String>]
         #     The list of Target names that do not exist. For example,
-        #     projects/\\{project_id}/locations/\\{location_name}/targets/\\{target_name}.
+        #     `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Last time the condition was updated.
@@ -444,7 +444,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of pipelines. Format must
-        #     be projects/\\{project_id}/locations/\\{location_name}.
+        #     be `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of pipelines to return. The service may return
@@ -490,7 +490,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the `DeliveryPipeline`. Format must be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         class GetDeliveryPipelineRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -500,7 +500,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent collection in which the `DeliveryPipeline` should be
-        #     created. Format should be projects/\\{project_id}/locations/\\{location_name}.
+        #     created. Format should be
+        #     `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] delivery_pipeline_id
         #   @return [::String]
         #     Required. ID of the `DeliveryPipeline`.
@@ -574,7 +575,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the `DeliveryPipeline` to delete. Format should be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -613,6 +614,61 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configs for the Rollback rollout.
+        # @!attribute [rw] rollout
+        #   @return [::Google::Cloud::Deploy::V1::Rollout]
+        #     Optional. The rollback `Rollout` to create.
+        # @!attribute [rw] starting_phase_id
+        #   @return [::String]
+        #     Optional. The starting phase ID for the `Rollout`. If unspecified, the
+        #     `Rollout` will start in the stable phase.
+        class RollbackTargetConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `RollbackTarget`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The `DeliveryPipeline` for which the rollback `Rollout` should be
+        #     created. Format should be
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+        # @!attribute [rw] target_id
+        #   @return [::String]
+        #     Required. ID of the `Target` that is being rolled back.
+        # @!attribute [rw] rollout_id
+        #   @return [::String]
+        #     Required. ID of the rollback `Rollout` to create.
+        # @!attribute [rw] release_id
+        #   @return [::String]
+        #     Optional. ID of the `Release` to roll back to. If this isn't specified, the
+        #     previous successful `Rollout` to the specified target will be used to
+        #     determine the `Release`.
+        # @!attribute [rw] rollout_to_roll_back
+        #   @return [::String]
+        #     Optional. If provided, this must be the latest `Rollout` that is on the
+        #     `Target`.
+        # @!attribute [rw] rollback_config
+        #   @return [::Google::Cloud::Deploy::V1::RollbackTargetConfig]
+        #     Optional. Configs for the rollback `Rollout`.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with a `RollbackTargetResponse`.
+        class RollbackTargetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from `RollbackTarget`.
+        # @!attribute [rw] rollback_config
+        #   @return [::Google::Cloud::Deploy::V1::RollbackTargetConfig]
+        #     The config of the rollback `Rollout` created or will be created.
+        class RollbackTargetResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A `Target` resource in the Cloud Deploy API.
         #
         # A `Target` defines a location to which a Skaffold configuration
@@ -620,7 +676,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `Target`. Format is
-        #     projects/\\{project}/locations/\\{location}/targets/[a-z][a-z0-9\-]\\{0,62}.
+        #     `projects/{project}/locations/{location}/targets/[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] target_id
         #   @return [::String]
         #     Output only. Resource id of the `Target`.
@@ -819,7 +875,7 @@ module Google
         # @!attribute [rw] cluster
         #   @return [::String]
         #     Information specifying a GKE Cluster. Format is
-        #     `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}.
+        #     `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`.
         # @!attribute [rw] internal_ip
         #   @return [::Boolean]
         #     Optional. If true, `cluster` is accessed using the private IP address of
@@ -869,7 +925,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of targets. Format must be
-        #     projects/\\{project_id}/locations/\\{location_name}.
+        #     `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of `Target` objects to return. The service may
@@ -916,7 +972,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the `Target`. Format must be
-        #     projects/\\{project_id}/locations/\\{location_name}/targets/\\{target_name}.
+        #     `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
         class GetTargetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -927,7 +983,7 @@ module Google
         #   @return [::String]
         #     Required. The parent collection in which the `Target` should be created.
         #     Format should be
-        #     projects/\\{project_id}/locations/\\{location_name}.
+        #     `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] target_id
         #   @return [::String]
         #     Required. ID of the `Target`.
@@ -1001,7 +1057,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the `Target` to delete. Format should be
-        #     projects/\\{project_id}/locations/\\{location_name}/targets/\\{target_name}.
+        #     `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -1035,15 +1091,42 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Contains criteria for selecting Targets. Attributes provided must match the
+        # target resource in order for policy restrictions to apply. E.g. if id "prod"
+        # and labels "foo: bar" are given the target resource must match both that id
+        # and have that label in order to be selected.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     ID of the `Target`. The value of this field could be one of the
+        #     following:
+        #     * The last segment of a target name. It only needs the ID to determine
+        #     which target is being referred to
+        #     * "*", all targets in a location.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Target labels.
+        class TargetAttribute
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # A `Release` resource in the Cloud Deploy API.
         #
         # A `Release` defines a specific Skaffold configuration instance
         # that can be deployed.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `Release`. Format is projects/\\{project}/
-        #     locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/[a-z][a-z0-9\-]\\{0,62}.
+        #     Optional. Name of the `Release`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `Release`.
@@ -1185,6 +1268,11 @@ module Google
               # Cloud Build failed to fulfill Cloud Deploy's request. See
               # failure_message for additional details.
               CLOUD_BUILD_REQUEST_FAILED = 3
+
+              # The render operation did not complete successfully because the
+              # verification stanza required for verify was not found on the skaffold
+              # configuration.
+              VERIFICATION_CONFIG_NOT_FOUND = 4
 
               # The render operation did not complete successfully because the custom
               # action required for predeploy or postdeploy was not found in the
@@ -1382,7 +1470,7 @@ module Google
         # @!attribute [r] service
         #   @return [::String]
         #     Output only. The name of the Cloud Run Service in the rendered manifest.
-        #     Format is projects/\\{project}/locations/\\{location}/services/\\{service}.
+        #     Format is `projects/{project}/locations/{location}/services/{service}`.
         class CloudRunRenderMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1448,7 +1536,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the `Release`. Format must be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}/releases/\\{release_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
         class GetReleaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1459,7 +1547,7 @@ module Google
         #   @return [::String]
         #     Required. The parent collection in which the `Release` should be created.
         #     Format should be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] release_id
         #   @return [::String]
         #     Required. ID of the `Release`.
@@ -1495,9 +1583,8 @@ module Google
         # A `Rollout` contains information around a specific deployment to a `Target`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `Rollout`. Format is projects/\\{project}/
-        #     locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/[a-z][a-z0-9\-]\\{0,62}.
+        #     Optional. Name of the `Rollout`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `Rollout`.
@@ -1573,9 +1660,15 @@ module Google
         #     Output only. Metadata contains information about the rollout.
         # @!attribute [r] controller_rollout
         #   @return [::String]
-        #     Output only. Name of the `ControllerRollout`. Format is projects/\\{project}/
-        #     locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/[a-z][a-z0-9\-]\\{0,62}.
+        #     Output only. Name of the `ControllerRollout`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
+        # @!attribute [r] rollback_of_rollout
+        #   @return [::String]
+        #     Output only. Name of the `Rollout` that is rolled back by this `Rollout`.
+        #     Empty if this `Rollout` wasn't created as a rollback.
+        # @!attribute [r] rolled_back_by_rollouts
+        #   @return [::Array<::String>]
+        #     Output only. Names of `Rollouts` that rolled back this `Rollout`.
         class Rollout
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1690,6 +1783,10 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::CloudRunMetadata]
         #     Output only. The name of the Cloud Run Service that is associated with a
         #     `Rollout`.
+        # @!attribute [r] automation
+        #   @return [::Google::Cloud::Deploy::V1::AutomationRolloutMetadata]
+        #     Output only. AutomationRolloutMetadata contains the information about the
+        #     interactions between Automation service and this rollout.
         class Metadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1711,7 +1808,7 @@ module Google
         #   @return [::String]
         #     Output only. The name of the Cloud Run Service that is associated with a
         #     `Rollout`. Format is
-        #     projects/\\{project}/locations/\\{location}/services/\\{service}.
+        #     `projects/{project}/locations/{location}/services/{service}`.
         # @!attribute [r] service_urls
         #   @return [::Array<::String>]
         #     Output only. The Cloud Run Service urls that are associated with a
@@ -1719,7 +1816,31 @@ module Google
         # @!attribute [r] revision
         #   @return [::String]
         #     Output only. The Cloud Run Revision id associated with a `Rollout`.
+        # @!attribute [r] job
+        #   @return [::String]
+        #     Output only. The name of the Cloud Run job that is associated with a
+        #     `Rollout`. Format is
+        #     `projects/{project}/locations/{location}/jobs/{job_name}`.
         class CloudRunMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AutomationRolloutMetadata contains Automation-related actions that
+        # were performed on a rollout.
+        # @!attribute [r] promote_automation_run
+        #   @return [::String]
+        #     Output only. The ID of the AutomationRun initiated by a promote release
+        #     rule.
+        # @!attribute [r] advance_automation_runs
+        #   @return [::Array<::String>]
+        #     Output only. The IDs of the AutomationRuns initiated by an advance rollout
+        #     rule.
+        # @!attribute [r] repair_automation_runs
+        #   @return [::Array<::String>]
+        #     Output only. The IDs of the AutomationRuns initiated by a repair rollout
+        #     rule.
+        class AutomationRolloutMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1780,12 +1901,10 @@ module Google
         #     Output only. The verify Job. Runs after a deploy if the deploy succeeds.
         # @!attribute [r] predeploy_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
-        #     Output only. The predeploy Job. This is the predeploy job in the phase.
-        #     This is the first job of the phase.
+        #     Output only. The predeploy Job, which is the first job on the phase.
         # @!attribute [r] postdeploy_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
-        #     Output only. The postdeploy Job. This is the postdeploy job in the phase.
-        #     This is the last job of the phase.
+        #     Output only. The postdeploy Job, which is the last job on the phase.
         class DeploymentJobs
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1963,7 +2082,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the `Rollout`. Format must be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}/releases/\\{release_name}/rollouts/\\{rollout_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}/rollouts/{rollout_name}`.
         class GetRolloutRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1974,7 +2093,7 @@ module Google
         #   @return [::String]
         #     Required. The parent collection in which the `Rollout` should be created.
         #     Format should be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}/releases/\\{release_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
         # @!attribute [rw] rollout_id
         #   @return [::String]
         #     Required. ID of the `Rollout`.
@@ -2044,8 +2163,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the Rollout. Format is
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/\\{rollout}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [rw] approved
         #   @return [::Boolean]
         #     Required. True = approve; false = reject
@@ -2064,8 +2182,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the Rollout. Format is
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/\\{rollout}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [rw] phase_id
         #   @return [::String]
         #     Required. The phase ID to advance the `Rollout` to.
@@ -2084,8 +2201,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the Rollout. Format is
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/\\{rollout}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         class CancelRolloutRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2101,8 +2217,7 @@ module Google
         # @!attribute [rw] rollout
         #   @return [::String]
         #     Required. Name of the Rollout. Format is
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/\\{rollout}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [rw] phase_id
         #   @return [::String]
         #     Required. The phase ID the Job to ignore belongs to.
@@ -2124,8 +2239,7 @@ module Google
         # @!attribute [rw] rollout
         #   @return [::String]
         #     Required. Name of the Rollout. Format is
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/\\{rollout}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [rw] phase_id
         #   @return [::String]
         #     Required. The phase ID the Job to retry belongs to.
@@ -2147,8 +2261,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the Release. Format is
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}`.
         class AbandonReleaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2166,9 +2279,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `JobRun`. Format is
-        #     projects/\\{project}/locations/\\{location}/
-        #     deliveryPipelines/\\{deliveryPipeline}/releases/\\{releases}/rollouts/
-        #     \\{rollouts}/jobRuns/\\{uuid}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{releases}/rollouts/{rollouts}/jobRuns/{uuid}`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `JobRun`.
@@ -2244,7 +2355,7 @@ module Google
         #   @return [::String]
         #     Output only. The resource name of the Cloud Build `Build` object that is
         #     used to deploy. Format is
-        #     projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        #     `projects/{project}/locations/{location}/builds/{build}`.
         # @!attribute [r] failure_cause
         #   @return [::Google::Cloud::Deploy::V1::DeployJobRun::FailureCause]
         #     Output only. The reason the deploy failed. This will always be unspecified
@@ -2276,7 +2387,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The deploy build did not complete within the alloted time.
+            # The deploy job run did not complete within the alloted time.
             DEADLINE_EXCEEDED = 3
 
             # There were missing resources in the runtime environment required for a
@@ -2294,7 +2405,7 @@ module Google
         #   @return [::String]
         #     Output only. The resource name of the Cloud Build `Build` object that is
         #     used to verify. Format is
-        #     projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        #     `projects/{project}/locations/{location}/builds/{build}`.
         # @!attribute [r] artifact_uri
         #   @return [::String]
         #     Output only. URI of a directory containing the verify artifacts. This
@@ -2328,7 +2439,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The verify build did not complete within the alloted time.
+            # The verify job run did not complete within the alloted time.
             DEADLINE_EXCEEDED = 3
 
             # No Skaffold verify configuration was found.
@@ -2345,7 +2456,7 @@ module Google
         #   @return [::String]
         #     Output only. The resource name of the Cloud Build `Build` object that is
         #     used to execute the custom actions associated with the predeploy Job.
-        #     Format is projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        #     Format is `projects/{project}/locations/{location}/builds/{build}`.
         # @!attribute [r] failure_cause
         #   @return [::Google::Cloud::Deploy::V1::PredeployJobRun::FailureCause]
         #     Output only. The reason the predeploy failed. This will always be
@@ -2372,7 +2483,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The predeploy build did not complete within the alloted time.
+            # The predeploy job run did not complete within the alloted time.
             DEADLINE_EXCEEDED = 3
 
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
@@ -2386,7 +2497,7 @@ module Google
         #   @return [::String]
         #     Output only. The resource name of the Cloud Build `Build` object that is
         #     used to execute the custom actions associated with the postdeploy Job.
-        #     Format is projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        #     Format is `projects/{project}/locations/{location}/builds/{build}`.
         # @!attribute [r] failure_cause
         #   @return [::Google::Cloud::Deploy::V1::PostdeployJobRun::FailureCause]
         #     Output only. The reason the postdeploy failed. This will always be
@@ -2413,7 +2524,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The postdeploy build did not complete within the alloted time.
+            # The postdeploy job run did not complete within the alloted time.
             DEADLINE_EXCEEDED = 3
 
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
@@ -2426,9 +2537,8 @@ module Google
         # createChildRollout `JobRun`.
         # @!attribute [r] rollout
         #   @return [::String]
-        #     Output only. Name of the `ChildRollout`. Format is projects/\\{project}/
-        #     locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/[a-z][a-z0-9\-]\\{0,62}.
+        #     Output only. Name of the `ChildRollout`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] rollout_phase_id
         #   @return [::String]
         #     Output only. The ID of the childRollout Phase initiated by this JobRun.
@@ -2441,9 +2551,8 @@ module Google
         # advanceChildRollout `JobRun`.
         # @!attribute [r] rollout
         #   @return [::String]
-        #     Output only. Name of the `ChildRollout`. Format is projects/\\{project}/
-        #     locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/[a-z][a-z0-9\-]\\{0,62}.
+        #     Output only. Name of the `ChildRollout`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] rollout_phase_id
         #   @return [::String]
         #     Output only. the ID of the ChildRollout's Phase.
@@ -2502,7 +2611,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the `JobRun`. Format must be
-        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}/releases/\\{release_name}/rollouts/\\{rollout_name}/jobRuns/\\{job_run_name}.
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}/rollouts/{rollout_name}/jobRuns/{job_run_name}`.
         class GetJobRunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2512,8 +2621,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the `JobRun`. Format must be
-        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
-        #     releases/\\{release}/rollouts/\\{rollout}/jobRuns/\\{jobRun}.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
         class TerminateJobRunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2568,6 +2676,732 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # An `Automation` resource in the Cloud Deploy API.
+        #
+        # An `Automation` enables the automation of manually driven actions for
+        # a Delivery Pipeline, which includes Release promotion amongst Targets,
+        # Rollout repair and Rollout deployment strategy advancement. The intention
+        # of Automation is to reduce manual intervention in the continuous delivery
+        # process.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of the `Automation`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automations/{automation}`.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique identifier of the `Automation`.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the `Automation`. Max length is 255 characters.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the automation was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the automation was updated.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user, and not by Cloud Deploy. Annotations must meet the following
+        #     constraints:
+        #
+        #     * Annotations are key/value pairs.
+        #     * Valid annotation keys have two segments: an optional prefix and name,
+        #     separated by a slash (`/`).
+        #     * The name segment is required and must be 63 characters or less,
+        #     beginning and ending with an alphanumeric character (`[a-z0-9A-Z]`) with
+        #     dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
+        #     * The prefix is optional. If specified, the prefix must be a DNS subdomain:
+        #     a series of DNS labels separated by dots(`.`), not longer than 253
+        #     characters in total, followed by a slash (`/`).
+        #
+        #     See
+        #     https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
+        #     for more details.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Labels are attributes that can be set and used by both the
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 63 characters.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The weak etag of the `Automation` resource.
+        #     This checksum is computed by the server based on the value of other
+        #     fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] suspended
+        #   @return [::Boolean]
+        #     Optional. When Suspended, automation is deactivated from execution.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Required. Email address of the user-managed IAM service account that
+        #     creates Cloud Deploy release and rollout resources.
+        # @!attribute [rw] selector
+        #   @return [::Google::Cloud::Deploy::V1::AutomationResourceSelector]
+        #     Required. Selected resources to which the automation will be applied.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Deploy::V1::AutomationRule>]
+        #     Required. List of Automation rules associated with the Automation resource.
+        #     Must have at least one rule and limited to 250 rules per Delivery Pipeline.
+        #     Note: the order of the rules here is not the same as the order of
+        #     execution.
+        class Automation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # AutomationResourceSelector contains the information to select the resources
+        # to which an Automation is going to be applied.
+        # @!attribute [rw] targets
+        #   @return [::Array<::Google::Cloud::Deploy::V1::TargetAttribute>]
+        #     Contains attributes about a target.
+        class AutomationResourceSelector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `AutomationRule` defines the automation activities.
+        # @!attribute [rw] promote_release_rule
+        #   @return [::Google::Cloud::Deploy::V1::PromoteReleaseRule]
+        #     Optional. `PromoteReleaseRule` will automatically promote a release from
+        #     the current target to a specified target.
+        # @!attribute [rw] advance_rollout_rule
+        #   @return [::Google::Cloud::Deploy::V1::AdvanceRolloutRule]
+        #     Optional. The `AdvanceRolloutRule` will automatically advance a
+        #     successful Rollout.
+        # @!attribute [rw] repair_rollout_rule
+        #   @return [::Google::Cloud::Deploy::V1::RepairRolloutRule]
+        #     Optional. The `RepairRolloutRule` will automatically repair a failed
+        #     rollout.
+        class AutomationRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `PromoteRelease` rule will automatically promote a release from the current
+        # target to a specified target.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. ID of the rule. This id must be unique in the `Automation`
+        #     resource to which this rule belongs. The format is `[a-z][a-z0-9\-]{0,62}`.
+        # @!attribute [rw] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. How long the release need to be paused until being promoted to
+        #     the next target.
+        # @!attribute [rw] destination_target_id
+        #   @return [::String]
+        #     Optional. The ID of the stage in the pipeline to which this `Release` is
+        #     deploying. If unspecified, default it to the next stage in the promotion
+        #     flow. The value of this field could be one of the following:
+        #     * The last segment of a target name. It only needs the ID to determine
+        #     if the target is one of the stages in the promotion sequence defined
+        #     in the pipeline.
+        #     * "@next", the next target in the promotion sequence.
+        # @!attribute [r] condition
+        #   @return [::Google::Cloud::Deploy::V1::AutomationRuleCondition]
+        #     Output only. Information around the state of the Automation rule.
+        # @!attribute [rw] destination_phase
+        #   @return [::String]
+        #     Optional. The starting phase of the rollout created by this operation.
+        #     Default to the first phase.
+        class PromoteReleaseRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The `AdvanceRollout` automation rule will automatically advance a successful
+        # Rollout to the next phase.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. ID of the rule. This id must be unique in the `Automation`
+        #     resource to which this rule belongs. The format is `[a-z][a-z0-9\-]{0,62}`.
+        # @!attribute [rw] source_phases
+        #   @return [::Array<::String>]
+        #     Optional. Proceeds only after phase name matched any one in the list.
+        #     This value must consist of lower-case letters, numbers, and hyphens,
+        #     start with a letter and end with a letter or a number, and have a max
+        #     length of 63 characters. In other words, it must match the following
+        #     regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+        # @!attribute [rw] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. How long to wait after a rollout is finished.
+        # @!attribute [r] condition
+        #   @return [::Google::Cloud::Deploy::V1::AutomationRuleCondition]
+        #     Output only. Information around the state of the Automation rule.
+        class AdvanceRolloutRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The `RepairRolloutRule` automation rule will automatically repair a failed
+        # `Rollout`.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. ID of the rule. This id must be unique in the `Automation`
+        #     resource to which this rule belongs. The format is `[a-z][a-z0-9\-]{0,62}`.
+        # @!attribute [rw] source_phases
+        #   @return [::Array<::String>]
+        #     Optional. Phases within which jobs are subject to automatic repair actions
+        #     on failure. Proceeds only after phase name matched any one in the list, or
+        #     for all phases if unspecified. This value must consist of lower-case
+        #     letters, numbers, and hyphens, start with a letter and end with a letter or
+        #     a number, and have a max length of 63 characters. In other words, it must
+        #     match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+        # @!attribute [rw] jobs
+        #   @return [::Array<::String>]
+        #     Optional. Jobs to repair. Proceeds only after job name matched any one in
+        #     the list, or for all jobs if unspecified or empty. The phase that includes
+        #     the job must match the phase ID specified in `source_phase`. This value
+        #     must consist of lower-case letters, numbers, and hyphens, start with a
+        #     letter and end with a letter or a number, and have a max length of 63
+        #     characters. In other words, it must match the following regex:
+        #     `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+        # @!attribute [rw] repair_modes
+        #   @return [::Array<::Google::Cloud::Deploy::V1::RepairMode>]
+        #     Required. Defines the types of automatic repair actions for failed jobs.
+        # @!attribute [r] condition
+        #   @return [::Google::Cloud::Deploy::V1::AutomationRuleCondition]
+        #     Output only. Information around the state of the 'Automation' rule.
+        class RepairRolloutRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration of the repair action.
+        # @!attribute [rw] retry
+        #   @return [::Google::Cloud::Deploy::V1::Retry]
+        #     Optional. Retries a failed job.
+        # @!attribute [rw] rollback
+        #   @return [::Google::Cloud::Deploy::V1::Rollback]
+        #     Optional. Rolls back a `Rollout`.
+        class RepairMode
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retries the failed job.
+        # @!attribute [rw] attempts
+        #   @return [::Integer]
+        #     Required. Total number of retries. Retry will skipped if set to 0; The
+        #     minimum value is 1, and the maximum value is 10.
+        # @!attribute [rw] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. How long to wait for the first retry. Default is 0, and the
+        #     maximum value is 14d.
+        # @!attribute [rw] backoff_mode
+        #   @return [::Google::Cloud::Deploy::V1::BackoffMode]
+        #     Optional. The pattern of how wait time will be increased. Default is
+        #     linear. Backoff mode will be ignored if `wait` is 0.
+        class Retry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Rolls back a `Rollout`.
+        # @!attribute [rw] destination_phase
+        #   @return [::String]
+        #     Optional. The starting phase ID for the `Rollout`. If unspecified, the
+        #     `Rollout` will start in the stable phase.
+        class Rollback
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `AutomationRuleCondition` contains conditions relevant to an
+        # `Automation` rule.
+        # @!attribute [rw] targets_present_condition
+        #   @return [::Google::Cloud::Deploy::V1::TargetsPresentCondition]
+        #     Optional. Details around targets enumerated in the rule.
+        class AutomationRuleCondition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `CreateAutomation`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which the `Automation` should be
+        #     created. Format should be
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+        # @!attribute [rw] automation_id
+        #   @return [::String]
+        #     Required. ID of the `Automation`.
+        # @!attribute [rw] automation
+        #   @return [::Google::Cloud::Deploy::V1::Automation]
+        #     Required. The `Automation` to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with an expected result, but no actual change is made.
+        class CreateAutomationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `UpdateAutomation`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `Automation` resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] automation
+        #   @return [::Google::Cloud::Deploy::V1::Automation]
+        #     Required. The `Automation` to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, updating a `Automation` that does not exist will
+        #     result in the creation of a new `Automation`.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with an expected result, but no actual change is made.
+        class UpdateAutomationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `DeleteAutomation`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the `Automation` to delete. Format should be
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, then deleting an already deleted or non-existing
+        #     `Automation` will succeed.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and verify whether the resource
+        #     exists, but do not actually post it.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The weak etag of the request.
+        #     This checksum is computed by the server based on the value of other
+        #     fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class DeleteAutomationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `ListAutomations`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of automations. Format
+        #     must be
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of automations to return. The service may return
+        #     fewer than this value. If unspecified, at most 50 automations will
+        #     be returned. The maximum value is 1000; values above 1000 will be set
+        #     to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAutomations` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other provided parameters match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter automations to be returned. All fields can be used in the
+        #     filter.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Field to sort by.
+        class ListAutomationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from `ListAutomations`.
+        # @!attribute [rw] automations
+        #   @return [::Array<::Google::Cloud::Deploy::V1::Automation>]
+        #     The `Automations` objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListAutomationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `GetAutomation`
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the `Automation`. Format must be
+        #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
+        class GetAutomationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An `AutomationRun` resource in the Cloud Deploy API.
+        #
+        # An `AutomationRun` represents an automation execution instance of an
+        # automation rule.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of the `AutomationRun`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}`.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the `AutomationRun` was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the automationRun was updated.
+        # @!attribute [r] etag
+        #   @return [::String]
+        #     Output only. The weak etag of the `AutomationRun` resource.
+        #     This checksum is computed by the server based on the value of other
+        #     fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        # @!attribute [r] service_account
+        #   @return [::String]
+        #     Output only. Email address of the user-managed IAM service account that
+        #     performs the operations against Cloud Deploy resources.
+        # @!attribute [r] automation_snapshot
+        #   @return [::Google::Cloud::Deploy::V1::Automation]
+        #     Output only. Snapshot of the Automation taken at AutomationRun creation
+        #     time.
+        # @!attribute [r] target_id
+        #   @return [::String]
+        #     Output only. The ID of the target that represents the promotion stage that
+        #     initiates the `AutomationRun`. The value of this field is the last segment
+        #     of a target name.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Deploy::V1::AutomationRun::State]
+        #     Output only. Current state of the `AutomationRun`.
+        # @!attribute [r] state_description
+        #   @return [::String]
+        #     Output only. Explains the current state of the `AutomationRun`. Present
+        #     only an explanation is needed.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the `AutomationRun` will expire. An `AutomationRun` will
+        #     expire after 14 days from its creation date.
+        # @!attribute [r] rule_id
+        #   @return [::String]
+        #     Output only. The ID of the automation rule that initiated the operation.
+        # @!attribute [r] automation_id
+        #   @return [::String]
+        #     Output only. The ID of the automation that initiated the operation.
+        # @!attribute [r] promote_release_operation
+        #   @return [::Google::Cloud::Deploy::V1::PromoteReleaseOperation]
+        #     Output only. Promotes a release to a specified 'Target'.
+        # @!attribute [r] advance_rollout_operation
+        #   @return [::Google::Cloud::Deploy::V1::AdvanceRolloutOperation]
+        #     Output only. Advances a rollout to the next phase.
+        # @!attribute [r] repair_rollout_operation
+        #   @return [::Google::Cloud::Deploy::V1::RepairRolloutOperation]
+        #     Output only. Repairs a failed 'Rollout'.
+        # @!attribute [r] wait_until_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Earliest time the `AutomationRun` will attempt to resume.
+        #     Wait-time is configured by `wait` in automation rule.
+        class AutomationRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid state of an `AutomationRun`.
+          module State
+            # The `AutomationRun` has an unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # The `AutomationRun` has succeeded.
+            SUCCEEDED = 1
+
+            # The `AutomationRun` was cancelled.
+            CANCELLED = 2
+
+            # The `AutomationRun` has failed.
+            FAILED = 3
+
+            # The `AutomationRun` is in progress.
+            IN_PROGRESS = 4
+
+            # The `AutomationRun` is pending.
+            PENDING = 5
+          end
+        end
+
+        # Contains the information of an automated promote-release operation.
+        # @!attribute [r] target_id
+        #   @return [::String]
+        #     Output only. The ID of the target that represents the promotion stage to
+        #     which the release will be promoted. The value of this field is the last
+        #     segment of a target name.
+        # @!attribute [r] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. How long the operation will be paused.
+        # @!attribute [r] rollout
+        #   @return [::String]
+        #     Output only. The name of the rollout that initiates the `AutomationRun`.
+        # @!attribute [r] phase
+        #   @return [::String]
+        #     Output only. The starting phase of the rollout created by this operation.
+        class PromoteReleaseOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains the information of an automated advance-rollout operation.
+        # @!attribute [r] source_phase
+        #   @return [::String]
+        #     Output only. The phase of a deployment that initiated the operation.
+        # @!attribute [r] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. How long the operation will be paused.
+        # @!attribute [r] rollout
+        #   @return [::String]
+        #     Output only. The name of the rollout that initiates the `AutomationRun`.
+        # @!attribute [r] destination_phase
+        #   @return [::String]
+        #     Output only. The phase to which the rollout will be advanced to.
+        class AdvanceRolloutOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains the information for an automated `repair rollout` operation.
+        # @!attribute [r] rollout
+        #   @return [::String]
+        #     Output only. The name of the rollout that initiates the `AutomationRun`.
+        # @!attribute [r] current_repair_mode_index
+        #   @return [::Integer]
+        #     Output only. The index of the current repair action in the repair sequence.
+        # @!attribute [r] repair_phases
+        #   @return [::Array<::Google::Cloud::Deploy::V1::RepairPhase>]
+        #     Output only. Records of the repair attempts. Each repair phase may have
+        #     multiple retry attempts or single rollback attempt.
+        class RepairRolloutOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RepairPhase tracks the repair attempts that have been made for
+        # each `RepairMode` specified in the `Automation` resource.
+        # @!attribute [r] retry
+        #   @return [::Google::Cloud::Deploy::V1::RetryPhase]
+        #     Output only. Records of the retry attempts for retry repair mode.
+        # @!attribute [r] rollback
+        #   @return [::Google::Cloud::Deploy::V1::RollbackAttempt]
+        #     Output only. Rollback attempt for rollback repair mode .
+        class RepairPhase
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RetryPhase contains the retry attempts and the metadata for initiating a
+        # new attempt.
+        # @!attribute [r] total_attempts
+        #   @return [::Integer]
+        #     Output only. The number of attempts that have been made.
+        # @!attribute [r] backoff_mode
+        #   @return [::Google::Cloud::Deploy::V1::BackoffMode]
+        #     Output only. The pattern of how the wait time of the retry attempt is
+        #     calculated.
+        # @!attribute [r] phase_id
+        #   @return [::String]
+        #     Output only. The phase ID of the phase that includes the job being retried.
+        # @!attribute [r] job_id
+        #   @return [::String]
+        #     Output only. The job ID for the Job to retry.
+        # @!attribute [r] attempts
+        #   @return [::Array<::Google::Cloud::Deploy::V1::RetryAttempt>]
+        #     Output only. Detail of a retry action.
+        class RetryPhase
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RetryAttempt represents an action of retrying the failed Cloud Deploy job.
+        # @!attribute [r] attempt
+        #   @return [::Integer]
+        #     Output only. The index of this retry attempt.
+        # @!attribute [r] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. How long the operation will be paused.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Deploy::V1::RepairState]
+        #     Output only. Valid state of this retry action.
+        # @!attribute [r] state_desc
+        #   @return [::String]
+        #     Output only. Description of the state of the Retry.
+        class RetryAttempt
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RollbackAttempt represents an action of rolling back a Cloud Deploy 'Target'.
+        # @!attribute [r] destination_phase
+        #   @return [::String]
+        #     Output only. The phase to which the rollout will be rolled back to.
+        # @!attribute [r] rollout_id
+        #   @return [::String]
+        #     Output only. ID of the rollback `Rollout` to create.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Deploy::V1::RepairState]
+        #     Output only. Valid state of this rollback action.
+        # @!attribute [r] state_desc
+        #   @return [::String]
+        #     Output only. Description of the state of the Rollback.
+        class RollbackAttempt
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `ListAutomationRuns`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of automationRuns. Format
+        #     must be
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of automationRuns to return. The service may return
+        #     fewer than this value. If unspecified, at most 50 automationRuns will
+        #     be returned. The maximum value is 1000; values above 1000 will be set
+        #     to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAutomationRuns` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other provided parameters match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter automationRuns to be returned. All fields can be used in the
+        #     filter.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Field to sort by.
+        class ListAutomationRunsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from `ListAutomationRuns`.
+        # @!attribute [rw] automation_runs
+        #   @return [::Array<::Google::Cloud::Deploy::V1::AutomationRun>]
+        #     The `AutomationRuns` objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListAutomationRunsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `GetAutomationRun`
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the `AutomationRun`. Format must be
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}`.
+        class GetAutomationRunRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object used by `CancelAutomationRun`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the `AutomationRun`. Format is
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}`.
+        class CancelAutomationRunRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from `CancelAutomationRun`.
+        class CancelAutomationRunResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The support state of a specific Skaffold version.
         module SkaffoldSupportState
           # Default value. This value is unused.
@@ -2581,6 +3415,42 @@ module Google
 
           # This skaffold version is no longer supported.
           SKAFFOLD_SUPPORT_STATE_UNSUPPORTED = 3
+        end
+
+        # The pattern of how wait time is increased.
+        module BackoffMode
+          # No WaitMode is specified.
+          BACKOFF_MODE_UNSPECIFIED = 0
+
+          # Increases the wait time linearly.
+          BACKOFF_MODE_LINEAR = 1
+
+          # Increases the wait time exponentially.
+          BACKOFF_MODE_EXPONENTIAL = 2
+        end
+
+        # Valid state of a repair attempt.
+        module RepairState
+          # The `repair` has an unspecified state.
+          REPAIR_STATE_UNSPECIFIED = 0
+
+          # The `repair` action has succeeded.
+          REPAIR_STATE_SUCCEEDED = 1
+
+          # The `repair` action was cancelled.
+          REPAIR_STATE_CANCELLED = 2
+
+          # The `repair` action has failed.
+          REPAIR_STATE_FAILED = 3
+
+          # The `repair` action is in progress.
+          REPAIR_STATE_IN_PROGRESS = 4
+
+          # The `repair` action is pending.
+          REPAIR_STATE_PENDING = 5
+
+          # The `repair` action was skipped.
+          REPAIR_STATE_SKIPPED = 6
         end
       end
     end

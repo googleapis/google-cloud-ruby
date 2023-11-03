@@ -40,6 +40,11 @@
                 "list_targets"
               ]
             },
+            "RollbackTarget": {
+              "methods": [
+                "rollback_target"
+              ]
+            },
             "GetTarget": {
               "methods": [
                 "get_target"
@@ -138,6 +143,46 @@
             "GetConfig": {
               "methods": [
                 "get_config"
+              ]
+            },
+            "CreateAutomation": {
+              "methods": [
+                "create_automation"
+              ]
+            },
+            "UpdateAutomation": {
+              "methods": [
+                "update_automation"
+              ]
+            },
+            "DeleteAutomation": {
+              "methods": [
+                "delete_automation"
+              ]
+            },
+            "GetAutomation": {
+              "methods": [
+                "get_automation"
+              ]
+            },
+            "ListAutomations": {
+              "methods": [
+                "list_automations"
+              ]
+            },
+            "GetAutomationRun": {
+              "methods": [
+                "get_automation_run"
+              ]
+            },
+            "ListAutomationRuns": {
+              "methods": [
+                "list_automation_runs"
+              ]
+            },
+            "CancelAutomationRun": {
+              "methods": [
+                "cancel_automation_run"
               ]
             }
           }
