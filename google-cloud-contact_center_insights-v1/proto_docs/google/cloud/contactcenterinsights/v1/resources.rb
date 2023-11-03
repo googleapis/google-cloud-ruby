@@ -1481,7 +1481,7 @@ module Google
               # Unspecified summarization model.
               SUMMARIZATION_MODEL_UNSPECIFIED = 0
 
-              # The Insights baseline model.
+              # The CCAI baseline model.
               BASELINE_MODEL = 1
             end
           end

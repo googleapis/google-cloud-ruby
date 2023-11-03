@@ -1204,6 +1204,110 @@ module Google
             end
 
             ##
+            # Deletes multiple conversations in a single request.
+            #
+            # @overload bulk_delete_conversations(request, options = nil)
+            #   Pass arguments to `bulk_delete_conversations` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload bulk_delete_conversations(parent: nil, filter: nil, max_delete_count: nil, force: nil)
+            #   Pass arguments to `bulk_delete_conversations` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource to create analyses in.
+            #     Format:
+            #     projects/\\{project}/locations/\\{location}
+            #   @param filter [::String]
+            #     Filter used to select the subset of conversations to analyze.
+            #   @param max_delete_count [::Integer]
+            #     Maximum number of conversations to delete. The default is 1000. It can be
+            #     changed by setting the `max_delete_count` field.
+            #   @param force [::Boolean]
+            #     If set to true, all of this conversation's analyses will also be deleted.
+            #     Otherwise, the request will only succeed if the conversation has no
+            #     analyses.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new
+            #
+            #   # Call the bulk_delete_conversations method.
+            #   result = client.bulk_delete_conversations request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def bulk_delete_conversations request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.bulk_delete_conversations.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.bulk_delete_conversations.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.bulk_delete_conversations.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :bulk_delete_conversations, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Imports conversations and processes them according to the user's
             # configuration.
             #
@@ -1217,7 +1321,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil)
+            # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil, redaction_config: nil, speech_config: nil)
             #   Pass arguments to `ingest_conversations` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1231,6 +1335,12 @@ module Google
             #     Required. The parent resource for new conversations.
             #   @param conversation_config [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::ConversationConfig, ::Hash]
             #     Configuration that applies to all conversations.
+            #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
+            #     Optional. DLP settings for transcript redaction. Optional, will default to
+            #     the config specified in Settings.
+            #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
+            #     Optional. Default Speech-to-Text configuration. Optional, will default to
+            #     the config specified in Settings.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3824,6 +3934,11 @@ module Google
                 #
                 attr_reader :bulk_analyze_conversations
                 ##
+                # RPC-specific configuration for `bulk_delete_conversations`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :bulk_delete_conversations
+                ##
                 # RPC-specific configuration for `ingest_conversations`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3983,6 +4098,8 @@ module Google
                   @delete_analysis = ::Gapic::Config::Method.new delete_analysis_config
                   bulk_analyze_conversations_config = parent_rpcs.bulk_analyze_conversations if parent_rpcs.respond_to? :bulk_analyze_conversations
                   @bulk_analyze_conversations = ::Gapic::Config::Method.new bulk_analyze_conversations_config
+                  bulk_delete_conversations_config = parent_rpcs.bulk_delete_conversations if parent_rpcs.respond_to? :bulk_delete_conversations
+                  @bulk_delete_conversations = ::Gapic::Config::Method.new bulk_delete_conversations_config
                   ingest_conversations_config = parent_rpcs.ingest_conversations if parent_rpcs.respond_to? :ingest_conversations
                   @ingest_conversations = ::Gapic::Config::Method.new ingest_conversations_config
                   export_insights_data_config = parent_rpcs.export_insights_data if parent_rpcs.respond_to? :export_insights_data

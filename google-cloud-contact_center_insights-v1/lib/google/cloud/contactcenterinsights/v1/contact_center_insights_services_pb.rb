@@ -58,6 +58,8 @@ module Google
             rpc :DeleteAnalysis, ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest, ::Google::Protobuf::Empty
             # Analyzes multiple conversations in a single request.
             rpc :BulkAnalyzeConversations, ::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest, ::Google::Longrunning::Operation
+            # Deletes multiple conversations in a single request.
+            rpc :BulkDeleteConversations, ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest, ::Google::Longrunning::Operation
             # Imports conversations and processes them according to the user's
             # configuration.
             rpc :IngestConversations, ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest, ::Google::Longrunning::Operation
