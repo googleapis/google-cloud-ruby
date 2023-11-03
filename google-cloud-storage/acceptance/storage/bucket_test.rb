@@ -302,7 +302,6 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     one_off_bucket.update do |b|
       b.autoclass_enabled= false
-      b.autoclass_terminal_storage_class = 'ARCHIVE'
     end
     _(one_off_bucket.autoclass_enabled).must_equal false
 
