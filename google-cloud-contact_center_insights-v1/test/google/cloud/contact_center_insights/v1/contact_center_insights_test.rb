@@ -750,6 +750,75 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     end
   end
 
+  def test_bulk_delete_conversations
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    max_delete_count = 42
+    force = true
+
+    bulk_delete_conversations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :bulk_delete_conversations, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["max_delete_count"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, bulk_delete_conversations_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.bulk_delete_conversations parent: parent, filter: filter, max_delete_count: max_delete_count, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.bulk_delete_conversations ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.bulk_delete_conversations(::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, bulk_delete_conversations_client_stub.call_rpc_count
+    end
+  end
+
   def test_ingest_conversations
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -762,6 +831,8 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     transcript_object_config = {}
     parent = "hello world"
     conversation_config = {}
+    redaction_config = {}
+    speech_config = {}
 
     ingest_conversations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :ingest_conversations, name
@@ -772,6 +843,8 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
       assert_equal :transcript_object_config, request.object_config
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::ConversationConfig), request["conversation_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::RedactionConfig), request["redaction_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::SpeechConfig), request["speech_config"]
       refute_nil options
     end
 
@@ -782,35 +855,35 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
       end
 
       # Use hash object
-      client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config }) do |response, operation|
+      client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config do |response, operation|
+      client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config) do |response, operation|
+      client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config }, grpc_options) do |response, operation|
+      client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config), grpc_options) do |response, operation|
+      client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

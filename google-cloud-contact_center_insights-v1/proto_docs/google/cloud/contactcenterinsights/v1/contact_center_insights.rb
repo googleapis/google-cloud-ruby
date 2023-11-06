@@ -316,6 +316,14 @@ module Google
         # @!attribute [rw] conversation_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::ConversationConfig]
         #     Configuration that applies to all conversations.
+        # @!attribute [rw] redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Optional. DLP settings for transcript redaction. Optional, will default to
+        #     the config specified in Settings.
+        # @!attribute [rw] speech_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig]
+        #     Optional. Default Speech-to-Text configuration. Optional, will default to
+        #     the config specified in Settings.
         class IngestConversationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -324,9 +332,23 @@ module Google
           # @!attribute [rw] bucket_uri
           #   @return [::String]
           #     Required. The Cloud Storage bucket containing source objects.
+          # @!attribute [rw] bucket_object_type
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource::BucketObjectType]
+          #     Optional. Specifies the type of the objects in `bucket_uri`.
           class GcsSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            module BucketObjectType
+              # The object type is unspecified and will default to TRANSCRIPT.
+              BUCKET_OBJECT_TYPE_UNSPECIFIED = 0
+
+              # The object is a transcript.
+              TRANSCRIPT = 1
+
+              # The object is an audio file.
+              AUDIO = 2
+            end
           end
 
           # Configuration for processing transcript objects.
@@ -343,6 +365,16 @@ module Google
           #   @return [::String]
           #     An opaque, user-specified string representing the human agent who handled
           #     the conversations.
+          # @!attribute [rw] agent_channel
+          #   @return [::Integer]
+          #     Optional. For audio conversations, this field indicates which of the
+          #     channels, 1 or 2, contains the agent. Note that this must be set for
+          #     audio conversations to be properly displayed and analyzed.
+          # @!attribute [rw] customer_channel
+          #   @return [::Integer]
+          #     Optional. For audio conversations, this field indicates which of the
+          #     channels, 1 or 2, contains the customer. Note that this must be set for
+          #     audio conversations to be properly displayed and analyzed.
           class ConversationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -505,6 +537,10 @@ module Google
         #   @return [::Integer]
         #     Total number of analyses requested. Computed by the number of conversations
         #     returned by `filter` multiplied by `analysis_percentage` in the request.
+        # @!attribute [r] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. Partial errors during bulk analyze operation that might cause
+        #     the operation output to be incomplete.
         class BulkAnalyzeConversationsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -518,6 +554,54 @@ module Google
         #   @return [::Integer]
         #     Count of failed analyses.
         class BulkAnalyzeConversationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete conversations in bulk.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource to create analyses in.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter used to select the subset of conversations to analyze.
+        # @!attribute [rw] max_delete_count
+        #   @return [::Integer]
+        #     Maximum number of conversations to delete. The default is 1000. It can be
+        #     changed by setting the `max_delete_count` field.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     If set to true, all of this conversation's analyses will also be deleted.
+        #     Otherwise, the request will only succeed if the conversation has no
+        #     analyses.
+        class BulkDeleteConversationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata for a bulk delete conversations operation.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation was created.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation finished running.
+        # @!attribute [rw] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest]
+        #     The original request for bulk delete.
+        # @!attribute [rw] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Partial errors during bulk delete conversations operation that might cause
+        #     the operation output to be incomplete.
+        class BulkDeleteConversationsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for a bulk analyze conversations operation.
+        class BulkDeleteConversationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

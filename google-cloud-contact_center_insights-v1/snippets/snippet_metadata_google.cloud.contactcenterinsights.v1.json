@@ -452,6 +452,46 @@
       ]
     },
     {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkDeleteConversations_sync",
+      "title": "Snippet for the bulk_delete_conversations call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_delete_conversations. It may require modification in order to execute successfully.",
+      "file": "contact_center_insights/bulk_delete_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_delete_conversations",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_delete_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "BulkDeleteConversations",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDeleteConversations",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_sync",
       "title": "Snippet for the ingest_conversations call in the ContactCenterInsights service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#ingest_conversations. It may require modification in order to execute successfully.",

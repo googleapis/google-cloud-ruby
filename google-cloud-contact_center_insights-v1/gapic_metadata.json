@@ -65,6 +65,11 @@
                 "bulk_analyze_conversations"
               ]
             },
+            "BulkDeleteConversations": {
+              "methods": [
+                "bulk_delete_conversations"
+              ]
+            },
             "IngestConversations": {
               "methods": [
                 "ingest_conversations"
