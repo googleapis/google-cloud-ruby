@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 (2023-11-06)
+
+#### Features
+
+* Add optional field "SourceFetcher" to choose source fetcher tool ([#23504](https://github.com/googleapis/google-cloud-ruby/issues/23504)) 
+
 ### 0.24.0 (2023-09-12)
 
 #### Features
