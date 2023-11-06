@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-11-06)
+
+#### Features
+
+* Add "use_metadata_exchange" field in GenerateClientCertificate API ([#23505](https://github.com/googleapis/google-cloud-ruby/issues/23505)) 
+
 ### 0.6.0 (2023-09-29)
 
 #### Features
