@@ -77,6 +77,9 @@ module Google
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityDimensionResult>]
         #     A list of results at the dimension level.
+        #
+        #     A dimension will have a corresponding `DataQualityDimensionResult` if and
+        #     only if there is at least one rule with the 'dimension' field set to it.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult>]
         #     A list of all the rules in a job, and their results.
