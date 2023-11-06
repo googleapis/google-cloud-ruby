@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2023-11-06)
+
+#### Features
+
+* add Automation API and Rollback API ([#23509](https://github.com/googleapis/google-cloud-ruby/issues/23509)) 
+
 ### 0.13.0 (2023-10-25)
 
 #### Features
