@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2023-11-06)
+
+#### Features
+
+* Support DirectedReadOptions ([#23500](https://github.com/googleapis/google-cloud-ruby/issues/23500)) 
+
 ### 0.18.0 (2023-11-02)
 
 #### Features
