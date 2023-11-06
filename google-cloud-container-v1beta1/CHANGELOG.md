@@ -1,5 +1,11 @@
 # Release History
 
+### 0.31.0 (2023-11-06)
+
+#### Features
+
+* Support cluster enterprise config ([#23502](https://github.com/googleapis/google-cloud-ruby/issues/23502)) 
+
 ### 0.30.0 (2023-11-02)
 
 #### Features
