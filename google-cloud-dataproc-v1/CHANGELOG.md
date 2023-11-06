@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2023-11-06)
+
+#### Features
+
+* Add startup_config field in InstanceGroupConfig ([#23507](https://github.com/googleapis/google-cloud-ruby/issues/23507)) 
+
 ### 0.21.0 (2023-09-19)
 
 #### Features
