@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2023-11-06)
+
+#### Features
+
+* Support MP3, TranscriptNormalization and SpeakerLabels ([#23506](https://github.com/googleapis/google-cloud-ruby/issues/23506)) 
+
 ### 0.14.0 (2023-09-12)
 
 #### Features
