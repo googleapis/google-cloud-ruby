@@ -1,5 +1,11 @@
 # Release History
 
+### 1.45.0 (2023-11-06)
+
+#### Features
+
+* added autoclass v2.1 features ([#23483](https://github.com/googleapis/google-cloud-ruby/issues/23483)) 
+
 ### 1.44.0 (2022-11-02)
 
 #### Features
