@@ -1,5 +1,11 @@
 # Release History
 
+### 2.15.5 (2023-11-06)
+
+#### Bug Fixes
+
+* set x-goog-request-params for streaming pull request ([#23508](https://github.com/googleapis/google-cloud-ruby/issues/23508)) 
+
 ### 2.15.4 (2023-05-19)
 
 #### Documentation
