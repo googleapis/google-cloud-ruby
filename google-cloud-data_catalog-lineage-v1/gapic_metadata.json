@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client",
           "rpcs": {
+            "ProcessOpenLineageRunEvent": {
+              "methods": [
+                "process_open_lineage_run_event"
+              ]
+            },
             "CreateProcess": {
               "methods": [
                 "create_process"

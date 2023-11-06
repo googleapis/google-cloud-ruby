@@ -55,6 +55,7 @@
     "snippets/lineage/list_lineage_events.rb",
     "snippets/lineage/list_processes.rb",
     "snippets/lineage/list_runs.rb",
+    "snippets/lineage/process_open_lineage_run_event.rb",
     "snippets/lineage/search_links.rb",
     "snippets/lineage/update_process.rb",
     "snippets/lineage/update_run.rb",
