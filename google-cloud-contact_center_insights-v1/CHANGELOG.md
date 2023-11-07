@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.19.0 (2023-11-07)
+
+#### Features
+
+* Support bulk audio import via the IngestConversations API ([#23521](https://github.com/googleapis/google-cloud-ruby/issues/23521)) 
+* Support BulkDeleteConversations API ([#23521](https://github.com/googleapis/google-cloud-ruby/issues/23521)) 
+
 ### 0.18.0 (2023-09-28)
 
 #### Features
