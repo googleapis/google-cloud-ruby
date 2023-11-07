@@ -158,6 +158,95 @@ module Google
                 # Service calls
 
                 ##
+                # Creates new lineage events together with their parents: process and run.
+                # Updates the process and run if they already exist.
+                # Mapped from Open Lineage specification:
+                # https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json.
+                #
+                # @overload process_open_lineage_run_event(request, options = nil)
+                #   Pass arguments to `process_open_lineage_run_event` via a request object, either of type
+                #   {::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload process_open_lineage_run_event(parent: nil, open_lineage: nil, request_id: nil)
+                #   Pass arguments to `process_open_lineage_run_event` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The name of the project and its location that should own the
+                #     process, run, and lineage event.
+                #   @param open_lineage [::Google::Protobuf::Struct, ::Hash]
+                #     Required. OpenLineage message following OpenLineage format:
+                #     https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
+                #   @param request_id [::String]
+                #     A unique identifier for this request. Restricted to 36 ASCII characters.
+                #     A random UUID is recommended. This request is idempotent only if a
+                #     `request_id` is provided.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new
+                #
+                #   # Call the process_open_lineage_run_event method.
+                #   result = client.process_open_lineage_run_event request
+                #
+                #   # The returned object is of type Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse.
+                #   p result
+                #
+                def process_open_lineage_run_event request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.process_open_lineage_run_event.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::DataCatalog::Lineage::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.process_open_lineage_run_event.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.process_open_lineage_run_event.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @lineage_stub.process_open_lineage_run_event request, options do |result, operation|
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Creates a new process.
                 #
                 # @overload create_process(request, options = nil)
@@ -687,7 +776,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload update_run(run: nil, update_mask: nil)
+                # @overload update_run(run: nil, update_mask: nil, allow_missing: nil)
                 #   Pass arguments to `update_run` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -702,6 +791,8 @@ module Google
                 #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
                 #     The list of fields to update. Currently not used. The whole message is
                 #     updated.
+                #   @param allow_missing [::Boolean]
+                #     If set to true and the run is not found, the request creates it.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::Run]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1389,7 +1480,7 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Required. The project and location you want search in the format `projects/*/locations/*`
+                #     Required. The project and location you want search in.
                 #   @param source [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference, ::Hash]
                 #     Optional. Send asset information in the **source** field to retrieve all
                 #     links that lead from the specified asset to downstream assets.
@@ -1504,7 +1595,7 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Required. The project and location you want search in the format `projects/*/locations/*`
+                #     Required. The project and location where you want to search.
                 #   @param links [::Array<::String>]
                 #     Required. An array of links to check for their associated LineageProcesses.
                 #
@@ -1602,17 +1693,17 @@ module Google
                 # @example
                 #
                 #   # Modify the global config, setting the timeout for
-                #   # create_process to 20 seconds,
+                #   # process_open_lineage_run_event to 20 seconds,
                 #   # and all remaining timeouts to 10 seconds.
                 #   ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.configure do |config|
                 #     config.timeout = 10.0
-                #     config.rpcs.create_process.timeout = 20.0
+                #     config.rpcs.process_open_lineage_run_event.timeout = 20.0
                 #   end
                 #
                 #   # Apply the above configuration only to a new client.
                 #   client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
                 #     config.timeout = 10.0
-                #     config.rpcs.create_process.timeout = 20.0
+                #     config.rpcs.process_open_lineage_run_event.timeout = 20.0
                 #   end
                 #
                 # @!attribute [rw] endpoint
@@ -1712,6 +1803,11 @@ module Google
                   #
                   class Rpcs
                     ##
+                    # RPC-specific configuration for `process_open_lineage_run_event`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :process_open_lineage_run_event
+                    ##
                     # RPC-specific configuration for `create_process`
                     # @return [::Gapic::Config::Method]
                     #
@@ -1794,6 +1890,8 @@ module Google
 
                     # @private
                     def initialize parent_rpcs = nil
+                      process_open_lineage_run_event_config = parent_rpcs.process_open_lineage_run_event if parent_rpcs.respond_to? :process_open_lineage_run_event
+                      @process_open_lineage_run_event = ::Gapic::Config::Method.new process_open_lineage_run_event_config
                       create_process_config = parent_rpcs.create_process if parent_rpcs.respond_to? :create_process
                       @create_process = ::Gapic::Config::Method.new create_process_config
                       update_process_config = parent_rpcs.update_process if parent_rpcs.respond_to? :update_process

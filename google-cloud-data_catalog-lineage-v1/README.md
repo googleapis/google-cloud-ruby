@@ -33,8 +33,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/data_catalog/lineage/v1"
 
 client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new
-request = ::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest.new # (request fields as keyword arguments...)
-response = client.create_process request
+request = ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new # (request fields as keyword arguments...)
+response = client.process_open_lineage_run_event request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-lineage-v1/latest)

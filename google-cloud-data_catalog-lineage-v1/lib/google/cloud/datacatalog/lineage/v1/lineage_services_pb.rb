@@ -37,6 +37,11 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.datacatalog.lineage.v1.Lineage'
 
+              # Creates new lineage events together with their parents: process and run.
+              # Updates the process and run if they already exist.
+              # Mapped from Open Lineage specification:
+              # https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json.
+              rpc :ProcessOpenLineageRunEvent, ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest, ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse
               # Creates a new process.
               rpc :CreateProcess, ::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest, ::Google::Cloud::DataCatalog::Lineage::V1::Process
               # Updates a process.
