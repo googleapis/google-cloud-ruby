@@ -1047,6 +1047,10 @@
       "component": "google-cloud-redis",
       "version_file": "lib/google/cloud/redis/version.rb"
     },
+    "google-cloud-redis-cluster-v1": {
+      "component": "google-cloud-redis-cluster-v1",
+      "version_file": "lib/google/cloud/redis/cluster/v1/version.rb"
+    },
     "google-cloud-redis-v1": {
       "component": "google-cloud-redis-v1",
       "version_file": "lib/google/cloud/redis/v1/version.rb"
