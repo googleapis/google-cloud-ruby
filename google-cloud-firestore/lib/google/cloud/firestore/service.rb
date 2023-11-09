@@ -177,13 +177,13 @@ module Google
           commit_req[:transaction] = transaction if transaction
 
           options = call_options(parent: database_path)
-          puts "\n"
-          p "#{__FILE__} at #{__LINE__}"
-          p "commit request", commit_req
-          puts "\n"
-          puts "commit request json", commit_req.to_json
-          puts "\n"
-          pp "options", options
+          # puts "\n"
+          # p "#{__FILE__} at #{__LINE__}"
+          # p "commit request", commit_req
+          # puts "\n"
+          # puts "commit request json", commit_req.to_json
+          # puts "\n"
+          # pp "options", options
           firestore.commit commit_req, options
         end
 

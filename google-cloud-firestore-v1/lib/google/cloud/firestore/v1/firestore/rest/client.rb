@@ -901,9 +901,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                puts "\n"
-                p "#{__FILE__} at #{__LINE__}"
-                pp "rest metadata", options
+                # puts "\n"
+                # p "#{__FILE__} at #{__LINE__}"
+                # pp "rest metadata", options
 
                 @firestore_stub.commit request, options do |result, operation|
                   yield result, operation if block_given?
