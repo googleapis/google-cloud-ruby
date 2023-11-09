@@ -966,6 +966,9 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
+              p "#{__FILE__} at #{__LINE__}"
+              pp "grpc metadata", options
+
               @firestore_stub.call_rpc :commit, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response

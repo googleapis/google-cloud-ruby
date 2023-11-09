@@ -890,6 +890,9 @@ module Google
 
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+                # request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                # call_metadata[:"x-goog-request-params"] ||= "project_id=#{@quota_project_id}&"
+
                 options.apply_defaults timeout:      @config.rpcs.commit.timeout,
                                        metadata:     call_metadata,
                                        retry_policy: @config.rpcs.commit.retry_policy
@@ -897,6 +900,10 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
+
+                puts "\n"
+                p "#{__FILE__} at #{__LINE__}"
+                pp "rest metadata", options
 
                 @firestore_stub.commit request, options do |result, operation|
                   yield result, operation if block_given?
