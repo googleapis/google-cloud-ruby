@@ -153,6 +153,80 @@
         }
       }
     },
+    "FeatureOnlineStoreAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client",
+          "rpcs": {
+            "CreateFeatureOnlineStore": {
+              "methods": [
+                "create_feature_online_store"
+              ]
+            },
+            "GetFeatureOnlineStore": {
+              "methods": [
+                "get_feature_online_store"
+              ]
+            },
+            "ListFeatureOnlineStores": {
+              "methods": [
+                "list_feature_online_stores"
+              ]
+            },
+            "UpdateFeatureOnlineStore": {
+              "methods": [
+                "update_feature_online_store"
+              ]
+            },
+            "DeleteFeatureOnlineStore": {
+              "methods": [
+                "delete_feature_online_store"
+              ]
+            },
+            "CreateFeatureView": {
+              "methods": [
+                "create_feature_view"
+              ]
+            },
+            "GetFeatureView": {
+              "methods": [
+                "get_feature_view"
+              ]
+            },
+            "ListFeatureViews": {
+              "methods": [
+                "list_feature_views"
+              ]
+            },
+            "UpdateFeatureView": {
+              "methods": [
+                "update_feature_view"
+              ]
+            },
+            "DeleteFeatureView": {
+              "methods": [
+                "delete_feature_view"
+              ]
+            },
+            "SyncFeatureView": {
+              "methods": [
+                "sync_feature_view"
+              ]
+            },
+            "GetFeatureViewSync": {
+              "methods": [
+                "get_feature_view_sync"
+              ]
+            },
+            "ListFeatureViewSyncs": {
+              "methods": [
+                "list_feature_view_syncs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "FeaturestoreOnlineServingService": {
       "clients": {
         "grpc": {
@@ -171,6 +245,20 @@
             "WriteFeatureValues": {
               "methods": [
                 "write_feature_values"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureOnlineStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client",
+          "rpcs": {
+            "FetchFeatureValues": {
+              "methods": [
+                "fetch_feature_values"
               ]
             }
           }
@@ -285,6 +373,65 @@
             "SearchFeatures": {
               "methods": [
                 "search_features"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureRegistryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client",
+          "rpcs": {
+            "CreateFeatureGroup": {
+              "methods": [
+                "create_feature_group"
+              ]
+            },
+            "GetFeatureGroup": {
+              "methods": [
+                "get_feature_group"
+              ]
+            },
+            "ListFeatureGroups": {
+              "methods": [
+                "list_feature_groups"
+              ]
+            },
+            "UpdateFeatureGroup": {
+              "methods": [
+                "update_feature_group"
+              ]
+            },
+            "DeleteFeatureGroup": {
+              "methods": [
+                "delete_feature_group"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "create_feature"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "get_feature"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "list_features"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "update_feature"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "delete_feature"
               ]
             }
           }

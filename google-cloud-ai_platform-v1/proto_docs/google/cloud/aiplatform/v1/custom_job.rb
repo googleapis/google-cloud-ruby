@@ -172,6 +172,12 @@ module Google
         #       * AIP_MODEL_DIR = `<base_output_directory>/<trial_id>/model/`
         #       * AIP_CHECKPOINT_DIR = `<base_output_directory>/<trial_id>/checkpoints/`
         #       * AIP_TENSORBOARD_LOG_DIR = `<base_output_directory>/<trial_id>/logs/`
+        # @!attribute [rw] protected_artifact_location_id
+        #   @return [::String]
+        #     The ID of the location to store protected artifacts. e.g. us-central1.
+        #     Populate only when the location is different than CustomJob location.
+        #     List of supported locations:
+        #     https://cloud.google.com/vertex-ai/docs/general/locations
         # @!attribute [rw] tensorboard
         #   @return [::String]
         #     Optional. The name of a Vertex AI

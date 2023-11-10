@@ -216,6 +216,34 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for [PredictionService.CountTokens][].
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to perform token counting.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] instances
+        #   @return [::Array<::Google::Protobuf::Value>]
+        #     Required. The instances that are the input to token counting call.
+        #     Schema is identical to the prediction schema of the underlying model.
+        class CountTokensRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [PredictionService.CountTokens][].
+        # @!attribute [rw] total_tokens
+        #   @return [::Integer]
+        #     The total number of tokens counted across all instances from the request.
+        # @!attribute [rw] total_billable_characters
+        #   @return [::Integer]
+        #     The total number of billable characters counted across all instances from
+        #     the request.
+        class CountTokensResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

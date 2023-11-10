@@ -48,24 +48,69 @@ module Google
             ##
             # Create a fully-qualified Feature resource string.
             #
+            # @overload feature_path(project:, location:, featurestore:, entity_type:, feature:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param featurestore [String]
+            #   @param entity_type [String]
+            #   @param feature [String]
+            #
+            # @overload feature_path(project:, location:, feature_group:, feature:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param feature_group [String]
+            #   @param feature [String]
+            #
+            # @return [::String]
+            def feature_path **args
+              resources = {
+                "entity_type:feature:featurestore:location:project" => (proc do |project:, location:, featurestore:, entity_type:, feature:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "featurestore cannot contain /" if featurestore.to_s.include? "/"
+                  raise ::ArgumentError, "entity_type cannot contain /" if entity_type.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/featurestores/#{featurestore}/entityTypes/#{entity_type}/features/#{feature}"
+                end),
+                "feature:feature_group:location:project" => (proc do |project:, location:, feature_group:, feature:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "feature_group cannot contain /" if feature_group.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/featureGroups/#{feature_group}/features/#{feature}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified FeatureGroup resource string.
+            #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+            # `projects/{project}/locations/{location}/featureGroups/{feature_group}`
             #
             # @param project [String]
             # @param location [String]
-            # @param featurestore [String]
-            # @param entity_type [String]
-            # @param feature [String]
+            # @param feature_group [String]
             #
             # @return [::String]
-            def feature_path project:, location:, featurestore:, entity_type:, feature:
+            def feature_group_path project:, location:, feature_group:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "featurestore cannot contain /" if featurestore.to_s.include? "/"
-              raise ::ArgumentError, "entity_type cannot contain /" if entity_type.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/featurestores/#{featurestore}/entityTypes/#{entity_type}/features/#{feature}"
+              "projects/#{project}/locations/#{location}/featureGroups/#{feature_group}"
             end
 
             ##

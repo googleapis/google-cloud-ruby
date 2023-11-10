@@ -134,6 +134,11 @@ module Google
         #     searches" where boolean rule are used to filter the subset of the database
         #     eligible for matching. This uses categorical tokens. See:
         #     https://cloud.google.com/vertex-ai/docs/matching-engine/filtering
+        # @!attribute [rw] numeric_restricts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint::NumericRestriction>]
+        #     Optional. List of Restrict of the datapoint, used to perform "restricted
+        #     searches" where boolean rule are used to filter the subset of the database
+        #     eligible for matching. This uses numeric comparisons.
         # @!attribute [rw] crowding_tag
         #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::CrowdingTag]
         #     Optional. CrowdingTag of the datapoint, the number of neighbors to return
@@ -156,6 +161,54 @@ module Google
           class Restriction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # This field allows restricts to be based on numeric comparisons rather
+          # than categorical tokens.
+          # @!attribute [rw] value_int
+          #   @return [::Integer]
+          #     Represents 64 bit integer.
+          # @!attribute [rw] value_float
+          #   @return [::Float]
+          #     Represents 32 bit float.
+          # @!attribute [rw] value_double
+          #   @return [::Float]
+          #     Represents 64 bit float.
+          # @!attribute [rw] namespace
+          #   @return [::String]
+          #     The namespace of this restriction. e.g.: cost.
+          # @!attribute [rw] op
+          #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::NumericRestriction::Operator]
+          #     This MUST be specified for queries and must NOT be specified for
+          #     datapoints.
+          class NumericRestriction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Which comparison operator to use.  Should be specified for queries only;
+            # specifying this for a datapoint is an error.
+            #
+            # Datapoints for which Operator is true relative to the query's Value
+            # field will be allowlisted.
+            module Operator
+              # Default value of the enum.
+              OPERATOR_UNSPECIFIED = 0
+
+              # Datapoints are eligible iff their value is < the query's.
+              LESS = 1
+
+              # Datapoints are eligible iff their value is <= the query's.
+              LESS_EQUAL = 2
+
+              # Datapoints are eligible iff their value is == the query's.
+              EQUAL = 3
+
+              # Datapoints are eligible iff their value is >= the query's.
+              GREATER_EQUAL = 4
+
+              # Datapoints are eligible iff their value is > the query's.
+              GREATER = 5
+            end
           end
 
           # Crowding tag is a constraint on a neighbor list produced by nearest

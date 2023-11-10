@@ -21,14 +21,14 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Feature Metadata information that describes an attribute of an entity type.
-        # For example, apple is an entity type, and color is a feature that describes
-        # apple.
+        # Feature Metadata information.
+        # For example, color is a feature that describes an apple.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Name of the Feature.
         #     Format:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
         #
         #     The last part feature is assigned by the client. The feature can be up to
         #     64 characters long and can consist only of ASCII Latin letters A-Z and a-z,
@@ -39,13 +39,16 @@ module Google
         #     Description of the Feature.
         # @!attribute [rw] value_type
         #   @return [::Google::Cloud::AIPlatform::V1::Feature::ValueType]
-        #     Required. Immutable. Type of Feature value.
+        #     Immutable. Only applicable for Vertex AI Feature Store (Legacy).
+        #     Type of Feature value.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when this EntityType was created.
+        #     Output only. Only applicable for Vertex AI Feature Store (Legacy).
+        #     Timestamp when this EntityType was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when this EntityType was most recently updated.
+        #     Output only. Only applicable for Vertex AI Feature Store (Legacy).
+        #     Timestamp when this EntityType was most recently updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels with user-defined metadata to organize your Features.
@@ -65,8 +68,10 @@ module Google
         #     "overwrite" update happens.
         # @!attribute [rw] disable_monitoring
         #   @return [::Boolean]
-        #     Optional. If not set, use the monitoring_config defined for the EntityType
-        #     this Feature belongs to. Only Features with type
+        #     Optional. Only applicable for Vertex AI Feature Store (Legacy).
+        #     If not set, use the monitoring_config defined for the EntityType this
+        #     Feature belongs to.
+        #     Only Features with type
         #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL,
         #     STRING, DOUBLE or INT64 can enable monitoring.
         #
@@ -74,8 +79,13 @@ module Google
         #     config on EntityType.
         # @!attribute [r] monitoring_stats_anomalies
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Feature::MonitoringStatsAnomaly>]
-        #     Output only. The list of historical stats and anomalies with specified
-        #     objectives.
+        #     Output only. Only applicable for Vertex AI Feature Store (Legacy).
+        #     The list of historical stats and anomalies with specified objectives.
+        # @!attribute [rw] version_column_name
+        #   @return [::String]
+        #     Only applicable for Vertex AI Feature Store.
+        #     The name of the BigQuery Table/View columnn hosting data for this version.
+        #     If no value is provided, will use feature_id.
         class Feature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -122,6 +132,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Only applicable for Vertex AI Legacy Feature Store.
           # An enum representing the value type of a feature.
           module ValueType
             # The value type is unspecified.
