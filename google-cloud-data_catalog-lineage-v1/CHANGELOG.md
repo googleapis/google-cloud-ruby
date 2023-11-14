@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2023-11-14)
+
+#### Features
+
+* Support for the process_open_lineage_run_event RPC 
+* Support the allow_missing parameter to update_run 
+
 ### 0.4.0 (2023-09-12)
 
 #### Features
