@@ -1052,6 +1052,526 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_CreateFeatureOnlineStore_sync",
+      "title": "Snippet for the create_feature_online_store call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#create_feature_online_store. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/create_feature_online_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_feature_online_store",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#create_feature_online_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateFeatureOnlineStore",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.CreateFeatureOnlineStore",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_GetFeatureOnlineStore_sync",
+      "title": "Snippet for the get_feature_online_store call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#get_feature_online_store. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/get_feature_online_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_feature_online_store",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#get_feature_online_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStore",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetFeatureOnlineStore",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.GetFeatureOnlineStore",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_ListFeatureOnlineStores_sync",
+      "title": "Snippet for the list_feature_online_stores call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#list_feature_online_stores. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/list_feature_online_stores.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_feature_online_stores",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#list_feature_online_stores",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresResponse",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListFeatureOnlineStores",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.ListFeatureOnlineStores",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_UpdateFeatureOnlineStore_sync",
+      "title": "Snippet for the update_feature_online_store call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#update_feature_online_store. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/update_feature_online_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_feature_online_store",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#update_feature_online_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFeatureOnlineStore",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.UpdateFeatureOnlineStore",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_DeleteFeatureOnlineStore_sync",
+      "title": "Snippet for the delete_feature_online_store call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#delete_feature_online_store. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/delete_feature_online_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_feature_online_store",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#delete_feature_online_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteFeatureOnlineStore",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.DeleteFeatureOnlineStore",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_CreateFeatureView_sync",
+      "title": "Snippet for the create_feature_view call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#create_feature_view. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/create_feature_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_feature_view",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#create_feature_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateFeatureView",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.CreateFeatureView",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_GetFeatureView_sync",
+      "title": "Snippet for the get_feature_view call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#get_feature_view. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/get_feature_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_feature_view",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#get_feature_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::FeatureView",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetFeatureView",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.GetFeatureView",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_ListFeatureViews_sync",
+      "title": "Snippet for the list_feature_views call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#list_feature_views. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/list_feature_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_feature_views",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#list_feature_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListFeatureViewsResponse",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListFeatureViews",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.ListFeatureViews",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_UpdateFeatureView_sync",
+      "title": "Snippet for the update_feature_view call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#update_feature_view. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/update_feature_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_feature_view",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#update_feature_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFeatureView",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.UpdateFeatureView",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_DeleteFeatureView_sync",
+      "title": "Snippet for the delete_feature_view call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#delete_feature_view. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/delete_feature_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_feature_view",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#delete_feature_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteFeatureView",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.DeleteFeatureView",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_SyncFeatureView_sync",
+      "title": "Snippet for the sync_feature_view call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#sync_feature_view. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/sync_feature_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sync_feature_view",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#sync_feature_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::SyncFeatureViewResponse",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "SyncFeatureView",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.SyncFeatureView",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_GetFeatureViewSync_sync",
+      "title": "Snippet for the get_feature_view_sync call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#get_feature_view_sync. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/get_feature_view_sync.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_feature_view_sync",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#get_feature_view_sync",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Aiplatform::V1::FeatureViewSync",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetFeatureViewSync",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.GetFeatureViewSync",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_ListFeatureViewSyncs_sync",
+      "title": "Snippet for the list_feature_view_syncs call in the FeatureOnlineStoreAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#list_feature_view_syncs. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_admin_service/list_feature_view_syncs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_feature_view_syncs",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#list_feature_view_syncs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsResponse",
+        "client": {
+          "short_name": "FeatureOnlineStoreAdminService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListFeatureViewSyncs",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.ListFeatureViewSyncs",
+          "service": {
+            "short_name": "FeatureOnlineStoreAdminService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_sync",
       "title": "Snippet for the read_feature_values call in the FeaturestoreOnlineServingService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values. It may require modification in order to execute successfully.",
@@ -1158,6 +1678,46 @@
           "service": {
             "short_name": "FeaturestoreOnlineServingService",
             "full_name": "google.cloud.aiplatform.v1.FeaturestoreOnlineServingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreService_FetchFeatureValues_sync",
+      "title": "Snippet for the fetch_feature_values call in the FeatureOnlineStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#fetch_feature_values. It may require modification in order to execute successfully.",
+      "file": "feature_online_store_service/fetch_feature_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_feature_values",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#fetch_feature_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::FetchFeatureValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::FetchFeatureValuesResponse",
+        "client": {
+          "short_name": "FeatureOnlineStoreService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client"
+        },
+        "method": {
+          "short_name": "FetchFeatureValues",
+          "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.FetchFeatureValues",
+          "service": {
+            "short_name": "FeatureOnlineStoreService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureOnlineStoreService"
           }
         }
       },
@@ -2007,6 +2567,406 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_CreateFeatureGroup_sync",
+      "title": "Snippet for the create_feature_group call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#create_feature_group. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/create_feature_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_feature_group",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#create_feature_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateFeatureGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "CreateFeatureGroup",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.CreateFeatureGroup",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_GetFeatureGroup_sync",
+      "title": "Snippet for the get_feature_group call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#get_feature_group. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/get_feature_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_feature_group",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#get_feature_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetFeatureGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::FeatureGroup",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "GetFeatureGroup",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.GetFeatureGroup",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_ListFeatureGroups_sync",
+      "title": "Snippet for the list_feature_groups call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_feature_groups. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/list_feature_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_feature_groups",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_feature_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListFeatureGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListFeatureGroupsResponse",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "ListFeatureGroups",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_UpdateFeatureGroup_sync",
+      "title": "Snippet for the update_feature_group call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#update_feature_group. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/update_feature_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_feature_group",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#update_feature_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateFeatureGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFeatureGroup",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.UpdateFeatureGroup",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_DeleteFeatureGroup_sync",
+      "title": "Snippet for the delete_feature_group call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#delete_feature_group. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/delete_feature_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_feature_group",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#delete_feature_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteFeatureGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "DeleteFeatureGroup",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.DeleteFeatureGroup",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_CreateFeature_sync",
+      "title": "Snippet for the create_feature call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#create_feature. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/create_feature.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_feature",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#create_feature",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateFeatureRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "CreateFeature",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.CreateFeature",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_GetFeature_sync",
+      "title": "Snippet for the get_feature call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#get_feature. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/get_feature.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_feature",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#get_feature",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetFeatureRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Feature",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "GetFeature",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.GetFeature",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_ListFeatures_sync",
+      "title": "Snippet for the list_features call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/list_features.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_features",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListFeaturesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListFeaturesResponse",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "ListFeatures",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatures",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_UpdateFeature_sync",
+      "title": "Snippet for the update_feature call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#update_feature. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/update_feature.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_feature",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#update_feature",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateFeatureRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFeature",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.UpdateFeature",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_FeatureRegistryService_DeleteFeature_sync",
+      "title": "Snippet for the delete_feature call in the FeatureRegistryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#delete_feature. It may require modification in order to execute successfully.",
+      "file": "feature_registry_service/delete_feature.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_feature",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#delete_feature",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteFeatureRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FeatureRegistryService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client"
+        },
+        "method": {
+          "short_name": "DeleteFeature",
+          "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService.DeleteFeature",
+          "service": {
+            "short_name": "FeatureRegistryService",
+            "full_name": "google.cloud.aiplatform.v1.FeatureRegistryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
