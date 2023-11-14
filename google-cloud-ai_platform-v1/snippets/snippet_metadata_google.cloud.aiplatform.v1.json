@@ -4972,6 +4972,246 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_PredictionService_Predict_sync",
+      "title": "Snippet for the predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#predict. It may require modification in order to execute successfully.",
+      "file": "prediction_service/predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::PredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::PredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "Predict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.Predict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_RawPredict_sync",
+      "title": "Snippet for the raw_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict. It may require modification in order to execute successfully.",
+      "file": "prediction_service/raw_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "raw_predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::RawPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "RawPredict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.RawPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_ServerStreamingPredict_sync",
+      "title": "Snippet for the server_streaming_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#server_streaming_predict. It may require modification in order to execute successfully.",
+      "file": "prediction_service/server_streaming_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "server_streaming_predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#server_streaming_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StreamingPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::StreamingPredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "ServerStreamingPredict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.ServerStreamingPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_Explain_sync",
+      "title": "Snippet for the explain call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#explain. It may require modification in order to execute successfully.",
+      "file": "prediction_service/explain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "explain",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ExplainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ExplainResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "Explain",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.Explain",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_LlmUtilityService_CountTokens_sync",
+      "title": "Snippet for the count_tokens call in the LlmUtilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::LlmUtilityService::Client#count_tokens. It may require modification in order to execute successfully.",
+      "file": "llm_utility_service/count_tokens.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "count_tokens",
+        "full_name": "::Google::Cloud::AIPlatform::V1::LlmUtilityService::Client#count_tokens",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CountTokensRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::CountTokensResponse",
+        "client": {
+          "short_name": "LlmUtilityService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::LlmUtilityService::Client"
+        },
+        "method": {
+          "short_name": "CountTokens",
+          "full_name": "google.cloud.aiplatform.v1.LlmUtilityService.CountTokens",
+          "service": {
+            "short_name": "LlmUtilityService",
+            "full_name": "google.cloud.aiplatform.v1.LlmUtilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_LlmUtilityService_ComputeTokens_sync",
+      "title": "Snippet for the compute_tokens call in the LlmUtilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::LlmUtilityService::Client#compute_tokens. It may require modification in order to execute successfully.",
+      "file": "llm_utility_service/compute_tokens.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "compute_tokens",
+        "full_name": "::Google::Cloud::AIPlatform::V1::LlmUtilityService::Client#compute_tokens",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ComputeTokensRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ComputeTokensResponse",
+        "client": {
+          "short_name": "LlmUtilityService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::LlmUtilityService::Client"
+        },
+        "method": {
+          "short_name": "ComputeTokens",
+          "full_name": "google.cloud.aiplatform.v1.LlmUtilityService.ComputeTokens",
+          "service": {
+            "short_name": "LlmUtilityService",
+            "full_name": "google.cloud.aiplatform.v1.LlmUtilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_MatchService_FindNeighbors_sync",
       "title": "Snippet for the find_neighbors call in the MatchService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::MatchService::Client#find_neighbors. It may require modification in order to execute successfully.",
@@ -7558,166 +7798,6 @@
           "service": {
             "short_name": "PipelineService",
             "full_name": "google.cloud.aiplatform.v1.PipelineService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "aiplatform_v1_generated_PredictionService_Predict_sync",
-      "title": "Snippet for the predict call in the PredictionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#predict. It may require modification in order to execute successfully.",
-      "file": "prediction_service/predict.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "predict",
-        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#predict",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AIPlatform::V1::PredictRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::AIPlatform::V1::PredictResponse",
-        "client": {
-          "short_name": "PredictionService::Client",
-          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
-        },
-        "method": {
-          "short_name": "Predict",
-          "full_name": "google.cloud.aiplatform.v1.PredictionService.Predict",
-          "service": {
-            "short_name": "PredictionService",
-            "full_name": "google.cloud.aiplatform.v1.PredictionService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "aiplatform_v1_generated_PredictionService_RawPredict_sync",
-      "title": "Snippet for the raw_predict call in the PredictionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict. It may require modification in order to execute successfully.",
-      "file": "prediction_service/raw_predict.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "raw_predict",
-        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AIPlatform::V1::RawPredictRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Api::HttpBody",
-        "client": {
-          "short_name": "PredictionService::Client",
-          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
-        },
-        "method": {
-          "short_name": "RawPredict",
-          "full_name": "google.cloud.aiplatform.v1.PredictionService.RawPredict",
-          "service": {
-            "short_name": "PredictionService",
-            "full_name": "google.cloud.aiplatform.v1.PredictionService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "aiplatform_v1_generated_PredictionService_ServerStreamingPredict_sync",
-      "title": "Snippet for the server_streaming_predict call in the PredictionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#server_streaming_predict. It may require modification in order to execute successfully.",
-      "file": "prediction_service/server_streaming_predict.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "server_streaming_predict",
-        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#server_streaming_predict",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AIPlatform::V1::StreamingPredictRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::AIPlatform::V1::StreamingPredictResponse",
-        "client": {
-          "short_name": "PredictionService::Client",
-          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
-        },
-        "method": {
-          "short_name": "ServerStreamingPredict",
-          "full_name": "google.cloud.aiplatform.v1.PredictionService.ServerStreamingPredict",
-          "service": {
-            "short_name": "PredictionService",
-            "full_name": "google.cloud.aiplatform.v1.PredictionService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 44,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "aiplatform_v1_generated_PredictionService_Explain_sync",
-      "title": "Snippet for the explain call in the PredictionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#explain. It may require modification in order to execute successfully.",
-      "file": "prediction_service/explain.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "explain",
-        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#explain",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AIPlatform::V1::ExplainRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::AIPlatform::V1::ExplainResponse",
-        "client": {
-          "short_name": "PredictionService::Client",
-          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
-        },
-        "method": {
-          "short_name": "Explain",
-          "full_name": "google.cloud.aiplatform.v1.PredictionService.Explain",
-          "service": {
-            "short_name": "PredictionService",
-            "full_name": "google.cloud.aiplatform.v1.PredictionService"
           }
         }
       },

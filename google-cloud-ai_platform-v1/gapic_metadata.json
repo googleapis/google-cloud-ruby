@@ -715,6 +715,54 @@
         }
       }
     },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::PredictionService::Client",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            },
+            "RawPredict": {
+              "methods": [
+                "raw_predict"
+              ]
+            },
+            "ServerStreamingPredict": {
+              "methods": [
+                "server_streaming_predict"
+              ]
+            },
+            "Explain": {
+              "methods": [
+                "explain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LlmUtilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::LlmUtilityService::Client",
+          "rpcs": {
+            "CountTokens": {
+              "methods": [
+                "count_tokens"
+              ]
+            },
+            "ComputeTokens": {
+              "methods": [
+                "compute_tokens"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MatchService": {
       "clients": {
         "grpc": {
@@ -1088,35 +1136,6 @@
             "CancelPipelineJob": {
               "methods": [
                 "cancel_pipeline_job"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "PredictionService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::AIPlatform::V1::PredictionService::Client",
-          "rpcs": {
-            "Predict": {
-              "methods": [
-                "predict"
-              ]
-            },
-            "RawPredict": {
-              "methods": [
-                "raw_predict"
-              ]
-            },
-            "ServerStreamingPredict": {
-              "methods": [
-                "server_streaming_predict"
-              ]
-            },
-            "Explain": {
-              "methods": [
-                "explain"
               ]
             }
           }
