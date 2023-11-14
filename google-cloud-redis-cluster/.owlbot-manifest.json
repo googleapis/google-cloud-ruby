@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-redis-cluster.gemspec",
+    "lib/google-cloud-redis-cluster.rb",
+    "lib/google/cloud/redis/cluster.rb",
+    "lib/google/cloud/redis/cluster/version.rb",
+    "test/google/cloud/redis/cluster/client_test.rb",
+    "test/google/cloud/redis/cluster/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
