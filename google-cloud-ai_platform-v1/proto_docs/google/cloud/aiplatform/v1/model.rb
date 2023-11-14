@@ -663,6 +663,20 @@ module Google
         #       (Vertex AI makes this value available to your container code as the
         #       [`AIP_DEPLOYED_MODEL_ID` environment
         #       variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
+        # @!attribute [rw] deployment_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Immutable. Deployment timeout.
+        #     Limit for deployment timeout is 2 hours.
+        # @!attribute [rw] shared_memory_size_mb
+        #   @return [::Integer]
+        #     Immutable. The amount of the VM memory to reserve as the shared memory for
+        #     the model in megabytes.
+        # @!attribute [rw] startup_probe
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe]
+        #     Immutable. Specification for Kubernetes startup probe.
+        # @!attribute [rw] health_probe
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe]
+        #     Immutable. Specification for Kubernetes readiness probe.
         class ModelContainerSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -710,6 +724,42 @@ module Google
 
             # The Model is saved or tuned from Genie.
             GENIE = 5
+          end
+        end
+
+        # Probe describes a health check to be performed against a container to
+        # determine whether it is alive or ready to receive traffic.
+        # @!attribute [rw] exec
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe::ExecAction]
+        #     Exec specifies the action to take.
+        # @!attribute [rw] period_seconds
+        #   @return [::Integer]
+        #     How often (in seconds) to perform the probe. Default to 10 seconds.
+        #     Minimum value is 1. Must be less than timeout_seconds.
+        #
+        #     Maps to Kubernetes probe argument 'periodSeconds'.
+        # @!attribute [rw] timeout_seconds
+        #   @return [::Integer]
+        #     Number of seconds after which the probe times out. Defaults to 1 second.
+        #     Minimum value is 1. Must be greater or equal to period_seconds.
+        #
+        #     Maps to Kubernetes probe argument 'timeoutSeconds'.
+        class Probe
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ExecAction specifies a command to execute.
+          # @!attribute [rw] command
+          #   @return [::Array<::String>]
+          #     Command is the command line to execute inside the container, the working
+          #     directory for the command is root ('/') in the container's filesystem.
+          #     The command is simply exec'd, it is not run inside a shell, so
+          #     traditional shell instructions ('|', etc) won't work. To use a shell, you
+          #     need to explicitly call out to that shell. Exit status of 0 is treated as
+          #     live/healthy and non-zero is unhealthy.
+          class ExecAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
