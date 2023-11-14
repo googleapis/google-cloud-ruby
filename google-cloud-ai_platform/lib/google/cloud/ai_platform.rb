@@ -105,6 +105,37 @@ module Google
       end
 
       ##
+      # Create a new client object for FeatureOnlineStoreAdminService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-FeatureOnlineStoreAdminService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the FeatureOnlineStoreAdminService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About FeatureOnlineStoreAdminService
+      #
+      # The service that handles CRUD and List for resources for
+      # FeatureOnlineStore.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.feature_online_store_admin_service version: :v1, &block
+        require "google/cloud/ai_platform/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::AIPlatform
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeatureOnlineStoreAdminService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for FeaturestoreOnlineServingService.
       #
       # By default, this returns an instance of
@@ -135,6 +166,32 @@ module Google
       end
 
       ##
+      # Create a new client object for FeatureOnlineStoreService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-FeatureOnlineStoreService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the FeatureOnlineStoreService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.feature_online_store_service version: :v1, &block
+        require "google/cloud/ai_platform/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::AIPlatform
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeatureOnlineStoreService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for FeaturestoreService.
       #
       # By default, this returns an instance of
@@ -161,6 +218,37 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeaturestoreService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for FeatureRegistryService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-FeatureRegistryService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the FeatureRegistryService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About FeatureRegistryService
+      #
+      # The service that handles CRUD and List for resources for
+      # FeatureRegistry.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.feature_registry_service version: :v1, &block
+        require "google/cloud/ai_platform/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::AIPlatform
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeatureRegistryService)
         service_module.const_get(:Client).new(&block)
       end
 

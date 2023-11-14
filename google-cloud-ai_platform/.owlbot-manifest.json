@@ -19,6 +19,11 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    "samples/Gemfile",
+    "samples/Rakefile",
+    "samples/acceptance/predict_text_prompt_test.rb",
+    "samples/predict_text_prompt.rb",
+    "test/README.md"
   ]
 }
