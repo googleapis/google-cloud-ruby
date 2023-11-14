@@ -8,7 +8,7 @@
     "name": "redis",
     "name_pretty": "Google Cloud Memorystore for Redis API",
     "product_documentation": "https://cloud.google.com/memorystore/docs/cluster",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Creates and manages Redis instances on the Google Cloud Platform.",
