@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/filestore/v1/version"
+require "google/cloud/filestore/v1/bindings_override"
 
 require "google/cloud/filestore/v1/cloud_filestore_manager/credentials"
 require "google/cloud/filestore/v1/cloud_filestore_manager/paths"

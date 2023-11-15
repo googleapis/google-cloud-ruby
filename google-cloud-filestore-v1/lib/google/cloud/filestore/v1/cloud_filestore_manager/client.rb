@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/filestore/v1/cloud_filestore_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -191,6 +192,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @cloud_filestore_manager_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Stub,
                 credentials:  credentials,
@@ -207,6 +214,13 @@ module Google
             # @return [::Google::Cloud::Filestore::V1::CloudFilestoreManager::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -701,6 +715,105 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_filestore_manager_stub.call_rpc :restore_instance, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Revert an existing instance's file system to a specified snapshot.
+            #
+            # @overload revert_instance(request, options = nil)
+            #   Pass arguments to `revert_instance` via a request object, either of type
+            #   {::Google::Cloud::Filestore::V1::RevertInstanceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Filestore::V1::RevertInstanceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload revert_instance(name: nil, target_snapshot_id: nil)
+            #   Pass arguments to `revert_instance` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required.
+            #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+            #     The resource name of the instance, in the format
+            #   @param target_snapshot_id [::String]
+            #     Required. The snapshot resource ID, in the format 'my-snapshot', where the
+            #     specified ID is the \\{snapshot_id} of the fully qualified name like
+            #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::RevertInstanceRequest.new
+            #
+            #   # Call the revert_instance method.
+            #   result = client.revert_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def revert_instance request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::RevertInstanceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.revert_instance.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Filestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.revert_instance.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.revert_instance.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_filestore_manager_stub.call_rpc :revert_instance, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -1943,6 +2056,11 @@ module Google
                 #
                 attr_reader :restore_instance
                 ##
+                # RPC-specific configuration for `revert_instance`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :revert_instance
+                ##
                 # RPC-specific configuration for `delete_instance`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2010,6 +2128,8 @@ module Google
                   @update_instance = ::Gapic::Config::Method.new update_instance_config
                   restore_instance_config = parent_rpcs.restore_instance if parent_rpcs.respond_to? :restore_instance
                   @restore_instance = ::Gapic::Config::Method.new restore_instance_config
+                  revert_instance_config = parent_rpcs.revert_instance if parent_rpcs.respond_to? :revert_instance
+                  @revert_instance = ::Gapic::Config::Method.new revert_instance_config
                   delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                   list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots

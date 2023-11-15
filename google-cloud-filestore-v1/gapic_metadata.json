@@ -35,6 +35,11 @@
                 "restore_instance"
               ]
             },
+            "RevertInstance": {
+              "methods": [
+                "revert_instance"
+              ]
+            },
             "DeleteInstance": {
               "methods": [
                 "delete_instance"
