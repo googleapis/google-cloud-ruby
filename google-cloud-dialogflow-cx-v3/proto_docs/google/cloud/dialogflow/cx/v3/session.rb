@@ -22,6 +22,71 @@ module Google
     module Dialogflow
       module CX
         module V3
+          # Stores information about feedback provided by users about a response.
+          # @!attribute [rw] rating
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AnswerFeedback::Rating]
+          #     Optional. Rating from user for the specific Dialogflow response.
+          # @!attribute [rw] rating_reason
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AnswerFeedback::RatingReason]
+          #     Optional. In case of thumbs down rating provided, users can optionally
+          #     provide context about the rating.
+          # @!attribute [rw] custom_rating
+          #   @return [::String]
+          #     Optional. Custom rating from the user about the provided answer, with
+          #     maximum length of 1024 characters. For example, client could use a
+          #     customized JSON object to indicate the rating.
+          class AnswerFeedback
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Stores extra information about why users provided thumbs down rating.
+            # @!attribute [rw] reason_labels
+            #   @return [::Array<::String>]
+            #     Optional. Custom reason labels for thumbs down rating provided by the
+            #     user. The maximum number of labels allowed is 10 and the maximum length
+            #     of a single label is 128 characters.
+            # @!attribute [rw] feedback
+            #   @return [::String]
+            #     Optional. Additional feedback about the rating.
+            #     This field can be populated without choosing a predefined `reason`.
+            class RatingReason
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Represents thumbs up/down rating provided by user about a response.
+            module Rating
+              # Rating not specified.
+              RATING_UNSPECIFIED = 0
+
+              # Thumbs up feedback from user.
+              THUMBS_UP = 1
+
+              # Thumbs down feedback from user.
+              THUMBS_DOWN = 2
+            end
+          end
+
+          # The request to set the feedback for a bot answer.
+          # @!attribute [rw] session
+          #   @return [::String]
+          #     Required. The name of the session the feedback was sent to.
+          # @!attribute [rw] response_id
+          #   @return [::String]
+          #     Required. ID of the response to update its feedback. This is the same as
+          #     DetectIntentResponse.response_id.
+          # @!attribute [rw] answer_feedback
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AnswerFeedback]
+          #     Required. Feedback provided for a bot answer.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The mask to control which fields to update. If the mask is not
+          #     present, all fields will be updated.
+          class SubmitAnswerFeedbackRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The request to detect user's intent.
           # @!attribute [rw] session
           #   @return [::String]
@@ -516,6 +581,28 @@ module Google
           #     By default, a Dialogflow session remains active and its data is stored for
           #     30 minutes after the last request is sent for the session.
           #     This value should be no longer than 1 day.
+          # @!attribute [rw] end_user_metadata
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. Information about the end-user to improve the relevance and
+          #     accuracy of generative answers.
+          #
+          #     This will be interpreted and used by a language model, so, for good
+          #     results, the data should be self-descriptive, and in a simple structure.
+          #
+          #     Example:
+          #
+          #     ```json
+          #     {
+          #       "subscription plan": "Business Premium Plus",
+          #       "devices owned": [
+          #         \\{"model": "Google Pixel 7"},
+          #         \\{"model": "Google Pixel Tablet"}
+          #       ]
+          #     }
+          #     ```
+          # @!attribute [rw] search_config
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SearchConfig]
+          #     Optional. Search configuration for UCS search queries.
           class QueryParameters
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -528,6 +615,100 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Search configuration for UCS search queries.
+          # @!attribute [rw] boost_specs
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpecs>]
+          #     Optional. Boosting configuration for the datastores.
+          # @!attribute [rw] filter_specs
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::FilterSpecs>]
+          #     Optional. Filter configuration for the datastores.
+          class SearchConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Boost specification to boost certain documents.
+          # A copy of google.cloud.discoveryengine.v1main.BoostSpec, field documentation
+          # is available at
+          # https://cloud.google.com/generative-ai-app-builder/docs/reference/rest/v1alpha/BoostSpec
+          # @!attribute [rw] condition_boost_specs
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec>]
+          #     Optional. Condition boost specifications. If a document matches multiple
+          #     conditions in the specifictions, boost scores from these specifications are
+          #     all applied and combined in a non-linear way. Maximum number of
+          #     specifications is 20.
+          class BoostSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Boost applies to documents which match a condition.
+            # @!attribute [rw] condition
+            #   @return [::String]
+            #     Optional. An expression which specifies a boost condition. The syntax and
+            #     supported fields are the same as a filter expression.
+            #     Examples:
+            #
+            #     * To boost documents with document ID "doc_1" or "doc_2", and
+            #     color
+            #       "Red" or "Blue":
+            #         * (id: ANY("doc_1", "doc_2")) AND (color: ANY("Red","Blue"))
+            # @!attribute [rw] boost
+            #   @return [::Float]
+            #     Optional. Strength of the condition boost, which should be in [-1, 1].
+            #     Negative boost means demotion. Default is 0.0.
+            #
+            #     Setting to 1.0 gives the document a big promotion. However, it does not
+            #     necessarily mean that the boosted document will be the top result at
+            #     all times, nor that other documents will be excluded. Results could
+            #     still be shown even when none of them matches the condition. And
+            #     results that are significantly more relevant to the search query can
+            #     still trump your heavily favored but irrelevant documents.
+            #
+            #     Setting to -1.0 gives the document a big demotion. However, results
+            #     that are deeply relevant might still be shown. The document will have
+            #     an upstream battle to get a fairly high ranking, but it is not blocked
+            #     out completely.
+            #
+            #     Setting to 0.0 means no boost applied. The boosting condition is
+            #     ignored.
+            class ConditionBoostSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Boost specifications for data stores.
+          # @!attribute [rw] data_stores
+          #   @return [::Array<::String>]
+          #     Optional. Data Stores where the boosting configuration is applied. The full
+          #     names of the referenced data stores. Formats:
+          #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+          #     `projects/{project}/locations/{location}/dataStores/{data_store}
+          # @!attribute [rw] spec
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpec>]
+          #     Optional. A list of boosting specifications.
+          class BoostSpecs
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Filter specifications for data stores.
+          # @!attribute [rw] data_stores
+          #   @return [::Array<::String>]
+          #     Optional. Data Stores where the boosting configuration is applied. The full
+          #     names of the referenced data stores. Formats:
+          #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+          #     `projects/{project}/locations/{location}/dataStores/{data_store}
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter expression to be applied.
+          #     Expression syntax is documented at
+          #     https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata#filter-expression-syntax
+          class FilterSpecs
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Represents the query input. It can contain one of:
@@ -688,6 +869,10 @@ module Google
           #     the client may need to perform special logic at the moment. For example, if
           #     Dialogflow exports audio to Google Cloud Storage, then the client may need
           #     to wait for the resulting object to appear in the bucket before proceeding.
+          # @!attribute [rw] allow_answer_feedback
+          #   @return [::Boolean]
+          #     Indicates whether the Thumbs up/Thumbs down rating controls are need to be
+          #     shown for the response in the Dialogflow Messenger widget.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

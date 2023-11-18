@@ -298,6 +298,7 @@
     "snippets/sessions/fulfill_intent.rb",
     "snippets/sessions/match_intent.rb",
     "snippets/sessions/streaming_detect_intent.rb",
+    "snippets/sessions/submit_answer_feedback.rb",
     "snippets/snippet_metadata_google.cloud.dialogflow.cx.v3.json",
     "snippets/test_cases/batch_delete_test_cases.rb",
     "snippets/test_cases/batch_run_test_cases.rb",

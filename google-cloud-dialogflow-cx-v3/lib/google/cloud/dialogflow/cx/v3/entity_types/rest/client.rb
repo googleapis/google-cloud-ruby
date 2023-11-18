@@ -157,108 +157,6 @@ module Google
                 # Service calls
 
                 ##
-                # Returns the list of all entity types in the specified agent.
-                #
-                # @overload list_entity_types(request, options = nil)
-                #   Pass arguments to `list_entity_types` via a request object, either of type
-                #   {::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest} or an equivalent Hash.
-                #
-                #   @param request [::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest, ::Hash]
-                #     A request object representing the call parameters. Required. To specify no
-                #     parameters, or to keep all the default parameter values, pass an empty Hash.
-                #   @param options [::Gapic::CallOptions, ::Hash]
-                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-                #
-                # @overload list_entity_types(parent: nil, language_code: nil, page_size: nil, page_token: nil)
-                #   Pass arguments to `list_entity_types` via keyword arguments. Note that at
-                #   least one keyword argument is required. To specify no parameters, or to keep all
-                #   the default parameter values, pass an empty Hash as a request object (see above).
-                #
-                #   @param parent [::String]
-                #     Required. The agent to list all entity types for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
-                #   @param language_code [::String]
-                #     The language to list entity types for. The following fields are language
-                #     dependent:
-                #
-                #     *   `EntityType.entities.value`
-                #     *   `EntityType.entities.synonyms`
-                #     *   `EntityType.excluded_phrases.value`
-                #
-                #     If not specified, the agent's default language is used.
-                #     [Many
-                #     languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-                #     are supported.
-                #     Note: languages must be enabled in the agent before they can be used.
-                #   @param page_size [::Integer]
-                #     The maximum number of items to return in a single page. By default 100 and
-                #     at most 1000.
-                #   @param page_token [::String]
-                #     The next_page_token value returned from a previous list request.
-                # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::EntityType>]
-                # @yieldparam operation [::Gapic::Rest::TransportOperation]
-                #
-                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::EntityType>]
-                #
-                # @raise [::Google::Cloud::Error] if the REST call is aborted.
-                #
-                # @example Basic example
-                #   require "google/cloud/dialogflow/cx/v3"
-                #
-                #   # Create a client object. The client can be reused for multiple calls.
-                #   client = Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new
-                #
-                #   # Create a request. To set request fields, pass in keyword arguments.
-                #   request = Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new
-                #
-                #   # Call the list_entity_types method.
-                #   result = client.list_entity_types request
-                #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
-                #   # over elements, and API calls will be issued to fetch pages as needed.
-                #   result.each do |item|
-                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::EntityType.
-                #     p item
-                #   end
-                #
-                def list_entity_types request, options = nil
-                  raise ::ArgumentError, "request must be provided" if request.nil?
-
-                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest
-
-                  # Converts hash and nil to an options object
-                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                  # Customize the options with defaults
-                  call_metadata = @config.rpcs.list_entity_types.metadata.to_h
-
-                  # Set x-goog-api-client and x-goog-user-project headers
-                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                    lib_name: @config.lib_name, lib_version: @config.lib_version,
-                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
-                    transports_version_send: [:rest]
-
-                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                  options.apply_defaults timeout:      @config.rpcs.list_entity_types.timeout,
-                                         metadata:     call_metadata,
-                                         retry_policy: @config.rpcs.list_entity_types.retry_policy
-
-                  options.apply_defaults timeout:      @config.timeout,
-                                         metadata:     @config.metadata,
-                                         retry_policy: @config.retry_policy
-
-                  @entity_types_stub.list_entity_types request, options do |result, operation|
-                    result = ::Gapic::Rest::PagedEnumerable.new @entity_types_stub, :list_entity_types, "entity_types", request, result, options
-                    yield result, operation if block_given?
-                    return result
-                  end
-                rescue ::Gapic::Rest::Error => e
-                  raise ::Google::Cloud::Error.from_error(e)
-                end
-
-                ##
                 # Retrieves the specified entity type.
                 #
                 # @overload get_entity_type(request, options = nil)
@@ -642,6 +540,108 @@ module Google
                 end
 
                 ##
+                # Returns the list of all entity types in the specified agent.
+                #
+                # @overload list_entity_types(request, options = nil)
+                #   Pass arguments to `list_entity_types` via a request object, either of type
+                #   {::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_entity_types(parent: nil, language_code: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_entity_types` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The agent to list all entity types for.
+                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #   @param language_code [::String]
+                #     The language to list entity types for. The following fields are language
+                #     dependent:
+                #
+                #     *   `EntityType.entities.value`
+                #     *   `EntityType.entities.synonyms`
+                #     *   `EntityType.excluded_phrases.value`
+                #
+                #     If not specified, the agent's default language is used.
+                #     [Many
+                #     languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+                #     are supported.
+                #     Note: languages must be enabled in the agent before they can be used.
+                #   @param page_size [::Integer]
+                #     The maximum number of items to return in a single page. By default 100 and
+                #     at most 1000.
+                #   @param page_token [::String]
+                #     The next_page_token value returned from a previous list request.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::EntityType>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dialogflow::CX::V3::EntityType>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new
+                #
+                #   # Call the list_entity_types method.
+                #   result = client.list_entity_types request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::EntityType.
+                #     p item
+                #   end
+                #
+                def list_entity_types request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_entity_types.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_entity_types.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_entity_types.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @entity_types_stub.list_entity_types request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @entity_types_stub, :list_entity_types, "entity_types", request, result, options
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the EntityTypes REST API.
                 #
                 # This class represents the configuration for EntityTypes REST,
@@ -657,17 +657,17 @@ module Google
                 # @example
                 #
                 #   # Modify the global config, setting the timeout for
-                #   # list_entity_types to 20 seconds,
+                #   # get_entity_type to 20 seconds,
                 #   # and all remaining timeouts to 10 seconds.
                 #   ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.configure do |config|
                 #     config.timeout = 10.0
-                #     config.rpcs.list_entity_types.timeout = 20.0
+                #     config.rpcs.get_entity_type.timeout = 20.0
                 #   end
                 #
                 #   # Apply the above configuration only to a new client.
                 #   client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
                 #     config.timeout = 10.0
-                #     config.rpcs.list_entity_types.timeout = 20.0
+                #     config.rpcs.get_entity_type.timeout = 20.0
                 #   end
                 #
                 # @!attribute [rw] endpoint
@@ -774,11 +774,6 @@ module Google
                   #
                   class Rpcs
                     ##
-                    # RPC-specific configuration for `list_entity_types`
-                    # @return [::Gapic::Config::Method]
-                    #
-                    attr_reader :list_entity_types
-                    ##
                     # RPC-specific configuration for `get_entity_type`
                     # @return [::Gapic::Config::Method]
                     #
@@ -798,11 +793,14 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :delete_entity_type
+                    ##
+                    # RPC-specific configuration for `list_entity_types`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_entity_types
 
                     # @private
                     def initialize parent_rpcs = nil
-                      list_entity_types_config = parent_rpcs.list_entity_types if parent_rpcs.respond_to? :list_entity_types
-                      @list_entity_types = ::Gapic::Config::Method.new list_entity_types_config
                       get_entity_type_config = parent_rpcs.get_entity_type if parent_rpcs.respond_to? :get_entity_type
                       @get_entity_type = ::Gapic::Config::Method.new get_entity_type_config
                       create_entity_type_config = parent_rpcs.create_entity_type if parent_rpcs.respond_to? :create_entity_type
@@ -811,6 +809,8 @@ module Google
                       @update_entity_type = ::Gapic::Config::Method.new update_entity_type_config
                       delete_entity_type_config = parent_rpcs.delete_entity_type if parent_rpcs.respond_to? :delete_entity_type
                       @delete_entity_type = ::Gapic::Config::Method.new delete_entity_type_config
+                      list_entity_types_config = parent_rpcs.list_entity_types if parent_rpcs.respond_to? :list_entity_types
+                      @list_entity_types = ::Gapic::Config::Method.new list_entity_types_config
 
                       yield self if block_given?
                     end
