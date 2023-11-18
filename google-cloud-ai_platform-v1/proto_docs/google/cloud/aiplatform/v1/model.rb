@@ -663,6 +663,17 @@ module Google
         #       (Vertex AI makes this value available to your container code as the
         #       [`AIP_DEPLOYED_MODEL_ID` environment
         #       variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
+        # @!attribute [rw] grpc_ports
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Port>]
+        #     Immutable. List of ports to expose from the container. Vertex AI sends gRPC
+        #     prediction requests that it receives to the first port on this list. Vertex
+        #     AI also sends liveness and health checks to this port.
+        #
+        #     If you do not specify this field, gRPC requests to the container will be
+        #     disabled.
+        #
+        #     Vertex AI does not use ports other than the first one listed. This field
+        #     corresponds to the `ports` field of the Kubernetes Containers v1 core API.
         # @!attribute [rw] deployment_timeout
         #   @return [::Google::Protobuf::Duration]
         #     Immutable. Deployment timeout.

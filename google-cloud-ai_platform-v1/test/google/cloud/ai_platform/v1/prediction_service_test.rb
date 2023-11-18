@@ -169,6 +169,222 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     end
   end
 
+  def test_direct_predict
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::DirectPredictResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    endpoint = "hello world"
+    inputs = [{}]
+    parameters = {}
+
+    direct_predict_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :direct_predict, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::DirectPredictRequest, request
+      assert_equal "hello world", request["endpoint"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::Tensor, request["inputs"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Tensor), request["parameters"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, direct_predict_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.direct_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.direct_predict ::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.direct_predict(::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, direct_predict_client_stub.call_rpc_count
+    end
+  end
+
+  def test_direct_raw_predict
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::DirectRawPredictResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    endpoint = "hello world"
+    method_name = "hello world"
+    input = "hello world"
+
+    direct_raw_predict_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :direct_raw_predict, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest, request
+      assert_equal "hello world", request["endpoint"]
+      assert_equal "hello world", request["method_name"]
+      assert_equal "hello world", request["input"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, direct_raw_predict_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.direct_raw_predict endpoint: endpoint, method_name: method_name, input: input do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.direct_raw_predict ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.direct_raw_predict(::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, direct_raw_predict_client_stub.call_rpc_count
+    end
+  end
+
+  def test_streaming_predict
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    endpoint = "hello world"
+    inputs = [{}]
+    parameters = {}
+
+    streaming_predict_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :streaming_predict, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, streaming_predict_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
+      enum_input = [request_hash, request_proto].to_enum
+      client.streaming_predict enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
+      stream_input = Gapic::StreamInput.new
+      client.streaming_predict stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
+      enum_input = [request_hash, request_proto].to_enum
+      client.streaming_predict enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
+      stream_input = Gapic::StreamInput.new
+      client.streaming_predict stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, streaming_predict_client_stub.call_rpc_count
+      streaming_predict_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest, r
+          assert_equal "hello world", r["endpoint"]
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::Tensor, r["inputs"].first
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Tensor), r["parameters"]
+        end
+      end
+    end
+  end
+
   def test_server_streaming_predict
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse.new
@@ -243,6 +459,98 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
       # Verify method calls
       assert_equal 5, server_streaming_predict_client_stub.call_rpc_count
+    end
+  end
+
+  def test_streaming_raw_predict
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    endpoint = "hello world"
+    method_name = "hello world"
+    input = "hello world"
+
+    streaming_raw_predict_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :streaming_raw_predict, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, streaming_raw_predict_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { endpoint: endpoint, method_name: method_name, input: input }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
+      enum_input = [request_hash, request_proto].to_enum
+      client.streaming_raw_predict enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { endpoint: endpoint, method_name: method_name, input: input }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
+      stream_input = Gapic::StreamInput.new
+      client.streaming_raw_predict stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { endpoint: endpoint, method_name: method_name, input: input }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
+      enum_input = [request_hash, request_proto].to_enum
+      client.streaming_raw_predict enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { endpoint: endpoint, method_name: method_name, input: input }
+      request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
+      stream_input = Gapic::StreamInput.new
+      client.streaming_raw_predict stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, streaming_raw_predict_client_stub.call_rpc_count
+      streaming_raw_predict_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest, r
+          assert_equal "hello world", r["endpoint"]
+          assert_equal "hello world", r["method_name"]
+          assert_equal "hello world", r["input"]
+        end
+      end
     end
   end
 
