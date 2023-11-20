@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2023-11-20)
+
+#### Features
+
+* Add a new field token_type to TokenOptions ([#23534](https://github.com/googleapis/google-cloud-ruby/issues/23534)) 
+
 ### 0.5.0 (2023-09-12)
 
 #### Features
