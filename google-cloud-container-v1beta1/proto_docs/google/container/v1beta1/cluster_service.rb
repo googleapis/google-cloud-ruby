@@ -3589,29 +3589,6 @@ module Google
         # of Kubernetes labels applied to them, which may be used to reference them
         # during pod scheduling. They may also be resized up or down, to accommodate
         # the workload.
-        # These upgrade settings control the level of parallelism and the level of
-        # disruption caused by an upgrade.
-        #
-        # maxUnavailable controls the number of nodes that can be simultaneously
-        # unavailable.
-        #
-        # maxSurge controls the number of additional nodes that can be added to the
-        # node pool temporarily for the time of the upgrade to increase the number of
-        # available nodes.
-        #
-        # (maxUnavailable + maxSurge) determines the level of parallelism (how many
-        # nodes are being upgraded at the same time).
-        #
-        # Note: upgrades inevitably introduce some disruption since workloads need to
-        # be moved from old nodes to new, upgraded ones. Even if maxUnavailable=0,
-        # this holds true. (Disruption stays within the limits of
-        # PodDisruptionBudget, if it is configured.)
-        #
-        # Consider a hypothetical node pool with 5 nodes having maxSurge=2,
-        # maxUnavailable=1. This means the upgrade process upgrades 3 nodes
-        # simultaneously. It creates 2 additional (upgraded) nodes, then it brings
-        # down 3 old (not yet upgraded) nodes at the same time. This ensures that
-        # there are always at least 4 nodes available.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the node pool.
@@ -3695,6 +3672,9 @@ module Google
         #     This checksum is computed by the server based on the value of node pool
         #     fields, and may be sent on update requests to ensure the client has an
         #     up-to-date value before proceeding.
+        # @!attribute [rw] queued_provisioning
+        #   @return [::Google::Cloud::Container::V1beta1::NodePool::QueuedProvisioning]
+        #     Specifies the configuration of queued provisioning.
         # @!attribute [rw] best_effort_provisioning
         #   @return [::Google::Cloud::Container::V1beta1::BestEffortProvisioning]
         #     Enable best effort provisioning for nodes
@@ -3702,6 +3682,30 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # These upgrade settings control the level of parallelism and the level of
+          # disruption caused by an upgrade.
+          #
+          # maxUnavailable controls the number of nodes that can be simultaneously
+          # unavailable.
+          #
+          # maxSurge controls the number of additional nodes that can be added to the
+          # node pool temporarily for the time of the upgrade to increase the number of
+          # available nodes.
+          #
+          # (maxUnavailable + maxSurge) determines the level of parallelism (how many
+          # nodes are being upgraded at the same time).
+          #
+          # Note: upgrades inevitably introduce some disruption since workloads need to
+          # be moved from old nodes to new, upgraded ones. Even if maxUnavailable=0,
+          # this holds true. (Disruption stays within the limits of
+          # PodDisruptionBudget, if it is configured.)
+          #
+          # Consider a hypothetical node pool with 5 nodes having maxSurge=2,
+          # maxUnavailable=1. This means the upgrade process upgrades 3 nodes
+          # simultaneously. It creates 2 additional (upgraded) nodes, then it brings
+          # down 3 old (not yet upgraded) nodes at the same time. This ensures that
+          # there are always at least 4 nodes available.
+          #
           # These upgrade settings configure the upgrade strategy for the node pool.
           # Use strategy to switch between the strategies applied to the node pool.
           #
@@ -3837,6 +3841,17 @@ module Google
               # ensure low communication latency.
               COMPACT = 1
             end
+          end
+
+          # QueuedProvisioning defines the queued provisioning used by the node pool.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Denotes that this nodepool is QRM specific, meaning nodes can be only
+          #     obtained through queuing via the Cluster Autoscaler ProvisioningRequest
+          #     API.
+          class QueuedProvisioning
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The current status of the node pool instance.
@@ -5482,6 +5497,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AutopilotConversionStatus represents conversion status.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Container::V1beta1::AutopilotConversionStatus::State]
+        #     Output only. The current state of the conversion.
+        class AutopilotConversionStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The current state of the conversion.
+          module State
+            # STATE_UNSPECIFIED indicates the state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # DONE indicates the conversion has been completed. Old node pools will
+            # continue being deleted in the background.
+            DONE = 5
+          end
+        end
+
         # Autopilot is the configuration for Autopilot settings on the cluster.
         # @!attribute [rw] enabled
         #   @return [::Boolean]
@@ -5489,6 +5523,9 @@ module Google
         # @!attribute [rw] workload_policy_config
         #   @return [::Google::Cloud::Container::V1beta1::WorkloadPolicyConfig]
         #     Workload policy configuration for Autopilot.
+        # @!attribute [rw] conversion_status
+        #   @return [::Google::Cloud::Container::V1beta1::AutopilotConversionStatus]
+        #     ConversionStatus shows conversion status.
         class Autopilot
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
