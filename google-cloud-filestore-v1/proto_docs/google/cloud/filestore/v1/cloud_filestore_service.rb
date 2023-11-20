@@ -92,7 +92,10 @@ module Google
         # File share configuration for the instance.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the file share (must be 16 characters or less).
+        #     Required. The name of the file share. Must use 1-16 characters for the
+        #     basic service tier and 1-63 characters for all other service tiers.
+        #     Must use lowercase letters, numbers, or underscores `[a-z0-9_]`. Must
+        #     start with a letter. Immutable.
         # @!attribute [rw] capacity_gb
         #   @return [::Integer]
         #     File share capacity in gigabytes (GB).
@@ -211,6 +214,9 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Google::Protobuf::BoolValue]
         #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     KMS key name used for data encryption.
@@ -267,6 +273,9 @@ module Google
 
             # The instance is in the process of becoming active.
             RESUMING = 10
+
+            # The instance is reverting to a snapshot.
+            REVERTING = 12
           end
 
           # Available service tiers.
@@ -297,6 +306,14 @@ module Google
             # ENTERPRISE instances offer the features and availability needed for
             # mission-critical workloads.
             ENTERPRISE = 6
+
+            # ZONAL instances offer expanded capacity and performance scaling
+            # capabilities.
+            ZONAL = 7
+
+            # REGIONAL instances offer the features and availability needed for
+            # mission-critical workloads.
+            REGIONAL = 8
           end
 
           # SuspensionReason contains the possible reasons for a suspension.
@@ -370,6 +387,23 @@ module Google
         #     The resource name of the backup, in the format
         #     `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
         class RestoreInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RevertInstanceRequest reverts the given instance's file share to the
+        # specified snapshot.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required.
+        #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+        #     The resource name of the instance, in the format
+        # @!attribute [rw] target_snapshot_id
+        #   @return [::String]
+        #     Required. The snapshot resource ID, in the format 'my-snapshot', where the
+        #     specified ID is the \\{snapshot_id} of the fully qualified name like
+        #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
+        class RevertInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -623,6 +657,9 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Google::Protobuf::BoolValue]
         #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     Immutable. KMS key name used for data encryption.
@@ -656,6 +693,10 @@ module Google
 
             # Backup is being deleted.
             DELETING = 4
+
+            # Backup is not valid and cannot be used for creating new instances or
+            # restoring existing instances.
+            INVALID = 5
           end
         end
 

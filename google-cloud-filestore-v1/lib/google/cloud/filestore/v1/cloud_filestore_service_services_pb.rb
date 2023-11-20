@@ -69,6 +69,8 @@ module Google
             # capacity of the backup (and also equal to or larger than the minimum
             # capacity of the tier).
             rpc :RestoreInstance, ::Google::Cloud::Filestore::V1::RestoreInstanceRequest, ::Google::Longrunning::Operation
+            # Revert an existing instance's file system to a specified snapshot.
+            rpc :RevertInstance, ::Google::Cloud::Filestore::V1::RevertInstanceRequest, ::Google::Longrunning::Operation
             # Deletes an instance.
             rpc :DeleteInstance, ::Google::Cloud::Filestore::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Lists all snapshots in a project for either a specified location
