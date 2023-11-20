@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.34.0 (2023-11-20)
+
+#### Features
+
+* add CountTokensRequest to Prediction 
+* add FeatureGroup, FeatureOnlineStore, FeatureOnlineStoreAdminService, FeatureOnlineStoreService, FeatureRegistryService, FeatureView, FeatureViewSync 
+* add numeric_restriction to Index 
+* add protected_artifact_location_id to CustomJob ([#23538](https://github.com/googleapis/google-cloud-ruby/issues/23538)) 
+* add tpu_topology to MachineSpec 
+* add value_type, version_column_name to Feature 
+
 ### 0.33.0 (2023-10-06)
 
 #### Features
