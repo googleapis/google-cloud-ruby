@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2023-11-20)
+
+#### Documentation
+
+* correct timezone/offset information for Cloud Scheduler headers 
+
 ### 0.9.0 (2023-09-12)
 
 #### Features
