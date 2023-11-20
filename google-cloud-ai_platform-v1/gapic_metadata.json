@@ -715,6 +715,74 @@
         }
       }
     },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::PredictionService::Client",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            },
+            "RawPredict": {
+              "methods": [
+                "raw_predict"
+              ]
+            },
+            "DirectPredict": {
+              "methods": [
+                "direct_predict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "direct_raw_predict"
+              ]
+            },
+            "StreamingPredict": {
+              "methods": [
+                "streaming_predict"
+              ]
+            },
+            "ServerStreamingPredict": {
+              "methods": [
+                "server_streaming_predict"
+              ]
+            },
+            "StreamingRawPredict": {
+              "methods": [
+                "streaming_raw_predict"
+              ]
+            },
+            "Explain": {
+              "methods": [
+                "explain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LlmUtilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::LlmUtilityService::Client",
+          "rpcs": {
+            "CountTokens": {
+              "methods": [
+                "count_tokens"
+              ]
+            },
+            "ComputeTokens": {
+              "methods": [
+                "compute_tokens"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MatchService": {
       "clients": {
         "grpc": {
@@ -1088,35 +1156,6 @@
             "CancelPipelineJob": {
               "methods": [
                 "cancel_pipeline_job"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "PredictionService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::AIPlatform::V1::PredictionService::Client",
-          "rpcs": {
-            "Predict": {
-              "methods": [
-                "predict"
-              ]
-            },
-            "RawPredict": {
-              "methods": [
-                "raw_predict"
-              ]
-            },
-            "ServerStreamingPredict": {
-              "methods": [
-                "server_streaming_predict"
-              ]
-            },
-            "Explain": {
-              "methods": [
-                "explain"
               ]
             }
           }
