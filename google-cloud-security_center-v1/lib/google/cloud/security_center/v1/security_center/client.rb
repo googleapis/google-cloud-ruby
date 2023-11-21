@@ -3810,12 +3810,12 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The relative resource name of the organization, project, or
-            #     folder. See:
-            #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-            #     An example is:
-            #     "organizations/\\{organization_id}".
+            #     folder. For more information about relative resource names, see [Relative
+            #     Resource
+            #     Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+            #     Example: `organizations/{organization_id}`
             #   @param custom_config [::Google::Cloud::SecurityCenter::V1::CustomConfig, ::Hash]
-            #     Required. The user specified custom configuration to test.
+            #     Required. The custom configuration that you need to test.
             #   @param resource [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest::SimulatedResource, ::Hash]
             #     Required. Resource data to simulate custom module against.
             #

@@ -1323,13 +1323,13 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The relative resource name of the organization, project, or
-        #     folder. See:
-        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-        #     An example is:
-        #     "organizations/\\{organization_id}".
+        #     folder. For more information about relative resource names, see [Relative
+        #     Resource
+        #     Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+        #     Example: `organizations/{organization_id}`
         # @!attribute [rw] custom_config
         #   @return [::Google::Cloud::SecurityCenter::V1::CustomConfig]
-        #     Required. The user specified custom configuration to test.
+        #     Required. The custom configuration that you need to test.
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest::SimulatedResource]
         #     Required. Resource data to simulate custom module against.
@@ -1337,16 +1337,17 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Manually constructed resource. If the custom module only evaluates against
-          # the resource data, the iam_policy_data field can be omitted, and vice
-          # versa.
+          # Manually constructed resource name. If the custom module evaluates against
+          # only the resource data, you can omit the `iam_policy_data` field. If it
+          # evaluates only the `iam_policy_data` field, you can omit the resource data.
           # @!attribute [rw] resource_type
           #   @return [::String]
-          #     Required. The type of the resource, e.g. `compute.googleapis.com/Disk`.
+          #     Required. The type of the resource, for example,
+          #     `compute.googleapis.com/Disk`.
           # @!attribute [rw] resource_data
           #   @return [::Google::Protobuf::Struct]
-          #     Optional. A representation of the GCP resource. Should match the GCP
-          #     resource JSON format.
+          #     Optional. A representation of the Google Cloud resource. Should match the
+          #     Google Cloud resource JSON format.
           # @!attribute [rw] iam_policy_data
           #   @return [::Google::Iam::V1::Policy]
           #     Optional. A representation of the IAM policy.
@@ -1356,8 +1357,8 @@ module Google
           end
         end
 
-        # Response message for simulating a SecurityHealthAnalyticsCustomModule against
-        # a given resource.
+        # Response message for simulating a `SecurityHealthAnalyticsCustomModule`
+        # against a given resource.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse::SimulatedResult]
         #     Result for test case in the corresponding request.
