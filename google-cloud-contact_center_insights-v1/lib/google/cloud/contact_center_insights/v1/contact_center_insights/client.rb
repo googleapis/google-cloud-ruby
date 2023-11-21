@@ -289,11 +289,11 @@ module Google
             #     This value should be 4-64 characters and must match the regular
             #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
             #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
-            #     Optional. DLP settings for transcript redaction. Optional, will default to
-            #     the config specified in Settings.
+            #     Optional. DLP settings for transcript redaction. Will default to the config
+            #     specified in Settings.
             #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
-            #     Optional. Default Speech-to-Text configuration. Optional, will default to
-            #     the config specified in Settings.
+            #     Optional. Speech-to-Text configuration. Will default to the config
+            #     specified in Settings.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1222,14 +1222,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource to create analyses in.
+            #     Required. The parent resource to delete conversations from.
             #     Format:
             #     projects/\\{project}/locations/\\{location}
             #   @param filter [::String]
-            #     Filter used to select the subset of conversations to analyze.
+            #     Filter used to select the subset of conversations to delete.
             #   @param max_delete_count [::Integer]
-            #     Maximum number of conversations to delete. The default is 1000. It can be
-            #     changed by setting the `max_delete_count` field.
+            #     Maximum number of conversations to delete.
             #   @param force [::Boolean]
             #     If set to true, all of this conversation's analyses will also be deleted.
             #     Otherwise, the request will only succeed if the conversation has no

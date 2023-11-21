@@ -190,12 +190,12 @@ module Google
         #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
         # @!attribute [rw] redaction_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
-        #     Optional. DLP settings for transcript redaction. Optional, will default to
-        #     the config specified in Settings.
+        #     Optional. DLP settings for transcript redaction. Will default to the config
+        #     specified in Settings.
         # @!attribute [rw] speech_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig]
-        #     Optional. Default Speech-to-Text configuration. Optional, will default to
-        #     the config specified in Settings.
+        #     Optional. Speech-to-Text configuration. Will default to the config
+        #     specified in Settings.
         class UploadConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -340,7 +340,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             module BucketObjectType
-              # The object type is unspecified and will default to TRANSCRIPT.
+              # The object type is unspecified and will default to `TRANSCRIPT`.
               BUCKET_OBJECT_TYPE_UNSPECIFIED = 0
 
               # The object is a transcript.
@@ -561,16 +561,15 @@ module Google
         # The request to delete conversations in bulk.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource to create analyses in.
+        #     Required. The parent resource to delete conversations from.
         #     Format:
         #     projects/\\{project}/locations/\\{location}
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter used to select the subset of conversations to analyze.
+        #     Filter used to select the subset of conversations to delete.
         # @!attribute [rw] max_delete_count
         #   @return [::Integer]
-        #     Maximum number of conversations to delete. The default is 1000. It can be
-        #     changed by setting the `max_delete_count` field.
+        #     Maximum number of conversations to delete.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     If set to true, all of this conversation's analyses will also be deleted.
@@ -600,7 +599,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for a bulk analyze conversations operation.
+        # The response for a bulk delete conversations operation.
         class BulkDeleteConversationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
