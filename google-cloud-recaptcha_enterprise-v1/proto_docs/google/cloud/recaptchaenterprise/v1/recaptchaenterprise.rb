@@ -167,15 +167,18 @@ module Google
         #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-        #     Optional. Optional reasons for the annotation that will be assigned to the
-        #     Event.
+        #     Optional. Reasons for the annotation that are assigned to the event.
+        # @!attribute [rw] account_id
+        #   @return [::String]
+        #     Optional. A stable account identifier to apply to the assessment. This is
+        #     an alternative to setting `account_id` in `CreateAssessment`, for example
+        #     when a stable account identifier is not yet known in the initial request.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. Unique stable hashed user identifier to apply to the assessment.
-        #     This is an alternative to setting the hashed_account_id in
-        #     CreateAssessment, for example when the account identifier is not yet known
-        #     in the initial request. It is recommended that the identifier is hashed
-        #     using hmac-sha256 with stable secret.
+        #     Optional. A stable hashed account identifier to apply to the assessment.
+        #     This is an alternative to setting `hashed_account_id` in
+        #     `CreateAssessment`, for example when a stable account identifier is not yet
+        #     known in the initial request.
         # @!attribute [rw] transaction_event
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent]
         #     Optional. If the assessment is part of a payment transaction, provide
@@ -408,8 +411,8 @@ module Google
         #     assessment event must include a token and site key to use this feature.
         # @!attribute [r] account_defender_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
-        #     Output only. Assessment returned by account defender when a
-        #     hashed_account_id is provided.
+        #     Output only. Assessment returned by account defender when an account
+        #     identifier is provided.
         # @!attribute [rw] private_password_leak_verification
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PrivatePasswordLeakVerification]
         #     Optional. The private password leak verification field contains the
@@ -456,8 +459,9 @@ module Google
         #     already integrated with recaptcha enterprise.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. Unique stable hashed user identifier for the request. The
-        #     identifier must be hashed using hmac-sha256 with stable secret.
+        #     Optional. Deprecated: use `user_info.account_id` instead.
+        #     Unique stable hashed user identifier for the request. The identifier must
+        #     be hashed using hmac-sha256 with stable secret.
         # @!attribute [rw] express
         #   @return [::Boolean]
         #     Optional. Flag for a reCAPTCHA express request for an assessment without a
@@ -487,6 +491,12 @@ module Google
         #     Optional. Data describing a payment transaction to be assessed. Sending
         #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
         #     FraudPreventionAssessment component in the response.
+        # @!attribute [rw] user_info
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::UserInfo]
+        #     Optional. Information about the user that generates this event, when they
+        #     can be identified. They are often identified through the use of an account
+        #     for logged-in requests or login/registration requests, or by providing user
+        #     identifiers for guest actions like checkout.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -647,6 +657,44 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # User information associated with a request protected by reCAPTCHA Enterprise.
+        # @!attribute [rw] create_account_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Creation time for this account associated with this user. Leave
+        #     blank for non logged-in actions, guest checkout, or when there is no
+        #     account associated with the current user.
+        # @!attribute [rw] account_id
+        #   @return [::String]
+        #     Optional. For logged-in requests or login/registration requests, the unique
+        #     account identifier associated with this user. You can use the username if
+        #     it is stable (meaning it is the same for every request associated with the
+        #     same user), or any stable user ID of your choice. Leave blank for non
+        #     logged-in actions or guest checkout.
+        # @!attribute [rw] user_ids
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::UserId>]
+        #     Optional. Identifiers associated with this user or request.
+        class UserInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An identifier associated with a user.
+        # @!attribute [rw] email
+        #   @return [::String]
+        #     Optional. An email address.
+        # @!attribute [rw] phone_number
+        #   @return [::String]
+        #     Optional. A phone number. Should use the E.164 format.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Optional. A unique username, if different from all the other identifiers
+        #     and `account_id` that are provided. Can be a unique login handle or
+        #     display name for a user.
+        class UserId
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Risk analysis result for an event.

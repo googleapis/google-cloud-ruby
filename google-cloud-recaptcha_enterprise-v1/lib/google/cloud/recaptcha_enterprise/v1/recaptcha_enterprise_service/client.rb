@@ -261,7 +261,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil, transaction_event: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, account_id: nil, hashed_account_id: nil, transaction_event: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -274,14 +274,16 @@ module Google
             #     be left empty to provide reasons that apply to an event without concluding
             #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the
-            #     Event.
+            #     Optional. Reasons for the annotation that are assigned to the event.
+            #   @param account_id [::String]
+            #     Optional. A stable account identifier to apply to the assessment. This is
+            #     an alternative to setting `account_id` in `CreateAssessment`, for example
+            #     when a stable account identifier is not yet known in the initial request.
             #   @param hashed_account_id [::String]
-            #     Optional. Unique stable hashed user identifier to apply to the assessment.
-            #     This is an alternative to setting the hashed_account_id in
-            #     CreateAssessment, for example when the account identifier is not yet known
-            #     in the initial request. It is recommended that the identifier is hashed
-            #     using hmac-sha256 with stable secret.
+            #     Optional. A stable hashed account identifier to apply to the assessment.
+            #     This is an alternative to setting `hashed_account_id` in
+            #     `CreateAssessment`, for example when a stable account identifier is not yet
+            #     known in the initial request.
             #   @param transaction_event [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent, ::Hash]
             #     Optional. If the assessment is part of a payment transaction, provide
             #     details on payment lifecycle events that occur in the transaction.
