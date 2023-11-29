@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-cloud-beyond_corp-app_gateways-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.beyondcorp.appgateways.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "beyondcorp_v1_generated_AppGatewaysService_ListAppGateways_sync",
+      "title": "Snippet for the list_app_gateways call in the AppGatewaysService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways. It may require modification in order to execute successfully.",
+      "file": "app_gateways_service/list_app_gateways.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_app_gateways",
+        "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysResponse",
+        "client": {
+          "short_name": "AppGatewaysService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client"
+        },
+        "method": {
+          "short_name": "ListAppGateways",
+          "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService.ListAppGateways",
+          "service": {
+            "short_name": "AppGatewaysService",
+            "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppGatewaysService_GetAppGateway_sync",
+      "title": "Snippet for the get_app_gateway call in the AppGatewaysService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#get_app_gateway. It may require modification in order to execute successfully.",
+      "file": "app_gateways_service/get_app_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_app_gateway",
+        "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#get_app_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppGateways::V1::GetAppGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway",
+        "client": {
+          "short_name": "AppGatewaysService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client"
+        },
+        "method": {
+          "short_name": "GetAppGateway",
+          "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService.GetAppGateway",
+          "service": {
+            "short_name": "AppGatewaysService",
+            "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppGatewaysService_CreateAppGateway_sync",
+      "title": "Snippet for the create_app_gateway call in the AppGatewaysService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#create_app_gateway. It may require modification in order to execute successfully.",
+      "file": "app_gateways_service/create_app_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_app_gateway",
+        "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#create_app_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppGateways::V1::CreateAppGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppGatewaysService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client"
+        },
+        "method": {
+          "short_name": "CreateAppGateway",
+          "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService.CreateAppGateway",
+          "service": {
+            "short_name": "AppGatewaysService",
+            "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppGatewaysService_DeleteAppGateway_sync",
+      "title": "Snippet for the delete_app_gateway call in the AppGatewaysService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#delete_app_gateway. It may require modification in order to execute successfully.",
+      "file": "app_gateways_service/delete_app_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_app_gateway",
+        "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#delete_app_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppGateways::V1::DeleteAppGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppGatewaysService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAppGateway",
+          "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService.DeleteAppGateway",
+          "service": {
+            "short_name": "AppGatewaysService",
+            "full_name": "google.cloud.beyondcorp.appgateways.v1.AppGatewaysService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
