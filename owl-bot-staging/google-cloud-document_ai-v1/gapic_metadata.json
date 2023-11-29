@@ -1,0 +1,128 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.documentai.v1",
+  "libraryPackage": "::Google::Cloud::DocumentAI::V1",
+  "services": {
+    "DocumentProcessorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client",
+          "rpcs": {
+            "ProcessDocument": {
+              "methods": [
+                "process_document"
+              ]
+            },
+            "BatchProcessDocuments": {
+              "methods": [
+                "batch_process_documents"
+              ]
+            },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetch_processor_types"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "list_processor_types"
+              ]
+            },
+            "GetProcessorType": {
+              "methods": [
+                "get_processor_type"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "list_processors"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "get_processor"
+              ]
+            },
+            "TrainProcessorVersion": {
+              "methods": [
+                "train_processor_version"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "get_processor_version"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "list_processor_versions"
+              ]
+            },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "delete_processor_version"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deploy_processor_version"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeploy_processor_version"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "create_processor"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "delete_processor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enable_processor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disable_processor"
+              ]
+            },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "set_default_processor_version"
+              ]
+            },
+            "ReviewDocument": {
+              "methods": [
+                "review_document"
+              ]
+            },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluate_processor_version"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "get_evaluation"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "list_evaluations"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

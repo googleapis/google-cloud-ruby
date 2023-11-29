@@ -1,0 +1,1415 @@
+{
+  "client_library": {
+    "name": "google-cloud-deploy-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.deploy.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListDeliveryPipelines_sync",
+      "title": "Snippet for the list_delivery_pipelines call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_delivery_pipelines. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_delivery_pipelines.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_delivery_pipelines",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_delivery_pipelines",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListDeliveryPipelinesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListDeliveryPipelinesResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListDeliveryPipelines",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListDeliveryPipelines",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetDeliveryPipeline_sync",
+      "title": "Snippet for the get_delivery_pipeline call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_delivery_pipeline. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_delivery_pipeline.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_delivery_pipeline",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_delivery_pipeline",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetDeliveryPipelineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::DeliveryPipeline",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetDeliveryPipeline",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetDeliveryPipeline",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateDeliveryPipeline_sync",
+      "title": "Snippet for the create_delivery_pipeline call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_delivery_pipeline. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/create_delivery_pipeline.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_delivery_pipeline",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_delivery_pipeline",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateDeliveryPipelineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateDeliveryPipeline",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateDeliveryPipeline",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_UpdateDeliveryPipeline_sync",
+      "title": "Snippet for the update_delivery_pipeline call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#update_delivery_pipeline. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/update_delivery_pipeline.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_delivery_pipeline",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#update_delivery_pipeline",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::UpdateDeliveryPipelineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeliveryPipeline",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.UpdateDeliveryPipeline",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_DeleteDeliveryPipeline_sync",
+      "title": "Snippet for the delete_delivery_pipeline call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_delivery_pipeline. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/delete_delivery_pipeline.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_delivery_pipeline",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_delivery_pipeline",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::DeleteDeliveryPipelineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeliveryPipeline",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.DeleteDeliveryPipeline",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListTargets_sync",
+      "title": "Snippet for the list_targets call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_targets. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_targets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_targets",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_targets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListTargetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListTargetsResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListTargets",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListTargets",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_RollbackTarget_sync",
+      "title": "Snippet for the rollback_target call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#rollback_target. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/rollback_target.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rollback_target",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#rollback_target",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::RollbackTargetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::RollbackTargetResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "RollbackTarget",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.RollbackTarget",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetTarget_sync",
+      "title": "Snippet for the get_target call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_target. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_target.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_target",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_target",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetTargetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::Target",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetTarget",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetTarget",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateTarget_sync",
+      "title": "Snippet for the create_target call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_target. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/create_target.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_target",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_target",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateTargetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateTarget",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateTarget",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_UpdateTarget_sync",
+      "title": "Snippet for the update_target call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#update_target. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/update_target.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_target",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#update_target",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::UpdateTargetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "UpdateTarget",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.UpdateTarget",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_DeleteTarget_sync",
+      "title": "Snippet for the delete_target call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_target. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/delete_target.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_target",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_target",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::DeleteTargetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "DeleteTarget",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.DeleteTarget",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListReleases_sync",
+      "title": "Snippet for the list_releases call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_releases. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_releases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_releases",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_releases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListReleasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListReleasesResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListReleases",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListReleases",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetRelease_sync",
+      "title": "Snippet for the get_release call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_release. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_release",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::Release",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetRelease",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetRelease",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateRelease_sync",
+      "title": "Snippet for the create_release call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_release. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/create_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_release",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateRelease",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateRelease",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_AbandonRelease_sync",
+      "title": "Snippet for the abandon_release call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#abandon_release. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/abandon_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "abandon_release",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#abandon_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::AbandonReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::AbandonReleaseResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "AbandonRelease",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.AbandonRelease",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ApproveRollout_sync",
+      "title": "Snippet for the approve_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#approve_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/approve_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "approve_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#approve_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ApproveRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ApproveRolloutResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ApproveRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ApproveRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_AdvanceRollout_sync",
+      "title": "Snippet for the advance_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#advance_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/advance_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "advance_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#advance_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::AdvanceRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::AdvanceRolloutResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "AdvanceRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.AdvanceRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CancelRollout_sync",
+      "title": "Snippet for the cancel_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#cancel_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/cancel_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#cancel_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CancelRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::CancelRolloutResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CancelRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CancelRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListRollouts_sync",
+      "title": "Snippet for the list_rollouts call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_rollouts. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_rollouts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rollouts",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_rollouts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListRolloutsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListRolloutsResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListRollouts",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListRollouts",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetRollout_sync",
+      "title": "Snippet for the get_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::Rollout",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateRollout_sync",
+      "title": "Snippet for the create_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/create_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_IgnoreJob_sync",
+      "title": "Snippet for the ignore_job call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#ignore_job. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/ignore_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ignore_job",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#ignore_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::IgnoreJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::IgnoreJobResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "IgnoreJob",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.IgnoreJob",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_RetryJob_sync",
+      "title": "Snippet for the retry_job call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/retry_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retry_job",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::RetryJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::RetryJobResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "RetryJob",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.RetryJob",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListJobRuns_sync",
+      "title": "Snippet for the list_job_runs call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_job_runs. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_job_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_job_runs",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_job_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListJobRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListJobRunsResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListJobRuns",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListJobRuns",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetJobRun_sync",
+      "title": "Snippet for the get_job_run call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_job_run. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_job_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job_run",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_job_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetJobRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::JobRun",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetJobRun",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetJobRun",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_sync",
+      "title": "Snippet for the terminate_job_run call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#terminate_job_run. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/terminate_job_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "terminate_job_run",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#terminate_job_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::TerminateJobRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::TerminateJobRunResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "TerminateJobRun",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.TerminateJobRun",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetConfig_sync",
+      "title": "Snippet for the get_config call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_config. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_config",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::Config",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetConfig",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetConfig",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateAutomation_sync",
+      "title": "Snippet for the create_automation call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_automation. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/create_automation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_automation",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_automation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateAutomationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateAutomation",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateAutomation",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_UpdateAutomation_sync",
+      "title": "Snippet for the update_automation call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#update_automation. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/update_automation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_automation",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#update_automation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::UpdateAutomationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "UpdateAutomation",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.UpdateAutomation",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_DeleteAutomation_sync",
+      "title": "Snippet for the delete_automation call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_automation. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/delete_automation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_automation",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_automation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::DeleteAutomationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "DeleteAutomation",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.DeleteAutomation",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetAutomation_sync",
+      "title": "Snippet for the get_automation call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_automation. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_automation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_automation",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_automation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetAutomationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::Automation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetAutomation",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetAutomation",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListAutomations_sync",
+      "title": "Snippet for the list_automations call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_automations. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_automations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_automations",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_automations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListAutomationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListAutomationsResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListAutomations",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListAutomations",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetAutomationRun_sync",
+      "title": "Snippet for the get_automation_run call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_automation_run. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_automation_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_automation_run",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_automation_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetAutomationRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::AutomationRun",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetAutomationRun",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetAutomationRun",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListAutomationRuns_sync",
+      "title": "Snippet for the list_automation_runs call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_automation_runs. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_automation_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_automation_runs",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_automation_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListAutomationRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListAutomationRunsResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListAutomationRuns",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListAutomationRuns",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CancelAutomationRun_sync",
+      "title": "Snippet for the cancel_automation_run call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#cancel_automation_run. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/cancel_automation_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_automation_run",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#cancel_automation_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CancelAutomationRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::CancelAutomationRunResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CancelAutomationRun",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CancelAutomationRun",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
