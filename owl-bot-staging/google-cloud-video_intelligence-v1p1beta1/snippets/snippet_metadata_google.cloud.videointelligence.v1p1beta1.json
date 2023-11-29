@@ -1,0 +1,55 @@
+{
+  "client_library": {
+    "name": "google-cloud-video_intelligence-v1p1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.videointelligence.v1p1beta1",
+        "version": "v1p1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "videointelligence_v1p1beta1_generated_VideoIntelligenceService_AnnotateVideo_sync",
+      "title": "Snippet for the annotate_video call in the VideoIntelligenceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::Client#annotate_video. It may require modification in order to execute successfully.",
+      "file": "video_intelligence_service/annotate_video.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "annotate_video",
+        "full_name": "::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::Client#annotate_video",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VideoIntelligence::V1p1beta1::AnnotateVideoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VideoIntelligenceService::Client",
+          "full_name": "::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::Client"
+        },
+        "method": {
+          "short_name": "AnnotateVideo",
+          "full_name": "google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService.AnnotateVideo",
+          "service": {
+            "short_name": "VideoIntelligenceService",
+            "full_name": "google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
