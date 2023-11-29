@@ -1,0 +1,2095 @@
+{
+  "client_library": {
+    "name": "google-cloud-resource_manager-v3",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.resourcemanager.v3",
+        "version": "v3"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_GetFolder_sync",
+      "title": "Snippet for the get_folder call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#get_folder. It may require modification in order to execute successfully.",
+      "file": "folders/get_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_folder",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#get_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::Folder",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "GetFolder",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.GetFolder",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_ListFolders_sync",
+      "title": "Snippet for the list_folders call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#list_folders. It may require modification in order to execute successfully.",
+      "file": "folders/list_folders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_folders",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#list_folders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListFoldersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListFoldersResponse",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "ListFolders",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.ListFolders",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_SearchFolders_sync",
+      "title": "Snippet for the search_folders call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#search_folders. It may require modification in order to execute successfully.",
+      "file": "folders/search_folders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_folders",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#search_folders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::SearchFoldersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::SearchFoldersResponse",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "SearchFolders",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.SearchFolders",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_CreateFolder_sync",
+      "title": "Snippet for the create_folder call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#create_folder. It may require modification in order to execute successfully.",
+      "file": "folders/create_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_folder",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#create_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "CreateFolder",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.CreateFolder",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_UpdateFolder_sync",
+      "title": "Snippet for the update_folder call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#update_folder. It may require modification in order to execute successfully.",
+      "file": "folders/update_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_folder",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#update_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::UpdateFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "UpdateFolder",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.UpdateFolder",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_MoveFolder_sync",
+      "title": "Snippet for the move_folder call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#move_folder. It may require modification in order to execute successfully.",
+      "file": "folders/move_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "move_folder",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#move_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::MoveFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "MoveFolder",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.MoveFolder",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_DeleteFolder_sync",
+      "title": "Snippet for the delete_folder call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#delete_folder. It may require modification in order to execute successfully.",
+      "file": "folders/delete_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_folder",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#delete_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "DeleteFolder",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.DeleteFolder",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_UndeleteFolder_sync",
+      "title": "Snippet for the undelete_folder call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#undelete_folder. It may require modification in order to execute successfully.",
+      "file": "folders/undelete_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_folder",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#undelete_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::UndeleteFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "UndeleteFolder",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.UndeleteFolder",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "folders/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.GetIamPolicy",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "folders/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.SetIamPolicy",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Folders_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the Folders service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "folders/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "Folders::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Folders::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.resourcemanager.v3.Folders.TestIamPermissions",
+          "service": {
+            "short_name": "Folders",
+            "full_name": "google.cloud.resourcemanager.v3.Folders"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Organizations_GetOrganization_sync",
+      "title": "Snippet for the get_organization call in the Organizations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#get_organization. It may require modification in order to execute successfully.",
+      "file": "organizations/get_organization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_organization",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client#get_organization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetOrganizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::Organization",
+        "client": {
+          "short_name": "Organizations::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client"
+        },
+        "method": {
+          "short_name": "GetOrganization",
+          "full_name": "google.cloud.resourcemanager.v3.Organizations.GetOrganization",
+          "service": {
+            "short_name": "Organizations",
+            "full_name": "google.cloud.resourcemanager.v3.Organizations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Organizations_SearchOrganizations_sync",
+      "title": "Snippet for the search_organizations call in the Organizations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#search_organizations. It may require modification in order to execute successfully.",
+      "file": "organizations/search_organizations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_organizations",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client#search_organizations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::SearchOrganizationsResponse",
+        "client": {
+          "short_name": "Organizations::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client"
+        },
+        "method": {
+          "short_name": "SearchOrganizations",
+          "full_name": "google.cloud.resourcemanager.v3.Organizations.SearchOrganizations",
+          "service": {
+            "short_name": "Organizations",
+            "full_name": "google.cloud.resourcemanager.v3.Organizations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Organizations_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the Organizations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "organizations/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Organizations::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.Organizations.GetIamPolicy",
+          "service": {
+            "short_name": "Organizations",
+            "full_name": "google.cloud.resourcemanager.v3.Organizations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Organizations_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the Organizations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "organizations/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Organizations::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.Organizations.SetIamPolicy",
+          "service": {
+            "short_name": "Organizations",
+            "full_name": "google.cloud.resourcemanager.v3.Organizations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Organizations_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the Organizations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "organizations/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "Organizations::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Organizations::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.resourcemanager.v3.Organizations.TestIamPermissions",
+          "service": {
+            "short_name": "Organizations",
+            "full_name": "google.cloud.resourcemanager.v3.Organizations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_GetProject_sync",
+      "title": "Snippet for the get_project call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#get_project. It may require modification in order to execute successfully.",
+      "file": "projects/get_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_project",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#get_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::Project",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "GetProject",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.GetProject",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_ListProjects_sync",
+      "title": "Snippet for the list_projects call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#list_projects. It may require modification in order to execute successfully.",
+      "file": "projects/list_projects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_projects",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#list_projects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListProjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListProjectsResponse",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "ListProjects",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.ListProjects",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_SearchProjects_sync",
+      "title": "Snippet for the search_projects call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#search_projects. It may require modification in order to execute successfully.",
+      "file": "projects/search_projects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_projects",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#search_projects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::SearchProjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::SearchProjectsResponse",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "SearchProjects",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.SearchProjects",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_CreateProject_sync",
+      "title": "Snippet for the create_project call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#create_project. It may require modification in order to execute successfully.",
+      "file": "projects/create_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_project",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#create_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "CreateProject",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.CreateProject",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_UpdateProject_sync",
+      "title": "Snippet for the update_project call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#update_project. It may require modification in order to execute successfully.",
+      "file": "projects/update_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_project",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#update_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::UpdateProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "UpdateProject",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.UpdateProject",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_MoveProject_sync",
+      "title": "Snippet for the move_project call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#move_project. It may require modification in order to execute successfully.",
+      "file": "projects/move_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "move_project",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#move_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::MoveProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "MoveProject",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.MoveProject",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_DeleteProject_sync",
+      "title": "Snippet for the delete_project call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#delete_project. It may require modification in order to execute successfully.",
+      "file": "projects/delete_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_project",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#delete_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "DeleteProject",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.DeleteProject",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_UndeleteProject_sync",
+      "title": "Snippet for the undelete_project call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#undelete_project. It may require modification in order to execute successfully.",
+      "file": "projects/undelete_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_project",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#undelete_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::UndeleteProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "UndeleteProject",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.UndeleteProject",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "projects/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.GetIamPolicy",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "projects/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.SetIamPolicy",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_Projects_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the Projects service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "projects/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "Projects::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::Projects::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.resourcemanager.v3.Projects.TestIamPermissions",
+          "service": {
+            "short_name": "Projects",
+            "full_name": "google.cloud.resourcemanager.v3.Projects"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagBindings_ListTagBindings_sync",
+      "title": "Snippet for the list_tag_bindings call in the TagBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_tag_bindings. It may require modification in order to execute successfully.",
+      "file": "tag_bindings/list_tag_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tag_bindings",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client#list_tag_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListTagBindingsResponse",
+        "client": {
+          "short_name": "TagBindings::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client"
+        },
+        "method": {
+          "short_name": "ListTagBindings",
+          "full_name": "google.cloud.resourcemanager.v3.TagBindings.ListTagBindings",
+          "service": {
+            "short_name": "TagBindings",
+            "full_name": "google.cloud.resourcemanager.v3.TagBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagBindings_CreateTagBinding_sync",
+      "title": "Snippet for the create_tag_binding call in the TagBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#create_tag_binding. It may require modification in order to execute successfully.",
+      "file": "tag_bindings/create_tag_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_binding",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client#create_tag_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagBindings::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client"
+        },
+        "method": {
+          "short_name": "CreateTagBinding",
+          "full_name": "google.cloud.resourcemanager.v3.TagBindings.CreateTagBinding",
+          "service": {
+            "short_name": "TagBindings",
+            "full_name": "google.cloud.resourcemanager.v3.TagBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagBindings_DeleteTagBinding_sync",
+      "title": "Snippet for the delete_tag_binding call in the TagBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#delete_tag_binding. It may require modification in order to execute successfully.",
+      "file": "tag_bindings/delete_tag_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_binding",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client#delete_tag_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagBindings::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagBinding",
+          "full_name": "google.cloud.resourcemanager.v3.TagBindings.DeleteTagBinding",
+          "service": {
+            "short_name": "TagBindings",
+            "full_name": "google.cloud.resourcemanager.v3.TagBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_sync",
+      "title": "Snippet for the list_effective_tags call in the TagBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_effective_tags. It may require modification in order to execute successfully.",
+      "file": "tag_bindings/list_effective_tags.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_effective_tags",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client#list_effective_tags",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListEffectiveTagsResponse",
+        "client": {
+          "short_name": "TagBindings::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client"
+        },
+        "method": {
+          "short_name": "ListEffectiveTags",
+          "full_name": "google.cloud.resourcemanager.v3.TagBindings.ListEffectiveTags",
+          "service": {
+            "short_name": "TagBindings",
+            "full_name": "google.cloud.resourcemanager.v3.TagBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_sync",
+      "title": "Snippet for the create_tag_hold call in the TagHolds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#create_tag_hold. It may require modification in order to execute successfully.",
+      "file": "tag_holds/create_tag_hold.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_hold",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client#create_tag_hold",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateTagHoldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagHolds::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client"
+        },
+        "method": {
+          "short_name": "CreateTagHold",
+          "full_name": "google.cloud.resourcemanager.v3.TagHolds.CreateTagHold",
+          "service": {
+            "short_name": "TagHolds",
+            "full_name": "google.cloud.resourcemanager.v3.TagHolds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_sync",
+      "title": "Snippet for the delete_tag_hold call in the TagHolds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#delete_tag_hold. It may require modification in order to execute successfully.",
+      "file": "tag_holds/delete_tag_hold.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_hold",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client#delete_tag_hold",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteTagHoldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagHolds::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagHold",
+          "full_name": "google.cloud.resourcemanager.v3.TagHolds.DeleteTagHold",
+          "service": {
+            "short_name": "TagHolds",
+            "full_name": "google.cloud.resourcemanager.v3.TagHolds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagHolds_ListTagHolds_sync",
+      "title": "Snippet for the list_tag_holds call in the TagHolds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#list_tag_holds. It may require modification in order to execute successfully.",
+      "file": "tag_holds/list_tag_holds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tag_holds",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client#list_tag_holds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListTagHoldsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListTagHoldsResponse",
+        "client": {
+          "short_name": "TagHolds::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client"
+        },
+        "method": {
+          "short_name": "ListTagHolds",
+          "full_name": "google.cloud.resourcemanager.v3.TagHolds.ListTagHolds",
+          "service": {
+            "short_name": "TagHolds",
+            "full_name": "google.cloud.resourcemanager.v3.TagHolds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_ListTagKeys_sync",
+      "title": "Snippet for the list_tag_keys call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#list_tag_keys. It may require modification in order to execute successfully.",
+      "file": "tag_keys/list_tag_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tag_keys",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#list_tag_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListTagKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListTagKeysResponse",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "ListTagKeys",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.ListTagKeys",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetTagKey_sync",
+      "title": "Snippet for the get_tag_key call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key. It may require modification in order to execute successfully.",
+      "file": "tag_keys/get_tag_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tag_key",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetTagKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::TagKey",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "GetTagKey",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.GetTagKey",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetNamespacedTagKey_sync",
+      "title": "Snippet for the get_namespaced_tag_key call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_namespaced_tag_key. It may require modification in order to execute successfully.",
+      "file": "tag_keys/get_namespaced_tag_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_namespaced_tag_key",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#get_namespaced_tag_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetNamespacedTagKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::TagKey",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "GetNamespacedTagKey",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.GetNamespacedTagKey",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_sync",
+      "title": "Snippet for the create_tag_key call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#create_tag_key. It may require modification in order to execute successfully.",
+      "file": "tag_keys/create_tag_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_key",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#create_tag_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateTagKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "CreateTagKey",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.CreateTagKey",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_sync",
+      "title": "Snippet for the update_tag_key call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#update_tag_key. It may require modification in order to execute successfully.",
+      "file": "tag_keys/update_tag_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tag_key",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#update_tag_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::UpdateTagKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "UpdateTagKey",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.UpdateTagKey",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_DeleteTagKey_sync",
+      "title": "Snippet for the delete_tag_key call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#delete_tag_key. It may require modification in order to execute successfully.",
+      "file": "tag_keys/delete_tag_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_key",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#delete_tag_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteTagKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagKey",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.DeleteTagKey",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "tag_keys/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.GetIamPolicy",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "tag_keys/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.SetIamPolicy",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "tag_keys/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.TestIamPermissions",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_ListTagValues_sync",
+      "title": "Snippet for the list_tag_values call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#list_tag_values. It may require modification in order to execute successfully.",
+      "file": "tag_values/list_tag_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tag_values",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#list_tag_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListTagValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListTagValuesResponse",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "ListTagValues",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.ListTagValues",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetTagValue_sync",
+      "title": "Snippet for the get_tag_value call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_tag_value. It may require modification in order to execute successfully.",
+      "file": "tag_values/get_tag_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tag_value",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#get_tag_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetTagValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::TagValue",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "GetTagValue",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.GetTagValue",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_sync",
+      "title": "Snippet for the get_namespaced_tag_value call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_namespaced_tag_value. It may require modification in order to execute successfully.",
+      "file": "tag_values/get_namespaced_tag_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_namespaced_tag_value",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#get_namespaced_tag_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::TagValue",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "GetNamespacedTagValue",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.GetNamespacedTagValue",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_CreateTagValue_sync",
+      "title": "Snippet for the create_tag_value call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#create_tag_value. It may require modification in order to execute successfully.",
+      "file": "tag_values/create_tag_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_value",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#create_tag_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateTagValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "CreateTagValue",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.CreateTagValue",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_sync",
+      "title": "Snippet for the update_tag_value call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#update_tag_value. It may require modification in order to execute successfully.",
+      "file": "tag_values/update_tag_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tag_value",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#update_tag_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::UpdateTagValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "UpdateTagValue",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.UpdateTagValue",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_sync",
+      "title": "Snippet for the delete_tag_value call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#delete_tag_value. It may require modification in order to execute successfully.",
+      "file": "tag_values/delete_tag_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_value",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#delete_tag_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteTagValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagValue",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.DeleteTagValue",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "tag_values/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.GetIamPolicy",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "tag_values/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.SetIamPolicy",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "tag_values/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.TestIamPermissions",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
