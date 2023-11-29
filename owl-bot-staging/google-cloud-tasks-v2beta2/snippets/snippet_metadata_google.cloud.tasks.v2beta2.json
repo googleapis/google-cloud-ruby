@@ -1,0 +1,895 @@
+{
+  "client_library": {
+    "name": "google-cloud-tasks-v2beta2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.tasks.v2beta2",
+        "version": "v2beta2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_ListQueues_sync",
+      "title": "Snippet for the list_queues call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/list_queues.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_queues",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::ListQueuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::ListQueuesResponse",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "ListQueues",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.ListQueues",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_GetQueue_sync",
+      "title": "Snippet for the get_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/get_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::GetQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Queue",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "GetQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.GetQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_CreateQueue_sync",
+      "title": "Snippet for the create_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/create_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::CreateQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Queue",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "CreateQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.CreateQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_UpdateQueue_sync",
+      "title": "Snippet for the update_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#update_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/update_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#update_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::UpdateQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Queue",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "UpdateQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.UpdateQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_DeleteQueue_sync",
+      "title": "Snippet for the delete_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#delete_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/delete_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#delete_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::DeleteQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "DeleteQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.DeleteQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_PurgeQueue_sync",
+      "title": "Snippet for the purge_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#purge_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/purge_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#purge_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::PurgeQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Queue",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "PurgeQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.PurgeQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_PauseQueue_sync",
+      "title": "Snippet for the pause_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#pause_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/pause_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pause_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#pause_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::PauseQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Queue",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "PauseQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.PauseQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_ResumeQueue_sync",
+      "title": "Snippet for the resume_queue call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/resume_queue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_queue",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::ResumeQueueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Queue",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "ResumeQueue",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.ResumeQueue",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_UploadQueueYaml_sync",
+      "title": "Snippet for the upload_queue_yaml call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#upload_queue_yaml. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/upload_queue_yaml.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upload_queue_yaml",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#upload_queue_yaml",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::UploadQueueYamlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "UploadQueueYaml",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.UploadQueueYaml",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.GetIamPolicy",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.SetIamPolicy",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.TestIamPermissions",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_ListTasks_sync",
+      "title": "Snippet for the list_tasks call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/list_tasks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tasks",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::ListTasksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::ListTasksResponse",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "ListTasks",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.ListTasks",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_GetTask_sync",
+      "title": "Snippet for the get_task call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_task. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/get_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_task",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::GetTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Task",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "GetTask",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.GetTask",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_CreateTask_sync",
+      "title": "Snippet for the create_task call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/create_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_task",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::CreateTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Task",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "CreateTask",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.CreateTask",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_DeleteTask_sync",
+      "title": "Snippet for the delete_task call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#delete_task. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/delete_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_task",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#delete_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::DeleteTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "DeleteTask",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.DeleteTask",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_LeaseTasks_sync",
+      "title": "Snippet for the lease_tasks call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/lease_tasks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lease_tasks",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "LeaseTasks",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_AcknowledgeTask_sync",
+      "title": "Snippet for the acknowledge_task call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/acknowledge_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "acknowledge_task",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "AcknowledgeTask",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_RenewLease_sync",
+      "title": "Snippet for the renew_lease call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/renew_lease.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "renew_lease",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::RenewLeaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Task",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "RenewLease",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.RenewLease",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_CancelLease_sync",
+      "title": "Snippet for the cancel_lease call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#cancel_lease. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/cancel_lease.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_lease",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#cancel_lease",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::CancelLeaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Task",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "CancelLease",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.CancelLease",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_RunTask_sync",
+      "title": "Snippet for the run_task call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/run_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_task",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::RunTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::Task",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "RunTask",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.RunTask",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudtasks_v2beta2_generated_CloudTasks_BufferTask_sync",
+      "title": "Snippet for the buffer_task call in the CloudTasks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task. It may require modification in order to execute successfully.",
+      "file": "cloud_tasks/buffer_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "buffer_task",
+        "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Tasks::V2beta2::BufferTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Tasks::V2beta2::BufferTaskResponse",
+        "client": {
+          "short_name": "CloudTasks::Client",
+          "full_name": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client"
+        },
+        "method": {
+          "short_name": "BufferTask",
+          "full_name": "google.cloud.tasks.v2beta2.CloudTasks.BufferTask",
+          "service": {
+            "short_name": "CloudTasks",
+            "full_name": "google.cloud.tasks.v2beta2.CloudTasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
