@@ -117,8 +117,8 @@ module Google
           #   @return [::String]
           #     Optional. Which Speech model to select for the given request. Select the
           #     model best suited to your domain to get best results. If a model is not
-          #     explicitly specified, then we auto-select a model based on the parameters
-          #     in the InputAudioConfig.
+          #     explicitly specified, then Dialogflow auto-selects a model based on other
+          #     parameters in the InputAudioConfig and Agent settings.
           #     If enhanced speech model is enabled for the agent and an enhanced
           #     version of the specified model for the language does not exist, then the
           #     speech is recognized using the standard version of the specified model.
@@ -131,7 +131,12 @@ module Google
           #
           #     - phone_call (best for Agent Assist and telephony)
           #     - latest_short (best for Dialogflow non-telephony)
-          #     - command_and_search (best for very short utterances and commands)
+          #     - command_and_search
+          #
+          #     Leave this field unspecified to use
+          #     [Agent Speech
+          #     settings](https://cloud.google.com/dialogflow/cx/docs/concept/agent#settings-speech)
+          #     for model selection.
           # @!attribute [rw] model_variant
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SpeechModelVariant]
           #     Optional. Which variant of the [Speech
