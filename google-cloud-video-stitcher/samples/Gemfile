@@ -15,7 +15,7 @@
 source "https://rubygems.org"
 
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-gem "grpc", "1.59.2"
+gem "grpc", "1.60.0"
 gem "google-cloud-video-stitcher", path: master ? "../../google-cloud-video-stitcher" : nil
 gem "google-cloud-video-stitcher-v1", path: master ? "../../google-cloud-video-stitcher-v1" : nil
 
