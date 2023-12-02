@@ -304,6 +304,19 @@ module Google
     #                seconds: 360 # 6 minutes
     #              total_poll_timeout:
     #                 seconds: 54000 # 90 minutes
+    # @!attribute [rw] auto_populated_fields
+    #   @return [::Array<::String>]
+    #     List of top-level fields of the request message, that should be
+    #     automatically populated by the client libraries based on their
+    #     (google.api.field_info).format. Currently supported format: UUID4.
+    #
+    #     Example of a YAML configuration:
+    #
+    #      publishing:
+    #        method_settings:
+    #          - selector: google.example.v1.ExampleService.CreateExample
+    #            auto_populated_fields:
+    #            - request_id
     class MethodSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
