@@ -1530,11 +1530,13 @@ module Google
             # enabled boolean to true.
             PROJECT_SINGLETON_POLICY_ENFORCE = 2
 
-            # Use Binary Authorization with the policies specified in policy_bindings.
+            # Use Binary Authorization Continuous Validation with the policies
+            # specified in policy_bindings.
             POLICY_BINDINGS = 5
 
-            # Use Binary Authorization with the policies specified in policy_bindings,
-            # and also with the project's singleton policy in enforcement mode.
+            # Use Binary Authorization Continuous Validation with the policies
+            # specified in policy_bindings and enforce Kubernetes admission requests
+            # with Binary Authorization using the project's singleton policy.
             POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE = 6
           end
         end
@@ -5774,6 +5776,9 @@ module Google
         # @!attribute [rw] relay_mode
         #   @return [::Google::Cloud::Container::V1beta1::AdvancedDatapathObservabilityConfig::RelayMode]
         #     Method used to make Relay available
+        # @!attribute [rw] enable_relay
+        #   @return [::Boolean]
+        #     Enable Relay component
         class AdvancedDatapathObservabilityConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
