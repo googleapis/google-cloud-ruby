@@ -93,9 +93,20 @@ module Google
         #     The path to which logs are saved when the destination = PATH. This can be a
         #     local file path on the VM, or under the mount point of a Persistent Disk or
         #     Filestore, or a Cloud Storage path.
+        # @!attribute [rw] cloud_logging_option
+        #   @return [::Google::Cloud::Batch::V1::LogsPolicy::CloudLoggingOption]
+        #     Optional. Additional settings for Cloud Logging. It will only take effect
+        #     when the destination of LogsPolicy is set to CLOUD_LOGGING.
         class LogsPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # CloudLoggingOption contains additional settings for cloud logging generated
+          # by Batch job.
+          class CloudLoggingOption
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The destination (if any) for logs.
           module Destination
@@ -280,6 +291,10 @@ module Google
         # @!attribute [rw] network
         #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::NetworkPolicy]
         #     The network policy.
+        #
+        #     If you define an instance template in the InstancePolicyOrTemplate field,
+        #     Batch will use the network settings in the instance template instead of
+        #     this field.
         # @!attribute [rw] placement
         #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::PlacementPolicy]
         #     The placement policy.
