@@ -1720,6 +1720,10 @@ module Google
 
             # Applies basic vulnerability scanning on the cluster.
             VULNERABILITY_BASIC = 2
+
+            # Applies the Security Posture's vulnerability on cluster Enterprise level
+            # features.
+            VULNERABILITY_ENTERPRISE = 3
           end
         end
 
@@ -5103,6 +5107,9 @@ module Google
         # @!attribute [rw] relay_mode
         #   @return [::Google::Cloud::Container::V1::AdvancedDatapathObservabilityConfig::RelayMode]
         #     Method used to make Relay available
+        # @!attribute [rw] enable_relay
+        #   @return [::Boolean]
+        #     Enable Relay component
         class AdvancedDatapathObservabilityConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
