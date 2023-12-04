@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.1 (2023-12-04)
+
+#### Documentation
+
+* Update IngestConversations and BulkAnalyzeConversations comments ([#23561](https://github.com/googleapis/google-cloud-ruby/issues/23561)) 
+
 ### 0.19.0 (2023-11-07)
 
 #### Features
