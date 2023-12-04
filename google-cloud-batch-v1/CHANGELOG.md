@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2023-12-04)
+
+#### Features
+
+* Added cloud_logging_option field to LogsPolicy ([#23565](https://github.com/googleapis/google-cloud-ruby/issues/23565)) 
+
 ### 0.13.1 (2023-11-02)
 
 #### Documentation
