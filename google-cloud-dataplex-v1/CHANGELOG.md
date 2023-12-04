@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.15.0 (2023-12-04)
+
+#### Features
+
+* support more event types 
+* support score, dimension_score, colun_score for DataQualityResult 
+
 ### 0.14.0 (2023-11-02)
 
 #### Features
