@@ -452,6 +452,206 @@
       ]
     },
     {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListCustomTargetTypes_sync",
+      "title": "Snippet for the list_custom_target_types call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_custom_target_types. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/list_custom_target_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_target_types",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_custom_target_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListCustomTargetTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListCustomTargetTypesResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListCustomTargetTypes",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListCustomTargetTypes",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetCustomTargetType_sync",
+      "title": "Snippet for the get_custom_target_type call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_custom_target_type. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/get_custom_target_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_custom_target_type",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_custom_target_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetCustomTargetTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::CustomTargetType",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetCustomTargetType",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetCustomTargetType",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateCustomTargetType_sync",
+      "title": "Snippet for the create_custom_target_type call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_custom_target_type. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/create_custom_target_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_target_type",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_custom_target_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateCustomTargetTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomTargetType",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateCustomTargetType",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_UpdateCustomTargetType_sync",
+      "title": "Snippet for the update_custom_target_type call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#update_custom_target_type. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/update_custom_target_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_custom_target_type",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#update_custom_target_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::UpdateCustomTargetTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomTargetType",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.UpdateCustomTargetType",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_DeleteCustomTargetType_sync",
+      "title": "Snippet for the delete_custom_target_type call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_custom_target_type. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/delete_custom_target_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_custom_target_type",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_custom_target_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::DeleteCustomTargetTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomTargetType",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.DeleteCustomTargetType",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListReleases_sync",
       "title": "Snippet for the list_releases call in the CloudDeploy service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_releases. It may require modification in order to execute successfully.",

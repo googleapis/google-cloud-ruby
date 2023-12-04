@@ -65,6 +65,31 @@
                 "delete_target"
               ]
             },
+            "ListCustomTargetTypes": {
+              "methods": [
+                "list_custom_target_types"
+              ]
+            },
+            "GetCustomTargetType": {
+              "methods": [
+                "get_custom_target_type"
+              ]
+            },
+            "CreateCustomTargetType": {
+              "methods": [
+                "create_custom_target_type"
+              ]
+            },
+            "UpdateCustomTargetType": {
+              "methods": [
+                "update_custom_target_type"
+              ]
+            },
+            "DeleteCustomTargetType": {
+              "methods": [
+                "delete_custom_target_type"
+              ]
+            },
             "ListReleases": {
               "methods": [
                 "list_releases"
