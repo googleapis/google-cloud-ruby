@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-12-04)
+
+#### Features
+
+* add bindings_override and revert_instance apis 
+
 ### 0.6.0 (2023-09-12)
 
 #### Features
