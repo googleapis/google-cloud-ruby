@@ -22,7 +22,8 @@ module Google
     module Firestore
       module Admin
         module V1
-          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation} results from
+          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation}
+          # results from
           # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_index FirestoreAdmin.CreateIndex}.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -49,7 +50,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation} results from
+          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation}
+          # results from
           # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field FirestoreAdmin.UpdateField}.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -64,8 +66,9 @@ module Google
           #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_path}`
           # @!attribute [rw] index_config_deltas
           #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::IndexConfigDelta>]
-          #     A list of {::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::IndexConfigDelta IndexConfigDelta}, which describe the intent of this
-          #     operation.
+          #     A list of
+          #     {::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::IndexConfigDelta IndexConfigDelta},
+          #     which describe the intent of this operation.
           # @!attribute [rw] state
           #   @return [::Google::Cloud::Firestore::Admin::V1::OperationState]
           #     The state of the operation.
@@ -106,7 +109,7 @@ module Google
               end
             end
 
-            # Information about an TTL configuration change.
+            # Information about a TTL configuration change.
             # @!attribute [rw] change_type
             #   @return [::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::TtlConfigDelta::ChangeType]
             #     Specifies how the TTL configuration is changing.
@@ -128,7 +131,8 @@ module Google
             end
           end
 
-          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation} results from
+          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation}
+          # results from
           # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents FirestoreAdmin.ExportDocuments}.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -151,13 +155,22 @@ module Google
           #     Which collection ids are being exported.
           # @!attribute [rw] output_uri_prefix
           #   @return [::String]
-          #     Where the entities are being exported to.
+          #     Where the documents are being exported to.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     Which namespace ids are being exported.
+          # @!attribute [rw] snapshot_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The timestamp that corresponds to the version of the database that is being
+          #     exported. If unspecified, there are no guarantees about the consistency of
+          #     the documents being exported.
           class ExportDocumentsMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation} results from
+          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation}
+          # results from
           # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#import_documents FirestoreAdmin.ImportDocuments}.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -181,12 +194,16 @@ module Google
           # @!attribute [rw] input_uri_prefix
           #   @return [::String]
           #     The location of the documents being imported.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     Which namespace ids are being imported.
           class ImportDocumentsMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Returned in the {::Google::Longrunning::Operation google.longrunning.Operation} response field.
+          # Returned in the {::Google::Longrunning::Operation google.longrunning.Operation}
+          # response field.
           # @!attribute [rw] output_uri_prefix
           #   @return [::String]
           #     Location of the output files. This can be used to begin an import
@@ -198,8 +215,8 @@ module Google
           end
 
           # Describes the progress of the operation.
-          # Unit of work is generic and must be interpreted based on where {::Google::Cloud::Firestore::Admin::V1::Progress Progress}
-          # is used.
+          # Unit of work is generic and must be interpreted based on where
+          # {::Google::Cloud::Firestore::Admin::V1::Progress Progress} is used.
           # @!attribute [rw] estimated_work
           #   @return [::Integer]
           #     The amount of work estimated.

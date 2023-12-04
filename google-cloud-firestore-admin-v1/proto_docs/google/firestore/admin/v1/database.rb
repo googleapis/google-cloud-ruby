@@ -31,7 +31,7 @@ module Google
           #     Format: `projects/{project}/databases/{database}`
           # @!attribute [rw] location_id
           #   @return [::String]
-          #     The location of the database. Available databases are listed at
+          #     The location of the database. Available locations are listed at
           #     https://cloud.google.com/firestore/docs/locations.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DatabaseType]
@@ -41,15 +41,40 @@ module Google
           # @!attribute [rw] concurrency_mode
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::ConcurrencyMode]
           #     The concurrency control mode to use for this database.
+          # @!attribute [r] version_retention_period
+          #   @return [::Google::Protobuf::Duration]
+          #     Output only. The period during which past versions of data are retained in
+          #     the database.
+          #
+          #     Any [read][google.firestore.v1.GetDocumentRequest.read_time]
+          #     or [query][google.firestore.v1.ListDocumentsRequest.read_time] can specify
+          #     a `read_time` within this window, and will read the state of the database
+          #     at that time.
+          #
+          #     If the PITR feature is enabled, the retention period is 7 days. Otherwise,
+          #     the retention period is 1 hour.
+          # @!attribute [r] earliest_version_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The earliest timestamp at which older versions of the data can
+          #     be read from the database. See [version_retention_period] above; this field
+          #     is populated with `now - version_retention_period`.
+          #
+          #     This value is continuously updated, and becomes stale the moment it is
+          #     queried. If you are using this value to recover data, make sure to account
+          #     for the time from the moment when the value is queried to the moment when
+          #     you initiate the recovery.
+          # @!attribute [rw] point_in_time_recovery_enablement
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::PointInTimeRecoveryEnablement]
+          #     Whether to enable the PITR feature on this database.
           # @!attribute [rw] app_engine_integration_mode
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::AppEngineIntegrationMode]
           #     The App Engine integration mode to use for this database.
           # @!attribute [r] key_prefix
           #   @return [::String]
-          #     Output only. The key_prefix for this database. This key_prefix is used, in combination
-          #     with the project id ("<key prefix>~<project id>") to construct the
-          #     application id that is returned from the Cloud Datastore APIs in Google App
-          #     Engine first generation runtimes.
+          #     Output only. The key_prefix for this database. This key_prefix is used, in
+          #     combination with the project id ("<key prefix>~<project id>") to construct
+          #     the application id that is returned from the Cloud Datastore APIs in Google
+          #     App Engine first generation runtimes.
           #
           #     This value may be empty in which case the appid to use for URL-encoded keys
           #     is the project_id (eg: foo instead of v~foo).
@@ -102,6 +127,26 @@ module Google
               OPTIMISTIC_WITH_ENTITY_GROUPS = 3
             end
 
+            # Point In Time Recovery feature enablement.
+            module PointInTimeRecoveryEnablement
+              # Not used.
+              POINT_IN_TIME_RECOVERY_ENABLEMENT_UNSPECIFIED = 0
+
+              # Reads are supported on selected versions of the data from within the past
+              # 7 days:
+              #
+              # * Reads against any timestamp within the past hour
+              # * Reads against 1-minute snapshots beyond 1 hour and within 7 days
+              #
+              # `version_retention_period` and `earliest_version_time` can be
+              # used to determine the supported versions.
+              POINT_IN_TIME_RECOVERY_ENABLED = 1
+
+              # Reads are supported on any version of the data from within the past 1
+              # hour.
+              POINT_IN_TIME_RECOVERY_DISABLED = 2
+            end
+
             # The type of App Engine integration mode.
             module AppEngineIntegrationMode
               # Not used.
@@ -113,8 +158,10 @@ module Google
               # the database.
               ENABLED = 1
 
-              # Appengine has no affect on the ability of this database to serve
+              # App Engine has no effect on the ability of this database to serve
               # requests.
+              #
+              # This is the default setting for databases created with the Firestore API.
               DISABLED = 2
             end
           end

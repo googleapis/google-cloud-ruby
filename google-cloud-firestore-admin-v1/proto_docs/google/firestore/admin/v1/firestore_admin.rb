@@ -254,6 +254,23 @@ module Google
           #     guidelines: https://cloud.google.com/storage/docs/naming.
           #     If the URI is a bucket (without a namespace path), a prefix will be
           #     generated based on the start time.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     Unspecified means all namespaces. This is the preferred
+          #     usage for databases that don't use namespaces.
+          #
+          #     An empty string element represents the default namespace. This should be
+          #     used if the database has data in non-default namespaces, but doesn't want
+          #     to include them. Each namespace in this list must be unique.
+          # @!attribute [rw] snapshot_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The timestamp that corresponds to the version of the database to be
+          #     exported. The timestamp must be in the past, rounded to the minute and not
+          #     older than
+          #     {::Google::Cloud::Firestore::Admin::V1::Database#earliest_version_time earliestVersionTime}.
+          #     If specified, then the exported documents will represent a consistent view
+          #     of the database at the provided time. Otherwise, there are no guarantees
+          #     about the consistency of the exported documents.
           class ExportDocumentsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,6 +293,14 @@ module Google
           #     an export that has completed successfully.
           #     See:
           #     {::Google::Cloud::Firestore::Admin::V1::ExportDocumentsResponse#output_uri_prefix google.firestore.admin.v1.ExportDocumentsResponse.output_uri_prefix}.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     Unspecified means all namespaces. This is the preferred
+          #     usage for databases that don't use namespaces.
+          #
+          #     An empty string element represents the default namespace. This should be
+          #     used if the database has data in non-default namespaces, but doesn't want
+          #     to include them. Each namespace in this list must be unique.
           class ImportDocumentsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -876,7 +876,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload export_documents(name: nil, collection_ids: nil, output_uri_prefix: nil)
+                # @overload export_documents(name: nil, collection_ids: nil, output_uri_prefix: nil, namespace_ids: nil, snapshot_time: nil)
                 #   Pass arguments to `export_documents` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -895,6 +895,21 @@ module Google
                 #     guidelines: https://cloud.google.com/storage/docs/naming.
                 #     If the URI is a bucket (without a namespace path), a prefix will be
                 #     generated based on the start time.
+                #   @param namespace_ids [::Array<::String>]
+                #     Unspecified means all namespaces. This is the preferred
+                #     usage for databases that don't use namespaces.
+                #
+                #     An empty string element represents the default namespace. This should be
+                #     used if the database has data in non-default namespaces, but doesn't want
+                #     to include them. Each namespace in this list must be unique.
+                #   @param snapshot_time [::Google::Protobuf::Timestamp, ::Hash]
+                #     The timestamp that corresponds to the version of the database to be
+                #     exported. The timestamp must be in the past, rounded to the minute and not
+                #     older than
+                #     {::Google::Cloud::Firestore::Admin::V1::Database#earliest_version_time earliestVersionTime}.
+                #     If specified, then the exported documents will represent a consistent view
+                #     of the database at the provided time. Otherwise, there are no guarantees
+                #     about the consistency of the exported documents.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -978,7 +993,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload import_documents(name: nil, collection_ids: nil, input_uri_prefix: nil)
+                # @overload import_documents(name: nil, collection_ids: nil, input_uri_prefix: nil, namespace_ids: nil)
                 #   Pass arguments to `import_documents` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -995,6 +1010,13 @@ module Google
                 #     an export that has completed successfully.
                 #     See:
                 #     {::Google::Cloud::Firestore::Admin::V1::ExportDocumentsResponse#output_uri_prefix google.firestore.admin.v1.ExportDocumentsResponse.output_uri_prefix}.
+                #   @param namespace_ids [::Array<::String>]
+                #     Unspecified means all namespaces. This is the preferred
+                #     usage for databases that don't use namespaces.
+                #
+                #     An empty string element represents the default namespace. This should be
+                #     used if the database has data in non-default namespaces, but doesn't want
+                #     to include them. Each namespace in this list must be unique.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

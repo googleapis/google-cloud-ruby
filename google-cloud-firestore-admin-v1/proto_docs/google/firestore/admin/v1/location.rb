@@ -22,7 +22,8 @@ module Google
     module Firestore
       module Admin
         module V1
-          # The metadata message for `::Google::Cloud::Location::Location#metadata`.
+          # The metadata message for
+          # `::Google::Cloud::Location::Location#metadata`.
           class LocationMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
