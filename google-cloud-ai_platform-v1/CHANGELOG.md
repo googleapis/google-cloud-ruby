@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.35.0 (2023-12-04)
+
+#### Features
+
+* add direct_predict, direct_raw_predict, streaming_predict, streaming_raw_predict to prediction_service 
+* add llm_utility_service  
+
 ### 0.34.0 (2023-11-20)
 
 #### Features
