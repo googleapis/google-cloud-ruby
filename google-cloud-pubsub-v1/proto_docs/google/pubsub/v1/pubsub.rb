@@ -688,8 +688,9 @@ module Google
         #     \\{projectId}.\\{datasetId}.\\{tableId}
         # @!attribute [rw] use_topic_schema
         #   @return [::Boolean]
-        #     When true, use the topic's schema as the columns to write to in BigQuery,
-        #     if it exists.
+        #     Optional. When true, use the topic's schema as the columns to write to in
+        #     BigQuery, if it exists. `use_topic_schema` and `use_table_schema` cannot be
+        #     enabled at the same time.
         # @!attribute [rw] write_metadata
         #   @return [::Boolean]
         #     When true, write the subscription name, message_id, publish_time,
@@ -708,6 +709,11 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig::State]
         #     Output only. An output-only field that indicates whether or not the
         #     subscription can receive messages.
+        # @!attribute [rw] use_table_schema
+        #   @return [::Boolean]
+        #     Optional. When true, use the BigQuery table's schema as the columns to
+        #     write to in BigQuery. `use_table_schema` and `use_topic_schema` cannot be
+        #     enabled at the same time.
         class BigQueryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
