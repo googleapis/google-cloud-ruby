@@ -358,6 +358,18 @@ module Google
         #     Service on the user's behalf to facilitate traffic splitting. This is
         #     required to be true for CanaryDeployments, but optional for
         #     CustomCanaryDeployments.
+        # @!attribute [rw] canary_revision_tags
+        #   @return [::Array<::String>]
+        #     Optional. A list of tags that are added to the canary revision while the
+        #     canary deployment is in progress.
+        # @!attribute [rw] prior_revision_tags
+        #   @return [::Array<::String>]
+        #     Optional. A list of tags that are added to the prior revision while the
+        #     canary deployment is in progress.
+        # @!attribute [rw] stable_revision_tags
+        #   @return [::Array<::String>]
+        #     Optional. A list of tags that are added to the final stable revision after
+        #     the canary deployment is completed.
         class CloudRunConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -392,7 +404,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # TargetsPresentCondition contains information on any Targets defined in
+        # `TargetsPresentCondition` contains information on any Targets referenced in
         # the Delivery Pipeline that do not actually exist.
         # @!attribute [rw] status
         #   @return [::Boolean]
@@ -726,6 +738,9 @@ module Google
         # @!attribute [rw] multi_target
         #   @return [::Google::Cloud::Deploy::V1::MultiTarget]
         #     Optional. Information specifying a multiTarget.
+        # @!attribute [rw] custom_target
+        #   @return [::Google::Cloud::Deploy::V1::CustomTarget]
+        #     Optional. Information specifying a Custom Target.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. This checksum is computed by the server based on the value of
@@ -921,6 +936,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Information specifying a Custom Target.
+        # @!attribute [rw] custom_target_type
+        #   @return [::String]
+        #     Required. The name of the CustomTargetType. Format must be
+        #     `projects/{project}/locations/{location}/customTargetTypes/{custom_target_type}`.
+        class CustomTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request object for `ListTargets`.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1091,6 +1116,315 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A `CustomTargetType` resource in the Cloud Deploy API.
+        #
+        # A `CustomTargetType` defines a type of custom target that can be referenced
+        # in a `Target` in order to facilitate deploying to a runtime that does not
+        # have a 1P integration with Cloud Deploy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. Name of the `CustomTargetType`. Format is
+        #     `projects/{project}/locations/{location}/customTargetTypes/[a-z][a-z0-9\-]{0,62}`.
+        # @!attribute [r] custom_target_type_id
+        #   @return [::String]
+        #     Output only. Resource id of the `CustomTargetType`.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique identifier of the `CustomTargetType`.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the `CustomTargetType`. Max length is 255
+        #     characters.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user, and not by Cloud Deploy. See
+        #     https://google.aip.dev/128#annotations for more details such as format and
+        #     size limitations.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Labels are attributes that can be set and used by both the
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 128 bytes.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the `CustomTargetType` was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Most recent time at which the `CustomTargetType` was updated.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] custom_actions
+        #   @return [::Google::Cloud::Deploy::V1::CustomTargetSkaffoldActions]
+        #     Configures render and deploy for the `CustomTargetType` using Skaffold
+        #     custom actions.
+        class CustomTargetType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # CustomTargetSkaffoldActions represents the `CustomTargetType` configuration
+        # using Skaffold custom actions.
+        # @!attribute [rw] render_action
+        #   @return [::String]
+        #     Optional. The Skaffold custom action responsible for render operations. If
+        #     not provided then Cloud Deploy will perform the render operations via
+        #     `skaffold render`.
+        # @!attribute [rw] deploy_action
+        #   @return [::String]
+        #     Required. The Skaffold custom action responsible for deploy operations.
+        # @!attribute [rw] include_skaffold_modules
+        #   @return [::Array<::Google::Cloud::Deploy::V1::SkaffoldModules>]
+        #     Optional. List of Skaffold modules Cloud Deploy will include in the
+        #     Skaffold Config as required before performing diagnose.
+        class CustomTargetSkaffoldActions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Skaffold Config modules and their remote source.
+        # @!attribute [rw] configs
+        #   @return [::Array<::String>]
+        #     Optional. The Skaffold Config modules to use from the specified source.
+        # @!attribute [rw] git
+        #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGitSource]
+        #     Remote git repository containing the Skaffold Config modules.
+        # @!attribute [rw] google_cloud_storage
+        #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCSSource]
+        #     Cloud Storage bucket containing the Skaffold Config modules.
+        class SkaffoldModules
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Git repository containing Skaffold Config modules.
+          # @!attribute [rw] repo
+          #   @return [::String]
+          #     Required. Git repository the package should be cloned from.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Optional. Relative path from the repository root to the Skaffold file.
+          # @!attribute [rw] ref
+          #   @return [::String]
+          #     Optional. Git ref the package should be cloned from.
+          class SkaffoldGitSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Cloud Storage bucket containing Skaffold Config modules.
+          # @!attribute [rw] source
+          #   @return [::String]
+          #     Required. Cloud Storage source paths to copy recursively. For example,
+          #     providing "gs://my-bucket/dir/configs/*" will result in Skaffold copying
+          #     all files within the "dir/configs" directory in the bucket "my-bucket".
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Optional. Relative path from the source to the Skaffold file.
+          class SkaffoldGCSSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The request object for `ListCustomTargetTypes`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent that owns this collection of custom target types.
+        #     Format must be `projects/{project_id}/locations/{location_name}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of `CustomTargetType` objects to return. The
+        #     service may return fewer than this value. If unspecified, at most 50
+        #     `CustomTargetType` objects will be returned. The maximum value is 1000;
+        #     values above 1000 will be set to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListCustomTargetTypes`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other provided parameters match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter custom target types to be returned. See
+        #     https://google.aip.dev/160 for more details.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+        #     more details.
+        class ListCustomTargetTypesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from `ListCustomTargetTypes.`
+        # @!attribute [rw] custom_target_types
+        #   @return [::Array<::Google::Cloud::Deploy::V1::CustomTargetType>]
+        #     The `CustomTargetType` objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListCustomTargetTypesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `GetCustomTargetType`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the `CustomTargetType`. Format must be
+        #     `projects/{project_id}/locations/{location_name}/customTargetTypes/{custom_target_type}`.
+        class GetCustomTargetTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `CreateCustomTargetType`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which the `CustomTargetType` should be
+        #     created in. Format should be
+        #     `projects/{project_id}/locations/{location_name}`.
+        # @!attribute [rw] custom_target_type_id
+        #   @return [::String]
+        #     Required. ID of the `CustomTargetType`.
+        # @!attribute [rw] custom_target_type
+        #   @return [::Google::Cloud::Deploy::V1::CustomTargetType]
+        #     Required. The `CustomTargetType` to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with an expected result, but no actual change is made.
+        class CreateCustomTargetTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `UpdateCustomTargetType`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `CustomTargetType` resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] custom_target_type
+        #   @return [::Google::Cloud::Deploy::V1::CustomTargetType]
+        #     Required. The `CustomTargetType` to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, updating a `CustomTargetType` that does not exist
+        #     will result in the creation of a new `CustomTargetType`.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with an expected result, but no actual change is made.
+        class UpdateCustomTargetTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `DeleteCustomTargetType`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the `CustomTargetType` to delete. Format must be
+        #     `projects/{project_id}/locations/{location_name}/customTargetTypes/{custom_target_type}`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, then deleting an already deleted or non-existing
+        #     `CustomTargetType` will succeed.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated but no actual change is
+        #     made.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class DeleteCustomTargetTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Contains criteria for selecting Targets. Attributes provided must match the
         # target resource in order for policy restrictions to apply. E.g. if id "prod"
         # and labels "foo: bar" are given the target resource must match both that id
@@ -1179,6 +1513,10 @@ module Google
         # @!attribute [r] target_snapshots
         #   @return [::Array<::Google::Cloud::Deploy::V1::Target>]
         #     Output only. Snapshot of the targets taken at release creation time.
+        # @!attribute [r] custom_target_type_snapshots
+        #   @return [::Array<::Google::Cloud::Deploy::V1::CustomTargetType>]
+        #     Output only. Snapshot of the custom target types referenced by the targets
+        #     taken at release creation time.
         # @!attribute [r] render_state
         #   @return [::Google::Cloud::Deploy::V1::Release::RenderState]
         #     Output only. Current state of the render operation.
@@ -1270,14 +1608,21 @@ module Google
               CLOUD_BUILD_REQUEST_FAILED = 3
 
               # The render operation did not complete successfully because the
-              # verification stanza required for verify was not found on the skaffold
+              # verification stanza required for verify was not found on the Skaffold
               # configuration.
               VERIFICATION_CONFIG_NOT_FOUND = 4
 
               # The render operation did not complete successfully because the custom
               # action required for predeploy or postdeploy was not found in the
-              # skaffold configuration. See failure_message for additional details.
+              # Skaffold configuration. See failure_message for additional details.
               CUSTOM_ACTION_NOT_FOUND = 5
+
+              # Release failed during rendering because the release configuration is
+              # not supported with the specified deployment strategy.
+              DEPLOYMENT_STRATEGY_NOT_SUPPORTED = 6
+
+              # The render operation had a feature configured that is not supported.
+              RENDER_FEATURE_NOT_SUPPORTED = 7
             end
           end
 
@@ -1296,20 +1641,20 @@ module Google
           end
 
           # SkaffoldSupportedCondition contains information about when support for the
-          # release's version of skaffold ends.
+          # release's version of Skaffold ends.
           # @!attribute [rw] status
           #   @return [::Boolean]
-          #     True if the version of skaffold used by this release is supported.
+          #     True if the version of Skaffold used by this release is supported.
           # @!attribute [rw] skaffold_support_state
           #   @return [::Google::Cloud::Deploy::V1::SkaffoldSupportState]
-          #     The skaffold support state for this release's version of skaffold.
+          #     The Skaffold support state for this release's version of Skaffold.
           # @!attribute [rw] maintenance_mode_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The time at which this release's version of skaffold will enter
+          #     The time at which this release's version of Skaffold will enter
           #     maintenance mode.
           # @!attribute [rw] support_expiration_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The time at which this release's version of skaffold will no longer be
+          #     The time at which this release's version of Skaffold will no longer be
           #     supported.
           class SkaffoldSupportedCondition
             include ::Google::Protobuf::MessageExts
@@ -1322,7 +1667,7 @@ module Google
           #     Details around the Releases's overall status.
           # @!attribute [rw] skaffold_supported_condition
           #   @return [::Google::Cloud::Deploy::V1::Release::SkaffoldSupportedCondition]
-          #     Details around the support state of the release's skaffold
+          #     Details around the support state of the release's Skaffold
           #     version.
           class ReleaseCondition
             include ::Google::Protobuf::MessageExts
@@ -1480,6 +1825,9 @@ module Google
         # @!attribute [r] cloud_run
         #   @return [::Google::Cloud::Deploy::V1::CloudRunRenderMetadata]
         #     Output only. Metadata associated with rendering for Cloud Run.
+        # @!attribute [r] custom
+        #   @return [::Google::Cloud::Deploy::V1::CustomMetadata]
+        #     Output only. Custom metadata provided by user defined render operation.
         class RenderMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1769,12 +2117,15 @@ module Google
             # Release is abandoned.
             RELEASE_ABANDONED = 5
 
-            # No skaffold verify configuration was found.
+            # No Skaffold verify configuration was found.
             VERIFICATION_CONFIG_NOT_FOUND = 6
 
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
             # for additional details.
             CLOUD_BUILD_REQUEST_FAILED = 7
+
+            # A Rollout operation had a feature configured that is not supported.
+            OPERATION_FEATURE_NOT_SUPPORTED = 8
           end
         end
 
@@ -1787,6 +2138,9 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::AutomationRolloutMetadata]
         #     Output only. AutomationRolloutMetadata contains the information about the
         #     interactions between Automation service and this rollout.
+        # @!attribute [r] custom
+        #   @return [::Google::Cloud::Deploy::V1::CustomMetadata]
+        #     Output only. Custom metadata provided by user defined `Rollout` operations.
         class Metadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1798,6 +2152,12 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::CloudRunMetadata]
         #     Output only. The name of the Cloud Run Service that is associated with a
         #     `DeployJobRun`.
+        # @!attribute [r] custom_target
+        #   @return [::Google::Cloud::Deploy::V1::CustomTargetDeployMetadata]
+        #     Output only. Custom Target metadata associated with a `DeployJobRun`.
+        # @!attribute [r] custom
+        #   @return [::Google::Cloud::Deploy::V1::CustomMetadata]
+        #     Output only. Custom metadata provided by user defined deploy operation.
         class DeployJobRunMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1826,6 +2186,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # CustomTargetDeployMetadata contains information from a Custom Target
+        # deploy operation.
+        # @!attribute [r] skip_message
+        #   @return [::String]
+        #     Output only. Skip message provided in the results of a custom deploy
+        #     operation.
+        class CustomTargetDeployMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # AutomationRolloutMetadata contains Automation-related actions that
         # were performed on a rollout.
         # @!attribute [r] promote_automation_run
@@ -1843,6 +2214,24 @@ module Google
         class AutomationRolloutMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CustomMetadata contains information from a user defined operation.
+        # @!attribute [r] values
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. Key-value pairs provided by the user defined operation.
+        class CustomMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ValuesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Phase represents a collection of jobs that are logically grouped together
@@ -2397,6 +2786,9 @@ module Google
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
             # for additional details.
             CLOUD_BUILD_REQUEST_FAILED = 5
+
+            # The deploy operation had a feature configured that is not supported.
+            DEPLOY_FEATURE_NOT_SUPPORTED = 6
           end
         end
 
@@ -2655,10 +3047,10 @@ module Google
         #     Release version number. For example, "1.20.3".
         # @!attribute [rw] maintenance_mode_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which this version of skaffold will enter maintenance mode.
+        #     The time at which this version of Skaffold will enter maintenance mode.
         # @!attribute [rw] support_expiration_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which this version of skaffold will no longer be supported.
+        #     The time at which this version of Skaffold will no longer be supported.
         # @!attribute [rw] support_end_date
         #   @return [::Google::Type::Date]
         #     Date when this version is expected to no longer be supported.
@@ -2679,7 +3071,7 @@ module Google
         # An `Automation` resource in the Cloud Deploy API.
         #
         # An `Automation` enables the automation of manually driven actions for
-        # a Delivery Pipeline, which includes Release promotion amongst Targets,
+        # a Delivery Pipeline, which includes Release promotion among Targets,
         # Rollout repair and Rollout deployment strategy advancement. The intention
         # of Automation is to reduce manual intervention in the continuous delivery
         # process.
@@ -2819,6 +3211,7 @@ module Google
         #     Optional. The ID of the stage in the pipeline to which this `Release` is
         #     deploying. If unspecified, default it to the next stage in the promotion
         #     flow. The value of this field could be one of the following:
+        #
         #     * The last segment of a target name. It only needs the ID to determine
         #     if the target is one of the stages in the promotion sequence defined
         #     in the pipeline.
@@ -2908,7 +3301,7 @@ module Google
         # Retries the failed job.
         # @!attribute [rw] attempts
         #   @return [::Integer]
-        #     Required. Total number of retries. Retry will skipped if set to 0; The
+        #     Required. Total number of retries. Retry is skipped if set to 0; The
         #     minimum value is 1, and the maximum value is 10.
         # @!attribute [rw] wait
         #   @return [::Google::Protobuf::Duration]
@@ -3060,8 +3453,8 @@ module Google
         # The request object for `ListAutomations`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of automations. Format
-        #     must be
+        #     Required. The parent `Delivery Pipeline`, which owns this collection of
+        #     automations. Format must be
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -3091,7 +3484,7 @@ module Google
         # The response object from `ListAutomations`.
         # @!attribute [rw] automations
         #   @return [::Array<::Google::Cloud::Deploy::V1::Automation>]
-        #     The `Automations` objects.
+        #     The `Automation` objects.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
@@ -3116,7 +3509,7 @@ module Google
 
         # An `AutomationRun` resource in the Cloud Deploy API.
         #
-        # An `AutomationRun` represents an automation execution instance of an
+        # An `AutomationRun` represents an execution instance of an
         # automation rule.
         # @!attribute [r] name
         #   @return [::String]
@@ -3153,11 +3546,11 @@ module Google
         # @!attribute [r] state_description
         #   @return [::String]
         #     Output only. Explains the current state of the `AutomationRun`. Present
-        #     only an explanation is needed.
+        #     only when an explanation is needed.
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time the `AutomationRun` will expire. An `AutomationRun` will
-        #     expire after 14 days from its creation date.
+        #     Output only. Time the `AutomationRun` expires. An `AutomationRun` expires
+        #     after 14 days from its creation date.
         # @!attribute [r] rule_id
         #   @return [::String]
         #     Output only. The ID of the automation rule that initiated the operation.
@@ -3235,7 +3628,7 @@ module Google
         #     Output only. The name of the rollout that initiates the `AutomationRun`.
         # @!attribute [r] destination_phase
         #   @return [::String]
-        #     Output only. The phase to which the rollout will be advanced to.
+        #     Output only. The phase the rollout will be advanced to.
         class AdvanceRolloutOperation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3332,8 +3725,8 @@ module Google
         # The request object for `ListAutomationRuns`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of automationRuns. Format
-        #     must be
+        #     Required. The parent `Delivery Pipeline`, which owns this collection of
+        #     automationRuns. Format must be
         #     `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -3407,13 +3800,13 @@ module Google
           # Default value. This value is unused.
           SKAFFOLD_SUPPORT_STATE_UNSPECIFIED = 0
 
-          # This skaffold version is currently supported.
+          # This Skaffold version is currently supported.
           SKAFFOLD_SUPPORT_STATE_SUPPORTED = 1
 
-          # This skaffold version is in maintenance mode.
+          # This Skaffold version is in maintenance mode.
           SKAFFOLD_SUPPORT_STATE_MAINTENANCE_MODE = 2
 
-          # This skaffold version is no longer supported.
+          # This Skaffold version is no longer supported.
           SKAFFOLD_SUPPORT_STATE_UNSUPPORTED = 3
         end
 

@@ -56,6 +56,16 @@ module Google
             rpc :UpdateTarget, ::Google::Cloud::Deploy::V1::UpdateTargetRequest, ::Google::Longrunning::Operation
             # Deletes a single Target.
             rpc :DeleteTarget, ::Google::Cloud::Deploy::V1::DeleteTargetRequest, ::Google::Longrunning::Operation
+            # Lists CustomTargetTypes in a given project and location.
+            rpc :ListCustomTargetTypes, ::Google::Cloud::Deploy::V1::ListCustomTargetTypesRequest, ::Google::Cloud::Deploy::V1::ListCustomTargetTypesResponse
+            # Gets details of a single CustomTargetType.
+            rpc :GetCustomTargetType, ::Google::Cloud::Deploy::V1::GetCustomTargetTypeRequest, ::Google::Cloud::Deploy::V1::CustomTargetType
+            # Creates a new CustomTargetType in a given project and location.
+            rpc :CreateCustomTargetType, ::Google::Cloud::Deploy::V1::CreateCustomTargetTypeRequest, ::Google::Longrunning::Operation
+            # Updates a single CustomTargetType.
+            rpc :UpdateCustomTargetType, ::Google::Cloud::Deploy::V1::UpdateCustomTargetTypeRequest, ::Google::Longrunning::Operation
+            # Deletes a single CustomTargetType.
+            rpc :DeleteCustomTargetType, ::Google::Cloud::Deploy::V1::DeleteCustomTargetTypeRequest, ::Google::Longrunning::Operation
             # Lists Releases in a given project and location.
             rpc :ListReleases, ::Google::Cloud::Deploy::V1::ListReleasesRequest, ::Google::Cloud::Deploy::V1::ListReleasesResponse
             # Gets details of a single Release.

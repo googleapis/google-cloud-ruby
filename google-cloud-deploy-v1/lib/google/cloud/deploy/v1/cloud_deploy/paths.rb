@@ -122,6 +122,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CustomTargetType resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/customTargetTypes/{custom_target_type}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param custom_target_type [String]
+            #
+            # @return [::String]
+            def custom_target_type_path project:, location:, custom_target_type:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/customTargetTypes/#{custom_target_type}"
+            end
+
+            ##
             # Create a fully-qualified DeliveryPipeline resource string.
             #
             # The resource will be in the following format:
