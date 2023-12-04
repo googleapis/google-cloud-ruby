@@ -1,5 +1,13 @@
 # Release History
 
+### 0.32.0 (2023-12-04)
+
+#### Features
+
+* Added enable_relay field to AdvancedDatapathObservabilityConfig ([#23567](https://github.com/googleapis/google-cloud-ruby/issues/23567)) 
+* support conversion_status for AutoPilot 
+* support queued_provisioning for NodePool 
+
 ### 0.31.0 (2023-11-06)
 
 #### Features
