@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "googleauth", "~> 1.0"
 gem "google-cloud-errors", path: "../google-cloud-errors"
-gem "google-gax", "~> 1.0"
 
 gem "rake"
