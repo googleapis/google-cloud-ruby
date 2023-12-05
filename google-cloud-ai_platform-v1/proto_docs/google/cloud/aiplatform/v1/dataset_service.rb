@@ -199,7 +199,14 @@ module Google
         # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#export_data DatasetService.ExportData}.
         # @!attribute [rw] exported_files
         #   @return [::Array<::String>]
-        #     All of the files that are exported in this export operation.
+        #     All of the files that are exported in this export operation. For custom
+        #     code training export, only three (training, validation and test) GCS paths
+        #     in wildcard format are populated (e.g., gs://.../training-*).
+        # @!attribute [rw] data_stats
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::DataStats]
+        #     Only present for custom code training export use case. Records data stats,
+        #     i.e., train/validation/test item/annotation counts calculated during
+        #     the export operation.
         class ExportDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

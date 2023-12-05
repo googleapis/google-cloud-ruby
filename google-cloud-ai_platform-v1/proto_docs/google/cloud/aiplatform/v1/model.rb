@@ -270,6 +270,12 @@ module Google
         #     characters, underscores and dashes. International characters are allowed.
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
+        # @!attribute [rw] data_stats
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::DataStats]
+        #     Stats of data used for training or evaluating the Model.
+        #
+        #     Only populated when the Model is trained by a TrainingPipeline with
+        #     [data_input_config][TrainingPipeline.data_input_config].
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for a Model. If set, this
@@ -342,6 +348,38 @@ module Google
               # object.
               IMAGE = 2
             end
+          end
+
+          # Stats of data used for train or evaluate the Model.
+          # @!attribute [rw] training_data_items_count
+          #   @return [::Integer]
+          #     Number of DataItems that were used for training this Model.
+          # @!attribute [rw] validation_data_items_count
+          #   @return [::Integer]
+          #     Number of DataItems that were used for validating this Model during
+          #     training.
+          # @!attribute [rw] test_data_items_count
+          #   @return [::Integer]
+          #     Number of DataItems that were used for evaluating this Model. If the
+          #     Model is evaluated multiple times, this will be the number of test
+          #     DataItems used by the first evaluation. If the Model is not evaluated,
+          #     the number is 0.
+          # @!attribute [rw] training_annotations_count
+          #   @return [::Integer]
+          #     Number of Annotations that are used for training this Model.
+          # @!attribute [rw] validation_annotations_count
+          #   @return [::Integer]
+          #     Number of Annotations that are used for validating this Model during
+          #     training.
+          # @!attribute [rw] test_annotations_count
+          #   @return [::Integer]
+          #     Number of Annotations that are used for evaluating this Model. If the
+          #     Model is evaluated multiple times, this will be the number of test
+          #     Annotations used by the first evaluation. If the Model is not evaluated,
+          #     the number is 0.
+          class DataStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Contains information about the original Model if this Model is a copy.
@@ -735,6 +773,9 @@ module Google
 
             # The Model is saved or tuned from Genie.
             GENIE = 5
+
+            # The Model is uploaded by text embedding finetuning pipeline.
+            CUSTOM_TEXT_EMBEDDING = 6
           end
         end
 
